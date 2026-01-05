@@ -1,14 +1,28 @@
-<div class="card border-0 shadow-sm mb-4" style="break-inside: avoid;">
+@if (mode() === 'card') {
+<div class="card border-0 shadow-sm mb-4 h-100">
     <div class="ratio ratio-16x9">
-        <img src="{{post().imageUrl}}" class="img-fluid rounded-top" alt="">
+        <img [src]="post().imageUrl" class="img-fluid rounded-top" [alt]="post().title">
     </div>
-    <div class="card-body">
+    <div class="card-body d-flex flex-column">
         <h6 class="fw-semibold">{{ post().title }}</h6>
-        <p class="text-muted small mb-0">{{ post().description }}</p>
-
-        <!-- <div class="card-actions">
-          <ng-content select="[actions]"></ng-content>
+        <p class="text-muted small flex-grow-1">{{ post().description }}</p>
+        <div class="mt-2">
+            <ng-container *ngTemplateOutlet="actionRef"></ng-container>
         </div>
-    </div> -->
     </div>
 </div>
+} @else {
+<div class="d-flex justify-content-between align-items-start p-3 border-bottom bg-white">
+    <div class="me-3">
+        <strong class="d-block">{{ post().title }}</strong>
+        <p class="small text-muted mb-0">{{ post().description }}</p>
+    </div>
+    <div class="d-flex gap-2 align-items-center">
+        <ng-container *ngTemplateOutlet="actionRef"></ng-container>
+    </div>
+</div>
+}
+
+<ng-template #actionRef>
+    <ng-content select="[actions]"></ng-content>
+</ng-template>

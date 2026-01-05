@@ -7,12 +7,13 @@ import { PostStore } from './data-access/post-store';
 import { AuthService } from '../../core/services/auth-service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
+import { PostCard } from '../../shared/ui/post-card/post-card';
 
 
 
 @Component({
   selector: 'app-poststore',
-  imports: [ReactiveFormsModule, CommonModule, LoadingSpinner],
+  imports: [ReactiveFormsModule, CommonModule, LoadingSpinner, PostCard],
   templateUrl: './poststore.html',
   styleUrl: './poststore.css',
   providers: [PostStore] // Each instance of this component gets a FRESH PostStore

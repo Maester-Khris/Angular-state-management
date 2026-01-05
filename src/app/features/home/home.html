@@ -17,7 +17,9 @@
   @if (vm$ | async; as vm) {
     <div style="column-count: 3; column-gap: 1.5rem;" class="masonry-grid">
       @for (post of vm.posts; track post.title) {
-        <app-post-card [post]="post"></app-post-card>
+        <app-post-card [post]="post">  <!-- will decide later if want to add action on hone page -->
+        </app-post-card>
+        <!-- hold card presentation -->
         <!-- <div class="card border-0 shadow-sm mb-4" style="break-inside: avoid;">
           <div class="ratio ratio-16x9">
             <img src="{{post.imageUrl}}" class="img-fluid rounded-top" alt="">
@@ -31,9 +33,6 @@
     </div>
    
     @if (vm.loading) {
-      <!-- <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div> -->
       <app-loading-spinner *ngIf="vm.loading" size="sm" label="Loading..."></app-loading-spinner>
     }
 

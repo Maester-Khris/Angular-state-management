@@ -1,0 +1,1 @@
+export type PostViewMode = 'card' | 'list-item';
