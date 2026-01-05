@@ -1,0 +1,32 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+
+          <!-- Avatar -->
+          <img
+            [src]="'https://www.gravatar.com/avatar/?d=mp&s=150'"
+            alt="Profile avatar"
+            class="rounded-circle mb-3"
+            width="120"
+            height="120"
+          />
+
+          <!-- Name -->
+          <h4 class="card-title mb-2">
+            {{ profile.name }}
+          </h4>
+
+          <!-- Bio -->
+          <p class="card-text text-muted">
+            {{ profile.bio }}
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

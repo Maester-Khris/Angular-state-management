@@ -1,0 +1,113 @@
+<div class="container" *ngIf="vm$ | async as vm">
+  <h3 class="mb-4">Post Page</h3>
+  <div class="row g-4">
+    <!-- Left: Form section -->
+    <div class="col-md-5">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Add New Post</h5>
+
+          <form [formGroup]="addPostForm" (ngSubmit)="onAdd()" class="d-flex flex-column gap-3">
+            <div>
+                <input
+                type="text"
+                class="form-control"
+                [class.is-invalid]="addPostForm.get('title')?.touched && addPostForm.get('title')?.invalid"
+                placeholder="Post title"
+                formControlName="title"
+                />
+                <div class="invalid-feedback">Title must be at least 10 characters.</div>
+            </div>
+
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Short description"
+              formControlName="description"
+            ></textarea>
+
+             <!-- Public visibility -->
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="isPublic"
+                formControlName="isPublic" />
+
+              <label class="form-check-label" for="isPublic">
+                {{ addPostForm.value.isPublic ? 'Public post' : 'Private post' }}
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              [disabled]="addPostForm.invalid"
+              class="btn btn-primary align-self-end"
+            >
+              Add Post
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: List section -->
+    <div class="col-md-7">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Posts</h5>
+
+          <div *ngIf="vm.isLoading" class="text-center text-muted my-3">
+            <div class="spinner-border spinner-border-sm" role="status"></div>
+            Loading...
+          </div>
+
+          <div *ngIf="vm.error" class="alert alert-danger">
+            {{ errors }}
+          </div>
+
+          <ul class="list-group list-group-flush" style="flex-grow:1;">
+              @for (post of vm.posts; track post.title) {
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+
+                  <div class="me-3">
+                    <strong>{{ post.title }}</strong>
+                    <p class="small text-muted mb-0">
+                      {{ post.description }}
+                    </p>
+                  </div>
+
+                  <div class="d-flex gap-2">
+                    <!-- Public / Private toggle -->
+                    <button
+                      class="btn btn-sm"
+                      [ngClass]="post.isPublic ? 'btn-outline-secondary' : 'btn-outline-success'"
+                      (click)="onTogglePublic(post.title)">
+                      {{ post.isPublic ? 'Make Private' : 'Make Public' }}
+                    </button>
+
+                    <!-- Delete -->
+                    <button
+                      class="btn btn-sm btn-outline-danger"
+                      (click)="onDelete(post.title)">
+                      Delete
+                    </button>
+                  </div>
+
+                </li>
+              }
+
+          </ul>
+
+          <div
+            *ngIf="!vm.isLoading && vm.posts.length === 0"
+            class="text-muted text-center mt-3"
+          >
+            No posts available.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

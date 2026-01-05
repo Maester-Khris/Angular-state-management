@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-semibold" routerLink="/home">
+      App.com
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav ms-auto gap-2">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active fw-semibold"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home
+          </a>
+        </li>
+
+        @if (isLoggedIn()) {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/posts" routerLinkActive="active fw-semibold">
+            My Activity
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/profile" routerLinkActive="active fw-semibold">Profile</a>
+        </li>
+        <app-user-overview [user]="user()" (logout)="onLogout()" />
+
+        } @else {
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active fw-semibold">Login</a>
+        </li>
+        }
+
+      </ul>
+    </div>
+  </div>
+</nav>
