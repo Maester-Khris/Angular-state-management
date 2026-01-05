@@ -1,0 +1,6 @@
+<div class="text-center my-3" [class.overlay]="overlay()">
+    <div class="spinner-border" [class.spinner-border-sm]="size() === 'sm'" role="status">
+    <span class="visually-hidden">Loading...</span>
+    </div>
+    @if (label()) { <span class="ms-2 text-muted">{{ label() }}</span> }
+</div>

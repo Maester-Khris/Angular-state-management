@@ -5,10 +5,13 @@ import { BehaviorSubject, combineLatest, concatMap, debounceTime, delay, distinc
 import { MockApi } from '../../core/services/mock-api';
 import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
+import { ActivatedRoute } from '@angular/router';
+import { PostCard } from '../../shared/ui/post-card/post-card';
+import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll],
+  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -16,6 +19,10 @@ export class Home implements OnInit, OnDestroy {
   private currentPage = 0;
   private readonly limit = 5;
   private readonly MockApi = inject(MockApi);
+
+  // Get data from resolver
+  private route = inject(ActivatedRoute);
+  private initialData = this.route.snapshot.data['initialPosts'] || [];
 
   /**
    * Home react to 3 types of events with the same stream of data
@@ -64,13 +71,13 @@ export class Home implements OnInit, OnDestroy {
         case 'SET_LOADING':
           return { ...state, loading: true };
         case 'RESET':
-          return { posts: action.posts, query: action.query, loading: false };
+          return { posts: action.posts, query: action.query, loading: false, hasMore: action.posts.length === this.limit };
         case 'LOAD_NEXT':
-          return { ...state, posts: [...state.posts, ...action.posts], loading: false };
+          return { ...state, posts: [...state.posts, ...action.posts], loading: false, hasMore: action.posts.length === this.limit };
         default:
           return state;
       }
-    },{ posts: [] as Post[], query: '', loading: false}),
+    },{ posts: this.initialData , query: '', loading: false, hasMore: true}),
 
     shareReplay(1)
   );
@@ -79,10 +86,11 @@ export class Home implements OnInit, OnDestroy {
     
   }
   
-  loadMore() {
+  loadMore(isLoading: boolean) {
+    // Prevent concurrent loads
+    if (isLoading) return; 
     this.loadMore$.next();
   }
-
   onSearch(event:Event) {
     const value = (event.target as HTMLInputElement).value; 
     this.searchQuery$.next(value);

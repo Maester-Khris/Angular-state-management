@@ -5,22 +5,28 @@ import { pendingChangesGuard } from './core/guards/pending-changes-guard';
 import { Login } from './features/login/login';
 import { profileResolver } from './core/resolvers/profile-resolver';
 import { Home } from './features/home/home';
+import { HomeResolver } from './core/resolvers/home-resolver';
 
 export const routes: Routes = [
-    {path:"home", component:Home},
+    {
+        path: "home", 
+        loadComponent: () => import("./features/home/home").then(c => c.Home),
+        resolve: { initialPosts: HomeResolver }
+    },
     {
         path: "posts",
         loadComponent: () => import("./features/posts/poststore").then(c => c.Poststore),
         canDeactivate: [pendingChangesGuard]
     },
     {
-        path:"profile",
+        path: "profile",
         loadComponent: () => import("./features/profile/profile").then(c => c.Profile),
         canActivate: [authGuardGuard],
-        resolve: {
-            profileData: profileResolver
-        }
+        resolve: { profileData: profileResolver }
     },
-    {path:"login", component: Login},
-    {path:"", redirectTo: "home", pathMatch:"full"}
+    {
+        path: "login", 
+        loadComponent: () => import("./features/login/login").then(c => c.Login)
+    },
+    { path: "", redirectTo: "home", pathMatch: "full" }
 ];
