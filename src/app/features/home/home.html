@@ -14,21 +14,33 @@
     </div>
   </div>
 
-  <div style="column-count: 5; column-gap: 1.5rem;" class="masonry-grid">
-    @for (post of ( filteredPost$ | async); track post.title) {
-      <div class="card border-0 shadow-sm mb-4" style="break-inside: avoid;">
-        <div class="ratio ratio-16x9">
-          <img src="{{post.imageUrl}}" class="img-fluid rounded-top" alt="">
+  @if (vm$ | async; as vm) {
+    <div style="column-count: 5; column-gap: 1.5rem;" class="masonry-grid">
+      @for (post of vm.posts; track post.title) {
+        <div class="card border-0 shadow-sm mb-4" style="break-inside: avoid;">
+          <div class="ratio ratio-16x9">
+            <img src="{{post.imageUrl}}" class="img-fluid rounded-top" alt="">
+          </div>
+          <div class="card-body">
+            <h6 class="fw-semibold">{{ post.title }}</h6>
+            <p class="text-muted small mb-0">{{ post.description }}</p>
+          </div>
         </div>
-        <div class="card-body">
-          <h6 class="fw-semibold">{{ post.title }}</h6>
-          <p class="text-muted small mb-0">{{ post.description }}</p>
-        </div>
-      </div>
-    }@empty {
-      <p class="text-center text-muted  w-full">No posts match your search.</p>
-    }
+      }
     </div>
+
+     <div appInfiniteScroll (scrolled)="loadMore()" class="scroll-anchor">
+        @if (vm.loading) {
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        }@else if (vm.posts.length === 0) {
+          <p class="text-muted">No posts found.</p>
+        }
+    </div>
+   }
+
+   
 </div>
 
 <!-- [(ngModel)]="searchQuery" -->

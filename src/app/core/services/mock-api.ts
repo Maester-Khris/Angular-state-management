@@ -174,10 +174,19 @@ export class MockApi {
     })
   }
 
-  fetchPublicPosts(): Observable<Post[]> {
+  fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<Post[]> {
     return of(this.MOCK_POSTS).pipe(
       delay(500),
-      map((posts: Post[]) => posts.filter(post => post.isPublic))
+      map((posts: Post[]) => {
+        const publicPosts = posts.filter(post => post.isPublic);
+        const start = page * limit;
+        if(!query) return publicPosts.slice(start, start + limit);
+        const term = query.toLowerCase().trim();
+        return publicPosts.filter((p:Post) => 
+          p.title.toLowerCase().includes(term) || 
+          p.description.toLowerCase().includes(term)
+        ).slice(start, start + limit);
+      })
     );
   }
 

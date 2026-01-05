@@ -30,7 +30,9 @@ This project serves as a showcase for modern Angular (Standalone, Signals) and a
 **Challenge:** Modernizing the app with Signals while maintaining the power of RxJS Effects.
 **Solution:** Structured the dependency injection to handle `toObservable` and `toSignal` within proper life-cycle hooks, ensuring "glitch-free" reactivity between the Store and the View.
 
----
+### 4. Infinite scroll: intersection observer api
+--- create a shared directive: detect when element at the bottom of the current page has become visible
+--- fire an event to load element of the next page
 
 ## Architecture Overview
 
