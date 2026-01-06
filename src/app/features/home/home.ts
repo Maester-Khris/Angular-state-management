@@ -1,17 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BehaviorSubject, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
 import { MockApi } from '../../core/services/mock-api';
 import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner],
+  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, RouterOutlet],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -23,6 +24,21 @@ export class Home implements OnInit, OnDestroy {
   // Get data from resolver
   private route = inject(ActivatedRoute);
   private initialData = this.route.snapshot.data['initialPosts'] || [];
+
+  // ui interaction
+  private router = inject(Router);
+  isDrawerOpen = toSignal(
+     this.router.events.pipe(
+      filter((event)=> event instanceof NavigationEnd),
+      map(() => this.router.url.includes('/view/')),
+      startWith(this.router.url.includes('/view/'))
+    )
+  );
+  // .subscribe(() => {
+  //     this,this.isDrawerOpen.set(this.route.children.length > 0); 
+  //   });
+
+
 
   /**
    * Home react to 3 types of events with the same stream of data
@@ -82,6 +98,9 @@ export class Home implements OnInit, OnDestroy {
     shareReplay(1)
   );
 
+
+  
+
   ngOnInit(): void {
     
   }
@@ -97,6 +116,22 @@ export class Home implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+  }
+
+  // ================= Navigation with child component  ==============
+  openDetails(title:string){
+    console.log(title);
+    this.router.navigate(['view',title], {relativeTo: this.route});
+  }
+  closeDetails() {
+    this.router.navigate(['/home']);
+  }
+
+  @HostListener('window:keyup.esc')
+  onEsc() {
+    if (this.isDrawerOpen()) {
+      this.closeDetails();
+    }
   }
 }
 

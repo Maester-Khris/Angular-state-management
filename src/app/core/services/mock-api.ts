@@ -197,6 +197,10 @@ export class MockApi {
     );
   }
 
+  fetchPostByTitle(title: string): Observable<Post> {
+    return of(this.MOCK_POSTS.find(post => post.title === title) || {} as Post);
+  }
+
   savePost(post:Post):Observable<Post>{ 
     this.MOCK_POSTS.push(post);
     this.dataChangedTrigger.next();

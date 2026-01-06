@@ -1,3 +1,30 @@
+/* Ensure the body doesn't have its own scrollbar */
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; 
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.app-header {
+  height: 60px; /* Define a fixed height */
+  z-index: 2000; /* Higher than drawer (1050) and backdrop (1040) */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: white;
+  flex-shrink: 0; /* Don't let flexbox squash the header */
+}
+
+.app-main {
+  flex-grow: 1;
+  overflow-y: auto; /* This becomes our primary scroll area */
+  position: relative;
+}
+
 .progress-bar-container {
   position: fixed;
   top: 0;

@@ -11,11 +11,16 @@ export const routes: Routes = [
     {
         path: "home", 
         loadComponent: () => import("./features/home/home").then(c => c.Home),
-        resolve: { initialPosts: HomeResolver }
+        resolve: { initialPosts: HomeResolver },
+        children: [
+            { path: "view/:title", 
+              loadComponent: ()=> import("./features/post-detail/post-detail").then(c => c.PostDetail)
+            }
+        ]
     },
     {
         path: "posts",
-        loadComponent: () => import("./features/posts/poststore").then(c => c.Poststore),
+        loadComponent: () => import("./features/posts/posts").then(c => c.Posts),
         canDeactivate: [pendingChangesGuard]
     },
     {

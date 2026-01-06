@@ -1,48 +1,55 @@
-<div class="container-fluid py-5" style="">
-  <div class="row justify-content-center mb-5">
-    <div class="col-12 col-md-6 col-lg-8">
-      <div class="input-group input-group-lg shadow-sm rounded-pill overflow-hidden border">
-        <span class="input-group-text bg-white border-0 ps-4">
-          <i class="bi bi-search text-muted"></i>
-        </span>
-        <input 
-          type="text" 
-          class="form-control border-0 shadow-none ps-2 py-3 fs-6" 
-          placeholder="Search stories..."
-          (input)="onSearch($event)">
+<div class="container-fluid py-5 home-layout-container">
+  <section class="main-content flex-grow-1" [ngClass]="isDrawerOpen() ? ['drawer-open', 'is-blurred'] : []" >
+    <div class="row justify-content-center mb-5 ">
+      <div class="col-12 col-md-6 col-lg-8">
+        <div class="input-group input-group-lg shadow-sm rounded-pill overflow-hidden border">
+          <span class="input-group-text bg-white border-0 ps-4">
+            <i class="bi bi-search text-muted"></i>
+          </span>
+          <input type="text" class="form-control border-0 shadow-none ps-2 py-3 fs-6" placeholder="Search stories..."
+            (input)="onSearch($event)">
+        </div>
       </div>
     </div>
-  </div>
 
-  @if (vm$ | async; as vm) {
-    <div style="column-count: 3; column-gap: 1.5rem;" class="masonry-grid">
-      @for (post of vm.posts; track post.title) {
-        <app-post-card [post]="post">  <!-- will decide later if want to add action on hone page -->
-        </app-post-card>
-        <!-- hold card presentation -->
-        <!-- <div class="card border-0 shadow-sm mb-4" style="break-inside: avoid;">
-          <div class="ratio ratio-16x9">
-            <img src="{{post.imageUrl}}" class="img-fluid rounded-top" alt="">
-          </div>
-          <div class="card-body">
-            <h6 class="fw-semibold">{{ post.title }}</h6>
-            <p class="text-muted small mb-0">{{ post.description }}</p>
-          </div>
-        </div> -->
+    @if (vm$ | async; as vm) {
+      <div style="column-count: 3; column-gap: 1.5rem;" class="masonry-grid">
+        @for (post of vm.posts; track post.title) {
+          <app-post-card [post]="post" (click)="openDetails(post.title)"> <!-- will decide later if want to add action on hone page -->
+          </app-post-card>
+        }
+      </div>
+
+      @if (vm.loading) {
+        <app-loading-spinner *ngIf="vm.loading" size="sm" label="Loading..."></app-loading-spinner>
       }
-    </div>
-   
-    @if (vm.loading) {
-      <app-loading-spinner *ngIf="vm.loading" size="sm" label="Loading..."></app-loading-spinner>
+
+      @if(vm.hasMore) {
+        <div appInfiniteScroll (scrolled)="loadMore(vm.loading)" class="scroll-anchor"></div>
+      }@else if (vm.posts.length > 0) {
+        <p class="text-muted">No more posts at this time.</p>
+      }
     }
 
-    @if(vm.hasMore) {
-      <div appInfiniteScroll (scrolled)="loadMore(vm.loading)" class="scroll-anchor"></div>
-    }@else if (vm.posts.length > 0) {
-      <p class="text-muted">No more posts at this time.</p>
-    }
-  
-   }
+    <aside class="side-drawer" [class.open]="isDrawerOpen()">
+      <router-outlet></router-outlet>
+    </aside>
 
-   
+    @if (isDrawerOpen()) {
+      <div class="backdrop" [class.active]="isDrawerOpen()" (click)="closeDetails()" ></div>
+    }
+  </section>
+
 </div>
+
+
+<!-- hold card presentation -->
+<!-- <div class="card border-0 shadow-sm mb-4" style="break-inside: avoid;">
+  <div class="ratio ratio-16x9">
+    <img src="{{post.imageUrl}}" class="img-fluid rounded-top" alt="">
+  </div>
+  <div class="card-body">
+    <h6 class="fw-semibold">{{ post.title }}</h6>
+    <p class="text-muted small mb-0">{{ post.description }}</p>
+  </div>
+</div> -->

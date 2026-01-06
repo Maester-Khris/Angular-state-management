@@ -41,11 +41,6 @@
         <div class="card-body">
           <h5 class="card-title mb-3">Posts</h5>
 
-          <!-- <div *ngIf="vm.isLoading" class="text-center text-muted my-3">
-            <div class="spinner-border spinner-border-sm" role="status"></div>
-            Loading...
-          </div> -->
-
           <app-loading-spinner *ngIf="vm.isLoading" size="sm" label="Updating..."></app-loading-spinner>
 
           <div *ngIf="vm.error" class="alert alert-danger">
@@ -79,6 +74,12 @@
   </div>
 </div>
 
+
+<!-- <div *ngIf="vm.isLoading" class="text-center text-muted my-3">
+  <div class="spinner-border spinner-border-sm" role="status"></div>
+  Loading...
+</div> -->
+
 <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
   <div class="me-3">
     <strong>{{ post.title }}</strong>
@@ -96,5 +97,4 @@
       Delete
     </button>
   </div>
-
 </li> -->

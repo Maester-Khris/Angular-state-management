@@ -14,11 +14,11 @@ import { PostCard } from '../../shared/ui/post-card/post-card';
 @Component({
   selector: 'app-poststore',
   imports: [ReactiveFormsModule, CommonModule, LoadingSpinner, PostCard],
-  templateUrl: './poststore.html',
-  styleUrl: './poststore.css',
+  templateUrl: './posts.html',
+  styleUrl: './posts.css',
   providers: [PostStore] // Each instance of this component gets a FRESH PostStore
 })
-export class Poststore implements OnInit, HasUnsavedChanges {  
+export class Posts implements OnInit, HasUnsavedChanges {  
   private readonly fb = inject(FormBuilder);
   private readonly storeService = inject(PostStore);
   private readonly authService = inject(AuthService); 
