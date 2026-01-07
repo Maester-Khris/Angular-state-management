@@ -38,9 +38,15 @@
     }
   </div>
 
-  <aside class="side-drawer" [class.open]="isDrawerOpen()">
+  <!-- <aside class="side-drawer" [class.open]="isDrawerOpen()">
     <router-outlet></router-outlet>
-  </aside>
+  </aside> -->
+
+  <div class="immersive-overlay" [class.active]="isDrawerOpen()" (click)="closeDetails()">
+    <div class="detail-container" (click)="$event.stopPropagation()">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 
   <div class="backdrop" *ngIf="isDrawerOpen()" (click)="closeDetails()"></div>
 </div>

@@ -42,7 +42,7 @@
 } -->
 
 
-@if (post(); as p) {
+<!-- @if (post(); as p) {
 <div class="h-100 d-flex flex-column bg-white shadow-lg">
   <div class="p-3 border-bottom d-flex align-items-center gap-3 sticky-top bg-white">
     <button (click)="close()" class="btn btn-light btn-sm rounded-circle shadow-sm">
@@ -77,5 +77,109 @@
 } @else {
   <div class="h-100 d-flex align-items-center justify-content-center">
     <app-loading-spinner label="Waking up the server..."></app-loading-spinner>
+  </div>
+} -->
+<!-- 
+@if (post(); as p) {
+<div class="post-detail-view bg-white">
+  <nav class="detail-nav sticky-top bg-white-glass d-flex align-items-center justify-content-between p-3 px-lg-5">
+    <button (click)="close()" class="btn-close-custom">
+      <i class="bi bi-x-lg"></i> <span class="ms-2 d-none d-md-inline">Close</span>
+    </button>
+    
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-secondary rounded-pill btn-sm px-3">
+        <i class="bi bi-share me-1"></i> Share
+      </button>
+      <button class="btn btn-primary rounded-pill btn-sm px-4">Save</button>
+    </div>
+  </nav>
+
+  <header class="detail-hero mx-auto px-4 mt-4">
+    <div class="badge-group mb-3">
+      <span class="category-tag">Engineering</span>
+      <span class="dot-separator"> • </span>
+      <span class="read-time">5 min read</span>
+    </div>
+    
+    <h1 class="display-5 fw-bold tracking-tight mb-4">{{ p.title }}</h1>
+
+    <div class="author-card-premium d-flex align-items-center mb-5">
+      <div class="avatar-wrapper me-3">
+        <img class="rounded-circle border" src="https://www.gravatar.com/avatar/?d=mp&s=150" alt="NkDev">
+      </div>
+      <div class="author-meta">
+        <span class="name">NkDev</span>
+        <span class="bio text-muted">Core CredOps Contributor</span>
+      </div>
+      <div class="ms-auto text-muted small">
+        Published {{ p.lastModifiedAt || 'Today' }}
+      </div>
+    </div>
+  </header>
+
+  <div class="detail-body mx-auto px-4">
+    <figure class="featured-image-container mb-5">
+      <img [src]="p.imageUrl" [alt]="p.title" class="rounded-4 shadow-lg">
+      <figcaption class="text-center text-muted small mt-3 italic">
+        Visualizing the future of web architecture.
+      </figcaption>
+    </figure>
+
+    <article class="prose">
+      <p class="lead">{{ p.description }}</p>
+      <p>Leveraging high-end design patterns allows for a more cohesive user experience. By focusing on typography and whitespace, we ensure the user remains engaged with the core narrative of the data.</p>
+    </article>
+  </div>
+</div>
+} -->
+
+@if (post(); as p) {
+<div class="canvas-wrapper">
+  <article class="content-canvas shadow-2xl">
+    
+    <header class="canvas-header">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <button (click)="close()" class="btn-action-glass btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
+          <i class="bi bi-x-lg"></i>
+          <span>Close</span>
+        </button>
+        <div class="d-flex gap-2">
+          <button class="btn-action-glass btn btn-primary rounded-pill px-4 fw-bold shadow-sm"><i class="bi bi-share"></i></button>
+          <button class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm">Save</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="meta-section text-center">
+      <div class="category-pill mb-3">Engineering</div>
+      <h1 class="canvas-title">{{ p.title }}</h1>
+      
+      <div class="author-strip d-flex align-items-center justify-content-center">
+        <div class="avatar-mini me-2">NK</div>
+        <div class="text-start">
+          <span class="d-block fw-bold small">NkDev</span>
+          <span class="smallest text-muted">Published Jan 2026 • 5 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <figure class="canvas-hero-image mx-5 text-center">
+      <div class="image-aspect-ratio">
+        <img [src]="p.imageUrl" [alt]="p.title">
+      </div>
+      <figcaption class="mt-2">Visualizing the future of web architecture.</figcaption>
+    </figure>
+
+    <div class="canvas-body">
+      <p class="lead-text">{{ p.description }}</p>
+      <div class="content-divider"></div>
+      <p>This approach ensures that even on ultra-wide monitors, your content remains readable and centered, preventing the "large image taking the entire screen" issue you encountered.</p>
+    </div>
+  </article>
+</div>
+} @else {
+  <div class="loading-full-page">
+    <app-loading-spinner label="Curating your content..."></app-loading-spinner>
   </div>
 }

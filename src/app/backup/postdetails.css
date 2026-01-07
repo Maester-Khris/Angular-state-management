@@ -1,0 +1,37 @@
+/* Typography & Layout */
+.detail-hero { max-width: 680px; }
+.detail-body { max-width: 680px; padding-bottom: 5rem; }
+
+.post-title-sm {
+  letter-spacing: -0.02em;
+}
+
+.prose p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #334155; /* Slate 700 */
+  margin-bottom: 1.5rem;
+}
+
+.bg-white-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Close Button Custom */
+.btn-close-custom {
+  background: #f1f5f9;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.btn-close-custom:hover {
+  background: #e2e8f0;
+  transform: scale(0.98);
+}
+
