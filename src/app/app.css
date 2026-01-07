@@ -1,5 +1,5 @@
 /* Ensure the body doesn't have its own scrollbar */
-html, body {
+/* html, body {
   height: 100%;
   margin: 0;
   overflow: hidden; 
@@ -12,16 +12,16 @@ html, body {
 }
 
 .app-header {
-  height: 60px; /* Define a fixed height */
-  z-index: 2000; /* Higher than drawer (1050) and backdrop (1040) */
+  height: 60px; 
+  z-index: 2000; 
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   background: white;
-  flex-shrink: 0; /* Don't let flexbox squash the header */
+  flex-shrink: 0; 
 }
 
 .app-main {
   flex-grow: 1;
-  overflow-y: auto; /* This becomes our primary scroll area */
+  overflow-y: auto; 
   position: relative;
 }
 
@@ -37,7 +37,7 @@ html, body {
 
 .progress-bar-fill {
   height: 100%;
-  background-color: #3b82f6; /* Modern Blue */
+  background-color: #3b82f6; 
   width: 0%;
   animation: loading 2s infinite ease-in-out;
 }
@@ -45,5 +45,35 @@ html, body {
 @keyframes loading {
   0% { width: 0%; left: 0; }
   50% { width: 70%; left: 15%; }
+  100% { width: 100%; left: 100%; }
+} */
+
+/* Loading Bar Logic */
+.progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--postair-primary);
+  width: 30%;
+  animation: loading-shimmer 2s infinite ease-in-out;
+}
+
+/* Structural Layout */
+.app-main {
+  padding-top: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@keyframes loading-shimmer {
+  0% { width: 0%; left: 0%; }
   100% { width: 100%; left: 100%; }
 }

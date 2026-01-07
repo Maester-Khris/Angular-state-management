@@ -71,6 +71,11 @@ export class Posts implements OnInit, HasUnsavedChanges {
     this.storeService.togglePostPublicStatus(title);
   }
 
+  onEdit(title: string) {
+    // this.storeService.editPost(title);
+  }
+
+
   onDelete(title: string) {
     this.storeService.deletePost(title);
   }

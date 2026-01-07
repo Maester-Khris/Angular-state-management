@@ -1,0 +1,42 @@
+/* Vertical and Horizontal Centering */
+.auth-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh; /* Keeps it centered in the app-shell */
+}
+
+.auth-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--postair-border);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-header {
+  margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+  color: var(--postair-text-main);
+  letter-spacing: -0.5px;
+}
+
+/* Specific Label Styling */
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--postair-text-muted);
+}
+
+/* Button Overrides for Login */
+.btn-primary {
+  transition: transform 0.1s ease-in-out;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}

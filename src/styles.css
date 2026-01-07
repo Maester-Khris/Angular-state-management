@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+/* Import Google Font: Inter (The gold standard for UI) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* --- Startup Color Palette --- */
+    --postair-primary: #6366f1;       /* Electric Indigo */
+    --postair-primary-hover: #4f46e5;
+    --postair-bg: #f8fafc;            /* Subtle Slate Gray */
+    --postair-card-bg: #ffffff;
+    --postair-text-main: #0f172a;     /* Deep Navy/Black */
+    --postair-text-muted: #64748b;    /* Cool Slate */
+    --postair-border: #e2e8f0;
+
+    /* --- Typography --- */
+    --bs-body-font-family: 'Inter', sans-serif;
+}
+
+/* --- Bootstrap Variable Overrides --- */
+body {
+    background-color: var(--postair-bg);
+    color: var(--postair-text-main);
+    font-feature-settings: "cv11", "ss01"; /* Enables high-end font features */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Elevate standard Bootstrap Buttons to 'Startup' level */
+.btn-primary {
+    --bs-btn-bg: var(--postair-primary);
+    --bs-btn-border-color: var(--postair-primary);
+    --bs-btn-hover-bg: var(--postair-primary-hover);
+    --bs-btn-hover-border-color: var(--postair-primary-hover);
+    --bs-btn-font-weight: 500;
+    --bs-btn-padding-x: 1.25rem;
+    --bs-btn-border-radius: 8px; /* Softer, modern corners */
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+
+/* Modernize Cards */
+.card {
+    border: 1px solid var(--postair-border);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+/* Standardize Inputs */
+.form-control {
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    border-color: var(--postair-border);
+}
+
+.form-control:focus {
+    border-color: var(--postair-primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}

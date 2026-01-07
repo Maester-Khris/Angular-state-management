@@ -13,8 +13,8 @@ export class Login {
   authservice = inject(AuthService);
   private router = inject(Router);
 
-  userEmail = "";
-  userPassword = "";
+  userEmail = "niki@gmail.com";
+  userPassword = "1234";
   
   login() {
     // console.log(this.userEmail, this.userPassword);

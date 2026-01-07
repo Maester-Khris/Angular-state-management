@@ -1,0 +1,130 @@
+.dashboard-wrapper {
+  margin-top: 1rem;
+}
+
+/* Sidebar Styling */
+.sidebar-card {
+  background: white;
+  border: 1px solid var(--postair-border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.sidebar-card .nav-link {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.sidebar-card .nav-link.active {
+  background: #f1f5f9;
+  color: var(--postair-primary);
+}
+
+/* Profile Card Specifics */
+.profile-card {
+  background: white;
+  border: 1px solid var(--postair-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.profile-cover {
+  height: 120px;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+}
+
+.profile-content {
+  padding: 0 2rem 2rem;
+  margin-top: -60px; /* Pulls avatar up into the cover */
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid white;
+  background: white;
+}
+
+.avatar-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  background: #22c55e;
+  border: 3px solid white;
+  border-radius: 50%;
+}
+
+/* Stats Cards */
+.stat-card {
+  background: white;
+  border: 1px solid var(--postair-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--postair-text-muted);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--postair-text-main);
+}
+
+/* Heatmap/Contribution Grid Simulation */
+.contribution-grid {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.heatmap-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  background-color: #ebedf0;
+}
+
+/* Heatmap Levels */
+.level-1 { background-color: #9be9a8; }
+.level-2 { background-color: #40c463; }
+.level-3 { background-color: #216e39; }
+
+/* Activity Icons */
+.activity-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-light-primary { background: rgba(99, 102, 241, 0.1); }
+.bg-light-success { background: rgba(34, 197, 94, 0.1); }
+
+.smaller { font-size: 0.75rem; }

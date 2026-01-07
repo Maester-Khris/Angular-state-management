@@ -1,4 +1,4 @@
-<div class="">
+<!-- <div class="">
   @if(isNavigating()) {
   <div class="progress-bar-container">
     <div class="progress-bar-fill"></div>
@@ -11,5 +11,20 @@
       <main class="app-main px-12">
         <router-outlet />
       </main>
+  </div>
+</div> -->
+<div class="app-container">
+  @if(isNavigating()) {
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill"></div>
+    </div>
+  }
+
+  <div class="app-shell">
+    <app-header></app-header>
+
+    <main class="app-main">
+      <router-outlet />
+    </main>
   </div>
 </div>

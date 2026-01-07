@@ -12,12 +12,12 @@
     </div>
 </div>
 } @else {
-<div class="d-flex justify-content-between align-items-start p-3 border-bottom bg-white">
-    <div class="me-3">
+<div class="d-flex justify-content-between align-items-start p-3  bg-white">
+    <div class="me-3 w-70">
         <strong class="d-block">{{ post().title }}</strong>
         <p class="small text-muted mb-0">{{ post().description }}</p>
     </div>
-    <div class="d-flex gap-2 align-items-center">
+    <div class="d-flex gap-2 align-items-center w-30">
         <ng-container *ngTemplateOutlet="actionRef"></ng-container>
     </div>
 </div>

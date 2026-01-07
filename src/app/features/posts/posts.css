@@ -1,0 +1,141 @@
+/* Sidebar and General Dashboard Layout */
+.sidebar-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.sidebar-card .nav-link {
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+   font-size: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.sidebar-card .nav-link.active {
+  background: var(--postair-bg);
+  color: var(--postair-primary);
+}
+
+/* Modern Input Styles */
+.bg-light {
+  background-color: #f1f5f9 !important;
+}
+
+.form-control:focus {
+  background-color: #fff !important;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Hover effect for post cards */
+.post-item-hover {
+    border: 1px solid transparent !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-item-hover:hover {
+    border-color: var(--postair-border) !important;
+  background-color: #fafafa;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Metadata Styling */
+.border-top-dashed {
+  border-top: 1px dashed #e2e8f0;
+}
+
+.metadata-item {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #94a3b8; /* Slate 400 */
+}
+
+.text-separator {
+  color: #cbd5e1;
+  font-size: 0.8rem;
+}
+
+/* Pagination Sleekness */
+.pagination .page-link {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--postair-text-muted);
+  font-weight: 600;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: var(--postair-primary);
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+}
+/* Typography Normalization */
+.post-title-sm {
+  font-size: 0.95rem; /* Exactly between small and normal */
+  font-weight: 600;
+  color: var(--postair-text-main);
+  letter-spacing: -0.01em;
+  margin-bottom: 2px;
+}
+
+.post-desc-sm {
+  font-size: 0.85rem;
+  color: var(--postair-text-muted);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Keeps descriptions clean */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.logout-link {
+  font-weight: 500;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.logout-link:hover {
+  opacity: 1;
+}
+
+/* Uniform Square-ish Icon Buttons */
+.actions-btn {
+  width: 30px; /* Slightly smaller for better proportion */
+  height: 30px;
+  font-size: 0.8rem;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px; /* Professional 'Squircle' look */
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+
+.actions-btn:hover {
+    background-color: var(--postair-bg);
+    border-color: var(--postair-primary);
+    color: var(--postair-primary) !important;
+}
+
+/* Ensure icons are centered */
+.actions-btn i {
+    line-height: 1;
+    font-size: 0.9rem;
+}
+
+.flex-shrink-0 {
+    flex-shrink: 0; /* Prevents buttons from squishing on small screens */
+}
+
+/* Keeps the editor visible while scrolling long post lists */
+@media (min-width: 1200px) {
+  .sticky-editor {
+    position: sticky;
+    top: 100px;
+  }
+}
