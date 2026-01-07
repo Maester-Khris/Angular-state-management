@@ -1,4 +1,123 @@
-<div class="container-fluid py-5 home-layout-container">
+
+
+<div class="home-container" *ngIf="vm$ | async as vm">
+  <header class="home-header mb-5">
+    <div class="search-glass-wrapper shadow-sm">
+      <i class="bi bi-search ms-3 text-muted"></i>
+      <input type="text" class="search-input" placeholder="Search stories, tech, and insights..." (input)="onSearch($event)">
+      <kbd class="me-3 d-none d-md-inline-block">CMD + K</kbd>
+    </div>
+  </header>
+
+  <div class="bento-grid">
+    @for (post of vm.posts; track post.title; let i = $index) {
+      <div class="bento-item" (click)="openDetails(post.title)">
+        <app-post-card [post]="post" mode="card">
+          <div actions class="d-flex align-items-center w-100">
+             <img [src]="post.authorAvatar" class="author-mini-img me-2" alt="">
+             <span class="fw-bold smaller text-dark">{{ post.authorName }}</span>
+             <button class="btn btn-link ms-auto p-0 text-muted"><i class="bi bi-bookmark"></i></button>
+          </div>
+        </app-post-card>
+      </div>
+    }
+  </div>
+
+  <div class="status-footer py-5 text-center">
+    @if (vm.loading) {
+      <app-loading-spinner size="sm" label="Fetching more insights..."></app-loading-spinner>
+    }
+
+    @if(vm.hasMore) {
+      <div appInfiniteScroll (scrolled)="loadMore(vm.loading)" class="scroll-anchor"></div>
+    } @else if (vm.posts.length > 0) {
+      <div class="no-more-indicator">
+        <hr class="w-25 mx-auto opacity-10">
+        <p class="text-muted small fw-medium">No more posts at this time.</p>
+      </div>
+    }
+  </div>
+
+  <aside class="side-drawer" [class.open]="isDrawerOpen()">
+    <router-outlet></router-outlet>
+  </aside>
+
+  <div class="backdrop" *ngIf="isDrawerOpen()" (click)="closeDetails()"></div>
+</div>
+
+
+<!-- 
+<div class="home-container" *ngIf="vm$ | async as vm">
+  <header class="home-header mb-5">
+    <div class="search-glass-wrapper shadow-sm">
+      <i class="bi bi-search ms-3 text-muted"></i>
+      <input type="text" class="search-input" placeholder="Search stories, tech, and insights..."  (input)="onSearch($event)">
+      <kbd class="me-3 d-none d-md-inline-block">CMD + K</kbd>
+    </div>
+  </header>
+
+  <div class="bento-grid">
+     @if (vm$ | async; as vm) {
+    @for (post of vm.posts; track post.title; let i = $index) {
+      <div class="bento-item" [class.bento-featured]="i === 0" (click)="openDetails(post.title)">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden">
+          <div class="post-image-wrapper">
+             <img [src]="post.imageUrl || 'assets/placeholder.jpg'" class="post-img" alt="Post cover">
+             <span class="category-badge">Tech</span>
+          </div>
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="post-title">{{ post.title }}</h5>
+            <p class="post-excerpt text-muted small flex-grow-1">
+              {{ post.description }}
+            </p>
+            
+            <div class="post-footer d-flex align-items-center mt-3 pt-3 border-top">
+              <img [src]="post.authorAvatar" class="author-mini-img me-2" alt="">
+              <div class="author-info">
+                <span class="d-block fw-bold smaller">{{ post.authorName }}</span>
+                <span class="text-muted smallest">5 min read</span>
+              </div>
+              <button class="btn btn-link ms-auto p-0 text-dark">
+                <i class="bi bi-bookmark"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    
+      @if (vm.loading) {
+        <app-loading-spinner *ngIf="vm.loading" size="sm" label="Loading..."></app-loading-spinner>
+      }
+
+      @if(vm.hasMore) {
+        <div appInfiniteScroll (scrolled)="loadMore(vm.loading)" class="scroll-anchor"></div>
+      }@else if (vm.posts.length > 0) {
+        <p class="text-muted">No more posts at this time.</p>
+      }
+    }
+
+    <aside class="side-drawer" [class.open]="isDrawerOpen()">
+      <router-outlet></router-outlet>
+    </aside>
+
+    @if (isDrawerOpen()) {
+      <div class="backdrop" [class.active]="isDrawerOpen()" (click)="closeDetails()" ></div>
+    }
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid py-5 home-layout-container">
   <section class="main-content flex-grow-1" [ngClass]="isDrawerOpen() ? ['drawer-open', 'is-blurred'] : []" >
     <div class="row justify-content-center mb-5 ">
       <div class="col-12 col-md-6 col-lg-8">
@@ -15,7 +134,7 @@
     @if (vm$ | async; as vm) {
       <div style="column-count: 3; column-gap: 1.5rem;" class="masonry-grid">
         @for (post of vm.posts; track post.title) {
-          <app-post-card [post]="post" (click)="openDetails(post.title)"> <!-- will decide later if want to add action on hone page -->
+          <app-post-card [post]="post" (click)="openDetails(post.title)"> 
           </app-post-card>
         }
       </div>
@@ -40,7 +159,7 @@
     }
   </section>
 
-</div>
+</div> -->
 
 
 <!-- hold card presentation -->

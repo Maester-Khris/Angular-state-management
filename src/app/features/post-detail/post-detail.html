@@ -1,4 +1,4 @@
-@if (post(); as p) {
+<!-- @if (post(); as p) {
 <div class="h-100 d-flex flex-column bg-white">
   <div class="p-3 border-bottom d-flex align-items-center gap-2">
     <button
@@ -38,5 +38,44 @@
 } @else {
   <div class="p-5 text-center">
       <app-loading-spinner label="Loading post details..."></app-loading-spinner>
+  </div>
+} -->
+
+
+@if (post(); as p) {
+<div class="h-100 d-flex flex-column bg-white shadow-lg">
+  <div class="p-3 border-bottom d-flex align-items-center gap-3 sticky-top bg-white">
+    <button (click)="close()" class="btn btn-light btn-sm rounded-circle shadow-sm">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h6 class="mb-0 fw-bold text-truncate">{{ p.title }}</h6>
+  </div>
+
+  <div class="flex-grow-1 overflow-auto p-4">
+    <div class="ratio ratio-16x9 mb-4 shadow-sm rounded-4 overflow-hidden">
+      <img [src]="p.imageUrl" [alt]="p.title" class="object-fit-cover">
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between mb-4">
+      <div class="d-flex align-items-center">
+        <div class="avatar-circle me-2">NK</div>
+        <div>
+          <span class="d-block fw-bold small">NkDev</span>
+          <span class="text-muted smallest">Last update: Today</span>
+        </div>
+      </div>
+      <span class="badge rounded-pill" [class.bg-success-subtle.text-success]="p.isPublic">
+        {{ p.isPublic ? 'Public' : 'Private' }}
+      </span>
+    </div>
+
+    <div class="post-content">
+      <p class="text-secondary lead-sm">{{ p.description }}</p>
+    </div>
+  </div>
+</div>
+} @else {
+  <div class="h-100 d-flex align-items-center justify-content-center">
+    <app-loading-spinner label="Waking up the server..."></app-loading-spinner>
   </div>
 }
