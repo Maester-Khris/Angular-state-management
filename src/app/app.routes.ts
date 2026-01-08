@@ -19,8 +19,9 @@ export const routes: Routes = [
         ]
     },
     {
-        path: "posts",
+        path: "myactivity",
         loadComponent: () => import("./features/posts/posts").then(c => c.Posts),
+        canActivate: [authGuardGuard],
         canDeactivate: [pendingChangesGuard]
     },
     {

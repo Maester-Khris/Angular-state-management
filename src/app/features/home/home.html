@@ -5,7 +5,7 @@
     <div class="search-glass-wrapper shadow-sm">
       <i class="bi bi-search ms-3 text-muted"></i>
       <input type="text" class="search-input" placeholder="Search stories, tech, and insights..." (input)="onSearch($event)">
-      <kbd class="me-3 d-none d-md-inline-block">CMD + K</kbd>
+      <kbd class="me-3 py-2 d-none d-md-inline-block" style="width: 80px;border-radius: 5px;">CMD + K</kbd>
     </div>
   </header>
 
@@ -14,7 +14,7 @@
       <div class="bento-item" (click)="openDetails(post.title)">
         <app-post-card [post]="post" mode="card">
           <div actions class="d-flex align-items-center w-100">
-             <img [src]="post.authorAvatar" class="author-mini-img me-2" alt="">
+             <img [src]="'https://placehold.co/600x400/png'" class="author-mini-img img-thumbnail me-2" alt="">
              <span class="fw-bold smaller text-dark">{{ post.authorName }}</span>
              <button class="btn btn-link ms-auto p-0 text-muted"><i class="bi bi-bookmark"></i></button>
           </div>
