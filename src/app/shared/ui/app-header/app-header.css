@@ -47,7 +47,7 @@
     .navbar-nav .nav-link.active::after {
         content: "";
         position: absolute;
-        bottom: -22px;
+        bottom: -15px;
         left: 20%;
         right: 20%;
         height: 2px;
@@ -58,4 +58,16 @@
     .border-start-lg {
         border-left: 1px solid var(--postair-border);
     }
+}
+.avatar-mini {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #6366f1;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
 }

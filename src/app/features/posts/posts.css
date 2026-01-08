@@ -1,3 +1,6 @@
+/* Fancy Curvy Header */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 /* Sidebar and General Dashboard Layout */
 .sidebar-card {
   background: white;
@@ -138,4 +141,119 @@
     position: sticky;
     top: 100px;
   }
+}
+
+
+
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-style: normal;
+}
+
+.canva-title {
+  font-family: 'Pacifico', sans-serif;
+  font-weight: 800;
+  font-size: 1.85rem;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.canva-title span {
+    -webkit-text-fill-color: #1e293b; /* Contrast for the comma */
+}
+
+.form-section-title {
+    font-family: 'Pacifico', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #1e293b;
+    letter-spacing: -0.02em;
+}
+
+/* Form Text Weight/Size Reduction */
+.smallest {
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.tracking-tight {
+  letter-spacing: -0.01em;
+}
+
+/* Image Upload Styling */
+.upload-zone {
+  position: relative;
+  border: 2px dashed #e2e8f0;
+  padding: 12px;
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background: #f8fafc;
+}
+
+.upload-zone:hover {
+  border-color: var(--postair-primary);
+  background: #f0f3ff;
+}
+
+.file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-preview-box {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  border: 1px solid #e2e8f0;
+  padding: 2px;
+  background: white;
+  border-radius: 8px;
+}
+
+.image-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn-remove-img {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Symmetry & Alignment */
+.align-items-stretch {
+  display: flex;
+}
+
+.sticky-editor {
+  border-radius: 20px; /* More rounded for the startup look */
+}
+
+.custom-pagination .page-link {
+  background: white;
+  border: 1px solid #f1f5f9 !important;
+  margin: 0 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-pagination .page-item.active .page-link {
+  transform: scale(1.15);
 }

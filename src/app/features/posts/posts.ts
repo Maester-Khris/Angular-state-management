@@ -43,6 +43,7 @@ export class Posts implements OnInit, HasUnsavedChanges {
   // ui state
   isLoading:boolean = false;
   errors:string[]=[];
+  imagePreview: string | null = "https://placehold.co/400";
   
   ngOnInit(): void {
     this.storeService.loadPosts(this.userid$);
@@ -79,4 +80,10 @@ export class Posts implements OnInit, HasUnsavedChanges {
   onDelete(title: string) {
     this.storeService.deletePost(title);
   }
+
+  onFileSelected(event:any){
+
+  }
+
+  removeImage(){}
 }
