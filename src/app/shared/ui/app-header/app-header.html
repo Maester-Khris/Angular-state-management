@@ -17,10 +17,10 @@
 
         @if (isLoggedIn()) {
           <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/myactivity" routerLinkActive="active">My Activity</a>
+            <a class="nav-link px-3" routerLink="/dashboard/myactivity" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Activity</a>
           </li>
           <li class="nav-item me-lg-3">
-            <a class="nav-link px-3" routerLink="/profile" routerLinkActive="active">Profile</a>
+            <a class="nav-link px-3" routerLink="/dashboard/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Profile</a>
           </li>
           <li class="nav-item ms-lg-2 ps-lg-3 border-start-lg">
               <div class="avatar-mini me-2">NK</div>

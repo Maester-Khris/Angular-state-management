@@ -1,37 +1,6 @@
-<div class="dashboard-wrapper" *ngIf="vm$ | async as vm">
-  <div class="row g-4">
-    <aside class="col-lg-3">
-      <div class="sidebar-card shadow-sm">
-        <ul class="nav flex-column gap-2">
-          <li class="nav-item">
-            <a class="nav-link text-muted" routerLink="/profile">
-              <i class="bi bi-person me-2"></i> Account Details
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" routerLink="/posts">
-              <i class="bi bi-grid-fill me-2"></i> My Activity
-            </a>
-          </li>
-          <li class="nav-item mt-3 pt-3 border-top">
-            <a class="nav-link text-danger logout-link" style="cursor: pointer;">
-              <i class="bi bi-box-arrow-right me-2"></i> Sign Out
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="card mt-4 border-0 bg-primary text-white shadow-sm">
-        <div class="card-body">
-          <h6 class="fw-bold mb-2">Create Content</h6>
-          <p class="small opacity-75">Share your latest technical insights with the community.</p>
-        </div>
-      </div>
-    </aside>
-  
-  <main class="col-lg-9">
+<div *ngIf="vm$ | async as vm">
   <div class="d-flex justify-content-between align-items-center mb-4">
-   <h3 class="canva-title mb-0">Share your next idea<span>,</span></h3>
+    <h3 class="canva-title mb-0">Share your next idea<span>,</span></h3>
     <app-loading-spinner *ngIf="vm.isLoading" size="sm"></app-loading-spinner>
   </div>
 
@@ -40,7 +9,7 @@
       <div class="card border-0 shadow-sm sticky-editor h-100">
         <div class="card-body p-4 d-flex flex-column">
           <h5 class="form-title-fancy mb-4">New publication</h5>
-          
+
           <form [formGroup]="addPostForm" (ngSubmit)="onAdd()" class="d-flex flex-column gap-3 flex-grow-1">
             <div>
               <label class="form-label smallest tracking-tight fw-medium text-muted">Title</label>
@@ -50,8 +19,8 @@
 
             <div class="flex-grow-1">
               <label class="form-label smallest tracking-tight fw-medium text-muted">Description</label>
-              <textarea class="form-control border-0 bg-light smallest" rows="4" 
-                placeholder="What's the story about?" formControlName="description"></textarea>
+              <textarea class="form-control border-0 bg-light smallest" rows="4" placeholder="What's the story about?"
+                formControlName="description"></textarea>
             </div>
 
             <div class="image-upload-wrapper">
@@ -76,7 +45,8 @@
               </label>
             </div>
 
-            <button type="submit" [disabled]="addPostForm.invalid" class="btn btn-primary w-100 py-2 shadow-sm rounded fw-bold small">
+            <button type="submit" [disabled]="addPostForm.invalid"
+              class="btn btn-primary w-100 py-2 shadow-sm rounded fw-bold small">
               Publish Post
             </button>
           </form>
@@ -86,58 +56,57 @@
 
     <div class="col-xl-7 d-flex flex-column">
       <div class="post-list-container flex-grow-1">
-         @if (vm.error) {
-            <div class="alert alert-danger border-0 shadow-sm">{{ vm.error }}</div>
-            }
+        @if (vm.error) {
+        <div class="alert alert-danger border-0 shadow-sm">{{ vm.error }}</div>
+        }
         <div class="d-flex flex-column gap-2">
           @for (post of vm.posts; track post.title) {
-           <div class="card border-0 shadow-sm post-item-hover">
-                <div class="card-body p-3">
-                  <app-post-card [post]="post" mode="list-item">
-                    <div actions class="w-100">
-                      <div class="d-flex justify-content-between align-items-start">
-                        <div class="d-flex gap-2 flex-shrink-0">
-                          <button type="button" class="btn btn-sm btn-light text-primary border actions-btn"
-                            (click)="onEdit(post.title)">
-                            <i class="bi bi-pencil-square"></i>
-                          </button>
-                          <button type="button" class="btn btn-sm actions-btn"
-                            [class]="post.isPublic ? 'btn-light text-muted border' : 'btn-outline-success'"
-                            (click)="onTogglePublic(post.title)">
-                            <i class="bi" [class]="post.isPublic ? 'bi-eye-slash' : 'bi-eye'"></i>
-                          </button>
-                          <button type="button" class="btn btn-sm btn-outline-danger actions-btn"
-                            (click)="onDelete(post.title)">
-                            <i class="bi bi-trash"></i>
-                          </button>
-                        </div>
-                      </div>
-
-                      <div class="d-flex align-items-center mt-2 pt-2 ">
-                        <span class="metadata-item">
-                          <i class="bi bi-clock-history me-1"></i>
-                          Updated 2h ago
-                        </span>
-                      </div>
+          <div class="card border-0 shadow-sm post-item-hover">
+            <div class="card-body p-3">
+              <app-post-card [post]="post" mode="list-item">
+                <div actions class="w-100">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex gap-2 flex-shrink-0">
+                      <button type="button" class="btn btn-sm btn-light text-primary border actions-btn"
+                        (click)="onEdit(post.title)">
+                        <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm actions-btn"
+                        [class]="post.isPublic ? 'btn-light text-muted border' : 'btn-outline-success'"
+                        (click)="onTogglePublic(post.title)">
+                        <i class="bi" [class]="post.isPublic ? 'bi-eye-slash' : 'bi-eye'"></i>
+                      </button>
+                      <button type="button" class="btn btn-sm btn-outline-danger actions-btn"
+                        (click)="onDelete(post.title)">
+                        <i class="bi bi-trash"></i>
+                      </button>
                     </div>
-                  </app-post-card>
+                  </div>
+
+                  <div class="d-flex align-items-center mt-2 pt-2 ">
+                    <span class="metadata-item">
+                      <i class="bi bi-clock-history me-1"></i>
+                      Updated 2h ago
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </app-post-card>
+            </div>
+          </div>
           }
         </div>
       </div>
-      
+
       <nav class="mt-4 d-flex justify-content-center">
         <ul class="pagination pagination-sm custom-pagination">
-          <li class="page-item disabled"><a class="page-link border-0 bg-transparent" href="#"><i class="bi bi-chevron-left"></i></a></li>
+          <li class="page-item disabled"><a class="page-link border-0 bg-transparent" href="#"><i
+                class="bi bi-chevron-left"></i></a></li>
           <li class="page-item active"><a class="page-link rounded-circle mx-1" href="#">1</a></li>
           <li class="page-item"><a class="page-link rounded-circle mx-1 border-0" href="#">2</a></li>
-          <li class="page-item"><a class="page-link border-0 bg-transparent text-primary" href="#"><i class="bi bi-chevron-right"></i></a></li>
+          <li class="page-item"><a class="page-link border-0 bg-transparent text-primary" href="#"><i
+                class="bi bi-chevron-right"></i></a></li>
         </ul>
       </nav>
     </div>
-  </div>
-</main>
-  
   </div>
 </div>

@@ -6,7 +6,7 @@ import { UserOverview } from '../user-overview/user-overview';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule, UserOverview],
+  imports: [RouterModule],
   templateUrl: './app-header.html',
   styleUrl: './app-header.css',
 })

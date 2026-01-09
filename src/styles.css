@@ -2,6 +2,8 @@
 /* Import Google Font: Inter (The gold standard for UI) */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 :root {
     /* --- Startup Color Palette --- */
     --postair-primary: #6366f1;       /* Electric Indigo */
@@ -63,4 +65,15 @@ body {
 .form-control:focus {
     border-color: var(--postair-primary);
     box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.canva-title {
+  font-family: 'Pacifico', sans-serif;
+  font-weight: 800;
+  font-size: 1.85rem;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
 }
