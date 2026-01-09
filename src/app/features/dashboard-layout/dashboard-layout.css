@@ -23,6 +23,13 @@
   margin: 0 auto;
 }
 
+.home-container{
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  /* border: 1px solid #ccc; */
+}
+
 /* Animation for the Dynamic Box */
 .create-cta-animation {
   animation: slideInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);

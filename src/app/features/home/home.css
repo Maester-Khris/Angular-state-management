@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;1,900&display=swap');
 .container-fluid{
     padding-left: 50px; padding-right: 50px;
 }
@@ -6,6 +8,12 @@
   position: relative;
   display: flex;
   min-height: 100%;
+}
+.home-container{
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  /* border: 1px solid #ccc; */
 }
 
 .side-drawer {
@@ -231,4 +239,174 @@ app-post-card {
 
 .immersive-overlay.active .detail-container {
   transform: translateY(0);
+}
+
+
+.hero-wrapper {
+  background: #ffffff;
+  /* Soft mesh gradient background */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+}
+
+.canva-gradient-text {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #1e293b 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.italic-play {
+  font-style: italic;
+  font-weight: 900;
+  color: #6366f1;
+  -webkit-text-fill-color: initial; /* Break the gradient for emphasis */
+}
+
+/* Glass Blobs that move slightly */
+.glass-blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+  filter: blur(80px);
+  border-radius: 50%;
+  z-index: 1;
+  animation: floatBlobs 20s infinite alternate ease-in-out;
+}
+
+.blob-1 { top: -10%; right: -10%; }
+.blob-2 { bottom: -10%; left: -10%; animation-delay: -5s; }
+
+@keyframes floatBlobs {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 100px) scale(1.1); }
+}
+
+/* Floating Mockup Cards */
+.floating-mockup-container {
+  position: relative;
+  height: 400px;
+}
+
+.mockup-card {
+  position: absolute;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.05);
+  animation: floatCard 6s infinite ease-in-out;
+}
+
+.card-1 { width: 280px; height: 180px; top: 20%; right: 10%; }
+.card-2 { width: 80px; height: 80px; bottom: 20%; left: 10%; animation-delay: -3s; }
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.btn-canva-lg {
+  background: #6366f1;
+  color: white;
+  padding: 1.2rem 2.5rem;
+  border-radius: 100px;
+  font-weight: 700;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-canva-lg:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+}
+/* ---------------------------------------- */
+.hero-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    min-height: 100svh;
+}
+
+.min-vh-75 {
+  min-height: 75vh;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-visual {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 420px;
+}
+
+.floating-card {
+  position: absolute;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 1rem;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-card:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.floating-card:nth-child(2) {
+  top: 140px;
+  left: 80px;
+}
+
+.floating-card:nth-child(3) {
+  top: 280px;
+  left: 20px;
+}
+
+.delay-1 {
+  animation-delay: 1.5s;
+}
+
+.delay-2 {
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.gradient-blob {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.blob-1 {
+  background: #6366f1;
+  top: -120px;
+  left: -120px;
+}
+
+.blob-2 {
+  background: #8b5cf6;
+  bottom: -140px;
+  right: -140px;
 }

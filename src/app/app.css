@@ -67,10 +67,9 @@
 
 /* Structural Layout */
 .app-main {
-  padding-top: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+  /* padding-top: 2rem; */
+ 
+  /* margin: 0 auto; */
 }
 
 @keyframes loading-shimmer {
