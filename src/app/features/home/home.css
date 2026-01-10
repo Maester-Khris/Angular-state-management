@@ -79,7 +79,7 @@ app-post-card {
 }
 
 /* The Search Bar (Linear/Stripe style) */
-.search-glass-wrapper {
+/* .search-glass-wrapper {
   background: white;
   border: 1px solid var(--postair-border);
   border-radius: 14px;
@@ -101,7 +101,7 @@ app-post-card {
   width: 100%;
   outline: none;
   font-size: 0.95rem;
-}
+} */
 
 /* Stable Masonry Layout */
 .bento-grid {

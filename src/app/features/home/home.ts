@@ -9,10 +9,11 @@ import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/ro
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { SearchBar } from '../search-bar/search-bar';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, RouterOutlet],
+  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, RouterOutlet],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -98,26 +99,27 @@ export class Home implements OnInit, OnDestroy {
     shareReplay(1)
   );
 
-
-  
-
+  // =============== Lifecycle hooks ================
   ngOnInit(): void {
-    
   }
+  ngOnDestroy(): void {
+  }
+
   
   loadMore(isLoading: boolean) {
     // Prevent concurrent loads
     if (isLoading) return; 
     this.loadMore$.next();
   }
-  onSearch(event:Event) {
-    const value = (event.target as HTMLInputElement).value; 
-    this.searchQuery$.next(value);
+
+
+  // ================= Search component  ==============
+  onSearch(query:string) {
+    // const value = (event.target as HTMLInputElement).value; 
+    this.searchQuery$.next(query);
   }
 
-  ngOnDestroy(): void {
-  }
-
+  
   // ================= Navigation with child component  ==============
   openDetails(title:string){
     console.log(title);
@@ -126,7 +128,6 @@ export class Home implements OnInit, OnDestroy {
   closeDetails() {
     this.router.navigate(['/home']);
   }
-
   @HostListener('window:keyup.esc')
   onEsc() {
     if (this.isDrawerOpen()) {
@@ -134,42 +135,3 @@ export class Home implements OnInit, OnDestroy {
     }
   }
 }
-
-// this.posts$ = this.MockApi.fetchPublicPosts();
-// this.refreshTrigger$.next();
-
-
-//make home reactive to change in global posts
-// posts$ = this.MockApi.dataChanged$.pipe(
-//   switchMap(() => this.MockApi.fetchPublicPosts()),
-//   shareReplay(1) // Avoid multiple API calls for the same data
-// );
-
-
-// filteredPost$ = this.searchQuery$.pipe(
-//   startWith(''),
-//   debounceTime(500),
-//   distinctUntilChanged(),
-//   switchMap((query:string) => 
-//     this.posts$.pipe(
-//       map(posts => {
-//         const searchTerm = query.toLowerCase().trim();
-//         if(!searchTerm) return posts;
-
-//         return posts.filter((post:Post) => 
-//           post.title.toLowerCase().includes(query) || 
-//           post.description.toLowerCase().includes(query)
-//         );
-//       }) 
-//     )
-//   )
-// );
-
- // apply filtering for search queries
-    // map(state =>{
-    //   const term = state.query.toLowerCase().trim();
-    //   return state.posts.filter((p:Post) => 
-    //     p.title.toLowerCase().includes(term) || 
-    //     p.description.toLowerCase().includes(term)
-    //   );
-    // }),s

@@ -1,0 +1,52 @@
+.search-glass-wrapper {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.search-glass-wrapper:focus-within {
+  background: #fff;
+  border-color: #6366f1;
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.2) !important;
+}
+
+.kbd-badge {
+  /* background: #f1f5f9; */
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 8px 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  margin-right: 12px;
+  white-space: nowrap;
+}
+
+/* The Search Bar (Linear/Stripe style) */
+.search-glass-wrapper {
+  background: white;
+  border: 1px solid var(--postair-border);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.search-glass-wrapper:focus-within {
+  border-color: var(--postair-primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
+}
+
+.search-input {
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  outline: none;
+  font-size: 0.95rem;
+}

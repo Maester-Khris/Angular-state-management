@@ -70,12 +70,7 @@
 
   <div class="home-container" *ngIf="vm$ | async as vm" style="margin-top: 40px!important;">
     <header class="home-header mb-5">
-      <div class="search-glass-wrapper shadow-sm">
-        <i class="bi bi-search ms-3 text-muted"></i>
-        <input type="text" class="search-input" placeholder="Search stories, tech, and insights..."
-          (input)="onSearch($event)">
-        <kbd class="me-3 py-2 d-none d-md-inline-block" style="width: 80px;border-radius: 5px;">CMD + K</kbd>
-      </div>
+      <app-search-bar (search)="onSearch($event)"></app-search-bar>
     </header>
 
     <div class="bento-grid">
@@ -106,10 +101,6 @@
       </div>
       }
     </div>
-
-    <!-- <aside class="side-drawer" [class.open]="isDrawerOpen()">
-    <router-outlet></router-outlet>
-  </aside> -->
 
     <div class="immersive-overlay" [class.active]="isDrawerOpen()" (click)="closeDetails()">
       <div class="detail-container" (click)="$event.stopPropagation()">
