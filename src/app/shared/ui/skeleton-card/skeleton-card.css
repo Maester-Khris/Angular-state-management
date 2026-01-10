@@ -1,0 +1,39 @@
+.glass-skeleton-wrapper {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1.5rem;
+  height: 280px; /* Match your bento-item height */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.4) 50%, 
+    transparent 100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.skeleton-line {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+.title { width: 80%; height: 1.2rem; }
+.subtitle { width: 50%; height: 0.8rem; }
+.skeleton-footer { display: flex; align-items: center; gap: 10px; }
+.skeleton-circle { width: 30px; height: 30px; border-radius: 50%; background: rgba(0, 0, 0, 0.05); }
+.name { width: 40%; height: 0.6rem; margin: 0; }

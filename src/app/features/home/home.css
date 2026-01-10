@@ -1,7 +1,8 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;1,900&display=swap');
-.container-fluid{
-    padding-left: 50px; padding-right: 50px;
+
+.container-fluid {
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .home-layout-container {
@@ -9,11 +10,19 @@
   display: flex;
   min-height: 100%;
 }
-.home-container{
+
+.home-container {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
   /* border: 1px solid #ccc; */
+}
+
+.home-header {
+  position: relative;
+  z-index: 10;
+  transform: translateY(-50%);
+  /* Center the search bar on the seam */
 }
 
 .side-drawer {
@@ -28,17 +37,20 @@
   z-index: 1050; 
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); */
-  position: fixed; /* Always stays in the viewport */
-  top: 56px;      /* Starts exactly below your 60px header */
+  position: fixed;
+  /* Always stays in the viewport */
+  top: 56px;
+  /* Starts exactly below your 60px header */
   right: 0;
   width: 450px;
-  
+
   /* Viewport Height minus the Header height */
-  height: calc(100vh - 56px); 
-  
+  height: calc(100vh - 56px);
+
   background: white;
-  z-index: 1050; /* Above the backdrop */
-  box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+  z-index: 1050;
+  /* Above the backdrop */
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
 
   transform: translateX(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -47,25 +59,31 @@
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
 }
+
 .side-drawer.open {
   transform: translateX(0);
 }
 
 .backdrop {
   position: fixed;
-  top: 56px; /* Starts exactly where your header ends */
+  top: 56px;
+  /* Starts exactly where your header ends */
   left: 0;
   width: 100vw;
   height: calc(100vh - 56px);
-  background-color: rgba(255, 255, 255, 0.3); /* Light tint instead of dark */
-  
+  background-color: rgba(255, 255, 255, 0.3);
+  /* Light tint instead of dark */
+
   /* This is the Senior-level property */
-  backdrop-filter: blur(8px); 
-  -webkit-backdrop-filter: blur(8px); /* Safari support */
-  
-  z-index: 1040; /* Below drawer (1050), Above content */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* Safari support */
+
+  z-index: 1040;
+  /* Below drawer (1050), Above content */
   cursor: pointer;
 }
+
 .backdrop.active {
   opacity: 1;
   visibility: visible;
@@ -74,34 +92,10 @@
 app-post-card {
   /* display: block; */
   /* min-height: 350px; Adjust to your average card height */
-  break-inside: avoid; /* If using CSS Columns Masonry */
+  break-inside: avoid;
+  /* If using CSS Columns Masonry */
   margin-bottom: 1.5rem;
 }
-
-/* The Search Bar (Linear/Stripe style) */
-/* .search-glass-wrapper {
-  background: white;
-  border: 1px solid var(--postair-border);
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  max-width: 600px;
-  margin: 0 auto;
-  transition: all 0.3s ease;
-}
-
-.search-glass-wrapper:focus-within {
-  border-color: var(--postair-primary);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
-}
-
-.search-input {
-  border: none;
-  padding: 1rem;
-  width: 100%;
-  outline: none;
-  font-size: 0.95rem;
-} */
 
 /* Stable Masonry Layout */
 .bento-grid {
@@ -109,14 +103,26 @@ app-post-card {
   column-gap: 1.5rem;
 }
 
-@media (min-width: 768px) { .bento-grid { column-count: 2; } }
-@media (min-width: 1200px) { .bento-grid { column-count: 3; } }
+@media (min-width: 768px) {
+  .bento-grid {
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1200px) {
+  .bento-grid {
+    column-count: 3;
+  }
+}
 
 .bento-item {
-  break-inside: avoid; /* Essential: prevents card from splitting across columns */
+  break-inside: avoid;
+  /* Essential: prevents card from splitting across columns */
   margin-bottom: 1.5rem;
   display: inline-block;
   width: 100%;
+
+  padding-top: 2rem;
 }
 
 /* Card Styling */
@@ -163,18 +169,22 @@ app-post-card {
   border-radius: 50%;
 }
 
-.smallest { font-size: 0.7rem; }
+.smallest {
+  font-size: 0.7rem;
+}
 
 /* Center status footer */
 .status-footer {
   width: 100%;
-  clear: both; /* Prevents masonry wrap-around issues */
+  clear: both;
+  /* Prevents masonry wrap-around issues */
 }
 
 /* Ensure images in postcards don't overflow */
 .post-image-wrapper img {
   width: 100%;
-  height: 200px; /* Force consistent heights for bento items if desired */
+  height: 200px;
+  /* Force consistent heights for bento items if desired */
   object-fit: cover;
 }
 
@@ -210,7 +220,8 @@ app-post-card {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(15, 23, 42, 0.4); /* Slate 900 with alpha */
+  background: rgba(15, 23, 42, 0.4);
+  /* Slate 900 with alpha */
   backdrop-filter: blur(12px);
   z-index: 1100;
   opacity: 0;
@@ -245,7 +256,7 @@ app-post-card {
 .hero-wrapper {
   background: #ffffff;
   /* Soft mesh gradient background */
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
 }
@@ -263,7 +274,8 @@ app-post-card {
   font-style: italic;
   font-weight: 900;
   color: #6366f1;
-  -webkit-text-fill-color: initial; /* Break the gradient for emphasis */
+  -webkit-text-fill-color: initial;
+  /* Break the gradient for emphasis */
 }
 
 /* Glass Blobs that move slightly */
@@ -278,12 +290,25 @@ app-post-card {
   animation: floatBlobs 20s infinite alternate ease-in-out;
 }
 
-.blob-1 { top: -10%; right: -10%; }
-.blob-2 { bottom: -10%; left: -10%; animation-delay: -5s; }
+.blob-1 {
+  top: -10%;
+  right: -10%;
+}
+
+.blob-2 {
+  bottom: -10%;
+  left: -10%;
+  animation-delay: -5s;
+}
 
 @keyframes floatBlobs {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(50px, 100px) scale(1.1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(50px, 100px) scale(1.1);
+  }
 }
 
 /* Floating Mockup Cards */
@@ -297,16 +322,35 @@ app-post-card {
   background: white;
   border-radius: 20px;
   padding: 20px;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   animation: floatCard 6s infinite ease-in-out;
 }
 
-.card-1 { width: 280px; height: 180px; top: 20%; right: 10%; }
-.card-2 { width: 80px; height: 80px; bottom: 20%; left: 10%; animation-delay: -3s; }
+.card-1 {
+  width: 280px;
+  height: 180px;
+  top: 20%;
+  right: 10%;
+}
+
+.card-2 {
+  width: 80px;
+  height: 80px;
+  bottom: 20%;
+  left: 10%;
+  animation-delay: -3s;
+}
 
 @keyframes floatCard {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .btn-canva-lg {
@@ -323,10 +367,15 @@ app-post-card {
   transform: scale(1.05);
   box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
 }
+
 /* ---------------------------------------- */
 .hero-section {
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-    min-height: 100svh;
+  /* min-height: 100svh; */
+  height: 85vh;
+  /* Drop from 100vh to 95vh */
+  margin-bottom: -5vh;
+  /* Pull the content up slightly */
 }
 
 .min-vh-75 {
@@ -381,9 +430,11 @@ app-post-card {
   0% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-12px);
   }
+
   100% {
     transform: translateY(0px);
   }

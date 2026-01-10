@@ -10,10 +10,11 @@ import { PostCard } from '../../shared/ui/post-card/post-card';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SearchBar } from '../search-bar/search-bar';
+import { SkeletonCard } from '../../shared/ui/skeleton-card/skeleton-card';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, RouterOutlet],
+  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -35,9 +36,6 @@ export class Home implements OnInit, OnDestroy {
       startWith(this.router.url.includes('/view/'))
     )
   );
-  // .subscribe(() => {
-  //     this,this.isDrawerOpen.set(this.route.children.length > 0); 
-  //   });
 
 
 

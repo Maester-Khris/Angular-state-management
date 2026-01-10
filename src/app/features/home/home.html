@@ -85,6 +85,13 @@
         </app-post-card>
       </div>
       }
+      @if (vm.loading) {
+        @for (i of [1, 2, 3]; track i) {
+          <div class="bento-item">
+            <app-skeleton-card></app-skeleton-card>
+          </div>
+        }
+      }
     </div>
 
     <div class="status-footer py-5 text-center">
