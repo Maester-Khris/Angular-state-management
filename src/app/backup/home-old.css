@@ -534,18 +534,6 @@ app-post-card {
 .ms-n2 { margin-left: -10px !important; }
 
 /* ---------------------------------------- */
-.author-avatar {
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.author-name {
-  font-size: 0.94rem;
-  letter-spacing: -0.01em;
-}
 
 .btn-fav {
   border: none;

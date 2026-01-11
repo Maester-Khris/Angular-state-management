@@ -11,6 +11,7 @@ import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner'
 import { toSignal } from '@angular/core/rxjs-interop';
 import { SearchBar } from '../search-bar/search-bar';
 import { SkeletonCard } from '../../shared/ui/skeleton-card/skeleton-card';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
