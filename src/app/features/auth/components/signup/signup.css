@@ -1,0 +1,51 @@
+.avatar-upload-container .avatar-preview-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.avatar-upload-container .avatar-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  background: #f8fafc;
+}
+
+.avatar-upload-container .avatar-edit-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: #6366f1;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #fff;
+}
+
+.avatar-upload-container .avatar-edit-badge:hover {
+  background: #4f46e5;
+  transform: scale(1.1);
+}
+
+.avatar-upload-container .avatar-edit-badge i {
+  font-size: 0.9rem;
+}
+
+textarea {
+  resize: none;
+  font-size: 0.9rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--postair-text-muted);
+}

@@ -1,0 +1,55 @@
+.auth-overlay {
+  min-height: 80vh; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-shell-card {
+  width: 100%;
+  max-width: 480px; 
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px; 
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.05),
+    0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  overflow: hidden; 
+  position: relative;
+}
+
+.auth-header-decorator {
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* // Generous padding for a "premium" feel */
+.auth-content-wrapper {
+  padding: 3rem 2.5rem; 
+}
+
+/* // Global Auth Typography for children */
+.auth-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+}
+
+.auth-subtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* For smooth state transitions if you use Angular Animations later */
+.step-container {
+  display: block;
+  width: 100%;
+}

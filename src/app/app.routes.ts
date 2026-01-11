@@ -2,11 +2,10 @@ import { Routes } from '@angular/router';
 
 import { authGuardGuard } from './core/guards/auth-guard-guard';
 import { pendingChangesGuard } from './core/guards/pending-changes-guard';
-import { Login } from './features/login/login';
 import { profileResolver } from './core/resolvers/profile-resolver';
-import { Home } from './features/home/home';
 import { HomeResolver } from './core/resolvers/home-resolver';
 import { DashboardLayout } from './features/dashboard-layout/dashboard-layout';
+import { AuthShell } from './features/auth/auth-shell/auth-shell';
 
 export const routes: Routes = [
     {
@@ -39,10 +38,20 @@ export const routes: Routes = [
             { path: '', redirectTo: 'myactivity', pathMatch: 'full' }
         ]
     },
-
     {
-        path: "login",
-        loadComponent: () => import("./features/login/login").then(c => c.Login)
+        path: 'auth',
+        component: AuthShell,
+        children: [
+            { path: '', redirectTo: 'login', pathMatch: 'full' } // We keep the shell but can use redirect to handle /login vs /signup
+        ]
     },
+    // High-end trick: Map direct URLs to the same Shell
+    { path: 'login', component: AuthShell },
+    { path: 'signup', component: AuthShell },
     { path: "", redirectTo: "home", pathMatch: "full" }
-];
+]; 
+
+// {
+    //     path: "login",
+    //     loadComponent: () => import("./features/auth/components/login/login").then(c => c.Login)
+    // },

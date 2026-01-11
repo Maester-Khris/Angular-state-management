@@ -1,0 +1,70 @@
+<!-- <div class="auth-container glass-effect shadow-lg">
+  <div class="step-indicator" [attr.data-step]="currentStep"></div>
+
+  <div [@fadeSlideInOut]="currentStep" [ngSwitch]="currentStep">
+    
+    <app-login 
+      *ngSwitchCase="'login'"
+      (onSwitchToSignup)="handleStepChange('signup')"
+      (onForgotPassword)="handleStepChange('reset')">
+    </app-login>
+
+    <app-signup 
+      *ngSwitchCase="'signup'"
+      (onSuccess)="handleStepChange('otp', $event)"
+      (onLoginLink)="handleStepChange('login')">
+    </app-signup>
+
+    <app-otp-verify 
+      *ngSwitchCase="'otp'"
+      [email]="tempAuthData.email"
+      (onVerified)="finishAuth()"
+      (onBack)="handleStepChange('signup')">
+    </app-otp-verify>
+
+    </div>
+</div> -->
+
+<div class="auth-overlay">
+  <div class="auth-shell-card">
+    <div class="auth-header-decorator"></div>
+    
+    <div class="auth-content-wrapper">
+      <div class="auth-header text-center mb-4">
+        <h2 class="auth-title">{{ getTitle() }}</h2>
+        <p class="auth-subtitle">{{ getSubtitle() }}</p>
+      </div>
+
+      <div class="step-container">
+        @switch (currentStep) {
+          @case ('login') {
+            <app-login
+              (onLogin)="executeLogin($event)"
+              (onForgotPassword)="handleStepChange('reset')"
+              (onNavigateToSignup)="handleStepChange('signup')">
+            </app-login>
+          }
+          @case ('signup') {
+            <app-signup
+              (onSuccess)="handleStepChange('otp', $event)"
+              (onLoginLink)="handleStepChange('login')">
+            </app-signup>
+             }
+          @case ('otp') {
+             <app-otp-verify 
+              [email]="tempAuthData.email"
+              (onVerified)="finishAuth()"
+              (onBack)="handleStepChange('signup')"
+              >
+            </app-otp-verify>
+          }
+          @case ('reset') {
+            <app-password-reset
+              (onBack)="handleStepChange('login')">
+            </app-password-reset>
+          }
+        }
+      </div>
+    </div>
+  </div>
+</div>

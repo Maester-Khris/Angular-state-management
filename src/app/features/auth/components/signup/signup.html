@@ -1,0 +1,80 @@
+<form [formGroup]="signupForm" (ngSubmit)="submit()">
+  
+  <div class="avatar-upload-container mb-4 text-center">
+    <div class="avatar-preview-wrapper mx-auto">
+      <img [src]="avatarPreview || 'assets/default-avatar.png'" 
+           class="avatar-preview shadow-sm" 
+           alt="Profile Preview">
+      
+      <label for="avatarInput" class="avatar-edit-badge shadow">
+        <i class="bi bi-camera-fill"></i>
+        <input type="file" 
+               id="avatarInput" 
+               (change)="onFileSelected($event)" 
+               accept="image/*" 
+               hidden>
+      </label>
+    </div>
+    <p class="text-muted smaller mt-2">Upload a profile picture</p>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-12">
+      <label class="form-label">Full Name</label>
+      <input type="text" 
+             formControlName="name"
+             class="form-control shadow-none" 
+             placeholder="John Doe"
+             [class.is-invalid]="f['name'].touched && f['name'].errors">
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Email Address</label>
+      <input type="email" 
+             formControlName="email"
+             class="form-control shadow-none" 
+             placeholder="name@company.com"
+             [class.is-invalid]="f['email'].touched && f['email'].errors">
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Password</label>
+      <input type="password" 
+             formControlName="password"
+             class="form-control shadow-none" 
+             placeholder="••••••••"
+             [class.is-invalid]="f['password'].touched && f['password'].errors">
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Bio <span class="text-muted">(Optional)</span></label>
+      <textarea formControlName="bio" 
+                class="form-control shadow-none" 
+                rows="2" 
+                placeholder="Briefly describe your expertise..."
+                [class.is-invalid]="f['bio'].touched && f['bio'].errors"></textarea>
+      <div class="d-flex justify-content-end">
+        <small class="text-muted">{{ f['bio'].value?.length || 0 }}/250</small>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" 
+          class="btn btn-primary w-100 py-2 fw-semibold mt-4" 
+          [disabled]="signupForm.invalid || isLoading">
+    @if (isLoading) {
+      <span class="spinner-border spinner-border-sm me-2"></span> Creating Account...
+    } @else {
+      Create Account
+    }
+  </button>
+
+  <div class="text-center mt-4">
+    <p class="text-muted small">Already have an account? 
+      <button type="button" (click)="onLoginLink.emit()" 
+              class="btn btn-link p-0 text-primary fw-bold text-decoration-none">
+        Sign In
+      </button>
+    </p>
+  </div>
+</form>

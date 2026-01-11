@@ -1,39 +1,4 @@
-<!-- <div class="container">
-<div class="row justify-content-center">
-    <div class="col-md-6">
-    <h1>Login</h1>
-    <form #loginForm="ngForm" (ngSubmit)="login()">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input #emailCtrl="ngModel"
-                type="email" class="form-control" id="email" name="email" 
-                [class.is-invalid]="emailCtrl.invalid && emailCtrl.touched"
-                [(ngModel)]="userEmail" 
-                required>
-            <div class="small invalid-feedback">
-                Valid email is required
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input #passCtrl="ngModel"
-                type="password" class="form-control" id="password" name="password"
-                [class.is-invalid]="passCtrl.invalid && passCtrl.touched"
-                [(ngModel)]="userPassword"
-                required minlength="4">
-
-            <div class="small invalid-feedback">
-                Password must be at least 4 characters
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
-    </form>
-    </div>
-</div>
-</div> -->
-
-<div class="auth-page-container">
+<!-- <div class="auth-page-container">
   <div class="auth-card">
     <div class="auth-header text-center">
       <h2 class="fw-bold">Welcome Back</h2>
@@ -86,4 +51,43 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->
+
+<form [formGroup]="loginForm" (ngSubmit)="submit()">
+  <div class="mb-3">
+    <label class="form-label">Email Address</label>
+    <input type="email" formControlName="email" class="form-control shadow-none" placeholder="name@company.com"
+      [class.is-invalid]="f['email'].touched && f['email'].errors">
+    <div class="invalid-feedback">Enter a valid email address</div>
+  </div>
+
+  <div class="mb-4">
+    <div class="d-flex justify-content-between">
+      <label class="form-label">Password</label>
+      <button type="button" (click)="onForgotPassword.emit()"
+        class="btn btn-link p-0 text-primary small text-decoration-none fw-medium">
+        Forgot?
+      </button>
+    </div>
+    <input type="password" formControlName="password" class="form-control shadow-none" placeholder="••••••••"
+      [class.is-invalid]="f['password'].touched && f['password'].errors">
+    <div class="invalid-feedback">Password must be at least 4 characters</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold" [disabled]="loginForm.invalid || isLoading">
+    @if (isLoading) {
+    <span class="spinner-border spinner-border-sm me-2"></span> Checking...
+    } @else {
+    Sign In
+    }
+  </button>
+
+  <div class="text-center mt-4">
+    <p class="text-muted small">Don't have an account?
+      <button type="button" (click)="onNavigateToSignup.emit()"
+        class="btn btn-link p-0 text-primary fw-bold text-decoration-none">
+        Sign Up
+      </button>
+    </p>
+  </div>
+</form>
