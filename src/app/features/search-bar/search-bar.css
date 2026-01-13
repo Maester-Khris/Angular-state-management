@@ -50,3 +50,117 @@
   outline: none;
   font-size: 0.95rem;
 }
+
+/* Custom styling for the mode selector */
+.search-mode-select {
+    border: none;
+    background: transparent;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    padding: 4px 8px;
+    outline: none;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.search-mode-select:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--postair-primary);
+}
+
+/* Vertical divider between select and input */
+.vertical-divider {
+    height: 20px;
+    width: 1px;
+    background-color: var(--postair-border);
+    opacity: 0.6;
+}
+
+/* Updated wrapper to ensure alignment with the new elements */
+.search-glass-wrapper {
+    background: white;
+    border: 1px solid var(--postair-border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    max-width: 700px; /* Increased slightly to accommodate the select */
+    margin: 0 auto;
+    transition: all 0.3s ease;
+    padding-left: 0.5rem;
+}
+
+.search-input {
+    border: none;
+    padding: 1rem 0.5rem; /* Adjusted horizontal padding */
+    width: 100%;
+    outline: none;
+    font-size: 0.95rem;
+    background: transparent;
+}
+/* Updated wrapper with softer border and padding */
+.search-glass-wrapper {
+    background: white;
+    border: 1px solid #e2e8f0; /* Matched to select hover/kbd grey */
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    max-width: 650px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.search-glass-wrapper:focus-within {
+    border-color: var(--postair-primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Container to handle the rounding and background */
+/* .search-mode-container {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px; 
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+} */
+
+.search-mode-container:hover {
+    background: #e2e8f0;
+}
+
+/* Reset select styling for a seamless look */
+.search-mode-select {
+    border: none;
+    background: transparent;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    outline: none;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.search-input {
+    border: none;
+    padding: 1rem;
+    width: 100%;
+    outline: none;
+    font-size: 0.95rem;
+    background: transparent;
+}
+
+/* Ensure KBD matches the new theme */
+/* .kbd-badge {
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #94a3b8;
+    white-space: nowrap;
+} */

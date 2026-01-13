@@ -38,6 +38,9 @@ export class Login {
   submit() {
     if (this.loginForm.valid) {
       this.onLogin.emit(this.loginForm.value);
+      this.authservice.login().subscribe(lognRes =>{
+        this.router.navigate(['home']);
+      });
     }
   }
 }

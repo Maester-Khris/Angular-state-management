@@ -30,4 +30,9 @@ export class SearchBar {
     const value = (event.target as HTMLInputElement).value;
     this.search.emit(value);
   }
+
+  onModeChange(event: any) {
+    // const value = (event.target as HTMLInputElement).value;
+    // this.search.emit(value);
+  }
 }

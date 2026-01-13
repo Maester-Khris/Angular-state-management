@@ -1,7 +1,38 @@
-<div class="search-glass-wrapper shadow-sm">
+<!-- <div class="search-glass-wrapper shadow-sm">
     <i class="bi bi-search ms-3 text-muted"></i>
     <input  #searchInput
         type="text" class="search-input" placeholder="Search stories, tech, and insights..."
         (input)="onInput($event)">
     <kbd class="me-3 kbd-badge d-none d-md-flex" style="">{{keyboardLabel}}</kbd>
+</div> -->
+<!-- <div class="search-glass-wrapper shadow-sm">
+    <i class="bi bi-search ms-3 text-muted"></i>
+    
+    <select class="search-mode-select ms-2" (change)="onModeChange($event)">
+        <option value="text">Text</option>
+        <option value="semantic">Semantic</option>
+    </select>
+    
+    <div class="vertical-divider mx-2"></div>
+
+    <input #searchInput
+        type="text" class="search-input" placeholder="Search stories, tech, and insights..."
+        (input)="onInput($event)">
+    <kbd class="me-3 kbd-badge d-none d-md-flex">{{keyboardLabel}}</kbd>
+</div> -->
+<div class="search-glass-wrapper shadow-sm">
+    <i class="bi bi-search ms-3 text-muted"></i>
+    
+    <input #searchInput
+        type="text" class="search-input" placeholder="Search stories, tech, and insights..."
+        (input)="onInput($event)">
+
+    <div class="search-mode-container me-2">
+        <select class="search-mode-select" (change)="onModeChange($event)">
+            <option value="text">Text</option>
+            <option value="semantic">Semantic</option>
+        </select>
+    </div>
+
+    <kbd class="me-3 kbd-badge d-none d-md-flex">{{keyboardLabel}}</kbd>
 </div>
