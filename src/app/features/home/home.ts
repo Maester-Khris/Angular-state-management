@@ -12,10 +12,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { SearchBar } from '../search-bar/search-bar';
 import { SkeletonCard } from '../../shared/ui/skeleton-card/skeleton-card';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { Footer } from '../../shared/ui/footer/footer';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet],
+  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
