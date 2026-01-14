@@ -1,158 +1,224 @@
-.dashboard-wrapper {
-  margin-top: 1rem;
-}
+/* 
+ .profile-dashboard-grid {
+   display: grid;
+   grid-template-columns: 1fr 340px; 
+   gap: 2rem;
+   max-width: 1400px;
+   margin: 0 auto;
+ }
+ .profile-card {
+   background: white;
+   border: 1px solid var(--postair-border);
+   border-radius: 20px;
+   overflow: hidden;
+   margin-bottom: 2rem;
 
-.sidebar-card {
-  background: white;
-  border: 1px solid var(--postair-border);
-  border-radius: 12px;
-  padding: 1rem;
-}
+   .profile-cover {
+     height: 140px;
+     background: linear-gradient(135deg, #6366f1, #a855f7);
+   }
 
-.sidebar-card .nav-link {
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-weight: 500;
-  transition: background 0.2s;
-}
+   .profile-content {
+     padding: 0 2rem 2rem;
+     margin-top: -60px;
+   }
 
-.sidebar-card .nav-link.active {
-  background: #f1f5f9;
-  color: var(--postair-primary);
-}
+   .profile-avatar {
+     width: 120px;
+     height: 120px;
+     border-radius: 50%;
+     border: 6px solid white;
+     background: white;
+   }
+ }
+ .drafts-lab {
+   margin-bottom: 2rem;
+  
+   .draft-card {
+     display: flex;
+     align-items: center;
+     background: white;
+     border: 1px dashed #cbd5e1; 
+     padding: 1rem;
+     border-radius: 12px;
+     margin-bottom: 0.75rem;
+     transition: all 0.2s;
+     cursor: pointer;
 
-.profile-card {
-  background: white;
-  border: 1px solid var(--postair-border);
-  border-radius: 16px;
-  overflow: hidden;
-}
+     &:hover {
+       border-color: var(--postair-primary);
+       background: #f8fafc;
+     }
 
-.profile-cover {
-  height: 120px;
-  background: linear-gradient(90deg, #6366f1, #a855f7);
-}
+     .draft-status {
+       font-size: 0.65rem;
+       font-weight: 800;
+       color: #94a3b8;
+       border: 1px solid #e2e8f0;
+       padding: 2px 6px;
+       border-radius: 4px;
+       margin-right: 1rem;
+     }
+   }
+ }
+ .stats-mini-grid {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 1rem;
 
-.profile-content {
-  padding: 0 2rem 2rem;
-  margin-top: -60px;
-}
+   .stat-mini-card {
+     background: white;
+     border: 1px solid #f1f5f9;
+     padding: 1rem;
+     border-radius: 12px;
+     text-align: center;
+    
+     .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #94a3b8; font-weight: 700; }
+     .stat-value { display: block; font-size: 1.25rem; font-weight: 700; color: #1e293b; }
+   }
+ }
+ .contribution-grid {
+   display: flex;
+   justify-content: space-between;
+   gap: 3px;
+  
+   .heatmap-cell {
+     width: 12px;
+     aspect-ratio: 1/1;
+     border-radius: 2px;
+     background-color: #f1f5f9;
+     &.level-1 { background: #9be9a8; }
+     &.level-2 { background: #40c463; }
+     &.level-3 { background: #216e39; }
+   }
+ }
+ .favorites-stack {
+   display: flex;
+   flex-direction: column;
+   gap: 0.75rem;
 
-.profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 5px solid white;
-  background: white;
-}
+   .fav-card-pro {
+     background: white;
+     border: 1px solid #f1f5f9;
+     border-radius: 10px;
+     padding: 0.75rem;
+     display: flex;
+     gap: 0.75rem;
+    
+     .fav-icon-border { color: #6366f1; font-size: 1rem; }
+     .fav-title { font-size: 0.8rem; font-weight: 600; color: #1e293b; }
+     .fav-date { font-size: 0.7rem; color: #94a3b8; }
+   }
+ }
+ .section-title {
+   font-size: 0.75rem;
+   font-weight: 800;
+   text-transform: uppercase;
+   letter-spacing: 0.1em;
+   color: #64748b;
+ }
 
-.avatar-wrapper {
+ .timeline-connector {
+   position: absolute;
+   top: 36px;
+   bottom: -6px;
+   width: 0;
+   border-left: 2px dotted #e2e8f0;
+ }
+
+.profile-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+} */
+
+/* ================= Profile Card ================= */
+/* Minimal Timeline */
+.timeline {
   position: relative;
-  display: inline-block;
+  padding-left: 1rem;
 }
 
-.status-indicator {
+.timeline::before {
+  content: '';
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  background: #22c55e;
-  border: 3px solid white;
+  left: 0;
+  top: 5px;
+  bottom: 5px;
+  width: 2px;
+  background: #f1f5f9;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.timeline-point {
+  position: absolute;
+  left: -4px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border: 2px solid var(--postair-primary);
   border-radius: 50%;
 }
-
-.stat-card {
-  background: white;
-  border: 1px solid var(--postair-border);
-  border-radius: 12px;
-  padding: 1.25rem;
-  text-align: center;
-}
-
-.stat-label {
-  display: block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: var(--postair-text-muted);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--postair-text-main);
-}
-
-.contribution-grid {
-  display: flex;
-  gap: 4px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-.heatmap-col {
+.activity-timeline {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  margin-left: -1rem; /* Pulls the timeline closer to the container edge */
 }
 
-.heatmap-cell {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  background-color: #ebedf0;
+.timeline-item {
+  display: flex;
+  gap: 1rem;
+  position: relative;
 }
 
-.level-1 { background-color: #9be9a8!important; }
-.level-2 { background-color: #40c463!important; }
-.level-3 { background-color: #216e39!important; }
+.timeline-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 40px; /* Width for the icon column */
+}
 
-.activity-icon {
+.timeline-marker {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2; /* Sits on top of the line */
+  font-size: 1rem;
+  flex-shrink: 0;
+  position: relative;
 }
 
-.bg-light-primary { background: rgba(99, 102, 241, 0.1); }
-.bg-light-success { background: rgba(34, 197, 94, 0.1); }
-
-.smaller { font-size: 0.75rem; }
-
-/* Stats Refinement */
-.stat-card {
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  border: 1px solid #eef2f6;
-}
-.stat-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--postair-primary);
+/* The Dotted Connector */
+.timeline-connector {
+  position: absolute;
+  top: 36px;    /* Starts exactly at the bottom of the icon (marker height) */
+  bottom: -6px; /* Extends slightly into the next item's space to bridge the gap */
+  width: 0;
+  border-left: 2px dotted #cbd5e1;
+  z-index: 1;
 }
 
-/* Full Width Contribution Heatmap */
-.contribution-heatmap-wrapper {
-  background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 12px;
+.timeline-content {
+  flex-grow: 1;
+  padding-bottom: 2.5rem; /* The gap between events */
+  padding-right: 1rem;
 }
 
-.contribution-grid {
-  display: flex;
-  justify-content: space-between; /* Spans the full parent width */
-  gap: 2px;
-}
-
-.heatmap-cell {
-  width: 100%; /* Flexible cell width */
-  aspect-ratio: 1/1; /* Keep it square */
-  min-width: 10px;
-  max-width: 14px;
-  border-radius: 2px;
-  background-color: #e2e8f0;
+/* Tighten up the timeline logic for the last item */
+.timeline-item:last-child .timeline-content {
+  padding-bottom: 0;
 }
 
 /* Pro Favorites Layout */
@@ -189,42 +255,220 @@
   font-size: 1.2rem;
 }
 
-/* Minimal Timeline */
-.timeline {
-  position: relative;
-  padding-left: 1rem;
+/* ================= The 3-Column Grid Engine ================= */
+.profile-dashboard-grid {
+  display: grid;
+  /* Column 1: Navigation (Fixed or Flex) | Column 2: Center (Main) | Column 3: Insights (Aside) */
+  /* We use 1fr for the center to let it soak up available space */
+  grid-template-columns: 1fr 340px; 
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start; /* Prevents columns from stretching vertically to match height */
+  padding: 1rem;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 5px;
-  bottom: 5px;
-  width: 2px;
-  background: #f1f5f9;
+/* Responsiveness: Stack columns on smaller screens */
+@media (max-width: 1100px) {
+  .profile-dashboard-grid {
+    grid-template-columns: 1fr;
+    max-width: 800px;
+  }
+  
+  .right-sidebar-wrapper {
+    margin-top: 1rem;
+  }
 }
 
-.timeline-item {
-  position: relative;
-  padding-bottom: 0.5rem;
-  padding-left: 1.5rem;
+/* Center Column Container */
+.center-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0; /* Prevents heatmap from overflowing the grid cell */
 }
 
-.timeline-point {
-  position: absolute;
-  left: -4px;
-  top: 6px;
-  width: 10px;
-  height: 10px;
+/* Right Sidebar Container */
+.right-sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 1rem; /* Keeps your stats and favorites visible as you scroll long heatmap/content */
+  padding: 0px 10px;
+}
+
+/* ================= Refined Heatmap for Grid ================= */
+/* Force the heatmap to be responsive inside its column */
+.contribution-grid {
+  display: flex;
+  justify-content: flex-start;
+  gap: 4px;
+  overflow-x: auto; /* Adds scroll if the 52 weeks exceed the center column width */
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+}
+
+.heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.profile-card {
   background: white;
-  border: 2px solid var(--postair-primary);
-  border-radius: 50%;
+  border: 1px solid var(--postair-border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 2rem;
 }
+
+.profile-card .profile-cover {
+  height: 140px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+}
+
+.profile-card .profile-content {
+  padding: 0 2rem 2rem;
+  margin-top: -60px;
+}
+
+.profile-card .profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid white;
+  background: white;
+}
+
+/* ================= Drafts Lab ================= */
+
+.drafts-lab {
+  margin-bottom: 2rem;
+}
+
+.drafts-lab .draft-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px dashed #cbd5e1;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.drafts-lab .draft-card:hover {
+  border-color: var(--postair-primary);
+  background: #f8fafc;
+}
+
+.drafts-lab .draft-card .draft-status {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+/* ================= Stats Mini Grid ================= */
+
+.stats-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stats-mini-grid .stat-mini-card {
+  background: white;
+  border: 1px solid #f1f5f9;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stats-mini-grid .stat-mini-card .stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.stats-mini-grid .stat-mini-card .stat-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* ================= Contribution Heatmap ================= */
+
+.contribution-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 3px;
+}
+
+.contribution-grid .heatmap-cell {
+  width: 12px;
+  aspect-ratio: 1 / 1;
+  border-radius: 2px;
+  background-color: #f1f5f9;
+}
+
+.contribution-grid .heatmap-cell.level-1 {
+  background: #9be9a8;
+}
+
+.contribution-grid .heatmap-cell.level-2 {
+  background: #40c463;
+}
+
+.contribution-grid .heatmap-cell.level-3 {
+  background: #216e39;
+}
+
+/* ================= Favorites ================= */
+
+.favorites-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.favorites-stack .fav-card-pro {
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-radius: 10px;
+  padding: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.favorites-stack .fav-card-pro .fav-icon-border {
+  color: #6366f1;
+  font-size: 1rem;
+}
+
+.favorites-stack .fav-card-pro .fav-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.favorites-stack .fav-card-pro .fav-date {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
 /* Favorites Grid: 4 per row */
 .favorites-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
 }
 
@@ -287,65 +531,20 @@
   font-size: 0.8rem;
 }
 
-/* Polished Timeline */
-/* Remove left space of activity and parent */
-.activity-timeline {
-  display: flex;
-  flex-direction: column;
-  margin-left: -1rem; /* Pulls the timeline closer to the container edge */
+/* ================= Misc ================= */
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
 }
 
-.timeline-item {
-  display: flex;
-  gap: 1rem;
-  position: relative;
-}
-
-.timeline-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  min-width: 40px; /* Width for the icon column */
-}
-
-.timeline-marker {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2; /* Sits on top of the line */
-  font-size: 1rem;
-  flex-shrink: 0;
-  position: relative;
-}
-
-/* The Dotted Connector */
 .timeline-connector {
   position: absolute;
-  top: 36px;    /* Starts exactly at the bottom of the icon (marker height) */
-  bottom: -6px; /* Extends slightly into the next item's space to bridge the gap */
+  top: 36px;
+  bottom: -6px;
   width: 0;
-  border-left: 2px dotted #cbd5e1;
-  z-index: 1;
+  border-left: 2px dotted #e2e8f0;
 }
-
-.timeline-content {
-  flex-grow: 1;
-  padding-bottom: 2.5rem; /* The gap between events */
-  padding-right: 1rem;
-}
-
-/* Tighten up the timeline logic for the last item */
-.timeline-item:last-child .timeline-content {
-  padding-bottom: 0;
-}
-
-/* Background Color Tones */
-.bg-light-primary { background: #f0f3ff; }
-.bg-light-success { background: #ecfdf5; }
-.bg-light-warning { background: #fffbeb; }
-
-.smallest { font-size: 0.75rem; }
