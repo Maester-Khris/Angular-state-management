@@ -117,8 +117,6 @@ export class Posts implements OnInit, HasUnsavedChanges {
         }
       }),
       tap((res: any[]) => {
-        // Filter out users already selected to avoid duplicates
-        console.log("from tap", res);
         this.suggestions = res
           .filter(user => !this.selectedCoAuthors.find(selected => selected.id === user.id))
           .slice(0, 3);
@@ -130,14 +128,6 @@ export class Posts implements OnInit, HasUnsavedChanges {
     console.log("fired");
     const query = event.target.value.toLowerCase();
     this.authorSearch.next(query);
-    // if (query.length > 1) {
-    //   this.mockApi.searchAuthorByEmail(query).subscribe((res:any[]) => {
-    //     console.log(res);
-    //     this.suggestions = res.slice(0, 3);
-    //   });
-    // } else {
-    //   this.suggestions = [];
-    // }
   }
 
   selectAuthor(user: any) {
