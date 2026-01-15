@@ -136,6 +136,95 @@
 
 /* ================= Profile Card ================= */
 /* Minimal Timeline */
+
+/* Layout Correction */
+.smallest { font-size: 0.75rem; }
+.profile-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px; /* Slightly wider sidebar for better content fit */
+  gap: 1.5rem; /* Reduced from 2rem to tighten look */
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+  padding: 1.5rem;
+}
+
+.center-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Tightened spacing between center cards */
+}
+
+.right-sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Consistent spacing in sidebar */
+  padding: 0; /* Removed manual padding */
+}
+
+/* Sidebar Sections Unification */
+.sidebar-section {
+  background: white;
+  border-radius: 16px;
+  /* Ensure Saved Posts look like the Activity card */
+}
+
+/* Fix Stats Grid in Sidebar */
+.stats-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.stat-mini-card {
+  background: white;
+  border: 1px solid #f1f5f9;
+  padding: 0.75rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.stat-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--postair-primary)!important;
+}
+
+/* Typography & Component Polish */
+.profile-card {
+  margin-bottom: 0; /* Let center-content-wrapper gap handle it */
+}
+
+.profile-card .profile-content {
+  padding: 0 1.5rem 1.5rem; /* Slightly reduced padding */
+}
+
+.section-title {
+  font-size: 0.7rem; /* Sharper label */
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+}
+
+/* Favorites Adjustments */
+.favorites-grid {
+  grid-template-columns: 1fr; /* Single column in sidebar for better readability */
+  gap: 0.5rem;
+}
+
+.fav-card-pro {
+  /* border: 1px solid #f1f5f9; */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Timeline Padding Fix */
+.activity-timeline {
+  margin-left: -0.5rem; /* Balanced pull */
+}
+
+.timeline-content {
+  padding-bottom: 1.5rem; /* Reduced from 2.5rem */
+}
+
+
 .timeline {
   position: relative;
   padding-left: 1rem;
@@ -154,7 +243,7 @@
 .timeline-item {
   position: relative;
   padding-bottom: 0.5rem;
-  padding-left: 1.5rem;
+  padding-left: 0.5rem;
 }
 
 .timeline-point {
@@ -239,10 +328,10 @@
   transition: all 0.2s ease;
 }
 
-.fav-card:hover {
-  border-color: #e2e8f0;
-  background: #fafafa;
-}
+/* .fav-card:hover { */
+  /* border-color: #e2e8f0;
+  background: #fafafa; */
+/* } */
 
 .fav-icon-box {
   width: 44px;
@@ -256,17 +345,15 @@
 }
 
 /* ================= The 3-Column Grid Engine ================= */
-.profile-dashboard-grid {
+/* .profile-dashboard-grid {
   display: grid;
-  /* Column 1: Navigation (Fixed or Flex) | Column 2: Center (Main) | Column 3: Insights (Aside) */
-  /* We use 1fr for the center to let it soak up available space */
   grid-template-columns: 1fr 340px; 
   gap: 2rem;
   max-width: 1400px;
   margin: 0 auto;
-  align-items: start; /* Prevents columns from stretching vertically to match height */
+  align-items: start;
   padding: 1rem;
-}
+} */
 
 /* Responsiveness: Stack columns on smaller screens */
 @media (max-width: 1100px) {
@@ -300,14 +387,14 @@
 
 /* ================= Refined Heatmap for Grid ================= */
 /* Force the heatmap to be responsive inside its column */
-.contribution-grid {
+/* .contribution-grid {
   display: flex;
   justify-content: flex-start;
   gap: 4px;
-  overflow-x: auto; /* Adds scroll if the 52 weeks exceed the center column width */
   padding-bottom: 12px;
+  overflow-x: auto; Adds scroll if the 52 weeks exceed the center column width
   scrollbar-width: thin;
-}
+} */
 
 .heatmap-col {
   display: flex;
@@ -321,7 +408,7 @@
   border: 1px solid var(--postair-border);
   border-radius: 20px;
   overflow: hidden;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .profile-card .profile-cover {
@@ -345,7 +432,7 @@
 /* ================= Drafts Lab ================= */
 
 .drafts-lab {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .drafts-lab .draft-card {
@@ -407,11 +494,43 @@
 
 /* ================= Contribution Heatmap ================= */
 
-.contribution-grid {
+/* .contribution-grid {
   display: flex;
   justify-content: space-between;
   gap: 3px;
+} */
+.contribution-container {
+  width: 100%;
+  padding: 5px 0;
+  overflow: hidden; /* Guaranteed no scrollbar */
 }
+
+.contribution-grid {
+  display: grid;
+  /* Divide the space into 52 equal columns */
+  grid-template-columns: repeat(52, 1fr);
+  gap: 3px; /* Adjust gap to be very small so cells don't get squeezed out */
+  width: 100%;
+}
+
+.heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* .heatmap-cell {
+  width: 100%;
+ aspect-ratio: 1 / 1; 
+  border-radius: 2px;
+  background-color: #f1f5f9;
+} */
+
+/* Level colors */
+/* .level-1 { background: #9be9a8; }
+.level-2 { background: #40c463; }
+.level-3 { background: #216e39; }
+.level-0 { background: #f1f5f9; } */
 
 .contribution-grid .heatmap-cell {
   width: 12px;
@@ -442,7 +561,7 @@
 
 .favorites-stack .fav-card-pro {
   background: white;
-  border: 1px solid #f1f5f9;
+  /* border: 1px solid #f1f5f9; */
   border-radius: 10px;
   padding: 0.75rem;
   display: flex;
@@ -475,6 +594,7 @@
 .fav-card-pro {
   background: white;
   border: 1px solid #f1f5f9;
+  border-color: #eee;
   border-radius: 8px; /* Reduced radius */
   padding: 0.75rem;
   display: flex;
@@ -485,8 +605,9 @@
 }
 
 .fav-card-pro:hover {
-  border-color: #e2e8f0;
+  /* background-color: #eee; */
   box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border-color: var(--postair-primary)!important;
 }
 
 .fav-icon-border {

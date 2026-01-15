@@ -154,7 +154,7 @@
     </div>
   </div>
 </div> -->
-
+<!-- 
 <div class="profile-dashboard-grid">
   <main class="center-content-wrapper">
     <section class="profile-card">
@@ -312,11 +312,207 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
 
 
+  </aside>
+</div> -->
+
+<div class="profile-dashboard-grid">
+  <main class="center-content-wrapper">
+    <section class="profile-card">
+      <div class="profile-cover"></div>
+      <div class="profile-content text-center">
+        <div class="avatar-wrapper">
+          <img [src]="'https://www.gravatar.com/avatar/?d=mp&s=150'" class="profile-avatar shadow" alt="Avatar">
+          <span class="status-indicator online"></span>
+        </div>
+        <h3 class="fw-bold mt-2 mb-1">{{ profile.name }}</h3>
+        <p class="text-muted mb-2 small">{{ profile.bio }}</p>
+        <div class="d-flex justify-content-center gap-2">
+          <button class="btn btn-primary btn-sm px-4 rounded-pill">Edit Profile</button>
+          <button class="btn btn-light btn-sm px-3 rounded-circle"><i class="bi bi-share"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="drafts-lab">
+      <h6 class="section-title mb-3">The Lab <span class="badge rounded-pill bg-light text-dark ms-2">2 Drafts</span>
+      </h6>
+      <div class="draft-card-container">
+        @for (draft of [1,2]; track $index) {
+        <div class="draft-card">
+          <div class="draft-status">DRAFT</div>
+          <div class="draft-body">
+            <h6 class="mb-1 ">Exploration of Vector Databases in 2026...</h6>
+            <p class="smallest text-muted mb-0">Last edited 4 hours ago</p>
+          </div>
+          <i class="bi bi-arrow-right-short ms-auto"></i>
+        </div>
+        }
+      </div>
+    </section>
+
+    
+    <!-- <section class="border-0 shadow-sm overflow-hidden">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="section-title mb-0">Contribution Activity</h6>
+          <button class="btn btn-link btn-sm text-muted text-decoration-none dropdown-toggle">Last 12 Months</button>
+        </div>
+        <div class="contribution-grid">
+          @for (i of [].constructor(52); track $index) {
+          <div class="heatmap-col">
+            <div class="heatmap-cell" [class]="'level-' + (i % 4)"></div>
+            <div class="heatmap-cell level-0"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell" [class]="'level-' + (i % 3)"></div>
+          </div>
+          }
+        </div>
+        <div class="d-flex justify-content-between mt-2 text-muted smallest px-1">
+          <span>Less</span>
+          <div class="d-flex gap-1 align-items-center">
+            <div class="heatmap-cell level-0"></div>
+            <div class="heatmap-cell level-1"></div>
+            <div class="heatmap-cell level-2"></div>
+            <div class="heatmap-cell level-3"></div>
+            <span class="ms-1">More</span>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <section class="contribution-section">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h6 class="section-title mb-0">
+      Contribution Activity 
+    </h6>
+    <span class="badge rounded-pill bg-light text-dark ms-2">Last 12 Months</span> 
+     
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-3">
+      <div class="contribution-container">
+  <div class="contribution-grid">
+    @for (i of [].constructor(52); track $index) {
+      <div class="heatmap-col">
+        <div class="heatmap-cell" [class]="'level-' + (i % 4)"></div>
+        <div class="heatmap-cell level-0"></div>
+        <div class="heatmap-cell level-1"></div>
+        <div class="heatmap-cell" [class]="'level-' + (i % 3)"></div>
+      </div>
+    }
+  </div>
+</div>
+      
+      <!-- <div class="d-flex justify-content-between mt-3 text-muted smallest px-1">
+        <span>Less activity</span>
+        <div class="d-flex gap-1 align-items-center">
+          <div class="heatmap-cell level-0"></div>
+          <div class="heatmap-cell level-1"></div>
+          <div class="heatmap-cell level-2"></div>
+          <div class="heatmap-cell level-3"></div>
+          <span class="ms-1">More</span>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+  </main>
+
+  <aside class="right-sidebar-wrapper">
+    <div class="stats-mini-grid">
+      <div class="stat-mini-card">
+        <span class="stat-label">Posts</span>
+        <span class="stat-value">12</span>
+      </div>
+      <div class="stat-mini-card">
+        <span class="stat-label">Reach</span>
+        <span class="stat-value">1.2k</span>
+      </div>
+      <div class="stat-mini-card">
+        <span class="stat-label">Co-Auth</span>
+        <span class="stat-value">4</span>
+      </div>
+      <div class="stat-mini-card">
+        <span class="stat-label">Since</span>
+        <span class="stat-value">2026</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section p-3">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h6 class="section-title mb-0">Saved Insights</h6>
+        <a href="#" class="text-primary smallest fw-bold text-decoration-none">
+          View All <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+      </div>
+      <div class="favorites-grid">
+        @for (fav of [1,2,3,4]; track $index) {
+        <div class="fav-card-pro">
+          <div class="fav-icon-border"><i class="bi bi-journal-text"></i></div>
+          <div class="fav-info">
+            <div class="fav-title">Advanced Angular Patterns</div>
+            <div class="fav-date">2 days ago</div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <div class="sidebar-section card border-0 shadow-sm">
+      <div class="card-body p-3">
+        <h6 class="section-title mb-4">Recent Activity</h6>
+        <div class="activity-timeline">
+          <div class="timeline-item">
+            <div class="timeline-indicator">
+              <div class="timeline-marker bg-light-primary">
+                <i class="bi bi-file-earmark-text text-primary"></i>
+              </div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="d-flex justify-content-between align-items-start">
+                <p class="mb-0 small text-dark">Published <strong>"Building RESTful APIs"</strong></p>
+                <span class="smallest text-muted text-end">2 hours ago</span>
+              </div>
+              <p class="smallest text-muted mt-1">New content added to Backend Engineering.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-indicator">
+              <div class="timeline-marker bg-light-success">
+                <i class="bi bi-person-plus text-success"></i>
+              </div>
+              <div class="timeline-connector"></div>
+            </div>
+            <div class="timeline-content">
+              <div class="d-flex justify-content-between align-items-start">
+                <p class="mb-0 small text-dark">Joined <strong>CredOps Core</strong> team</p>
+                <span class="smallest text-muted text-end">Yesterday</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item border-0">
+            <div class="timeline-indicator">
+              <div class="timeline-marker bg-light-warning">
+                <i class="bi bi-shield-check text-warning"></i>
+              </div>
+            </div>
+            <div class="timeline-content">
+              <div class="d-flex justify-content-between align-items-start">
+                <p class="mb-0 small text-dark">Security settings updated</p>
+                <span class="smallest text-muted text-end">Jan 04, 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </aside>
 </div>

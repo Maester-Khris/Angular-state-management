@@ -257,3 +257,56 @@
 .custom-pagination .page-item.active .page-link {
   transform: scale(1.15);
 }
+
+/* ================= coauthor sections ============ */
+/* Chip Input Container */
+.min-h-input {
+  min-height: 42px;
+}
+
+/* Badge Style derived from image_5cdb6c.png */
+.author-badge {
+  background: #2d3748; /* Dark navy/grey from reference */
+  color: #ffffff;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+}
+
+.btn-close-badge {
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  padding: 0;
+  margin-left: 4px;
+  line-height: 1;
+}
+
+.btn-close-badge:hover {
+  color: #ffffff;
+}
+
+/* Invisible Ghost Input */
+.ghost-input:focus {
+  outline: none;
+}
+
+/* Autosuggest Dropdown */
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1050;
+}
+
+.suggestion-item {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.suggestion-item:hover {
+  background: #f1f5f9;
+}

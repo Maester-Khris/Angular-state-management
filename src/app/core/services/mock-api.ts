@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable, of, Subscriber, throwError } from 'rxjs';
 import { Post } from '../../features/posts/data-access/post.model';
+import { email } from '@angular/forms/signals';
 
 @Injectable({
   providedIn: 'root',
@@ -166,12 +167,31 @@ export class MockApi {
   }
 ];
 
+MOCK_AUTHORS: any[] = [
+  {"name": "Niki Ops", email: "niki@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  {"name": "Hercule Poirot", email: "hercule@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  {"name": "Is No Good", email: "is-no-good@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  {"name": "The Mother Fucking CREDOPS agent", email: "credops@gmail.con",  avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+]
+
   fetchPosts():Observable<Post[]>{
     return new Observable(Subscriber =>{
       setTimeout(()=>{
         Subscriber.next(this.MOCK_POSTS)
       }, 500);
     })
+  }
+
+  fetchAuthors():Observable<any[]>{
+    return new Observable(Subscriber =>{
+      setTimeout(()=>{
+        Subscriber.next(this.MOCK_AUTHORS)
+      }, 500);
+    })
+  }
+
+  searchAuthorByEmail(email: string): Observable<any[]> {
+    return of(this.MOCK_AUTHORS.filter(author => author.email.includes(email)) || {});
   }
 
   fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<Post[]> {

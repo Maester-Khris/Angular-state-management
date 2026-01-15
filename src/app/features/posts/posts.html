@@ -38,6 +38,44 @@
               </div>
             </div>
 
+            <!-- author section -->
+            <div class="position-relative">
+              <label class="form-label smallest tracking-tight fw-medium text-muted">Co-Editors</label>
+              <div
+                class="chip-input-container form-control form-control-sm border-0 bg-light d-flex flex-wrap gap-2 align-items-center py-2 min-h-input">
+
+                @for (user of selectedCoAuthors; track user.id) {
+                <div class="author-badge d-flex align-items-center gap-1">
+                  <span>{{ user.name }}</span>
+                  <button type="button" class="btn-close-badge" (click)="removeAuthor(user)">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+                }
+
+                <input #authorInput type="text" class="ghost-input flex-grow-1 border-0 bg-transparent smallest"
+                  placeholder="{{ selectedCoAuthors.length === 0 ? 'Search users to collaborate...' : '' }}"
+                  (input)="onSearchAuthors($event)" (keydown.backspace)="handleBackspace($event)"
+                  formControlName="authorSearch" />
+              </div>
+
+              @if (suggestions.length > 0) {
+              <div class="suggestions-dropdown shadow-sm border rounded-3 bg-white mt-1 overflow-hidden">
+                @for (user of suggestions; track user.id) {
+                <div class="suggestion-item p-2 d-flex align-items-center gap-2" (click)="selectAuthor(user)">
+                  <img [src]="user.avatar" class="rounded-circle border" width="22" height="22">
+                  <div class="d-flex flex-column">
+                    <span class="smallest fw-bold text-dark">{{ user.name }}</span>
+                    <span class="text-muted" style="font-size: 0.6rem;">{{ user.role }}</span>
+                  </div>
+                </div>
+                }
+              </div>
+              }
+            </div>
+
+            <!-- author section -->
+
             <div class="form-check form-switch py-1">
               <input class="form-check-input" type="checkbox" id="isPublic" formControlName="isPublic" />
               <label class="form-check-label smallest fw-medium ms-2" for="isPublic">
