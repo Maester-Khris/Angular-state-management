@@ -22,10 +22,10 @@
           </p>
 
           <div class="d-flex flex-column flex-sm-row gap-4 align-items-sm-center">
-            <button class="btn btn-primary-elevated btn-lg px-5 py-3">
+            <a routerLink="/dashboard/myactivity" class="btn btn-primary-elevated btn-lg px-5 py-3">
               Start Writing <i class="bi bi-arrow-right ms-2"></i>
-            </button>
-            <a href="#" class="link-secondary fw-semibold text-decoration-none hover-underline">
+            </a>
+            <a (click)="scrollToCommunity()" class="link-secondary fw-semibold text-decoration-none hover-underline">
               Explore Community Posts
             </a>
           </div>
@@ -73,12 +73,12 @@
     <div class="gradient-blob blob-2"></div>
   </section>
 
-  <div class="home-container" *ngIf="vm$ | async as vm" style="margin-top: 40px!important;">
+  <div #communityGrid class="home-container" *ngIf="vm$ | async as vm" style="margin-top: 40px!important;">
     <header class="home-header mb-5">
       <app-search-bar (search)="onSearch($event)"></app-search-bar>
     </header>
 
-    <div class="bento-grid">
+    <div class="bento-grid" id="community-post">
       @for (post of vm.posts; track post.title; let i = $index) {
       <div class="bento-item" (click)="openDetails(post.title)">
         <app-post-card [post]="post" mode="card">

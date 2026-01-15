@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, HostListener, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BehaviorSubject, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
 import { MockApi } from '../../core/services/mock-api';
 import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -16,7 +16,7 @@ import { Footer } from '../../shared/ui/footer/footer';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer],
+  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -24,6 +24,7 @@ export class Home implements OnInit, OnDestroy {
   private currentPage = 0;
   private readonly limit = 5;
   private readonly MockApi = inject(MockApi);
+  @ViewChild('communityGrid') communityGrid!: ElementRef;
 
   // Get data from resolver
   private route = inject(ActivatedRoute);
@@ -118,6 +119,12 @@ export class Home implements OnInit, OnDestroy {
     // const value = (event.target as HTMLInputElement).value; 
     this.searchQuery$.next(query);
   }
+  scrollToCommunity() {
+  this.communityGrid.nativeElement.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+}
 
   
   // ================= Navigation with child component  ==============
