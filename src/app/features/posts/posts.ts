@@ -9,6 +9,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { MockApi } from '../../core/services/mock-api';
+import { MediaService } from '../../core/services/media-service';
 
 
 
@@ -23,6 +24,7 @@ export class Posts implements OnInit, HasUnsavedChanges {
   private readonly fb = inject(FormBuilder);
   private readonly storeService = inject(PostStore);
   private readonly authService = inject(AuthService); 
+  private readonly mediaService = inject(MediaService); 
   private readonly mockApi = inject(MockApi);
 
   //form builder
@@ -38,19 +40,25 @@ export class Posts implements OnInit, HasUnsavedChanges {
   readonly vm$ = this.storeService.vm$;
   user = toSignal(this.authService.user$);
 
-  // intialization
+  // data intialization
   readonly currentUserId = computed(() => this.user()?.id || "");
   userid$ = toObservable(this.currentUserId);
   posts = toSignal(this.storeService.posts$, { initialValue: [] });
+
+  //search
   authorSearch = new Subject<string>();
   selectedCoAuthors: any[] = [];
   suggestions: any[] = [];
 
+  //image 
+  imagePreview: string | null = "https://placehold.co/400";
+  cloudinaryUrl: string | null = null;
+  isUploading = false;
 
   // ui state
   isLoading:boolean = false;
   errors:string[]=[];
-  imagePreview: string | null = "https://placehold.co/400";
+  
   
   constructor() {
     this.initAuthorSearchStream();
@@ -80,31 +88,53 @@ export class Posts implements OnInit, HasUnsavedChanges {
   }
 
 
-  // == =========== Post ui actions ================
+  // == =========== Recents Post ui actions ================
 
   onTogglePublic(title: string) {
     this.storeService.togglePostPublicStatus(title);
   }
-
   onEdit(title: string) {
     // this.storeService.editPost(title);
   }
-
-
   onDelete(title: string) {
     this.storeService.deletePost(title);
   }
 
-  // == =========== Form ui interactions ================
+  // ============== Form ui image upload and preview ================
 
   onFileSelected(event:any){
+    const file = event.target.files[0];
+    if (!file) return;
 
-  }
-
+    this.imagePreview = URL.createObjectURL(file);
+    this.uploadToCloudinary(file);
+  } 
   removeImage(){
-
+    this.imagePreview = null;
+    this.cloudinaryUrl = null;
+    this.isUploading = false;
+    // Reset the file input so the same image can be re-selected if needed
+    const fileInput = document.querySelector('.file-input') as HTMLInputElement;
+    if (fileInput) fileInput.value = '';
+  }
+  uploadToCloudinary(file:File){
+    this.isUploading = true;
+    this.mediaService.uploadImage(file).subscribe({
+      next: (res) => {
+        this.cloudinaryUrl = res.secure_url;
+        this.isUploading = false; 
+        console.log("uploaded image url",this.cloudinaryUrl);
+      },
+      error: (err) => {
+        this.isUploading = false; 
+        this.removeImage();
+        alert("Error uploading image");
+      }
+    })
   }
 
+
+  // ============== Form ui author search ================
   private initAuthorSearchStream(){
     this.authorSearch.pipe(
       debounceTime(500),
