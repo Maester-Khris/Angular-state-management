@@ -168,10 +168,10 @@ export class MockApi {
 ];
 
 MOCK_AUTHORS: any[] = [
-  {"name": "Niki Ops", email: "niki@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-  {"name": "Hercule Poirot", email: "hercule@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-  {"name": "Is No Good", email: "is-no-good@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-  {"name": "The Mother Fucking CREDOPS agent", email: "credops@gmail.con",  avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  {"id":1, "name": "Niki Ops", email: "niki@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  {"id":2, "name": "Hercule Poirot", email: "hercule@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  {"id":3, "name": "Is No Good", email: "is-no-good@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  {"id":4, "name": "The Mother Fucking CREDOPS agent", email: "credops@gmail.con",  avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
 ]
 
   fetchPosts():Observable<Post[]>{

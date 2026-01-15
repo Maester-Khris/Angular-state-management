@@ -47,7 +47,7 @@
                 @for (user of selectedCoAuthors; track user.id) {
                 <div class="author-badge d-flex align-items-center gap-1">
                   <span>{{ user.name }}</span>
-                  <button type="button" class="btn-close-badge" (click)="removeAuthor(user)">
+                  <button type="button" class="btn-close-badge" (click)="removeAuthor(user.id)">
                     <i class="bi bi-x"></i>
                   </button>
                 </div>

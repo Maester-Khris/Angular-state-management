@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HasUnsavedChanges, Post } from './data-access/post.model';
 import { PostStore } from './data-access/post-store';
@@ -42,6 +42,7 @@ export class Posts implements OnInit, HasUnsavedChanges {
   readonly currentUserId = computed(() => this.user()?.id || "");
   userid$ = toObservable(this.currentUserId);
   posts = toSignal(this.storeService.posts$, { initialValue: [] });
+  authorSearch = new Subject<string>();
   selectedCoAuthors: any[] = [];
   suggestions: any[] = [];
 
@@ -51,6 +52,10 @@ export class Posts implements OnInit, HasUnsavedChanges {
   errors:string[]=[];
   imagePreview: string | null = "https://placehold.co/400";
   
+  constructor() {
+    this.initAuthorSearchStream();
+  }
+
   ngOnInit(): void {
     this.storeService.loadPosts(this.userid$);
   }
@@ -100,34 +105,51 @@ export class Posts implements OnInit, HasUnsavedChanges {
 
   }
 
+  private initAuthorSearchStream(){
+    this.authorSearch.pipe(
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap((query: string) => {
+        if(query.length>1){
+          return this.mockApi.searchAuthorByEmail(query);
+        }else{
+          return of([]);
+        }
+      }),
+      tap((res: any[]) => {
+        // Filter out users already selected to avoid duplicates
+        console.log("from tap", res);
+        this.suggestions = res
+          .filter(user => !this.selectedCoAuthors.find(selected => selected.id === user.id))
+          .slice(0, 3);
+      })
+    ).subscribe();
+  }
+
   onSearchAuthors(event: any) {
+    console.log("fired");
     const query = event.target.value.toLowerCase();
-    if (query.length > 1) {
-      // Filter logic: limit to 3 items as requested
-      this.mockApi.searchAuthorByEmail(query).subscribe((res:any[]) => {
-        console.log(res);
-        this.suggestions = res.slice(0, 3);
-        // this.suggestions = this.mockUserDatabase
-        // .filter(u => 
-        //   u.name.toLowerCase().includes(query) && 
-        //   !this.selectedCoAuthors.some(selected => selected.id === u.id)
-        // )
-        // .slice(0, 3);
-      });
-      
-    } else {
-      this.suggestions = [];
-    }
+    this.authorSearch.next(query);
+    // if (query.length > 1) {
+    //   this.mockApi.searchAuthorByEmail(query).subscribe((res:any[]) => {
+    //     console.log(res);
+    //     this.suggestions = res.slice(0, 3);
+    //   });
+    // } else {
+    //   this.suggestions = [];
+    // }
   }
 
   selectAuthor(user: any) {
     this.selectedCoAuthors.push(user);
     this.addPostForm.get('authorSearch')?.setValue('');
     this.suggestions = [];
+    this.authorSearch.next(''); // Clear the search query stream
   }
 
-  removeAuthor(user: any) {
-    this.selectedCoAuthors = this.selectedCoAuthors.filter(a => a.id !== user.id);
+  removeAuthor(userid:number) {
+    console.log(userid);  
+    this.selectedCoAuthors = this.selectedCoAuthors.filter(a => a.id !== userid);
   }
 
   handleBackspace(event: any) {
