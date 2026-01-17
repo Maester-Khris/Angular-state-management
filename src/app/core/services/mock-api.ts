@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable, of, Subscriber, throwError } from 'rxjs';
 import { Post } from '../../features/posts/data-access/post.model';
 import { email } from '@angular/forms/signals';
+import { UserProfile } from '../../features/profile/data-access/profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,23 @@ import { email } from '@angular/forms/signals';
 export class MockApi {
   private dataChangedTrigger = new BehaviorSubject<void>(undefined);
   dataChanged$ = this.dataChangedTrigger.asObservable();
+
+  // Inside your MockApiService
+  MOCK_USER_PROFILE: UserProfile = {
+    id: 'is-no-good',
+    name: 'Is No Good',
+    bio: 'Lead Engineer at CredOps | Angular & Cloud Architect',
+    avatar: 'https://www.gravatar.com/avatar/?d=mp&s=150',
+    stats: { posts: 12, reach: '1.2k', coAuth: 4, since: 2026 },
+    savedInsights: [
+      { id: 1, title: 'Advanced Angular Patterns', type: 'journal', date: '2 days ago' },
+      { id: 2, title: 'Cloud Native Scaling', type: 'code', date: '5 days ago' }
+    ],
+    recentActivity: [
+      { id: 101, type: 'publish', target: 'Building RESTful APIs', time: '2 hours ago', meta: 'Backend Engineering' },
+      { id: 102, type: 'join', target: 'CredOps Core', time: 'Yesterday' }
+    ]
+  };
 
   MOCK_POSTS: Post[] = [
   {
@@ -167,12 +185,29 @@ export class MockApi {
   }
 ];
 
-MOCK_AUTHORS: any[] = [
-  {"id":1, "name": "Niki Ops", email: "niki@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-  {"id":2, "name": "Hercule Poirot", email: "hercule@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-  {"id":3, "name": "Is No Good", email: "is-no-good@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-  {"id":4, "name": "The Mother Fucking CREDOPS agent", email: "credops@gmail.con",  avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-]
+  MOCK_AUTHORS: any[] = [
+    {"id":1, "name": "Niki Ops", email: "niki@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+    {"id":2, "name": "Hercule Poirot", email: "hercule@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+    {"id":3, "name": "Is No Good", email: "is-no-good@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+    {"id":4, "name": "The Mother Fucking CREDOPS agent", email: "credops@gmail.con",  avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+  ];
+
+  // Independent Fetching Methods
+fetchUserProfile(): Observable<UserProfile> {
+  return of(this.MOCK_USER_PROFILE).pipe(delay(800)); // Simulate network latency
+}
+
+fetchDrafts(): Observable<any[]> {
+  return of([
+    { id: 'd1', title: 'Exploration of Vector Databases in 2026', lastEdited: '4 hours ago' },
+    { id: 'd2', title: 'Micro-Frontend Strategy', lastEdited: '1 day ago' }
+  ]).pipe(delay(1200)); // Drafts take longer to simulate a heavy query
+}
+
+fetchContributionData(): Observable<any> {
+  // Simulate 52 weeks of levels
+  return of(Array.from({ length: 52 }, () => Math.floor(Math.random() * 4))).pipe(delay(1500));
+}
 
   fetchPosts():Observable<Post[]>{
     return new Observable(Subscriber =>{
