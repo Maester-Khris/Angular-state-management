@@ -359,6 +359,32 @@
         </div>
       </div> -->
 
+      <!-- Contribution -->
+    <!-- <section class="contribution-section">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h6 class="section-title mb-0">
+          Contribution Activity
+        </h6>
+        <span class="badge rounded-pill bg-light text-dark ms-2">Last 12 Months</span>
+      </div>
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-3">
+          <div class="contribution-container">
+            <div class="contribution-grid">
+              @for (i of contributionData(); track $index) {
+              <div class="heatmap-col">
+                <div class="heatmap-cell" [class]="'level-' + (i % 4)"></div>
+                <div class="heatmap-cell level-0"></div>
+                <div class="heatmap-cell level-1"></div>
+                <div class="heatmap-cell" [class]="'level-' + (i % 3)"></div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
 <div class="profile-dashboard-grid">
   <main class="center-content-wrapper">
     <!-- Profile -->
@@ -384,16 +410,16 @@
 
     <!-- Drafts -->
     <section class="drafts-lab">
-      @if (drafts() | async; as drafts) {
+      @if (drafts().length > 0 ) {
       <h6 class="section-title mb-3">The Lab <span class="badge rounded-pill bg-light text-dark ms-2">2 Drafts</span>
       </h6>
       <div class="draft-card-container">
-        @for (draft of drafts; track draft.id) {
+        @for (draft of drafts(); track draft.id) {
         <div class="draft-card">
           <div class="draft-status">DRAFT</div>
           <div class="draft-body">
             <h6 class="mb-1 ">{{draft.title}}</h6>
-            <p class="smallest text-muted mb-0">Last edited {{draft.lastEdited}}</p>
+            <p class="smallest text-muted mb-0">Last edited {{ draft.lastModifiedAt | date:'shortTime' }}</p>
           </div>
           <i class="bi bi-arrow-right-short ms-auto"></i>
         </div>
@@ -404,31 +430,38 @@
       }
     </section>
 
-    <!-- Contribution -->
+    
     <section class="contribution-section">
-      <div class="d-flex align-items-center justify-content-between mb-3">
-        <h6 class="section-title mb-0">
-          Contribution Activity
-        </h6>
-        <span class="badge rounded-pill bg-light text-dark ms-2">Last 12 Months</span>
-      </div>
-      <div class="card border-0 shadow-sm">
-        <div class="card-body p-3">
-          <div class="contribution-container">
-            <div class="contribution-grid">
-              @for (i of [].constructor(52); track $index) {
-              <div class="heatmap-col">
-                <div class="heatmap-cell" [class]="'level-' + (i % 4)"></div>
-                <div class="heatmap-cell level-0"></div>
-                <div class="heatmap-cell level-1"></div>
-                <div class="heatmap-cell" [class]="'level-' + (i % 3)"></div>
-              </div>
-              }
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h6 class="section-title mb-0">Contribution Activity</h6>
+    <span class="badge rounded-pill bg-light text-dark ms-2">Last 12 Months</span>
+  </div>
+
+  <div class="card border-0 shadow-sm glass-morphism">
+    <div class="card-body p-3">
+      <div class="contribution-container">
+        <div class="contribution-heatmap-grid">
+          @for (level of contributionData(); track $index) {
+            <div 
+              class="heatmap-cell" 
+              [class]="'level-' + level"
+              [title]="'Contribution level: ' + level">
             </div>
-          </div>
+          }
+        </div>
+        
+        <div class="d-flex align-items-center justify-content-end gap-1 mt-2">
+          <span class="smallest text-muted me-1">Less</span>
+          <div class="heatmap-cell level-0"></div>
+          <div class="heatmap-cell level-1"></div>
+          <div class="heatmap-cell level-2"></div>
+          <div class="heatmap-cell level-3"></div>
+          <span class="smallest text-muted ms-1">More</span>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
   </main>
 
   <!-- Right Sidebar -->

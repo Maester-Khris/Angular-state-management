@@ -499,27 +499,7 @@
   justify-content: space-between;
   gap: 3px;
 } */
-.contribution-container {
-  width: 100%;
-  padding: 5px 0;
-  overflow: hidden; /* Guaranteed no scrollbar */
-}
-
-.contribution-grid {
-  display: grid;
-  /* Divide the space into 52 equal columns */
-  grid-template-columns: repeat(52, 1fr);
-  gap: 3px; /* Adjust gap to be very small so cells don't get squeezed out */
-  width: 100%;
-}
-
-.heatmap-col {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-/* .heatmap-cell {
+ /* .heatmap-cell {
   width: 100%;
  aspect-ratio: 1 / 1; 
   border-radius: 2px;
@@ -531,6 +511,21 @@
 .level-2 { background: #40c463; }
 .level-3 { background: #216e39; }
 .level-0 { background: #f1f5f9; } */
+
+
+
+/*.contribution-grid {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  gap: 3px; 
+  width: 100%;
+} */
+
+/* .heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
 
 .contribution-grid .heatmap-cell {
   width: 12px;
@@ -549,7 +544,56 @@
 
 .contribution-grid .heatmap-cell.level-3 {
   background: #216e39;
+} */
+
+/* .contribution-heatmap-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 10px); 
+  grid-auto-flow: column;
+  grid-auto-columns: 10px;
+  gap: 3px;
+  justify-content: center; 
+  overflow: hidden; 
+} */
+ .contribution-container {
+  width: 100%;
+  padding: 5px 0;
+  overflow: hidden; 
 }
+
+.contribution-heatmap-grid {
+  display: grid;
+  /* 7 rows for days of the week */
+  grid-template-rows: repeat(7, 10px); 
+  /* Force it to fill the container by adding columns left-to-right */
+  grid-auto-flow: column;
+  /* Use a min-width to prevent the cells from becoming invisible on smaller screens */
+  grid-auto-columns: 10px;
+  gap: 3px;
+  width: 100%;
+  height: 90px; /* Controlled height for the 7 rows */
+  overflow: hidden; 
+}
+
+.heatmap-cell {
+  aspect-ratio: 1 / 1; /* Keeps cells perfectly square */
+  width: 10px;
+  border-radius: 2px;
+  background-color: #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.4);
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* Color set inspired by your legend image */
+.level-0 { background-color: #f1f5f9; }
+.level-1 { background-color: #94e2d5; } 
+.level-2 { background-color: #40c463; } 
+.level-3 { background-color: #216e39; }
 
 /* ================= Favorites ================= */
 
@@ -670,27 +714,42 @@
   border-left: 2px dotted #e2e8f0;
 }
 /* ================== sections glassmorphism =============== */
-/* The Glass Effect */
 .glass-loading {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* Using a subtle diagonal gradient instead of a solid color */
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.3) 0%, 
+    rgba(241, 245, 249, 0.5) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Brighter border for better definition against the background */
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 16px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Shimmer Animation */
+/* Updated Shimmer with Diagonal Gradient */
 .glass-loading::after {
   content: "";
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: shimmer 1.5s infinite;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  /* Diagonal shimmer effect */
+  background: linear-gradient(
+    45deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 80%
+  );
+  animation: shimmer-diagonal 2s infinite ease-in-out;
 }
 
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+@keyframes shimmer-diagonal {
+  0% { transform: translate(-30%, -30%); }
+  100% { transform: translate(30%, 30%); }
 }

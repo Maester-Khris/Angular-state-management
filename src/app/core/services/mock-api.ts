@@ -29,197 +29,217 @@ export class MockApi {
   };
 
   MOCK_POSTS: Post[] = [
-  {
-    title: "Understanding Promises in JavaScript",
-    description: "A comprehensive guide to JavaScript promises, including how to create, resolve, and chain them effectively.",
-    createdAt: new Date("2023-01-01"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "is-no-good",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
-  },
-  {
-    title: "Getting Started with Angular",
-    description: "An introduction to Angular framework, covering its architecture, components, and how to set up your first project.",
-    createdAt: new Date("2023-01-02"),
-    lastModifiedAt: new Date("2023-01-03"),
-    isPublic: true,
-    createdBy: "hercule-poirot",
-    imageUrl: "https://angular.io/assets/images/logos/angular/angular.png"
-  },
-  {
-    title: "Top 10 JavaScript ES6 Features You Should Know",
-    description: "Explore the most important features introduced in ES6, including arrow functions, destructuring, and template literals.",
-    createdAt: new Date("2023-01-04"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "hercule-poirot",
-    imageUrl: "https://miro.medium.com/1*ktJUMJO60oHoluiEV6KBmA.png"
-  },
-  {
-    title: "Building RESTful APIs with Node.js",
-    description: "Learn how to create RESTful APIs using Node.js and Express, including routing, middleware, and error handling.",
-    createdAt: new Date("2023-01-05"),
-    lastModifiedAt: new Date("2023-01-06"),
-    isPublic: false,
-    createdBy: "nk-dev",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg"
-  },
-  {
-    title: "The Basics of Docker: A Beginner's Guide",
-    description: "A beginner-friendly guide to Docker, explaining containerization, images, and how to deploy applications easily.",
-    createdAt: new Date("2023-01-07"),
-    lastModifiedAt: null,
-    isPublic: false,
-    createdBy: "kml-007",
-    imageUrl: "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
-  },
-  // Additional posts
-  {
-    title: "An Introduction to TypeScript",
-    description: "Learn the basics of TypeScript, its features, and how it improves JavaScript development.",
-    createdAt: new Date("2023-01-08"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "is-no-good",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
-  },
-  {
-    title: "Exploring React Hooks",
-    description: "A deep dive into React hooks, including useState and useEffect, and how they simplify state management.",
-    createdAt: new Date("2023-01-09"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "reactfan",
-    imageUrl: "https://reactjs.org/logo-og.png"
-  },
-  {
-    title: "CSS Grid vs Flexbox: Which One to Use?",
-    description: "A comparison of CSS Grid and Flexbox, including when to use each layout technique effectively.",
-    createdAt: new Date("2023-01-10"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "designmaster",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
-  },
-  {
-    title: "Understanding Asynchronous JavaScript",
-    description: "A guide to asynchronous JavaScript, including callbacks, promises, and async/await syntax.",
-    createdAt: new Date("2023-01-11"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "nk-dev",
-    imageUrl: "https://www.speqto.com/wp-content/uploads/2025/10/resized_image_1152x769-2.png"
-  },
-  {
-    title: "Web Accessibility: Best Practices",
-    description: "Learn the best practices for making your web applications accessible to all users.",
-    createdAt: new Date("2023-01-12"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "accessibilityguru",
-    imageUrl: "https://abilitynet.org.uk/sites/abilitynet.org.uk/files/A11y.jpg"
-  },
-  {
-    title: "DevOps Principles: A Beginner's Guide",
-    description: "An introduction to DevOps principles, practices, and tools that improve collaboration between development and operations.",
-    createdAt: new Date("2023-01-13"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "devopspro",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/05/Devops-toolchain.svg"
-  },
-  {
-    title: "JavaScript Design Patterns",
-    description: "Explore common design patterns in JavaScript and how to implement them in your projects.",
-    createdAt: new Date("2023-01-14"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "designmaster",
-    imageUrl: "https://media2.dev.to/dynamic/image/width=1080,height=1080,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F60z1766j792zk52kpqdv.png"
-  },
-  {
-    title: "Introduction to Machine Learning with Python",
-    description: "A beginner's guide to machine learning concepts and how to implement them using Python.",
-    createdAt: new Date("2023-01-15"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "mlenthusiast",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
-  },
-  {
-    title: "Building Mobile Apps with Flutter",
-    description: "Learn how to build cross-platform mobile applications using Flutter and Dart.",
-    createdAt: new Date("2023-01-16"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "flutterdev",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png"
-  },
-  {
-    title: "Version Control with Git",
-    description: "Understand the fundamentals of version control using Git, including branching and merging.",
-    createdAt: new Date("2023-01-17"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "gitmaster",
-    imageUrl: "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"
-  },
-  {
-    title: "Effective Unit Testing in JavaScript",
-    description: "A guide to writing effective unit tests in JavaScript using popular testing frameworks.",
-    createdAt: new Date("2023-01-18"),
-    lastModifiedAt: null,
-    isPublic: false,
-    createdBy: "nk-dev",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
-  },
-  {
-    title: "Introduction to GraphQL",
-    description: "Learn the basics of GraphQL, its benefits over REST, and how to set up a GraphQL server.",
-    createdAt: new Date("2023-01-19"),
-    lastModifiedAt: null,
-    isPublic: true,
-    createdBy: "graphqlguru",
-    imageUrl: "https://graphql.org/img/logo.svg"
-  }
-];
+    {
+      title: "Understanding Promises in JavaScript",
+      description: "A comprehensive guide to JavaScript promises, including how to create, resolve, and chain them effectively.",
+      createdAt: new Date("2023-01-01"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "is-no-good",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+    },
+    {
+      title: "Getting Started with Angular",
+      description: "An introduction to Angular framework, covering its architecture, components, and how to set up your first project.",
+      createdAt: new Date("2023-01-02"),
+      lastModifiedAt: new Date("2023-01-03"),
+      isPublic: true,
+      createdBy: "hercule-poirot",
+      imageUrl: "https://angular.io/assets/images/logos/angular/angular.png"
+    },
+    {
+      title: "Top 10 JavaScript ES6 Features You Should Know",
+      description: "Explore the most important features introduced in ES6, including arrow functions, destructuring, and template literals.",
+      createdAt: new Date("2023-01-04"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "hercule-poirot",
+      imageUrl: "https://miro.medium.com/1*ktJUMJO60oHoluiEV6KBmA.png"
+    },
+    {
+      title: "Building RESTful APIs with Node.js",
+      description: "Learn how to create RESTful APIs using Node.js and Express, including routing, middleware, and error handling.",
+      createdAt: new Date("2023-01-05"),
+      lastModifiedAt: new Date("2023-01-06"),
+      isPublic: false,
+      createdBy: "nk-dev",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg"
+    },
+    {
+      title: "The Basics of Docker: A Beginner's Guide",
+      description: "A beginner-friendly guide to Docker, explaining containerization, images, and how to deploy applications easily.",
+      createdAt: new Date("2023-01-07"),
+      lastModifiedAt: null,
+      isPublic: false,
+      createdBy: "kml-007",
+      imageUrl: "https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png"
+    },
+    // Additional posts
+    {
+      title: "An Introduction to TypeScript",
+      description: "Learn the basics of TypeScript, its features, and how it improves JavaScript development.",
+      createdAt: new Date("2023-01-08"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "is-no-good",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
+    },
+    {
+      title: "Exploring React Hooks",
+      description: "A deep dive into React hooks, including useState and useEffect, and how they simplify state management.",
+      createdAt: new Date("2023-01-09"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "reactfan",
+      imageUrl: "https://reactjs.org/logo-og.png"
+    },
+    {
+      title: "CSS Grid vs Flexbox: Which One to Use?",
+      description: "A comparison of CSS Grid and Flexbox, including when to use each layout technique effectively.",
+      createdAt: new Date("2023-01-10"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "designmaster",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg"
+    },
+    {
+      title: "Understanding Asynchronous JavaScript",
+      description: "A guide to asynchronous JavaScript, including callbacks, promises, and async/await syntax.",
+      createdAt: new Date("2023-01-11"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "nk-dev",
+      imageUrl: "https://www.speqto.com/wp-content/uploads/2025/10/resized_image_1152x769-2.png"
+    },
+    {
+      title: "Web Accessibility: Best Practices",
+      description: "Learn the best practices for making your web applications accessible to all users.",
+      createdAt: new Date("2023-01-12"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "accessibilityguru",
+      imageUrl: "https://abilitynet.org.uk/sites/abilitynet.org.uk/files/A11y.jpg"
+    },
+    {
+      title: "DevOps Principles: A Beginner's Guide",
+      description: "An introduction to DevOps principles, practices, and tools that improve collaboration between development and operations.",
+      createdAt: new Date("2023-01-13"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "devopspro",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/05/Devops-toolchain.svg"
+    },
+    {
+      title: "JavaScript Design Patterns",
+      description: "Explore common design patterns in JavaScript and how to implement them in your projects.",
+      createdAt: new Date("2023-01-14"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "designmaster",
+      imageUrl: "https://media2.dev.to/dynamic/image/width=1080,height=1080,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2F60z1766j792zk52kpqdv.png"
+    },
+    {
+      title: "Introduction to Machine Learning with Python",
+      description: "A beginner's guide to machine learning concepts and how to implement them using Python.",
+      createdAt: new Date("2023-01-15"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "mlenthusiast",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+    },
+    {
+      title: "Building Mobile Apps with Flutter",
+      description: "Learn how to build cross-platform mobile applications using Flutter and Dart.",
+      createdAt: new Date("2023-01-16"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "flutterdev",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/17/Google-flutter-logo.png"
+    },
+    {
+      title: "Version Control with Git",
+      description: "Understand the fundamentals of version control using Git, including branching and merging.",
+      createdAt: new Date("2023-01-17"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "gitmaster",
+      imageUrl: "https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png"
+    },
+    {
+      title: "Effective Unit Testing in JavaScript",
+      description: "A guide to writing effective unit tests in JavaScript using popular testing frameworks.",
+      createdAt: new Date("2023-01-18"),
+      lastModifiedAt: null,
+      isPublic: false,
+      createdBy: "nk-dev",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+    },
+    {
+      title: "Introduction to GraphQL",
+      description: "Learn the basics of GraphQL, its benefits over REST, and how to set up a GraphQL server.",
+      createdAt: new Date("2023-01-19"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "graphqlguru",
+      imageUrl: "https://graphql.org/img/logo.svg"
+    }
+  ];
+
+  MOCK_DRAFTS: Post[] = [
+    {
+      // id: 20,
+      title: "Mastering TypeScript Generics",
+      description: "Learn how to write flexible, reusable code components using TypeScript generics.",
+      createdAt: new Date("2023-02-15"),
+      lastModifiedAt: new Date("2023-02-20"),
+      isPublic: false,
+      createdBy: "dev-explorer",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
+    },
+    {
+      // id: 21,
+      title: "A Deep Dive into CSS Grid",
+      description: "Everything you need to know to create complex layouts with ease using CSS Grid.",
+      createdAt: new Date("2023-03-10"),
+      lastModifiedAt: null,
+      isPublic: false,
+      createdBy: "style-guru",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg"
+    }
+  ];
 
   MOCK_AUTHORS: any[] = [
-    {"id":1, "name": "Niki Ops", email: "niki@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-    {"id":2, "name": "Hercule Poirot", email: "hercule@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-    {"id":3, "name": "Is No Good", email: "is-no-good@gmail.com", avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
-    {"id":4, "name": "The Mother Fucking CREDOPS agent", email: "credops@gmail.con",  avatar:"https://www.gravatar.com/avatar/?d=mp&s=150"},
+    { "id": 1, "name": "Niki Ops", email: "niki@gmail.com", avatar: "https://www.gravatar.com/avatar/?d=mp&s=150" },
+    { "id": 2, "name": "Hercule Poirot", email: "hercule@gmail.com", avatar: "https://www.gravatar.com/avatar/?d=mp&s=150" },
+    { "id": 3, "name": "Is No Good", email: "is-no-good@gmail.com", avatar: "https://www.gravatar.com/avatar/?d=mp&s=150" },
+    { "id": 4, "name": "The Mother Fucking CREDOPS agent", email: "credops@gmail.con", avatar: "https://www.gravatar.com/avatar/?d=mp&s=150" },
   ];
 
   // Independent Fetching Methods
-fetchUserProfile(): Observable<UserProfile> {
-  return of(this.MOCK_USER_PROFILE).pipe(delay(800)); // Simulate network latency
-}
+  fetchUserProfile(): Observable<UserProfile> {
+    return of(this.MOCK_USER_PROFILE).pipe(delay(800)); // Simulate network latency
+  }
 
-fetchDrafts(): Observable<any[]> {
-  return of([
-    { id: 'd1', title: 'Exploration of Vector Databases in 2026', lastEdited: '4 hours ago' },
-    { id: 'd2', title: 'Micro-Frontend Strategy', lastEdited: '1 day ago' }
-  ]).pipe(delay(1200)); // Drafts take longer to simulate a heavy query
-}
+  fetchDrafts(): Observable<Post[]> {
+    return of(this.MOCK_DRAFTS).pipe(delay(1200)); // Drafts take longer to simulate a heavy query
+  }
 
-fetchContributionData(): Observable<any> {
-  // Simulate 52 weeks of levels
-  return of(Array.from({ length: 52 }, () => Math.floor(Math.random() * 4))).pipe(delay(1500));
-}
+  fetchContributionData(): Observable<any> {
+    // Simulate 52 weeks of levels
+    return of(Array.from({ length: 365 }, () => Math.floor(Math.random() * 4))).pipe(delay(1500));
+  }
 
-  fetchPosts():Observable<Post[]>{
-    return new Observable(Subscriber =>{
-      setTimeout(()=>{
+  fetchPosts(): Observable<Post[]> {
+    return new Observable(Subscriber => {
+      setTimeout(() => {
         Subscriber.next(this.MOCK_POSTS)
       }, 500);
     })
   }
 
-  fetchAuthors():Observable<any[]>{
-    return new Observable(Subscriber =>{
-      setTimeout(()=>{
+  fetchAuthors(): Observable<any[]> {
+    return new Observable(Subscriber => {
+      setTimeout(() => {
         Subscriber.next(this.MOCK_AUTHORS)
       }, 500);
     })
@@ -235,10 +255,10 @@ fetchContributionData(): Observable<any> {
       map((posts: Post[]) => {
         const publicPosts = posts.filter(post => post.isPublic);
         const start = page * limit;
-        if(!query) return publicPosts.slice(start, start + limit);
+        if (!query) return publicPosts.slice(start, start + limit);
         const term = query.toLowerCase().trim();
-        return publicPosts.filter((p:Post) => 
-          p.title.toLowerCase().includes(term) || 
+        return publicPosts.filter((p: Post) =>
+          p.title.toLowerCase().includes(term) ||
           p.description.toLowerCase().includes(term)
         ).slice(start, start + limit);
       })
@@ -256,7 +276,7 @@ fetchContributionData(): Observable<any> {
     return of(this.MOCK_POSTS.find(post => post.title === title) || {} as Post);
   }
 
-  savePost(post:Post):Observable<Post>{ 
+  savePost(post: Post): Observable<Post> {
     this.MOCK_POSTS.push(post);
     this.dataChangedTrigger.next();
     return of(post).pipe(delay(800));
@@ -273,7 +293,7 @@ fetchContributionData(): Observable<any> {
     return throwError(() => "Post not found");
   }
 
-  deletePost(title:string):Observable<void>{
+  deletePost(title: string): Observable<void> {
     this.MOCK_POSTS = this.MOCK_POSTS.filter(p => p.title !== title);
     return of();
   }
