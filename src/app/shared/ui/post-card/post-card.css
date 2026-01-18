@@ -118,3 +118,40 @@
   line-height: 1.5;
   font-style: italic;
 }
+/* ================= compact mode =========== */
+/* Normal Horizontal Layout */
+.post-card-wrapper {
+  transition: all 0.3s ease;
+}
+
+.content-section { width: 70%; }
+.side-section { width: 30%; }
+
+/* COMPACT MODE: Triggered when form expands */
+.compact-layout {
+  flex-direction: column !important; /* Stack top to bottom */
+}
+
+.compact-layout .content-section {
+  width: 100%;
+  order: 2; /* Move description to the middle */
+}
+
+.compact-layout .side-section {
+  width: 100%;
+  flex-direction: row !important; /* Align actions and meta in one line or stack */
+  justify-content: space-between;
+  margin-bottom: 10px;
+  order: 1; /* Move buttons to the TOP */
+}
+
+.compact-layout .metadata-wrapper {
+  order: 3; /* Move time + editors to the BOTTOM */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #eee; /* Subtle separator */
+}

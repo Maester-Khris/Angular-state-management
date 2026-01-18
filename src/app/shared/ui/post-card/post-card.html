@@ -21,7 +21,7 @@
     </div>
   </div>
 </div>
-} @else {
+} @else if(mode() === 'list-item') {
 <div class="d-flex justify-content-between align-items-start p-3  bg-white">
   <div class="me-3 w-70">
     <strong class="d-block">{{ post().title }}</strong>
@@ -30,24 +30,55 @@
   <div class="d-flex flex-column gap-2 align-items-center w-30">
     <ng-container *ngTemplateOutlet="actionRef"></ng-container>
     <div>
-    <div class="d-flex align-items-center pe-2">
-      <span class="metadata-item">
-        <i class="bi bi-clock-history me-1"></i>
-        Updated 2h ago
-      </span>
-    </div>
+      <div class="d-flex align-items-center pe-2">
+        <span class="metadata-item">
+          Updated 2h ago
+          <i class="bi bi-clock-history me-1"></i>
+        </span>
+      </div>
 
-    <div class="d-flex justify-content-end pe-2 gap-2">
-      <div class="avatar-group d-flex align-items-center">
-        <span class="smallest text-muted fw-medium">+2 editors</span>
-        <div class="co-author-circle shadow-sm ms-2" [title]="'Bill'">
-          <img [src]="'https://www.gravatar.com/avatar/?d=mp&s=150'" [alt]="'Elise'" class="avatar-img">
-          <!-- @else {
-                                <span class="avatar-initials">N</span>
-                              } -->
+      <div class="d-flex justify-content-end pe-2 gap-2">
+        <div class="avatar-group d-flex align-items-center">
+          <span class="metadata-item smallest text-muted">
+            +2 editors <i class="bi bi-person-circle me-1"></i>
+          </span>
+          <!-- <span class="smallest text-muted fw-medium">+2 editors</span>
+          <div class="co-author-circle shadow-sm ms-2" [title]="'Bill'">
+            <img [src]="'https://www.gravatar.com/avatar/?d=mp&s=150'" [alt]="'Elise'" class="avatar-img">
+          </div> -->
         </div>
       </div>
     </div>
+  </div>
+</div>
+}@else{
+<div class="post-card-wrapper compact-layout d-flex justify-content-between align-items-start p-3 bg-white">
+  <div class="content-section me-3">
+    <strong class="d-block">{{ post().title }}</strong>
+    <p class="small text-muted mb-0">{{ post().description }}</p>
+    <div class="compact-meta-footer mt-2"></div>
+  </div>
+  <div class="metadata-wrapper">
+    <div class="d-flex align-items-center mb-1">
+      <span class="metadata-item smallest text-muted">
+        <i class="bi bi-clock-history me-1"></i> Updated 2h ago
+      </span>
+    </div>
+
+    <div class="avatar-group d-flex align-items-center">
+      <span class="metadata-item smallest text-muted">
+        <i class="bi bi-person-circle me-1"></i> +2 editors
+      </span>
+      <!-- <div class="co-author-circle ">
+          <img [src]="'https://www.gravatar.com/avatar/?d=mp&s=150'" class="avatar-img">
+        </div>
+        <span class="smallest text-muted fw-medium">+2 editors</span> -->
+    </div>
+  </div>
+
+  <div class="side-section d-flex flex-column gap-2 align-items-center">
+    <div class="actions-wrapper">
+      <ng-container *ngTemplateOutlet="actionRef"></ng-container>
     </div>
   </div>
 </div>

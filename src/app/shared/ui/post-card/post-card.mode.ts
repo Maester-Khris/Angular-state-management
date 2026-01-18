@@ -1,1 +1,1 @@
-export type PostViewMode = 'card' | 'list-item';
+export type PostViewMode = 'card' | 'list-item' | 'compact';

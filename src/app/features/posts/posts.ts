@@ -27,6 +27,9 @@ export class Posts implements OnInit, HasUnsavedChanges {
   private readonly mediaService = inject(MediaService); 
   private readonly mockApi = inject(MockApi);
 
+  //elastic layout
+  isExpanded = false;
+
   //form builder
   readonly addPostForm = this.fb.nonNullable.group({
     title:["",[Validators.required, Validators.minLength(10)]],

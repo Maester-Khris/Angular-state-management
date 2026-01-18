@@ -4,28 +4,31 @@
     <app-loading-spinner *ngIf="vm.isLoading" size="sm"></app-loading-spinner>
   </div>
 
-  <div class="row g-4 align-items-stretch">
-    <div class="col-xl-5">
-      <div class="card border-0 shadow-sm sticky-editor h-100">
+  <div class="row g-4 align-items-stretch transition-container">
+    <div [class]="isExpanded ? 'col-xl-8' : 'col-xl-5'" class="transition-col ">
+      <div class="card border-0 shadow-sm sticky-editor h-100 ">
         <div class="card-body p-4 d-flex flex-column">
           <h5 class="form-title-fancy mb-4">New publication</h5>
-
-          <form [formGroup]="addPostForm" (ngSubmit)="onAdd()" class="d-flex flex-column gap-3 flex-grow-1">
+          <button type="button" (click)="isExpanded = !isExpanded"
+            class="btn btn-expand-toggle p-1 d-flex align-items-center justify-content-center"
+            [title]="isExpanded ? 'Collapse View' : 'Expand View'">
+            <i class="bi" [class]="isExpanded ? 'bi-grip-vertical' : 'bi-grid-3x3-gap-fill'"></i>
+          </button>
+          <form [formGroup]="addPostForm" (ngSubmit)="onAdd()" class="d-flex flex-column gap-3">
             <div>
               <label class="form-label smallest tracking-tight fw-medium text-muted">Title</label>
               <input type="text" class="form-control form-control-sm border-0 bg-light py-2"
                 placeholder="e.g. Mastering Angular Signals" formControlName="title" />
             </div>
 
-            <div class="flex-grow-1">
+            <div class="">
               <label class="form-label smallest tracking-tight fw-medium text-muted">Description</label>
-              <textarea class="form-control border-0 bg-light smallest" rows="4" placeholder="What's the story about?"
-                formControlName="description"></textarea>
+              <textarea class="form-control border-0 bg-light smallest" [rows]="isExpanded ? 10 : 4"
+                placeholder="What's the story about?" formControlName="description"></textarea>
             </div>
 
             <div class="image-upload-wrapper">
               <label class="form-label smallest tracking-tight fw-medium text-muted">Cover Image</label>
-
               <div class="upload-zone rounded-3" [class.uploading]="isUploading">
                 <input type="file" class="file-input" (change)="onFileSelected($event)" accept="image/*"
                   [disabled]="isUploading" />
@@ -38,24 +41,20 @@
               <div class="image-preview-box mt-3 position-relative" *ngIf="imagePreview">
                 <img [src]="imagePreview" class="rounded-2 shadow-sm w-100" [style.opacity]="isUploading ? '0.5' : '1'"
                   alt="Preview" />
-
                 @if (isUploading) {
                 <div class="upload-overlay">
                   <div class="spinner-border spinner-border-sm text-white" role="status"></div>
                 </div>
                 }
-
                 <button type="button" class="btn-remove-img" (click)="removeImage()"
                   *ngIf="!isUploading">&times;</button>
               </div>
             </div>
 
-
             <div class="position-relative">
               <label class="form-label smallest tracking-tight fw-medium text-muted">Co-Editors</label>
               <div
                 class="chip-input-container form-control form-control-sm border-0 bg-light d-flex flex-wrap gap-2 align-items-center py-2 min-h-input">
-
                 @for (user of selectedCoAuthors; track user.id) {
                 <div class="author-badge d-flex align-items-center gap-1">
                   <span>{{ user.name }}</span>
@@ -64,7 +63,6 @@
                   </button>
                 </div>
                 }
-
                 <input #authorInput type="text" class="ghost-input flex-grow-1 border-0 bg-transparent smallest"
                   placeholder="{{ selectedCoAuthors.length === 0 ? 'Search users to collaborate...' : '' }}"
                   (input)="onSearchAuthors($event)" (keydown.backspace)="handleBackspace($event)"
@@ -98,7 +96,6 @@
                 class="btn btn-light btn-save-draft flex-grow-1 py-2 rounded fw-bold small text-muted border">
                 <i class="bi bi-archive me-1"></i> Save Draft
               </button>
-
               <button type="submit" [disabled]="addPostForm.invalid || isUploading"
                 class="btn btn-primary flex-grow-1 py-2 shadow-sm rounded fw-bold small">
                 Publish Post
@@ -109,7 +106,7 @@
       </div>
     </div>
 
-    <div class="col-xl-7 d-flex flex-column">
+    <div [class]="isExpanded ? 'col-xl-4' : 'col-xl-7'" class="transition-col d-flex flex-column">
       <div class="post-list-container flex-grow-1">
         @if (vm.error) {
         <div class="alert alert-danger border-0 shadow-sm">{{ vm.error }}</div>
@@ -118,7 +115,7 @@
           @for (post of vm.posts; track post.title) {
           <div class="card border-0 shadow-sm post-item-hover">
             <div class="card-body p-3">
-              <app-post-card [post]="post" mode="list-item">
+              <app-post-card [post]="post" [mode]=" isExpanded ? 'compact' : 'list-item'">
                 <div actions class="w-100">
                   <div class="d-flex justify-content-between align-items-start">
                     <div class="d-flex gap-2 flex-shrink-0">

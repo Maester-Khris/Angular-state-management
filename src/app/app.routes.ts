@@ -50,8 +50,3 @@ export const routes: Routes = [
     { path: 'signup', component: AuthShell },
     { path: "", redirectTo: "home", pathMatch: "full" }
 ]; 
-
-// {
-    //     path: "login",
-    //     loadComponent: () => import("./features/auth/components/login/login").then(c => c.Login)
-    // },
