@@ -20,8 +20,8 @@ export class Profile implements OnInit{
     this.profileinit = this.route.snapshot.data['profileData'];
   }
 
-  profile = toSignal(this.mockApi.fetchUserProfile(), {
-    initialValue: {} as UserProfile
+  profile = toSignal<UserProfile | null>(this.mockApi.fetchUserProfile(), {
+    initialValue: null
   });
 
   drafts = toSignal(this.mockApi.fetchDrafts(), {

@@ -86,6 +86,9 @@ export class Posts implements OnInit, HasUnsavedChanges {
       this.addPostForm.markAllAsTouched();
     }
   }
+  onSaveDraft(){
+    
+  }
 
 
   // == =========== Recents Post ui actions ================

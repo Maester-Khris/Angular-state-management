@@ -1,139 +1,3 @@
-/* 
- .profile-dashboard-grid {
-   display: grid;
-   grid-template-columns: 1fr 340px; 
-   gap: 2rem;
-   max-width: 1400px;
-   margin: 0 auto;
- }
- .profile-card {
-   background: white;
-   border: 1px solid var(--postair-border);
-   border-radius: 20px;
-   overflow: hidden;
-   margin-bottom: 2rem;
-
-   .profile-cover {
-     height: 140px;
-     background: linear-gradient(135deg, #6366f1, #a855f7);
-   }
-
-   .profile-content {
-     padding: 0 2rem 2rem;
-     margin-top: -60px;
-   }
-
-   .profile-avatar {
-     width: 120px;
-     height: 120px;
-     border-radius: 50%;
-     border: 6px solid white;
-     background: white;
-   }
- }
- .drafts-lab {
-   margin-bottom: 2rem;
-  
-   .draft-card {
-     display: flex;
-     align-items: center;
-     background: white;
-     border: 1px dashed #cbd5e1; 
-     padding: 1rem;
-     border-radius: 12px;
-     margin-bottom: 0.75rem;
-     transition: all 0.2s;
-     cursor: pointer;
-
-     &:hover {
-       border-color: var(--postair-primary);
-       background: #f8fafc;
-     }
-
-     .draft-status {
-       font-size: 0.65rem;
-       font-weight: 800;
-       color: #94a3b8;
-       border: 1px solid #e2e8f0;
-       padding: 2px 6px;
-       border-radius: 4px;
-       margin-right: 1rem;
-     }
-   }
- }
- .stats-mini-grid {
-   display: grid;
-   grid-template-columns: 1fr 1fr;
-   gap: 1rem;
-
-   .stat-mini-card {
-     background: white;
-     border: 1px solid #f1f5f9;
-     padding: 1rem;
-     border-radius: 12px;
-     text-align: center;
-    
-     .stat-label { font-size: 0.65rem; text-transform: uppercase; color: #94a3b8; font-weight: 700; }
-     .stat-value { display: block; font-size: 1.25rem; font-weight: 700; color: #1e293b; }
-   }
- }
- .contribution-grid {
-   display: flex;
-   justify-content: space-between;
-   gap: 3px;
-  
-   .heatmap-cell {
-     width: 12px;
-     aspect-ratio: 1/1;
-     border-radius: 2px;
-     background-color: #f1f5f9;
-     &.level-1 { background: #9be9a8; }
-     &.level-2 { background: #40c463; }
-     &.level-3 { background: #216e39; }
-   }
- }
- .favorites-stack {
-   display: flex;
-   flex-direction: column;
-   gap: 0.75rem;
-
-   .fav-card-pro {
-     background: white;
-     border: 1px solid #f1f5f9;
-     border-radius: 10px;
-     padding: 0.75rem;
-     display: flex;
-     gap: 0.75rem;
-    
-     .fav-icon-border { color: #6366f1; font-size: 1rem; }
-     .fav-title { font-size: 0.8rem; font-weight: 600; color: #1e293b; }
-     .fav-date { font-size: 0.7rem; color: #94a3b8; }
-   }
- }
- .section-title {
-   font-size: 0.75rem;
-   font-weight: 800;
-   text-transform: uppercase;
-   letter-spacing: 0.1em;
-   color: #64748b;
- }
-
- .timeline-connector {
-   position: absolute;
-   top: 36px;
-   bottom: -6px;
-   width: 0;
-   border-left: 2px dotted #e2e8f0;
- }
-
-.profile-dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-} */
-
 /* ================= Profile Card ================= */
 /* Minimal Timeline */
 
@@ -218,6 +82,7 @@
 /* Timeline Padding Fix */
 .activity-timeline {
   margin-left: -0.5rem; /* Balanced pull */
+  padding-left: 8px;
 }
 
 .timeline-content {
@@ -344,17 +209,6 @@
   font-size: 1.2rem;
 }
 
-/* ================= The 3-Column Grid Engine ================= */
-/* .profile-dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr 340px; 
-  gap: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  align-items: start;
-  padding: 1rem;
-} */
-
 /* Responsiveness: Stack columns on smaller screens */
 @media (max-width: 1100px) {
   .profile-dashboard-grid {
@@ -386,16 +240,6 @@
 }
 
 /* ================= Refined Heatmap for Grid ================= */
-/* Force the heatmap to be responsive inside its column */
-/* .contribution-grid {
-  display: flex;
-  justify-content: flex-start;
-  gap: 4px;
-  padding-bottom: 12px;
-  overflow-x: auto; Adds scroll if the 52 weeks exceed the center column width
-  scrollbar-width: thin;
-} */
-
 .heatmap-col {
   display: flex;
   flex-direction: column;
@@ -427,6 +271,42 @@
   border-radius: 50%;
   border: 6px solid white;
   background: white;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  transform: translate(8px, 8px);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #fff; /* "Cut-out" effect against the avatar */
+}
+
+.status-indicator.online {
+  background-color: #22c55e; /* Success Green */
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  animation: pulse-online 2s infinite;
+}
+
+/* The "Visualizer" Pulse Animation */
+@keyframes pulse-online {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
 }
 
 /* ================= Drafts Lab ================= */
@@ -463,7 +343,6 @@
 }
 
 /* ================= Stats Mini Grid ================= */
-
 .stats-mini-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -493,68 +372,6 @@
 }
 
 /* ================= Contribution Heatmap ================= */
-
-/* .contribution-grid {
-  display: flex;
-  justify-content: space-between;
-  gap: 3px;
-} */
- /* .heatmap-cell {
-  width: 100%;
- aspect-ratio: 1 / 1; 
-  border-radius: 2px;
-  background-color: #f1f5f9;
-} */
-
-/* Level colors */
-/* .level-1 { background: #9be9a8; }
-.level-2 { background: #40c463; }
-.level-3 { background: #216e39; }
-.level-0 { background: #f1f5f9; } */
-
-
-
-/*.contribution-grid {
-  display: grid;
-  grid-template-columns: repeat(52, 1fr);
-  gap: 3px; 
-  width: 100%;
-} */
-
-/* .heatmap-col {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.contribution-grid .heatmap-cell {
-  width: 12px;
-  aspect-ratio: 1 / 1;
-  border-radius: 2px;
-  background-color: #f1f5f9;
-}
-
-.contribution-grid .heatmap-cell.level-1 {
-  background: #9be9a8;
-}
-
-.contribution-grid .heatmap-cell.level-2 {
-  background: #40c463;
-}
-
-.contribution-grid .heatmap-cell.level-3 {
-  background: #216e39;
-} */
-
-/* .contribution-heatmap-grid {
-  display: grid;
-  grid-template-rows: repeat(7, 10px); 
-  grid-auto-flow: column;
-  grid-auto-columns: 10px;
-  gap: 3px;
-  justify-content: center; 
-  overflow: hidden; 
-} */
  .contribution-container {
   width: 100%;
   padding: 5px 0;
