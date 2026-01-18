@@ -3,7 +3,7 @@ export interface UserProfile{
   name: string,
   bio: string,
   avatar: string|null,
-  stats: { posts: number; reach: string; coAuth: number; since: number };
+  stats: { posts: number; reach: string; coauth: number; since: number };
   savedInsights: any[];
   recentActivity: any[];
 }

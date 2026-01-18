@@ -28,7 +28,15 @@ export class Profile implements OnInit{
     initialValue: [] as any[]
   });
 
+  favs = toSignal(this.mockApi.fetchSavedInsights(), {
+    initialValue: [] as any[]
+  });
+
   contributionData = toSignal(this.mockApi.fetchContributionData(), {
     initialValue: [] as number[]
+  });
+
+  account_activity = toSignal(this.mockApi.fetchRecentActivity(), {
+    initialValue: [] as any[]
   });
 }

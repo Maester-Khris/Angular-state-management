@@ -17,7 +17,7 @@ export class MockApi {
     name: 'Is No Good',
     bio: 'Lead Engineer at CredOps | Angular & Cloud Architect',
     avatar: 'https://www.gravatar.com/avatar/?d=mp&s=150',
-    stats: { posts: 12, reach: '1.2k', coAuth: 4, since: 2026 },
+    stats: { posts: 12, reach: '1.2', coauth: 18, since: 2023 },
     savedInsights: [
       { id: 1, title: 'Advanced Angular Patterns', type: 'journal', date: '2 days ago' },
       { id: 2, title: 'Cloud Native Scaling', type: 'code', date: '5 days ago' }
@@ -27,6 +27,11 @@ export class MockApi {
       { id: 102, type: 'join', target: 'CredOps Core', time: 'Yesterday' }
     ]
   };
+
+  ACCOUNT_HISTORY: any[] = [
+    { id: 101, type: 'publish', target: 'Building RESTful APIs', time: '2 hours ago', meta: 'Backend Engineering' },
+    { id: 102, type: 'join', target: 'CredOps Core', time: 'Yesterday' }
+  ];
 
   MOCK_POSTS: Post[] = [
     {
@@ -185,9 +190,8 @@ export class MockApi {
     }
   ];
 
-  MOCK_DRAFTS: Post[] = [
+  MOCK_FAVS: Post[] = [
     {
-      // id: 20,
       title: "Mastering TypeScript Generics",
       description: "Learn how to write flexible, reusable code components using TypeScript generics.",
       createdAt: new Date("2023-02-15"),
@@ -197,7 +201,45 @@ export class MockApi {
       imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
     },
     {
-      // id: 21,
+      title: "Advanced React Patterns",
+      description: "Dive deep into Higher-Order Components, Render Props, and Compound Components.",
+      createdAt: new Date("2023-03-01"),
+      lastModifiedAt: new Date("2023-03-05"),
+      isPublic: true,
+      createdBy: "react-wizard",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+    },
+    {
+      title: "Node.js Performance Tuning",
+      description: "Optimize your backend services for high-traffic environments and low latency.",
+      createdAt: new Date("2023-04-10"),
+      lastModifiedAt: new Date("2023-04-12"),
+      isPublic: true,
+      createdBy: "backend-pro",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg"
+    },
+    {
+      title: "Understanding CSS Grid",
+      description: "Master complex layout designs with the most powerful layout system in CSS.",
+      createdAt: new Date("2023-05-22"),
+      lastModifiedAt: new Date("2023-05-25"),
+      isPublic: false,
+      createdBy: "style-master",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg"
+    }
+  ];
+
+  MOCK_DRAFTS: Post[] = [
+    {
+      title: "Mastering TypeScript Generics",
+      description: "Learn how to write flexible, reusable code components using TypeScript generics.",
+      createdAt: new Date("2023-02-15"),
+      lastModifiedAt: new Date("2023-02-20"),
+      isPublic: false,
+      createdBy: "dev-explorer",
+      imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg"
+    },
+    {
       title: "A Deep Dive into CSS Grid",
       description: "Everything you need to know to create complex layouts with ease using CSS Grid.",
       createdAt: new Date("2023-03-10"),
@@ -225,8 +267,15 @@ export class MockApi {
   }
 
   fetchContributionData(): Observable<any> {
-    // Simulate 52 weeks of levels
     return of(Array.from({ length: 365 }, () => Math.floor(Math.random() * 4))).pipe(delay(1500));
+  }
+
+  fetchSavedInsights(): Observable<Post[]> {
+    return of(this.MOCK_FAVS).pipe(delay(500));
+  }
+
+  fetchRecentActivity(): Observable<Post[]> {
+    return of(this.ACCOUNT_HISTORY).pipe(delay(500));
   }
 
   fetchPosts(): Observable<Post[]> {

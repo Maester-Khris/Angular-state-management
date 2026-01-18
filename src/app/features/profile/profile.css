@@ -714,6 +714,28 @@
   border-left: 2px dotted #e2e8f0;
 }
 /* ================== sections glassmorphism =============== */
+/* Internal skeleton lines for the cards */
+.skeleton-text-sm {
+  width: 40%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.skeleton-text-lg {
+  width: 70%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+}
+/* Ensure the mini-cards preserve their shape during loading */
+.stat-mini-card.glass-loading {
+  min-height: 80px; /* Adjust based on your actual design height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
 .glass-loading {
   /* Using a subtle diagonal gradient instead of a solid color */
   background: linear-gradient(
@@ -748,6 +770,22 @@
   );
   animation: shimmer-diagonal 2s infinite ease-in-out;
 }
+
+.timeline-marker.glass-loading {
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  width: 32px;
+  height: 32px;
+}
+
+.timeline-content .glass-loading {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.bg-light-primary { background-color: #e0e7ff; }
+.bg-light-success { background-color: #dcfce7; }
+.bg-light-warning { background-color: #fef9c3; }
 
 @keyframes shimmer-diagonal {
   0% { transform: translate(-30%, -30%); }

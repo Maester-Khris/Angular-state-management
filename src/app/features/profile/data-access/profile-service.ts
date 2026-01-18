@@ -12,7 +12,7 @@ export class ProfileService {
       name:"Niki OPS",
       bio:"The Mother Fucking CREDOPS agent",
       avatar:"assets/avatar.png",
-      stats: { posts: 0, reach: "", coAuth: 0, since: 120 },
+      stats: { posts: 0, reach: "", coauth: 0, since: 120 },
       savedInsights: [],
       recentActivity: [],
     }).pipe(delay(800));
