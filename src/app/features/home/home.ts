@@ -13,10 +13,11 @@ import { SearchBar } from '../search-bar/search-bar';
 import { SkeletonCard } from '../../shared/ui/skeleton-card/skeleton-card';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Footer } from '../../shared/ui/footer/footer';
+import { TrackPreview } from '../../shared/directives/track-preview';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink],
+  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink, TrackPreview],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

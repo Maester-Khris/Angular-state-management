@@ -80,7 +80,7 @@
 
     <div class="bento-grid" id="community-post">
       @for (post of vm.posts; track post.title; let i = $index) {
-      <div class="bento-item" (click)="openDetails(post.title)">
+      <div class="bento-item" (click)="openDetails(post.title)" [attr.data-post-id]="post.id" [trackPreview]="post.id">
         <app-post-card [post]="post" mode="card">
           <div actions>
             <button class="btn-fav ms-auto">
