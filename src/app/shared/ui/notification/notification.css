@@ -1,0 +1,66 @@
+/* .notification-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.notification-container.success {
+  background: rgba(34, 197, 94, 0.9); 
+}
+
+.notification-container.error {
+  background: rgba(239, 68, 68, 0.9); 
+}
+
+@keyframes slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+.animate-slide-in { animation: slide-in 0.3s ease-out; } */
+
+.notification-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  
+  /* Layout Controls */
+  width: fit-content;        /* Shrinks to fit short text */
+  min-width: 220px;         /* Prevents it from looking like a tiny pill */
+  max-width: 300px;         /* The 'Safety Valve' for long text */
+  
+  /* Visuals */
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  overflow: hidden;         /* Ensures content stays inside rounded corners */
+}
+
+.notification-container.success {
+  background: rgba(34, 197, 94, 0.9); 
+}
+
+.notification-container.error {
+  background: rgba(239, 68, 68, 0.9); 
+}
+
+
+
+
+/* Ensure the inner flex container allows wrapping */
+.notification-container .d-flex {
+  flex-wrap: nowrap;        /* Keeps icon and text on the same row start */
+  align-items: flex-start !important; /* Better for multi-line text */
+}
+
+.notification-container span {
+  white-space: normal;      /* Essential for text wrapping */
+  word-break: break-word;   /* Prevents long URLs from breaking layout */
+  line-height: 1.4;
+}

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BehaviorSubject, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
 import { MockApi } from '../../core/services/mock-api';
 import { Post } from '../posts/data-access/post.model';
@@ -17,7 +17,7 @@ import { TrackPreview } from '../../shared/directives/track-preview';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink, TrackPreview],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink, TrackPreview],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -30,6 +30,8 @@ export class Home implements OnInit, OnDestroy {
   // Get data from resolver
   private route = inject(ActivatedRoute);
   private initialData = this.route.snapshot.data['initialPosts'] || [];
+
+ 
 
   // ui interaction
   private router = inject(Router);
@@ -142,4 +144,5 @@ export class Home implements OnInit, OnDestroy {
       this.closeDetails();
     }
   }
+
 }

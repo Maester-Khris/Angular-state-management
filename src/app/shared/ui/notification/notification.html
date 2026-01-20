@@ -1,0 +1,8 @@
+@if (notifService.current(); as notif) {
+<div class="notification-container animate-slide-in shadow-lg"  [class]="notif.status">
+    <div class="d-flex align-items-center gap-2 px-3 py-2">
+        <i class="bi"[class]="getIcon(notif.status)"></i>
+        <span class="smallest fw-medium">{{ notif.message }}.</span>
+    </div>
+</div>
+}

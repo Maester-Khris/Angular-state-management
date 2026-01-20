@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import {  NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { AppHeader } from './shared/ui/app-header/app-header';
 import { filter } from 'rxjs';
+import { Notification } from './shared/ui/notification/notification';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, AppHeader],
+  imports: [RouterOutlet, AppHeader, Notification],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
