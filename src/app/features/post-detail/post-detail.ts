@@ -1,10 +1,12 @@
-import { Component, computed, effect, inject, input, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { MockApi } from '../../core/services/mock-api';
 import { Router } from '@angular/router';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 import { EventTracking } from '../../core/services/event-tracking';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-post-detail',
@@ -16,11 +18,30 @@ export class PostDetail implements OnInit {
   private mockApi = inject(MockApi);
   private router = inject(Router);
   private eventTracker = inject(EventTracking);
+  platformId = inject(PLATFORM_ID);
+
+  constructor(private meta: Meta, private pagetitle: Title) {
+    effect(() => {
+      const postData = this.post();
+
+      // Only set tags if postData actually exists
+      if (postData) {
+        this.pagetitle.setTitle(`${postData.title} | Postair Lab`);
+        this.meta.updateTag({ name: 'description', content: postData.description });
+        this.meta.updateTag({ property: 'og:title', content: postData.title });
+        this.meta.updateTag({ property: 'og:description', content: postData.description });
+        this.meta.updateTag({ property: 'og:image', content: postData.imageUrl || 'assets/favicon-postair.png' });
+      }
+    });
+  }
 
   // later can be updated with effect so that intial state comes from server respoinse if already present in bookmarks  
   isSaved = signal(false);
 
-  title = input<string>(''); // post title automatically populated by angular due to withInputBinding() on routing navigation
+  // Retrieve post data
+  // post title automatically populated by angular due to withInputBinding() on routing navigation
+  // use signal to fecth full post with retrieved title
+  title = input<string>('');
   post = toSignal(
     toObservable(this.title).pipe(
       switchMap(title => this.mockApi.fetchPostByTitle(title))
@@ -28,13 +49,15 @@ export class PostDetail implements OnInit {
   );
 
   ngOnInit() {
-    const viewTimer = setTimeout(() => {
-      this.eventTracker.emit({
-        postId: "1",
-        type: 'VIEW',
-        timestamp: Date.now()
-      });
-    }, 2000);
+    if (isPlatformBrowser(this.platformId)) {
+      const viewTimer = setTimeout(() => {
+        this.eventTracker.emit({
+          postId: "1",
+          type: 'VIEW',
+          timestamp: Date.now()
+        });
+      }, 2000);
+    }
   }
 
   onAddToBookmarks() {

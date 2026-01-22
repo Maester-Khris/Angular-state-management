@@ -1,195 +1,86 @@
-.dashboard-wrapper {
-  margin-top: 1rem;
+/* ================= Profile Card ================= */
+/* Minimal Timeline */
+
+/* Layout Correction */
+.smallest { font-size: 0.75rem; }
+.profile-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px; /* Slightly wider sidebar for better content fit */
+  gap: 1.5rem; /* Reduced from 2rem to tighten look */
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+  padding: 1.5rem;
 }
 
-.sidebar-card {
-  background: white;
-  border: 1px solid var(--postair-border);
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-.sidebar-card .nav-link {
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-weight: 500;
-  transition: background 0.2s;
-}
-
-.sidebar-card .nav-link.active {
-  background: #f1f5f9;
-  color: var(--postair-primary);
-}
-
-.profile-card {
-  background: white;
-  border: 1px solid var(--postair-border);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.profile-cover {
-  height: 120px;
-  background: linear-gradient(90deg, #6366f1, #a855f7);
-}
-
-.profile-content {
-  padding: 0 2rem 2rem;
-  margin-top: -60px;
-}
-
-.profile-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 5px solid white;
-  background: white;
-}
-
-.avatar-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.status-indicator {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 16px;
-  height: 16px;
-  background: #22c55e;
-  border: 3px solid white;
-  border-radius: 50%;
-}
-
-.stat-card {
-  background: white;
-  border: 1px solid var(--postair-border);
-  border-radius: 12px;
-  padding: 1.25rem;
-  text-align: center;
-}
-
-.stat-label {
-  display: block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: var(--postair-text-muted);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.stat-value {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--postair-text-main);
-}
-
-.contribution-grid {
-  display: flex;
-  gap: 4px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-.heatmap-col {
+.center-content-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 1rem; /* Tightened spacing between center cards */
 }
 
-.heatmap-cell {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  background-color: #ebedf0;
-}
-
-.level-1 { background-color: #9be9a8!important; }
-.level-2 { background-color: #40c463!important; }
-.level-3 { background-color: #216e39!important; }
-
-.activity-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+.right-sidebar-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem; /* Consistent spacing in sidebar */
+  padding: 0; /* Removed manual padding */
 }
 
-.bg-light-primary { background: rgba(99, 102, 241, 0.1); }
-.bg-light-success { background: rgba(34, 197, 94, 0.1); }
-
-.smaller { font-size: 0.75rem; }
-
-/* Stats Refinement */
-.stat-card {
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  border: 1px solid #eef2f6;
-}
-.stat-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--postair-primary);
-}
-
-/* Full Width Contribution Heatmap */
-.contribution-heatmap-wrapper {
-  background: #f8fafc;
-  padding: 1.5rem;
-  border-radius: 12px;
-}
-
-.contribution-grid {
-  display: flex;
-  justify-content: space-between; /* Spans the full parent width */
-  gap: 2px;
-}
-
-.heatmap-cell {
-  width: 100%; /* Flexible cell width */
-  aspect-ratio: 1/1; /* Keep it square */
-  min-width: 10px;
-  max-width: 14px;
-  border-radius: 2px;
-  background-color: #e2e8f0;
-}
-
-/* Pro Favorites Layout */
-.favorites-scroll {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-.fav-card {
+/* Sidebar Sections Unification */
+.sidebar-section {
   background: white;
   border-radius: 16px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  border: 1px solid transparent;
-  transition: all 0.2s ease;
+  /* Ensure Saved Posts look like the Activity card */
 }
 
-.fav-card:hover {
-  border-color: #e2e8f0;
-  background: #fafafa;
+/* Fix Stats Grid in Sidebar */
+.stats-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
 }
 
-.fav-icon-box {
-  width: 44px;
-  height: 44px;
-  background: #f1f5f9;
+.stat-mini-card {
+  background: white;
+  border: 1px solid #f1f5f9;
+  padding: 0.75rem;
   border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.stat-mini-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--postair-primary)!important;
 }
 
-/* Minimal Timeline */
+/* Typography & Component Polish */
+.profile-card {
+  margin-bottom: 0; /* Let center-content-wrapper gap handle it */
+}
+
+.profile-card .profile-content {
+  padding: 0 1.5rem 1.5rem; /* Slightly reduced padding */
+}
+
+.section-title {
+  font-size: 0.7rem; /* Sharper label */
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+}
+
+
+
+/* Timeline Padding Fix */
+.activity-timeline {
+  margin-left: -0.5rem; /* Balanced pull */
+  padding-left: 8px;
+}
+
+.timeline-content {
+  padding-bottom: 1.5rem; /* Reduced from 2.5rem */
+}
+
+
 .timeline {
   position: relative;
   padding-left: 1rem;
@@ -208,7 +99,7 @@
 .timeline-item {
   position: relative;
   padding-bottom: 0.5rem;
-  padding-left: 1.5rem;
+  padding-left: 0.5rem;
 }
 
 .timeline-point {
@@ -221,74 +112,6 @@
   border: 2px solid var(--postair-primary);
   border-radius: 50%;
 }
-/* Favorites Grid: 4 per row */
-.favorites-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-}
-
-.fav-card-pro {
-  background: white;
-  border: 1px solid #f1f5f9;
-  border-radius: 8px; /* Reduced radius */
-  padding: 0.75rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  position: relative;
-  transition: all 0.2s ease;
-}
-
-.fav-card-pro:hover {
-  border-color: #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-
-.fav-icon-border {
-  min-width: 32px;
-  height: 32px;
-  border: 1px solid #e2e8f0; /* Bordered icon, no bg */
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6366f1;
-  font-size: 0.9rem;
-}
-
-.fav-info {
-  flex-grow: 1;
-  min-width: 0; /* Ensures text wrapping works */
-}
-
-.fav-title {
-  font-size: 0.75rem; /* Smaller text */
-  font-weight: 600;
-  color: #1e293b;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Wrap to 2 lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.fav-date {
-  font-size: 0.65rem;
-  color: #94a3b8;
-  margin-top: 0.25rem;
-}
-
-.btn-fav-options {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #cbd5e1;
-  font-size: 0.8rem;
-}
-
-/* Polished Timeline */
-/* Remove left space of activity and parent */
 .activity-timeline {
   display: flex;
   flex-direction: column;
@@ -343,9 +166,444 @@
   padding-bottom: 0;
 }
 
-/* Background Color Tones */
-.bg-light-primary { background: #f0f3ff; }
-.bg-light-success { background: #ecfdf5; }
-.bg-light-warning { background: #fffbeb; }
+/* Pro Favorites Layout */
+/* .favorites-scroll {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+} */
+ /* .fav-card:hover { */
+  /* border-color: #e2e8f0;
+  background: #fafafa; */
+/* } */
+/* Favorites Adjustments */
 
-.smallest { font-size: 0.75rem; }
+
+/* Responsiveness: Stack columns on smaller screens */
+@media (max-width: 1100px) {
+  .profile-dashboard-grid {
+    grid-template-columns: 1fr;
+    max-width: 800px;
+  }
+  
+  .right-sidebar-wrapper {
+    margin-top: 1rem;
+  }
+}
+
+/* Center Column Container */
+.center-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-width: 0; /* Prevents heatmap from overflowing the grid cell */
+}
+
+/* Right Sidebar Container */
+.right-sidebar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 1rem; /* Keeps your stats and favorites visible as you scroll long heatmap/content */
+  padding: 0px 10px;
+}
+
+/* ================= Refined Heatmap for Grid ================= */
+.heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.profile-card {
+  background: white;
+  border: 1px solid var(--postair-border);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.profile-card .profile-cover {
+  height: 140px;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+}
+
+.profile-card .profile-content {
+  padding: 0 2rem 2rem;
+  margin-top: -60px;
+}
+
+.profile-card .profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid white;
+  background: white;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  transform: translate(8px, 8px);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #fff; /* "Cut-out" effect against the avatar */
+}
+
+.status-indicator.online {
+  background-color: #22c55e; /* Success Green */
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  animation: pulse-online 2s infinite;
+}
+
+/* The "Visualizer" Pulse Animation */
+@keyframes pulse-online {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+/* ================= Drafts Lab ================= */
+
+.drafts-lab {
+  margin-bottom: 1rem;
+}
+
+.drafts-lab .draft-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px dashed #cbd5e1;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.drafts-lab .draft-card:hover {
+  border-color: var(--postair-primary);
+  background: #f8fafc;
+}
+
+.drafts-lab .draft-card .draft-status {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #94a3b8;
+  border: 1px solid #e2e8f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-right: 1rem;
+}
+
+/* ================= Stats Mini Grid ================= */
+.stats-mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stats-mini-grid .stat-mini-card {
+  background: white;
+  border: 1px solid #f1f5f9;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stats-mini-grid .stat-mini-card .stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 700;
+}
+
+.stats-mini-grid .stat-mini-card .stat-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* ================= Contribution Heatmap ================= */
+ .contribution-container {
+  width: 100%;
+  padding: 5px 0;
+  overflow: hidden; 
+}
+
+.contribution-heatmap-grid {
+  display: grid;
+  /* 7 rows for days of the week */
+  grid-template-rows: repeat(7, 10px); 
+  /* Force it to fill the container by adding columns left-to-right */
+  grid-auto-flow: column;
+  /* Use a min-width to prevent the cells from becoming invisible on smaller screens */
+  grid-auto-columns: 10px;
+  gap: 3px;
+  width: 100%;
+  height: 90px; /* Controlled height for the 7 rows */
+  overflow: hidden; 
+}
+
+.heatmap-cell {
+  aspect-ratio: 1 / 1; /* Keeps cells perfectly square */
+  width: 10px;
+  border-radius: 2px;
+  background-color: #f1f5f9;
+  transition: all 0.2s ease;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.4);
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* Color set inspired by your legend image */
+.level-0 { background-color: #f1f5f9; }
+.level-1 { background-color: #94e2d5; } 
+.level-2 { background-color: #40c463; } 
+.level-3 { background-color: #216e39; }
+
+/* ================= Favorites ================= */
+
+.favorites-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.favorites-stack .fav-card-pro {
+  background: white;
+  /* border: 1px solid #f1f5f9; */
+  border-radius: 10px;
+  padding: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.favorites-stack .fav-card-pro .fav-icon-border {
+  color: #6366f1;
+  font-size: 1rem;
+}
+
+.favorites-stack .fav-card-pro .fav-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.favorites-stack .fav-card-pro .fav-date {
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+/* Favorites Grid: 4 per row */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.25rem;
+}
+
+.fav-card-pro {
+  background: white;
+  border: 1px solid #f1f5f9;
+  border-color: #eee;
+  border-radius: 8px; /* Reduced radius */
+  padding: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.fav-card-pro:hover {
+  /* background-color: #eee; */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border-color: var(--postair-primary)!important;
+}
+
+.fav-icon-border {
+  min-width: 30px;
+  height: 30px;
+  border: 1px solid #e2e8f0; /* Bordered icon, no bg */
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6366f1;
+  font-size: 0.9rem;
+}
+
+.fav-info {
+  flex-grow: 1;
+  min-width: 0; /* Ensures text wrapping works */
+}
+
+.fav-title {
+  font-size: 0.75rem; /* Smaller text */
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Wrap to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fav-date {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.btn-fav-options {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #cbd5e1;
+  font-size: 0.8rem;
+}
+
+/* .favorites-grid {
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+} */
+.fav-card-pro {
+  /* border: 1px solid #f1f5f9; */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+.fav-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  /* gap: 1rem; */
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+.fav-icon-box {
+  width: 44px;
+  height: 44px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* ================= Misc ================= */
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #64748b;
+}
+
+.timeline-connector {
+  position: absolute;
+  top: 36px;
+  bottom: -6px;
+  width: 0;
+  border-left: 2px dotted #e2e8f0;
+}
+/* ================== sections glassmorphism =============== */
+/* Internal skeleton lines for the cards */
+.skeleton-text-sm {
+  width: 40%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.skeleton-text-lg {
+  width: 70%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+}
+/* Ensure the mini-cards preserve their shape during loading */
+.stat-mini-card.glass-loading {
+  min-height: 80px; /* Adjust based on your actual design height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+.glass-loading {
+  /* Using a subtle diagonal gradient instead of a solid color */
+  background: linear-gradient(
+    135deg, 
+    rgba(255, 255, 255, 0.3) 0%, 
+    rgba(241, 245, 249, 0.5) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  /* Brighter border for better definition against the background */
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Updated Shimmer with Diagonal Gradient */
+.glass-loading::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  /* Diagonal shimmer effect */
+  background: linear-gradient(
+    45deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 80%
+  );
+  animation: shimmer-diagonal 2s infinite ease-in-out;
+}
+
+.timeline-marker.glass-loading {
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  width: 32px;
+  height: 32px;
+}
+
+.timeline-content .glass-loading {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.bg-light-primary { background-color: #e0e7ff; }
+.bg-light-success { background-color: #dcfce7; }
+.bg-light-warning { background-color: #fef9c3; }
+
+@keyframes shimmer-diagonal {
+  0% { transform: translate(-30%, -30%); }
+  100% { transform: translate(30%, 30%); }
+}
