@@ -44,10 +44,30 @@ def embed_post():
         return jsonify({"error": f"Error logging post {postuuid}: {e}"}), 500
 
    
-    # return jsonify({
-    #     "message": f"Post {postuuid} received and logging initiated.",
-    #     "status": "received"
-    # }), 202
+@app.route('/search', methods=['POST'])
+def search():
+    """
+    Search for posts semantically.
+    Expected JSON: {"query": "...", "limit": 5}
+    Default to top 5 if limit isn't provided
+    """
+    data = request.get_json()
+    query = data.get("query")
+    limit = data.get("limit", 5)
+
+    if not query:
+        return jsonify({"error": "Missing query string"}), 400
+
+    try:
+        results = search_svc.search_posts(query, limit=limit)
+        return jsonify({
+            "query": query,
+            "count": len(results),
+            "results": results
+        }), 200
+    except Exception as e:
+        logger.error(f"Search error: {e}")
+        return jsonify({"error": "Failed to perform search"}), 500
 
 
 if __name__ == '__main__':

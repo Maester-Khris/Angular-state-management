@@ -33,6 +33,11 @@ class SearchService:
                 vectors_config=VectorParams(size=384, distance=Distance.COSINE),
             )
 
+    def _get_embedding(self, text):
+        """Internal helper to vectorize text. Centralizes math logic."""
+        embeddings = list(self.model.embed([text]))
+        return embeddings[0].tolist()
+
     
     def store_post(self, post_uuid, title, description):
         # concatenate title and description for richer semantic context
@@ -41,7 +46,8 @@ class SearchService:
         # FastEmbed generate the vector in one line
         # we use list (because the embedder returns a generator)
         embeddings = list(self.model.embed([combined_text])) 
-        vector = embeddings[0].tolist()
+        # vector = embeddings[0].tolist()
+        vector = self._get_embedding(combined_text)
        
         # upsert the post into qdrant
         self.client.upsert(
@@ -56,3 +62,26 @@ class SearchService:
         )
 
         return True
+
+    
+    def search_similar_post(self, query_text, limit=10):
+        """
+        Retrieves Top-K results. 
+        Returns a list of dicts with postuuid and similarity score.
+        """
+        query_vector = self._get_embedding(query_text)
+
+        search_result = self.client.search(
+            collection_name=self.collection_name,
+            query_vector=query_vector,
+            limit=limit,
+            with_payload=True
+        )
+
+        return [
+            {
+                "postuuid": hit.payload.get("postuuid"),
+                "score": round(hit.score, 4)
+            }
+            for hit in search_result
+        ]

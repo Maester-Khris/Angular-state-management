@@ -1,0 +1,26 @@
+[
+  { 
+    "title": "The Future of React", 
+    "description": "Exploring the new concurrent rendering features and how they impact performance." 
+  },
+  { 
+    "title": "Mastering TypeScript", 
+    "description": "Why strict typing is the best thing that happened to my JavaScript workflow." 
+  },
+  { 
+    "title": "Node.js Performance Tips", 
+    "description": "How to optimize your event loop for high-traffic applications." 
+  },
+  { 
+    "title": "Docker for Beginners", 
+    "description": "A simple guide to containerizing your first MERN stack application." 
+  },
+  { 
+    "title": "The Rise of AI Agents", 
+    "description": "Moving beyond chatbots to autonomous agents that solve complex tasks." 
+  },
+  { 
+    "title": "Clean Code Principles", 
+    "description": "Writing code that your future self won't hate you for." 
+  }
+]
