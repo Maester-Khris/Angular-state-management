@@ -59,7 +59,7 @@ def search():
         return jsonify({"error": "Missing query string"}), 400
 
     try:
-        results = search_svc.search_posts(query, limit=limit)
+        results = search_svc.search_similar_post(query, limit=limit)
         return jsonify({
             "query": query,
             "count": len(results),

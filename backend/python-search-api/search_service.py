@@ -11,7 +11,8 @@ class SearchService:
         # Initialize the Qdrant client cloud
         self.client = QdrantClient(
             url = os.getenv("QDRANT_URL"),
-            api_key = os.getenv("QDRANT_API_KEY")
+            api_key = os.getenv("QDRANT_API_KEY"),
+            timeout=60
         )
         self.collection_name = os.getenv("QDRANT_COLLECTION_NAME")
 
@@ -71,17 +72,16 @@ class SearchService:
         """
         query_vector = self._get_embedding(query_text)
 
-        search_result = self.client.search(
+        search_result = self.client.query_points(
             collection_name=self.collection_name,
-            query_vector=query_vector,
+            query=query_vector,
             limit=limit,
             with_payload=True
         )
-
         return [
             {
                 "postuuid": hit.payload.get("postuuid"),
                 "score": round(hit.score, 4)
             }
-            for hit in search_result
+            for hit in search_result.points
         ]
