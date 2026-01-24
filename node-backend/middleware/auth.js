@@ -16,7 +16,7 @@ const opts = {
 
 passport.use(
   new Strategy(opts, async (req, payload, done) => {
-    console.log("retrieved payload", payload);
+    // console.log("retrieved payload", payload);
     try {
       const authHeader = req.headers.authorization;
       const token = authHeader?.split(" ")[1];

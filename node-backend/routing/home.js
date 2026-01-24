@@ -1,114 +1,107 @@
 const router = require('express').Router();
 const dbCrudOperator = require('../database/crud');
 const MongoConnection = require('../database/connection');
+const Post = require('../database/models/post');
 const { getSemanticMatches, checkPythonStatus } = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
-const Post = require('../database/models/post');
+
+// ==========================================
+// 1. SYSTEM INTEGRITY
+// ==========================================
 
 router.get("/health", async (req, res) => {
     const start = Date.now();
-    
-    // Map Mongoose readyState numbers to readable strings
-    const dbStates = {
-        0: "disconnected",
-        1: "connected",
-        2: "connecting",
-        3: "disconnecting"
-    };
+    const dbStates = { 0: "disconnected", 1: "connected", 2: "connecting", 3: "disconnecting" };
 
-    const pythonStatus = await checkPythonStatus();
-    const dbStatus = dbStates[MongoConnection.getDbStatus()] || "unknown";
-    const isSystemHealthy = (pythonStatus === "connected" && dbStatus === "connected");
+    const [pythonStatus, currentDbState] = await Promise.all([
+        checkPythonStatus(),
+        MongoConnection.getDbStatus()
+    ]);
 
-    res.status(isSystemHealthy ? 200 : 503).json({
-        status: isSystemHealthy ? "UP" : "DEGRADED",
+    const dbStatus = dbStates[currentDbState] || "unknown";
+    const isHealthy = (pythonStatus === "connected" && dbStatus === "connected");
+
+    res.status(isHealthy ? 200 : 503).json({
+        status: isHealthy ? "UP" : "DEGRADED",
         timestamp: new Date(),
         latency: `${Date.now() - start}ms`,
         services: {
-            database: {
-                name: "MongoDB Atlas",
-                status: dbStatus
-            },
-            semantic_engine: {
-                name: "Python Flask / Qdrant",
-                status: pythonStatus,
-                endpoint: "http://localhost:5000"
-            }
+            database: { name: "MongoDB Atlas", status: dbStatus },
+            semantic_engine: { name: "Python Flask / Qdrant", status: pythonStatus }
         }
     });
 });
 
+// ==========================================
+// 2. DISCOVERY & FEED
+// ==========================================
 
 router.get('/api/feed', async (req, res) => {
-  try {
-    const { cursor, limit } = req.query;
-    const pageLimit = Math.min(parseInt(limit) || 10, 50);
-    const feedResponse = await dbCrudOperator.getHomeFeed(cursor, pageLimit);
-    
-    // Return JSON for the Infinite Scroll component
-    return res.status(200).json(feedResponse);
-  } catch (error) {
-    console.error("Feed error:", error);
-    return res.status(500).json({ message: "Error fetching feed" });
-  }
+    try {
+        const { cursor, limit } = req.query;
+        const pageLimit = Math.min(parseInt(limit) || 10, 50);
+        
+        const feedResponse = await dbCrudOperator.getHomeFeed(cursor, pageLimit);
+        return res.status(200).json(feedResponse);
+    } catch (error) {
+        console.error("Feed error:", error);
+        return res.status(500).json({ message: "Error fetching feed" });
+    }
 });
 
-// hybrid search= lexical text + semantic
+// ==========================================
+// 3. HYBRID SEARCH ENGINE
+// ==========================================
+
 router.get('/api/search', async (req, res) => {
-  try {
-    const { q, limit, mode = 'hybrid' } = req.query;
-    if (!q) return res.status(400).json({ message: "Search term 'q' is required" });
-    
-    const searchLimit = Math.min(parseInt(limit) || 20, 50);
+    try {
+        const { q, limit, mode = 'hybrid' } = req.query;
+        if (!q) return res.status(400).json({ message: "Search query 'q' is required" });
 
-    if (mode === 'lexical') {
-      const results = await dbCrudOperator.searchPostsByKeyword(q, searchLimit);
-      // Map to same structure for Angular consistency
-      const unifiedResults = results.map(r => ({ ...r, matchPercentage: 100 }));
-      return res.status(200).json({ query: q, mode, count: unifiedResults.length, results: unifiedResults });
+        const searchLimit = Math.min(parseInt(limit) || 20, 50);
+
+        // --- Fast Path: Lexical Only ---
+        if (mode === 'lexical') {
+            const results = await dbCrudOperator.searchPostsByKeyword(q, searchLimit);
+            const unified = results.map(r => ({ ...r, matchPercentage: 100 }));
+            return res.status(200).json({ query: q, mode, count: unified.length, results: unified });
+        }
+
+        // --- Intelligence Path: Hybrid ---
+        const [mongoRes, pythonRes] = await Promise.allSettled([
+            dbCrudOperator.searchPostsByKeyword(q, searchLimit),
+            getSemanticMatches(q, searchLimit)
+        ]);
+
+        const keywordResults = mongoRes.status === 'fulfilled' ? mongoRes.value : [];
+        const semanticMatches = pythonRes.status === 'fulfilled' ? pythonRes.value : [];
+
+        // Hydration Logic: Fetch full docs for semantic matches not in lexical results
+        const lexicalUuids = new Set(keywordResults.map(p => p.uuid));
+        const missingUuids = semanticMatches
+            .filter(p => !lexicalUuids.has(p.uuid))
+            .map(p => p.uuid);
+
+        let hydratedDocs = [];
+        if (missingUuids.length > 0) {
+            hydratedDocs = await Post.find({ uuid: { $in: missingUuids } }).lean();
+        }
+
+        // Merge and Rank
+        // Note: hydratedDocs needs to be combined with semanticMatches scores in mergeResults
+        const hybridResults = mergeResults(keywordResults, hydratedDocs);
+
+        return res.status(200).json({
+            query: q,
+            mode,
+            count: hybridResults.length,
+            results: hybridResults.slice(0, searchLimit)
+        });
+
+    } catch (error) {
+        console.error("Search Route Error:", error);
+        return res.status(500).json({ message: "Internal search error" });
     }
-
-    // --- Hybrid Mode (Default) ----
-    // Parallel Execution: If one fails, the other still succeeds
-    const [mongoPromise, pythonPromise] = await Promise.allSettled([
-      dbCrudOperator.searchPostsByKeyword(q, searchLimit),
-      getSemanticMatches(q, searchLimit)
-    ]);
-
-    const keywordResults = mongoPromise.status === 'fulfilled' ? mongoPromise.value : [];
-    const semanticResults = pythonPromise.status === 'fulfilled' ? pythonPromise.value : [];  
-    
-    // 2. Identify missing data
-    // Semantic matches only have {uuid, score}. We need full objects.
-    const lexicalIds = new Set(keywordResults.map(p => p.uuid));
-    const missingIds = semanticResults.filter(p => !lexicalIds.has(p.uuid)).map(p => p.uuid);
-    
-    // 3. Hydrate missing objects from Mongo
-    let hydratedSemanticDocs = [];
-    if (missingIds.length > 0) {
-      hydratedSemanticDocs = await Post.find({ uuid: { $in: missingIds } }).lean();
-    }
-
-    const hybridResults = mergeResults(keywordResults, hydratedSemanticDocs);
-
-    return res.status(200).json({
-      query: q,
-      mode,
-      count: hybridResults.length,
-      results: hybridResults.slice(0, searchLimit)
-    });
-
-    // Initial Implementation: Fetching from Mongo
-    // const keywordResults = await dbCrudOperator.searchPostsByKeyword(q, searchLimit);
-    // return res.status(200).json({
-    //   query: q,
-    //   count: keywordResults.length,
-    //   results: keywordResults
-    // });
-  } catch (error) {
-    console.error("Search Route Error:", error);
-    return res.status(500).json({ message: "Internal search error" });
-  }
 });
 
 module.exports = router;

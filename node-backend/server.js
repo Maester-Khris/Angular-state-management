@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const database = require("./database/connection");
-const { signup, login } = require("./auth/authService");
+// const { signup, login } = require("./auth/authService");
 
 const homeRouter = require("./routing/home");
 const activityRouter = require("./routing/activity");
@@ -11,7 +11,6 @@ const profileRouter = require("./routing/profile");
 const authRouter = require("./routing/auth");
 
 app.use(express.json());
-
 let server;
 const PORT = process.env.PORT || 3000;
 
