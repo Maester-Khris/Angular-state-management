@@ -11,6 +11,8 @@ router.use(authenticateJWT);
 router.get("/", async (req, res) => {
     return res.status(200).json({ message: "welcome to your dashboard" });
 });
+
+
 router.get("/logout", async (req, res) => {
     try {
         const wasRevoked = await revokateToken(req.token);
@@ -31,6 +33,42 @@ router.get("/logout", async (req, res) => {
         return res.status(500).json({ message: "Logout process failed." });
     }
 });
+
+
+// routes/profile.js
+
+router.get("/me/full-profile", async (req, res) => {
+  const userId = req.userId;
+  const start = Date.now();
+
+  const results = await Promise.allSettled([
+    dbCrudOperator.getUserProfile(userId),
+    analyticsService.getStats(userId),
+    dbCrudOperator.getUserDrafts(userId),
+    dbCrudOperator.getUserFavorites(userId)
+  ]);
+
+  // Extract values, falling back to defaults if rejected
+  const profile = results[0].status === 'fulfilled' ? results[0].value : {};
+  const stats = results[1].status === 'fulfilled' ? results[1].value : { totalPosts: 0 };
+  const drafts = results[2].status === 'fulfilled' ? results[2].value : [];
+  const favorites = results[3].status === 'fulfilled' ? results[3].value : [];
+
+  res.status(200).json({
+    metadata: {
+      latency: `${Date.now() - start}ms`,
+      partialFailure: results.some(r => r.status === 'rejected'),
+      serverTime: new Date()
+    },
+    data: {
+      profile,
+      stats,
+      drafts,
+      favorites
+    }
+  });
+});
+
 
 router.get("/me/overview",async(req, res) => {
     try {
@@ -55,8 +93,6 @@ router.get("/me/overview",async(req, res) => {
                 coAuthored: stats?.totalCoAuthored || 0,
                 reach: stats?.totalReach || 0
             }
-            // "myfavs", "contribution", and "account_activity" are REMOVED.
-            // The client will query /me/favs, /me/contribution, etc., separately.
         });
     } catch (error) {
         res.status(500).json({ message: "Failed to load profile", error: error.message });
@@ -69,14 +105,7 @@ router.get("/me/favorites",  async (req, res) => {
         const limit = parseInt(req.query.limit) || 4; // Default to 4 for the profile grid
 
         // 1. Query the Favorite collection and "Hydrate" the post data
-        const favoriteDocs = await Favorite.find({ user: userId })
-            .sort({ createdAt: -1 })
-            .limit(limit)
-            .populate({
-                path: 'post',
-                select: 'title description uuid lastEditedAt authorName' // Only pull what the UI needs
-            })
-            .lean();
+        const favoriteDocs = await dbCrudOperator.getUserFavorites(userId);
 
         // 2. Clean the output: Map to return an array of post objects directly
         const posts = favoriteDocs

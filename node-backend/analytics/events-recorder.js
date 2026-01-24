@@ -59,7 +59,12 @@ const recordContributionEvent = async (postId, userId, eventType) =>{
 }
 
 const getStats = async (userId) => {
-    return await UserStatsSummary.findOne({ userId }).lean();
+   try {
+    const stats = await UserStatsSummary.findOne({ userId }).lean();
+    return stats || { totalPosts: 0, totalCoAuthored: 0, totalReach: 0 };
+  } catch (e) {
+    return { totalPosts: 0, totalCoAuthored: 0, totalReach: 0 };
+  }
 };
 
 module.exports = { recordPostEvent, recordContributionEvent, getStats };

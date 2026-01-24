@@ -1,6 +1,6 @@
 ### Global Variables
 @baseUrl = http://localhost:3000
-@password = Password123!
+@password = password123
 # Note: Use the UUID from a previous signup response
 @editorUuid = b848f9cc-720e-4e7f-b43d-d25d1ddb4f93
 
@@ -21,7 +21,7 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "jughead@riverdale.com",
+  "email": "alex@example.com",
   "password": "{{password}}"
 }
 
@@ -48,20 +48,28 @@ Content-Type: application/json
 
 ### =============== PROFILE & PROGRESSIVE LOADING ========================
 
+GET {{baseUrl}}/profile/
+Authorization: Bearer {{authToken}}
+
 ### 11. GET PROFILE OVERVIEW (Identity + Cached Stats)
 # Used for the top glassmorphism section
 # @name getOverview
-GET {{baseUrl}}/me/overview
+GET {{baseUrl}}/profile/me/overview
+Authorization: Bearer {{authToken}}
+
+###
+# @name profileOrchestrator
+GET {{baseUrl}}/profile/me/full-profile
 Authorization: Bearer {{authToken}}
 
 ### 12. GET SAVED INSIGHTS (Favorites)
 # Used for the "My Favs" section
-GET {{baseUrl}}/me/favorites?limit=4
+GET {{baseUrl}}/profile/me/favorites?limit=4
 Authorization: Bearer {{authToken}}
 
 ### 13. GET CONTRIBUTION GRID (Heatmap)
 # Used for the GitHub-style activity grid
-GET {{baseUrl}}/me/contribution-grid
+GET {{baseUrl}}/profile/me/contribution-grid
 Authorization: Bearer {{authToken}}
 
 ### =============== ANALYTICS & EVENTS ========================

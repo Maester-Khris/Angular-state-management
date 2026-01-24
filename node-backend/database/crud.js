@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Post = require('./models/post');
 const User = require("./models/user");
+const Favorite = require("./models/favorites");
 const TokenBlacklist = require("./models/blacklist");
 
 const dbCrudOperator = {
@@ -31,7 +32,48 @@ const dbCrudOperator = {
   },
 
   async getUserProfile(userId) {
-    return await User.findById(userId).select('name useruuid createdAt bio avatarUrl').lean();
+   try {
+     const user = await User.findById(userId).select('name useruuid createdAt bio avatarUrl').lean();
+     return user || {};
+   } catch (error) {
+    return {};
+   }
+  },
+
+  async getUserDrafts(userId, limit = 10) {
+    try {
+      return await Post.find({
+        $or: [
+          { author: userId },
+          { editors: userId } // Expanded scope for co-editing
+        ],
+        isDraft: true
+      })
+      .sort({ lastEditedAt: -1 })
+      .limit(limit)
+      .lean() || [];
+    } catch (e) {
+      return [];
+    }
+  },
+
+  async getUserFavorites(userId){
+   try {
+     const docs = await Favorite.find({ user: userId })
+       .sort({ createdAt: -1 })
+       .limit(limit)
+       .populate({
+           path: 'post',
+           select: 'title description uuid lastEditedAt authorName' // Only pull what the UI needs
+       })
+       .lean();
+ 
+       return (docs || [])
+       .filter(f => f.post)
+       .map(f => ({ ...f.post, savedAt: f.createdAt }));
+   } catch (error) {
+    return [];
+   }
   },
   
   async createUser(userData) {
@@ -74,6 +116,7 @@ const dbCrudOperator = {
       }
     };
   },
+
 
   async searchPostsByKeyword (term, limit = 10){
     try {

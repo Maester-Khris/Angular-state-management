@@ -18,6 +18,7 @@ const PostSchema = new mongoose.Schema({
   images: [{ type: String }], // Array of URLs
   hashtags: [{ type: String, lowercase: true }],
   isPublic: { type: Boolean, default: false }, 
+  isDraft: { type: Boolean, default: false }, 
   lastEditedAt: { type: Date, default: Date.now },
   views: { type: Number, default: 0, index: true },
 }, {
@@ -28,6 +29,8 @@ const PostSchema = new mongoose.Schema({
 // Composite Index for feed performance (Title + Creation Date)
 PostSchema.index({ title: 'text', description: 'text' });
 PostSchema.index({ authorid: 1, createdAt: -1 });
+PostSchema.index({ author: 1, isDraft: 1 });
+PostSchema.index({ editors: 1, isDraft: 1 });
 
 // Pre-save Method: Update lastEditedAt automatically
 PostSchema.pre('save', function(){

@@ -40,6 +40,7 @@ router.get('/me/posts', async (req, res) => {
   }
 });
 
+
 // 2. CREATE Post
 router.post('/posts', async (req, res) => {
   try {
@@ -78,6 +79,7 @@ router.post('/posts', async (req, res) => {
   }
 });
 
+
 // 3. UPDATE Post
 router.put('/posts/:postuuid', async (req, res) => {
   try {
@@ -92,6 +94,7 @@ router.put('/posts/:postuuid', async (req, res) => {
     res.status(500).json({ message: "Update failed" });
   }
 });
+
 
 router.post('/posts/:uuid/editors', async (req, res) => {
   try {
