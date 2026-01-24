@@ -1,0 +1,5 @@
+pymongo[srv]
+qdrant-client
+fastembed
+python-dotenv
+bcrypt

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-class SearchService:
+class EmbeddingService:
     def __init__(self):
         # Initialize the Qdrant client cloud
         self.client = QdrantClient(
@@ -57,7 +57,7 @@ class SearchService:
                 PointStruct(
                     id=post_uuid, 
                     vector=vector,
-                    payload={"postuuid": post_uuid}    
+                    payload={"uuid": post_uuid}    
                 )
             ],
         )

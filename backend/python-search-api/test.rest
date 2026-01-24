@@ -29,6 +29,6 @@ POST {{baseUrl}}/search HTTP/1.1
 Content-Type: {{contentType}}
 
 {
-    "query": "Looking for Angular and Node jobs",
+    "query": "What is rest",
     "limit": 5
 }

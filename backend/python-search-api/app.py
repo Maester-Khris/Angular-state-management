@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from search_service import SearchService
+from embedding_service import EmbeddingService
 import logging
 
 # configure logging
@@ -7,7 +7,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-search_svc = SearchService() # Initialize the model once on startup
+search_svc = EmbeddingService() # Initialize the model once on startup
 
 @app.route('/health', methods=['GET'])
 def health_check():
