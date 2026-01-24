@@ -1,8 +1,43 @@
 const router = require('express').Router();
 const dbCrudOperator = require('../database/crud');
-const { getSemanticMatches } = require('../services/remotesearch');
+const MongoConnection = require('../database/connection');
+const { getSemanticMatches, checkPythonStatus } = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
 const Post = require('../database/models/post');
+
+router.get("/health", async (req, res) => {
+    const start = Date.now();
+    
+    // Map Mongoose readyState numbers to readable strings
+    const dbStates = {
+        0: "disconnected",
+        1: "connected",
+        2: "connecting",
+        3: "disconnecting"
+    };
+
+    const pythonStatus = await checkPythonStatus();
+    const dbStatus = dbStates[MongoConnection.getDbStatus()] || "unknown";
+    const isSystemHealthy = (pythonStatus === "connected" && dbStatus === "connected");
+
+    res.status(isSystemHealthy ? 200 : 503).json({
+        status: isSystemHealthy ? "UP" : "DEGRADED",
+        timestamp: new Date(),
+        latency: `${Date.now() - start}ms`,
+        services: {
+            database: {
+                name: "MongoDB Atlas",
+                status: dbStatus
+            },
+            semantic_engine: {
+                name: "Python Flask / Qdrant",
+                status: pythonStatus,
+                endpoint: "http://localhost:5000"
+            }
+        }
+    });
+});
+
 
 router.get('/api/feed', async (req, res) => {
   try {

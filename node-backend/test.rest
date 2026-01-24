@@ -72,6 +72,10 @@ Authorization: Bearer {{authToken}}
 ### =============== FEED & LOGOUT ========================
 
 ### 7. GET INITIAL FEED
+# @name Health check
+GET {{baseUrl}}/health
+
+### 7. GET INITIAL FEED
 # @name initialFeed
 GET {{baseUrl}}/api/feed?limit=5
 

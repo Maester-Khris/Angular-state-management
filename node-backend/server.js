@@ -19,7 +19,12 @@ app.use("/", homeRouter);
 app.use("/auth", authRouter);
 app.use("/profile", profileRouter);
 app.use("/", activityRouter);
-
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Resource not found",
+    path: req.originalUrl
+  });
+});
 
 const startServer = async () => {
   try {
