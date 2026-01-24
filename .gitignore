@@ -23,21 +23,30 @@ __pycache__/
 *.joblib
 *.pkl
 
+
 # --- Node / Angular ---
 node_modules/
-/dist
-/tmp
-/out-tsc
-/bazel-out
-npm-debug.log
-yarn-error.log
-/.angular/cache
+# Angular build outputs
+dist/
+dist/**
+out-tsc/
+coverage/
+tmp/
+bazel-out/
+# Angular cache
+.angular/cache/
+# Logs
+npm-debug.log*
+yarn-error.log*
+# Optional (Vercel local builds)
+.vercel/
+# Misc
 .sass-cache/
-/connect.lock
-/coverage
-/typings
+connect.lock
+typings/
 __screenshots__/
 .history/
+
 
 # --- IDEs and Editors ---
 .idea/
