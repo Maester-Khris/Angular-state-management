@@ -1,0 +1,74 @@
+const usersBase = [
+  { name: "Alex River", email: "alex@example.com", bio: "Full-stack dev and coffee enthusiast." },
+  { name: "Sam Smith", email: "sam@example.com", bio: "Digital nomad traveling the world." },
+  { name: "Jordan Lee", email: "jordan@example.com", bio: "UI/UX Designer @ TechCorp." },
+  { name: "Casey Jones", email: "casey@example.com", bio: "Exploring the intersection of AI and Art." },
+  { name: "Morgan Free", email: "morgan@example.com", bio: "Blogger, Runner, and Father." },
+  { name: "Taylor Swiftly", email: "taylor@example.com", bio: "I write fast code and slow poetry." },
+  { name: "Riley Reed", email: "riley@example.com", bio: "Building the future of decentralized finance." },
+  { name: "Quinn Fabray", email: "quinn@example.com", bio: "Yoga instructor and mindfulness coach." },
+  { name: "Jamie Oliver", email: "jamie@example.com", bio: "Home cook sharing simple recipes." },
+  { name: "Skyler White", email: "skyler@example.com", bio: "Accountant by day, gamer by night." }
+];
+
+const postTemplates = [
+  // Technology & Coding (1-12)
+  { title: "The Future of React", description: "Exploring the new concurrent rendering features and how they impact performance." },
+  { title: "Mastering TypeScript", description: "Why strict typing is the best thing that happened to my JavaScript workflow." },
+  { title: "Node.js Performance Tips", description: "How to optimize your event loop for high-traffic applications." },
+  { title: "Docker for Beginners", description: "A simple guide to containerizing your first MERN stack application." },
+  { title: "The Rise of AI Agents", description: "Moving beyond chatbots to autonomous agents that solve complex tasks." },
+  { title: "Clean Code Principles", description: "Writing code that your future self won't hate you for." },
+  { title: "CSS Grid vs Flexbox", description: "A definitive guide on when to use which layout system." },
+  { title: "API Design Patterns", description: "Best practices for building scalable and maintainable REST APIs." },
+  { title: "The State of Web3", description: "Separating the hype from the actual utility of blockchain tech." },
+  { title: "Mobile First Design", description: "Strategies for ensuring your web apps look great on every device." },
+  { title: "Cybersecurity Basics", description: "Essential steps every developer should take to secure their data." },
+  { title: "Cloud Native Apps", description: "Leveraging AWS and Azure for seamless scaling." },
+
+  // Lifestyle & Productivity (13-25)
+  { title: "The Morning Routine", description: "How I reclaimed my first two hours of the day for deep work." },
+  { title: "Minimalism in Tech", description: "Reducing the number of tools I use to increase my focus." },
+  { title: "Remote Work Survival", description: "Tips for staying sane and productive while working from home." },
+  { title: "Digital Detox Guide", description: "Why I spent a weekend without a screen and what I learned." },
+  { title: "The Power of Habit", description: "Small changes that lead to massive results over time." },
+  { title: "Mental Health in Dev", description: "Identifying burnout before it happens and how to recover." },
+  { title: "Continuous Learning", description: "How to stay relevant in an industry that changes every six months." },
+  { title: "Public Speaking for Introverts", description: "My journey from being terrified of stages to giving tech talks." },
+  { title: "Financial Freedom", description: "Basics of investing for software engineers and tech workers." },
+  { title: "The Art of Saying No", description: "Protecting your time by declining projects that don't align." },
+  { title: "Workspace Ergonomics", description: "Setting up your desk to avoid back pain and fatigue." },
+  { title: "Book Recommendations 2024", description: "The top 5 books that changed my perspective this year." },
+  { title: "Journaling for Clarity", description: "How writing daily helps me solve complex engineering problems." },
+
+  // Travel & Food (26-38)
+  { title: "Digital Nomad in Bali", description: "The best cafes with reliable Wi-Fi and great community vibes." },
+  { title: "Tokyo Food Tour", description: "Searching for the best ramen hidden in the back alleys of Shibuya." },
+  { title: "Hiking the Alps", description: "A breathtaking journey through the peaks of Switzerland." },
+  { title: "The Perfect Espresso", description: "A deep dive into grind size, pressure, and bean sourcing." },
+  { title: "Lisbon Startup Scene", description: "Why Portugal is becoming the new hub for European tech." },
+  { title: "Slow Travel Benefits", description: "Why staying in one place for a month is better than a week." },
+  { title: "Cooking for One", description: "Quick and healthy meals for busy developers." },
+  { title: "Hidden Gems in Rome", description: "Going beyond the Colosseum to find the soul of the city." },
+  { title: "Backpacking Essentials", description: "What I pack for a six-month trip around Southeast Asia." },
+  { title: "Photography for Travelers", description: "Capturing the essence of a place without fancy equipment." },
+  { title: "Street Food Safety", description: "How to enjoy local delicacies without getting sick." },
+  { title: "Language Learning Apps", description: "Ranking the best tools to learn a new language on the go." },
+  { title: "Van Life Reality", description: "The pros and cons of living and working from a converted van." },
+
+  // Miscellaneous & Creative (39-50)
+  { title: "Mechanical Keyboards", description: "Why I spent $300 on a keyboard and why I don't regret it." },
+  { title: "Building a Side Project", description: "From initial idea to the first 100 paying customers." },
+  { title: "The Ethics of AI", description: "Discussing the responsibility of creators in the age of automation." },
+  { title: "Podcasting Setup", description: "The gear and software I use to record high-quality audio." },
+  { title: "Urban Gardening", description: "Growing your own vegetables on a small apartment balcony." },
+  { title: "Chess Strategies", description: "How the game of kings improved my logical thinking." },
+  { title: "Modern Board Games", description: "Moving beyond Monopoly into the world of strategic gaming." },
+  { title: "DIY Home Automation", description: "Using Raspberry Pi to control everything in my house." },
+  { title: "The Future of Education", description: "Will traditional degrees still matter in ten years?" },
+  { title: "Creative Writing Tips", description: "How to overcome writer's block and find your voice." },
+  { title: "Learning to Paint", description: "Why picking up a brush is the perfect break from the screen." },
+  { title: "Sustainable Living", description: "Small steps to reduce your carbon footprint every day." }
+];
+
+module.exports = { usersBase, postTemplates };

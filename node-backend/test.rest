@@ -1,0 +1,117 @@
+### Global Variables
+@baseUrl = http://localhost:3000
+@name = Jughead Jones
+@email = jughead@riverdale.com
+@password = Password123!
+
+### 1. SIGNUP
+# @name signup
+POST {{baseUrl}}/auth/signup
+Content-Type: application/json
+
+{
+    "name": "{{name}}",
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
+
+### 2. LOGIN
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### CAPTURE ACCESS TOKEN
+@authToken = {{login.response.body.accessToken}}
+
+### =============== POST CRUD OPERATIONS ========================
+
+### 3. CREATE A NEW POST
+# @name createPost
+POST {{baseUrl}}/posts
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Burger Philosophy 101",
+  "description": "Why the hat stays on and the burger stays in.",
+  "isPublic": true,
+  "hashtags": ["riverdale", "burgers"]
+}
+
+### CAPTURE POST UUID FOR FURTHER ACTIONS
+@postUuid = {{createPost.response.body.uuid}}
+
+### 4. UPDATE THE POST (Ownership check test)
+# @name updatePost
+PUT {{baseUrl}}/posts/{{postUuid}}
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Burger Philosophy 102 (Revised)",
+  "description": "The hat is non-negotiable.",
+  "isPublic": false
+}
+
+### 5. GET MY ACTIVITY (Verify Update)
+# @name myActivity
+GET {{baseUrl}}/me/posts?limit=5
+Authorization: Bearer {{authToken}}
+
+### 6. DELETE THE POST
+# @name deletePost
+DELETE {{baseUrl}}/posts/{{postUuid}}
+Authorization: Bearer {{authToken}}
+
+
+### =============== FEED & LOGOUT ========================
+
+### 7. GET INITIAL FEED
+# @name initialFeed
+GET {{baseUrl}}/api/feed?limit=5
+
+### CAPTURE CURSOR
+@nextCursor = {{initialFeed.response.body.pagination.nextCursor}} 
+
+### 8. GET NEXT BATCH
+GET {{baseUrl}}/api/feed?cursor={{nextCursor}}&limit=5
+
+
+# ==================== SEARCH: Hybrid  ================
+### 8. MERGED SEARCH RESULT (Qdrant + MongoDB FTSearch)
+# @name HybridSearch
+GET {{baseUrl}}/api/search?q=web&limit=5
+Content-Type: application/json
+
+# ==================== SEARCH: Lexical ================
+### 8. KEYWORD SEARCH (MongoDB Only)
+# @name LexicalSearch
+GET {{baseUrl}}/api/search?q=web&limit=5&mode=lexical
+Content-Type: application/json
+
+
+### 9. SEMANTIC SEARCH (Python/Qdrant Only)
+# Note: This hits the Python service directly for comparison
+POST http://localhost:5000/search
+Content-Type: application/json
+
+{
+  "query": "performance optimization in javascript",
+  "limit": 5
+}
+
+### 10. HYBRID SEARCH (Upcoming Integration)
+# This will be the endpoint where Node.js orchestrates both
+GET {{baseUrl}}/api/search/hybrid?q=Angular%20developer&limit=5
+Content-Type: application/json
+
+
+### 9. LOGOUT
+# @name logout
+GET {{baseUrl}}/profile/logout
+Authorization: Bearer {{authToken}}
