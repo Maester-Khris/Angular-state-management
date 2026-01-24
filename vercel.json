@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/ng-front/dist/project-name/index.html"
+      "destination": "./browser/index.html"
     }
   ]
 }
