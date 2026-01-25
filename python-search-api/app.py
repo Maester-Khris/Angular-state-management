@@ -4,17 +4,17 @@ from flask_cors import CORS
 from embedding_service import EmbeddingService
 import logging
 
+
+# --- CORS Configuration ---
+# Read the allowed origin from environment variables
+allowed_origin = os.getenv("ALLOWED_ORIGIN", "http://localhost:3000")
+INTERNAL_API_KEY = os.getenv("SHARED_SECURITY_KEY")
+
 # configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-search_svc = EmbeddingService() # Initialize the model once on startup
-
-# --- CORS Configuration ---
-# Read the allowed origin from environment variables
-allowed_origin = os.getenv("ALLOWED_ORIGIN", "http://localhost:3000")
-
 CORS(app, resources={
     r"/*": {
         "origins": [allowed_origin],
@@ -23,6 +23,31 @@ CORS(app, resources={
     }
 })
 
+search_svc = EmbeddingService() # Initialize the model once on startup
+
+# --- Middleware ---
+def require_security_key(f):
+    """
+    Middleware decorator to verify the internal API key.
+    """
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # 1. Extract key from header
+        provided_key = request.headers.get('X-Internal-Key')
+        
+        # 2. Compare with our environment variable
+        # Note: We use 'is None' check to prevent access if the env var isn't set
+        if not INTERNAL_API_KEY or provided_key != INTERNAL_API_KEY:
+            return jsonify({
+                "error": "Unauthorized",
+                "message": "Invalid or missing Internal API Key."
+            }), 401
+            
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+# --- Routes ---
 @app.route('/', methods=['GET'])
 def index():
     """
@@ -31,9 +56,10 @@ def index():
     """
     return jsonify({
         "message": "PostAir Semantic Search Engine is Active",
-        "documentation": "Endpoints: /health, /api/search, /api/index",
+        "documentation": "Endpoints: /health, /search, /embed",
         "status": "online"
     }), 200
+
 
 @app.route('/health', methods=['GET'])
 def health_check():
@@ -46,6 +72,7 @@ def health_check():
 
 
 @app.route('/embed', methods=['POST'])
+@require_security_key
 def embed_post():
     """
     Receive a post data logs its and embeds it.
@@ -71,6 +98,7 @@ def embed_post():
 
    
 @app.route('/search', methods=['POST'])
+@require_security_key
 def search():
     """
     Search for posts semantically.
