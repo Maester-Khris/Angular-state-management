@@ -1,4 +1,6 @@
+import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from embedding_service import EmbeddingService
 import logging
 
@@ -8,6 +10,18 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 search_svc = EmbeddingService() # Initialize the model once on startup
+
+# --- CORS Configuration ---
+# Read the allowed origin from environment variables
+allowed_origin = os.getenv("ALLOWED_ORIGIN", "http://localhost:3000")
+
+CORS(app, resources={
+    r"/*": {
+        "origins": [allowed_origin],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }
+})
 
 @app.route('/health', methods=['GET'])
 def health_check():
