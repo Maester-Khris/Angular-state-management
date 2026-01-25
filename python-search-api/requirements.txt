@@ -4,3 +4,4 @@ requests
 qdrant-client
 gunicorn
 fastembed
+python-dotenv
