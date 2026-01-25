@@ -23,6 +23,18 @@ CORS(app, resources={
     }
 })
 
+@app.route('/', methods=['GET'])
+def index():
+    """
+    Root endpoint for the Search Engine.
+    Used for basic connectivity testing.
+    """
+    return jsonify({
+        "message": "PostAir Semantic Search Engine is Active",
+        "documentation": "Endpoints: /health, /api/search, /api/index",
+        "status": "online"
+    }), 200
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Return the server status."""
