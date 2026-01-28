@@ -54,7 +54,7 @@
                 placeholder="Briefly describe your expertise..."
                 [class.is-invalid]="f['bio'].touched && f['bio'].errors"></textarea>
       <div class="d-flex justify-content-end">
-        <small class="text-muted">{{ f['bio'].value?.length || 0 }}/250</small>
+        <small class="text-muted">{{ f['bio'].value.length || 0 }}/250</small>
       </div>
     </div>
   </div>
