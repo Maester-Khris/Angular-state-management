@@ -32,9 +32,20 @@ POST {{baseUrl}}/auth/signup
 Content-Type: application/json
 
 {
-    "name": "Jughead Jones",
-    "email": "jughead@riverdale.com",
-    "password": "Password123!"
+  "name": "Jughead Jones",
+  "email": "formationnikit@gmail.com",
+  "password": "Password123!"
+}
+
+### -------------------------------------------------------------------------
+
+# @name OTPverif
+POST {{baseUrl}}/auth/verify-otp
+Content-Type: application/json
+
+{
+  "otp": "272086",
+  "email": "formationnikit@gmail.com"
 }
 
 ### -------------------------------------------------------------------------

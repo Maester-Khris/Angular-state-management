@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RemoteApi {
-  private baseUrl = 'http://localhost:3000';
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +25,8 @@ export class RemoteApi {
   createPost(data: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/posts`, data);
   }
+
+ 
 
   // Update post
   updatePost(id: string, data: any): Observable<any> {

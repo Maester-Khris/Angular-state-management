@@ -1,9 +1,49 @@
 const router = require('express').Router();
+const multer = require('multer');
+const { uploadImage } = require('../services/cloudinary.service');
 const dbCrudOperator = require('../database/crud');
 const { authenticateJWT } = require("../middleware/auth");
 
+// Configure Multer for memory storage
+const storage = multer.memoryStorage();
+const upload = multer({ 
+  storage, 
+  limits: { fileSize: 5 * 1024 * 1024 } // Limit: 5MB
+});
+
+
 // All activity routes require authentication
 router.use(authenticateJWT);
+
+
+// ==========================================
+// IMAGE UPLOAD (NEW)
+// ==========================================
+
+/**
+ * Upload an image to Cloudinary and return the URL.
+ * Angular usage: FormData with 'file' field.
+ */
+router.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No image file provided" });
+    }
+
+    // Call our Cloudinary service
+    // We pass the buffer directly from Multer
+    const imageUrl = await uploadImage(req.file.buffer, 'user_content');
+
+    return res.status(200).json({ 
+      message: "Upload successful", 
+      url: imageUrl 
+    });
+  } catch (error) {
+    console.error("Cloudinary Upload Error:", error);
+    return res.status(500).json({ message: "Failed to upload image to cloud" });
+  }
+});
+
 
 // ==========================================
 // 1. COLLABORATOR DISCOVERY

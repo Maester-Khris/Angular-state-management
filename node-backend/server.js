@@ -3,14 +3,19 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const database = require("./database/connection");
-// const { signup, login } = require("./auth/authService");
+const logger = require("morgan");
+const cors = require("cors");
+const { corsConfig, loggingFormat } = require('./configurations/security')
 
 const homeRouter = require("./routing/home");
 const activityRouter = require("./routing/activity");
 const profileRouter = require("./routing/profile");
 const authRouter = require("./routing/auth");
 
+app.use(cors(corsConfig));
 app.use(express.json());
+app.use(logger(loggingFormat));
+
 let server;
 const PORT = process.env.PORT || 3000;
 

@@ -6,6 +6,10 @@ const UserSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   email: { type: String, required: true, unique: true, index: true, lowercase: true, trim: true },
   password: { type: String, required: true, select: false }, // Hidden by default
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
   avatarUrl: { type: String, default: '' },
   bio: { type: String, maxlength: 250, default: '' },
   status: { type: String, enum: ['active', 'away', 'offline'], default: 'active' },
@@ -28,7 +32,7 @@ UserSchema.set('toJSON', {
     return ret;
   }
 });
-UserSchema.methods.toProfileJSON = function() {
+UserSchema.methods.toProfileJSON = function () {
   return {
     uuid: this.useruuid,
     name: this.name,

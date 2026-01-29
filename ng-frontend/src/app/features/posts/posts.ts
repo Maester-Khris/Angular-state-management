@@ -10,6 +10,7 @@ import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner'
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { MockApi } from '../../core/services/mock-api';
 import { MediaService } from '../../core/services/media-service';
+import { NotificationService } from '../../core/services/notification-service';
 
 
 
@@ -25,6 +26,7 @@ export class Posts implements OnInit, HasUnsavedChanges {
   private readonly storeService = inject(PostStore);
   private readonly authService = inject(AuthService); 
   private readonly mediaService = inject(MediaService); 
+  private notifService = inject(NotificationService); 
   private readonly mockApi = inject(MockApi);
 
   //elastic layout
@@ -107,7 +109,6 @@ export class Posts implements OnInit, HasUnsavedChanges {
   }
 
   // ============== Form ui image upload and preview ================
-
   onFileSelected(event:any){
     const file = event.target.files[0];
     if (!file) return;
@@ -115,6 +116,21 @@ export class Posts implements OnInit, HasUnsavedChanges {
     this.imagePreview = URL.createObjectURL(file);
     this.uploadToCloudinary(file);
   } 
+  uploadToCloudinary(file:File){
+    this.isUploading = true;
+    this.mediaService.uploadImage(file).subscribe({
+     next: (res) => {
+        this.isUploading = false;
+        this.cloudinaryUrl = res.url; // Save the permanent URL for the final form submit
+        this.notifService.show('Image uploaded and optimized', 'success');
+      },
+      error: (err) => {
+        this.isUploading = false;
+        this.removeImage(); // Clean up if upload fails
+        this.notifService.show('Cloud upload failed. Please try again.', 'error');
+      }
+    });
+  }
   removeImage(){
     this.imagePreview = null;
     this.cloudinaryUrl = null;
@@ -122,21 +138,6 @@ export class Posts implements OnInit, HasUnsavedChanges {
     // Reset the file input so the same image can be re-selected if needed
     const fileInput = document.querySelector('.file-input') as HTMLInputElement;
     if (fileInput) fileInput.value = '';
-  }
-  uploadToCloudinary(file:File){
-    this.isUploading = true;
-    this.mediaService.uploadImage(file).subscribe({
-      next: (res) => {
-        this.cloudinaryUrl = res.secure_url;
-        this.isUploading = false; 
-        console.log("uploaded image url",this.cloudinaryUrl);
-      },
-      error: (err) => {
-        this.isUploading = false; 
-        this.removeImage();
-        alert("Error uploading image");
-      }
-    })
   }
 
 
@@ -186,3 +187,14 @@ export class Posts implements OnInit, HasUnsavedChanges {
     }
   }
 }
+
+  //  next: (res) => {
+  //       this.cloudinaryUrl = res.secure_url;
+  //       this.isUploading = false; 
+  //       console.log("uploaded image url",this.cloudinaryUrl);
+  //     },
+  //     error: (err) => {
+  //       this.isUploading = false; 
+  //       this.removeImage();
+  //       alert("Error uploading image");
+  //     }

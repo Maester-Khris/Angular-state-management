@@ -36,7 +36,7 @@ const login = async ({ email, password }) => {
 
 const signup = async ({ name, email, password }) => {
 
-  userExists = await dbCrudOperator.checkUserExistsbyEmail(email);
+  userExists = await dbCrudOperator.checkUserExistsByEmail(email);
   if (userExists) 
     return null;
   
