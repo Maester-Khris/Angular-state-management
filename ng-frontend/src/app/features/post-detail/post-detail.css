@@ -1,15 +1,3 @@
-/* .canvas-wrapper {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  overflow-y: auto;
-  padding: 2rem 1rem;
-  z-index: 1050;
-} */
-
 .content-canvas {
   width: 100%;
   max-width: 860px; /* KEY FIX */
@@ -83,6 +71,7 @@
 .bg-white-glass {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);/* 1. Prevent Double Scrollbar: Overlay handles scrolling */
+}
 .canvas-wrapper {
   padding: 4rem 1rem; /* Space top/bottom for the modal feel */
   display: flex;
@@ -156,26 +145,12 @@
 }
 
 /* 5. Custom Buttons */
-/* .btn-action-glass {
-  background: #f1f5f9;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #475569;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s;
-}
 
 .btn-action-glass:hover {
   background: #e2e8f0;
   color: #0f172a;
-} */
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
+} 
+  /* border-bottom: 1px solid rgba(0,0,0,0.05); */
 
 /* Close Button Custom */
 .btn-close-custom {

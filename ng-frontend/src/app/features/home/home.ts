@@ -32,7 +32,6 @@ export class Home implements OnInit, OnDestroy {
   private initialData = this.route.snapshot.data['initialPosts'] || [];
 
  
-
   // ui interaction
   private router = inject(Router);
   isDrawerOpen = toSignal(
@@ -42,7 +41,6 @@ export class Home implements OnInit, OnDestroy {
       startWith(this.router.url.includes('/view/'))
     )
   );
-
 
 
   /**
