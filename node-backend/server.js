@@ -2,11 +2,13 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const database = require("./database/connection");
 const logger = require("morgan");
 const cors = require("cors");
-const { corsConfig, loggingFormat } = require('./configurations/security')
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./configurations/swagger');
 
+const database = require("./database/connection");
+const { corsConfig, loggingFormat } = require('./configurations/security')
 const homeRouter = require("./routing/home");
 const activityRouter = require("./routing/activity");
 const profileRouter = require("./routing/profile");
@@ -19,10 +21,13 @@ app.use(logger(loggingFormat));
 let server;
 const PORT = process.env.PORT || 3000;
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use("/", homeRouter);
 app.use("/auth", authRouter);
 app.use("/profile", profileRouter);
 app.use("/", activityRouter);
+
 app.use((req, res) => {
   res.status(404).json({
     message: "Resource not found",

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const multer = require('multer');
-const { uploadImage } = require('../services/cloudinary.service');
+const { uploadImage } = require('../services/cloudinary');
 const dbCrudOperator = require('../database/crud');
 const { authenticateJWT } = require("../middleware/auth");
 
@@ -14,7 +14,6 @@ const upload = multer({
 
 // All activity routes require authentication
 router.use(authenticateJWT);
-
 
 // ==========================================
 // IMAGE UPLOAD (NEW)
