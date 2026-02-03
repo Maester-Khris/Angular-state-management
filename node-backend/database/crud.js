@@ -3,6 +3,7 @@ const Post = require('./models/post');
 const User = require("./models/user");
 const Favorite = require("./models/favorites");
 const TokenBlacklist = require("./models/blacklist");
+const Otp = require("./models/userotp"); // added
 
 const dbCrudOperator = {
 
@@ -197,7 +198,39 @@ const dbCrudOperator = {
         { isPublic: true }
       ]
     }).lean();
-  }
+  },
+
+  // ==========================================
+  // OTP helpers (for auth flows)
+  // ==========================================
+  async createOtp({ email, otp, createdAt, expiresAt }) {
+    return await Otp.create({ email, otp, createdAt, expiresAt });
+  },
+
+  async deleteOtpById(id) {
+    return await Otp.deleteOne({ _id: id });
+  },
+
+  async findValidOtp(email, otp) {
+    const now = new Date();
+    return await Otp.findOne({ email, otp, expiresAt: { $gt: now } }).lean();
+  },
+
+  async findLatestOtpByEmail(email) {
+    return await Otp.findOne({ email }).sort({ createdAt: -1 }).lean();
+  },
+
+  async countOtpsSince(email, sinceDate) {
+    return await Otp.countDocuments({ email, createdAt: { $gte: sinceDate } });
+  },
+
+  async deleteOtpsByEmail(email) {
+    return await Otp.deleteMany({ email });
+  },
+
+  async markUserVerifiedByEmail(email) {
+    return await User.findOneAndUpdate({ email }, { isVerified: true });
+  },
 };
 
 module.exports = dbCrudOperator;

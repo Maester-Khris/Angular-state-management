@@ -1,10 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const { signup, login } = require("../auth/authService");
-const { sendOtpEmail} = require("../utils/mailer");
-const {generateOtp} = require("../utils/otpgenerator");
-const Otp = require("../database/models/userotp");
-const User = require("../database/models/user");
+const { sendOtpEmail } = require("../utils/mailer");
+const { generateOtp } = require("../utils/otpgenerator");
+const db = require("../database/crud"); // use db CRUD helpers
 
 // Configuration for battle-testing/emergency delivery
 const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES || "10", 10);
@@ -44,14 +43,14 @@ router.post("/signup", async (req, res) => {
     // Save OTP with timestamps and expiry
     const createdAt = new Date();
     const expiresAt = new Date(createdAt.getTime() + OTP_EXPIRY_MINUTES * 60 * 1000);
-    const otpRecord = await Otp.create({ email, otp: otpCode, createdAt, expiresAt });
+    const otpRecord = await db.createOtp({ email, otp: otpCode, createdAt, expiresAt });
 
     try {
       await sendWithRetries(email, otpCode);
     } catch (sendErr) {
       // Clean up OTP on persistent send failures
       console.error(`Failed to send OTP to ${email} after retries:`, sendErr.message);
-      try { await Otp.deleteOne({ _id: otpRecord._id }); } catch (e) { /* ignore cleanup errors */ }
+      try { await db.deleteOtpById(otpRecord._id); } catch (e) { /* ignore cleanup errors */ }
       return res.status(500).json({ message: "Failed to deliver verification email. Please try again later." });
     }
 
@@ -66,15 +65,14 @@ router.post('/verify-otp', async (req, res) => {
   const { email, otp } = req.body;
   try {
     // Ensure the OTP exists and has not expired
-    const now = new Date();
-    const record = await Otp.findOne({ email, otp, expiresAt: { $gt: now } });
+    const record = await db.findValidOtp(email, otp);
     if (!record) {
       return res.status(400).json({ message: "Invalid or expired OTP" });
     }
     // Mark User as Verified
-    await User.findOneAndUpdate({ email }, { isVerified: true });
+    await db.markUserVerifiedByEmail(email);
     // Delete all OTP records for this email to prevent reuse/brute-force
-    await Otp.deleteMany({ email });
+    await db.deleteOtpsByEmail(email);
 
     res.status(200).json({ message: "Email verified successfully!" });
   } catch (error) {
@@ -87,38 +85,38 @@ router.post('/resend-otp', async (req, res) => {
   const { email } = req.body;
   try {
     // Ensure user exists and is not already verified
-    const user = await User.findOne({ email });
+    const user = await db.findUserByEmail(email);
     if (!user) return res.status(404).json({ message: "User not found" });
     if (user.isVerified) return res.status(400).json({ message: "Account already verified" });
 
     const now = new Date();
 
     // 1. Prevent very frequent resends (cooldown)
-    const recent = await Otp.findOne({ email }).sort({ createdAt: -1 });
-    if (recent && recent.createdAt && (now - recent.createdAt) < RESEND_COOLDOWN_SECONDS * 1000) {
+    const recent = await db.findLatestOtpByEmail(email);
+    if (recent && recent.createdAt && (now - new Date(recent.createdAt)) < RESEND_COOLDOWN_SECONDS * 1000) {
       return res.status(429).json({ message: `Please wait ${RESEND_COOLDOWN_SECONDS} seconds before requesting another OTP.` });
     }
 
     // 2. Limit total resends per 24 hours
     const dayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-    const sendsLast24h = await Otp.countDocuments({ email, createdAt: { $gte: dayAgo } });
+    const sendsLast24h = await db.countOtpsSince(email, dayAgo);
     if (sendsLast24h >= MAX_RESENDS_PER_DAY) {
       return res.status(429).json({ message: "Too many OTP requests in the last 24 hours. Try again later." });
     }
 
     // 3. Remove previous OTPs (to avoid confusion) and create a new one with expiry
-    await Otp.deleteMany({ email });
+    await db.deleteOtpsByEmail(email);
     const newOtp = generateOtp();
     const createdAt = new Date();
     const expiresAt = new Date(createdAt.getTime() + OTP_EXPIRY_MINUTES * 60 * 1000);
-    const newRecord = await Otp.create({ email, otp: newOtp, createdAt, expiresAt });
+    const newRecord = await db.createOtp({ email, otp: newOtp, createdAt, expiresAt });
 
     // 4. Send Email with retries; clean up on persistent failure
     try {
       await sendWithRetries(email, newOtp);
     } catch (sendErr) {
       console.error(`Failed to resend OTP to ${email}:`, sendErr.message);
-      try { await Otp.deleteOne({ _id: newRecord._id }); } catch (e) { /* ignore cleanup errors */ }
+      try { await db.deleteOtpById(newRecord._id); } catch (e) { /* ignore cleanup errors */ }
       return res.status(500).json({ message: "Failed to deliver OTP email. Please try again later." });
     }
 
