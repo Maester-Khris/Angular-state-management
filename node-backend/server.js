@@ -73,6 +73,12 @@ const serverShutdown = async () => {
   }, 10000);
 };
 
-startServer();
-process.on("SIGINT", serverShutdown);
-process.on("SIGTERM", serverShutdown);
+// Only auto-start when this file is executed directly (not when required by tests)
+if (require.main === module) {
+  startServer();
+  process.on("SIGINT", serverShutdown);
+  process.on("SIGTERM", serverShutdown);
+}
+
+// Export app and lifecycle helpers so tests can control startup/shutdown
+module.exports = { app, startServer, serverShutdown };

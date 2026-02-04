@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --testTimeout=15000",
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "dotenv": "^16.0.0",
+    "mongodb-memory-server": "^8.16.1",
     "nodemon": "^3.1.11",
     "supertest": "^6.3.4",
     "vitest": "^0.34.6"

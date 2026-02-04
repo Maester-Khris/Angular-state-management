@@ -89,5 +89,8 @@ async function runSeeder() {
   }
 }
 
-runSeeder();
+// Only run when executed directly (avoid running on require/import)
+if (require.main === module) {
+  runSeeder();
+}
 // console.log(connectionURL)
