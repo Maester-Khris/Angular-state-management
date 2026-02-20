@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BehaviorSubject, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
 import { MockApi } from '../../core/services/mock-api';
@@ -22,6 +22,7 @@ import { TrackPreview } from '../../shared/directives/track-preview';
   styleUrl: './home.css',
 })
 export class Home implements OnInit, OnDestroy {
+  private document = inject(DOCUMENT);
   private currentPage = 0;
   private readonly limit = 5;
   private readonly MockApi = inject(MockApi);
@@ -31,16 +32,29 @@ export class Home implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private initialData = this.route.snapshot.data['initialPosts'] || [];
 
- 
+
   // ui interaction
   private router = inject(Router);
   isDrawerOpen = toSignal(
-     this.router.events.pipe(
-      filter((event)=> event instanceof NavigationEnd),
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
       map(() => this.router.url.includes('/view/')),
       startWith(this.router.url.includes('/view/'))
     )
   );
+
+  constructor() {
+    effect(() => {
+      const isOpen = this.isDrawerOpen();
+      if (this.document) {
+        if (isOpen) {
+          this.document.body.classList.add('overflow-hidden');
+        } else {
+          this.document.body.classList.remove('overflow-hidden');
+        }
+      }
+    });
+  }
 
 
   /**
@@ -61,10 +75,10 @@ export class Home implements OnInit, OnDestroy {
     this.MockApi.dataChanged$.pipe(startWith(undefined))
   ]).pipe(
     // whenever search or global posts change
-    switchMap(([query]) =>{
+    switchMap(([query]) => {
       this.currentPage = 0;
       return this.MockApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
-        map(posts => ({type: 'RESET' as const, query, posts})),
+        map(posts => ({ type: 'RESET' as const, query, posts })),
         startWith({ type: 'SET_LOADING' as const })
       );
     }),
@@ -73,11 +87,11 @@ export class Home implements OnInit, OnDestroy {
     // use mergewith to listen to initial resent and subsequent load more
     mergeWith(
       this.loadMore$.pipe(
-        switchMap(() =>{ 
+        switchMap(() => {
           this.currentPage++;
-          const currentQuery = this.searchQuery$.getValue() || ''; 
+          const currentQuery = this.searchQuery$.getValue() || '';
           return this.MockApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
-            map(posts => ({type: 'LOAD_NEXT', posts})),
+            map(posts => ({ type: 'LOAD_NEXT', posts })),
             startWith({ type: 'SET_LOADING' as const })
           );
         })
@@ -85,7 +99,7 @@ export class Home implements OnInit, OnDestroy {
     ),
 
     //we use scan to accumulate data on current home page state
-    scan((state, action: any) =>{
+    scan((state, action: any) => {
       switch (action.type) {
         case 'SET_LOADING':
           return { ...state, loading: true };
@@ -96,7 +110,7 @@ export class Home implements OnInit, OnDestroy {
         default:
           return state;
       }
-    },{ posts: this.initialData , query: '', loading: false, hasMore: true}),
+    }, { posts: this.initialData, query: '', loading: false, hasMore: true }),
 
     shareReplay(1)
   );
@@ -105,33 +119,36 @@ export class Home implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
   ngOnDestroy(): void {
+    if (this.document) {
+      this.document.body.classList.remove('overflow-hidden');
+    }
   }
 
-  
+
   loadMore(isLoading: boolean) {
     // Prevent concurrent loads
-    if (isLoading) return; 
+    if (isLoading) return;
     this.loadMore$.next();
   }
 
 
   // ================= Search component  ==============
-  onSearch(query:string) {
+  onSearch(query: string) {
     // const value = (event.target as HTMLInputElement).value; 
     this.searchQuery$.next(query);
   }
   scrollToCommunity() {
-  this.communityGrid.nativeElement.scrollIntoView({ 
-      behavior: 'smooth', 
-      block: 'start' 
+    this.communityGrid.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
-}
+  }
 
-  
+
   // ================= Navigation with child component  ==============
-  openDetails(title:string){
+  openDetails(title: string) {
     console.log(title);
-    this.router.navigate(['view',title], {relativeTo: this.route});
+    this.router.navigate(['view', title], { relativeTo: this.route });
   }
   closeDetails() {
     this.router.navigate(['/home']);

@@ -77,3 +77,7 @@ body {
   -webkit-text-fill-color: transparent;
   position: relative;
 }
+
+.overflow-hidden {
+  overflow: hidden !important;
+}

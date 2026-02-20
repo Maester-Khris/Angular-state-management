@@ -1,18 +1,16 @@
 @if (post(); as p) {
 <div class="canvas-wrapper">
-  <article class="content-canvas shadow-2xl">
-    
+  <article class="content-canvas">
+
     <header class="canvas-header">
       <div class="d-flex justify-content-between align-items-center w-100">
-        <button (click)="close()" class="btn-action-glass btn btn-primary rounded-pill px-4 fw-bold shadow-sm">
-          <i class="bi bi-x-lg me-1"></i>
+        <button (click)="close()" class="btn-action-glass">
+          <i class="bi bi-x-lg"></i>
           <span>Close</span>
         </button>
         <div class="d-flex gap-2">
-          <button class="btn-action-glass btn btn-primary rounded-pill px-4 fw-bold shadow-sm"><i class="bi bi-share"></i></button>
-          <button class="btn btn-primary rounded-pill px-4 fw-bold shadow-sm" 
-            [class.btn-primary]="!isSaved()"
-            [class.btn-success]="isSaved()"
+          <button class="btn-action-glass"><i class="bi bi-share"></i></button>
+          <button class="btn-action-glass" [class.btn-save-gold]="!isSaved()" [class.btn-saved-success]="isSaved()"
             (click)="onAddToBookmarks()">
             <i class="bi" [class.bi-bookmark]="!isSaved()" [class.bi-bookmark-fill]="isSaved()"></i>
             {{ isSaved() ? 'Saved' : 'Save' }}
@@ -22,34 +20,37 @@
     </header>
 
     <section class="meta-section text-center">
-      <div class="category-pill mb-3">Engineering</div>
+      <div class="category-pill">Engineering</div>
       <h1 class="canvas-title">{{ p.title }}</h1>
-      
+
       <div class="author-strip d-flex align-items-center justify-content-center">
-        <div class="avatar-mini me-2">NK</div>
-        <div class="text-start">
-          <span class="d-block fw-bold small">NkDev</span>
-          <span class="smallest text-muted">Published Jan 2026 • 5 min read</span>
+        <div class="avatar-mini">NK</div>
+        <div class="text-start author-info">
+          <span class="d-block author-name">NkDev</span>
+          <span class="meta-details">Published Jan 2026 • 5 min read</span>
         </div>
       </div>
     </section>
 
-    <figure class="canvas-hero-image mx-5 text-center">
+    <figure class="canvas-hero-image text-center">
       <div class="image-aspect-ratio">
         <img [src]="p.imageUrl" [alt]="p.title">
       </div>
-      <figcaption class="mt-2">Visualizing the future of web architecture.</figcaption>
+      <figcaption>Visualizing the future of scalable web architecture.</figcaption>
     </figure>
 
     <div class="canvas-body">
       <p class="lead-text">{{ p.description }}</p>
       <div class="content-divider"></div>
-      <p>This approach ensures that even on ultra-wide monitors, your content remains readable and centered, preventing the "large image taking the entire screen" issue you encountered.</p>
+      <p>This approach ensures that even on ultra-wide monitors, your content remains readable and centered, preventing
+        the "large image taking the entire screen" issue you encountered.</p>
+      <p>By confining the scroll to the detail container itself, we provide a focused reading environment while keeping
+        the background context perfectly preserved and blur-filtered for maximum immersion.</p>
     </div>
   </article>
 </div>
 } @else {
-  <div class="loading-full-page">
-    <app-loading-spinner label="Curating your content..."></app-loading-spinner>
-  </div>
+<div class="loading-full-page">
+  <app-loading-spinner label="Curating your content..."></app-loading-spinner>
+</div>
 }

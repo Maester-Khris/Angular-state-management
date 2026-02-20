@@ -229,7 +229,10 @@ app-post-card {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   justify-content: center;
-  overflow-y: auto;
+  align-items: center;
+  /* Center the content */
+  overflow: hidden;
+  /* Let the container handle scrolling */
   padding: 2rem 1rem;
 }
 
@@ -239,13 +242,29 @@ app-post-card {
 }
 
 .detail-container {
-  max-width: 800px;
+  max-width: 820px;
+  /* Matching the content-canvas */
   width: 100%;
+  max-height: calc(100vh - 4rem);
+  /* Limit height to viewport minus padding */
   background: white;
-  border-radius: 24px;
+  border-radius: 28px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  /* INTERNAL SCROLLBAR */
   transform: translateY(40px);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 1110;
+}
+
+.detail-container::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
 }
 
 .immersive-overlay.active .detail-container {
@@ -267,6 +286,7 @@ app-post-card {
   line-height: 1.1;
   background: linear-gradient(135deg, #1e293b 0%, #6366f1 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -382,6 +402,7 @@ app-post-card {
 .text-gradient {
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -479,12 +500,15 @@ app-post-card {
   background: linear-gradient(90deg, #6366f1, #a855f7, #6366f1);
   background-size: 200% auto;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 4s linear infinite;
 }
 
 @keyframes shine {
-  to { background-position: 200% center; }
+  to {
+    background-position: 200% center;
+  }
 }
 
 /* Glassmorphism Badge */
@@ -504,9 +528,20 @@ app-post-card {
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
 }
 
 /* Elevated Primary Button */
@@ -531,7 +566,10 @@ app-post-card {
   width: 32px;
   height: 32px;
 }
-.ms-n2 { margin-left: -10px !important; }
+
+.ms-n2 {
+  margin-left: -10px !important;
+}
 
 /* ---------------------------------------- */
 .author-avatar {
@@ -539,7 +577,7 @@ app-post-card {
   height: 32px;
   object-fit: cover;
   border: 2px solid #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .author-name {

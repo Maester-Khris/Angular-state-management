@@ -1,116 +1,123 @@
-.content-canvas {
-  width: 100%;
-  max-width: 860px; /* KEY FIX */
-  background: #fff;
-  border-radius: 1.25rem;
-  overflow: hidden;
-}
+/* Post Detail Component Styles */
 
-.canvas-hero-image {
-  margin: 0;
-}
-
-.image-aspect-ratio {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border-radius: 0.75rem;
-}
-
-.image-aspect-ratio img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.canvas-body {
-  padding: 2rem 2.5rem;
-}
-
-.meta-section {
-  padding: 2.5rem 2rem 1.5rem;
-}
-
-.canvas-header {
-  padding: 1.25rem 1.5rem;
-  position: sticky;
-  top: 0;
-  background: #fff;
-  z-index: 2;
-}
-
-.avatar-mini {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #6366f1;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-/* Typography & Layout */
-.detail-hero { max-width: 680px; }
-.detail-body { max-width: 680px; padding-bottom: 5rem; }
-
-.post-title-sm {
-  letter-spacing: -0.02em;
-}
-
-.prose p {
-  font-size: 1.15rem;
-  line-height: 1.8;
-  color: #334155; /* Slate 700 */
-  margin-bottom: 1.5rem;
-}
-
-.bg-white-glass {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);/* 1. Prevent Double Scrollbar: Overlay handles scrolling */
-}
 .canvas-wrapper {
-  padding: 4rem 1rem; /* Space top/bottom for the modal feel */
+  padding: 0;
   display: flex;
   justify-content: center;
   min-height: 100%;
 }
 
 .content-canvas {
-  background: white;
   width: 100%;
-  max-width: 820px; /* Golden width for readability */
+  max-width: 820px;
+  background: transparent;
   border-radius: 28px;
   overflow: hidden;
   position: relative;
 }
 
-/* 2. Header: Glassmorphism without 'Fixed' position bugs */
+/* Header: Sticky with Glassmorphism */
 .canvas-header {
-  padding: 1.5rem 2rem;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
 }
 
-/* 3. Image Sizing: Prevent "Huge Image" Syndrome */
+/* Metadata & Section Sizing */
+.meta-section {
+  padding: 3rem 2rem 1.5rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.category-pill {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(99, 102, 241, 0.08);
+  color: #6366f1;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.25rem;
+}
+
+.canvas-title {
+  font-size: 2.4rem;
+  margin: 0 50px;
+  /* max-width: 70%; */
+  /* Lowered size */
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #0f172a;
+  margin-bottom: 1.75rem;
+}
+
+/* Author & Metadata Strip */
+.author-strip {
+  gap: 0.85rem;
+}
+
+.avatar-mini {
+  width: 38px;
+  /* Slightly smaller */
+  height: 38px;
+  background: #6366f1;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.15);
+}
+
+.author-info {
+  line-height: 1.25;
+}
+
+.author-name {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.meta-details {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Hero Image & Legend */
 .canvas-hero-image {
-  padding: 0 2rem;
+  padding: 0 5rem;
+  /* Increased padding to lower width and breathe */
   margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .image-aspect-ratio {
   position: relative;
   width: 100%;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  max-width: 100%;
+  /* Ensures it stays centered and contained */
+  padding-top: 56.25%;
+  /* 16:9 */
   background: #f8fafc;
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
 }
 
 .image-aspect-ratio img {
@@ -119,88 +126,112 @@
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Shows full image without cropping/stretching */
+  object-fit: cover;
 }
 
-/* 4. Typography & Avatar Scale */
-.canvas-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  padding: 0 3rem;
-  line-height: 1.1;
+figcaption {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  /* Muted slate */
+  font-style: italic;
+  font-weight: 500;
+  text-align: center;
+  max-width: 80%;
 }
 
-.avatar-mini {
-  width: 36px; /* Reduced scale */
-  height: 36px;
-  background: #6366f1;
-  color: white;
-  border-radius: 50%;
-  display: flex;
+/* Body Content Styling */
+.canvas-body {
+  padding: 0 3rem 5rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.lead-text {
+  font-size: 1.15rem;
+  /* Lowered size */
+  font-weight: 600;
+  line-height: 1.5;
+  color: #334155;
+  margin-bottom: 1.25rem;
+  /* Reduced spacing */
+}
+
+.canvas-body p {
+  font-size: 1rem;
+  /* Lowered overall text size */
+  line-height: 1.7;
+  color: #475569;
+  /* Slate 600 for better readability */
+  margin-bottom: 1.25rem;
+}
+
+.content-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #f1f5f9, transparent);
+  margin: 1.5rem 0;
+  /* Reduced vertical spacing */
+}
+
+/* Buttons Styling Fix - Enhanced with colors */
+.btn-action-glass {
+  background: rgba(241, 245, 249, 0.8);
+  /* Nice soft background */
+  color: #475569 !important;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 100px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.25s ease;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: bold;
+  gap: 0.4rem;
 }
-
-/* 5. Custom Buttons */
 
 .btn-action-glass:hover {
-  background: #e2e8f0;
-  color: #0f172a;
-} 
-  /* border-bottom: 1px solid rgba(0,0,0,0.05); */
-
-/* Close Button Custom */
-.btn-close-custom {
   background: #f1f5f9;
+  color: #0f172a !important;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.btn-save-gold {
+  background: #6366f1;
+  /* Using primary brand color */
+  color: white !important;
   border: none;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
 }
 
-.btn-close-custom:hover {
-  background: #e2e8f0;
-  transform: scale(0.98);
+.btn-save-gold:hover {
+  background: #4f46e5;
+  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
 }
 
-/* Typography & Layout */
-.detail-hero { max-width: 680px; }
-.detail-body { max-width: 680px; padding-bottom: 5rem; }
-
-.post-title-sm {
-  letter-spacing: -0.02em;
-}
-
-.prose p {
-  font-size: 1.15rem;
-  line-height: 1.8;
-  color: #334155; /* Slate 700 */
-  margin-bottom: 1.5rem;
-}
-
-.bg-white-glass {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-/* Close Button Custom */
-.btn-close-custom {
-  background: #f1f5f9;
+.btn-saved-success {
+  background: #10b981;
+  color: white !important;
   border: none;
-  padding: 8px 16px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  transition: all 0.2s;
 }
 
-.btn-close-custom:hover {
-  background: #e2e8f0;
-  transform: scale(0.98);
+.loading-full-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
+
+/* Focus Reading Mode Enhancement */
+.content-canvas::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.02);
+  z-index: -1;
 }
