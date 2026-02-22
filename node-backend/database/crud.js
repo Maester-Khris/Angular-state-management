@@ -83,7 +83,14 @@ const dbCrudOperator = {
   // ==========================================
 
   async getHomeFeed(lastId = null, limit = 10) {
-    const query = lastId ? { _id: { $lt: lastId }, isPublic: true, isDraft: false } : { isPublic: true, isDraft: false };
+    const query = { 
+      isPublic: true, 
+      isDraft: { $ne: true } 
+    };
+
+    if (lastId) {
+      query._id = { $lt: lastId };
+    }
 
     const posts = await Post.find(query)
       .sort({ _id: -1 })
