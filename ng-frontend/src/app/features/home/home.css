@@ -101,39 +101,33 @@
 }
 
 app-post-card {
-  /* display: block; */
-  /* min-height: 350px; Adjust to your average card height */
-  break-inside: avoid;
-  /* If using CSS Columns Masonry */
-  margin-bottom: 1.5rem;
+  display: block;
 }
 
-/* Stable Masonry Layout */
+/* Stable Grid Layout */
 .bento-grid {
-  column-count: 1;
-  column-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  align-items: start;
 }
 
 @media (min-width: 768px) {
   .bento-grid {
-    column-count: 2;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1200px) {
   .bento-grid {
-    column-count: 4;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 .bento-item {
-  break-inside: avoid;
-  /* Essential: prevents card from splitting across columns */
-  margin-bottom: 1.5rem;
-  display: inline-block;
   width: 100%;
-
-  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Card Styling */
