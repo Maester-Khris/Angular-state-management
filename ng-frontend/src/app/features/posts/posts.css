@@ -1,5 +1,5 @@
 /* Fancy Curvy Header */
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap'); */
 
 /* Sidebar and General Dashboard Layout */
 .sidebar-card {
@@ -11,7 +11,7 @@
 .sidebar-card .nav-link {
   border-radius: 8px;
   padding: 0.75rem 1rem;
-   font-size: 0.9rem;
+  font-size: 0.9rem;
   padding: 0.6rem 0.8rem;
   font-weight: 500;
   transition: all 0.2s;
@@ -34,12 +34,12 @@
 
 /* Hover effect for post cards */
 .post-item-hover {
-    border: 1px solid transparent !important;
+  border: 1px solid transparent !important;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .post-item-hover:hover {
-    border-color: var(--postair-border) !important;
+  border-color: var(--postair-border) !important;
   background-color: #fafafa;
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
@@ -53,7 +53,8 @@
 .metadata-item {
   font-size: 0.75rem;
   font-weight: 500;
-  color: #94a3b8; /* Slate 400 */
+  color: #94a3b8;
+  /* Slate 400 */
 }
 
 .text-separator {
@@ -76,9 +77,11 @@
   background-color: var(--postair-primary);
   box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
 }
+
 /* Typography Normalization */
 .post-title-sm {
-  font-size: 0.95rem; /* Exactly between small and normal */
+  font-size: 0.95rem;
+  /* Exactly between small and normal */
   font-weight: 600;
   color: var(--postair-text-main);
   letter-spacing: -0.01em;
@@ -90,7 +93,8 @@
   color: var(--postair-text-muted);
   line-height: 1.4;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Keeps descriptions clean */
+  -webkit-line-clamp: 2;
+  /* Keeps descriptions clean */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -107,32 +111,35 @@
 
 /* Uniform Square-ish Icon Buttons */
 .actions-btn {
-  width: 30px; /* Slightly smaller for better proportion */
+  width: 30px;
+  /* Slightly smaller for better proportion */
   height: 30px;
   font-size: 0.8rem;
-    padding: 0 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px; /* Professional 'Squircle' look */
-    background-color: #fff;
-    transition: all 0.2s ease;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  /* Professional 'Squircle' look */
+  background-color: #fff;
+  transition: all 0.2s ease;
 }
 
 .actions-btn:hover {
-    background-color: var(--postair-bg);
-    border-color: var(--postair-primary);
-    color: var(--postair-primary) !important;
+  background-color: var(--postair-bg);
+  border-color: var(--postair-primary);
+  color: var(--postair-primary) !important;
 }
 
 /* Ensure icons are centered */
 .actions-btn i {
-    line-height: 1;
-    font-size: 0.9rem;
+  line-height: 1;
+  font-size: 0.9rem;
 }
 
 .flex-shrink-0 {
-    flex-shrink: 0; /* Prevents buttons from squishing on small screens */
+  flex-shrink: 0;
+  /* Prevents buttons from squishing on small screens */
 }
 
 /* Keeps the editor visible while scrolling long post lists */
@@ -162,15 +169,16 @@
 }
 
 .canva-title span {
-    -webkit-text-fill-color: #1e293b; /* Contrast for the comma */
+  -webkit-text-fill-color: #1e293b;
+  /* Contrast for the comma */
 }
 
 .form-section-title {
-    font-family: 'Pacifico', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: #1e293b;
-    letter-spacing: -0.02em;
+  font-family: 'Pacifico', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1e293b;
+  letter-spacing: -0.02em;
 }
 
 /* Form Text Weight/Size Reduction */
@@ -244,7 +252,8 @@
 }
 
 .sticky-editor {
-  border-radius: 20px; /* More rounded for the startup look */
+  border-radius: 20px;
+  /* More rounded for the startup look */
 }
 
 .custom-pagination .page-link {
@@ -266,7 +275,8 @@
 
 /* Badge Style derived from image_5cdb6c.png */
 .author-badge {
-  background: #2d3748; /* Dark navy/grey from reference */
+  background: #2d3748;
+  /* Dark navy/grey from reference */
   color: #ffffff;
   font-size: 0.75rem;
   padding: 3px 8px;
@@ -331,18 +341,20 @@
 
 .spin {
   animation: rotation 2s infinite linear;
-  
+
 }
-.spinner-border{
+
+.spinner-border {
   font-size: 10px !important;
-  height: 10px!important;
-  width: 10px!important;
-  color: rgba(0, 0, 0, 0.4)!important;
+  height: 10px !important;
+  width: 10px !important;
+  color: rgba(0, 0, 0, 0.4) !important;
 }
 
 .btn-save-draft {
   background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  color: #92400e; /* Deep amber text for readability */
+  color: #92400e;
+  /* Deep amber text for readability */
   border: 1px solid rgba(251, 191, 36, 0.3);
   transition: all 0.3s ease;
 }
@@ -358,8 +370,13 @@
 }
 
 @keyframes rotation {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(359deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
 }
 
 /* Smoothly animate column width changes */
@@ -370,7 +387,8 @@
 .btn-expand-toggle {
   background: transparent;
   border: none;
-  color: #adb5bd; /* Muted grey to start */
+  color: #adb5bd;
+  /* Muted grey to start */
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-size: 1.2rem;
@@ -380,13 +398,14 @@
 }
 
 .btn-expand-toggle:hover {
-  color: var(--bs-primary); /* Use your primary blue on hover */
+  color: var(--bs-primary);
+  /* Use your primary blue on hover */
   transform: scale(1.1);
 }
 
 .btn-expand-toggle i {
   /* This creates the "6-dot" draggable appearance if you don't have a specific icon */
-  letter-spacing: -4px; 
+  letter-spacing: -4px;
 }
 
 /* Optional: Add a subtle glass glow on hover */

@@ -1,28 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
 /* Import Google Font: Inter (The gold standard for UI) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap'); */
 
 :root {
     /* --- Startup Color Palette --- */
-    --postair-primary: #6366f1;       /* Electric Indigo */
+    --postair-primary: #6366f1;
+    /* Electric Indigo */
     --postair-primary-hover: #4f46e5;
-    --postair-bg: #f8fafc;            /* Subtle Slate Gray */
+    --postair-bg: #f8fafc;
+    /* Subtle Slate Gray */
     --postair-card-bg: #ffffff;
-    --postair-text-main: #0f172a;     /* Deep Navy/Black */
-    --postair-text-muted: #64748b;    /* Cool Slate */
+    --postair-text-main: #0f172a;
+    /* Deep Navy/Black */
+    --postair-text-muted: #64748b;
+    /* Cool Slate */
     --postair-border: #e2e8f0;
 
     /* --- Typography --- */
     --bs-body-font-family: 'Inter', sans-serif;
 }
 
+@font-face {
+    font-family: 'Pacifico';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/pacifico-regular.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Inter - Regular (Repeat this pattern for 300, 500, 600, 700) */
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/inter-regular.ttf') format('truetype');
+    font-display: swap;
+}
+
 /* --- Bootstrap Variable Overrides --- */
 body {
     background-color: var(--postair-bg);
     color: var(--postair-text-main);
-    font-feature-settings: "cv11", "ss01"; /* Enables high-end font features */
+    font-feature-settings: "cv11", "ss01";
+    /* Enables high-end font features */
     -webkit-font-smoothing: antialiased;
 }
 
@@ -34,7 +55,8 @@ body {
     --bs-btn-hover-border-color: var(--postair-primary-hover);
     --bs-btn-font-weight: 500;
     --bs-btn-padding-x: 1.25rem;
-    --bs-btn-border-radius: 8px; /* Softer, modern corners */
+    --bs-btn-border-radius: 8px;
+    /* Softer, modern corners */
     transition: all 0.2s ease-in-out;
 }
 
@@ -47,12 +69,12 @@ body {
 .card {
     border: 1px solid var(--postair-border);
     border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: box-shadow 0.3s ease;
 }
 
 .card:hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 /* Standardize Inputs */
@@ -68,16 +90,16 @@ body {
 }
 
 .canva-title {
-  font-family: 'Pacifico', sans-serif;
-  font-weight: 800;
-  font-size: 1.85rem;
-  letter-spacing: -0.04em;
-  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  position: relative;
+    font-family: 'Pacifico', sans-serif;
+    font-weight: 800;
+    font-size: 1.85rem;
+    letter-spacing: -0.04em;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
 }
 
 .overflow-hidden {
-  overflow: hidden !important;
+    overflow: hidden !important;
 }
