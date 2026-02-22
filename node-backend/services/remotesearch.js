@@ -15,7 +15,7 @@ const checkPythonStatus = async () => {
             timeout: 5000, // Increased for free-tier 'wake up'
             headers: { 'X-Internal-Key': INTERNAL_KEY }
         });
-        console.log("python response", response);
+        // console.log("python response", response);
         return response.status === 200 ? "connected" : "error";
     } catch (error) {
         console.log("python error", error);

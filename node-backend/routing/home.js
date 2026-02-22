@@ -71,11 +71,21 @@ router.get('/api/search', async (req, res) => {
 
         const searchLimit = Math.min(parseInt(limit) || 20, 50);
 
-        // --- Fast Path: Lexical Only ---
-        if (mode === 'lexical') {
+        // --- 4. INTELLECTUAL FALLBACK: Check Python Availability ---
+        let effectiveMode = mode;
+        if (mode === 'hybrid') {
+            const status = await checkPythonStatus();
+            if (status !== 'connected') {
+                console.warn("Python Search Engine unreachable. Decoupling and falling back to Lexical mode.");
+                effectiveMode = 'lexical';
+            }
+        }
+
+        // --- Fast Path: Lexical (or fallback) ---
+        if (effectiveMode === 'lexical') {
             const results = await dbCrudOperator.searchPostsByKeyword(q, searchLimit);
             const unified = results.map(r => ({ ...r, matchPercentage: 100 }));
-            return res.status(200).json({ query: q, mode, count: unified.length, results: unified });
+            return res.status(200).json({ query: q, mode: effectiveMode, count: unified.length, results: unified });
         }
 
         // --- Intelligence Path: Hybrid ---
@@ -86,6 +96,8 @@ router.get('/api/search', async (req, res) => {
 
         const keywordResults = mongoRes.status === 'fulfilled' ? mongoRes.value : [];
         const semanticMatches = pythonRes.status === 'fulfilled' ? pythonRes.value : [];
+        console.log("keywordResults", keywordResults);
+        console.log("semanticMatches", semanticMatches);
 
         // Hydration Logic: Fetch full docs for semantic matches not in lexical results
         const lexicalUuids = new Set(keywordResults.map(p => p.uuid));
@@ -104,7 +116,7 @@ router.get('/api/search', async (req, res) => {
 
         return res.status(200).json({
             query: q,
-            mode,
+            mode: effectiveMode,
             count: hybridResults.length,
             results: hybridResults.slice(0, searchLimit)
         });

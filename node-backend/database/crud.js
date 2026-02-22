@@ -127,7 +127,7 @@ const dbCrudOperator = {
   async searchPostsByKeyword(term, limit = 10) {
     try {
       return await Post.find(
-        { $text: { $search: term }, isPublic: true, isDraft: false },
+        { $text: { $search: term }, isPublic: true, isDraft: { $ne: true } },
         { score: { $meta: "textScore" } }
       )
       .sort({ score: { $meta: "textScore" } })

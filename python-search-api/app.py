@@ -1,4 +1,5 @@
 import os
+import time
 from functools import wraps
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -12,10 +13,13 @@ allowed_origin = os.getenv("ALLOWED_ORIGIN", "http://localhost:3000")
 INTERNAL_API_KEY = os.getenv("SHARED_SECURITY_KEY")
 
 # configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# logging.basicConfig(level=logging.INFO)
+# logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+# Force Flask's internal logger to INFO level
+app.logger.setLevel(logging.INFO)
+
 CORS(app, resources={
     r"/*": {
         "origins": [allowed_origin],
@@ -23,6 +27,34 @@ CORS(app, resources={
         "allow_headers": ["Content-Type", "Authorization"]
     }
 })
+
+# --- Request/Response Logging (Morgan style) ---
+@app.before_request
+def start_timer():
+    request.start_time = time.time()
+
+@app.after_request
+def log_request(response):
+    if request.path == '/favicon.ico':
+        return response
+    
+    # Calculate duration in ms
+    duration = 0
+    if hasattr(request, 'start_time'):
+        duration = round((time.time() - request.start_time) * 1000, 2)
+    
+    ip = request.headers.get('X-Forwarded-For', request.remote_addr or '-')
+    method = request.method
+    path = request.path
+    status = response.status_code
+    content_length = response.content_length or 0
+    ua = request.headers.get('User-Agent', '-')
+
+    # Format: :method :url :status :res[content-length] - :response-time ms :remote-addr :user-agent
+    log_line = f"{method} {path} {status} {content_length} - {duration} ms {ip} {ua}"
+    app.logger.info(log_line)
+
+    return response
 
 search_svc = EmbeddingService() # Initialize the model once on startup
 
