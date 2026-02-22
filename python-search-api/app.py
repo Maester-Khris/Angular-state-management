@@ -1,4 +1,5 @@
 import os
+from functools import wraps
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from embedding_service import EmbeddingService
