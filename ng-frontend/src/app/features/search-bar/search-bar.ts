@@ -5,6 +5,9 @@ import { Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } 
   imports: [],
   templateUrl: './search-bar.html',
   styleUrl: './search-bar.css',
+  host: {
+    'class': 'd-block'
+  }
 })
 export class SearchBar {
   @Output() search = new EventEmitter<string>();

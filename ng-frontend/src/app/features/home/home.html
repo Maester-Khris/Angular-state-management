@@ -2,7 +2,7 @@
   <section class="hero-section position-relative overflow-hidden py-5 d-flex flex-column justify-content-center">
     <div class="container position-relative z-1 ">
       <div class="row align-items-center ">
-        <div class="col-lg-6 mb-5 mb-lg-0">
+        <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
           <div
             class="d-inline-flex align-items-center mb-4 py-2 px-3 rounded-pill glass-badge border border-primary-subtle shadow-sm">
             <span class="pulsing-dot me-2"></span>
@@ -21,7 +21,8 @@
             Publish high-fidelity content and curate the future of technical influence.
           </p>
 
-          <div class="d-flex flex-column flex-sm-row gap-4 align-items-sm-center">
+          <div
+            class="d-flex flex-column flex-sm-row gap-4 align-items-sm-center justify-content-center justify-content-lg-start">
             <a routerLink="/dashboard/myactivity" class="btn btn-primary-elevated btn-lg px-5 py-3">
               Start Writing <i class="bi bi-arrow-right ms-2"></i>
             </a>
@@ -30,7 +31,8 @@
             </a>
           </div>
 
-          <div class="mt-5 pt-4 border-top border-light d-flex align-items-center gap-3">
+          <div
+            class="mt-5 pt-4 border-top border-light d-flex align-items-center justify-content-center justify-content-lg-start gap-3">
             <div class="avatar-stack">
               <img src="https://i.pravatar.cc/40?u=1" alt="user" class="rounded-circle border border-2 border-white">
               <img src="https://i.pravatar.cc/40?u=2" alt="user"
@@ -42,7 +44,7 @@
               the web.</span>
           </div>
         </div>
-        <div class="col-lg-6 position-relative">
+        <div class="col-lg-6 position-relative d-none d-lg-block">
           <div class="hero-visual mx-auto">
             <div class="floating-card card shadow-lg">
               <div class="card-body">
@@ -73,7 +75,7 @@
     <div class="gradient-blob blob-2"></div>
   </section>
 
-  <div #communityGrid class="home-container" *ngIf="vm$ | async as vm" style="margin-top: 40px!important;">
+  <div #communityGrid class="home-container px-3 px-md-4" *ngIf="vm$ | async as vm" style="margin-top: 40px!important;">
     <header class="home-header mb-5">
       <app-search-bar (search)="onSearch($event)"></app-search-bar>
     </header>
