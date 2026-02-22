@@ -1,9 +1,9 @@
 {
-  "outputDirectory": "dist/ngprepinterview/browser",
+  "outputDirectory": "dist/postair/browser",
   "rewrites": [
-    { 
-      "source": "/(.*)", 
-      "destination": "/index.html" 
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
