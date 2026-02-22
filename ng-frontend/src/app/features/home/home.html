@@ -80,7 +80,7 @@
       <app-search-bar (search)="onSearch($event)"></app-search-bar>
     </header>
 
-    <div class="bento-grid" id="community-post">
+    <div class="bento-grid" id="community-post" *ngIf="vm.isAvailable">
       @for (post of vm.posts; track post.uuid; let i = $index) {
       <div class="bento-item" (click)="openDetails(post.uuid!)" [attr.data-post-id]="post.uuid"
         [trackPreview]="post.uuid!">
@@ -102,7 +102,23 @@
       }
     </div>
 
-    <div class="status-footer py-5 text-center">
+    <!-- API Unavailable or Empty State -->
+    <div class="empty-state-container py-5 text-center"
+      *ngIf="!vm.isAvailable || (vm.posts.length === 0 && !vm.loading)">
+      <div class="empty-icon-wrapper mb-4">
+        <i class="bi bi-cloud-slash text-muted display-1"></i>
+      </div>
+      <h3 class="fw-bold text-dark mb-3">{{ !vm.isAvailable ? 'Server Connection Lost' : 'No posts found' }}</h3>
+      <p class="text-muted mx-auto" style="max-width: 400px;">
+        {{ !vm.isAvailable ? 'We are having trouble reaching our servers. Please check your connection or try again
+        later.' : 'No posts matched your criteria. Try adjusting your search or check back later.' }}
+      </p>
+      <button class="btn btn-outline-primary rounded-pill px-4 mt-3" (click)="ngOnInit()" *ngIf="!vm.isAvailable">
+        <i class="bi bi-arrow-clockwise me-2"></i>Retry Connection
+      </button>
+    </div>
+
+    <div class="status-footer py-5 text-center" *ngIf="vm.isAvailable">
       @if (vm.loading) {
       <app-loading-spinner size="sm" label="Fetching more insights..."></app-loading-spinner>
       }

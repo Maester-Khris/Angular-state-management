@@ -1,5 +1,9 @@
+const ANGULAR_URL = process.env.NODE_ENV === 'production'
+    ? process.env.ANGULAR_FRONT_URL
+    : 'http://localhost:4200';
+
 const corsConfig = {
-    origin: "http://localhost:4200",
+    origin: ANGULAR_URL,
     methods: ["GET", "POST", "PUT"],
     allowedHeaders: ["Content-Type", "Authorization"],
 };

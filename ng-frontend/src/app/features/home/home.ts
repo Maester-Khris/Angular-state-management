@@ -1,7 +1,7 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BehaviorSubject, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
+import { BehaviorSubject, catchError, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
 import { RemoteApi } from '../../core/service/remote-api';
 import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
@@ -14,6 +14,7 @@ import { SkeletonCard } from '../../shared/ui/skeleton-card/skeleton-card';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Footer } from '../../shared/ui/footer/footer';
 import { TrackPreview } from '../../shared/directives/track-preview';
+import { NotificationService } from '../../core/services/notification-service';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +27,7 @@ export class Home implements OnInit, OnDestroy {
   private currentPage = 0;
   private readonly limit = 5;
   private readonly RemoteApi = inject(RemoteApi);
+  private readonly notifService = inject(NotificationService);
   @ViewChild('communityGrid') communityGrid!: ElementRef;
 
   // Get data from resolver
@@ -72,14 +74,22 @@ export class Home implements OnInit, OnDestroy {
   // 2- Home page master stream of data:
   vm$ = combineLatest([
     this.searchQuery$.pipe(startWith(''), debounceTime(500), distinctUntilChanged()),
-    this.RemoteApi.dataChanged$.pipe(startWith(undefined))
+    this.RemoteApi.dataChanged$.pipe(startWith(undefined)),
+    this.RemoteApi.isAvailable$.pipe(startWith(true))
   ]).pipe(
     // whenever search or global posts change
-    switchMap(([query]) => {
+    switchMap(([query, _, isAvailable]) => {
+      if (!isAvailable) {
+        return of({ type: 'RESET' as const, query, posts: [] });
+      }
       this.currentPage = 0;
       return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
         map(posts => ({ type: 'RESET' as const, query, posts })),
-        startWith({ type: 'SET_LOADING' as const })
+        startWith({ type: 'SET_LOADING' as const }),
+        catchError(() => {
+          this.notifService.show('Failed to load posts. API might be down.', 'error');
+          return of({ type: 'RESET' as const, query, posts: [] });
+        })
       );
     }),
 
@@ -92,7 +102,11 @@ export class Home implements OnInit, OnDestroy {
           const currentQuery = this.searchQuery$.getValue() || '';
           return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
             map(posts => ({ type: 'LOAD_NEXT', posts })),
-            startWith({ type: 'SET_LOADING' as const })
+            startWith({ type: 'SET_LOADING' as const }),
+            catchError(() => {
+              this.notifService.show('Failed to load more posts.', 'error');
+              return of({ type: 'SET_LOADING' as const }); // Just stop loading
+            })
           );
         })
       )
@@ -104,19 +118,29 @@ export class Home implements OnInit, OnDestroy {
         case 'SET_LOADING':
           return { ...state, loading: true };
         case 'RESET':
-          return { posts: action.posts, query: action.query, loading: false, hasMore: action.posts.length === this.limit };
+          return { ...state, posts: action.posts, query: action.query, loading: false, hasMore: action.posts.length === this.limit };
         case 'LOAD_NEXT':
           return { ...state, posts: [...state.posts, ...action.posts], loading: false, hasMore: action.posts.length === this.limit };
         default:
           return state;
       }
-    }, { posts: this.initialData, query: '', loading: false, hasMore: true }),
+    }, { posts: this.initialData, query: '', loading: false, hasMore: true, isAvailable: true }),
+
+    // Combine with overall availability
+    switchMap(state => this.RemoteApi.isAvailable$.pipe(
+      map(isAvailable => ({ ...state, isAvailable }))
+    )),
 
     shareReplay(1)
   );
 
   // =============== Lifecycle hooks ================
   ngOnInit(): void {
+    this.RemoteApi.checkHealth().subscribe(isAvailable => {
+      if (!isAvailable) {
+        this.notifService.show('API Server is currently unavailable', 'error');
+      }
+    });
   }
   ngOnDestroy(): void {
     if (this.document) {

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Post } from '../../features/posts/data-access/post.model';
 
@@ -13,7 +13,27 @@ export class RemoteApi {
   private dataChangedTrigger = new BehaviorSubject<void>(undefined);
   dataChanged$ = this.dataChangedTrigger.asObservable();
 
+  private isAvailableSubject = new BehaviorSubject<boolean>(true);
+  isAvailable$ = this.isAvailableSubject.asObservable();
+
   constructor(private http: HttpClient) { }
+
+  setAvailability(status: boolean) {
+    this.isAvailableSubject.next(status);
+  }
+
+  checkHealth(): Observable<boolean> {
+    return this.http.get(`${this.baseUrl}/health`).pipe(
+      map(() => {
+        this.isAvailableSubject.next(true);
+        return true;
+      }),
+      catchError(() => {
+        this.isAvailableSubject.next(false);
+        return of(false);
+      })
+    );
+  }
 
   // Get initial feed
   getInitialFeed(limit: number = 5): Observable<any> {
@@ -29,16 +49,15 @@ export class RemoteApi {
    * Home page requirement: Fetch public posts with pagination and search
    */
   fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<Post[]> {
-    if (query) {
-      return this.http.get<any>(`${this.baseUrl}/api/search?q=${query}&limit=${limit}`).pipe(
-        map(res => this.mapPosts(res.results || []))
-      );
-    } else {
-      const skip = page * limit;
-      return this.http.get<any>(`${this.baseUrl}/api/feed?limit=${limit}&skip=${skip}`).pipe(
-        map(res => this.mapPosts(res.data || []))
-      );
-    }
+    const skip = page * limit;
+    const request$ = query
+      ? this.http.get<any>(`${this.baseUrl}/api/search?q=${query}&limit=${limit}`).pipe(map(res => res.results || []))
+      : this.http.get<any>(`${this.baseUrl}/api/feed?limit=${limit}&skip=${skip}`).pipe(map(res => res.data || []));
+
+    return request$.pipe(
+      tap(() => this.setAvailability(true)),
+      map(posts => this.mapPosts(posts))
+    );
   }
 
   private mapPosts(serverPosts: any[]): Post[] {

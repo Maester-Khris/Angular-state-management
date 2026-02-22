@@ -9,7 +9,7 @@ import logging
 
 # --- CORS Configuration ---
 # Read the allowed origin from environment variables
-allowed_origin = os.getenv("ALLOWED_ORIGIN", "http://localhost:3000")
+allowed_origin = os.getenv("NODE_SERVICE_URL", "http://localhost:3000")
 INTERNAL_API_KEY = os.getenv("SHARED_SECURITY_KEY")
 
 # configure logging
