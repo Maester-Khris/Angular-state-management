@@ -82,7 +82,7 @@ const dbCrudOperator = {
   // 3. DISCOVERY (Feed & Search)
   // ==========================================
 
-  async getHomeFeed(lastId = null, limit = 10) {
+  async getHomeFeed(lastId = null, limit = 10, skip = 0) {
     const query = { 
       isPublic: true, 
       isDraft: { $ne: true } 
@@ -94,6 +94,7 @@ const dbCrudOperator = {
 
     const posts = await Post.find(query)
       .sort({ _id: -1 })
+      .skip(parseInt(skip) || 0)
       .limit(limit + 1) 
       .select('title description authorName lastEditedAt images uuid')
       .lean();
@@ -113,6 +114,14 @@ const dbCrudOperator = {
       data,
       pagination: { nextCursor: data.length > 0 ? data[data.length - 1].cursorId : null, hasMore }
     };
+  },
+
+  async getPublicPostByTitle(title) {
+    return await Post.findOne({ title, isPublic: true, isDraft: { $ne: true } }).lean();
+  },
+
+  async getPublicPostByUuid(uuid) {
+    return await Post.findOne({ uuid, isPublic: true, isDraft: { $ne: true } }).lean();
   },
 
   async searchPostsByKeyword(term, limit = 10) {

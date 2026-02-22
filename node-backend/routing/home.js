@@ -38,14 +38,25 @@ router.get("/health", async (req, res) => {
 
 router.get('/api/feed', async (req, res) => {
     try {
-        const { cursor, limit } = req.query;
+        const { cursor, limit, skip } = req.query;
         const pageLimit = Math.min(parseInt(limit) || 10, 50);
-        
-        const feedResponse = await dbCrudOperator.getHomeFeed(cursor, pageLimit);
+
+        const feedResponse = await dbCrudOperator.getHomeFeed(cursor, pageLimit, skip);
         return res.status(200).json(feedResponse);
     } catch (error) {
         console.error("Feed error:", error);
         return res.status(500).json({ message: "Error fetching feed" });
+    }
+});
+
+router.get('/api/posts/:uuid', async (req, res) => {
+    try {
+        const post = await dbCrudOperator.getPublicPostByUuid(req.params.uuid);
+        if (!post) return res.status(404).json({ message: "Post not found" });
+        return res.status(200).json(post);
+    } catch (error) {
+        console.error("Fetch post error:", error);
+        return res.status(500).json({ message: "Error fetching post" });
     }
 });
 

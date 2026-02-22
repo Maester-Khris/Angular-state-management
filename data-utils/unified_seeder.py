@@ -1,4 +1,5 @@
 import os
+import requests
 import json
 import uuid
 import bcrypt
@@ -25,6 +26,17 @@ with open('posts_to_seeds.json') as f:
 users_base = data['usersBase']
 post_templates = data['postTemplates']
 
+def fetch_image_pool():
+    print("📸 Fetching image pool from Picsum...")
+    try:
+        # Use the list API to get 50 creative images
+        response = requests.get("https://picsum.photos/v2/list?page=2&limit=50", timeout=10)
+        response.raise_for_status()
+        return [img['download_url'] for img in response.json()]
+    except Exception as e:
+        print(f"⚠️ Warning: Could not fetch images: {e}. Using fallback placeholders.")
+        return ["https://picsum.photos/seed/picsum/800/600"]
+
 def run_seeder():
     # 1. Initialize Clients
     mongo_client = MongoClient(MONGO_URI)
@@ -42,7 +54,10 @@ def run_seeder():
         vectors_config=VectorParams(size=384, distance=Distance.COSINE),
     )
 
-    # 2. Phase 1: Seed Users
+    # 2. Phase 1: Prepare Image Pool
+    image_pool = fetch_image_pool()
+
+    # 3. Phase 2: Seed Users
     print("1.Seeding Users...")
     salt = bcrypt.gensalt(rounds=10)
     hashed_pw = bcrypt.hashpw("password123".encode('utf-8'), salt).decode('utf-8')
@@ -59,7 +74,7 @@ def run_seeder():
         user_data["_id"] = result.inserted_id # Keep for post referencing
         user_docs.append(user_data)
 
-    # 3. Phase 2: Prepare Posts & Vectors
+    # 4. Phase 3: Prepare Posts & Vectors
     print("2. Preparing 50 Posts and generating embeddings...")
     mongo_posts = []
     qdrant_points = []
@@ -85,6 +100,7 @@ def run_seeder():
             "authorName": author["name"],
             "authorAvatar": author["avatarUrl"],
             "isPublic": True,
+            "images": [random.choice(image_pool)],
             "hashtags": ["tech", "engineering"],
             "createdAt": created_at
         })

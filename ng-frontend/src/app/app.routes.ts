@@ -14,7 +14,7 @@ export const routes: Routes = [
         resolve: { initialPosts: HomeResolver },
         children: [
             {
-                path: "view/:title",
+                path: "view/:uuid",
                 loadComponent: () => import("./features/post-detail/post-detail").then(c => c.PostDetail)
             }
         ]

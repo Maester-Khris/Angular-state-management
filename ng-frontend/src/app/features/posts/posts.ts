@@ -21,12 +21,12 @@ import { NotificationService } from '../../core/services/notification-service';
   styleUrl: './posts.css',
   providers: [PostStore] // Each instance of this component gets a FRESH PostStore
 })
-export class Posts implements OnInit, HasUnsavedChanges {  
+export class Posts implements OnInit, HasUnsavedChanges {
   private readonly fb = inject(FormBuilder);
   private readonly storeService = inject(PostStore);
-  private readonly authService = inject(AuthService); 
-  private readonly mediaService = inject(MediaService); 
-  private notifService = inject(NotificationService); 
+  private readonly authService = inject(AuthService);
+  private readonly mediaService = inject(MediaService);
+  private notifService = inject(NotificationService);
   private readonly mockApi = inject(MockApi);
 
   //elastic layout
@@ -34,10 +34,10 @@ export class Posts implements OnInit, HasUnsavedChanges {
 
   //form builder
   readonly addPostForm = this.fb.nonNullable.group({
-    title:["",[Validators.required, Validators.minLength(10)]],
-    description:["", [Validators.required]],
-    isPublic:[false], 
-    imageUrl:["https://miro.medium.com/v2/resize:fit:1320/format:webp/1*qkevp-qzQiw5rWcNag_HHA.jpeg"], //optional image
+    title: ["", [Validators.required, Validators.minLength(10)]],
+    description: ["", [Validators.required]],
+    isPublic: [false],
+    imageUrl: ["https://miro.medium.com/v2/resize:fit:1320/format:webp/1*qkevp-qzQiw5rWcNag_HHA.jpeg"], //optional image
     authorSearch: [""], //optional coauthor
   })
 
@@ -61,10 +61,10 @@ export class Posts implements OnInit, HasUnsavedChanges {
   isUploading = false;
 
   // ui state
-  isLoading:boolean = false;
-  errors:string[]=[];
-  
-  
+  isLoading: boolean = false;
+  errors: string[] = [];
+
+
   constructor() {
     this.initAuthorSearchStream();
   }
@@ -77,8 +77,8 @@ export class Posts implements OnInit, HasUnsavedChanges {
     return this.addPostForm.dirty;
   }
 
-  onAdd(): void{
-    if(this.addPostForm.valid){
+  onAdd(): void {
+    if (this.addPostForm.valid) {
       const newPost: Post = {
         ...this.addPostForm.getRawValue(),
         createdAt: new Date(),
@@ -87,12 +87,12 @@ export class Posts implements OnInit, HasUnsavedChanges {
       };
       this.storeService.savePost(newPost); //fire and forget -> save delegetate to internal store logic
       this.addPostForm.reset();
-    }else{
+    } else {
       this.addPostForm.markAllAsTouched();
     }
   }
-  onSaveDraft(){
-    
+  onSaveDraft() {
+
   }
 
 
@@ -109,17 +109,17 @@ export class Posts implements OnInit, HasUnsavedChanges {
   }
 
   // ============== Form ui image upload and preview ================
-  onFileSelected(event:any){
+  onFileSelected(event: any) {
     const file = event.target.files[0];
     if (!file) return;
 
     this.imagePreview = URL.createObjectURL(file);
     this.uploadToCloudinary(file);
-  } 
-  uploadToCloudinary(file:File){
+  }
+  uploadToCloudinary(file: File) {
     this.isUploading = true;
     this.mediaService.uploadImage(file).subscribe({
-     next: (res) => {
+      next: (res) => {
         this.isUploading = false;
         this.cloudinaryUrl = res.url; // Save the permanent URL for the final form submit
         this.notifService.show('Image uploaded and optimized', 'success');
@@ -131,7 +131,7 @@ export class Posts implements OnInit, HasUnsavedChanges {
       }
     });
   }
-  removeImage(){
+  removeImage() {
     this.imagePreview = null;
     this.cloudinaryUrl = null;
     this.isUploading = false;
@@ -142,14 +142,14 @@ export class Posts implements OnInit, HasUnsavedChanges {
 
 
   // ============== Form ui author search ================
-  private initAuthorSearchStream(){
+  private initAuthorSearchStream() {
     this.authorSearch.pipe(
       debounceTime(500),
       distinctUntilChanged(),
       switchMap((query: string) => {
-        if(query.length>1){
+        if (query.length > 1) {
           return this.mockApi.searchAuthorByEmail(query);
-        }else{
+        } else {
           return of([]);
         }
       }),
@@ -174,8 +174,8 @@ export class Posts implements OnInit, HasUnsavedChanges {
     this.authorSearch.next(''); // Clear the search query stream
   }
 
-  removeAuthor(userid:number) {
-    console.log(userid);  
+  removeAuthor(userid: number) {
+    console.log(userid);
     this.selectedCoAuthors = this.selectedCoAuthors.filter(a => a.id !== userid);
   }
 
@@ -187,14 +187,3 @@ export class Posts implements OnInit, HasUnsavedChanges {
     }
   }
 }
-
-  //  next: (res) => {
-  //       this.cloudinaryUrl = res.secure_url;
-  //       this.isUploading = false; 
-  //       console.log("uploaded image url",this.cloudinaryUrl);
-  //     },
-  //     error: (err) => {
-  //       this.isUploading = false; 
-  //       this.removeImage();
-  //       alert("Error uploading image");
-  //     }

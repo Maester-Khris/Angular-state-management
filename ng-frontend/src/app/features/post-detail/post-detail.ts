@@ -1,6 +1,6 @@
 import { Component, computed, effect, inject, input, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { MockApi } from '../../core/services/mock-api';
+import { RemoteApi } from '../../core/service/remote-api';
 import { Router } from '@angular/router';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
@@ -15,7 +15,7 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './post-detail.css',
 })
 export class PostDetail implements OnInit {
-  private mockApi = inject(MockApi);
+  private remoteApi = inject(RemoteApi);
   private router = inject(Router);
   private eventTracker = inject(EventTracking);
   platformId = inject(PLATFORM_ID);
@@ -39,12 +39,12 @@ export class PostDetail implements OnInit {
   isSaved = signal(false);
 
   // Retrieve post data
-  // post title automatically populated by angular due to withInputBinding() on routing navigation
-  // use signal to fecth full post with retrieved title
-  title = input<string>('');
+  // post uuid automatically populated by angular due to withInputBinding() on routing navigation
+  // use signal to fecth full post with retrieved uuid
+  uuid = input<string>('', { alias: 'uuid' });
   post = toSignal(
-    toObservable(this.title).pipe(
-      switchMap(title => this.mockApi.fetchPostByTitle(title))
+    toObservable(this.uuid).pipe(
+      switchMap(uuid => this.remoteApi.fetchPostByUuid(uuid))
     )
   );
 

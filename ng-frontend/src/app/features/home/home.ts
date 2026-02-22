@@ -2,7 +2,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BehaviorSubject, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
-import { MockApi } from '../../core/services/mock-api';
+import { RemoteApi } from '../../core/service/remote-api';
 import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -25,7 +25,7 @@ export class Home implements OnInit, OnDestroy {
   private document = inject(DOCUMENT);
   private currentPage = 0;
   private readonly limit = 5;
-  private readonly MockApi = inject(MockApi);
+  private readonly RemoteApi = inject(RemoteApi);
   @ViewChild('communityGrid') communityGrid!: ElementRef;
 
   // Get data from resolver
@@ -72,12 +72,12 @@ export class Home implements OnInit, OnDestroy {
   // 2- Home page master stream of data:
   vm$ = combineLatest([
     this.searchQuery$.pipe(startWith(''), debounceTime(500), distinctUntilChanged()),
-    this.MockApi.dataChanged$.pipe(startWith(undefined))
+    this.RemoteApi.dataChanged$.pipe(startWith(undefined))
   ]).pipe(
     // whenever search or global posts change
     switchMap(([query]) => {
       this.currentPage = 0;
-      return this.MockApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
+      return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
         map(posts => ({ type: 'RESET' as const, query, posts })),
         startWith({ type: 'SET_LOADING' as const })
       );
@@ -90,7 +90,7 @@ export class Home implements OnInit, OnDestroy {
         switchMap(() => {
           this.currentPage++;
           const currentQuery = this.searchQuery$.getValue() || '';
-          return this.MockApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
+          return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
             map(posts => ({ type: 'LOAD_NEXT', posts })),
             startWith({ type: 'SET_LOADING' as const })
           );
@@ -146,9 +146,8 @@ export class Home implements OnInit, OnDestroy {
 
 
   // ================= Navigation with child component  ==============
-  openDetails(title: string) {
-    console.log(title);
-    this.router.navigate(['view', title], { relativeTo: this.route });
+  openDetails(uuid: string) {
+    this.router.navigate(['view', uuid], { relativeTo: this.route });
   }
   closeDetails() {
     this.router.navigate(['/home']);
