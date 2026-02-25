@@ -73,28 +73,37 @@ export class Home implements OnInit, OnDestroy {
 
   // 2- Home page master stream of data:
   vm$ = combineLatest([
-    this.searchQuery$.pipe(startWith(''), debounceTime(500), distinctUntilChanged()),
+    this.searchQuery$.pipe(debounceTime(500), distinctUntilChanged()),
     this.RemoteApi.dataChanged$.pipe(startWith(undefined)),
-    this.RemoteApi.isAvailable$.pipe(startWith(true))
+    this.RemoteApi.isAvailable$
   ]).pipe(
     // whenever search or global posts change
     switchMap(([query, _, isAvailable]) => {
       if (!isAvailable) {
-        return of({ type: 'RESET' as const, query, posts: [] });
+        return of({ type: 'RESET' as const, query, posts: [], isAvailable });
       }
+
+      // If we have initial data from resolver and this is the first load (currentPage 0),
+      // we can skip the initial network request.
+      if (this.currentPage === 0 && this.initialData.length > 0 && !query) {
+        const posts = this.initialData;
+        // Clear initial data so subsequent global updates or resets trigger a fresh fetch
+        this.initialData = [];
+        return of({ type: 'RESET' as const, query, posts, isAvailable });
+      }
+
       this.currentPage = 0;
       return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
-        map(posts => ({ type: 'RESET' as const, query, posts })),
+        map(posts => ({ type: 'RESET' as const, query, posts, isAvailable })),
         startWith({ type: 'SET_LOADING' as const }),
         catchError(() => {
           this.notifService.show('Failed to load posts. API might be down.', 'error');
-          return of({ type: 'RESET' as const, query, posts: [] });
+          return of({ type: 'RESET' as const, query, posts: [], isAvailable });
         })
       );
     }),
 
     // handle the load more data for infinite scroll
-    // use mergewith to listen to initial resent and subsequent load more
     mergeWith(
       this.loadMore$.pipe(
         switchMap(() => {
@@ -105,7 +114,7 @@ export class Home implements OnInit, OnDestroy {
             startWith({ type: 'SET_LOADING' as const }),
             catchError(() => {
               this.notifService.show('Failed to load more posts.', 'error');
-              return of({ type: 'SET_LOADING' as const }); // Just stop loading
+              return of({ type: 'STOP_LOADING' as const });
             })
           );
         })
@@ -117,19 +126,28 @@ export class Home implements OnInit, OnDestroy {
       switch (action.type) {
         case 'SET_LOADING':
           return { ...state, loading: true };
+        case 'STOP_LOADING':
+          return { ...state, loading: false };
         case 'RESET':
-          return { ...state, posts: action.posts, query: action.query, loading: false, hasMore: action.posts.length === this.limit };
+          return {
+            ...state,
+            posts: action.posts,
+            query: action.query,
+            loading: false,
+            hasMore: action.posts.length === this.limit,
+            isAvailable: action.isAvailable ?? state.isAvailable
+          };
         case 'LOAD_NEXT':
-          return { ...state, posts: [...state.posts, ...action.posts], loading: false, hasMore: action.posts.length === this.limit };
+          return {
+            ...state,
+            posts: [...state.posts, ...action.posts],
+            loading: false,
+            hasMore: action.posts.length === this.limit
+          };
         default:
           return state;
       }
-    }, { posts: this.initialData, query: '', loading: false, hasMore: true, isAvailable: true }),
-
-    // Combine with overall availability
-    switchMap(state => this.RemoteApi.isAvailable$.pipe(
-      map(isAvailable => ({ ...state, isAvailable }))
-    )),
+    }, { posts: [], query: '', loading: false, hasMore: true, isAvailable: true }),
 
     shareReplay(1)
   );
