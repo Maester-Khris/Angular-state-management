@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, distinctUntilChanged, map, Observable, of, Subject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Post } from '../../features/posts/data-access/post.model';
 
@@ -10,11 +10,11 @@ import { Post } from '../../features/posts/data-access/post.model';
 export class RemoteApi {
   private baseUrl = environment.apiUrl;
 
-  private dataChangedTrigger = new BehaviorSubject<void>(undefined);
+  private dataChangedTrigger = new Subject<void>();
   dataChanged$ = this.dataChangedTrigger.asObservable();
 
   private isAvailableSubject = new BehaviorSubject<boolean>(true);
-  isAvailable$ = this.isAvailableSubject.asObservable();
+  isAvailable$ = this.isAvailableSubject.asObservable().pipe(distinctUntilChanged());
 
   constructor(private http: HttpClient) { }
 
