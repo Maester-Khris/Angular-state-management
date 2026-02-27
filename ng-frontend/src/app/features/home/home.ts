@@ -2,7 +2,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BehaviorSubject, catchError, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
-import { MockApi, ProposedLink } from '../../core/services/mock-api';
+import { RemoteApi } from '../../core/service/remote-api';
 import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -18,7 +18,7 @@ import { NotificationService } from '../../core/services/notification-service';
 
 @Component({
   selector: 'app-home',
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink, TrackPreview],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink, TrackPreview],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -26,7 +26,7 @@ export class Home implements OnInit, OnDestroy {
   private document = inject(DOCUMENT);
   private currentPage = 0;
   private readonly limit = 5;
-  private readonly RemoteApi = inject(MockApi);
+  private readonly RemoteApi = inject(RemoteApi);
   private readonly notifService = inject(NotificationService);
   @ViewChild('communityGrid') communityGrid!: ElementRef;
   showAllLinks = signal(false);
