@@ -42,7 +42,12 @@ router.get('/api/feed', async (req, res) => {
         const pageLimit = Math.min(parseInt(limit) || 10, 50);
 
         const feedResponse = await dbCrudOperator.getHomeFeed(cursor, pageLimit, skip);
-        return res.status(200).json(feedResponse);
+        // Defined a new object that copies the result and adds proposedLinks
+        return res.status(200).json({
+            ...feedResponse,
+            posts: feedResponse.data,
+            proposedLinks: []
+        });
     } catch (error) {
         console.error("Feed error:", error);
         return res.status(500).json({ message: "Error fetching feed" });
@@ -85,7 +90,13 @@ router.get('/api/search', async (req, res) => {
         if (effectiveMode === 'lexical') {
             const results = await dbCrudOperator.searchPostsByKeyword(q, searchLimit);
             const unified = results.map(r => ({ ...r, matchPercentage: 100 }));
-            return res.status(200).json({ query: q, mode: effectiveMode, count: unified.length, results: unified });
+            return res.status(200).json({
+                query: q,
+                mode: effectiveMode,
+                count: unified.length,
+                results: unified,
+                proposedLinks: []
+            });
         }
 
         // --- Intelligence Path: Hybrid ---
@@ -118,7 +129,8 @@ router.get('/api/search', async (req, res) => {
             query: q,
             mode: effectiveMode,
             count: hybridResults.length,
-            results: hybridResults.slice(0, searchLimit)
+            results: hybridResults.slice(0, searchLimit),
+            proposedLinks: []
         });
 
     } catch (error) {

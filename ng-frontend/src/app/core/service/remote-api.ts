@@ -48,15 +48,28 @@ export class RemoteApi {
   /**
    * Home page requirement: Fetch public posts with pagination and search
    */
-  fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<Post[]> {
+  fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<{ posts: Post[], proposedLinks: any[] }> {
     const skip = page * limit;
     const request$ = query
-      ? this.http.get<any>(`${this.baseUrl}/api/search?q=${query}&limit=${limit}`).pipe(map(res => res.results || []))
-      : this.http.get<any>(`${this.baseUrl}/api/feed?limit=${limit}&skip=${skip}`).pipe(map(res => res.data || []));
+      ? this.http.get<any>(`${this.baseUrl}/api/search?q=${query}&limit=${limit}`).pipe(
+        map(res => ({
+          posts: this.mapPosts(res.results || []),
+          proposedLinks: res.proposedLinks || []
+        }))
+      )
+      : this.http.get<any>(`${this.baseUrl}/api/feed?limit=${limit}&skip=${skip}`).pipe(
+        map(res => ({
+          posts: this.mapPosts(res.posts || res.data || []),
+          proposedLinks: res.proposedLinks || []
+        }))
+      );
 
     return request$.pipe(
       tap(() => this.setAvailability(true)),
-      map(posts => this.mapPosts(posts))
+      catchError(err => {
+        console.error('RemoteApi fetch error:', err);
+        throw err;
+      })
     );
   }
 
