@@ -29,6 +29,11 @@ export class Home implements OnInit, OnDestroy {
   private readonly RemoteApi = inject(MockApi);
   private readonly notifService = inject(NotificationService);
   @ViewChild('communityGrid') communityGrid!: ElementRef;
+  showAllLinks = signal(false);
+
+  toggleLinks() {
+    this.showAllLinks.update(v => !v);
+  }
 
   // Get data from resolver
   private route = inject(ActivatedRoute);
