@@ -1,4 +1,3 @@
-/* --- 1. Layout & Grid System --- */
 .profile-dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 350px;
@@ -25,9 +24,8 @@
   padding: 0 10px;
 }
 
-/* --- 2. Profile Card & Hero --- */
 .profile-card {
-  background: white;
+  background: #fff;
   border: 1px solid var(--postair-border);
   border-radius: 20px;
   overflow: hidden;
@@ -54,8 +52,8 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 6px solid white;
-  background: white;
+  border: 6px solid #fff;
+  background: #fff;
   object-fit: cover;
 }
 
@@ -75,20 +73,19 @@
   animation: pulse-online 2s infinite;
 }
 
-/* --- 3. Stats & Mini Cards --- */
 .stats-mini-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  gap: .75rem;
 }
 
 .stat-mini-card {
-  background: white;
+  background: #fff;
   border: 1px solid #f1f5f9;
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
-  transition: all 0.2s;
+  transition: all .2s;
 }
 
 .stat-mini-card:hover {
@@ -98,7 +95,7 @@
 
 .stat-label {
   display: block;
-  font-size: 0.65rem;
+  font-size: .65rem;
   text-transform: uppercase;
   color: #94a3b8;
   font-weight: 700;
@@ -111,7 +108,6 @@
   color: #1e293b;
 }
 
-/* --- 4. Contribution Heatmap --- */
 .contribution-heatmap-grid {
   display: grid;
   grid-template-rows: repeat(7, 10px);
@@ -128,16 +124,30 @@
   height: 10px;
   border-radius: 2px;
   background-color: #f1f5f9;
-  transition: transform 0.2s;
+  transition: transform .2s;
 }
 
-.heatmap-cell:hover { transform: scale(1.4); z-index: 10; }
-.level-0 { background-color: #f1f5f9; }
-.level-1 { background-color: #94e2d5; }
-.level-2 { background-color: #40c463; }
-.level-3 { background-color: #216e39; }
+.heatmap-cell:hover {
+  transform: scale(1.4);
+  z-index: 10;
+}
 
-/* --- 5. Timeline & Activity --- */
+.level-0 {
+  background-color: #f1f5f9;
+}
+
+.level-1 {
+  background-color: #94e2d5;
+}
+
+.level-2 {
+  background-color: #40c463;
+}
+
+.level-3 {
+  background-color: #216e39;
+}
+
 .activity-timeline {
   display: flex;
   flex-direction: column;
@@ -180,20 +190,15 @@
   padding-bottom: 2rem;
 }
 
-/* --- 6. Drafts & Favorites --- */
-.drafts-lab {
-  margin-bottom: 1rem;
-}
-
 .drafts-lab .draft-card {
   display: flex;
   align-items: center;
-  background: white;
+  background: #fff;
   border: 1px dashed #cbd5e1;
   padding: 1rem;
   border-radius: 12px;
-  margin-bottom: 0.75rem;
-  transition: all 0.2s;
+  margin-bottom: .75rem;
+  transition: all .2s;
   cursor: pointer;
 }
 
@@ -203,7 +208,7 @@
 }
 
 .drafts-lab .draft-card .draft-status {
-  font-size: 0.65rem;
+  font-size: .65rem;
   font-weight: 800;
   color: #94a3b8;
   border: 1px solid #e2e8f0;
@@ -215,68 +220,62 @@
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.25rem;
+  gap: .25rem;
 }
 
 .fav-card-pro {
-  background: white;
+  background: #fff;
   border: 1px solid #f1f5f9;
-  border-color: #eee;
-  border-radius: 8px; /* Reduced radius */
-  padding: 0.75rem;
+  border-radius: 8px;
+  padding: .75rem;
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: .75rem;
   position: relative;
-  transition: all 0.2s ease;
+  transition: all .2s ease;
 }
 
 .fav-card-pro:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  border-color: var(--postair-primary)!important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  border-color: var(--postair-primary) !important;
 }
 
 .fav-info {
   flex-grow: 1;
-  min-width: 0; /* Ensures text wrapping works */
+  min-width: 0;
 }
 
 .fav-title {
-  font-size: 0.75rem; /* Smaller text */
+  font-size: .75rem;
   font-weight: 600;
   color: #1e293b;
   line-height: 1.3;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Wrap to 2 lines */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .fav-date {
-  font-size: 0.65rem;
+  font-size: .65rem;
   color: #94a3b8;
-  margin-top: 0.25rem;
+  margin-top: .25rem;
 }
 
-/* --- 7. Utility & Common --- */
-.smallest { font-size: 0.75rem; }
+.smallest {
+  font-size: .75rem;
+}
+
 .section-title {
-  font-size: 0.7rem;
+  font-size: .7rem;
   font-weight: 800;
   text-transform: uppercase;
   color: #94a3b8;
-  letter-spacing: 0.05em;
+  letter-spacing: .05em;
 }
 
-.glass-morphism {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-}
-
-/* --- 8. Glass Loading & Animations --- */
 .glass-loading {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(241, 245, 249, 0.5) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0, rgba(241, 245, 249, 0.5) 100%);
   backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
@@ -285,22 +284,42 @@
 .glass-loading::after {
   content: "";
   position: absolute;
-  top: -50%; left: -50%; width: 200%; height: 200%;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background: linear-gradient(45deg, transparent 20%, rgba(255, 255, 255, 0.6) 50%, transparent 80%);
   animation: shimmer-diagonal 2s infinite;
 }
 
 @keyframes pulse-online {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+  }
 }
 
 @keyframes shimmer-diagonal {
-  0% { transform: translate(-30%, -30%); }
-  100% { transform: translate(30%, 30%); }
+  0% {
+    transform: translate(-30%, -30%);
+  }
+
+  100% {
+    transform: translate(30%, 30%);
+  }
 }
 
 @media (max-width: 1100px) {
-  .profile-dashboard-grid { grid-template-columns: 1fr; }
-  .right-sidebar-wrapper { position: static; }
+  .profile-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .right-sidebar-wrapper {
+    position: static;
+  }
 }

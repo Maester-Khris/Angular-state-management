@@ -1,6 +1,5 @@
 .container-fluid {
-  padding-left: 50px;
-  padding-right: 50px;
+  padding: 0 50px;
 }
 
 .home-layout-container {
@@ -17,8 +16,12 @@
 
 @media (max-width: 767px) {
   .home-container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0 1rem;
+  }
+
+  .home-header {
+    transform: translateY(0);
+    margin-top: -2rem;
   }
 }
 
@@ -29,46 +32,19 @@
   margin-bottom: 2rem;
 }
 
-@media (max-width: 767px) {
-  .home-header {
-    transform: translateY(0);
-    margin-top: -2rem;
-  }
-}
-
 .side-drawer {
-  /* position: absolute; Changed from fixed */
-  /* Calc height to be exactly the viewport minus the header */
-  /*
-  top: 0;
-  right: 0;
-  width: 450px;
-  height: 100%; 
-  background: white;
-  z-index: 1050; 
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); */
   position: fixed;
-  /* Always stays in the viewport */
   top: 56px;
-  /* Starts exactly below your 60px header */
   right: 0;
   width: 450px;
-
-  /* Viewport Height minus the Header height */
   height: calc(100vh - 56px);
-
-  background: white;
+  background: #fff;
   z-index: 1050;
-  /* Above the backdrop */
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-
   transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
+  transition: transform .3s cubic-bezier(.4, 0, .2, 1);
   border-left: 1px solid #dee2e6;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
+  border-radius: 5px 0 0 5px;
 }
 
 .side-drawer.open {
@@ -78,33 +54,20 @@
 .backdrop {
   position: fixed;
   top: 56px;
-  /* Starts exactly where your header ends */
   left: 0;
   width: 100vw;
   height: calc(100vh - 56px);
-  background-color: rgba(255, 255, 255, 0.3);
-  /* Light tint instead of dark */
-
-  /* This is the Senior-level property */
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  /* Safari support */
-
   z-index: 1040;
-  /* Below drawer (1050), Above content */
   cursor: pointer;
-}
-
-.backdrop.active {
-  opacity: 1;
-  visibility: visible;
 }
 
 app-post-card {
   display: block;
 }
 
-/* Stable Grid Layout */
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -128,9 +91,9 @@ app-post-card {
   width: 100%;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
-/* Card Styling */
 .post-image-wrapper {
   position: relative;
   overflow: hidden;
@@ -141,155 +104,61 @@ app-post-card {
   width: 100%;
   height: auto;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform .5s ease;
 }
 
 .bento-item:hover .post-img {
   transform: scale(1.05);
 }
 
-.category-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(4px);
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.post-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 0.75rem;
-}
-
-.author-mini-img {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
-
 .smallest {
-  font-size: 0.7rem;
+  font-size: .7rem;
 }
 
-/* Center status footer */
 .status-footer {
   width: 100%;
   clear: both;
-  /* Prevents masonry wrap-around issues */
 }
 
-/* Ensure images in postcards don't overflow */
 .post-image-wrapper img {
   width: 100%;
   height: 200px;
-  /* Force consistent heights for bento items if desired */
   object-fit: cover;
 }
 
-/* Pro Details Sidebar Styling */
 .avatar-circle {
   width: 32px;
   height: 32px;
   background: #6366f1;
-  color: white;
+  color: #fff;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  font-weight: bold;
+  font-size: .7rem;
+  font-weight: 700;
 }
 
 .lead-sm {
-  font-size: 0.95rem;
+  font-size: .95rem;
   line-height: 1.7;
 }
 
-/* Infinite Scroll Anchor */
 .scroll-anchor {
   height: 20px;
   width: 100%;
 }
 
-/* Full Viewport Overlay */
-.immersive-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 23, 42, 0.4);
-  /* Slate 900 with alpha */
-  backdrop-filter: blur(12px);
-  z-index: 1100;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Center the content */
-  overflow: hidden;
-  /* Let the container handle scrolling */
-  padding: 2rem 1rem;
-}
-
-.immersive-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.detail-container {
-  max-width: 820px;
-  /* Matching the content-canvas */
-  width: 100%;
-  max-height: calc(100vh - 4rem);
-  /* Limit height to viewport minus padding */
-  background: white;
-  border-radius: 28px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  overflow-y: auto;
-  scrollbar-width: none;
-  /* Firefox */
-  -ms-overflow-style: none;
-  /* IE/Edge */
-  /* INTERNAL SCROLLBAR */
-  transform: translateY(40px);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  z-index: 1110;
-}
-
-.detail-container::-webkit-scrollbar {
-  display: none;
-  /* Chrome/Safari */
-}
-
-.immersive-overlay.active .detail-container {
-  transform: translateY(0);
-}
-
-
 .hero-wrapper {
-  background: #ffffff;
-  /* Soft mesh gradient background */
-  background-image:
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+  background: #fff;
+  background-image: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0, transparent 50%), radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.1) 0, transparent 50%);
 }
 
 .canva-gradient-text {
-  font-family: 'Montserrat', sans-serif;
-  letter-spacing: -0.04em;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: -.04em;
   line-height: 1.1;
-  background: linear-gradient(135deg, #1e293b 0%, #6366f1 100%);
+  background: linear-gradient(135deg, #1e293b 0, #6366f1 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -300,15 +169,13 @@ app-post-card {
   font-weight: 900;
   color: #6366f1;
   -webkit-text-fill-color: initial;
-  /* Break the gradient for emphasis */
 }
 
-/* Glass Blobs that move slightly */
 .glass-blob {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.2));
+  background: linear-gradient(135deg, rgba(99, 102, 241, .2), rgba(168, 85, 247, .2));
   filter: blur(80px);
   border-radius: 50%;
   z-index: 1;
@@ -326,66 +193,14 @@ app-post-card {
   animation-delay: -5s;
 }
 
-@keyframes floatBlobs {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  100% {
-    transform: translate(50px, 100px) scale(1.1);
-  }
-}
-
-/* Floating Mockup Cards */
-.floating-mockup-container {
-  position: relative;
-  height: 400px;
-}
-
-.mockup-card {
-  position: absolute;
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  animation: floatCard 6s infinite ease-in-out;
-}
-
-.card-1 {
-  width: 280px;
-  height: 180px;
-  top: 20%;
-  right: 10%;
-}
-
-.card-2 {
-  width: 80px;
-  height: 80px;
-  bottom: 20%;
-  left: 10%;
-  animation-delay: -3s;
-}
-
-@keyframes floatCard {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
 .btn-canva-lg {
   background: #6366f1;
-  color: white;
+  color: #fff;
   padding: 1.2rem 2.5rem;
   border-radius: 100px;
   font-weight: 700;
   border: none;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
 }
 
 .btn-canva-lg:hover {
@@ -393,9 +208,8 @@ app-post-card {
   box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
 }
 
-/* ---------------------------------------- */
 .hero-section {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  background: linear-gradient(180deg, #fff 0, #f8fafc 100%);
   min-height: 70vh;
   padding: 4rem 0;
   margin-bottom: 0;
@@ -405,6 +219,20 @@ app-post-card {
   .hero-section {
     min-height: auto;
     padding: 6rem 0 8rem;
+  }
+
+  .hero-lead {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .avatar-stack {
+    justify-content: center;
+  }
+
+  .related-links-panel {
+    max-width: 100%;
+    position: static;
   }
 }
 
@@ -442,33 +270,13 @@ app-post-card {
 .floating-card:nth-child(2) {
   top: 140px;
   left: 80px;
+  animation-delay: 1.5s;
 }
 
 .floating-card:nth-child(3) {
   top: 280px;
   left: 20px;
-}
-
-.delay-1 {
-  animation-delay: 1.5s;
-}
-
-.delay-2 {
   animation-delay: 3s;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-12px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
 }
 
 .gradient-blob {
@@ -477,35 +285,27 @@ app-post-card {
   height: 420px;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.6;
+  opacity: .6;
   z-index: 0;
 }
 
-.blob-1 {
+.blob-1-alt {
   background: #6366f1;
   top: -120px;
   left: -120px;
 }
 
-.blob-2 {
+.blob-2-alt {
   background: #8b5cf6;
   bottom: -140px;
   right: -140px;
 }
 
-/* ---------------------------------------- */
-/* Typography & Weight */
 .hero-title {
   font-size: clamp(2.2rem, 8vw, 4.2rem);
-  letter-spacing: -0.04em;
+  letter-spacing: -.04em;
   font-weight: 800;
   line-height: 1;
-}
-
-@media (max-width: 767px) {
-  .hero-title br {
-    display: none;
-  }
 }
 
 .hero-lead {
@@ -515,19 +315,6 @@ app-post-card {
   max-width: 90%;
 }
 
-@media (max-width: 991px) {
-  .hero-lead {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .avatar-stack {
-    justify-content: center;
-  }
-}
-
-/* Animations & Gradients */
 .text-gradient-animated {
   background: linear-gradient(90deg, #6366f1, #a855f7, #6366f1);
   background-size: 200% auto;
@@ -537,53 +324,19 @@ app-post-card {
   animation: shine 4s linear infinite;
 }
 
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
-}
-
-/* Glassmorphism Badge */
 .glass-badge {
-  background: rgba(99, 102, 241, 0.05);
+  background: rgba(99, 102, 241, .05);
   backdrop-filter: blur(4px);
-  font-size: 0.75rem;
+  font-size: .75rem;
 }
 
-.pulsing-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #6366f1;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
-  }
-
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-  }
-
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
-  }
-}
-
-/* Elevated Primary Button */
 .btn-primary-elevated {
   background: #0f172a;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 12px;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
   box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
 }
 
@@ -591,7 +344,7 @@ app-post-card {
   transform: translateY(-3px);
   background: #1e293b;
   box-shadow: 0 15px 25px -5px rgba(15, 23, 42, 0.4);
-  color: white;
+  color: #fff;
 }
 
 .avatar-stack img {
@@ -599,11 +352,6 @@ app-post-card {
   height: 32px;
 }
 
-.ms-n2 {
-  margin-left: -10px !important;
-}
-
-/* ---------------------------------------- */
 .author-avatar {
   width: 32px;
   height: 32px;
@@ -613,34 +361,10 @@ app-post-card {
 }
 
 .author-name {
-  font-size: 0.94rem;
-  letter-spacing: -0.01em;
+  font-size: .94rem;
+  letter-spacing: -.01em;
 }
 
-.btn-fav {
-  border: none;
-  background-color: #f8fafc;
-  color: #64748b;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.btn-fav:hover {
-  background-color: #e0e7ff;
-  color: #6366f1;
-  transform: scale(1.1);
-}
-
-.btn-fav i {
-  font-size: 1.1rem;
-}
-
-/* Related Links Panel */
 .home-content-layout.has-sidebar .bento-grid {
   grid-template-columns: repeat(1, 1fr);
 }
@@ -660,7 +384,7 @@ app-post-card {
 .related-links-panel {
   width: 100%;
   max-width: 450px;
-  background: #F0F4FF;
+  background: #f0f4ff;
   backdrop-filter: blur(16px);
   padding: 1.5rem 1.25rem;
   border-radius: 20px;
@@ -688,17 +412,10 @@ app-post-card {
   border-radius: 10px;
 }
 
-@media (max-width: 991px) {
-  .related-links-panel {
-    max-width: 100%;
-    position: static;
-  }
-}
-
 .premium-glass-card {
   background: rgba(255, 255, 255, 0.5);
   border: none;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all .4s cubic-bezier(.165, .84, .44, 1);
 }
 
 .premium-glass-card:hover {
@@ -708,9 +425,9 @@ app-post-card {
 }
 
 .link-title-premium {
-  font-size: 0.9rem;
+  font-size: .9rem;
   color: #1e293b;
-  transition: color 0.3s ease;
+  transition: color .3s ease;
 }
 
 .premium-glass-card:hover .link-title-premium {
@@ -725,54 +442,15 @@ app-post-card {
   overflow: hidden;
 }
 
-.pulsing-dot-green {
-  width: 8px;
-  height: 8px;
-  background-color: #10b981;
-  border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-  animation: pulse-green 2s infinite;
-}
-
-@keyframes pulse-green {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  }
-
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-  }
-
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
-}
-
-/* Empty State */
 .empty-state-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn .6s ease-out;
 }
 
 .empty-icon-wrapper i {
-  opacity: 0.2;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: .2;
 }
