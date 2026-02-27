@@ -2,7 +2,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BehaviorSubject, catchError, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
-import { RemoteApi } from '../../core/service/remote-api';
+import { MockApi, ProposedLink } from '../../core/services/mock-api';
 import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -26,7 +26,7 @@ export class Home implements OnInit, OnDestroy {
   private document = inject(DOCUMENT);
   private currentPage = 0;
   private readonly limit = 5;
-  private readonly RemoteApi = inject(RemoteApi);
+  private readonly RemoteApi = inject(MockApi);
   private readonly notifService = inject(NotificationService);
   @ViewChild('communityGrid') communityGrid!: ElementRef;
 
@@ -94,11 +94,11 @@ export class Home implements OnInit, OnDestroy {
 
       this.currentPage = 0;
       return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
-        map(posts => ({ type: 'RESET' as const, query, posts, isAvailable })),
+        map(result => ({ type: 'RESET' as const, query, posts: result.posts, proposedLinks: result.proposedLinks, isAvailable })),
         startWith({ type: 'SET_LOADING' as const }),
         catchError(() => {
           this.notifService.show('Failed to load posts. API might be down.', 'error');
-          return of({ type: 'RESET' as const, query, posts: [], isAvailable });
+          return of({ type: 'RESET' as const, query, posts: [], proposedLinks: [], isAvailable });
         })
       );
     }),
@@ -110,7 +110,7 @@ export class Home implements OnInit, OnDestroy {
           this.currentPage++;
           const currentQuery = this.searchQuery$.getValue() || '';
           return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
-            map(posts => ({ type: 'LOAD_NEXT', posts })),
+            map(result => ({ type: 'LOAD_NEXT', posts: result.posts, proposedLinks: result.proposedLinks })),
             startWith({ type: 'SET_LOADING' as const }),
             catchError(() => {
               this.notifService.show('Failed to load more posts.', 'error');
@@ -132,6 +132,7 @@ export class Home implements OnInit, OnDestroy {
           return {
             ...state,
             posts: action.posts,
+            proposedLinks: action.proposedLinks,
             query: action.query,
             loading: false,
             hasMore: action.posts.length === this.limit,
@@ -141,13 +142,14 @@ export class Home implements OnInit, OnDestroy {
           return {
             ...state,
             posts: [...state.posts, ...action.posts],
+            proposedLinks: action.proposedLinks.length > 0 ? action.proposedLinks : state.proposedLinks,
             loading: false,
             hasMore: action.posts.length === this.limit
           };
         default:
           return state;
       }
-    }, { posts: [], query: '', loading: false, hasMore: true, isAvailable: true }),
+    }, { posts: [], proposedLinks: [], query: '', loading: false, hasMore: true, isAvailable: true }),
 
     shareReplay(1)
   );
