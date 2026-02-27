@@ -1,17 +1,15 @@
 import { inject } from '@angular/core';
 import { ResolveFn } from '@angular/router';
-import { RemoteApi } from '../service/remote-api';
+import { MockApi, ProposedLink } from '../services/mock-api';
 import { Post } from '../../features/posts/data-access/post.model';
 import { catchError, of } from 'rxjs';
 
-export const HomeResolver: ResolveFn<Post[]> = (route, state) => {
-  const remoteApi = inject(RemoteApi);
-  return remoteApi.fetchPublicPosts(0, 5).pipe(
+export const HomeResolver: ResolveFn<{ posts: Post[], proposedLinks: ProposedLink[] }> = (route, state) => {
+  const mockApi = inject(MockApi);
+  return mockApi.fetchPublicPosts(0, 5).pipe(
     catchError(() => {
-      // If the resolver fails, notify the service that the server is down
-      // This ensures the Home component shows the 'Server Connection Lost' UI
-      remoteApi.setAvailability(false);
-      return of([]); // Return empty list to allow the route to activate
+      // If the resolver fails, return empty structure
+      return of({ posts: [], proposedLinks: [] });
     })
   );
 };
