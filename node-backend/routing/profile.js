@@ -27,7 +27,7 @@ router.get("/logout", async (req, res) => {
 
     return res.status(200).json({ message: "User logged out successfully." });
   } catch (error) {
-    console.error("Logout error:", error);
+    console.error("Logout error:", error.message);
     return res.status(500).json({ message: "Internal server error during logout." });
   }
 });

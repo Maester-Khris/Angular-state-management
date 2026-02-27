@@ -53,8 +53,8 @@ router.get('/api/feed', async (req, res) => {
             proposedLinks: []
         });
     } catch (error) {
-        console.error("Feed error:", error);
-        return res.status(500).json({ message: "Error fetching feed" });
+        console.error("Feed error:", error.message);
+        return res.status(500).json({ message: "Unable to fetch home feed" });
     }
 });
 
@@ -64,8 +64,8 @@ router.get('/api/posts/:uuid', async (req, res) => {
         if (!post) return res.status(404).json({ message: "Post not found" });
         return res.status(200).json(post);
     } catch (error) {
-        console.error("Fetch post error:", error);
-        return res.status(500).json({ message: "Error fetching post" });
+        console.error("Fetch post error:", error.message);
+        return res.status(500).json({ message: "Unable to load post details" });
     }
 });
 
@@ -138,8 +138,8 @@ router.get('/api/search', async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Search Route Error:", error);
-        return res.status(500).json({ message: "Internal search error" });
+        console.error("Search Route Error:", error.message);
+        return res.status(500).json({ message: "Search service temporarily unavailable" });
     }
 });
 

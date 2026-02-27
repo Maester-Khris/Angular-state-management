@@ -68,8 +68,9 @@ export class RemoteApi {
     return request$.pipe(
       tap(() => this.setAvailability(true)),
       catchError(err => {
-        console.error('RemoteApi fetch error:', err);
-        throw err;
+        const message = err.error?.message || err.message || 'Connection error';
+        console.error('RemoteApi fetch error:', message);
+        throw new Error(message);
       })
     );
   }

@@ -6,8 +6,8 @@ const { authenticateJWT } = require("../middleware/auth");
 
 // Configure Multer for memory storage
 const storage = multer.memoryStorage();
-const upload = multer({ 
-  storage, 
+const upload = multer({
+  storage,
   limits: { fileSize: 5 * 1024 * 1024 } // Limit: 5MB
 });
 
@@ -33,13 +33,13 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     // We pass the buffer directly from Multer
     const imageUrl = await uploadImage(req.file.buffer, 'user_content');
 
-    return res.status(200).json({ 
-      message: "Upload successful", 
-      url: imageUrl 
+    return res.status(200).json({
+      message: "Upload successful",
+      url: imageUrl
     });
   } catch (error) {
-    console.error("Cloudinary Upload Error:", error);
-    return res.status(500).json({ message: "Failed to upload image to cloud" });
+    console.error("Cloudinary Upload Error:", error.message);
+    return res.status(500).json({ message: "Failed to upload image" });
   }
 });
 
@@ -61,13 +61,13 @@ router.get('/users/lookup/:email', async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    return res.status(200).json({ 
+    return res.status(200).json({
       email: email.toLowerCase(),
-      uuid: user.useruuid 
+      uuid: user.useruuid
     });
   } catch (error) {
-    console.error("Lookup error:", error);
-    return res.status(500).json({ message: "Error during user lookup" });
+    console.error("Lookup error:", error.message);
+    return res.status(500).json({ message: "User lookup failed" });
   }
 });
 
@@ -81,7 +81,7 @@ router.get('/users/lookup/:email', async (req, res) => {
 router.post('/posts', async (req, res) => {
   try {
     const { editorUuids, title, description, isPublic, hashtags, isDraft } = req.body;
-    
+
     // 1. Convert external UUIDs to internal ObjectIDs
     let editorIds = [];
     if (Array.isArray(editorUuids) && editorUuids.length > 0) {
@@ -97,16 +97,16 @@ router.post('/posts', async (req, res) => {
       isPublic,
       isDraft: isDraft || false,
       author: req.userId,
-      authorName: req.userName, 
-      editors: editorIds 
+      authorName: req.userName,
+      editors: editorIds
     };
 
     const newPost = await dbCrudOperator.createPost(postData);
     res.status(201).json(newPost);
 
   } catch (error) {
-    console.error("Post Creation Failed:", error);
-    res.status(400).json({ message: "Validation error", details: error.message });
+    console.error("Post Creation Failed:", error.message);
+    res.status(400).json({ message: "Post creation failed", details: error.message });
   }
 });
 
@@ -123,6 +123,7 @@ router.put('/posts/:postuuid', async (req, res) => {
     if (!updatedPost) return res.status(404).json({ message: "Post not found or unauthorized" });
     res.json(updatedPost);
   } catch (error) {
+    console.error("Update failed:", error.message);
     res.status(500).json({ message: "Update failed" });
   }
 });
@@ -136,6 +137,7 @@ router.delete('/posts/:postuuid', async (req, res) => {
     if (!result) return res.status(404).json({ message: "Delete failed: Unauthorized" });
     res.status(204).send();
   } catch (error) {
+    console.error("Deletion failed:", error.message);
     res.status(500).json({ message: "Server error during deletion" });
   }
 });
@@ -158,10 +160,10 @@ router.post('/posts/:uuid/editors', async (req, res) => {
 
     const users = await dbCrudOperator.findUserByUUid(editorUuids);
     if (users.length === 0) return res.status(404).json({ message: "No valid users found" });
-    
+
     const editorObjectIds = users.map(u => u._id);
     const updatedPost = await dbCrudOperator.addEditorsToPost(
-      postUuid, 
+      postUuid,
       editorObjectIds,
       req.userId
     );
@@ -170,6 +172,7 @@ router.post('/posts/:uuid/editors', async (req, res) => {
 
     res.json({ message: `Success`, post: updatedPost });
   } catch (error) {
+    console.error("Add editors failed:", error.message);
     res.status(500).json({ message: "Failed to add editors" });
   }
 });

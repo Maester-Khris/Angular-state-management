@@ -68,7 +68,8 @@ router.post("/login", async (req, res) => {
     });
 
     res.status(200).json({ message: "Login successful", accessToken, user: userProfile });
-  } catch {
+  } catch (error) {
+    console.error("Login failed:", error.message);
     res.status(401).json({ message: "Invalid email or password." });
   }
 });
