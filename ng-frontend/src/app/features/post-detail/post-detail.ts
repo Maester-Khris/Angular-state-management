@@ -4,8 +4,9 @@ import { RemoteApi } from '../../core/service/remote-api';
 import { Router } from '@angular/router';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
+import { catchError, of, switchMap, tap } from 'rxjs';
 import { EventTracking } from '../../core/services/event-tracking';
+import { NotificationService } from '../../core/services/notification-service';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -18,6 +19,7 @@ export class PostDetail implements OnInit {
   private remoteApi = inject(RemoteApi);
   private router = inject(Router);
   private eventTracker = inject(EventTracking);
+  private notifService = inject(NotificationService);
   platformId = inject(PLATFORM_ID);
 
   constructor(private meta: Meta, private pagetitle: Title) {
@@ -44,7 +46,13 @@ export class PostDetail implements OnInit {
   uuid = input<string>('', { alias: 'uuid' });
   post = toSignal(
     toObservable(this.uuid).pipe(
-      switchMap(uuid => this.remoteApi.fetchPostByUuid(uuid))
+      switchMap(uuid => this.remoteApi.fetchPostByUuid(uuid).pipe(
+        catchError(err => {
+          this.notifService.show(err.message || 'Post not found', 'error');
+          this.close();
+          return of(null);
+        })
+      ))
     )
   );
 

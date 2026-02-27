@@ -1,9 +1,9 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
-import { BehaviorSubject, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rxjs';
 import { AuthUser } from '../../features/auth/user.model';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class AuthService {
   private _accessToken = signal<string | null>(null);
   private readonly userState = new BehaviorSubject<AuthUser | null>(null);
   readonly user$: Observable<AuthUser | null> = this.userState.asObservable(); // avaible for the rest of app: shared state
-  
+
 
   // ================== Internal State Management ===================
   get currentValue(): AuthUser | null {
@@ -48,8 +48,10 @@ export class AuthService {
 
 
   // ================== Auth Process Management ===================
-  signup(name:string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/signup`, {name, email, password });
+  signup(name: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/signup`, { name, email, password }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   login(): Observable<AuthUser> {
@@ -62,16 +64,26 @@ export class AuthService {
       map(user => {
         this.setToken(user.accessToken);
         return user;
-      })
+      }),
+      catchError(this.handleError)
     );
   }
 
   verifyOtp(email: string, otp: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/verify-otp`, { email, otp });
+    return this.http.post(`${this.baseUrl}/auth/verify-otp`, { email, otp }).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  resendOtp(email:string){
-    return this.http.post(`${this.baseUrl}/auth/resend-otp`, { email});
+  resendOtp(email: string) {
+    return this.http.post(`${this.baseUrl}/auth/resend-otp`, { email }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    const message = err.error?.message || err.message || 'Authentication failed';
+    return throwError(() => new Error(message));
   }
 
   logout() {

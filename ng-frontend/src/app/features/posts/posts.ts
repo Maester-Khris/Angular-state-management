@@ -126,8 +126,8 @@ export class Posts implements OnInit, HasUnsavedChanges {
       },
       error: (err) => {
         this.isUploading = false;
-        this.removeImage(); // Clean up if upload fails
-        this.notifService.show('Cloud upload failed. Please try again.', 'error');
+        this.removeImage();
+        this.notifService.show(err.message || 'Upload failed', 'error');
       }
     });
   }

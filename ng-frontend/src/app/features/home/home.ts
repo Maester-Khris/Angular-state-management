@@ -109,8 +109,8 @@ export class Home implements OnInit, OnDestroy {
       return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
         map(result => ({ type: 'RESET' as const, query, posts: result.posts, proposedLinks: result.proposedLinks, isAvailable })),
         startWith({ type: 'SET_LOADING' as const }),
-        catchError(() => {
-          this.notifService.show('Failed to load posts. API might be down.', 'error');
+        catchError((err) => {
+          this.notifService.show(err.message || 'Failed to load posts.', 'error');
           return of({ type: 'RESET' as const, query, posts: [], proposedLinks: [], isAvailable });
         })
       );
@@ -127,8 +127,8 @@ export class Home implements OnInit, OnDestroy {
             }),
             map(result => ({ type: 'LOAD_NEXT', posts: result.posts, proposedLinks: result.proposedLinks })),
             startWith({ type: 'SET_LOADING' as const }),
-            catchError(() => {
-              this.notifService.show('Failed to load more posts.', 'error');
+            catchError((err) => {
+              this.notifService.show(err.message || 'Failed to load more posts.', 'error');
               return of({ type: 'STOP_LOADING' as const });
             })
           );

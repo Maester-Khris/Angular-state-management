@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -11,16 +11,21 @@ export class MediaService {
   private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
-  
-   // Upload image
+
+  // Upload image
   uploadImage(file: File): Observable<{ message: string, url: string }> {
     const formData = new FormData();
-    formData.append('file', file); // 'file' must match the name in upload.single('file') in Node
+    formData.append('file', file);
 
-    // Note: Do NOT add headers here. The browser needs to set the multipart boundary.
     return this.http.post<{ message: string, url: string }>(
-      `${this.baseUrl}/myactivity/upload`, 
+      `${this.baseUrl}/myactivity/upload`,
       formData
+    ).pipe(
+      catchError((err: HttpErrorResponse) => {
+        const message = err.error?.message || err.message || 'Failed to upload image';
+        console.error('MediaService upload error:', message);
+        return throwError(() => new Error(message));
+      })
     );
   }
 }

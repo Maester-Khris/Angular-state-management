@@ -99,7 +99,12 @@ export class RemoteApi {
         isPublic: p.isPublic !== undefined ? p.isPublic : true,
         createdBy: p.authorName || 'Unknown',
         imageUrl: p.images && p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/150'
-      }))
+      })),
+      catchError(err => {
+        const message = err.error?.message || err.message || 'Post not found';
+        console.error('Fetch post error:', message);
+        throw new Error(message);
+      })
     );
   }
 
