@@ -19,10 +19,14 @@ router.get("/health", async (req, res) => {
     ]);
 
     const dbStatus = dbStates[currentDbState] || "unknown";
-    const isHealthy = (pythonStatus === "connected" && dbStatus === "connected");
 
-    res.status(isHealthy ? 200 : 503).json({
-        status: isHealthy ? "UP" : "DEGRADED",
+    // Core logic: The Node server is functional if the Database is connected.
+    // Python (Semantic Search) is considered an optional enhancement for basic browsing.
+    const isFunctional = (dbStatus === "connected");
+    const isPerfect = isFunctional && (pythonStatus === "connected");
+
+    res.status(isFunctional ? 200 : 503).json({
+        status: isPerfect ? "UP" : (isFunctional ? "DEGRADED" : "DOWN"),
         timestamp: new Date(),
         latency: `${Date.now() - start}ms`,
         services: {

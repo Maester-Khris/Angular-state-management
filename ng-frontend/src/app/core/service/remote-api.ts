@@ -23,10 +23,11 @@ export class RemoteApi {
   }
 
   checkHealth(): Observable<boolean> {
-    return this.http.get(`${this.baseUrl}/health`).pipe(
-      map(() => {
-        this.isAvailableSubject.next(true);
-        return true;
+    return this.http.get<any>(`${this.baseUrl}/health`).pipe(
+      map((res) => {
+        const isAvailable = res.status === 'UP' || res.status === 'DEGRADED';
+        this.isAvailableSubject.next(isAvailable);
+        return isAvailable;
       }),
       catchError(() => {
         this.isAvailableSubject.next(false);
