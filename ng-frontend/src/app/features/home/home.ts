@@ -32,7 +32,9 @@ export class Home implements OnInit, OnDestroy {
 
   // Get data from resolver
   private route = inject(ActivatedRoute);
-  private initialData = this.route.snapshot.data['initialPosts'] || [];
+  private initialDataLoader = this.route.snapshot.data['initialPosts'] || { posts: [], proposedLinks: [] };
+  private initialData = this.initialDataLoader.posts;
+  private initialProposedLinks = this.initialDataLoader.proposedLinks;
 
 
   // ui interaction
@@ -78,18 +80,25 @@ export class Home implements OnInit, OnDestroy {
     this.RemoteApi.isAvailable$
   ]).pipe(
     // whenever search or global posts change
+    tap(() => {
+      // if (this.currentPage === 0 && this.initialData.length > 0) {
+      console.log('Initial data from resolver:', this.initialDataLoader);
+      // }
+    }),
     switchMap(([query, _, isAvailable]) => {
       if (!isAvailable) {
-        return of({ type: 'RESET' as const, query, posts: [], isAvailable });
+        return of({ type: 'RESET' as const, query, posts: [], proposedLinks: [], isAvailable });
       }
 
       // If we have initial data from resolver and this is the first load (currentPage 0),
       // we can skip the initial network request.
       if (this.currentPage === 0 && this.initialData.length > 0 && !query) {
         const posts = this.initialData;
+        const proposedLinks = this.initialProposedLinks;
         // Clear initial data so subsequent global updates or resets trigger a fresh fetch
         this.initialData = [];
-        return of({ type: 'RESET' as const, query, posts, isAvailable });
+        this.initialProposedLinks = [];
+        return of({ type: 'RESET' as const, query, posts, proposedLinks, isAvailable });
       }
 
       this.currentPage = 0;
@@ -110,6 +119,9 @@ export class Home implements OnInit, OnDestroy {
           this.currentPage++;
           const currentQuery = this.searchQuery$.getValue() || '';
           return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
+            tap((result) => {
+              console.log('Loading more posts...', result);
+            }),
             map(result => ({ type: 'LOAD_NEXT', posts: result.posts, proposedLinks: result.proposedLinks })),
             startWith({ type: 'SET_LOADING' as const }),
             catchError(() => {
@@ -132,7 +144,7 @@ export class Home implements OnInit, OnDestroy {
           return {
             ...state,
             posts: action.posts,
-            proposedLinks: action.proposedLinks,
+            proposedLinks: action.proposedLinks || [],
             query: action.query,
             loading: false,
             hasMore: action.posts.length === this.limit,
@@ -142,7 +154,7 @@ export class Home implements OnInit, OnDestroy {
           return {
             ...state,
             posts: [...state.posts, ...action.posts],
-            proposedLinks: action.proposedLinks.length > 0 ? action.proposedLinks : state.proposedLinks,
+            proposedLinks: (action.proposedLinks && action.proposedLinks.length > 0) ? action.proposedLinks : state.proposedLinks,
             loading: false,
             hasMore: action.posts.length === this.limit
           };

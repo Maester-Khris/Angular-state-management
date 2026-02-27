@@ -362,7 +362,7 @@ export class MockApi {
 
         return {
           posts: filteredPosts.slice(start, start + limit),
-          proposedLinks: query ? this.MOCK_PROPOSED_LINKS : []
+          proposedLinks: (query || start === 0) ? this.MOCK_PROPOSED_LINKS : []
         };
       })
     );
