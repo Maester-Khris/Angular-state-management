@@ -16,7 +16,7 @@ const verifyPassword = async (plain, hashPassword) => {
     const passwordMatch = await bcrypt.compare(plain, hashPassword);
     return passwordMatch;
   } catch (error) {
-    console.log("Error verifying password:", error);
+    console.error("Error verifying password:", error);
   }
 };
 

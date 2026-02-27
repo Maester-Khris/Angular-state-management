@@ -5,7 +5,6 @@ const PYTHON_BASE_URL = process.env.NODE_ENV === 'production'
     ? process.env.PYTHON_SERVICE_URL
     : 'http://localhost:5000';
 
-console.log("PYTHON_BASE_URL", PYTHON_BASE_URL);
 
 const checkPythonStatus = async () => {
     try {
@@ -18,7 +17,7 @@ const checkPythonStatus = async () => {
         // console.log("python response", response);
         return response.status === 200 ? "connected" : "error";
     } catch (error) {
-        console.log("python error", error);
+        console.error("python error", error);
         return "disconnected";
     }
 };

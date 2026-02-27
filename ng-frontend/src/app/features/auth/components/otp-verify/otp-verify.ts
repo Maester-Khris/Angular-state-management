@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, inject, Input, OnDestroy, Output, QueryList, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';import { submit } from '@angular/forms/signals';
+import { Router } from '@angular/router'; import { submit } from '@angular/forms/signals';
 import { NotificationService } from '../../../../core/services/notification-service';
 import { AuthService } from '../../../../core/services/auth-service';
 
@@ -10,9 +10,9 @@ import { AuthService } from '../../../../core/services/auth-service';
   templateUrl: './otp-verify.html',
   styleUrl: './otp-verify.css',
 })
-export class OtpVerify implements OnDestroy{
+export class OtpVerify implements OnDestroy {
   @ViewChildren('otpSlot') slots!: QueryList<ElementRef>;
-  
+
   isSubmitting = false;
   resendTimer = 30;
   private timerInterval: any;
@@ -29,7 +29,7 @@ export class OtpVerify implements OnDestroy{
   constructor() {
     this.startTimer();
   }
-isOtpComplete() {
+  isOtpComplete() {
     return this.slots?.toArray().every(slot => slot.nativeElement.value !== '');
   }
 
@@ -43,7 +43,6 @@ isOtpComplete() {
     this.isSubmitting = true;
     const otp = this.getOtpValue();
 
-    console.log(otp); 
 
     // this.authservice.verifyOtp(this.email, otp).subscribe({
     //   next: (res) => {
@@ -72,12 +71,12 @@ isOtpComplete() {
 
   onKeyUp(event: KeyboardEvent, index: number) {
     const input = event.target as HTMLInputElement;
-    
+
     // Move to next on input
     if (input.value && index < 5) {
       this.slots.toArray()[index + 1].nativeElement.focus();
     }
-    
+
     // Move to previous on backspace
     if (event.key === 'Backspace' && !input.value && index > 0) {
       this.slots.toArray()[index - 1].nativeElement.focus();
@@ -93,7 +92,7 @@ isOtpComplete() {
     }
   }
 
-  
+
   startTimer() {
     this.resendTimer = 30;
     if (this.timerInterval) clearInterval(this.timerInterval);

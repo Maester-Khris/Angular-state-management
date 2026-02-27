@@ -660,8 +660,7 @@ app-post-card {
 .related-links-panel {
   width: 100%;
   max-width: 450px;
-  /* Wider panel */
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(238, 242, 255, 0.9) 100%);
+  background: #F0F4FF;
   backdrop-filter: blur(16px);
   padding: 1.5rem 1.25rem;
   border-radius: 20px;

@@ -209,19 +209,19 @@ export class MockApi {
       title: 'Groq Faster AI Inference',
       url: 'https://groq.com/',
       description: 'LPU™ Inference Engine is the next generation of AI processing, delivering massive throughput and low latency.',
-      imageUrl: 'https://groq.com/wp-content/uploads/2024/02/Groq_Logo_Black-1.png'
+      imageUrl: 'https://images.ctfassets.net/gy95mqeyjg28/3eOfMquE9pgI95J4b83uMI/6db5a806dc37b4e8fc55b61b132e7dcb/Groq_2025_Update_V2-320x180.png'
     },
     {
       title: 'LangChain Documentation',
       url: 'https://js.langchain.com/',
       description: 'Build context-aware, reasoning applications with LangChain’s flexible framework.',
-      imageUrl: 'https://python.langchain.com/img/brand/wordmark.png'
+      imageUrl: 'https://miro.medium.com/v2/resize:fit:1400/1*QhTOaf0yM1YagBAvmgP9yg.png'
     },
     {
       title: 'Retrieval-Augmented Generation (RAG)',
       url: 'https://aws.amazon.com/what-is/retrieval-augmented-generation/',
       description: 'Understand how RAG combines LLMs with external data sources for more accurate results.',
-      imageUrl: 'https://example.com/rag-diagram.png'
+      imageUrl: 'https://miro.medium.com/1*uW3VXqTVz3u9HJHOqQnK5w.png'
     },
     {
       title: 'Angular Signals Guide',
@@ -233,7 +233,7 @@ export class MockApi {
       title: 'Vector Databases Explained',
       url: 'https://www.pinecone.io/learn/vector-database/',
       description: 'Explore how vector databases enable efficient semantic search for AI applications.',
-      imageUrl: 'https://www.pinecone.io/static/pinecone-logo-5f80f9b69b8d2b85e0fe167440263f9d.svg'
+      imageUrl: 'https://www.lystr.tech/wp-content/uploads/2025/12/Qdrant-Logo.png'
     }
   ];
 

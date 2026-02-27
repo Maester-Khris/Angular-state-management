@@ -111,8 +111,6 @@ router.get('/api/search', async (req, res) => {
 
         const keywordResults = mongoRes.status === 'fulfilled' ? mongoRes.value : [];
         const semanticMatches = pythonRes.status === 'fulfilled' ? pythonRes.value : [];
-        console.log("keywordResults", keywordResults);
-        console.log("semanticMatches", semanticMatches);
 
         // Hydration Logic: Fetch full docs for semantic matches not in lexical results
         const lexicalUuids = new Set(keywordResults.map(p => p.uuid));
@@ -134,7 +132,9 @@ router.get('/api/search', async (req, res) => {
             mode: effectiveMode,
             count: hybridResults.length,
             results: hybridResults.slice(0, searchLimit),
-            proposedLinks: []
+            proposedLinks: [
+
+            ]
         });
 
     } catch (error) {

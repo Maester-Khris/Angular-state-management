@@ -87,7 +87,6 @@ export class Home implements OnInit, OnDestroy {
     // whenever search or global posts change
     tap(() => {
       // if (this.currentPage === 0 && this.initialData.length > 0) {
-      console.log('Initial data from resolver:', this.initialDataLoader);
       // }
     }),
     switchMap(([query, _, isAvailable]) => {
@@ -125,7 +124,6 @@ export class Home implements OnInit, OnDestroy {
           const currentQuery = this.searchQuery$.getValue() || '';
           return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
             tap((result) => {
-              console.log('Loading more posts...', result);
             }),
             map(result => ({ type: 'LOAD_NEXT', posts: result.posts, proposedLinks: result.proposedLinks })),
             startWith({ type: 'SET_LOADING' as const }),

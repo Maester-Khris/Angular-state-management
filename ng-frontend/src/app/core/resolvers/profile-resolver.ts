@@ -9,14 +9,13 @@ export const profileResolver: ResolveFn<UserProfile> = (route, state) => {
   const profileService = inject(ProfileService);
   const authService = inject(AuthService);
 
-  console.log('hello from profileResolverResolver');
-  
+
   return authService.user$.pipe(
     take(1), // ensure the observable complete after emitting one value
     switchMap((user) => {
-      if(user){
+      if (user) {
         return profileService.getProfile(user.id)
-      }else{
+      } else {
         return EMPTY;
       }
     })
