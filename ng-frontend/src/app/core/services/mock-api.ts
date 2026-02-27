@@ -4,12 +4,26 @@ import { Post } from '../../features/posts/data-access/post.model';
 import { email } from '@angular/forms/signals';
 import { UserProfile } from '../../features/profile/data-access/profile.model';
 
+export interface ProposedLink {
+  title: string;
+  url: string;
+  description: string;
+  imageUrl?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class MockApi {
   private dataChangedTrigger = new BehaviorSubject<void>(undefined);
   dataChanged$ = this.dataChangedTrigger.asObservable();
+
+  private isAvailableSubject = new BehaviorSubject<boolean>(true);
+  isAvailable$ = this.isAvailableSubject.asObservable();
+
+  checkHealth(): Observable<boolean> {
+    return of(true).pipe(delay(300));
+  }
 
   // Inside your MockApiService
   MOCK_USER_PROFILE: UserProfile = {
@@ -154,7 +168,7 @@ export class MockApi {
     },
     {
       title: "Building Mobile Apps with Flutter",
-      description: "Learn how to build cross-platform mobile applications using Flutter and Dart.",
+      description: "Learn how to build cross-platform mobile applications using Flutter and JavaScript.",
       createdAt: new Date("2023-01-16"),
       lastModifiedAt: null,
       isPublic: true,
@@ -187,6 +201,39 @@ export class MockApi {
       isPublic: true,
       createdBy: "graphqlguru",
       imageUrl: "https://graphql.org/img/logo.svg"
+    }
+  ];
+
+  MOCK_PROPOSED_LINKS: ProposedLink[] = [
+    {
+      title: 'Groq Faster AI Inference',
+      url: 'https://groq.com/',
+      description: 'LPU™ Inference Engine is the next generation of AI processing, delivering massive throughput and low latency.',
+      imageUrl: 'https://groq.com/wp-content/uploads/2024/02/Groq_Logo_Black-1.png'
+    },
+    {
+      title: 'LangChain Documentation',
+      url: 'https://js.langchain.com/',
+      description: 'Build context-aware, reasoning applications with LangChain’s flexible framework.',
+      imageUrl: 'https://python.langchain.com/img/brand/wordmark.png'
+    },
+    {
+      title: 'Retrieval-Augmented Generation (RAG)',
+      url: 'https://aws.amazon.com/what-is/retrieval-augmented-generation/',
+      description: 'Understand how RAG combines LLMs with external data sources for more accurate results.',
+      imageUrl: 'https://example.com/rag-diagram.png'
+    },
+    {
+      title: 'Angular Signals Guide',
+      url: 'https://angular.io/guide/signals',
+      description: 'Learn about Angular’s new reactive primitive for optimized change detection.',
+      imageUrl: 'https://angular.io/assets/images/logos/angular/angular.png'
+    },
+    {
+      title: 'Vector Databases Explained',
+      url: 'https://www.pinecone.io/learn/vector-database/',
+      description: 'Explore how vector databases enable efficient semantic search for AI applications.',
+      imageUrl: 'https://www.pinecone.io/static/pinecone-logo-5f80f9b69b8d2b85e0fe167440263f9d.svg'
     }
   ];
 
@@ -298,18 +345,25 @@ export class MockApi {
     return of(this.MOCK_AUTHORS.filter(author => author.email.includes(email)) || {});
   }
 
-  fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<Post[]> {
+  fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<{ posts: Post[], proposedLinks: ProposedLink[] }> {
     return of(this.MOCK_POSTS).pipe(
       delay(500),
       map((posts: Post[]) => {
         const publicPosts = posts.filter(post => post.isPublic);
         const start = page * limit;
-        if (!query) return publicPosts.slice(start, start + limit);
-        const term = query.toLowerCase().trim();
-        return publicPosts.filter((p: Post) =>
-          p.title.toLowerCase().includes(term) ||
-          p.description.toLowerCase().includes(term)
-        ).slice(start, start + limit);
+        let filteredPosts = publicPosts;
+        if (query) {
+          const term = query.toLowerCase().trim();
+          filteredPosts = publicPosts.filter((p: Post) =>
+            p.title.toLowerCase().includes(term) ||
+            p.description.toLowerCase().includes(term)
+          );
+        }
+
+        return {
+          posts: filteredPosts.slice(start, start + limit),
+          proposedLinks: query ? this.MOCK_PROPOSED_LINKS : []
+        };
       })
     );
   }
