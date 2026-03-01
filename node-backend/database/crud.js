@@ -4,6 +4,7 @@ const User = require("./models/user");
 const Favorite = require("./models/favorites");
 const TokenBlacklist = require("./models/blacklist");
 const Otp = require("./models/userotp"); // added
+const Newsletter = require("./models/newsletter");
 
 const dbCrudOperator = {
 
@@ -246,6 +247,14 @@ const dbCrudOperator = {
 
   async markUserVerifiedByEmail(email) {
     return await User.findOneAndUpdate({ email }, { isVerified: true });
+  },
+
+  async subscribeNewsletter(email) {
+    return await Newsletter.findOneAndUpdate(
+      { email: email.toLowerCase() },
+      { $setOnInsert: { email: email.toLowerCase(), createdAt: new Date() } },
+      { upsert: true, new: true, lean: true }
+    );
   },
 };
 
