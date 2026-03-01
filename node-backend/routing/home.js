@@ -143,4 +143,26 @@ router.get('/api/search', async (req, res) => {
     }
 });
 
+// ==========================================
+// 4. NEWSLETTER
+// ==========================================
+
+router.post('/api/newsletter', async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email || !email.includes('@')) {
+            return res.status(400).json({ message: "A valid email is required" });
+        }
+
+        const result = await dbCrudOperator.subscribeNewsletter(email);
+        return res.status(200).json({
+            message: "Successfully subscribed to newsletter",
+            data: result
+        });
+    } catch (error) {
+        console.error("Newsletter error:", error.message);
+        return res.status(500).json({ message: "Unable to process newsletter subscription" });
+    }
+});
+
 module.exports = router;
