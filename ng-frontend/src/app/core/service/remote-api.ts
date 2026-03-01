@@ -129,8 +129,13 @@ export class RemoteApi {
 
   // Delete post
   deletePost(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/posts/${id}`).pipe(
+    return this.http.delete<any>(`${this.baseUrl}/api/posts/${id}`).pipe(
       tap(() => this.dataChangedTrigger.next())
     );
+  }
+
+  // Newsletter
+  subscribeNewsletter(email: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/api/newsletter`, { email });
   }
 }
