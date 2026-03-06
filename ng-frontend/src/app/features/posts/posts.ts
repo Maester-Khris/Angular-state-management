@@ -162,7 +162,6 @@ export class Posts implements OnInit, HasUnsavedChanges {
   }
 
   onSearchAuthors(event: any) {
-    console.log("fired");
     const query = event.target.value.toLowerCase();
     this.authorSearch.next(query);
   }
@@ -175,7 +174,6 @@ export class Posts implements OnInit, HasUnsavedChanges {
   }
 
   removeAuthor(userid: number) {
-    console.log(userid);
     this.selectedCoAuthors = this.selectedCoAuthors.filter(a => a.id !== userid);
   }
 

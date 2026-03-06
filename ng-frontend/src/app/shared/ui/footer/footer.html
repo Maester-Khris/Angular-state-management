@@ -1,11 +1,11 @@
 <footer class="footer-glass mt-5">
   <div class="container py-5">
     <div class="row g-4">
-      
+
       <div class="col-md-4">
         <h5 class="footer-title">PostAir</h5>
         <p class="footer-text">
-          A high-performance sanctuary for tech insights and collaborative research. 
+          A high-performance sanctuary for tech insights and collaborative research.
           Built for engineers, by engineers, using the cutting edge of Time-Series analytics.
         </p>
         <div class="social-links d-flex gap-3">
@@ -28,7 +28,7 @@
       <div class="col-md-4">
         <h5 class="footer-title">Stay in the Loop</h5>
         <p class="footer-text mb-3">Get the weekly digest of the most impactful research.</p>
-        <form [formGroup]="newsletterForm" (ngSubmit)="onEmailSubmit()" class="newsletter-form">
+        <form [formGroup]="newsletterForm" (ngSubmit)="onNewsletterSubmit()" class="newsletter-form">
           <div class="input-group">
             <input type="email" class="form-control" placeholder="email@research.com" formControlName="email">
             <button class="btn btn-primary-glass" type="submit">Join</button>

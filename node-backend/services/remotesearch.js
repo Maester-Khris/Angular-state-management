@@ -17,7 +17,7 @@ const checkPythonStatus = async () => {
         // console.log("python response", response);
         return response.status === 200 ? "connected" : "error";
     } catch (error) {
-        console.error("python error", error);
+        console.error("python error", error.message);
         return "disconnected";
     }
 };
