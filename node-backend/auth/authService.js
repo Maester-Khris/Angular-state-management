@@ -51,7 +51,7 @@ const signupUser = async ({ name, email, password }, deps) => {
   });
 
   try {
-    await mailer.sendWithRetries(user.email, otp);
+    await mailer.enqueueOtpEmail(user.email, otp);
   } catch (err) {
     await db.deleteOtpById(otpRecord._id);
     return { ok: false, reason: "EMAIL_FAILED" };
@@ -102,7 +102,7 @@ const resendOtp = async ({ email }, deps) => {
   const record = await db.createOtp({ email, otp, createdAt: new Date(), expiresAt });
 
   try {
-    await mailer.sendWithRetries(email, otp);
+    await mailer.enqueueOtpEmail(email, otp);
   } catch {
     await db.deleteOtpById(record._id);
     return { ok: false, reason: "EMAIL_FAILED" };

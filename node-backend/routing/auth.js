@@ -4,7 +4,7 @@ const router = express.Router();
 
 const authService = require("../auth/authService");
 const db = require("../database/crud");
-const mailer = require("../utils/mailer");
+const mailer = require("../services/mailService");
 
 /* ---------- dependency bundle ---------- */
 const deps = { db, mailer };

@@ -13,6 +13,9 @@ const homeRouter = require("./routing/home");
 const activityRouter = require("./routing/activity");
 const profileRouter = require("./routing/profile");
 const authRouter = require("./routing/auth");
+const eventLoggerService = require("./services/eventLoggerService");
+const mailService = require("./services/mailService");
+const queueService = require("./services/queueService");
 
 app.use(cors(corsConfig));
 app.use(express.json());
@@ -41,6 +44,18 @@ const startServer = async () => {
     await database.connectDB();
     server = app.listen(PORT, async () => {
       console.log(`Server started on port ${PORT}`);
+
+      // Initialize Analytics Worker
+      eventLoggerService.initWorker();
+
+      // Initialize Mailing Worker (Long-lived)
+      mailService.initWorker();
+
+      // Schedule repeatable batch processing (every 5 minutes)
+      await queueService.addJob('analytics-queue', 'process-batch', {}, {
+        repeat: { cron: '*/5 * * * *' }
+      });
+      console.log('Analytics batch scheduler started.');
     });
   } catch (err) {
     console.log("Error starting server", err);
@@ -61,7 +76,7 @@ const serverShutdown = async () => {
       console.log("Error while shutting down server", err);
       process.exit(1);
     }
-     
+
     await database.closeConnection();
     console.log("Server shutdown complete.");
     process.exit(0);
