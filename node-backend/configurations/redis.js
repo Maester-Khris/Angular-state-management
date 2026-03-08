@@ -2,15 +2,17 @@ const Redis = require('ioredis');
 
 class RedisConfig {
     constructor() {
-        this.redisOptions = {
+        this.producerConnection = null;
+        this.consumerConnection = null;
+    }
+
+    getRedisOptions() {
+        return {
             host: process.env.REDIS_HOST || '127.0.0.1',
             port: process.env.REDIS_PORT || 6379,
             password: process.env.REDIS_PASSWORD || undefined,
-            maxRetriesPerRequest: null, // Required for BullMQ
+            maxRetriesPerRequest: null,
         };
-
-        this.producerConnection = null;
-        this.consumerConnection = null;
     }
 
     getProducerConnection() {
@@ -20,7 +22,8 @@ class RedisConfig {
             if (redisUrl) {
                 this.producerConnection = new Redis(redisUrl, { maxRetriesPerRequest: null });
             } else {
-                this.producerConnection = new Redis(this.redisOptions);
+                const options = this.getRedisOptions();
+                this.producerConnection = new Redis(options);
             }
 
             this.producerConnection.on('error', (err) => console.error('Redis Producer Error:', err));
@@ -35,7 +38,8 @@ class RedisConfig {
             if (redisUrl) {
                 this.consumerConnection = new Redis(redisUrl, { maxRetriesPerRequest: null });
             } else {
-                this.consumerConnection = new Redis(this.redisOptions);
+                const options = this.getRedisOptions();
+                this.consumerConnection = new Redis(options);
             }
 
             this.consumerConnection.on('error', (err) => console.error('Redis Consumer Error:', err));
@@ -44,8 +48,14 @@ class RedisConfig {
     }
 
     async closeConnections() {
-        if (this.producerConnection) await this.producerConnection.quit();
-        if (this.consumerConnection) await this.consumerConnection.quit();
+        if (this.producerConnection) {
+            await this.producerConnection.quit();
+            this.producerConnection = null;
+        }
+        if (this.consumerConnection) {
+            await this.consumerConnection.quit();
+            this.consumerConnection = null;
+        }
         console.log('Redis connections closed.');
     }
 }
