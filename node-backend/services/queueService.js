@@ -30,7 +30,10 @@ class QueueService {
      */
     async addJob(queueName, jobName, data, options = {}) {
         const queue = this.getQueue(queueName);
-        return await queue.add(jobName, data, options);
+        console.log(`[QueueService] Adding job [${jobName}] to queue [${queueName}]...`);
+        const job = await queue.add(jobName, data, options);
+        console.log(`[QueueService] Job enqueued: ${job.id}`);
+        return job;
     }
 
     /**

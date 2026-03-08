@@ -171,6 +171,7 @@ router.post('/api/newsletter', async (req, res) => {
 // ==========================================
 
 router.post('/api/analytics/events', async (req, res) => {
+    console.log(`[AnalyticsRoute] Individual event received: ${req.body.type} for ${req.body.postId}`);
     try {
         const { postId, userId, guestId, type, source } = req.body;
         if (!postId || (!userId && !guestId) || !type) {
@@ -188,6 +189,7 @@ router.post('/api/analytics/events', async (req, res) => {
 });
 
 router.post('/api/analytics/batch', async (req, res) => {
+    console.log(`[AnalyticsRoute] Batch received with ${req.body.events?.length || 0} events`);
     try {
         const { events } = req.body;
         if (!events || !Array.isArray(events)) {

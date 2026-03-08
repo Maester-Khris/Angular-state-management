@@ -8,8 +8,11 @@ const AnalyticsDAO = {
     async batchInsertEvents(events) {
         if (!events || events.length === 0) return null;
 
+        console.log(`[AnalyticsDAO] Inserting ${events.length} events into MongoDB...`);
         // Mongoose insertMany handles bulk operations efficiently
-        return await PostAnalytics.insertMany(events, { ordered: false });
+        const results = await PostAnalytics.insertMany(events, { ordered: false });
+        console.log(`[AnalyticsDAO] Successfully inserted ${results.length} events.`);
+        return results;
     },
 
     /**
