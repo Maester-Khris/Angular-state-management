@@ -1,18 +1,19 @@
 const mongoose = require('mongoose');
 
 const postAnalyticsSchema = new mongoose.Schema({
-    timestamp:{
+    timestamp: {
         type: Date,
         required: true,
     },
-    metadata:{
-        postId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Post', required: true },
-        userId:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-        type:{ type: String, required: true, enum:['view', 'impression', 'share'] },
+    metadata: {
+        postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post', required: true },
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
+        guestId: { type: String, required: false },
+        type: { type: String, required: true, enum: ['view', 'impression', 'share', 'favorite'] },
         source: { type: String } // e.g., 'web', 'mobile', 'api'
     }
 }, {
-    timeseries:{
+    timeseries: {
         timeField: 'timestamp',
         metaField: 'metadata',
         granularity: 'minutes'

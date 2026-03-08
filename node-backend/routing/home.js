@@ -4,6 +4,7 @@ const MongoConnection = require('../database/connection');
 const Post = require('../database/models/post');
 const { getSemanticMatches, checkPythonStatus } = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
+const eventLoggerService = require('../services/eventLoggerService');
 
 // ==========================================
 // 1. SYSTEM INTEGRITY
@@ -162,6 +163,51 @@ router.post('/api/newsletter', async (req, res) => {
     } catch (error) {
         console.error("Newsletter error:", error.message);
         return res.status(500).json({ message: "Unable to process newsletter subscription" });
+    }
+});
+
+// ==========================================
+// 5. ANALYTICS
+// ==========================================
+
+router.post('/api/analytics/events', async (req, res) => {
+    try {
+        const { postId, userId, guestId, type, source } = req.body;
+        if (!postId || (!userId && !guestId) || !type) {
+            return res.status(400).json({ message: "postId, (userId or guestId), and type are required" });
+        }
+
+        // Add to queue for asynchronous processing
+        await eventLoggerService.queueEvent({ postId, userId, guestId, type, source });
+
+        return res.status(202).json({ message: "Event queued for processing" });
+    } catch (error) {
+        console.error("Analytics error:", error.message);
+        return res.status(500).json({ message: "Unable to process analytics event" });
+    }
+});
+
+router.post('/api/analytics/batch', async (req, res) => {
+    try {
+        const { events } = req.body;
+        if (!events || !Array.isArray(events)) {
+            return res.status(400).json({ message: "Array of events is required" });
+        }
+
+        const validEvents = events.filter(e => e.postId && (e.userId || e.guestId) && e.type);
+
+        // Enqueue all valid events
+        for (const event of validEvents) {
+            await eventLoggerService.queueEvent(event);
+        }
+
+        return res.status(202).json({
+            message: `${validEvents.length} events queued for processing`,
+            ignored: events.length - validEvents.length
+        });
+    } catch (error) {
+        console.error("Analytics batch error:", error.message);
+        return res.status(500).json({ message: "Unable to process analytics batch" });
     }
 });
 
