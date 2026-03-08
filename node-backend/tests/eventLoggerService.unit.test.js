@@ -32,7 +32,7 @@ describe('EventLoggerService Unit Tests', () => {
         it('should fetch waiting jobs and insert them via DAO', async () => {
             const jobs = [
                 { id: '1', data: { postId: 'id1', userId: 'u1', type: 'view' }, remove: vi.fn().mockResolvedValue() },
-                { id: '2', data: { postId: 'id2', userId: 'u2', type: 'share' }, remove: vi.fn().mockResolvedValue() }
+                { id: '2', data: { postId: 'id2', guestId: 'g1', type: 'share' }, remove: vi.fn().mockResolvedValue() }
             ];
             const mockQueue = {
                 getWaiting: vi.fn().mockResolvedValue(jobs)
@@ -43,8 +43,8 @@ describe('EventLoggerService Unit Tests', () => {
             await eventLoggerService.processAnalyticsBatch();
 
             expect(batchInsertSpy).toHaveBeenCalledWith([
-                expect.objectContaining({ metadata: expect.objectContaining({ postId: 'id1', userId: 'u1' }) }),
-                expect.objectContaining({ metadata: expect.objectContaining({ postId: 'id2', userId: 'u2' }) })
+                expect.objectContaining({ metadata: expect.objectContaining({ postId: 'id1', userId: 'u1', guestId: null }) }),
+                expect.objectContaining({ metadata: expect.objectContaining({ postId: 'id2', userId: null, guestId: 'g1' }) })
             ]);
             expect(jobs[0].remove).toHaveBeenCalled();
             expect(jobs[1].remove).toHaveBeenCalled();

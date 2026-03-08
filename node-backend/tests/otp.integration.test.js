@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { beforeAll, afterAll, describe, it, expect, vi } from 'vitest';
 import request from 'supertest';
 
@@ -42,15 +43,13 @@ const { Queue } = require('bullmq');
 let mailingQueue;
 
 beforeAll(async () => {
-  mailingQueue = new Queue('mailing-queue', {
-    connection: redisConfig.getProducerConnection()
-  });
+  mailingQueue = queueService.getQueue('mailing-queue');
   await mailingQueue.drain(true);
 });
 
 afterAll(async () => {
-  await mailingQueue.close();
-  await queueService.shutdown();
+  // await mailingQueue.close(); 
+  // Do NOT close shared queue instances in afterAll as they are shared via singleton
 });
 
 describe('OTP integration tests (Real Redis + Mocked MongoDB)', () => {
@@ -72,6 +71,9 @@ describe('OTP integration tests (Real Redis + Mocked MongoDB)', () => {
       });
 
     expect(res.status).toBe(201);
+
+    // Wait for job to be processed/enqueued
+    await new Promise(r => setTimeout(r, 500));
 
     // Verify job in queue
     const jobs = await mailingQueue.getJobs(['waiting']);
