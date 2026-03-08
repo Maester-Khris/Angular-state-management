@@ -31,6 +31,17 @@ app.use("/auth", authRouter);
 app.use("/profile", profileRouter);
 app.use("/", activityRouter);
 
+// Debug Route: Manually trigger analytics batch processing
+app.post("/debug/analytics/process", async (req, res) => {
+  try {
+    const eventLoggerService = require("./services/eventLoggerService");
+    await eventLoggerService.processAnalyticsBatch();
+    res.json({ message: "Analytics batch processing triggered manually" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.use((req, res) => {
   res.status(404).json({
     message: "Resource not found",
@@ -52,10 +63,10 @@ const startServer = async () => {
       mailService.initWorker();
 
       // Schedule repeatable batch processing (every 5 minutes)
-      await queueService.addJob('analytics-queue', 'process-batch', {}, {
+      await queueService.addJob('analytics-control-queue', 'process-batch', {}, {
         repeat: { cron: '*/5 * * * *' }
       });
-      console.log('Analytics batch scheduler started.');
+      console.log('Analytics batch scheduler started on analytics-control-queue.');
     });
   } catch (err) {
     console.log("Error starting server", err);

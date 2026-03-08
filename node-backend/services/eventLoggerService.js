@@ -4,7 +4,8 @@ const analyticsDAO = require('../database/analytics-dao');
 class EventLoggerService {
     constructor() {
         this.ANALYTICS_QUEUE = 'analytics-queue';
-        this.BATCH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes (standard, but we can customize)
+        this.BATCH_CONTROL_QUEUE = 'analytics-control-queue';
+        this.BATCH_INTERVAL_MS = 5 * 60 * 1000;
     }
 
     /**
@@ -12,6 +13,7 @@ class EventLoggerService {
      * @param {object} eventData 
      */
     async queueEvent(eventData) {
+        console.log(`[EventLoggerService] Enqueuing event: ${eventData.type} for post ${eventData.postId}`);
         // Enqueue the job for later processing
         return await queueService.addJob(this.ANALYTICS_QUEUE, 'log-event', eventData);
     }
@@ -25,9 +27,10 @@ class EventLoggerService {
 
         // Fetch waiting jobs (up to a reasonable limit)
         const jobs = await queue.getWaiting();
+        console.log(`[EventLoggerService] processAnalyticsBatch called. Jobs waiting: ${jobs.length}`);
         if (jobs.length === 0) return;
 
-        console.log(`Processing batch of ${jobs.length} analytics events...`);
+        console.log(`[EventLoggerService] Processing batch of ${jobs.length} analytics events...`);
 
         const eventsToInsert = jobs.map(job => ({
             timestamp: job.data.timestamp ? new Date(job.data.timestamp) : new Date(),
@@ -59,13 +62,15 @@ class EventLoggerService {
      * Initialize the worker for analytics
      */
     initWorker() {
-        // In this implementation, the worker handles the batch processing
-        // triggered by a 'scheduler' job rather than processing every job individually.
-        queueService.createWorker(this.ANALYTICS_QUEUE, async (job) => {
+        // We create a worker on a SEPARATE queue so it doesn't automatically 
+        // process (and complete) the 'log-event' jobs in analytics-queue.
+        queueService.createWorker(this.BATCH_CONTROL_QUEUE, async (job) => {
+            console.log(`[EventLoggerService] Received control job: ${job.name}`);
             if (job.name === 'process-batch') {
                 await this.processAnalyticsBatch();
             }
         });
+        console.log(`[EventLoggerService] Analytics batch worker initialized on ${this.BATCH_CONTROL_QUEUE}`);
     }
 }
 

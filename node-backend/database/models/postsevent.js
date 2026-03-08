@@ -6,10 +6,10 @@ const postAnalyticsSchema = new mongoose.Schema({
         required: true,
     },
     metadata: {
-        postId: { type: mongoose.Schema.Types.ObjectId, ref: 'Post', required: true },
-        userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
+        postId: { type: String, required: true },
+        userId: { type: String, required: false },
         guestId: { type: String, required: false },
-        type: { type: String, required: true, enum: ['view', 'impression', 'share', 'favorite'] },
+        type: { type: String, required: true, enum: ['view', 'impression', 'share', 'favorite', 'preview'] },
         source: { type: String } // e.g., 'web', 'mobile', 'api'
     }
 }, {
