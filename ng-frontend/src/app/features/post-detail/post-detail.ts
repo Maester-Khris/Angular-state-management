@@ -56,26 +56,62 @@ export class PostDetail implements OnInit {
     )
   );
 
+  private viewTimer?: any;
+  private viewTracked = false;
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
-      const viewTimer = setTimeout(() => {
+      this.startViewTimer();
+    }
+  }
+
+  private startViewTimer() {
+    this.viewTimer = setTimeout(() => {
+      if (!this.viewTracked) {
         this.eventTracker.emit({
-          postId: "1",
-          type: 'VIEW',
+          postId: this.uuid(),
+          type: 'view',
           timestamp: Date.now()
         });
-      }, 2000);
-    }
+        this.viewTracked = true;
+      }
+    }, 30000); // 30 seconds
   }
 
   onAddToBookmarks() {
     // optimistic ui update
     this.isSaved.set(true);
     this.eventTracker.emit({
-      postId: "1",
-      type: 'FAVORITE',
+      postId: this.uuid(),
+      type: 'favorite',
       timestamp: Date.now()
     });
+    this.notifService.show('Added to favorites', 'success');
+  }
+
+  onShare() {
+    this.eventTracker.emit({
+      postId: this.uuid(),
+      type: 'share',
+      timestamp: Date.now()
+    });
+
+    // Attempt to use Web Share API
+    if (navigator.share) {
+      navigator.share({
+        title: this.post()?.title,
+        url: window.location.href
+      }).catch(() => { });
+    } else {
+      this.notifService.show('Link copied to clipboard', 'success');
+      navigator.clipboard.writeText(window.location.href);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.viewTimer) {
+      clearTimeout(this.viewTimer);
+    }
   }
 
   close() {
