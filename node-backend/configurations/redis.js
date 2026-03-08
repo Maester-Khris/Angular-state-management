@@ -5,8 +5,8 @@ class RedisConfig {
         this.redisOptions = {
             host: process.env.REDIS_HOST || '127.0.0.1',
             port: process.env.REDIS_PORT || 6379,
+            password: process.env.REDIS_PASSWORD || undefined,
             maxRetriesPerRequest: null, // Required for BullMQ
-            // Add other options like password if needed
         };
 
         this.producerConnection = null;
@@ -15,10 +15,9 @@ class RedisConfig {
 
     getProducerConnection() {
         if (!this.producerConnection) {
-            const isProd = process.env.NODE_ENV === 'production';
             const redisUrl = process.env.REDIS_URL;
 
-            if (isProd && redisUrl) {
+            if (redisUrl) {
                 this.producerConnection = new Redis(redisUrl, { maxRetriesPerRequest: null });
             } else {
                 this.producerConnection = new Redis(this.redisOptions);
@@ -31,10 +30,9 @@ class RedisConfig {
 
     getConsumerConnection() {
         if (!this.consumerConnection) {
-            const isProd = process.env.NODE_ENV === 'production';
             const redisUrl = process.env.REDIS_URL;
 
-            if (isProd && redisUrl) {
+            if (redisUrl) {
                 this.consumerConnection = new Redis(redisUrl, { maxRetriesPerRequest: null });
             } else {
                 this.consumerConnection = new Redis(this.redisOptions);
