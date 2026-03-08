@@ -23,7 +23,7 @@ const mockDb = {
 };
 
 const mockMailer = {
-  sendWithRetries: vi.fn()
+  enqueueOtpEmail: vi.fn()
 };
 
 const deps = {
@@ -40,7 +40,7 @@ describe("signupUser", () => {
     mockDb.checkUserExistsByEmail.mockResolvedValue(false);
     mockDb.createUser.mockResolvedValue({ email: "test@test.com" });
     mockDb.createOtp.mockResolvedValue({ _id: "otp1" });
-    mockMailer.sendWithRetries.mockResolvedValue();
+    mockMailer.enqueueOtpEmail.mockResolvedValue();
 
     const result = await signupUser(
       { name: "Test", email: "test@test.com", password: "123456" },
@@ -49,13 +49,13 @@ describe("signupUser", () => {
 
     expect(result).toEqual({ ok: true, email: "test@test.com" });
     expect(mockDb.createOtp).toHaveBeenCalled();
-    expect(mockMailer.sendWithRetries).toHaveBeenCalledWith(
+    expect(mockMailer.enqueueOtpEmail).toHaveBeenCalledWith(
       "test@test.com",
       expect.any(String)
     );
   });
 
-    it("returns USER_EXISTS if email already registered", async () => {
+  it("returns USER_EXISTS if email already registered", async () => {
     mockDb.checkUserExistsByEmail.mockResolvedValue(true);
 
     const result = await signupUser(
@@ -67,11 +67,11 @@ describe("signupUser", () => {
     expect(mockDb.createUser).not.toHaveBeenCalled();
   });
 
-    it("rolls back OTP if email sending fails", async () => {
+  it("rolls back OTP if email sending fails", async () => {
     mockDb.checkUserExistsByEmail.mockResolvedValue(false);
     mockDb.createUser.mockResolvedValue({ email: "test@test.com" });
     mockDb.createOtp.mockResolvedValue({ _id: "otp123" });
-    mockMailer.sendWithRetries.mockRejectedValue(new Error("SMTP down"));
+    mockMailer.enqueueOtpEmail.mockRejectedValue(new Error("SMTP down"));
 
     const result = await signupUser(
       { name: "Test", email: "test@test.com", password: "123456" },
@@ -139,7 +139,7 @@ describe("resendOtp", () => {
     mockDb.findLatestOtpByEmail.mockResolvedValue(null);
     mockDb.countOtpsSince.mockResolvedValue(0);
     mockDb.createOtp.mockResolvedValue({ _id: "otp2" });
-    mockMailer.sendWithRetries.mockResolvedValue();
+    mockMailer.enqueueOtpEmail.mockResolvedValue();
 
     const result = await resendOtp(
       { email: "test@test.com" },
@@ -147,6 +147,6 @@ describe("resendOtp", () => {
     );
 
     expect(result).toEqual({ ok: true });
-    expect(mockMailer.sendWithRetries).toHaveBeenCalled();
+    expect(mockMailer.enqueueOtpEmail).toHaveBeenCalled();
   });
 });

@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 
 export default defineConfig({
   test: {
+    globals: true,
     env: dotenv.config({ path: '.env' }).parsed, // Manually load .env into Vitest
   },
 })  

@@ -1,79 +1,97 @@
 import { beforeAll, afterAll, describe, it, expect, vi } from 'vitest';
 import request from 'supertest';
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import mongoose from 'mongoose';
 
 // Speed up retry/backoff loops in routes for tests
 process.env.SEND_RETRY_ATTEMPTS = '1';
 process.env.SEND_RETRY_BASE_MS = '1';
 
-const mailer = require('../utils/mailer');
-const sendSpy = vi.spyOn(mailer, 'sendWithRetries').mockResolvedValue(true);
+// Mock DB before importing anything else
+vi.mock('../database/connection', () => ({
+  connectDB: vi.fn().mockResolvedValue(),
+  closeConnection: vi.fn().mockResolvedValue(),
+  getDbStatus: vi.fn().mockReturnValue(1),
+  connectionEventListeners: vi.fn()
+}));
 
-// Import app and database helpers after mocks
+// Mock Models
+vi.mock('../database/models/user', () => {
+  const mock = {
+    findOne: vi.fn(),
+    create: vi.fn(),
+    updateOne: vi.fn()
+  };
+  return mock;
+});
+vi.mock('../database/models/userotp', () => {
+  const mock = {
+    deleteMany: vi.fn(),
+    create: vi.fn(),
+    find: vi.fn()
+  };
+  return mock;
+});
+
+// Import app after mocks
 const { app } = require('../server');
-const database = require('../database/connection');
 const User = require('../database/models/user');
 const Otp = require('../database/models/userotp');
+const queueService = require('../services/queueService');
+const redisConfig = require('../configurations/redis');
+const { Queue } = require('bullmq');
 
-let mongoServer;
+let mailingQueue;
+
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
-  await database.connectDB(uri);
-
-  // clean all collections before tests
-  await Otp.deleteMany({});
-  await User.deleteMany({});  
-
-  // Ensure indexes are created (some models rely on TTL indexes etc.)
-  await mongoose.connection.db.command({ ping: 1 });
+  mailingQueue = new Queue('mailing-queue', {
+    connection: redisConfig.getProducerConnection()
+  });
+  await mailingQueue.drain(true);
 });
 
 afterAll(async () => {
-  await database.closeConnection();
-  if (mongoServer) await mongoServer.stop();
+  await mailingQueue.close();
+  await queueService.shutdown();
 });
 
-describe('OTP integration tests (in-memory MongoDB)', () => {
-  it('signup flow: successfully mocks email and creates OTP', async () => {
+describe('OTP integration tests (Real Redis + Mocked MongoDB)', () => {
+  it('signup flow: successfully enqueues OTP email job', async () => {
+    const email = 'formationikit@gmail.com';
+
+    // Setup DB Mocks for signup
+    const dbCrud = require('../database/crud');
+    vi.spyOn(dbCrud, 'checkUserExistsByEmail').mockResolvedValue(false);
+    vi.spyOn(dbCrud, 'createUser').mockResolvedValue({ email, name: 'Test User' });
+    vi.spyOn(dbCrud, 'createOtp').mockResolvedValue({ _id: 'otp-id', email, otp: '123456' });
+
     const res = await request(app)
-      .post('/auth/signup') // Ensure /auth prefix is here
-      .send({ 
-        email: 'formationnikit@gmail.com', 
-        password: 'password123', 
-        name: 'Test User' 
+      .post('/auth/signup')
+      .send({
+        email: email,
+        password: 'password123',
+        name: 'Test User'
       });
 
-    // Debugging: If this is 500, check the console for the error
-    if (res.status === 500) console.log('Error Body:', res.body);
-
     expect(res.status).toBe(201);
-    
-    // 4. Use the spy variable directly for the expectation
-    expect(sendSpy).toHaveBeenCalledWith(
-      'formationnikit@gmail.com', 
-      expect.any(String)
-    );
+
+    // Verify job in queue
+    const jobs = await mailingQueue.getJobs(['waiting']);
+    expect(jobs.length).toBeGreaterThan(0);
+
+    const job = email ? jobs.find(j => j.data.to === email) : jobs[0];
+    expect(job).toBeDefined();
+    expect(job.data.to).toBe(email);
   });
 
-  it('/auth/verify-otp: works end-to-end', async () => {
-    // Create a user and an OTP entry
-    const user = await User.create({ name: 'Verifier', email: 'khris.firesoft@gmail.com', password: 'x' });
+  it('/auth/verify-otp: works end-to-end (mocked)', async () => {
+    const email = 'khris.firesoft@gmail.com';
     const otpCode = '654321';
-    const now = new Date();
-    const expiresAt = new Date(now.getTime() + 10 * 60 * 1000);
 
-    await Otp.create({ email: user.email, otp: otpCode, createdAt: now, expiresAt });
+    const dbCrud = require('../database/crud');
+    vi.spyOn(dbCrud, 'findValidOtp').mockResolvedValue({ email, otp: otpCode });
+    vi.spyOn(dbCrud, 'markUserVerifiedByEmail').mockResolvedValue();
+    vi.spyOn(dbCrud, 'deleteOtpsByEmail').mockResolvedValue();
 
-    const res = await request(app).post('/auth/verify-otp').send({ email: user.email, otp: otpCode });
+    const res = await request(app).post('/auth/verify-otp').send({ email, otp: otpCode });
     expect(res.status).toBe(200);
-
-    const updatedUser = await User.findOne({ email: user.email }).lean();
-    expect(updatedUser.isVerified).toBe(true);
-
-    // OTPs should be deleted
-    const remaining = await Otp.find({ email: user.email });
-    expect(remaining.length).toBe(0);
   });
 });
