@@ -18,6 +18,8 @@ export class AuthService {
   readonly user$: Observable<AuthUser | null> = this.userState.asObservable(); // avaible for the rest of app: shared state
 
 
+  private _sessionId: string | null = null;
+
   // ================== Internal State Management ===================
   get currentValue(): AuthUser | null {
     return this.userState.value;
@@ -31,9 +33,29 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       const token = parseCookie(document.cookie, 'accessToken');
       if (token) this._accessToken.set(token);
+      this.initSessionId();
     }
   }
 
+  private initSessionId() {
+    this._sessionId = sessionStorage.getItem('guest_session_id');
+    if (!this._sessionId) {
+      this._sessionId = crypto.randomUUID();
+      sessionStorage.setItem('guest_session_id', this._sessionId);
+    }
+  }
+
+  get sessionId(): string | null {
+    return this._sessionId;
+  }
+
+  getTrackingIdentity(): { userId?: string; guestId?: string } {
+    const user = this.currentValue;
+    if (user && user.id) {
+      return { userId: user.id };
+    }
+    return { guestId: this._sessionId || undefined };
+  }
 
   // ================== Token Management ===================
   // Synchronous return. No waiting for observables. [cite: 2025-12-31]

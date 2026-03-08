@@ -9,25 +9,25 @@ export class TrackPreview implements OnInit, OnDestroy {
   // Directly inject the reference to the element this directive is on
   private el = inject(ElementRef);
   private observer?: IntersectionObserver;
-  private dwellTimer?:any; 
+  private dwellTimer?: any;
   private eventTracker = inject(EventTracking)
 
 
   ngOnInit(): void {
-    this.observer = new IntersectionObserver((entries) =>{
-      entries.forEach(entry =>{
-        if(entry.isIntersecting){
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
           this.dwellTimer = setTimeout(() => {
             this.eventTracker.emit({
               postId: this.postId,
-              type: 'PREVIEW',
+              type: 'preview',
               timestamp: Date.now()
             });
 
             // Stop observing after successful track to save resources [cite: 2025-12-31]
             this.observer?.disconnect();
           }, 1500)
-        }else{
+        } else {
           // If they scroll away before 1.5s, cancel the timer [cite: 2025-12-31]
           clearTimeout(this.dwellTimer);
         }
@@ -39,7 +39,7 @@ export class TrackPreview implements OnInit, OnDestroy {
     this.observer.observe(this.el.nativeElement);
   }
 
-   ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.observer?.disconnect();
     clearTimeout(this.dwellTimer);
   }

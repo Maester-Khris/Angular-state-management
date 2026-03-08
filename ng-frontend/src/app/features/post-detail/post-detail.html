@@ -9,7 +9,7 @@
           <span>Close</span>
         </button>
         <div class="d-flex gap-2">
-          <button class="btn-action-glass"><i class="bi bi-share"></i></button>
+          <button (click)="onShare()" class="btn-action-glass"><i class="bi bi-share"></i></button>
           <button class="btn-action-glass" [class.btn-save-gold]="!isSaved()" [class.btn-saved-success]="isSaved()"
             (click)="onAddToBookmarks()">
             <i class="bi" [class.bi-bookmark]="!isSaved()" [class.bi-bookmark-fill]="isSaved()"></i>
