@@ -167,3 +167,22 @@ border-top: 1px solid #e2e8f0;
   color: #ffffff;
   transform: translateY(-3px);
 }
+
+/* QR Code Styling */
+.qr-code-img {
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  background: white; /* Scannability */
+  object-fit: contain;
+}
+
+.smallest {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}
+
+.fw-black {
+  font-weight: 900;
+}
