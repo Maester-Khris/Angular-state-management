@@ -142,4 +142,8 @@ export class RemoteApi {
   logAnalyticsBatch(events: any[]): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/api/analytics/batch`, { events });
   }
+
+  subscribeNewsletter(email: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/api/newsletter`, { email });
+  }
 }

@@ -8,6 +8,7 @@
           <i class="bi bi-x-lg"></i>
           <span>Close</span>
         </button>
+        @if (isLoggedIn()) {
         <div class="d-flex gap-2">
           <button (click)="onShare()" class="btn-action-glass"><i class="bi bi-share"></i></button>
           <button class="btn-action-glass" [class.btn-save-gold]="!isSaved()" [class.btn-saved-success]="isSaved()"
@@ -16,6 +17,7 @@
             {{ isSaved() ? 'Saved' : 'Save' }}
           </button>
         </div>
+        }
       </div>
     </header>
 

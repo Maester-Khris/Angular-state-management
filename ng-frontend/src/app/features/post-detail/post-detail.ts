@@ -2,6 +2,7 @@ import { Component, computed, effect, inject, input, OnInit, PLATFORM_ID, signal
 import { Meta, Title } from '@angular/platform-browser';
 import { RemoteApi } from '../../core/service/remote-api';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth-service';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, of, switchMap, tap } from 'rxjs';
@@ -20,7 +21,10 @@ export class PostDetail implements OnInit {
   private router = inject(Router);
   private eventTracker = inject(EventTracking);
   private notifService = inject(NotificationService);
+  private authService = inject(AuthService);
   platformId = inject(PLATFORM_ID);
+
+  isLoggedIn = toSignal(this.authService.isLoggedIn$);
 
   constructor(private meta: Meta, private pagetitle: Title) {
     effect(() => {

@@ -26,7 +26,7 @@ export class TrackPreview implements OnInit, OnDestroy {
 
             // Stop observing after successful track to save resources [cite: 2025-12-31]
             this.observer?.disconnect();
-          }, 1500)
+          }, 5000)
         } else {
           // If they scroll away before 1.5s, cancel the timer [cite: 2025-12-31]
           clearTimeout(this.dwellTimer);
