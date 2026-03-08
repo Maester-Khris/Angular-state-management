@@ -134,8 +134,12 @@ export class RemoteApi {
     );
   }
 
-  // Newsletter
-  subscribeNewsletter(email: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/api/newsletter`, { email });
+  // Analytics
+  logAnalyticsEvent(event: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/api/analytics/events`, event);
+  }
+
+  logAnalyticsBatch(events: any[]): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/api/analytics/batch`, { events });
   }
 }
