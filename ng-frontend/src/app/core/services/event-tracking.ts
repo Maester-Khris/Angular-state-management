@@ -1,23 +1,35 @@
 import { HostListener, inject, Injectable, OnDestroy } from '@angular/core';
-import { buffer, bufferTime, filter, Subject, Subscription, tap } from 'rxjs';
-import { EventBatch, PostEvent } from '../../features/posts/data-access/post-event.model';
-import { HttpClient } from '@angular/common/http';
+import { bufferTime, filter, Subject, Subscription, tap } from 'rxjs';
+import { RemoteApi } from '../service/remote-api';
+import { AuthService } from './auth-service';
+import { PostEvent } from '../../features/posts/data-access/post-event.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EventTracking implements OnDestroy{
+export class EventTracking implements OnDestroy {
 
   private eventBus = new Subject<PostEvent>();
   private batchSub!: Subscription;
   private localBuffer: PostEvent[] = []; // The "Shadow Buffer"
-  private http = inject(HttpClient);
+  private remoteApi = inject(RemoteApi);
+  private authService = inject(AuthService);
 
   constructor() {
     this.batchSub = this.eventBus.pipe(
-      tap(event => this.localBuffer.push(event)), // 1. Every event that enters the bus is added to the shadow buffer
-      bufferTime(10000, undefined, 20), // buffer events every 10 seconds or 20 events
-      filter((events) => events.length > 0), // only emit if there are events in the buffer
+      tap(event => {
+        // Enrich event with identity before buffering
+        const identity = this.authService.getTrackingIdentity();
+        Object.assign(event, identity);
+        if (!event.timestamp) event.timestamp = Date.now();
+
+        // Ensure type is lowercase
+        if (event.type) event.type = event.type.toLowerCase() as any;
+
+        this.localBuffer.push(event);
+      }),
+      bufferTime(10000, undefined, 20),
+      filter((events) => events.length > 0),
     ).subscribe((batch) => this.dispactchBatch(batch));
   }
 
@@ -27,18 +39,12 @@ export class EventTracking implements OnDestroy{
   }
 
   private dispactchBatch(events: PostEvent[]) {
-    const payload: EventBatch = {
-      events,
-      batchId: crypto.randomUUID(),
-      sentAt: Date.now(),
-    };
-
-    this.http.post('/api/analytics/batch', payload).subscribe({
+    this.remoteApi.logAnalyticsBatch(events).subscribe({
       next: () => {
         // We remove only the events that were just sent
         this.localBuffer = this.localBuffer.filter(e => !events.includes(e));
       },
-      error: (err) => {console.error("Batch sync failed",err)},
+      error: (err) => { console.error("Batch sync failed", err) },
     });
   }
 
@@ -55,9 +61,9 @@ export class EventTracking implements OnDestroy{
   @HostListener('window:beforeunload')
   onUnload() {
     // Access the current pending events not sent to remote server
-    this.flushWithBeacon(this.localBuffer); 
+    this.flushWithBeacon(this.localBuffer);
   }
-    
+
   ngOnDestroy(): void {
     this.batchSub?.unsubscribe();
   }
