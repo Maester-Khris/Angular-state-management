@@ -1,9 +1,11 @@
 import os
 import time
+import asyncio
 from functools import wraps
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from embedding_service import EmbeddingService
+from services.embedding_service import EmbeddingService
+from services.inference import InferenceService
 import logging
 
 
@@ -57,6 +59,7 @@ def log_request(response):
     return response
 
 search_svc = EmbeddingService() # Initialize the model once on startup
+llm_svc = InferenceService() # Initialize the model once on startup
 
 # --- Middleware ---
 def require_security_key(f):
@@ -122,11 +125,11 @@ def embed_post():
     description = data.get("description", "")
 
     try:
-        logger.info(f"Processing embedding for post: {postuuid} | Title: {title}")
+        app.logger.info(f"Processing embedding for post: {postuuid} | Title: {title}")
         search_svc.store_post(postuuid, title, description)
         return jsonify({"status": "success", "uuid": postuuid}), 201
     except Exception as e:
-        logger.error(f"Error logging post {postuuid}: {e}")
+        app.logger.error(f"Error logging post {postuuid}: {e}")
         return jsonify({"error": f"Error logging post {postuuid}: {e}"}), 500
 
    
@@ -153,7 +156,43 @@ def search():
             "results": results
         }), 200
     except Exception as e:
-        logger.error(f"Search error: {e}")
+        app.logger.error(f"Search error: {e}")
+        return jsonify({"error": "Failed to perform search"}), 500
+
+
+
+@app.route('/search-augmented', methods=['POST'])
+@require_security_key
+def search_augmented():
+    """
+    Search for posts semantically. and augment the results with LLM relevant web sources
+    Expected JSON: 
+  
+    """
+    data = request.get_json()
+    query = data.get("query")
+    limit = data.get("limit", 5)
+
+    if not query:
+        return jsonify({"error": "Missing query string"}), 400
+
+    try:
+        results = search_svc.search_similar_post(query, limit=limit)
+        docs = [{"title":doc.get("title","no title"), "description":doc.get("description","no description")} for doc in results]
+        relevant_sources = asyncio.run(
+            llm_svc.generate_relevant_sources(query, results)
+        )
+        # llm_svc.generate_relevant_sources(query, docs)
+
+
+        return jsonify({
+            "query": query,
+            "count": len(results),
+            "results": results,
+            "relevant_sources": relevant_sources
+        }), 200
+    except Exception as e:
+        app.logger.error(f"Search augmented error: {e}")
         return jsonify({"error": "Failed to perform search"}), 500
 
 
