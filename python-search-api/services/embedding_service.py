@@ -69,7 +69,7 @@ class EmbeddingService:
                 PointStruct(
                     id=post_uuid, 
                     vector=vector,
-                    payload={"uuid": post_uuid}    
+                    payload={"uuid": post_uuid, "title": title, "description": description}    
                 )
             ],
         )
@@ -89,10 +89,34 @@ class EmbeddingService:
         return [
             {
                 "uuid": hit.payload.get("uuid"),
+                "title": hit.payload.get("title"),
+                "description": hit.payload.get("description"),
                 "score": round(hit.score, 4)
             }
             for hit in search_result.points
         ]
+
+
+    # def search_similar_post_with_context(self, query_text, limit=10):
+    #     """Retrieves Top-K results using similarity scores and complete with LLM relevant web sources"""
+    #     query_vector = self._get_embedding(query_text)
+
+    #     search_result = self.client.query_points(
+    #         collection_name=self.collection_name,
+    #         query=query_vector,
+    #         limit=limit,
+    #         with_payload=True
+    #     )
+
+    #     similar_posts = [{"title":doc.get("title"), "description":doc.get("description")} for doc in search_result.points]
+
+    #     return [
+    #         {
+    #             "uuid": hit.payload.get("uuid"),
+    #             "score": round(hit.score, 4)
+    #         }
+    #         for hit in search_result.points
+    #     ]
 
 # =================== HEAVEY BOOT CODE FOR DEPLOYMENT ON POWERED SERVER: CPU AND MEMORY ===================
 
