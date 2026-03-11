@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/services/auth-service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../../../core/services/auth-service';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit {
   authservice = inject(AuthService);
   private router = inject(Router);
 
@@ -18,8 +18,22 @@ export class Login {
   @Output() onForgotPassword = new EventEmitter<void>();
   @Output() onNavigateToSignup = new EventEmitter<void>();
 
+  @ViewChild('googleBtn', { static: true }) googleBtn!: ElementRef;
+
   // userEmail = "niki@gmail.com";
   // userPassword = "1234";
+
+  ngOnInit() {
+    this.authservice.initGoogle((user) => {
+      // user already exists → sign in
+      // this.router.navigate(['/dashboard']);
+      console.log(user);
+    });
+    this.authservice.renderButton(this.googleBtn.nativeElement, {
+      width: 400,       // ← set in pixels, must match container width
+      size: 'large',
+    });
+  }
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

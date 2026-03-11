@@ -1,9 +1,16 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
+import { inject, Injectable, NgZone, PLATFORM_ID, signal } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rxjs';
 import { AuthUser } from '../../features/auth/user.model';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
+
+export interface GoogleUser {
+  email: string;
+  name: string;
+  picture: string;
+  idToken: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +24,8 @@ export class AuthService {
   private readonly userState = new BehaviorSubject<AuthUser | null>(null);
   readonly user$: Observable<AuthUser | null> = this.userState.asObservable(); // avaible for the rest of app: shared state
 
+  private _user: GoogleUser | null = null;
+  private zone = inject(NgZone);
 
   private _sessionId: string | null = null;
 
@@ -91,6 +100,51 @@ export class AuthService {
     );
   }
 
+  logout() {
+    this._accessToken.set(null);
+    this.userState.next(null);
+  }
+
+  // ============================== Google Auth ===================
+  initGoogle(callback: (user: GoogleUser) => void) {
+    (window as any).google.accounts.id.initialize({
+      client_id: environment.googleClientId,
+      callback: (response: any) => {
+        this.zone.run(() => {
+          const payload = this.parseJwt(response.credential);
+          this._user = {
+            email: payload.email,
+            name: payload.name,
+            picture: payload.picture,
+            idToken: response.credential,
+          };
+          callback(this._user);
+        });
+      },
+    });
+  }
+
+  renderButton(element: HTMLElement, options?: object) {
+    (window as any).google.accounts.id.renderButton(element, {
+      type: 'standard',
+      size: 'large',
+      ...options,
+    });
+  }
+  googleLogin() {
+
+  }
+  googleLogout() {
+    (window as any).google.accounts.id.disableAutoSelect();
+    this._user = null;
+  }
+  googleSignup() {
+
+  }
+  private parseJwt(token: string) {
+    return JSON.parse(atob(token.split('.')[1]));
+  }
+
   verifyOtp(email: string, otp: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/verify-otp`, { email, otp }).pipe(
       catchError(this.handleError)
@@ -108,10 +162,7 @@ export class AuthService {
     return throwError(() => new Error(message));
   }
 
-  logout() {
-    this._accessToken.set(null);
-    this.userState.next(null);
-  }
+
 
 }
 
