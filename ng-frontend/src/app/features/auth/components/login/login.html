@@ -27,6 +27,18 @@
     }
   </button>
 
+  <div class="position-relative my-4">
+    <hr class="text-muted">
+    <div class="position-absolute top-50 start-50 translate-middle px-3 bg-white text-muted small">
+      OR
+    </div>
+  </div>
+
+  <button type="button" (click)="onGoogleSignIn()" class="btn btn-outline-secondary w-100 py-2 d-flex align-items-center justify-content-center fw-medium">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18" height="18" class="me-2" alt="Google">
+    Sign in with Google
+  </button>
+
   <div class="text-center mt-4">
     <p class="text-muted small">Don't have an account?
       <button type="button" (click)="onNavigateToSignup.emit()"

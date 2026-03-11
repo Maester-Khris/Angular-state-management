@@ -27,10 +27,10 @@ export class Login {
   });
 
   get f() { return this.loginForm.controls; }
-  
+
   login() {
     // console.log(this.userEmail, this.userPassword);
-    this.authservice.login().subscribe(lognRes =>{
+    this.authservice.login().subscribe(lognRes => {
       this.router.navigate(['home']);
     })
   }
@@ -38,9 +38,13 @@ export class Login {
   submit() {
     if (this.loginForm.valid) {
       this.onLogin.emit(this.loginForm.value);
-      this.authservice.login().subscribe(lognRes =>{
+      this.authservice.login().subscribe(lognRes => {
         this.router.navigate(['home']);
       });
     }
+  }
+
+  onGoogleSignIn() {
+    // console.log('Google Sign In Clicked');
   }
 }

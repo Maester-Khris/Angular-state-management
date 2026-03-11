@@ -29,7 +29,7 @@ export class Signup {
   get f() { return this.signupForm.controls; }
 
   submit() {
-      this.onSuccess.emit();
+    this.onSuccess.emit();
     // if (this.signupForm.valid) {
     //   if (this.userCreated == false) {
     //     const { name, email, password, bio } = this.signupForm.getRawValue();
@@ -50,6 +50,10 @@ export class Signup {
 
   onFileSelected(event: any) {
 
+  }
+
+  onGoogleSignUp() {
+    // console.log('Google Sign Up Clicked');
   }
 
 }
