@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideHttpClient(
-      withFetch(), 
+      withFetch(),
       withInterceptors([errorInterceptorInterceptor, authInterceptorInterceptor])
     ),
   ]
