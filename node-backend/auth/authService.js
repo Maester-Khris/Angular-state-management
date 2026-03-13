@@ -137,10 +137,41 @@ const revokeToken = async (token, deps) => {
   return true;
 };
 
+const loginWithGoogle = async ({ idToken, guestId }, deps) => {
+  const { db, analyticsDao } = deps;
+  const { verifyGoogleToken } = require("./authUtils");
+
+  try {
+    const payload = await verifyGoogleToken(idToken);
+
+    // Upsert User
+    const user = await db.upsertUserByGoogle({
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture
+    });
+
+    // Transfer Analytics if guestId provided
+    if (guestId && analyticsDao) {
+      await analyticsDao.transferGuestAnalytics(guestId, user.useruuid);
+    }
+
+    return {
+      userProfile: transformToProfile(user),
+      accessToken: generateJWTToken({ id: user._id, name: user.name }),
+      refreshToken: generateJWTToken({ id: user._id })
+    };
+  } catch (error) {
+    console.error("Google Login failed:", error.message);
+    throw new Error("GOOGLE_AUTH_FAILED");
+  }
+};
+
 module.exports = {
   signupUser,
   verifyOtp,
   resendOtp,
   loginUser,
+  loginWithGoogle,
   revokeToken
 };

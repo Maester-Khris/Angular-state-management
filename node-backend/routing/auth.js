@@ -6,8 +6,10 @@ const authService = require("../auth/authService");
 const db = require("../database/crud");
 const mailer = require("../services/mailService");
 
+const analyticsDao = require("../database/analytics-dao");
+
 /* ---------- dependency bundle ---------- */
-const deps = { db, mailer };
+const deps = { db, mailer, analyticsDao };
 
 /* ---------- routes ---------- */
 
@@ -71,6 +73,26 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Login failed:", error.message);
     res.status(401).json({ message: "Invalid email or password." });
+  }
+});
+
+router.post("/google", async (req, res) => {
+  try {
+    const { idToken, guestId } = req.body;
+    const { userProfile, accessToken, refreshToken } =
+      await authService.loginWithGoogle({ idToken, guestId }, deps);
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    });
+
+    res.status(200).json({ message: "Google login successful", accessToken, user: userProfile });
+  } catch (error) {
+    console.error("Google login failed:", error.message);
+    res.status(401).json({ message: "Google authentication failed." });
   }
 });
 

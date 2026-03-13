@@ -21,6 +21,26 @@ const AnalyticsDAO = {
      */
     async deleteAnalyticsByPostId(postId) {
         return await PostAnalytics.deleteMany({ "metadata.postId": postId });
+    },
+
+    /**
+     * Transfer guest analytics to a real user after login
+     * @param {string} guestId - The guest session ID
+     * @param {string} useruuid - The internal user UUID
+     */
+    async transferGuestAnalytics(guestId, useruuid) {
+        if (!guestId || !useruuid) return null;
+
+        console.log(`[AnalyticsDAO] Transferring analytics from ${guestId} to ${useruuid}...`);
+        const result = await PostAnalytics.updateMany(
+            { "metadata.guestId": guestId },
+            {
+                $set: { "metadata.userId": useruuid },
+                $unset: { "metadata.guestId": "" }
+            }
+        );
+        console.log(`[AnalyticsDAO] Transferred ${result.modifiedCount} events.`);
+        return result;
     }
 };
 
