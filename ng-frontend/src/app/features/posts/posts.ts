@@ -1,18 +1,16 @@
 import { Component, computed, effect, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HasUnsavedChanges, Post } from './data-access/post.model';
 import { PostStore } from './data-access/post-store';
-import { AuthService } from '../../core/services/auth-service';
+import { UserService } from '../../core/user/user-service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { MockApi } from '../../core/services/mock-api';
 import { MediaService } from '../../core/services/media-service';
 import { NotificationService } from '../../core/services/notification-service';
-
-
 
 @Component({
   selector: 'app-poststore',
@@ -24,7 +22,7 @@ import { NotificationService } from '../../core/services/notification-service';
 export class Posts implements OnInit, HasUnsavedChanges {
   private readonly fb = inject(FormBuilder);
   private readonly storeService = inject(PostStore);
-  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
   private readonly mediaService = inject(MediaService);
   private notifService = inject(NotificationService);
   private readonly mockApi = inject(MockApi);
@@ -43,10 +41,10 @@ export class Posts implements OnInit, HasUnsavedChanges {
 
   //expose the view model for the template
   readonly vm$ = this.storeService.vm$;
-  user = toSignal(this.authService.user$);
+  user = toSignal(this.userService.user$);
 
   // data intialization
-  readonly currentUserId = computed(() => this.user()?.id || "");
+  readonly currentUserId = computed(() => this.user()?.uuid || "");
   userid$ = toObservable(this.currentUserId);
   posts = toSignal(this.storeService.posts$, { initialValue: [] });
 
