@@ -33,6 +33,25 @@ const dbCrudOperator = {
     return await user.save();
   },
 
+  async upsertUserByGoogle(googleData) {
+    const { email, name, picture } = googleData;
+    let user = await User.findOne({ email: email.toLowerCase() });
+
+    if (!user) {
+      user = new User({
+        name,
+        email: email.toLowerCase(),
+        avatarUrl: picture,
+        isVerified: true,
+        // Password is required in schema, but for Google users we can set a random one or handle it differently
+        // Since schema says required: true, we'll set a placeholder or random string
+        password: require('crypto').randomBytes(16).toString('hex'), 
+      });
+      await user.save();
+    }
+    return user;
+  },
+
   async addTokenToBlacklist(token, expiresAt) {
     return TokenBlacklist.create({ token, expiresAt });
   },
