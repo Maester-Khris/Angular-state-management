@@ -22,9 +22,7 @@ export class Signup implements OnInit {
   @ViewChild('googleBtn', { static: true }) googleBtn!: ElementRef;
 
   ngOnInit() {
-    this.authservice.initGoogle((user) => {
-      console.log('Register new user:', user.email);
-    });
+    this.authservice.initGoogle();
     this.authservice.renderButton(this.googleBtn.nativeElement, {
       text: 'signup_with',
       width: 400,

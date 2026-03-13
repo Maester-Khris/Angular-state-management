@@ -20,15 +20,8 @@ export class Login implements OnInit {
 
   @ViewChild('googleBtn', { static: true }) googleBtn!: ElementRef;
 
-  // userEmail = "niki@gmail.com";
-  // userPassword = "1234";
-
   ngOnInit() {
-    this.authservice.initGoogle((user) => {
-      // user already exists → sign in
-      // this.router.navigate(['/dashboard']);
-      console.log(user);
-    });
+    this.authservice.initGoogle();
     this.authservice.renderButton(this.googleBtn.nativeElement, {
       width: 400,       // ← set in pixels, must match container width
       size: 'large',
@@ -43,19 +36,15 @@ export class Login implements OnInit {
   get f() { return this.loginForm.controls; }
 
   login() {
-    // console.log(this.userEmail, this.userPassword);
-    this.authservice.login().subscribe(lognRes => {
-      this.router.navigate(['home']);
-    })
-  }
-
-  submit() {
     if (this.loginForm.valid) {
-      this.onLogin.emit(this.loginForm.value);
-      this.authservice.login().subscribe(lognRes => {
+      this.authservice.login(this.loginForm.value).subscribe(lognRes => {
         this.router.navigate(['home']);
       });
     }
+  }
+
+  submit() {
+    this.login();
   }
 
   onGoogleSignIn() {
