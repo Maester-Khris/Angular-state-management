@@ -1,7 +1,7 @@
 import { HostListener, inject, Injectable, OnDestroy } from '@angular/core';
 import { bufferTime, filter, Subject, Subscription, tap } from 'rxjs';
-import { RemoteApi } from '../service/remote-api';
-import { AuthService } from './auth-service';
+import { RemoteApi } from './remote-api';
+import { UserService } from '../user/user-service';
 import { PostEvent } from '../../features/posts/data-access/post-event.model';
 
 @Injectable({
@@ -13,13 +13,13 @@ export class EventTracking implements OnDestroy {
   private batchSub!: Subscription;
   private localBuffer: PostEvent[] = []; // The "Shadow Buffer"
   private remoteApi = inject(RemoteApi);
-  private authService = inject(AuthService);
+  private userService = inject(UserService);
 
   constructor() {
     this.batchSub = this.eventBus.pipe(
       tap(event => {
-        // Enrich event with identity before buffering
-        const identity = this.authService.getTrackingIdentity();
+        // Enrichment with identity before buffering
+        const identity = this.userService.getTrackingIdentity();
         Object.assign(event, identity);
         if (!event.timestamp) event.timestamp = Date.now();
 

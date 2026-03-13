@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NotificationService } from '../../../core/services/notification-service';
-import { RemoteApi } from '../../../core/service/remote-api';
+import { RemoteApi } from '../../../core/services/remote-api';
 
 @Component({
   selector: 'app-footer',
