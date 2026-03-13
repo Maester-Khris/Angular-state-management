@@ -1,127 +1,78 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable, NgZone, PLATFORM_ID, signal } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rxjs';
-import { AuthUser } from '../../features/auth/user.model';
+import { AppUser, GoogleUser } from '../user/user.model';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
+import { UserService } from '../user/user-service';
+import { UserAdapter } from '../user/user.adapter';
 
-export interface GoogleUser {
-  email: string;
-  name: string;
-  picture: string;
-  idToken: string;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // Internal state: Use a Signal for the token to get synchronous access [cite: 2025-12-31]
   private readonly baseUrl = environment.apiUrl;
-  platformId = inject(PLATFORM_ID);
-  http = inject(HttpClient);
-  private _accessToken = signal<string | null>(null);
-  private readonly userState = new BehaviorSubject<AuthUser | null>(null);
-  readonly user$: Observable<AuthUser | null> = this.userState.asObservable(); // avaible for the rest of app: shared state
-
-  private _user: GoogleUser | null = null;
+  private http = inject(HttpClient);
+  private userService = inject(UserService); // Inject the state manager
   private zone = inject(NgZone);
-
-  private _sessionId: string | null = null;
-
-  // ================== Internal State Management ===================
-  get currentValue(): AuthUser | null {
-    return this.userState.value;
-  }
-  readonly isLoggedIn$: Observable<boolean> = this.user$.pipe(
-    map(user => !!user)
-  );
-
-
-  constructor() {
-    if (isPlatformBrowser(this.platformId)) {
-      const token = parseCookie(document.cookie, 'accessToken');
-      if (token) this._accessToken.set(token);
-      this.initSessionId();
-    }
-  }
-
-  private initSessionId() {
-    this._sessionId = sessionStorage.getItem('guest_session_id');
-    if (!this._sessionId) {
-      this._sessionId = crypto.randomUUID();
-      sessionStorage.setItem('guest_session_id', this._sessionId);
-    }
-  }
-
-  get sessionId(): string | null {
-    return this._sessionId;
-  }
-
-  getTrackingIdentity(): { userId?: string; guestId?: string } {
-    const user = this.currentValue;
-    if (user && user.id) {
-      return { userId: user.id };
-    }
-    return { guestId: this._sessionId || undefined };
-  }
+  private _accessToken = signal<string | null>(null);
 
   // ================== Token Management ===================
-  // Synchronous return. No waiting for observables. [cite: 2025-12-31]
+  setToken(token: string | null) {
+    this._accessToken.set(token);
+    // Logic for cookies/localstorage remains here
+  }
+
   getAccessToken(): string | null {
     return this._accessToken();
   }
 
-  // Update token after login or refresh
-  setToken(token: string) {
-    this._accessToken.set(token);
-  }
-
-
-  // ================== Auth Process Management ===================
-  signup(name: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/signup`, { name, email, password }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  login(): Observable<AuthUser> {
-    // const mockUser: AuthUser = { id: 'nk-dev', email: 'niki@gmail.con' };
-    // this.setToken('mock-jwt-token-123');
-    // this.userState.next(mockUser);
-    // return of(mockUser);
-
-    return this.http.post<any>(`${this.baseUrl}/auth/login`, {}).pipe(
-      map(user => {
-        this.setToken(user.accessToken);
+  // ================== Manual Auth =========================
+  login(credentials: any): Observable<AppUser> {
+    return this.http.post<any>(`${this.baseUrl}/auth/login`, credentials).pipe(
+      map(response => {
+        this.setToken(response.accessToken);
+        const user = UserAdapter.fromMongo(response.user);
+        this.userService.setAuthenticatedUser(user); // Update state
         return user;
-      }),
-      catchError(this.handleError)
+      })
     );
   }
 
   logout() {
-    this._accessToken.set(null);
-    this.userState.next(null);
+    this.setToken(null);
+    this.userService.setAuthenticatedUser(null);
+    // If google initialized, disable auto-select
+    if ((window as any).google?.accounts?.id) {
+      (window as any).google.accounts.id.disableAutoSelect();
+    }
   }
 
-  // ============================== Google Auth ===================
-  initGoogle(callback: (user: GoogleUser) => void) {
+  // ================== Google Auth =========================
+  initGoogle() {
     (window as any).google.accounts.id.initialize({
       client_id: environment.googleClientId,
       callback: (response: any) => {
         this.zone.run(() => {
-          const payload = this.parseJwt(response.credential);
-          this._user = {
-            email: payload.email,
-            name: payload.name,
-            picture: payload.picture,
-            idToken: response.credential,
-          };
-          callback(this._user);
+          // Send response.credential (the idToken) to Node.js backend
+          // Once backend verifies, it returns the Mongo User
+          this.loginWithGoogle(response.credential).subscribe();
         });
       },
     });
+  }
+
+  signup(name: string, email: string, password: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/signup`, { name, email, password });
+  }
+
+  verifyOtp(email: string, otp: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/verify-otp`, { email, otp });
+  }
+
+  resendOtp(email: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/resend-otp`, { email });
   }
 
   renderButton(element: HTMLElement, options?: object) {
@@ -131,38 +82,17 @@ export class AuthService {
       ...options,
     });
   }
-  googleLogin() {
 
-  }
-  googleLogout() {
-    (window as any).google.accounts.id.disableAutoSelect();
-    this._user = null;
-  }
-  googleSignup() {
-
-  }
-  private parseJwt(token: string) {
-    return JSON.parse(atob(token.split('.')[1]));
-  }
-
-  verifyOtp(email: string, otp: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/verify-otp`, { email, otp }).pipe(
-      catchError(this.handleError)
+  private loginWithGoogle(idToken: string): Observable<AppUser> {
+    return this.http.post<any>(`${this.baseUrl}/auth/google`, { idToken, guestId: this.userService.sessionId }).pipe(
+      map(res => {
+        this.setToken(res.accessToken);
+        const user = UserAdapter.fromMongo(res.user);
+        this.userService.setAuthenticatedUser(user);
+        return user;
+      })
     );
   }
-
-  resendOtp(email: string) {
-    return this.http.post(`${this.baseUrl}/auth/resend-otp`, { email }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  private handleError(err: HttpErrorResponse) {
-    const message = err.error?.message || err.message || 'Authentication failed';
-    return throwError(() => new Error(message));
-  }
-
-
 
 }
 
