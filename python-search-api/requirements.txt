@@ -8,3 +8,5 @@ fastembed
 python-dotenv
 asyncio
 serpapi
+pytest
+pytest-mock
