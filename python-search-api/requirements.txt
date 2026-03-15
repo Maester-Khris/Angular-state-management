@@ -7,3 +7,4 @@ gunicorn
 fastembed
 python-dotenv
 asyncio
+serpapi

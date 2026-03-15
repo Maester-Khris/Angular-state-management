@@ -6,22 +6,20 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from services.embedding_service import EmbeddingService
 from services.inference import InferenceService
+from services.websearch import WebSearchService
 import logging
 
 
-# --- CORS Configuration ---
+# configure logging
+# Force Flask's internal logger to INFO level
+app = Flask(__name__)
+app.logger.setLevel(logging.INFO)
+
+
+# --- Security Configuration ---
 # Read the allowed origin from environment variables
 allowed_origin = os.getenv("NODE_SERVICE_URL", "http://localhost:3000")
 INTERNAL_API_KEY = os.getenv("SHARED_SECURITY_KEY")
-
-# configure logging
-# logging.basicConfig(level=logging.INFO)
-# logger = logging.getLogger(__name__)
-
-app = Flask(__name__)
-# Force Flask's internal logger to INFO level
-app.logger.setLevel(logging.INFO)
-
 CORS(app, resources={
     r"/*": {
         "origins": [allowed_origin],
@@ -29,6 +27,7 @@ CORS(app, resources={
         "allow_headers": ["Content-Type", "Authorization"]
     }
 })
+
 
 # --- Request/Response Logging (Morgan style) ---
 @app.before_request
@@ -58,8 +57,10 @@ def log_request(response):
 
     return response
 
+
 search_svc = EmbeddingService() # Initialize the model once on startup
 llm_svc = InferenceService() # Initialize the model once on startup
+websearch_svc = WebSearchService() # Initialize the model once on startup
 
 # --- Middleware ---
 def require_security_key(f):
@@ -194,6 +195,34 @@ def search_augmented():
     except Exception as e:
         app.logger.error(f"Search augmented error: {e}")
         return jsonify({"error": "Failed to perform search"}), 500
+
+
+@app.route('/web-search', methods=['POST'])
+@require_security_key
+def web_search():
+    """
+    Search the web using Serper API (async).
+    Expected JSON: {"query": "...", "limit": 5}
+    """
+    data = request.get_json()
+    query = data.get("query")
+    limit = data.get("limit", 5)
+
+    if not query:
+        return jsonify({"error": "Missing query string"}), 400
+
+    try:
+        app.logger.info(f"Web search for: {query}")
+        # results = await websearch_svc.search(query, limit=limit)
+        result  = asyncio.run(websearch_svc.search(query, limit=limit))
+        return jsonify({
+            "query": query,
+            "count": len(result),
+            "results": result
+        }), 200
+    except Exception as e:
+        app.logger.error(f"Web search error: {e}")
+        return jsonify({"error": "Failed to perform web search"}), 500
 
 
 if __name__ == '__main__':
