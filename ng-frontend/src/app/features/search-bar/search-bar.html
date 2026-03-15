@@ -1,7 +1,7 @@
 <div class="search-container-outer">
     <div class="search-bar-main" [title]="keyboardLabel">
         <!-- AI Identity Strip -->
-        <div class="ai-identity-strip">
+        <div class="ai-identity-strip" [class.groq-active]="isAiActive">
             <span class="pulse-dot"></span>
             <span class="ai-label">AI ASSIST</span>
             <div class="vertical-divider"></div>
