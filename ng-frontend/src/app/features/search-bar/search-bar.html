@@ -46,16 +46,13 @@
         </button>
     </div>
 
-    <!-- Rotating Guidance Tips (Always below) -->
-    <div class="search-tips-row" *ngIf="!searchInput.value">
-        <i class="bi bi-lightbulb-fill me-2 tip-icon"></i>
-        <span class="tip-text">{{currentTip}}</span>
-    </div>
-
-    <!-- Search Suggestions (Chips) -->
     <div class="search-suggestions" *ngIf="!searchInput.value && !isFocused">
-        <button *ngFor="let chip of currentChips" (click)="prefillSearch(chip)" class="suggestion-chip">
+        <span class="tip-text">Tips: </span>
+        @for (chip of currentChips | async; track chip) {
+        <button (click)="prefillSearch(chip)" class="suggestion-chip">
             {{chip}}
         </button>
+        }
     </div>
+
 </div>
