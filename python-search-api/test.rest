@@ -27,6 +27,15 @@ Content-Type: {{contentType}}
 # @name search
 POST {{baseUrl}}/search HTTP/1.1
 Content-Type: {{contentType}}
+### AI Augmented Search
+POST {{baseUrl}}/search/ai
+Content-Type: application/json
+X-Internal-Key: {{securityKey}}
+
+{
+    "query": "future of generative ai in healthcare",
+    "limit": 5
+}
 
 {
     "query": "What is rest",

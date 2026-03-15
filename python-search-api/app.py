@@ -166,9 +166,8 @@ def search():
 @require_security_key
 def search_augmented():
     """
-    Search for posts semantically. and augment the results with LLM relevant web sources
-    Expected JSON: 
-  
+    [DEPRECATED] Use /search/ai for the full AI search pipeline.
+    Search for posts semantically and augment with source structuring.
     """
     data = request.get_json()
     query = data.get("query")
@@ -179,12 +178,9 @@ def search_augmented():
 
     try:
         results = search_svc.search_similar_post(query, limit=limit)
-        docs = [{"title":doc.get("title","no title"), "description":doc.get("description","no description")} for doc in results]
         relevant_sources = asyncio.run(
             llm_svc.generate_relevant_sources(query, results)
         )
-        # llm_svc.generate_relevant_sources(query, docs)
-
 
         return jsonify({
             "query": query,
@@ -195,6 +191,58 @@ def search_augmented():
     except Exception as e:
         app.logger.error(f"Search augmented error: {e}")
         return jsonify({"error": "Failed to perform search"}), 500
+
+
+@app.route('/search/ai', methods=['POST'])
+@require_security_key
+def search_ai():
+    """
+    Full AI Search Pipeline: 
+    Qdrant Similarity -> LLM Expansion -> SerpAPI Web Search -> LLM Source Structuring.
+    Expected JSON: {"query": "...", "limit": 5}
+    """
+    data = request.get_json()
+    query = data.get("query")
+    limit = data.get("limit", 5)
+
+    if not query:
+        return jsonify({"error": "Missing query string"}), 400
+
+    try:
+        app.logger.info(f"AI Search starting for query: {query}")
+
+        # 1. Similarity Search (Qdrant)
+        similar_docs = search_svc.search_similar_post(query, limit=limit)
+        
+        # 2. Query Expansion (LLM)
+        expanded_query = asyncio.run(
+            llm_svc.expand_query(query, similar_docs)
+        )
+        app.logger.info(f"Expanded query: {expanded_query}")
+
+        # 3. Web Search (SerpAPI)
+        web_results = asyncio.run(
+             websearch_svc.search(expanded_query, limit=8)
+        )
+
+        # 4. Source Structuring & Reranking (LLM)
+        relevant_ext_docs = asyncio.run(
+            llm_svc.generate_relevant_sources(query, web_results)
+        )
+
+        return jsonify({
+            "query": query,
+            "expanded_query": expanded_query,
+            "similar_docs": similar_docs,
+            "relevant_ext_docs": relevant_ext_docs
+        }), 200
+
+    except Exception as e:
+        app.logger.error(f"AI Search Pipeline failed: {e}")
+        return jsonify({
+            "error": "Failed to perform AI search",
+            "message": str(e)
+        }), 500
 
 
 @app.route('/web-search', methods=['POST'])
