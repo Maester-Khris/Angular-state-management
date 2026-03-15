@@ -21,7 +21,9 @@ export class Login implements OnInit {
   @ViewChild('googleBtn', { static: true }) googleBtn!: ElementRef;
 
   ngOnInit() {
-    this.authservice.initGoogle();
+    this.authservice.initGoogle(() => {
+      this.router.navigate(['/dashboard']);
+    });
     this.authservice.renderButton(this.googleBtn.nativeElement, {
       width: 400,       // ← set in pixels, must match container width
       size: 'large',

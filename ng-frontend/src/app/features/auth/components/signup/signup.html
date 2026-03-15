@@ -27,8 +27,33 @@
 
     <div class="col-12">
       <label class="form-label">Password</label>
-      <input type="password" formControlName="password" class="form-control shadow-none" placeholder="••••••••"
-        [class.is-invalid]="f['password'].touched && f['password'].errors">
+      <div class="password-wrapper">
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control shadow-none"
+          placeholder="••••••••" [class.is-invalid]="f['password'].touched && f['password'].errors">
+        <i class="bi password-toggle" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"
+          (click)="showPassword = !showPassword"></i>
+      </div>
+      @if (f['password'].value && getPasswordRequirements().length > 0) {
+      <div class="password-criteria text-danger">
+        Missing: {{ getPasswordRequirements().join(', ') }}
+      </div>
+      }
+    </div>
+
+    <div class="col-12">
+      <label class="form-label">Confirm Password</label>
+      <div class="password-wrapper">
+        <input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword"
+          class="form-control shadow-none" placeholder="••••••••"
+          [class.is-invalid]="f['confirmPassword'].touched && (f['confirmPassword'].errors || signupForm.errors?.['passwordMismatch'])">
+        <i class="bi password-toggle" [class.bi-eye]="!showConfirmPassword" [class.bi-eye-slash]="showConfirmPassword"
+          (click)="showConfirmPassword = !showConfirmPassword"></i>
+      </div>
+      @if (f['confirmPassword'].touched && signupForm.errors?.['passwordMismatch']) {
+      <div class="password-criteria text-danger">
+        Passwords do not match
+      </div>
+      }
     </div>
 
     <div class="col-12">

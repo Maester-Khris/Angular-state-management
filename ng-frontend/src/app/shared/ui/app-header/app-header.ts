@@ -23,6 +23,20 @@ export class AppHeader {
   // Computed signal for the template logic
   isLoggedIn = computed(() => !!this.user());
 
+  avatarUrl = computed(() => {
+    const url = this.user()?.avatarUrl;
+    return url === 'default-avatar' ? null : url;
+  });
+  initials = computed(() => {
+    const name = this.user()?.name;
+    if (!name) return '??';
+    const parts = name.split(' ');
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+    return name.slice(0, 2).toUpperCase();
+  });
+
   onLogout(): void {
     this.authService.logout();
     this.router.navigate(['/home']);

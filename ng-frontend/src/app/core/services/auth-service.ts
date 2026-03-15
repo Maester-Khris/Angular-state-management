@@ -50,14 +50,18 @@ export class AuthService {
   }
 
   // ================== Google Auth =========================
-  initGoogle() {
+  initGoogle(onSuccess?: () => void) {
     (window as any).google.accounts.id.initialize({
       client_id: environment.googleClientId,
       callback: (response: any) => {
         this.zone.run(() => {
           // Send response.credential (the idToken) to Node.js backend
           // Once backend verifies, it returns the Mongo User
-          this.loginWithGoogle(response.credential).subscribe();
+          this.loginWithGoogle(response.credential).subscribe({
+            next: () => {
+              if (onSuccess) onSuccess();
+            }
+          });
         });
       },
     });

@@ -5,30 +5,38 @@
       <span class="brand-text">Postair</span>
     </a>
 
-    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+    <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+      data-bs-target="#mainNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item">
-          <a class="nav-link px-3" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+          <a class="nav-link px-3" routerLink="/home" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">Home</a>
         </li>
 
         @if (isLoggedIn()) {
-          <li class="nav-item">
-            <a class="nav-link px-3" routerLink="/dashboard/myactivity" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">My Activity</a>
-          </li>
-          <li class="nav-item me-lg-3">
-            <a class="nav-link px-3" routerLink="/dashboard/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Profile</a>
-          </li>
-          <li class="nav-item ms-lg-2 ps-lg-3 border-start-lg">
-              <div class="avatar-mini me-2">NK</div>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/dashboard/myactivity" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">My Activity</a>
+        </li>
+        <li class="nav-item me-lg-3">
+          <a class="nav-link px-3" routerLink="/dashboard/profile" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">Profile</a>
+        </li>
+        <li class="nav-item ms-lg-2 ps-lg-3 border-start-lg">
+          @if (avatarUrl()) {
+          <img [src]="avatarUrl()" class="avatar-mini me-2" alt="Avatar">
+          } @else {
+          <div class="avatar-mini me-2">{{ initials() }}</div>
+          }
+        </li>
         } @else {
-          <li class="nav-item ms-lg-3">
-            <a class="btn btn-primary btn-sm px-4 shadow-sm" routerLink="/login">Login</a>
-          </li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-primary btn-sm px-4 shadow-sm" routerLink="/login">Login</a>
+        </li>
         }
       </ul>
     </div>

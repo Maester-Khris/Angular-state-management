@@ -21,8 +21,15 @@ export class Signup implements OnInit {
 
   @ViewChild('googleBtn', { static: true }) googleBtn!: ElementRef;
 
+  private router = inject(Router);
+
+  showPassword = false;
+  showConfirmPassword = false;
+
   ngOnInit() {
-    this.authservice.initGoogle();
+    this.authservice.initGoogle(() => {
+      this.router.navigate(['/dashboard']);
+    });
     this.authservice.renderButton(this.googleBtn.nativeElement, {
       text: 'signup_with',
       width: 400,
@@ -33,11 +40,35 @@ export class Signup implements OnInit {
   signupForm = new FormGroup({
     name: new FormControl('', { validators: [Validators.required], nonNullable: true }),
     email: new FormControl('', { validators: [Validators.required, Validators.email], nonNullable: true }),
-    password: new FormControl('', { validators: [Validators.required, Validators.minLength(4)], nonNullable: true }),
+    password: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+      ],
+      nonNullable: true
+    }),
+    confirmPassword: new FormControl('', { validators: [Validators.required], nonNullable: true }),
     bio: new FormControl('', { nonNullable: true }),
-  });
+  }, { validators: this.passwordMatchValidator });
+
+  passwordMatchValidator(group: any) {
+    const pass = group.get('password').value;
+    const confirmPass = group.get('confirmPassword').value;
+    return pass === confirmPass ? null : { passwordMismatch: true };
+  }
 
   get f() { return this.signupForm.controls; }
+
+  getPasswordRequirements() {
+    const val = this.f.password.value;
+    const requirements = [];
+    if (val.length < 8) requirements.push('At least 8 characters');
+    if (!/[A-Z]/.test(val)) requirements.push('One uppercase letter');
+    if (!/\d/.test(val)) requirements.push('One number');
+    if (!/[@$!%*?&]/.test(val)) requirements.push('One special character (@$!%*?&)');
+    return requirements;
+  }
 
   submit() {
     this.onSuccess.emit();
