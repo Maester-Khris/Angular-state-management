@@ -41,7 +41,7 @@ const dbCrudOperator = {
       user = new User({
         name,
         email: email.toLowerCase(),
-        avatarUrl: picture,
+        avatarUrl: picture || 'default-avatar',
         isVerified: true,
         // Password is required in schema, but for Google users we can set a random one or handle it differently
         // Since schema says required: true, we'll set a placeholder or random string

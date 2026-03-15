@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  avatarUrl: { type: String, default: '' },
+  avatarUrl: { type: String, default: 'default-avatar' },
   bio: { type: String, maxlength: 250, default: '' },
   status: { type: String, enum: ['active', 'away', 'offline'], default: 'active' },
   createdAt: { type: Date, default: Date.now }

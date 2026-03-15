@@ -23,6 +23,7 @@ const transformToProfile = (user) => ({
   status: user.status
 });
 
+
 /* ---------------- auth core ---------------- */
 
 const signupUser = async ({ name, email, password }, deps) => {
@@ -58,6 +59,61 @@ const signupUser = async ({ name, email, password }, deps) => {
   }
 
   return { ok: true, email: user.email };
+};
+
+const loginUser = async ({ email, password }, deps) => {
+  const { db } = deps;
+
+  const user = await db.findUserByEmail(email);
+  if (!user) throw new Error("INVALID_CREDENTIALS");
+
+  const ok = await verifyPassword(password, user.password);
+  if (!ok) throw new Error("INVALID_CREDENTIALS");
+
+  return {
+    userProfile: transformToProfile(user),
+    accessToken: generateJWTToken({ id: user._id, name: user.name }),
+    refreshToken: generateJWTToken({ id: user._id })
+  };
+};
+
+const loginWithGoogle = async ({ idToken, guestId }, deps) => {
+  const { db, analyticsDao } = deps;
+  const { verifyGoogleToken } = require("./authUtils");
+
+  try {
+    const payload = await verifyGoogleToken(idToken);
+
+    // Upsert User
+    const user = await db.upsertUserByGoogle({
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture
+    });
+
+    // Transfer Analytics if guestId provided
+    if (guestId && analyticsDao) {
+      await analyticsDao.transferGuestAnalytics(guestId, user.useruuid);
+    }
+
+    return {
+      userProfile: transformToProfile(user),
+      accessToken: generateJWTToken({ id: user._id, name: user.name }),
+      refreshToken: generateJWTToken({ id: user._id })
+    };
+  } catch (error) {
+    console.error("Google Login failed:", error.message);
+    throw new Error("GOOGLE_AUTH_FAILED");
+  }
+};
+const revokeToken = async (token, deps) => {
+  const { db } = deps;
+
+  const decoded = decodeToken(token);
+  if (!decoded?.exp) return false;
+
+  await db.addTokenToBlacklist(token, new Date(decoded.exp * 1000));
+  return true;
 };
 
 const verifyOtp = async ({ email, otp }, deps) => {
@@ -111,61 +167,6 @@ const resendOtp = async ({ email }, deps) => {
   return { ok: true };
 };
 
-const loginUser = async ({ email, password }, deps) => {
-  const { db } = deps;
-
-  const user = await db.findUserByEmail(email);
-  if (!user) throw new Error("INVALID_CREDENTIALS");
-
-  const ok = await verifyPassword(password, user.password);
-  if (!ok) throw new Error("INVALID_CREDENTIALS");
-
-  return {
-    userProfile: transformToProfile(user),
-    accessToken: generateJWTToken({ id: user._id, name: user.name }),
-    refreshToken: generateJWTToken({ id: user._id })
-  };
-};
-
-const revokeToken = async (token, deps) => {
-  const { db } = deps;
-
-  const decoded = decodeToken(token);
-  if (!decoded?.exp) return false;
-
-  await db.addTokenToBlacklist(token, new Date(decoded.exp * 1000));
-  return true;
-};
-
-const loginWithGoogle = async ({ idToken, guestId }, deps) => {
-  const { db, analyticsDao } = deps;
-  const { verifyGoogleToken } = require("./authUtils");
-
-  try {
-    const payload = await verifyGoogleToken(idToken);
-
-    // Upsert User
-    const user = await db.upsertUserByGoogle({
-      email: payload.email,
-      name: payload.name,
-      picture: payload.picture
-    });
-
-    // Transfer Analytics if guestId provided
-    if (guestId && analyticsDao) {
-      await analyticsDao.transferGuestAnalytics(guestId, user.useruuid);
-    }
-
-    return {
-      userProfile: transformToProfile(user),
-      accessToken: generateJWTToken({ id: user._id, name: user.name }),
-      refreshToken: generateJWTToken({ id: user._id })
-    };
-  } catch (error) {
-    console.error("Google Login failed:", error.message);
-    throw new Error("GOOGLE_AUTH_FAILED");
-  }
-};
 
 module.exports = {
   signupUser,

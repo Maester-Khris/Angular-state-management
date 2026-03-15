@@ -1,5 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 const saltRounds = 10;
 
 const hashPassword = async (password) => {
@@ -34,9 +37,6 @@ const decodeToken = (token) => {
   const decoded = jwt.decode(token);
   return decoded;
 };
-
-const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const verifyGoogleToken = async (idToken) => {
   const ticket = await client.verifyIdToken({

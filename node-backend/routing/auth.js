@@ -11,8 +11,8 @@ const analyticsDao = require("../database/analytics-dao");
 /* ---------- dependency bundle ---------- */
 const deps = { db, mailer, analyticsDao };
 
-/* ---------- routes ---------- */
 
+/* ---------- routes ---------- */
 router.post("/signup", async (req, res) => {
   const result = await authService.signupUser(req.body, deps);
 
@@ -27,36 +27,6 @@ router.post("/signup", async (req, res) => {
 
   res.status(201).json({ message: `Registered. Check ${result.email} for OTP.` });
 });
-
-router.post("/verify-otp", async (req, res) => {
-  const result = await authService.verifyOtp(req.body, deps);
-
-  if (!result.ok) {
-    return res.status(400).json({ message: "Invalid or expired OTP" });
-  }
-
-  res.status(200).json({ message: "Email verified successfully!" });
-});
-
-router.post("/resend-otp", async (req, res) => {
-  const result = await authService.resendOtp(req.body, deps);
-
-  const map = {
-    NOT_FOUND: [404, "User not found"],
-    ALREADY_VERIFIED: [400, "Already verified"],
-    COOLDOWN: [429, "Cooldown active"],
-    DAILY_LIMIT: [429, "Daily limit reached"],
-    EMAIL_FAILED: [500, "Failed to deliver OTP email"]
-  };
-
-  if (!result.ok) {
-    const [status, message] = map[result.reason];
-    return res.status(status).json({ message });
-  }
-
-  res.status(200).json({ message: "New OTP sent." });
-});
-
 router.post("/login", async (req, res) => {
   try {
     const { userProfile, accessToken, refreshToken } =
@@ -75,7 +45,6 @@ router.post("/login", async (req, res) => {
     res.status(401).json({ message: "Invalid email or password." });
   }
 });
-
 router.post("/google", async (req, res) => {
   try {
     const { idToken, guestId } = req.body;
@@ -94,6 +63,35 @@ router.post("/google", async (req, res) => {
     console.error("Google login failed:", error.message);
     res.status(401).json({ message: "Google authentication failed." });
   }
+});
+
+
+router.post("/verify-otp", async (req, res) => {
+  const result = await authService.verifyOtp(req.body, deps);
+
+  if (!result.ok) {
+    return res.status(400).json({ message: "Invalid or expired OTP" });
+  }
+
+  res.status(200).json({ message: "Email verified successfully!" });
+});
+router.post("/resend-otp", async (req, res) => {
+  const result = await authService.resendOtp(req.body, deps);
+
+  const map = {
+    NOT_FOUND: [404, "User not found"],
+    ALREADY_VERIFIED: [400, "Already verified"],
+    COOLDOWN: [429, "Cooldown active"],
+    DAILY_LIMIT: [429, "Daily limit reached"],
+    EMAIL_FAILED: [500, "Failed to deliver OTP email"]
+  };
+
+  if (!result.ok) {
+    const [status, message] = map[result.reason];
+    return res.status(status).json({ message });
+  }
+
+  res.status(200).json({ message: "New OTP sent." });
 });
 
 module.exports = router;
