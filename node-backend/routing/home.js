@@ -2,7 +2,8 @@ const router = require('express').Router();
 const dbCrudOperator = require('../database/crud');
 const MongoConnection = require('../database/connection');
 const Post = require('../database/models/post');
-const { getSemanticMatches, checkPythonStatus } = require('../services/remotesearch');
+// const { getSemanticMatches, checkPythonStatus } = require('../services/remotesearch');
+const remoteSearchSvc = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
 const eventLoggerService = require('../services/eventLoggerService');
 
@@ -84,7 +85,7 @@ router.get('/api/search', async (req, res) => {
         // --- 4. INTELLECTUAL FALLBACK: Check Python Availability ---
         let effectiveMode = mode;
         if (mode === 'hybrid') {
-            const status = await checkPythonStatus();
+            const status = await remoteSearchSvc.checkPythonStatus();
             if (status !== 'connected') {
                 console.warn("Python Search Engine unreachable. Decoupling and falling back to Lexical mode.");
                 effectiveMode = 'lexical';
@@ -100,14 +101,17 @@ router.get('/api/search', async (req, res) => {
                 mode: effectiveMode,
                 count: unified.length,
                 results: unified,
-                proposedLinks: []
+                meta: {
+                    mode: effectiveMode,
+                    python_available: false // Always false in lexical fallback
+                }
             });
         }
 
         // --- Intelligence Path: Hybrid ---
         const [mongoRes, pythonRes] = await Promise.allSettled([
             dbCrudOperator.searchPostsByKeyword(q, searchLimit),
-            getSemanticMatches(q, searchLimit)
+            remoteSearchSvc.getSemanticMatches(q, searchLimit)
         ]);
 
         const keywordResults = mongoRes.status === 'fulfilled' ? mongoRes.value : [];
@@ -128,14 +132,17 @@ router.get('/api/search', async (req, res) => {
         // Note: hydratedDocs needs to be combined with semanticMatches scores in mergeResults
         const hybridResults = mergeResults(keywordResults, hydratedDocs);
 
+        const pythonStatus = await remoteSearchSvc.checkPythonStatus();
+
         return res.status(200).json({
             query: q,
             mode: effectiveMode,
             count: hybridResults.length,
             results: hybridResults.slice(0, searchLimit),
-            proposedLinks: [
-
-            ]
+            meta: {
+                mode: effectiveMode,
+                python_available: pythonStatus === 'connected'
+            }
         });
 
     } catch (error) {

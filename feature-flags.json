@@ -1,0 +1,54 @@
+{
+    "_comment": "Postair feature flag registry. All trunk-based deployments gate unreleased work here.",
+    "_docs": "To enable a flag locally, set the corresponding key to true. Never ship with VERTICAL_SWIPE or RAG_SEARCH enabled in production until integration tests pass.",
+    "flags": {
+        "FOCUS_MODE": {
+            "description": "Post detail focused reading mode — blurred background overlay",
+            "status": "shipped",
+            "sprint": "03",
+            "modules": [
+                "ng-frontend"
+            ],
+            "enabled_prod": true
+        },
+        "VERTICAL_SWIPE": {
+            "description": "Quick post overview via vertical swipe gesture on feed",
+            "status": "in_progress",
+            "sprint": "03",
+            "modules": [
+                "ng-frontend"
+            ],
+            "enabled_prod": false
+        },
+        "RAG_SEARCH": {
+            "description": "AI-augmented hybrid search — BM25 + Qdrant vector retrieval + LLM query expansion + web search enrichment",
+            "status": "in_progress",
+            "sprint": "03",
+            "modules": [
+                "python-search-api",
+                "node-backend"
+            ],
+            "enabled_prod": false,
+            "gate": "integration_tests_must_pass"
+        },
+        "REDIS_POST_CACHE": {
+            "description": "Redis-backed post detail caching via Upstash for reduced latency on focused reading mode",
+            "status": "in_progress",
+            "sprint": "03",
+            "modules": [
+                "node-backend"
+            ],
+            "enabled_prod": false
+        },
+        "SWIPE_TO_RELATED": {
+            "description": "Performance-optimized swipe transition between related posts on post detail view",
+            "status": "planned",
+            "sprint": "03",
+            "modules": [
+                "ng-frontend"
+            ],
+            "enabled_prod": false,
+            "priority": "stretch"
+        }
+    }
+}
