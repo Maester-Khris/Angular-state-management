@@ -1,0 +1,71 @@
+<aside class="ai-results-panel h-llm-panel" *ngIf="aiState.state !== 'idle'">
+    <!-- Loading State -->
+    @if (aiState.state === 'loading') {
+    <div class="ai-results-panel__status-container">
+        <p class="ai-results-panel__status text-muted small">
+            <i class="bi bi-cpu me-2 spinning"></i>AI is analyzing your query…
+        </p>
+    </div>
+    }
+
+    <!-- Loaded State -->
+    @else if (aiState.state === 'loaded') {
+    <div>
+        <!-- Similar Docs Section -->
+        @if (aiState.data.similar_docs.length) {
+        <section class="ai-results-panel__section mb-4">
+            <h3 class="ai-results-panel__heading h6 fw-bold mb-3 d-flex align-items-center">
+                <i class="bi bi-link-45deg me-2 text-primary"></i>Related posts
+            </h3>
+            <div class="ai-results-panel__list d-flex flex-column gap-2">
+                @for (doc of aiState.data.similar_docs; track doc.uuid || $index) {
+                <a class="ai-results-panel__item premium-glass-card p-2 rounded-3 text-dark text-decoration-none small"
+                    (click)="onDocClick(doc.uuid)" style="cursor: pointer;">
+                    {{ doc.title }}
+                </a>
+                }
+            </div>
+        </section>
+        }
+
+        <!-- External Docs Section -->
+        @if (aiState.data.relevant_ext_docs.length) {
+        <section class="ai-results-panel__section">
+            <h3 class="ai-results-panel__heading h6 fw-bold mb-3 d-flex align-items-center">
+                <i class="bi bi-globe me-2 text-primary"></i>Web sources
+            </h3>
+            @if (aiState.data.expanded_query) {
+            <p class="ai-results-panel__expanded-query text-muted smallest mb-3 italic">
+                "{{ aiState.data.expanded_query }}"
+            </p>
+            }
+            <div class="ai-results-panel__list d-flex flex-column gap-2">
+                @for (src of aiState.data.relevant_ext_docs; track src.source_url || $index) {
+                <a class="ai-results-panel__item premium-glass-card p-2 rounded-3 text-dark text-decoration-none small"
+                    [href]="src.source_url" target="_blank" rel="noopener noreferrer">
+                    <div class="d-flex align-items-center gap-2">
+                        <img [src]="src.favicon" width="16" height="16" alt=""
+                            class="flex-shrink-0 ai-results-panel__favicon"
+                            (error)="$any($event.target).style.display='none'">
+                        <div class="d-flex flex-column">
+                            <span class="fw-semibold">{{ src.source_small_headline }}</span>
+                            <span class="text-muted" style="font-size:0.75rem">{{ src.source_name }}</span>
+                        </div>
+                    </div>
+                </a>
+                }
+            </div>
+        </section>
+        }
+    </div>
+    }
+
+    <!-- Error State -->
+    @else if (aiState.state === 'error') {
+    <div class="ai-results-panel__status-container">
+        <p class="ai-results-panel__status ai-results-panel__status--error text-danger small">
+            <i class="bi bi-exclamation-triangle me-2"></i>{{ aiState.message }}
+        </p>
+    </div>
+    }
+</aside>

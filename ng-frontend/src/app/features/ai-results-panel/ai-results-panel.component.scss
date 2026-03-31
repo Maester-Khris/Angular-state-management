@@ -1,0 +1,78 @@
+.ai-results-panel {
+  width: 100%;
+  max-width: 450px;
+  background: #f0f4ff;
+  backdrop-filter: blur(16px);
+  padding: 1.5rem 1.25rem;
+  border-radius: 20px;
+  border: 1px solid rgba(99, 102, 241, 0.1);
+  height: fit-content;
+  max-height: 70vh;
+  overflow-y: auto;
+  position: sticky;
+  top: 100px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.2) transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(99, 102, 241, 0.2);
+    border-radius: 10px;
+  }
+
+  &__status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  &__favicon {
+    object-fit: contain;
+  }
+
+  &__expanded-query {
+    font-size: 0.7rem;
+    font-style: italic;
+  }
+}
+
+.premium-glass-card {
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: block;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.08) !important;
+    color: #6366f1 !important;
+  }
+}
+
+.spinning {
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 991px) {
+  .ai-results-panel {
+    max-width: 100%;
+    position: static;
+    margin-top: 1.5rem;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
