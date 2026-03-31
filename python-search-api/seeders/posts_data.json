@@ -1,26 +1,138 @@
 [
-  { 
-    "title": "The Future of React", 
-    "description": "Exploring the new concurrent rendering features and how they impact performance." 
+  {
+    "title": "Designing Idempotent APIs for Distributed Systems",
+    "description": "Strategies for ensuring consistency in distributed environments using unique request identifiers and optimistic concurrency control."
   },
-  { 
-    "title": "Mastering TypeScript", 
-    "description": "Why strict typing is the best thing that happened to my JavaScript workflow." 
+  {
+    "title": "CQRS vs CRUD: When to Separate Read and Write Paths",
+    "description": "Evaluating architectural trade-offs between simple CRUD operations and Command Query Responsibility Segregation for complex domain models."
   },
-  { 
-    "title": "Node.js Performance Tips", 
-    "description": "How to optimize your event loop for high-traffic applications." 
+  {
+    "title": "Implementing Event-Driven Architectures with Kafka and RabbitMQ",
+    "description": "Comparing message broker semantics for decoupled services, focusing on consumer groups, delivery guarantees, and event ordering."
   },
-  { 
-    "title": "Docker for Beginners", 
-    "description": "A simple guide to containerizing your first MERN stack application." 
+  {
+    "title": "Circuit Breaker Patterns in Microservices",
+    "description": "Using software circuits to prevent cascading failures in inter-service communication with examples using Resilience4j and Hystrix."
   },
-  { 
-    "title": "The Rise of AI Agents", 
-    "description": "Moving beyond chatbots to autonomous agents that solve complex tasks." 
+  {
+    "title": "Strategy for Database Sharding in High-Scale Applications",
+    "description": "Techniques for horizontal scaling through shard keys, consistent hashing, and managing cross-shard queries in production environments."
   },
-  { 
-    "title": "Clean Code Principles", 
-    "description": "Writing code that your future self won't hate you for." 
+  {
+    "title": "Angular Signal Patterns for State Management",
+    "description": "Modernizing reactive apps by replacing complex RxJS streams with native Signals for granular change detection and better DX."
+  },
+  {
+    "title": "Optimizing Core Web Vitals in Next.js",
+    "description": "Practical steps for improving LCP, FID, and CLS through image optimization, dynamic imports, and streaming server components."
+  },
+  {
+    "title": "Advanced CSS Grid: Building Responsive Dashboards",
+    "description": "Leveraging grid-template-areas and auto-placement algorithms to create sophisticated layouts that adapt without heavy media queries."
+  },
+  {
+    "title": "WebAssembly for Performance-Critical Client Logic",
+    "description": "Integrating Rust-compiled WASM modules to offload computationally expensive tasks from the main JavaScript thread."
+  },
+  {
+    "title": "Best Practices for GraphQL Schema Design",
+    "description": "Designing evolvable graphs through input objects, unions, and clear pagination patterns to avoid breaking changes in the future."
+  },
+  {
+    "title": "Building Resilient Webhooks with Exponential Backoff",
+    "description": "Architecture for reliable third-party integrations using retries, jitter, and dead-letter queues to handle intermittent failures."
+  },
+  {
+    "title": "Async IO in Python: Beyond Basic Await",
+    "description": "Deep dive into event loop management, task groups, and avoiding blocking calls in high-performance Python backends."
+  },
+  {
+    "title": "Migrating from REST to gRPC for Internal Services",
+    "description": "Harnessing Protocol Buffers and HTTP/2 for type-safe, low-latency communication across polyglot microservice ecosystems."
+  },
+  {
+    "title": "Infrastructure as Code: Terraform vs Pulumi",
+    "description": "Comparing declarative HCL-based resource management with imperative code-driven approaches for cloud infrastructure provisioning."
+  },
+  {
+    "title": "Zero-Downtime Deployments with Blue-Green Strategies",
+    "description": "Implementing seamless releases by switching traffic between isolated environments via load balancers and DNS updates."
+  },
+  {
+    "title": "Optimizing Docker Builds with Multi-Stage Files",
+    "description": "Reducing image footprints and build times by separating development artifacts from lightweight production runtime environments."
+  },
+  {
+    "title": "Monitoring Kubernetes Clusters with Prometheus and Grafana",
+    "description": "Setting up observable infrastructure through custom metrics, alerting rules, and visual dashboards for cluster health."
+  },
+  {
+    "title": "RAG Pipelines: Optimizing Vector Search Context",
+    "description": "Improving retrieval-augmented generation accuracy through semantic chunking, re-ranking models, and hybrid search strategies."
+  },
+  {
+    "title": "Fine-Tuning LLMs for Specialized Domain Tasks",
+    "description": "Leveraging PEFT and LoRA to adapt foundation models to niche technical vocabularies and specific organizational knowledge."
+  },
+  {
+    "title": "Serving PyTorch Models at Scale with TorchServe",
+    "description": "Productionizing ML models with high-throughput inference endpoints, dynamic batching, and sidecar observability patterns."
+  },
+  {
+    "title": "Implementing Feature Stores for Real-Time ML Inference",
+    "description": "Managing the lifecycle of ML features to ensure parity between offline training and online serving for low-latency predictions."
+  },
+  {
+    "title": "Indexing Strategies for MongoDB Performance",
+    "description": "Maximizing query efficiency through compound indexes, TTL collections, and partial indexes tailored to application access patterns."
+  },
+  {
+    "title": "Choosing Between SQL and NoSQL for Time-Series Data",
+    "description": "Analyzing data locality and write throughput requirements for massive time-stamped datasets in PostgreSQL vs InfluxDB."
+  },
+  {
+    "title": "Hybrid Search: Combining Lexical and Semantic Vectors",
+    "description": "Merging BM25 keyword matching with dense embedding similarity to achieve superior search recall across varied technical queries."
+  },
+  {
+    "title": "Distributed Locking in Redis: Avoiding Deadlocks",
+    "description": "Implementing Redlock and semaphore patterns to synchronize shared resource access across multi-instance backend clusters."
+  },
+  {
+    "title": "Implementing LRU Caches from Scratch",
+    "description": "Building a Least Recently Used cache using a hash map combined with a doubly linked list for O(1) average lookup and eviction."
+  },
+  {
+    "title": "Tries for Efficient Prefix Search",
+    "description": "Designing prefix trees for autocomplete systems and IP routing logic with an emphasis on memory-efficient representation."
+  },
+  {
+    "title": "Understanding Big O: Time vs Space Trade-offs in Modern Runtimes",
+    "description": "Analyzing complexity beyond theoretical bounds, accounting for cache locality, garbage collection, and JIT optimizations."
+  },
+  {
+    "title": "Custom ESLint Rules for Team Governance",
+    "description": "Enforcing architectural boundaries and preventing common anti-patterns through bespoke static analysis rules in modern Monorepos."
+  },
+  {
+    "title": "Building Internal Developer Portals with Backstage",
+    "description": "Centralizing service catalogs, software templates, and technical documentation into a unified developer experience hub."
+  },
+  {
+    "title": "Streamlining Local Development with Dev Containers",
+    "description": "Standardizing reproducible development environments using Docker and VS Code to eliminate the 'works on my machine' syndrome."
+  },
+  {
+    "title": "Implementing OAuth 2.0 and OIDC for Centralized Auth",
+    "description": "Managing identity across services using authorization codes, PKCE for mobile apps, and scope-based permission models."
+  },
+  {
+    "title": "Securing APIs with JWT and Refresh Token Rotations",
+    "description": "Defensive patterns for stateless authentication, handling token revocation, and implementing secure refresh cycles in browser environments."
+  },
+  {
+    "title": "Preventing SQL Injection and XSS in Modern Frameworks",
+    "description": "Deep dive into parameterized queries, Content Security Policy (CSP), and sanitization pipelines for robust web application security."
   }
 ]
