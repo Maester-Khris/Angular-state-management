@@ -5,7 +5,7 @@ import os
 
 # Add the parent directory to the path so we can import SearchService
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from search_service import SearchService
+from services.embedding_service import EmbeddingService as SearchService
 
 def seed_database():
     # Initialize our existing service
