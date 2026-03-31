@@ -1,0 +1,17 @@
+<div class="empty-state-container py-5 text-center" *ngIf="!isAvailable || (hasNoPosts && !isLoading)">
+    <div class="empty-icon-wrapper mb-4">
+        <i [class]="isAvailable ? 'bi bi-search text-muted display-1' : 'bi bi-cloud-slash text-muted display-1'"></i>
+    </div>
+    <h3 class="fw-bold text-dark mb-3">
+        {{ !isAvailable ? 'Server Connection Lost' : 'No posts found' }}
+    </h3>
+    <p class="text-muted mx-auto" style="max-width: 400px;">
+        {{ !isAvailable
+        ? 'We are having trouble reaching our servers. Please check your connection or try again later.'
+        : 'No posts matched your criteria. Try adjusting your search or check back later.'
+        }}
+    </p>
+    <button class="btn btn-outline-primary rounded-pill px-4 mt-3" (click)="onRetry()" *ngIf="!isAvailable">
+        <i class="bi bi-arrow-clockwise me-2"></i>Retry Connection
+    </button>
+</div>
