@@ -18,13 +18,33 @@ app.logger.setLevel(logging.INFO)
 
 # --- Security Configuration ---
 # Read the allowed origin from environment variables
-allowed_origin = os.getenv("NODE_SERVICE_URL", "http://localhost:3000")
+node_origin = os.getenv("NODE_SERVICE_URL", "http://localhost:3000")
+angular_origin = os.getenv("ANGULAR_SERVICE_URL", "http://localhost:4200")
 INTERNAL_API_KEY = os.getenv("SHARED_SECURITY_KEY")
+
+# Determine if we are in production
+# If FLASK_DEBUG is '0', we assume production mode.
+is_prod = os.getenv("FLASK_DEBUG", 1) == 0
+allowed_origins = [node_origin, angular_origin]
+print(f"is prod: {is_prod}")
+
+if not is_prod:
+    # Add local development domains if not in production
+    dev_origins = [
+        "http://localhost:4200",
+        "http://localhost:3000",
+        "http://127.0.0.1:4200",
+        "http://127.0.0.1:3000"
+    ]
+    for origin in dev_origins:
+        if origin not in allowed_origins:
+            allowed_origins.append(origin)
+
 CORS(app, resources={
     r"/*": {
-        "origins": [allowed_origin],
+        "origins": allowed_origins,
         "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
+        "allow_headers": ["Content-Type", "Authorization", "X-Internal-Key"]
     }
 })
 
@@ -61,6 +81,18 @@ def log_request(response):
 search_svc = EmbeddingService() # Initialize the model once on startup
 llm_svc = InferenceService() # Initialize the model once on startup
 websearch_svc = WebSearchService() # Initialize the model once on startup
+
+# --- Eager warmup: force all services to fully initialize before accepting requests ---
+# This prevents "Lazy Loading" from happening mid-request and eliminates cold-start failures.
+with app.app_context():
+    try:
+        app.logger.info("Startup: warming up EmbeddingService...")
+        search_svc.search_similar_post("warmup", limit=1)
+        app.logger.info("Startup: EmbeddingService ready.")
+    except Exception as e:
+        app.logger.warning(f"Startup warmup failed (non-fatal): {e}")
+
+        
 
 # --- Middleware ---
 def require_security_key(f):
@@ -204,6 +236,8 @@ def search_ai():
     data = request.get_json()
     query = data.get("query")
     limit = data.get("limit", 5)
+    print(f"query: {query}")
+    print(f"limit: {limit}")
 
     if not query:
         return jsonify({"error": "Missing query string"}), 400
