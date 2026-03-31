@@ -21,32 +21,52 @@ class InferenceService:
     async def expand_query(self, query: str, context_docs: list[dict]) -> str:
         """
         Detects user intent and dominant topic from Qdrant snippets to produce a refined web search query.
+        Constraints: Strictly tech/engineering domain.
         """
-        formatted_context = "\n".join(
-            f"- {doc.get('title', 'Untitled')}: {doc.get('description', '')[:100]}..."
-            for doc in context_docs
-        )
+        similar_docs_text = "\n".join(
+            f"- {doc.get('title', '')}: {doc.get('description', '')[:100]}"
+            for doc in (context_docs or [])
+        ) or "No similar documents found."
 
-        prompt = f"""You are an expert search engineer.
-        Original Query: {query}
-        Local Context (to help detect intent/topic):
-        {formatted_context}
+        system_prompt = """You are a search query expansion assistant for a software engineering and technology platform.
 
-        Task: Synthesize a single, highly effective Google Search query that would find relevant external sources matching the user's intent.
-        The expanded query should be specific and professional.
-        Return ONLY the plain-text search string. No quotes, no explanation, no markdown.
-        """
+Your only job is to expand a user's search query into a short list of related technical keywords that will improve search recall.
+
+STRICT RULES:
+- Output ONLY a space-separated list of keywords. No sentences, no punctuation, no explanation.
+- Every keyword must be directly relevant to software engineering, computer science, or technology.
+- If the query is ambiguous (e.g. "life", "intelligence", "memory"), interpret it in its SOFTWARE/ENGINEERING context:
+    "life"        → software lifecycle, service uptime, TTL, reliability
+    "intelligence" → artificial intelligence, ML systems, intelligent agents
+    "memory"      → memory management, heap, garbage collection, caching
+- NEVER expand into: biology, philosophy, geography, history, lifestyle, wellness, or any non-technical domain.
+- Use the provided similar documents as additional context clues for the technical intent.
+- Output 5–8 keywords maximum.
+"""
+
+        user_prompt = f"""Query: "{query}"
+
+Similar documents from our platform (use for context):
+{similar_docs_text}
+
+Expand this query into 5–8 technical keywords relevant to software engineering."""
 
         response = await self.client.chat.completions.create(
             model=self.model,
             messages=[
-                {"role": "system", "content": "Return only the raw search query string."},
-                {"role": "user", "content": prompt}
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
             ],
             temperature=0.0,
         )
 
-        return response.choices[0].message.content.strip().strip('"')
+        expanded = response.choices[0].message.content.strip().strip('"')
+        
+        # Guard: if LLM returns garbage or empty, fallback to original query
+        if not expanded or len(expanded) < 3:
+            return query
+            
+        return expanded
 
 
     async def generate_relevant_sources(self, query: str, web_results: list[dict]) -> list[dict]:
