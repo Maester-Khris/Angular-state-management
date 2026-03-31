@@ -1,24 +1,29 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { AfterViewInit, Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BehaviorSubject, catchError, combineLatest, concatMap, debounceTime, delay, distinctUntilChanged, exhaustMap, filter, from, map, merge, mergeMap, mergeWith, Observable, of, pairwise, scan, shareReplay, startWith, Subject, switchMap, tap, timer } from 'rxjs';
+import { Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BehaviorSubject, catchError, combineLatest, debounceTime, distinctUntilChanged, filter, map, mergeWith, of, shareReplay, startWith, Subject, switchMap, tap, scan } from 'rxjs';
 import { RemoteApi } from '../../core/services/remote-api';
-import { Post } from '../posts/data-access/post.model';
 import { InfiniteScroll } from '../../shared/directives/infinite-scroll';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { PostCard } from '../../shared/ui/post-card/post-card';
 import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { SearchBar } from '../search-bar/search-bar';
+import { SearchBar, SearchEvent } from '../search-bar/search-bar';
 import { SkeletonCard } from '../../shared/ui/skeleton-card/skeleton-card';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { Footer } from '../../shared/ui/footer/footer';
 import { TrackPreview } from '../../shared/directives/track-preview';
 import { NotificationService } from '../../core/services/notification-service';
+import { AiResultsPanelComponent } from '../ai-results-panel';
+import { HeroComponent } from '../../shared/ui/hero/hero';
+import { EmptyStateComponent } from '../../shared/ui/empty-state/empty-state';
+
+
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, RouterLink, TrackPreview],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, InfiniteScroll, PostCard, LoadingSpinner, SearchBar, SkeletonCard, RouterOutlet, Footer, TrackPreview, AiResultsPanelComponent, HeroComponent, EmptyStateComponent],
+
+
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -30,6 +35,7 @@ export class Home implements OnInit, OnDestroy {
   private readonly notifService = inject(NotificationService);
   @ViewChild('communityGrid') communityGrid!: ElementRef;
   showAllLinks = signal(false);
+  isAiActive = signal(true);
 
   toggleLinks() {
     this.showAllLinks.update(v => !v);
@@ -75,7 +81,7 @@ export class Home implements OnInit, OnDestroy {
 
   // 1- input search and scroll trigger
   //  new Subject<string>();  
-  searchQuery$ = new BehaviorSubject<string>('');
+  searchQuery$ = new BehaviorSubject<{ query: string, mode: 'keyword' | 'hybrid', withAi: boolean }>({ query: '', mode: 'hybrid', withAi: false });
   loadMore$ = new Subject<void>();
 
   // 2- Home page master stream of data:
@@ -85,11 +91,8 @@ export class Home implements OnInit, OnDestroy {
     this.RemoteApi.isAvailable$
   ]).pipe(
     // whenever search or global posts change
-    tap(() => {
-      // if (this.currentPage === 0 && this.initialData.length > 0) {
-      // }
-    }),
-    switchMap(([query, _, isAvailable]) => {
+    tap(() => { }),
+    switchMap(([{ query, mode }, _, isAvailable]) => {
       if (!isAvailable) {
         return of({ type: 'RESET' as const, query, posts: [], proposedLinks: [], isAvailable });
       }
@@ -106,7 +109,7 @@ export class Home implements OnInit, OnDestroy {
       }
 
       this.currentPage = 0;
-      return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query).pipe(
+      return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query, mode).pipe(
         map(result => ({ type: 'RESET' as const, query, posts: result.posts, proposedLinks: result.proposedLinks, isAvailable })),
         startWith({ type: 'SET_LOADING' as const }),
         catchError((err) => {
@@ -121,10 +124,9 @@ export class Home implements OnInit, OnDestroy {
       this.loadMore$.pipe(
         switchMap(() => {
           this.currentPage++;
-          const currentQuery = this.searchQuery$.getValue() || '';
-          return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, currentQuery).pipe(
-            tap((result) => {
-            }),
+          const { query, mode } = this.searchQuery$.getValue();
+          return this.RemoteApi.fetchPublicPosts(this.currentPage, this.limit, query, mode).pipe(
+            tap((result) => { }),
             map(result => ({ type: 'LOAD_NEXT', posts: result.posts, proposedLinks: result.proposedLinks })),
             startWith({ type: 'SET_LOADING' as const }),
             catchError((err) => {
@@ -169,6 +171,22 @@ export class Home implements OnInit, OnDestroy {
     shareReplay(1)
   );
 
+  aiResults$ = this.searchQuery$.pipe(
+    debounceTime(500),
+    distinctUntilChanged((prev, curr) => prev.query === curr.query && prev.withAi === curr.withAi),
+    switchMap(({ query, withAi }) => {
+      if (!withAi || !query.trim()) {
+        return of({ state: 'idle' as const });
+      }
+      return this.RemoteApi.fetchAiResults(query).pipe(
+        map(data => ({ state: 'loaded' as const, data })),
+        startWith({ state: 'loading' as const }),
+        catchError(() => of({ state: 'error' as const, message: 'AI search unavailable' }))
+      );
+    }),
+    shareReplay(1)
+  );
+
   // =============== Lifecycle hooks ================
   ngOnInit(): void {
     this.RemoteApi.checkHealth().subscribe(isAvailable => {
@@ -192,9 +210,8 @@ export class Home implements OnInit, OnDestroy {
 
 
   // ================= Search component  ==============
-  onSearch(query: string) {
-    // const value = (event.target as HTMLInputElement).value; 
-    this.searchQuery$.next(query);
+  onSearch(event: SearchEvent) {
+    this.searchQuery$.next(event);
   }
   scrollToCommunity() {
     this.communityGrid.nativeElement.scrollIntoView({
