@@ -177,13 +177,9 @@ export class RemoteApi {
   }
 
   fetchAiResults(query: string, limit = 5): Observable<AiSearchResponse> {
-    const pythonBaseUrl = (environment as any).pythonBaseUrl || 'http://localhost:5000';
-    const internalKey = (environment as any).internalApiKey || 'SECRET';
-
     return this.http.post<AiSearchResponse>(
-      `${pythonBaseUrl}/search/ai`,
-      { query, limit },
-      { headers: { 'X-Internal-Key': internalKey } }
+      `${this.baseUrl}/api/search/ai`,
+      { query, limit }
     ).pipe(
       catchError((err) => {
         console.error('AI Search Error:', err);
