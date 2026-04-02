@@ -71,7 +71,8 @@
               "buildTarget": "postair:build:production"
             },
             "development": {
-              "buildTarget": "postair:build:development"
+              "buildTarget": "postair:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
