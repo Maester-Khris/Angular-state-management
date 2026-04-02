@@ -2,7 +2,6 @@ const router = require('express').Router();
 const dbCrudOperator = require('../database/crud');
 const MongoConnection = require('../database/connection');
 const Post = require('../database/models/post');
-// const { getSemanticMatches, checkPythonStatus } = require('../services/remotesearch');
 const remoteSearchSvc = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
 const eventLoggerService = require('../services/eventLoggerService');
@@ -16,7 +15,7 @@ router.get("/health", async (req, res) => {
     const dbStates = { 0: "disconnected", 1: "connected", 2: "connecting", 3: "disconnecting" };
 
     const [pythonStatus, currentDbState] = await Promise.all([
-        checkPythonStatus(),
+        remoteSearchSvc.checkPythonStatus(),
         MongoConnection.getDbStatus()
     ]);
 
@@ -150,6 +149,48 @@ router.get('/api/search', async (req, res) => {
         return res.status(500).json({ message: "Search service temporarily unavailable" });
     }
 });
+
+router.post('/api/search/ai', async (req, res) => {
+    try {
+        const { query, limit = 5 } = req.body;
+
+        if (!query) {
+            return res.status(400).json({ message: "Search query 'query' is required" });
+        }
+
+        const pythonBaseUrl = process.env.NODE_ENV === 'production'
+            ? process.env.PYTHON_SERVICE_URL
+            : 'http://localhost:5000';
+
+        const pythonUrl = `${pythonBaseUrl}/search/ai`;
+
+        const pythonResponse = await fetch(pythonUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Internal-Key': process.env.SHARED_SECURITY_KEY
+            },
+            body: JSON.stringify({ query, limit })
+        });
+
+        if (!pythonResponse.ok) {
+            const errorText = await pythonResponse.text();
+            console.error(`Python AI search error ${pythonResponse.status}: ${errorText}`);
+            return res.status(pythonResponse.status).json({
+                message: 'AI search service error'
+            });
+        }
+
+        // Forward Python response exactly — no transformation
+        const data = await pythonResponse.json();
+        return res.status(200).json(data);
+
+    } catch (error) {
+        console.error('AI search proxy error:', error.message);
+        return res.status(500).json({ message: 'AI search temporarily unavailable' });
+    }
+});
+
 
 // ==========================================
 // 4. NEWSLETTER
