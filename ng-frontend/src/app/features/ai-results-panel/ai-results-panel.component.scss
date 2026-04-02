@@ -32,6 +32,15 @@
     padding: 1rem 0;
   }
 
+  &--loading {
+    // Reserve enough height for ~5 results so the rail does not jump
+    // Use min-height not height so longer results are not clipped
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__favicon {
     object-fit: contain;
   }
@@ -63,8 +72,13 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 991px) {
