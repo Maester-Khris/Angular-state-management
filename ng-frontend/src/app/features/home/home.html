@@ -5,8 +5,11 @@
     <app-search-bar (search)="onSearch($event)" [isAiActive]="isAiActive()"></app-search-bar>
   </header>
 
-  <div class="home-content-layout d-flex flex-column flex-lg-row gap-4" *ngIf="vm.isAvailable">
-    <div class="bento-grid-container flex-grow-1">
+  <!-- Body row: grid + conditional AI rail -->
+  <div class="home-body-row" [class.has-ai-rail]="(aiResults$ | async)?.state !== 'idle'" *ngIf="vm.isAvailable">
+
+    <!-- Post area: flex: 1, always fills remaining space -->
+    <div class="home-post-area">
       <div class="bento-grid" id="community-post">
         @for (post of vm.posts; track post.uuid; let i = $index) {
         <div class="bento-item" (click)="openDetails(post.uuid!)" [attr.data-post-id]="post.uuid"
@@ -28,30 +31,35 @@
         }
         }
       </div>
+
+      <app-empty-state [isAvailable]="vm.isAvailable" [hasNoPosts]="vm.posts.length === 0" [isLoading]="vm.loading"
+        (retry)="ngOnInit()">
+      </app-empty-state>
+
+      <div class="status-footer py-5 text-center">
+        @if (vm.loading) {
+        <app-loading-spinner size="sm" label="Fetching more insights..."></app-loading-spinner>
+        }
+
+        @if(vm.hasMore) {
+        <div appInfiniteScroll (scrolled)="loadMore(vm.loading)" class="scroll-anchor"></div>
+        } @else if (vm.posts.length > 0) {
+        <div class="no-more-indicator">
+          <hr class="w-25 mx-auto opacity-10">
+          <p class="text-muted small fw-medium">No more posts at this time.</p>
+        </div>
+        }
+      </div>
     </div>
 
-    <app-ai-results-panel [aiState]="(aiResults$ | async) ?? { state: 'idle' }" (docSelected)="openDetails($event)">
-    </app-ai-results-panel>
-  </div>
-
-
-  <app-empty-state [isAvailable]="vm.isAvailable" [hasNoPosts]="vm.posts.length === 0" [isLoading]="vm.loading"
-    (retry)="ngOnInit()">
-  </app-empty-state>
-
-  <div class="status-footer py-5 text-center" *ngIf="vm.isAvailable">
-    @if (vm.loading) {
-    <app-loading-spinner size="sm" label="Fetching more insights..."></app-loading-spinner>
+    <!-- AI rail: fixed width, only mounts when AI state is not idle -->
+    @if ((aiResults$ | async)?.state !== 'idle') {
+    <aside class="home-ai-rail">
+      <app-ai-results-panel [aiState]="(aiResults$ | async) ?? { state: 'idle' }" (docSelected)="openDetails($event)">
+      </app-ai-results-panel>
+    </aside>
     }
 
-    @if(vm.hasMore) {
-    <div appInfiniteScroll (scrolled)="loadMore(vm.loading)" class="scroll-anchor"></div>
-    } @else if (vm.posts.length > 0) {
-    <div class="no-more-indicator">
-      <hr class="w-25 mx-auto opacity-10">
-      <p class="text-muted small fw-medium">No more posts at this time.</p>
-    </div>
-    }
   </div>
 
   <div class="immersive-overlay" [class.active]="isDrawerOpen()" (click)="closeDetails()">
