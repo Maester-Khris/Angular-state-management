@@ -19,21 +19,18 @@ app.logger.setLevel(logging.INFO)
 # --- Security Configuration ---
 # Read the allowed origin from environment variables
 node_origin = os.getenv("NODE_SERVICE_URL", "http://localhost:3000")
-angular_origin = os.getenv("ANGULAR_SERVICE_URL", "http://localhost:4200")
 INTERNAL_API_KEY = os.getenv("SHARED_SECURITY_KEY")
 
 # Determine if we are in production
 # If FLASK_DEBUG is '0', we assume production mode.
 is_prod = os.getenv("FLASK_DEBUG", 1) == 0
-allowed_origins = [node_origin, angular_origin]
+allowed_origins = [node_origin]
 print(f"is prod: {is_prod}")
 
 if not is_prod:
     # Add local development domains if not in production
     dev_origins = [
-        "http://localhost:4200",
         "http://localhost:3000",
-        "http://127.0.0.1:4200",
         "http://127.0.0.1:3000"
     ]
     for origin in dev_origins:
