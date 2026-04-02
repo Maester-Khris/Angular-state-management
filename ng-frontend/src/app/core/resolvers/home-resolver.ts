@@ -6,7 +6,7 @@ import { catchError, of } from 'rxjs';
 
 export const HomeResolver: ResolveFn<{ posts: Post[], proposedLinks: any[] }> = (route, state) => {
   const remoteApi = inject(RemoteApi);
-  return remoteApi.fetchPublicPosts(0, 5).pipe(
+  return remoteApi.fetchPublicPosts(0, 5, '', 'hybrid').pipe(
     catchError(() => {
       // If the resolver fails, return empty structure
       return of({ posts: [], proposedLinks: [] });
