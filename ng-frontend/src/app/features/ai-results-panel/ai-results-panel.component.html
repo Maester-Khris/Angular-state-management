@@ -1,7 +1,7 @@
 <aside class="ai-results-panel h-llm-panel" *ngIf="aiState.state !== 'idle'">
     <!-- Loading State -->
     @if (aiState.state === 'loading') {
-    <div class="ai-results-panel__status-container">
+    <div class="ai-results-panel__status-container ai-results-panel--loading">
         <p class="ai-results-panel__status text-muted small">
             <i class="bi bi-cpu me-2 spinning"></i>AI is analyzing your query…
         </p>
