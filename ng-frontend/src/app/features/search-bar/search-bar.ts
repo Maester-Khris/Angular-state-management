@@ -2,6 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, DestroyRef, inject, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export type SearchMode = 'keyword' | 'hybrid';
+
+export interface SearchEvent {
+  query: string;
+  mode: SearchMode;
+  withAi: boolean;
+}
+
 export type SearchType = 'keyword' | 'meaning';
 
 @Component({
@@ -16,7 +24,7 @@ export type SearchType = 'keyword' | 'meaning';
 export class SearchBar implements OnInit {
   @Input() searchType: SearchType = 'keyword';
   @Input() isAiActive = true;
-  @Output() search = new EventEmitter<string>();
+  @Output() search = new EventEmitter<SearchEvent>();
   @Output() typeChange = new EventEmitter<SearchType>();
   @Output() aiToggle = new EventEmitter<boolean>();
   @Output() groqToggle = new EventEmitter<boolean>();
@@ -95,12 +103,23 @@ export class SearchBar implements OnInit {
 
   onInput(event: Event) {
     const value = (event.target as HTMLInputElement).value;
-    this.search.emit(value);
+    this.search.emit({
+      query: value,
+      mode: this.searchType === 'meaning' ? 'hybrid' : 'keyword',
+      withAi: this.isAiActive
+    });
   }
 
   setType(type: SearchType) {
     this.searchType = type;
     this.typeChange.emit(type);
+
+    // Emit search event to refresh results with new mode
+    this.search.emit({
+      query: this.searchInput.nativeElement.value,
+      mode: type === 'meaning' ? 'hybrid' : 'keyword',
+      withAi: this.isAiActive
+    });
   }
 
   toggleAi() {
@@ -111,11 +130,19 @@ export class SearchBar implements OnInit {
 
   prefillSearch(value: string) {
     this.searchInput.nativeElement.value = value;
-    this.search.emit(value);
+    this.search.emit({
+      query: value,
+      mode: this.searchType === 'meaning' ? 'hybrid' : 'keyword',
+      withAi: this.isAiActive
+    });
     this.searchInput.nativeElement.focus();
   }
 
   onSubmit() {
-    this.search.emit(this.searchInput.nativeElement.value);
+    this.search.emit({
+      query: this.searchInput.nativeElement.value,
+      mode: this.searchType === 'meaning' ? 'hybrid' : 'keyword',
+      withAi: this.isAiActive
+    });
   }
 }
