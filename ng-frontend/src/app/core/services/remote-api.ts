@@ -1,8 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, distinctUntilChanged, map, Observable, of, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, distinctUntilChanged, map, Observable, of, Subject, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Post } from '../../features/posts/data-access/post.model';
+
+// export interface AiSearchResponse {
+//   query: string;
+//   expanded_query: string;
+//   similar_docs: Array<{ uuid: string; title: string; description: string; score: number }>;
+//   relevant_ext_docs: Array<{ title: string; url: string; snippet: string }>;
+// }
+export interface ExternalDoc {
+  source_url: string;
+  source_name: string;
+  source_small_headline: string;
+  source_small_description: string;
+  favicon: string;
+}
+
+export interface SimilarDoc {
+  uuid: string;
+  title: string;
+  description: string;
+  score: number;
+}
+
+export interface AiSearchResponse {
+  query: string;
+  expanded_query: string;
+  similar_docs: SimilarDoc[];
+  relevant_ext_docs: ExternalDoc[];
+}
 
 @Injectable({
   providedIn: 'root',
@@ -49,10 +77,11 @@ export class RemoteApi {
   /**
    * Home page requirement: Fetch public posts with pagination and search
    */
-  fetchPublicPosts(page: number = 0, limit: number = 5, query: string = ''): Observable<{ posts: Post[], proposedLinks: any[] }> {
+  fetchPublicPosts(page: number = 0, limit: number = 5, query: string = '', mode: 'keyword' | 'hybrid' = 'hybrid'): Observable<{ posts: Post[], proposedLinks: any[] }> {
     const skip = page * limit;
+    const effectiveMode = mode === 'keyword' ? 'lexical' : 'hybrid';
     const request$ = query
-      ? this.http.get<any>(`${this.baseUrl}/api/search?q=${query}&limit=${limit}`).pipe(
+      ? this.http.get<any>(`${this.baseUrl}/api/search?q=${query}&limit=${limit}&mode=${effectiveMode}`).pipe(
         map(res => ({
           posts: this.mapPosts(res.results || []),
           proposedLinks: res.proposedLinks || []
@@ -145,5 +174,21 @@ export class RemoteApi {
 
   subscribeNewsletter(email: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/api/newsletter`, { email });
+  }
+
+  fetchAiResults(query: string, limit = 5): Observable<AiSearchResponse> {
+    const pythonBaseUrl = (environment as any).pythonBaseUrl || 'http://localhost:5000';
+    const internalKey = (environment as any).internalApiKey || 'SECRET';
+
+    return this.http.post<AiSearchResponse>(
+      `${pythonBaseUrl}/search/ai`,
+      { query, limit },
+      { headers: { 'X-Internal-Key': internalKey } }
+    ).pipe(
+      catchError((err) => {
+        console.error('AI Search Error:', err);
+        return throwError(() => new Error('AI search unavailable'));
+      })
+    );
   }
 }
