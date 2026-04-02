@@ -25,7 +25,7 @@ import { EmptyStateComponent } from '../../shared/ui/empty-state/empty-state';
 
 
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrl: './home.scss',
 })
 export class Home implements OnInit, OnDestroy {
   private document = inject(DOCUMENT);
