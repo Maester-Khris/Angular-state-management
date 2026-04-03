@@ -107,7 +107,7 @@ def run_seeder():
 
         # Prep for Qdrant
         texts_to_embed.append(f"{full_title}. {template['description']}")
-        post_metadata.append({"uuid": post_uuid, "title": full_title})
+        post_metadata.append({"uuid": post_uuid, "title": full_title, "description": template['description']})
 
     # 4. Batch Embedding (FastEmbed is great at this)
     embeddings = list(embed_model.embed(texts_to_embed))
