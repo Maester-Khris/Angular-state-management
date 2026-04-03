@@ -5,7 +5,7 @@ from groq import AsyncGroq
 class InferenceService:
     def __init__(self):
         self.client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
-        self.model = os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
+        self.model = os.getenv("PYTHON_LLM_MODEL", "llama-3.3-70b-versatile")
 
     async def check_readiness(self):
         """Probes the AI provider for a minimal response to confirm API key/quota."""

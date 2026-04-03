@@ -19,11 +19,11 @@ app.logger.setLevel(logging.INFO)
 # --- Security Configuration ---
 # Read the allowed origin from environment variables
 node_origin = os.getenv("NODE_SERVICE_URL", "http://localhost:3000")
-INTERNAL_API_KEY = os.getenv("SHARED_SECURITY_KEY")
+INTERNAL_API_KEY = os.getenv("NODE_SHARED_SECURITY_KEY")
 
-# Determine if we are in production
-# If FLASK_DEBUG is '0', we assume production mode.
-is_prod = os.getenv("FLASK_DEBUG", 1) == 0
+# --- Model setup ---
+# FLASK_DEBUG=0 means production
+is_prod = os.getenv("PYTHON_FLASK_DEBUG", "1") == "0"
 allowed_origins = [node_origin]
 print(f"is prod: {is_prod}")
 

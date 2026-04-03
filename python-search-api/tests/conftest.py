@@ -11,7 +11,7 @@ from app import app as flask_app
 @pytest.fixture(scope='session', autouse=True)
 def setup_env():
     """Set up environment variables for testing. If not already set, provide defaults."""
-    os.environ['INTERNAL_API_KEY'] = os.getenv('INTERNAL_API_KEY', 'test-key')
+    os.environ['NODE_SHARED_SECURITY_KEY'] = os.getenv('NODE_SHARED_SECURITY_KEY', 'test-key')
     os.environ['NODE_SERVICE_URL'] = os.getenv('NODE_SERVICE_URL', 'http://test-node')
     os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY', 'test-groq-key')
     os.environ['SERPAPI_API_KEY'] = os.getenv('SERPAPI_API_KEY', 'test-serpapi-key')
@@ -22,7 +22,7 @@ def client():
     flask_app.config['TESTING'] = True
     # Refresh INTERNAL_API_KEY in the app modules if necessary
     import app
-    app.INTERNAL_API_KEY = os.environ['INTERNAL_API_KEY']
+    app.INTERNAL_API_KEY = os.environ['NODE_SHARED_SECURITY_KEY']
     
     with flask_app.test_client() as client:
         yield client
@@ -30,7 +30,7 @@ def client():
 @pytest.fixture
 def auth_headers():
     """Provide valid authentication headers matching the environment."""
-    return {"X-Internal-Key": os.environ['INTERNAL_API_KEY']}
+    return {"X-Internal-Key": os.environ['NODE_SHARED_SECURITY_KEY']}
 
 @pytest.fixture(autouse=True)
 def mock_embedding_svc(mocker):
