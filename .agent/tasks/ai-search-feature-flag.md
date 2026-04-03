@@ -1,7 +1,8 @@
 # Task 2: Feature Flag for AI Search
 
 ## Scope
-- [ ] Add `FEATURE_AI_SEARCH` environment variable to Node
+- configurations and secrets are now managed by doppler online and passed at server startup with doppler run
+- [ ] Add `FEATURE_AI_SEARCH` environment variable to local env files .env-local, .env-prod (change will be reported to doppler online)
 - [ ] Node `/api/search/ai` returns `503` immediately when flag is off
 - [ ] Node exposes `/api/config` endpoint returning current feature flags
 - [ ] Angular reads `/api/config` at app boot via `APP_INITIALIZER`
