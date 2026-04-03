@@ -16,6 +16,7 @@ import { NotificationService } from '../../core/services/notification-service';
 import { AiResultsPanelComponent } from '../ai-results-panel';
 import { HeroComponent } from '../../shared/ui/hero/hero';
 import { EmptyStateComponent } from '../../shared/ui/empty-state/empty-state';
+import { AppConfigService } from '../../core/services/app-config.service';
 
 
 
@@ -33,6 +34,7 @@ export class Home implements OnInit, OnDestroy {
   private readonly limit = 5;
   private readonly RemoteApi = inject(RemoteApi);
   private readonly notifService = inject(NotificationService);
+  private readonly configSvc = inject(AppConfigService);
   @ViewChild('communityGrid') communityGrid!: ElementRef;
   showAllLinks = signal(false);
   isAiActive = signal(true);
@@ -175,7 +177,9 @@ export class Home implements OnInit, OnDestroy {
     debounceTime(500),
     distinctUntilChanged((prev, curr) => prev.query === curr.query && prev.withAi === curr.withAi),
     switchMap(({ query, withAi }) => {
-      if (!withAi || !query.trim()) {
+      // Skip entirely if server flag is off — no request fired
+      const flagOn = this.configSvc.config().features.aiSearch;
+      if (!flagOn || !withAi || !query.trim()) {
         return of({ state: 'idle' as const });
       }
       return this.RemoteApi.fetchAiResults(query).pipe(

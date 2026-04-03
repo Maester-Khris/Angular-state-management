@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild, DestroyRef, inject, OnInit, computed } from '@angular/core';
+import { AppConfigService } from '../../core/services/app-config.service';
 import { BehaviorSubject } from 'rxjs';
 
 export type SearchMode = 'keyword' | 'hybrid';
@@ -33,6 +34,10 @@ export class SearchBar implements OnInit {
   isFocused = false;
 
   private destroyRef = inject(DestroyRef);
+  private configSvc = inject(AppConfigService);
+
+  // Computed from server-resolved config — not from environment.ts
+  aiSearchAvailable = computed(() => this.configSvc.config().features.aiSearch);
 
   keyboardLabel = 'CTRL + K';
   staticPlaceholder = 'Search stories, tech, and insights...';

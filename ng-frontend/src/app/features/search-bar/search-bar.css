@@ -47,6 +47,17 @@
   opacity: 1;
 }
 
+.ai-identity-strip.disabled {
+  opacity: 0.15;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.ai-identity-strip.disabled .pulse-dot {
+  background-color: #94a3b8;
+  animation: none;
+}
+
 .pulse-dot {
   width: 8px;
   height: 8px;

@@ -1,7 +1,8 @@
 <div class="search-container-outer">
     <div class="search-bar-main" [title]="keyboardLabel">
         <!-- AI Identity Strip -->
-        <div class="ai-identity-strip" [class.groq-active]="isAiActive">
+        <div class="ai-identity-strip" [class.groq-active]="isAiActive && aiSearchAvailable()"
+            [class.disabled]="!aiSearchAvailable()">
             <span class="pulse-dot"></span>
             <span class="ai-label">AI ASSIST</span>
             <div class="vertical-divider"></div>
@@ -27,8 +28,9 @@
             </div>
 
             <!-- Standalone Groq Toggle -->
-            <div class="booster-divider"></div>
+            <div class="booster-divider" *ngIf="aiSearchAvailable()"></div>
 
+            @if (aiSearchAvailable()) {
             <button type="button" class="btn-groq-booster" [class.active]="isAiActive" (click)="toggleAi()"
                 title="Toggle Groq AI Booster">
                 <svg width="32" height="12" viewBox="0 0 64 24" fill="currentColor" class="groq-icon-text">
@@ -37,6 +39,7 @@
                 </svg>
                 <span class="booster-label">Ask AI</span>
             </button>
+            }
         </div>
 
         <!-- Submit Button -->
