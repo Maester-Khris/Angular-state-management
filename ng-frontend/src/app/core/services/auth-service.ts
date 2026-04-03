@@ -12,7 +12,7 @@ import { UserAdapter } from '../user/user.adapter';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly baseUrl = environment.apiUrl;
+  private readonly baseUrl = environment.nodeServiceUrl;
   private http = inject(HttpClient);
   private userService = inject(UserService); // Inject the state manager
   private zone = inject(NgZone);

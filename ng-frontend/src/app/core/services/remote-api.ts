@@ -36,7 +36,7 @@ export interface AiSearchResponse {
   providedIn: 'root',
 })
 export class RemoteApi {
-  private baseUrl = environment.apiUrl;
+  private baseUrl = environment.nodeServiceUrl;
 
   private dataChangedTrigger = new Subject<void>();
   dataChanged$ = this.dataChangedTrigger.asObservable();

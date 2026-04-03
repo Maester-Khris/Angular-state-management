@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class MediaService {
 
-  private baseUrl = environment.apiUrl;
+  private baseUrl = environment.nodeServiceUrl;
 
   constructor(private http: HttpClient) { }
 
