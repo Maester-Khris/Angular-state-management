@@ -150,12 +150,31 @@ router.get('/api/search', async (req, res) => {
     }
 });
 
+// Read once at module load — no per-request overhead
+const AI_SEARCH_ENABLED = process.env.NODE_FEATURE_AI_SEARCH === 'TRUE';
+
+router.get('/api/config', (req, res) => {
+    res.status(200).json({
+        features: {
+            aiSearch: AI_SEARCH_ENABLED
+        }
+    });
+});
+
 router.post('/api/search/ai', async (req, res) => {
     try {
         const { query, limit = 5 } = req.body;
 
         if (!query) {
             return res.status(400).json({ message: "Search query 'query' is required" });
+        }
+
+        // Layer 1 gate — server enforced, cannot be bypassed from browser
+        if (!AI_SEARCH_ENABLED) {
+            return res.status(503).json({
+                error: 'disabled',
+                message: 'AI search is not available'
+            });
         }
 
         const pythonBaseUrl = process.env.NODE_ENV === 'production'
