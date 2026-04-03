@@ -7,7 +7,7 @@
     "test:unit": "NODE_ENV=test vitest run .unit.test.js",
     "test:integration": "../local.entry.sh && NODE_ENV=test BULL_PREFIX=test-bull vitest run .integration.test.js",
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "doppler run -- nodemon server.js"
   },
   "keywords": [],
   "author": "",

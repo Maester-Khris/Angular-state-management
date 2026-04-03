@@ -3,8 +3,8 @@ import { beforeAll, afterAll, describe, it, expect, vi } from 'vitest';
 import request from 'supertest';
 
 // Speed up retry/backoff loops in routes for tests
-process.env.SEND_RETRY_ATTEMPTS = '1';
-process.env.SEND_RETRY_BASE_MS = '1';
+process.env.NODE_SEND_RETRY_ATTEMPTS = '1';
+process.env.NODE_SEND_RETRY_BASE_MS = '1';
 
 // Mock DB before importing anything else
 vi.mock('../database/connection', () => ({
