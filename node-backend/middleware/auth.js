@@ -5,7 +5,7 @@ const TokenBlacklist = require("../database/models/blacklist");
 
 const opts = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
+  secretOrKey: process.env.NODE_JWT_SECRET,
   passReqToCallback: true,
 };
 

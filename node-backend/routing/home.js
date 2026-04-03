@@ -168,7 +168,7 @@ router.post('/api/search/ai', async (req, res) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-Internal-Key': process.env.SHARED_SECURITY_KEY
+                'X-Internal-Key': process.env.NODE_SHARED_SECURITY_KEY
             },
             body: JSON.stringify({ query, limit })
         });

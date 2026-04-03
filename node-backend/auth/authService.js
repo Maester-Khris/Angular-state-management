@@ -8,9 +8,9 @@ const {
 
 const { generateOtp } = require("../utils/otpgenerator");
 
-const OTP_EXPIRY_MINUTES = parseInt(process.env.OTP_EXPIRY_MINUTES || "10", 10);
-const RESEND_COOLDOWN_SECONDS = parseInt(process.env.RESEND_COOLDOWN_SECONDS || "60", 10);
-const MAX_RESENDS_PER_DAY = parseInt(process.env.MAX_RESENDS_PER_DAY || "5", 10);
+const OTP_EXPIRY_MINUTES = parseInt(process.env.NODE_OTP_EXPIRY_MINUTES || "10", 10);
+const RESEND_COOLDOWN_SECONDS = parseInt(process.env.NODE_RESEND_COOLDOWN_SECONDS || "60", 10);
+const MAX_RESENDS_PER_DAY = parseInt(process.env.NODE_MAX_RESENDS_PER_DAY || "5", 10);
 
 /* ---------------- helpers ---------------- */
 

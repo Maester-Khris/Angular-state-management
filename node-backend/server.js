@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(logger(loggingFormat));
 
 let server;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.NODE_PORT || 3000;
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

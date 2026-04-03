@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const INTERNAL_KEY = process.env.SHARED_SECURITY_KEY || 'SECRET';
+const INTERNAL_KEY = process.env.NODE_SHARED_SECURITY_KEY || 'SECRET';
 const PYTHON_BASE_URL = process.env.NODE_ENV === 'production'
     ? process.env.PYTHON_SERVICE_URL
     : 'http://localhost:5000';

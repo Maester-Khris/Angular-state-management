@@ -39,8 +39,8 @@ class MailService {
             from: `"${MailService.SENDER_NAME}" <${MailService.SENDER_EMAIL}>`,
             to: to,
             subject: 'Your PostAir Verification Code',
-            text: `Your OTP is: ${otp}. It expires in ${process.env.OTP_EXPIRY_MINUTES || 10} minutes.`,
-            html: `<b>Your OTP is: ${otp}</b><p>It expires in ${process.env.OTP_EXPIRY_MINUTES || 10} minutes.</p>`
+            text: `Your OTP is: ${otp}. It expires in ${process.env.NODE_OTP_EXPIRY_MINUTES || 10} minutes.`,
+            html: `<b>Your OTP is: ${otp}</b><p>It expires in ${process.env.NODE_OTP_EXPIRY_MINUTES || 10} minutes.</p>`
         };
 
         try {
