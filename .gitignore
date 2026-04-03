@@ -7,6 +7,7 @@
 .env.local
 .env.*.local
 *.env
+env-*
 # Ignore Qdrant local storage if you run binary
 /qdrant_data/
 /qdrant_server/
@@ -14,6 +15,8 @@
 # --- Python / Flask ---
 venv/
 .venv/
+.venv_fastembed/
+app/model_cache/
 ENV/
 __pycache__/
 *.py[cod]

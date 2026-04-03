@@ -1,0 +1,12 @@
+setup:
+  - project: postair
+    config: dev_nk
+    path: .
+
+  # - project: postair
+  #   config: dev_nk
+  # path: node-backend/
+
+  # project: postair
+  # config: dev_nk
+  # path: ng-frontend/
