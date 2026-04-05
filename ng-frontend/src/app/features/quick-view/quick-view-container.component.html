@@ -1,0 +1,19 @@
+<div class="quick-view-overlay">
+  <button class="btn-close-overlay" (click)="onClose()" title="Close">
+    <i class="bi bi-x-lg"></i>
+  </button>
+
+  <app-quick-view-rail
+    [queue]="posts()"
+    [activeIndex]="activeIndex()"
+    (navigate)="onNavigate($event)">
+  </app-quick-view-rail>
+
+  @if (currentPost()) {
+    <app-quick-view-content
+      [post]="currentPost()!"
+      [slideDir]="slideDir()"
+      (readFull)="onReadFull($event)">
+    </app-quick-view-content>
+  }
+</div>

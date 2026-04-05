@@ -1,0 +1,20 @@
+<div class="quick-view-rail">
+  <div class="rail-header">
+    <span class="rail-label">In this session</span>
+  </div>
+
+  <div class="progress-dots">
+    @for (post of queue; track post.uuid; let i = $index) {
+      <span class="progress-dot" [class.active]="i === activeIndex"></span>
+    }
+  </div>
+
+  <ul class="post-list">
+    @for (post of queue; track post.uuid; let i = $index) {
+      <li class="post-row" [class.active]="i === activeIndex" (click)="navigate.emit(i)">
+        <span class="post-tag">#Engineering</span>
+        <span class="post-row-title">{{ post.title }}</span>
+      </li>
+    }
+  </ul>
+</div>

@@ -1,0 +1,33 @@
+.quick-view-overlay {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.btn-close-overlay {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.btn-close-overlay:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #1e293b;
+}
