@@ -9,21 +9,21 @@
 
 /* Slide transition classes */
 .slide-left {
-  animation: slideInFromRight 0.25s ease forwards;
+  animation: slideLeft 0.2s ease;
 }
 
 .slide-right {
-  animation: slideInFromLeft 0.25s ease forwards;
+  animation: slideRight 0.2s ease;
 }
 
-@keyframes slideInFromRight {
+@keyframes slideLeft {
   from { opacity: 0; transform: translateX(24px); }
-  to   { opacity: 1; transform: translateX(0); }
+  to   { opacity: 1; transform: none; }
 }
 
-@keyframes slideInFromLeft {
+@keyframes slideRight {
   from { opacity: 0; transform: translateX(-24px); }
-  to   { opacity: 1; transform: translateX(0); }
+  to   { opacity: 1; transform: none; }
 }
 
 .category-tag {
