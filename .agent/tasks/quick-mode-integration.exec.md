@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: done
 phase: 3-of-3
 assigned: claude-code
 generated: 2026-04-04
@@ -40,14 +40,10 @@ cd ng-frontend && ng build 2>&1 | tail -20
 - [ ] Clicking card body still opens the full focus read.
 - [ ] Build check passes with zero errors.
 
-## On completion
-Update this file:
-  phase: 3-of-3 → done
-  Append to Log:
-  ### Run 3 — 2026-04-04
-  Output: [what was built]
-  Gap:    [anything unfinished or deviated]
-  Action: [what the next session needs to know]
+### Run 3 — 2026-04-04
+Output: Injected SessionQueueService into HomeComponent. Extended isDrawerOpen to match both /view/ and /quick-view/. Added currentPosts signal via toSignal(vm$.pipe(map(v => v.posts)), { initialValue: [] }) for synchronous batch read. Added onQuickView(post) handler calling openSession + navigate. Bound (quickView) output on app-post-card in home.html. Build passes zero errors.
+Gap:    None — all Phase 3 checklist items satisfied.
+Action: Feature complete. All 3 phases committed as separate [ng] commits on ui/quick-mode branch.
 
 ### Run 2 — 2026-04-04
 Output: Created all 9 quick-view files (QuickViewContainerComponent, QuickViewRailComponent, QuickViewContentComponent — each with .ts/.html/.css). Created index.ts barrel export. Registered `quick-view/:uuid` as a second child of `home` in app.routes.ts parallel to `view/:uuid`. Fixed an optional-chain warning in the content template (post.createdBy is non-nullable string).
