@@ -87,7 +87,7 @@ export class QuickViewContainerComponent implements OnInit {
   }
 
   onReadFull(uuid: string): void {
-    this.router.navigate(['/post', uuid]);
+    this.router.navigate(['/home', 'view', uuid]);
   }
 
   onClose(): void {

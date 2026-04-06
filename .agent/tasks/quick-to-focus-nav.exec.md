@@ -1,6 +1,6 @@
 ---
-status: in-progress
-phase: 2-of-2
+status: done
+phase: DONE
 assigned: claude-code
 generated: 2026-04-06
 ---
@@ -15,34 +15,43 @@ Read in this order before any action:
 4. .agent/tasks/quick-to-focus-nav.md
 5. .agent/tasks/quick-to-focus-nav.plan.md
 
-## Current phase: Phase 1 — Node ETag support
-Goal: Implement ETag and Cache-Control headers for the post detail endpoint.
-Files: `node-backend/routing/home.js`
-Done when: `curl -I http://localhost:3000/api/posts/:uuid` shows `ETag` and `Cache-Control` headers, and `If-None-Match` returns 304.
+## Current phase: Phase 2 — Angular navigation wiring
+Goal: Wire "Read full post" and add the top-level route.
+Files:
+- `ng-frontend/src/app/app.routes.ts`
+- `ng-frontend/src/app/features/quick-view/quick-view-container.component.ts`
 
 ## Exact file list for this session
-MODIFY  `node-backend/routing/home.js`
+MODIFY `ng-frontend/src/app/app.routes.ts`
+MODIFY `ng-frontend/src/app/features/quick-view/quick-view-container.component.ts`
 
 ## Must not change this session
-- Any frontend files (Phase 2)
-- Database schema or models
+- `node-backend/routing/home.js` (Phase 1 complete)
+- `SessionQueueService` (Must remain root provider)
+- `QuickViewRailComponent`
 
 ## Build check
-cd node-backend && npm test 2>&1 | tail -20
+cd ng-frontend && ng build 2>&1 | tail -20
 
 ## Done when
-- [ ] `curl -I http://localhost:3000/api/posts/:uuid` returns ETag and Cache-Control
-- [ ] Second request with If-None-Match returns 304
-- [ ] Build check passes with zero errors
+- [ ] Top-level `/post/:uuid` route mapping to `PostDetail` exists in `app.routes.ts`.
+- [ ] `QuickViewContainerComponent`'s `onReadFull` correctly navigates to `/post/:uuid`.
+- [ ] Browser back from `/post/:uuid` restores the quick view overlay with original session and scroll state.
+- [ ] Build check passes with zero errors.
 
 ## On completion
 Update this file:
-  phase: 1-of-2 → 2-of-2
+  phase: 2-of-2 → DONE
   Append to Log:
-  ### Run 1 — 2026-04-06
+  ### Run 2 — 2026-04-06
   Output: [what was built]
   Gap:    [anything unfinished or deviated]
-  Action: [what the next session needs to know]
+  Action: [Final verification or cleanup]
+
+### Run 2 — 2026-04-06
+Output: Updated onReadFull in QuickViewContainerComponent to navigate to ['/home', 'view', uuid] using the existing child route. No new route added — PostDetail is already reachable at home/view/:uuid. ng build passes with zero errors.
+Gap:    Task spec originally targeted /post/:uuid (new top-level route) but user confirmed the existing home/view/:uuid route should be used instead.
+Action: Verify manually — click "Read full post" in quick view, confirm navigation to /home/view/:uuid and that browser back returns to quick view overlay.
 
 ## Log
 
@@ -52,6 +61,6 @@ Gap:    Full test suite (integration tests) requires Redis Stack container — i
 Action: Phase 2 is Angular navigation wiring. Read quick-view-content.component.ts, quick-view-container.component.ts, post-detail.ts, and app.routes.ts before writing any code.
 
 ## Hard stops
-- Do not begin Phase 2 in this session even if Phase 1 finishes early
-- Do not modify files outside the exact file list above
-- If a required file is missing or unreadable, stop and report — do not guess
+- Do not modify core services or node-backend files.
+- Ensure `replaceUrl: false` is used to preserve navigation history.
+- If a required file is missing or unreadable, stop and report — do not guess.
