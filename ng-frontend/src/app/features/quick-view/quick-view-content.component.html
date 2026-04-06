@@ -1,5 +1,7 @@
 @if (post) {
-<div class="quick-view-content" [ngClass]="'slide-' + slideDir">
+<div class="quick-view-content" [ngClass]="'slide-' + slideDir"
+     (touchstart)="onTouchStart($event)"
+     (touchend)="onTouchEnd($event)">
   <div class="content-header">
     <span class="category-tag">#Engineering</span>
   </div>
@@ -21,5 +23,21 @@
   <button class="btn-read-full" (click)="onReadFull()">
     Read full post →
   </button>
+
+  @if (isMobile()) {
+  <section class="up-next">
+    <h3 class="up-next-label">Up next</h3>
+    @for (item of upNextPosts; track item.uuid; let i = $index) {
+    <div class="up-next-item" (click)="onUpNextClick(i)">
+      <span class="up-next-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+      <div class="up-next-info">
+        <span class="up-next-title">{{ item.title }}</span>
+        <span class="up-next-meta">{{ item.createdBy }}</span>
+      </div>
+      <span class="up-next-arrow">›</span>
+    </div>
+    }
+  </section>
+  }
 </div>
 }

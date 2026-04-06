@@ -1,3 +1,10 @@
+:host {
+  display: block;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
 .quick-view-overlay {
   display: flex;
   flex-direction: row;
@@ -30,4 +37,20 @@
 .btn-close-overlay:hover {
   background: rgba(0, 0, 0, 0.05);
   color: #1e293b;
+}
+
+@media (max-width: 600px) {
+  .quick-view-overlay {
+    flex-direction: column;
+  }
+
+  app-quick-view-rail {
+    display: none;
+  }
+
+  app-quick-view-content {
+    width: 100%;
+    border-left: none;
+    flex: 1;
+  }
 }
