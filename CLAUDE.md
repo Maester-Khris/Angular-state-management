@@ -29,8 +29,7 @@ AiSearchResponse interface is in the same file
 
 ## Git hygiene
 
-After completing any of the following, stage all modified files and create a
-commit. Never push — commit only.
+After completing any of the following, stage all modified files and create multiple commits(logical grouping of changes). Never push — commit only.
 
 Triggers:
 - A phase in an exec file is marked done (phase N-of-M checklist complete)
