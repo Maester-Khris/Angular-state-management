@@ -1,39 +1,45 @@
-<div class="quick-view-rail">
-  <div class="rail-header">
-    <span class="rail-label">Your reading session</span>
-  </div>
+<div class="quick-view-rail" style="">
+  <div class="rail-top-header">
+    <div class="rail-header">
+      <span class="rail-label">Your reading session</span>
+    </div>
 
-  <div class="progress-row">
-    <div class="progress-dots">
-      @for (post of queue; track post.uuid; let i = $index) {
-      <span class="progress-dot" [class.active]="i === activeIndex"></span>
+    <div class="progress-row">
+      <div class="progress-dots">
+        @for (post of queue; track post.uuid; let i = $index) {
+        <span class="progress-dot" [class.active]="i === activeIndex"></span>
+        }
+      </div>
+      @if (queue.length > 0) {
+      <span class="rail-count">{{ activeIndex + 1 }} of {{ queue.length }}</span>
       }
     </div>
-    @if (queue.length > 0) {
-    <span class="rail-count">{{ activeIndex + 1 }} of {{ queue.length }}</span>
-    }
   </div>
 
-  <ul class="post-list">
-    @for (post of queue; track post.uuid; let i = $index) {
-    <li class="rail-item" [class.active]="i === activeIndex" (click)="navigate.emit(i)">
-      <span class="post-tag">#Engineering</span>
-      <span class="rail-item-title">{{ post.title }}</span>
-      <span class="rail-item-meta">{{ post.createdBy }}</span>
-    </li>
-    }
-  </ul>
-
-  <div class="rail-pagination">
-    <button class="rail-btn" (click)="navigate.emit(activeIndex - 1)" [disabled]="activeIndex === 0">↑ prev</button>
-    <span class="pagination-indicator">{{ activeIndex + 1 }} / {{ queue.length }}</span>
-    <button class="rail-btn" (click)="navigate.emit(activeIndex + 1)" [disabled]="activeIndex === queue.length - 1">↓
-      next</button>
+  <div class="rail-body">
+    <ul class="post-list">
+      @for (post of queue; track post.uuid; let i = $index) {
+      <li class="rail-item" [class.active]="i === activeIndex" (click)="navigate.emit(i)">
+        <span class="post-tag">#Engineering</span>
+        <span class="rail-item-title">{{ post.title }}</span>
+        <span class="rail-item-meta">{{ post.createdBy }}</span>
+      </li>
+      }
+    </ul>
   </div>
 
-  <div class="rail-kbd-hints">
-    <span class="hint-group"><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
-    <span class="hint-group"><kbd>→</kbd> read</span>
-    <span class="hint-group"><kbd>Esc</kbd> close</span>
+  <div class="rail-footer">
+    <div class="rail-pagination">
+      <button class="rail-btn" (click)="navigate.emit(activeIndex - 1)" [disabled]="activeIndex === 0">↑ prev</button>
+      <span class="pagination-indicator">{{ activeIndex + 1 }} / {{ queue.length }}</span>
+      <button class="rail-btn" (click)="navigate.emit(activeIndex + 1)" [disabled]="activeIndex === queue.length - 1">↓
+        next</button>
+    </div>
+
+    <div class="rail-kbd-hints">
+      <span class="hint-group"><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+      <span class="hint-group"><kbd>→</kbd> read</span>
+      <span class="hint-group"><kbd>Esc</kbd> close</span>
+    </div>
   </div>
 </div>
