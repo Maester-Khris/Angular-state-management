@@ -4,7 +4,7 @@
   <a routerLink="/home">Back to feed</a>
 </div>
 } @else {
-<div class="quick-view-overlay" style="border: 1px solid green;">
+<div class="quick-view-overlay" style="">
   <button class="btn-close-overlay" (click)="onClose()" title="Close">
     <i class="bi bi-x-lg"></i>
   </button>
@@ -13,14 +13,8 @@
   </app-quick-view-rail>
 
   @if (currentPost()) {
-  <app-quick-view-content
-    [post]="currentPost()!"
-    [slideDir]="slideDir()"
-    [queue]="posts()"
-    [activeIndex]="activeIndex()"
-    (readFull)="onReadFull($event)"
-    (next)="navigateNext()"
-    (prev)="navigatePrev()"
+  <app-quick-view-content [post]="currentPost()!" [slideDir]="slideDir()" [queue]="posts()"
+    [activeIndex]="activeIndex()" (readFull)="onReadFull($event)" (next)="navigateNext()" (prev)="navigatePrev()"
     (navigateTo)="onNavigate($event)">
   </app-quick-view-content>
   }

@@ -6,7 +6,7 @@
 }
 
 .quick-view-content {
-  flex: 1;
+  height: 100%;
   padding: 40px;
   overflow-y: auto;
   display: flex;
