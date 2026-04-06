@@ -63,6 +63,17 @@ router.get('/api/posts/:uuid', async (req, res) => {
     try {
         const post = await dbCrudOperator.getPublicPostByUuid(req.params.uuid);
         if (!post) return res.status(404).json({ message: "Post not found" });
+
+        const etag = `"${post.updatedAt?.getTime() ?? post._id}"`;
+
+        if (req.headers['if-none-match'] === etag) {
+            return res.status(304).end();
+        }
+
+        res.set({
+            'ETag': etag,
+            'Cache-Control': 'private, max-age=300, must-revalidate'
+        });
         return res.status(200).json(post);
     } catch (error) {
         console.error("Fetch post error:", error.message);
