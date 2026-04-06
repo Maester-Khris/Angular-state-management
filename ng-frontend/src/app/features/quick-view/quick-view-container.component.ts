@@ -26,12 +26,16 @@ export class QuickViewContainerComponent implements OnInit {
   protected showEmptyFallback = signal(false);
 
   ngOnInit(): void {
+    const uuid = this.route.snapshot.paramMap.get('uuid');
+
+    // Queue is empty — page was reloaded or URL was accessed directly.
+    // Session context is lost. Return to home silently.
     if (this.queue.queue().length === 0) {
-      this.showEmptyFallback.set(true);
+      this.router.navigate(['/home'], { replaceUrl: true });
       return;
     }
+
     // Sync route param to activeIndex in case of direct URL load
-    const uuid = this.route.snapshot.paramMap.get('uuid');
     if (uuid) {
       const idx = this.queue.queue().findIndex(p => p.uuid === uuid);
       if (idx !== -1) this.queue.navigateTo(idx);
