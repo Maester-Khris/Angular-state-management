@@ -1,44 +1,31 @@
-# Changelog
-
-> Reverse-chronological sprint log. Updated at sprint close.
-> For upcoming work see `ROADMAP.md`. For flag registry see `feature-flags.json`.
-
----
-
-## [Sprint 04] — 2026-W14 — Planned
-**Theme: Observability & Data Resilience**
-
-### Planned
-- [ ] `node-backend`, `python-search-api` — Introduce OpenTelemetry for cross-service tracing.
-      Implement W3C Trace Context to track requests across
-      `ng-frontend` → `node-backend` → `python-search-api` (Flag: `OTEL_TRACING`)
-- [ ] `data-utils`, `node-backend` — Prototype Change Data Capture (CDC) logic.
-      Move from manual `data-utils` seeding to an event-driven sync
-      between MongoDB and the Qdrant vector store (Flag: `CDC_SYNC`)
-- [ ] `python-search-api` — Implement Reciprocal Rank Fusion (RRF) to optimize
-      score weighting between BM25 and vector retrieval results (Flag: `RRF_RANKING`)
-
----
-
-## [Sprint 03] — 2026-W13 — Current
-**Theme: Intelligence & Experience** — Trunk-based deployment.
-
-### In Progress
-- [ ] `python-search-api` — RAG search engine (hybrid + AI-augmented).
-      Current focus: integration test validation (Flag: `RAG_SEARCH`)
-- [ ] `node-backend`, `ng-frontend` — Redis-backed post detail cache;
-      focused reading mode UI (Flag: `REDIS_POST_CACHE`, `FOCUS_MODE`)
-- [ ] `ng-frontend` — Vertical swipe quick post overview (Flag: `VERTICAL_SWIPE`)
-
-### Stretch
-- [ ] `ng-frontend` — Post detail performance pass:
-      swipe-to-related-post transition optimization (Flag: `SWIPE_TO_RELATED`)
-
----
-
-## [Sprint 02] — 2026-W12 — Completed
+## [Sprint 03] — 2026-W14 — Completed
+**Theme: Quick View & Reading Session**
 
 ### Completed
-- [x] `python-search-api` — Hybrid search pipeline (BM25 + Qdrant vector retrieval)
-- [x] Root — Feature flag registry introduced (`feature-flags.json`)
-- [x] `ng-frontend` — Focused reading mode — blurred background (Flag: `FOCUS_MODE`, enabled_prod: true)
+- [x] `ng-frontend` — `SessionQueueService` — in-memory reading session queue,
+      Signal-based, capped at 30 posts, FIFO eviction (no server state)
+- [x] `ng-frontend` — Quick view overlay — child route `/home/quick-view/:uuid`
+      mirrors existing focus read drawer pattern
+- [x] `ng-frontend` — `QuickViewRailComponent` — left session rail, 260px,
+      independent scroll, progress dots, author per row, keyboard hints
+- [x] `ng-frontend` — `QuickViewContentComponent` — post preview, slide
+      transition with direction, "Read full post" CTA
+- [x] `ng-frontend` — Keyboard navigation — ↑↓ / J/K navigate rail,
+      → opens focus read, Esc closes overlay, scroll-to-active
+- [x] `ng-frontend` — Eye icon button on `PostCardComponent` — opens quick
+      view without triggering focus read (stopPropagation)
+- [x] `ng-frontend` — Reload guard — empty session queue redirects to /home
+      with replaceUrl, no broken blank panel
+- [x] `node-backend` — ETag + Cache-Control on `/api/posts/:uuid` —
+      304 Not Modified on repeat visits within 5 min window
+- [x] `ng-frontend` — Focus read navigation from quick view — full fetch
+      strategy, browser back restores session queue intact
+- [x] `node-backend` — `/api/search/ai` proxy route — internal key never
+      exposed to browser, FEATURE_AI_SEARCH flag guard
+- [x] Root — Doppler config — shared secrets centralised,
+      per-service scoped tokens
+
+### Known gaps carried to next sprint
+- Post model missing `readTime`, `slug`, `hashtags` — rail shows author only
+- Seeded data is off-topic (lifestyle posts) — search results polluted
+- Mobile responsive layout (quick view below 600px) — deferred
