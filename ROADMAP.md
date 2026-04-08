@@ -1,57 +1,55 @@
-# Postair — Roadmap
+## Sprint 04 — Current (Week of 2026-W15)
+**Theme: Post Model & Data Quality**
 
-> Human-readable planning reference. For agent task instructions see `.agents/tasks`.
-> For completed work see `CHANGELOG.md`.
+| User Story | Module(s) | Priority | Status |
+|---|---|---|---|
+| Extend Post model: slug, hashtags, readTime | `node-backend`, `ng-frontend` | Core | Planned |
+| Reseed database with on-scope engineering content and real images | `python-search-api`, `node-backend` | Core | Planned |
+| Rebuild Qdrant index from reseeded data | `python-search-api` | Core | Planned |
+
+### Sprint 04 — Engineering Notes
+- `readTime` should be computed at write time (word count / 200) and stored —
+  not computed on the client
+- Slug must be unique — generate from title + uuid suffix to avoid collisions
+- Hashtags are a string array on the Post model — search-bar tag filter
+  depends on this field being present before it can be implemented
+- Qdrant index must be rebuilt after reseed — existing embeddings reference
+  old post UUIDs and will return stale results
 
 ---
 
-## Sprint 03 — Current (Week of 2025-W12)
+## Sprint 05 — Next
+**Theme: Mobile Quick View + Search Polish**
 
-Trunk-based deployment. All unreleased work ships behind flags to `main`.
-
-| User Story | Module(s) | Flag | Priority | Status |
-|---|---|---|---|---|
-| Finish RAG search engine with integration test validation | `python-search-api`, `node-backend` | `RAG_SEARCH` | Core | In Progress |
-| Redis post-detail cache + focused reading mode UI | `node-backend`, `ng-frontend` | `REDIS_POST_CACHE`, `FOCUS_MODE` | Core | In Progress |
-| Vertical swipe quick post overview | `ng-frontend` | `VERTICAL_SWIPE` | Core | In Progress |
-| Post detail performance — swipe-to-related transition | `ng-frontend` | `SWIPE_TO_RELATED` | Stretch | Planned |
-
-### Sprint 03 — Engineering Notes
-
-- `RAG_SEARCH` is blocked on integration test sign-off before `enabled_prod: true`
-- `VERTICAL_SWIPE` and `SWIPE_TO_RELATED` are coupled — performance pass on detail
-  view should account for both before either ships to prod
-- Redis caching strategy (Upstash) must be validated against the Qdrant retrieval
-  latency budget before enabling in production
+| User Story | Module(s) | Priority | Status |
+|---|---|---|---|
+| Quick view mobile layout (≤600px) — content first, Up next list, swipe | `ng-frontend` | Core | Planned |
+| AI search results panel layout refinement | `ng-frontend` | Core | Planned |
+| Feature flag: FEATURE_AI_SEARCH enabled_prod: true | `node-backend` | Stretch | Planned |
 
 ---
 
 ## Backlog
 
 ### Search & Intelligence
-- [ ] Improve query expansion with vector embeddings (FAISS / Chroma as alternative to Qdrant)
-- [ ] Add relevance feedback loop — track which search results users engage with
-- [ ] Evaluate re-ranking layer post-retrieval (cross-encoder)
+- [ ] Improve query expansion with vector embeddings
+- [ ] Relevance feedback loop — track which results users engage with
+- [ ] Re-ranking layer post-retrieval (cross-encoder)
+- [ ] RAG search engine integration test sign-off (Flag: `RAG_SEARCH`)
+- [ ] Redis post-detail cache (Flag: `REDIS_POST_CACHE`)
+- [ ] RRF score weighting between BM25 and vector retrieval (Flag: `RRF_RANKING`)
 
 ### Infrastructure
+- [ ] OpenTelemetry cross-service tracing (Flag: `OTEL_TRACING`)
+- [ ] Change Data Capture — MongoDB → Qdrant event-driven sync (Flag: `CDC_SYNC`)
+- [ ] CI pipeline: python-search-api integration tests on every PR
 - [ ] Containerize polyglot services for Kubernetes
-- [ ] Introduce OpenTelemetry for cross-service tracing (`python-search-api` → `node-backend`)
-- [ ] CI pipeline: run `python-search-api` integration tests on every PR to `main`
-
-### Performance
-- [ ] Benchmark Node.js analytics middleware under stress (k6 or autocannon)
-- [ ] Evaluate SSR or partial hydration on `ng-frontend` for initial load
 
 ### Reader Experience
-- [ ] Vertical swipe — haptic feedback and gesture velocity tuning
 - [ ] Reading progress indicator on post detail
-- [ ] Offline reading mode (PWA + service worker caching)
+- [ ] Offline reading mode (PWA + service worker)
+- [ ] Post detail swipe-to-related transition (Flag: `SWIPE_TO_RELATED`)
 
----
-
-## Guiding Constraints
-
-- One week per sprint, 1–3 user stories maximum
-- All work deploys to `main` via trunk-based strategy — no long-lived feature branches
-- Nothing ships to production without its feature flag explicitly set to `enabled_prod: true`
-- `CHANGELOG.md` is updated at sprint close, not mid-sprint
+### Performance
+- [ ] Benchmark Node.js analytics middleware (k6 or autocannon)
+- [ ] Evaluate SSR partial hydration on ng-frontend

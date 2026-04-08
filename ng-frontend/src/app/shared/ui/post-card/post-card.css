@@ -118,6 +118,29 @@
   line-height: 1.5;
   font-style: italic;
 }
+/* ================= quick view button =========== */
+.btn-quick-view {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  color: var(--bs-primary, #6366f1);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-quick-view:hover {
+  background-color: rgba(99, 102, 241, 0.08);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--bs-primary, #6366f1);
+}
+
 /* ================= compact mode =========== */
 /* Normal Horizontal Layout */
 .post-card-wrapper {

@@ -17,7 +17,16 @@
           <span class="author-name fw-bold text-dark">The Niki</span>
         </div>
       </div>
-      <ng-container *ngTemplateOutlet="actionRef"></ng-container>
+      <div class="card-actions-group d-flex align-items-center gap-2">
+        <!-- Quick view button — placed left of the existing bookmark button -->
+        <button
+          class="btn-quick-view"
+          title="Quick view"
+          (click)="onQuickView($event)">
+          <i class="bi bi-eye"></i>
+        </button>
+        <ng-container *ngTemplateOutlet="actionRef"></ng-container>
+      </div>
     </div>
   </div>
 </div>

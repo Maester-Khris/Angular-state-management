@@ -16,6 +16,12 @@ export const routes: Routes = [
             {
                 path: "view/:uuid",
                 loadComponent: () => import("./features/post-detail/post-detail").then(c => c.PostDetail)
+            },
+            {
+                path: "quick-view/:uuid",
+                loadComponent: () =>
+                    import("./features/quick-view/quick-view-container.component")
+                        .then(c => c.QuickViewContainerComponent)
             }
         ]
     },

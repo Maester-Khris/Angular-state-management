@@ -1,5 +1,7 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
+import { Post } from '../../features/posts/data-access/post.model';
+import { SessionQueueService } from '../../core/services/session-queue.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject, catchError, combineLatest, debounceTime, distinctUntilChanged, filter, map, mergeWith, of, shareReplay, startWith, Subject, switchMap, tap, scan } from 'rxjs';
 import { RemoteApi } from '../../core/services/remote-api';
@@ -52,11 +54,12 @@ export class Home implements OnInit, OnDestroy {
 
   // ui interaction
   private router = inject(Router);
+  private sessionQueue = inject(SessionQueueService);
   isDrawerOpen = toSignal(
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
-      map(() => this.router.url.includes('/view/')),
-      startWith(this.router.url.includes('/view/'))
+      map(() => this.router.url.includes('/view/') || this.router.url.includes('/quick-view/')),
+      startWith(this.router.url.includes('/view/') || this.router.url.includes('/quick-view/'))
     )
   );
 
@@ -225,6 +228,9 @@ export class Home implements OnInit, OnDestroy {
   }
 
 
+  // Current post batch — read synchronously in onQuickView without a second subscription
+  private currentPosts = toSignal(this.vm$.pipe(map(v => v.posts)), { initialValue: [] as Post[] });
+
   // ================= Navigation with child component  ==============
   openDetails(uuid: string) {
     this.router.navigate(['view', uuid], { relativeTo: this.route });
@@ -236,6 +242,13 @@ export class Home implements OnInit, OnDestroy {
   onEsc() {
     if (this.isDrawerOpen()) {
       this.closeDetails();
+    }
+  }
+
+  onQuickView(post: Post): void {
+    this.sessionQueue.openSession(post, this.currentPosts());
+    if (post.uuid) {
+      this.router.navigate(['quick-view', post.uuid], { relativeTo: this.route });
     }
   }
 
