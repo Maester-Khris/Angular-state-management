@@ -20,9 +20,14 @@
     <ul class="post-list">
       @for (post of queue; track post.uuid; let i = $index) {
       <li class="rail-item" [class.active]="i === activeIndex" (click)="navigate.emit(i)">
-        <span class="post-tag">#Engineering</span>
+        @if (post.hashtags?.length) {
+          <span class="post-tag">#{{ post.hashtags![0] }}</span>
+        }
         <span class="rail-item-title">{{ post.title }}</span>
-        <span class="rail-item-meta">{{ post.createdBy }}</span>
+        <span class="rail-item-meta">
+          {{ post.authorName || post.createdBy }}
+          @if (post.readTime) { · {{ post.readTime }} min }
+        </span>
       </li>
       }
     </ul>

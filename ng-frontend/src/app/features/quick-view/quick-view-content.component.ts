@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../posts/data-access/post.model';
+import { TruncateWordsPipe } from '../../shared/pipes/truncate-words.pipe';
 
 @Component({
   selector: 'app-quick-view-content',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
+  imports: [CommonModule, TruncateWordsPipe],
   templateUrl: './quick-view-content.component.html',
   styleUrl: './quick-view-content.component.css'
 })

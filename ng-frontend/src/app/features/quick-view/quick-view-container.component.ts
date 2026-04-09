@@ -83,15 +83,18 @@ export class QuickViewContainerComponent implements OnInit {
         this.navigateNext();
         break;
       case 'ArrowRight': {
-        const uuid = this.currentPost()?.uuid;
-        if (uuid) this.onReadFull(uuid);
+        const post = this.currentPost();
+        const identifier = post?.slug ?? post?.uuid;
+        if (identifier) this.onReadFull(identifier);
         break;
       }
     }
   }
 
-  onReadFull(uuid: string): void {
-    this.router.navigate(['/home', 'view', uuid]);
+  onReadFull(_uuid: string): void {
+    const post = this.currentPost();
+    const identifier = post?.slug ?? post?.uuid ?? _uuid;
+    this.router.navigate(['/home', 'view', identifier]);
   }
 
   onClose(): void {
