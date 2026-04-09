@@ -8,11 +8,11 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { catchError, of, switchMap, tap } from 'rxjs';
 import { EventTracking } from '../../core/services/event-tracking';
 import { NotificationService } from '../../core/services/notification-service';
-import { isPlatformBrowser } from '@angular/common';
+import { DatePipe, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-post-detail',
-  imports: [LoadingSpinner],
+  imports: [LoadingSpinner, DatePipe],
   templateUrl: './post-detail.html',
   styleUrl: './post-detail.css',
 })
@@ -41,22 +41,40 @@ export class PostDetail implements OnInit {
     });
   }
 
-  // later can be updated with effect so that intial state comes from server respoinse if already present in bookmarks  
   isSaved = signal(false);
+  carouselIndex = signal(0);
+
+  carouselNav(el: HTMLElement, images: string[], dir: number): void {
+    const next = Math.max(0, Math.min(images.length - 1, this.carouselIndex() + dir));
+    this.carouselIndex.set(next);
+    (el.children[next] as HTMLElement)?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  }
+
+  carouselGoTo(el: HTMLElement, i: number): void {
+    this.carouselIndex.set(i);
+    (el.children[i] as HTMLElement)?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  }
 
   // Retrieve post data
   // post uuid automatically populated by angular due to withInputBinding() on routing navigation
   // use signal to fecth full post with retrieved uuid
+  private readonly UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
   uuid = input<string>('', { alias: 'uuid' });
   post = toSignal(
     toObservable(this.uuid).pipe(
-      switchMap(uuid => this.remoteApi.fetchPostByUuid(uuid).pipe(
-        catchError(err => {
-          this.notifService.show(err.message || 'Post not found', 'error');
-          this.close();
-          return of(null);
-        })
-      ))
+      switchMap(identifier => {
+        const fetch$ = this.UUID_RE.test(identifier)
+          ? this.remoteApi.fetchPostByUuid(identifier)
+          : this.remoteApi.fetchPostBySlug(identifier);
+        return fetch$.pipe(
+          catchError(err => {
+            this.notifService.show(err.message || 'Post not found', 'error');
+            this.close();
+            return of(null);
+          })
+        );
+      })
     )
   );
 

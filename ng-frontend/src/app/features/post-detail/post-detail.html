@@ -22,32 +22,68 @@
     </header>
 
     <section class="meta-section text-center">
-      <div class="category-pill">Engineering</div>
+      <div class="hashtags-row d-flex justify-content-center gap-1 flex-wrap mb-2">
+        @for (tag of p.hashtags; track tag) {
+        <span class="category-pill">#{{ tag }}</span>
+        }
+      </div>
       <h1 class="canvas-title">{{ p.title }}</h1>
 
       <div class="author-strip d-flex align-items-center justify-content-center">
-        <div class="avatar-mini">NK</div>
+        <div class="avatar-mini">{{ (p.authorName || p.createdBy).charAt(0).toUpperCase() }}</div>
         <div class="text-start author-info">
-          <span class="d-block author-name">NkDev</span>
-          <span class="meta-details">Published Jan 2026 • 5 min read</span>
+          <span class="d-block author-name">{{ p.authorName || p.createdBy }}</span>
+          <span class="meta-details">
+            @if (p.publishedAt) {
+            Published {{ p.publishedAt | date:'MMMM d, yyyy' }}
+            }
+            @if (p.publishedAt && p.readTime) { • }
+            @if (p.readTime) {
+            {{ p.readTime }} min read
+            }
+          </span>
         </div>
       </div>
     </section>
 
-    <figure class="canvas-hero-image text-center">
-      <div class="image-aspect-ratio">
-        <img [src]="p.imageUrl" [alt]="p.title">
+    <section class="image-section">
+      @if (p.images?.length) {
+      @if (p.images!.length === 1) {
+      <figure class="canvas-hero-image text-center">
+        <div class="image-aspect-ratio">
+          <img [src]="p.images![0]" [alt]="p.title" class="post-image-single">
+        </div>
+      </figure>
+      } @else {
+      <div class="carousel-wrapper">
+        <div class="image-carousel" #carouselEl>
+          @for (img of p.images; track img) {
+            <img [src]="img" [alt]="p.title" class="carousel-slide">
+          }
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" (click)="carouselNav(carouselEl, p.images!, -1)" [disabled]="carouselIndex() === 0">&#8249;</button>
+          <div class="carousel-dots">
+            @for (img of p.images; track img; let i = $index) {
+              <span class="carousel-dot" [class.active]="i === carouselIndex()" (click)="carouselGoTo(carouselEl, i)"></span>
+            }
+          </div>
+          <button class="carousel-btn" (click)="carouselNav(carouselEl, p.images!, 1)" [disabled]="carouselIndex() === p.images!.length - 1">&#8250;</button>
+        </div>
       </div>
-      <figcaption>Visualizing the future of scalable web architecture.</figcaption>
-    </figure>
+      }
+      } @else if (p.imageUrl) {
+      <figure class="canvas-hero-image text-center">
+        <div class="image-aspect-ratio">
+          <img [src]="p.imageUrl" [alt]="p.title">
+        </div>
+      </figure>
+      }
+    </section>
 
     <div class="canvas-body">
       <p class="lead-text">{{ p.description }}</p>
       <div class="content-divider"></div>
-      <p>This approach ensures that even on ultra-wide monitors, your content remains readable and centered, preventing
-        the "large image taking the entire screen" issue you encountered.</p>
-      <p>By confining the scroll to the detail container itself, we provide a focused reading environment while keeping
-        the background context perfectly preserved and blur-filtered for maximum immersion.</p>
     </div>
   </article>
 </div>
