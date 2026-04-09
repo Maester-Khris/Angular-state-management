@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 const { uploadImage } = require('../services/cloudinary');
 const dbCrudOperator = require('../database/crud');
 const { authenticateJWT } = require("../middleware/auth");
+const { generateSlug, computeReadTime } = require('../utils/functions');
 
 // Configure Multer for memory storage
 const storage = multer.memoryStorage();
@@ -90,7 +92,9 @@ router.post('/posts', async (req, res) => {
     }
 
     // 2. Consolidate post data
+    const postUuid = uuidv4();
     const postData = {
+      uuid: postUuid,
       title,
       description,
       hashtags,
@@ -98,8 +102,16 @@ router.post('/posts', async (req, res) => {
       isDraft: isDraft || false,
       author: req.userId,
       authorName: req.userName,
-      editors: editorIds
+      editors: editorIds,
+      readTime: computeReadTime(description),
+      createdAt: new Date(),
     };
+
+    // Set slug and publishedAt if publishing immediately
+    if (isPublic) {
+      postData.slug = generateSlug(title, postUuid);
+      postData.publishedAt = new Date();
+    }
 
     const newPost = await dbCrudOperator.createPost(postData);
     res.status(201).json(newPost);
@@ -115,10 +127,31 @@ router.post('/posts', async (req, res) => {
  */
 router.put('/posts/:postuuid', async (req, res) => {
   try {
+    const updates = { ...req.body };
+
+    // Recompute readTime whenever description changes
+    if (updates.description) {
+      updates.readTime = computeReadTime(updates.description);
+    }
+
+    // Handle publish transition: set slug and publishedAt exactly once
+    if (updates.isPublic === true) {
+      const existing = await dbCrudOperator.userPostDetails(req.userId, req.params.postuuid);
+      if (existing) {
+        if (!existing.slug) {
+          const titleForSlug = updates.title || existing.title;
+          updates.slug = generateSlug(titleForSlug, existing.uuid);
+        }
+        if (!existing.publishedAt) {
+          updates.publishedAt = new Date();
+        }
+      }
+    }
+
     const updatedPost = await dbCrudOperator.updatePost(
       req.params.postuuid,
       req.userId,
-      req.body
+      updates
     );
     if (!updatedPost) return res.status(404).json({ message: "Post not found or unauthorized" });
     res.json(updatedPost);

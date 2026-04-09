@@ -59,12 +59,28 @@ router.get('/api/feed', async (req, res) => {
     }
 });
 
+router.get('/api/posts/slug/:slug', async (req, res) => {
+    try {
+        const post = await dbCrudOperator.getPublicPostBySlug(req.params.slug);
+        if (!post) return res.status(404).json({ message: "Post not found" });
+
+        const etag = `"${(post.publishedAt ?? post.updatedAt)?.getTime() ?? post._id}"`;
+        if (req.headers['if-none-match'] === etag) return res.status(304).end();
+
+        res.set({ 'ETag': etag, 'Cache-Control': 'private, max-age=300, must-revalidate' });
+        return res.status(200).json(post);
+    } catch (error) {
+        console.error("Fetch post by slug error:", error.message);
+        return res.status(500).json({ message: "Unable to load post details" });
+    }
+});
+
 router.get('/api/posts/:uuid', async (req, res) => {
     try {
         const post = await dbCrudOperator.getPublicPostByUuid(req.params.uuid);
         if (!post) return res.status(404).json({ message: "Post not found" });
 
-        const etag = `"${post.updatedAt?.getTime() ?? post._id}"`;
+        const etag = `"${(post.publishedAt ?? post.updatedAt)?.getTime() ?? post._id}"`;
 
         if (req.headers['if-none-match'] === etag) {
             return res.status(304).end();

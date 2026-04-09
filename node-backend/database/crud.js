@@ -103,9 +103,10 @@ const dbCrudOperator = {
   // ==========================================
 
   async getHomeFeed(lastId = null, limit = 10, skip = 0) {
-    const query = { 
-      isPublic: true, 
-      isDraft: { $ne: true } 
+    const query = {
+      isPublic: true,
+      isDraft: { $ne: true },
+      publishedAt: { $ne: null }
     };
 
     if (lastId) {
@@ -113,10 +114,10 @@ const dbCrudOperator = {
     }
 
     const posts = await Post.find(query)
-      .sort({ _id: -1 })
+      .sort({ publishedAt: -1 })
       .skip(parseInt(skip) || 0)
-      .limit(limit + 1) 
-      .select('title description authorName lastEditedAt images uuid')
+      .limit(limit + 1)
+      .select('title description authorName authorAvatar lastEditedAt images uuid hashtags isPublic isDraft views slug publishedAt readTime createdAt')
       .lean();
 
     const hasMore = posts.length > limit;
@@ -142,6 +143,20 @@ const dbCrudOperator = {
 
   async getPublicPostByUuid(uuid) {
     return await Post.findOne({ uuid, isPublic: true, isDraft: { $ne: true } }).lean();
+  },
+
+  async getPublicPostBySlug(slug) {
+    return await Post.findOne({ slug, isPublic: true, isDraft: { $ne: true } }).lean();
+  },
+
+  // Accepts either a uuid (xxxxxxxx-xxxx-4xxx-...) or a slug.
+  // Uses the indexed uuid field for uuid lookups and the indexed sparse slug field otherwise.
+  async getPublicPostByIdentifier(identifier) {
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(identifier);
+    const filter = isUuid
+      ? { uuid: identifier }
+      : { slug: identifier };
+    return await Post.findOne({ ...filter, isPublic: true, isDraft: { $ne: true } }).lean();
   },
 
   async searchPostsByKeyword(term, limit = 10) {
