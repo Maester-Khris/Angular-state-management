@@ -105,7 +105,11 @@ export class RemoteApi {
   }
 
   private mapPosts(serverPosts: any[]): Post[] {
-    return serverPosts.map(p => ({
+    return serverPosts.map(p => this.mapPost(p));
+  }
+
+  private mapPost(p: any): Post {
+    return {
       uuid: p.uuid,
       title: p.title,
       description: p.description,
@@ -113,25 +117,38 @@ export class RemoteApi {
       lastModifiedAt: p.lastEditedAt ? new Date(p.lastEditedAt) : null,
       isPublic: p.isPublic !== undefined ? p.isPublic : true,
       createdBy: p.authorName || 'Unknown',
-      imageUrl: p.images && p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/150'
-    }));
+      imageUrl: p.images && p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/150',
+      // pass-through backend fields for UI enrichment
+      authorName: p.authorName,
+      authorAvatar: p.authorAvatar,
+      images: p.images || [],
+      hashtags: p.hashtags || [],
+      isDraft: p.isDraft,
+      lastEditedAt: p.lastEditedAt,
+      views: p.views,
+      slug: p.slug,
+      publishedAt: p.publishedAt,
+      readTime: p.readTime,
+    };
   }
 
   fetchPostByUuid(uuid: string): Observable<Post> {
     return this.http.get<any>(`${this.baseUrl}/api/posts/${uuid}`).pipe(
-      map(p => ({
-        uuid: p.uuid,
-        title: p.title,
-        description: p.description,
-        createdAt: new Date(p.lastEditedAt || Date.now()),
-        lastModifiedAt: p.lastEditedAt ? new Date(p.lastEditedAt) : null,
-        isPublic: p.isPublic !== undefined ? p.isPublic : true,
-        createdBy: p.authorName || 'Unknown',
-        imageUrl: p.images && p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/150'
-      })),
+      map(p => this.mapPost(p)),
       catchError(err => {
         const message = err.error?.message || err.message || 'Post not found';
         console.error('Fetch post error:', message);
+        throw new Error(message);
+      })
+    );
+  }
+
+  fetchPostBySlug(slug: string): Observable<Post> {
+    return this.http.get<any>(`${this.baseUrl}/api/posts/slug/${slug}`).pipe(
+      map(p => this.mapPost(p)),
+      catchError(err => {
+        const message = err.error?.message || err.message || 'Post not found';
+        console.error('Fetch post by slug error:', message);
         throw new Error(message);
       })
     );

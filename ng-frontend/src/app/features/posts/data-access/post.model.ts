@@ -7,6 +7,18 @@ export interface Post {
   isPublic: boolean
   createdBy: string,
   imageUrl?: string | null
+  // backend fields
+  authorName?: string,
+  authorAvatar?: string,
+  images?: string[],
+  hashtags?: string[],
+  isDraft?: boolean,
+  lastEditedAt?: string,
+  views?: number,
+  // new post model fields
+  slug?: string,
+  publishedAt?: string | Date,
+  readTime?: number,
 }
 export interface PostState {
   posts: Post[],
