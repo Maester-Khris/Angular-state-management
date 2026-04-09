@@ -12,11 +12,11 @@
     <div class="home-post-area">
       <div class="bento-grid" id="community-post">
         @for (post of vm.posts; track post.uuid; let i = $index) {
-        <div class="bento-item" (click)="openDetails(post.uuid!)" [attr.data-post-id]="post.uuid"
+        <div class="bento-item" (click)="openDetails(post)" [attr.data-post-id]="post.uuid"
           [trackPreview]="post.uuid!">
           <app-post-card [post]="post" mode="card" (quickView)="onQuickView(post)">
             <div actions>
-              <button class="btn-fav ms-auto">
+              <button *ngIf="isLoggedIn()" class="btn-fav ms-auto">
                 <i class="bi bi-bookmark-plus"></i>
               </button>
             </div>

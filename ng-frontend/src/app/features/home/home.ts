@@ -19,6 +19,7 @@ import { AiResultsPanelComponent } from '../ai-results-panel';
 import { HeroComponent } from '../../shared/ui/hero/hero';
 import { EmptyStateComponent } from '../../shared/ui/empty-state/empty-state';
 import { AppConfigService } from '../../core/services/app-config.service';
+import { UserService } from '../../core/user/user-service';
 
 
 
@@ -37,6 +38,8 @@ export class Home implements OnInit, OnDestroy {
   private readonly RemoteApi = inject(RemoteApi);
   private readonly notifService = inject(NotificationService);
   private readonly configSvc = inject(AppConfigService);
+  private readonly userService = inject(UserService);
+  readonly isLoggedIn = toSignal(this.userService.isLoggedIn$, { initialValue: false });
   @ViewChild('communityGrid') communityGrid!: ElementRef;
   showAllLinks = signal(false);
   isAiActive = signal(true);
@@ -232,8 +235,11 @@ export class Home implements OnInit, OnDestroy {
   private currentPosts = toSignal(this.vm$.pipe(map(v => v.posts)), { initialValue: [] as Post[] });
 
   // ================= Navigation with child component  ==============
-  openDetails(uuid: string) {
-    this.router.navigate(['view', uuid], { relativeTo: this.route });
+  openDetails(postOrId: Post | string): void {
+    const identifier = typeof postOrId === 'string'
+      ? postOrId
+      : (postOrId.slug ?? postOrId.uuid);
+    this.router.navigate(['view', identifier], { relativeTo: this.route });
   }
   closeDetails() {
     this.router.navigate(['/home']);

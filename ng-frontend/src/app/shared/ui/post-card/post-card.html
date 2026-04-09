@@ -2,7 +2,15 @@
 <div class="app-post-card h-100 d-flex flex-column">
   <div class="card-image-wrapper">
     <img [src]="post().imageUrl" class="post-img" [alt]="post().title">
-    <div class="post-category-badge"># {{'Engineering' }}</div>
+    @let tagResult = (post().hashtags ?? []) | hashtagSlice:2;
+    <div class="badge-overlay">
+      @for (tag of tagResult.visible; track tag) {
+        <span class="post-category-badge">#{{ tag }}</span>
+      }
+      @if (tagResult.overflow > 0) {
+        <span class="post-category-badge">+{{ tagResult.overflow }}</span>
+      }
+    </div>
   </div>
 
   <div class="card-body-content d-flex flex-column p-3 flex-grow-1">
@@ -14,15 +22,15 @@
       <div class="author-info d-flex align-items-center">
         <img src="https://i.pravatar.cc/150?u=niki" class="author-avatar rounded-circle me-2" alt="author">
         <div class="d-flex flex-column">
-          <span class="author-name fw-bold text-dark">The Niki</span>
+          <span class="author-name fw-bold text-dark">{{ post().authorName || post().createdBy }}</span>
+          @if (post().publishedAt) {
+          <span class="card-meta text-muted">{{ post().publishedAt | date:'MMM yyyy' }}</span>
+          }
         </div>
       </div>
       <div class="card-actions-group d-flex align-items-center gap-2">
         <!-- Quick view button — placed left of the existing bookmark button -->
-        <button
-          class="btn-quick-view"
-          title="Quick view"
-          (click)="onQuickView($event)">
+        <button class="btn-quick-view" title="Quick view" (click)="onQuickView($event)">
           <i class="bi bi-eye"></i>
         </button>
         <ng-container *ngTemplateOutlet="actionRef"></ng-container>
