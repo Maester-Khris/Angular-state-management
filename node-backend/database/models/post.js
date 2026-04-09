@@ -4,23 +4,47 @@ const { v4: uuidv4 } = require('uuid');
 const PostSchema = new mongoose.Schema({
   uuid: { type: String, default: uuidv4, unique: true, index: true },
   title: { type: String, required: true, trim: true },
-  description: { type: String, required: true },
+  description: { type: String, required: true, minlength: 120, maxlength: 400 }, // 280–400 characters.
+  slug: {
+    type: String,
+    unique: true,
+    sparse: true,  // sparse: drafts have no slug yet, sparse index skips null values
+    lowercase: true,
+    trim: true,
+    index: true
+  },
 
   // INTERNAL LINKING - The Performance Engine
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
-  editors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
-  
+  editors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+
   // DENORMALIZATION - Keep these for "Read-Heavy" performance (No joins needed for feed)
   // MUST IMPLEMENT WORKER FOR SYNC: after change in user objects
-  authorName: { type: String, required: true }, 
+  authorName: { type: String, required: true },
   authorAvatar: { type: String },
 
   images: [{ type: String }], // Array of URLs
   hashtags: [{ type: String, lowercase: true }],
-  isPublic: { type: Boolean, default: false }, 
-  isDraft: { type: Boolean, default: false }, 
+  isPublic: { type: Boolean, default: false },
+  isDraft: { type: Boolean, default: false },
   lastEditedAt: { type: Date, default: Date.now },
-  views: { type: Number, default: 0, index: true },
+  views: { type: Number, default: 0, index: true }, //denormalization of analytics
+
+  publishedAt: {
+    type: Date,
+    default: null,
+    index: true  // index for feed queries sorted by publish date
+  },
+  readTime: {
+    type: Number,
+    default: null,  // null until content exists to compute from
+    min: 1
+  },
+  createdAt: {
+    type: Date,
+    immutable: true,
+    default: null
+  },
 }, {
   timestamps: false, // We handle dates manually for precise control
   collection: 'posts'
@@ -33,7 +57,7 @@ PostSchema.index({ author: 1, isDraft: 1 });
 PostSchema.index({ editors: 1, isDraft: 1 });
 
 // Pre-save Method: Update lastEditedAt automatically
-PostSchema.pre('save', function(){
+PostSchema.pre('save', function () {
   if (this.isModified()) {
     this.lastEditedAt = Date.now();
   }
