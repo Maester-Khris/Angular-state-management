@@ -1,31 +1,43 @@
-## [Sprint 03] — 2026-W14 — Completed
-**Theme: Quick View & Reading Session**
+## [Sprint 05] — 2026-W15 — Completed
+**Theme: Reader MVP — Post Model, Data Quality & UI Polish**
 
 ### Completed
-- [x] `ng-frontend` — `SessionQueueService` — in-memory reading session queue,
-      Signal-based, capped at 30 posts, FIFO eviction (no server state)
-- [x] `ng-frontend` — Quick view overlay — child route `/home/quick-view/:uuid`
-      mirrors existing focus read drawer pattern
-- [x] `ng-frontend` — `QuickViewRailComponent` — left session rail, 260px,
-      independent scroll, progress dots, author per row, keyboard hints
-- [x] `ng-frontend` — `QuickViewContentComponent` — post preview, slide
-      transition with direction, "Read full post" CTA
-- [x] `ng-frontend` — Keyboard navigation — ↑↓ / J/K navigate rail,
-      → opens focus read, Esc closes overlay, scroll-to-active
-- [x] `ng-frontend` — Eye icon button on `PostCardComponent` — opens quick
-      view without triggering focus read (stopPropagation)
-- [x] `ng-frontend` — Reload guard — empty session queue redirects to /home
-      with replaceUrl, no broken blank panel
-- [x] `node-backend` — ETag + Cache-Control on `/api/posts/:uuid` —
-      304 Not Modified on repeat visits within 5 min window
-- [x] `ng-frontend` — Focus read navigation from quick view — full fetch
-      strategy, browser back restores session queue intact
-- [x] `node-backend` — `/api/search/ai` proxy route — internal key never
-      exposed to browser, FEATURE_AI_SEARCH flag guard
-- [x] Root — Doppler config — shared secrets centralised,
-      per-service scoped tokens
+- [x] `node-backend` — Post model extended: slug, publishedAt, readTime,
+      hashtags, createdAt
+- [x] `node-backend/utils` — generateSlug, computeReadTime utilities
+- [x] `node-backend` — ETag + Cache-Control on /api/posts/:uuid
+- [x] `node-backend` — /api/search/ai proxy — internal key never exposed
+      to browser, FEATURE_AI_SEARCH flag guard
+- [x] `data-utils` — backfill-published-at.js — backfilled publishedAt
+      on all seeded posts
+- [x] `python-search-api` — reseeded with on-scope engineering content
+      and real images, Qdrant index rebuilt
+- [x] `ng-frontend` — Post interface updated with new model fields
+- [x] `ng-frontend` — TruncateWordsPipe, HashtagSlicePipe added
+- [x] `ng-frontend` — Home card: CSS line-clamp, hashtag slice, publishedAt
+- [x] `ng-frontend` — Quick view: readTime, publishedAt, 100-word excerpt
+- [x] `ng-frontend` — Focus read: image carousel, all hashtags, dynamic fields
+- [x] `ng-frontend` — URL slug navigation on post detail
+- [x] `ng-frontend` — Hero section updated — new copy, contributor/writer CTAs
+- [x] `ng-frontend` — Footer updated — contributor and writer Google Form links
+- [x] `ng-frontend` — Postair description updated in footer
+- [x] `ng-frontend` — Mobile quick view layout (≤600px) — Up next list,
+      responsive breakpoint
 
-### Known gaps carried to next sprint
-- Post model missing `readTime`, `slug`, `hashtags` — rail shows author only
-- Seeded data is off-topic (lifestyle posts) — search results polluted
-- Mobile responsive layout (quick view below 600px) — deferred
+### Deferred to backlog
+- [ ] AI search results panel polish
+- [ ] Mobile quick view layout (≤600px)
+- [ ] User interactions: likes, favourites, share
+- [ ] View count increment on focus read open
+
+---
+
+## [Sprint 06] — 2026-W16 — Current
+**Theme: Writer & Admin — Authoring MVP**
+
+### Planned
+- [ ] `ng-frontend`, `node-backend` — Post creation: rich text editor,
+      image upload, hashtag input, draft save
+- [ ] `node-backend` — Publish flow: slug generation, publishedAt set on
+      publish action, isPublic toggle
+- [ ] Auth: Google Sign-In only — manual auth deferred
