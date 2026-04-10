@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Post } from '../posts/data-access/post.model';
+import { Post } from '../dashboard/writer-console/data-access/post.model';
 import { TruncateWordsPipe } from '../../shared/pipes/truncate-words.pipe';
 
 @Component({

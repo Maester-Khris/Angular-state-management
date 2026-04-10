@@ -1,6 +1,6 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, effect, ElementRef, HostListener, inject, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
-import { Post } from '../../features/posts/data-access/post.model';
+import { Post } from '../dashboard/writer-console/data-access/post.model';
 import { SessionQueueService } from '../../core/services/session-queue.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject, catchError, combineLatest, debounceTime, distinctUntilChanged, filter, map, mergeWith, of, shareReplay, startWith, Subject, switchMap, tap, scan } from 'rxjs';

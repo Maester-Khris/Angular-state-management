@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { concatMap, EMPTY, Observable, switchMap, tap, withLatestFrom } from 'rxjs';
 
-import { MockApi } from '../../../core/services/mock-api';
+import { MockApi } from '../../../../core/services/mock-api';
 import { Post, PostState } from './post.model';
 
 @Injectable()

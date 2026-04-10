@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Profile } from './profile';
+import { WriterConsole } from './writer-console';
 
-describe('Profile', () => {
-  let component: Profile;
-  let fixture: ComponentFixture<Profile>;
+describe('WriterConsole', () => {
+  let component: WriterConsole;
+  let fixture: ComponentFixture<WriterConsole>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Profile]
+      imports: [WriterConsole]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Profile);
+    fixture = TestBed.createComponent(WriterConsole);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -4,22 +4,22 @@ import { debounceTime, distinctUntilChanged, Observable, of, Subject, switchMap,
 import { CommonModule } from '@angular/common';
 import { HasUnsavedChanges, Post } from './data-access/post.model';
 import { PostStore } from './data-access/post-store';
-import { UserService } from '../../core/user/user-service';
+import { UserService } from '../../../core/user/user-service';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { LoadingSpinner } from '../../shared/ui/loading-spinner/loading-spinner';
-import { PostCard } from '../../shared/ui/post-card/post-card';
-import { MockApi } from '../../core/services/mock-api';
-import { MediaService } from '../../core/services/media-service';
-import { NotificationService } from '../../core/services/notification-service';
+import { LoadingSpinner } from '../../../shared/ui/loading-spinner/loading-spinner';
+import { PostCard } from '../../../shared/ui/post-card/post-card';
+import { MockApi } from '../../../core/services/mock-api';
+import { MediaService } from '../../../core/services/media-service';
+import { NotificationService } from '../../../core/services/notification-service';
 
 @Component({
-  selector: 'app-poststore',
+  selector: 'app-writer-console',
   imports: [ReactiveFormsModule, CommonModule, LoadingSpinner, PostCard],
-  templateUrl: './posts.html',
-  styleUrl: './posts.css',
+  templateUrl: './writer-console.html',
+  styleUrl: './writer-console.css',
   providers: [PostStore] // Each instance of this component gets a FRESH PostStore
 })
-export class Posts implements OnInit, HasUnsavedChanges {
+export class WriterConsole implements OnInit, HasUnsavedChanges {
   private readonly fb = inject(FormBuilder);
   private readonly storeService = inject(PostStore);
   private readonly userService = inject(UserService);
@@ -61,6 +61,55 @@ export class Posts implements OnInit, HasUnsavedChanges {
   // ui state
   isLoading: boolean = false;
   errors: string[] = [];
+
+  // Static list for UI preview
+  readonly mockPosts: Post[] = [
+    {
+      title: "Mastering Angular Signals",
+      description: "A deep dive into Angular's newest reactive primitive, exploring how it revolutionizes change detection and state management in modern web applications.",
+      createdAt: new Date("2024-03-20"),
+      lastModifiedAt: new Date("2024-03-22"),
+      isPublic: true,
+      createdBy: "is-no-good",
+      imageUrl: "https://miro.medium.com/v2/resize:fit:1320/format:webp/1*qkevp-qzQiw5rWcNag_HHA.jpeg",
+      authorName: "Niki Ops",
+      authorAvatar: "https://www.gravatar.com/avatar/?d=mp&s=150",
+      hashtags: ["Angular", "WebDev", "Signals"],
+      readTime: 8,
+      publishedAt: "2024-03-22T10:00:00Z",
+      slug: "mastering-angular-signals"
+    },
+    {
+      title: "The Future of Edge Computing",
+      description: "Exploring the shift from centralized cloud infrastructure to distributed edge nodes, and what it means for latency-sensitive applications.",
+      createdAt: new Date("2024-03-15"),
+      lastModifiedAt: null,
+      isPublic: true,
+      createdBy: "hercule-poirot",
+      imageUrl: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*uW3VXqTVz3u9HJHOqQnK5w.png",
+      authorName: "Hercule Poirot",
+      authorAvatar: "https://www.gravatar.com/avatar/?d=mp&s=150",
+      hashtags: ["EdgeComputing", "IA", "Architecture"],
+      readTime: 12,
+      publishedAt: "2024-03-18T14:30:00Z",
+      slug: "future-of-edge-computing"
+    },
+    {
+      title: "Building Resilient Mini-Apps",
+      description: "Best practices for designing, developing, and deploying mini-applications that are robust, performant, and user-friendly.",
+      createdAt: new Date("2024-03-10"),
+      lastModifiedAt: new Date("2024-03-11"),
+      isPublic: false,
+      createdBy: "is-no-good",
+      imageUrl: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ktJUMJO60oHoluiEV6KBmA.png",
+      authorName: "Niki Ops",
+      authorAvatar: "https://www.gravatar.com/avatar/?d=mp&s=150",
+      hashtags: ["MiniApps", "Productivity", "Mobile"],
+      readTime: 6,
+      publishedAt: undefined,
+      slug: "building-resilient-mini-apps"
+    }
+  ];
 
 
   constructor() {

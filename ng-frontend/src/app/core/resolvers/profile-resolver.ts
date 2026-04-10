@@ -2,8 +2,8 @@ import { ResolveFn } from '@angular/router';
 import { UserService } from '../user/user-service';
 import { inject } from '@angular/core';
 import { EMPTY, switchMap, take } from 'rxjs';
-import { ProfileService } from '../../features/profile/data-access/profile-service';
-import { UserProfile } from '../../features/profile/data-access/profile.model';
+import { ProfileService } from '../../features/dashboard/writer-profile/data-access/profile-service';
+import { UserProfile } from '../../features/dashboard/writer-profile/data-access/profile.model';
 
 export const profileResolver: ResolveFn<UserProfile> = (route, state) => {
   const profileService = inject(ProfileService);

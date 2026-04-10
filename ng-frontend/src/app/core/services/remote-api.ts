@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, distinctUntilChanged, map, Observable, of, Subject, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Post } from '../../features/posts/data-access/post.model';
+import { Post } from '../../features/dashboard/writer-console/data-access/post.model';
 
 // export interface AiSearchResponse {
 //   query: string;

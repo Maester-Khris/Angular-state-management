@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { Post } from '../../features/posts/data-access/post.model';
+import { Post } from '../../features/dashboard/writer-console/data-access/post.model';
 
 @Injectable({ providedIn: 'root' })
 export class SessionQueueService {

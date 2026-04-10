@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable, of, Subscriber, throwError } from 'rxjs';
-import { Post } from '../../features/posts/data-access/post.model';
+import { Post } from '../../features/dashboard/writer-console/data-access/post.model';
 import { email } from '@angular/forms/signals';
-import { UserProfile } from '../../features/profile/data-access/profile.model';
+import { UserProfile } from '../../features/dashboard/writer-profile/data-access/profile.model';
 
 export interface ProposedLink {
   title: string;
