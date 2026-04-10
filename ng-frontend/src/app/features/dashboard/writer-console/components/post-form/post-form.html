@@ -1,0 +1,54 @@
+<div class="d-flex flex-column gap-3 p-3">
+  <div>
+    <label class="form-label smallest fw-medium text-muted tracking-tight">Title</label>
+    <input type="text" class="form-control form-control-sm border-0 bg-light py-2"
+      placeholder="e.g. Mastering Angular Signals" [(ngModel)]="title" />
+  </div>
+
+  <div>
+    <label class="form-label smallest fw-medium text-muted tracking-tight">Description</label>
+    <textarea class="form-control border-0 bg-light smallest" rows="5"
+      placeholder="What's the story about?" [(ngModel)]="description"></textarea>
+  </div>
+
+  <div>
+    <label class="form-label smallest fw-medium text-muted tracking-tight">Cover Image</label>
+    <label class="upload-zone rounded-3 d-flex align-items-center justify-content-center gap-2">
+      <input type="file" class="d-none" accept="image/*" />
+      <i class="bi bi-image text-primary"></i>
+      <span class="smallest">Click to upload image</span>
+    </label>
+  </div>
+
+  <div>
+    <label class="form-label smallest fw-medium text-muted tracking-tight">Hashtags</label>
+    <div class="d-flex gap-2 flex-wrap mb-2">
+      @for (tag of hashtags; track tag) {
+        <span class="badge bg-light text-dark border">#{{ tag }}
+          <button type="button" class="btn-close btn-close-sm ms-1" (click)="removeHashtag(tag)"></button>
+        </span>
+      }
+    </div>
+    <div class="input-group input-group-sm">
+      <input type="text" class="form-control border-0 bg-light"
+        placeholder="Add tag..." [(ngModel)]="hashtag"
+        (keydown.enter)="$event.preventDefault(); addHashtag()" />
+      <button class="btn btn-light border" type="button" (click)="addHashtag()">
+        <i class="bi bi-plus"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex gap-2 mt-1">
+    <button type="button" class="btn btn-light btn-save-draft flex-grow-1 py-2 rounded fw-bold small text-muted border"
+      [disabled]="!title"
+      (click)="onSaveDraft()">
+      <i class="bi bi-archive me-1"></i> Save Draft
+    </button>
+    <button type="button" class="btn btn-primary flex-grow-1 py-2 shadow-sm rounded fw-bold small"
+      [disabled]="!title || !description"
+      (click)="onPublish()">
+      Publish
+    </button>
+  </div>
+</div>

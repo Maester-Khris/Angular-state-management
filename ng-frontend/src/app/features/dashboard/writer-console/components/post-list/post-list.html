@@ -1,0 +1,49 @@
+<div class="d-flex flex-column gap-2 p-2">
+  @if (posts.length === 0) {
+    <p class="text-muted smallest text-center py-3">No posts yet.</p>
+  }
+  @for (post of posts; track post.uuid) {
+    <div class="card border-0 shadow-sm post-item-hover">
+      <div class="card-body p-2 d-flex align-items-center gap-2">
+        <!-- Thumbnail -->
+        @if (post.images.length > 0) {
+          <img [src]="post.images[0]" class="rounded" width="44" height="44"
+            style="object-fit:cover;flex-shrink:0" alt="" />
+        } @else {
+          <div class="rounded bg-light d-flex align-items-center justify-content-center"
+            style="width:44px;height:44px;flex-shrink:0">
+            <i class="bi bi-image text-muted"></i>
+          </div>
+        }
+
+        <!-- Meta -->
+        <div class="flex-grow-1 min-w-0">
+          <p class="mb-0 small fw-semibold text-truncate">{{ post.title }}</p>
+          <div class="d-flex align-items-center gap-2 mt-1">
+            <span class="badge rounded-pill"
+              [class]="post.status === 'published' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning'">
+              {{ post.status }}
+            </span>
+            <span class="smallest text-muted">{{ post.lastEditedAt | date:'MMM d' }}</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-1 flex-shrink-0">
+          <button class="btn btn-sm btn-light border actions-btn" title="Edit"
+            (click)="editPost.emit(post)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-sm btn-light border actions-btn" title="Preview"
+            (click)="previewPost.emit(post)">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-danger actions-btn" title="Delete"
+            (click)="deletePost.emit(post.uuid)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

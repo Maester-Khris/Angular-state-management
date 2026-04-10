@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, map, Observable, of, Subscriber, throwError } from 'rxjs';
-import { Post } from '../../features/dashboard/writer-console/data-access/post.model';
+import { Post } from '../../features/dashboard/data-access/post.model';
 import { email } from '@angular/forms/signals';
-import { UserProfile } from '../../features/dashboard/writer-profile/data-access/profile.model';
+import { UserProfile } from '../../features/dashboard/data-access/profile.model';
+import { WriterPost, WriterStats } from '../../features/dashboard/data-access/writer.models';
 
 export interface ProposedLink {
   title: string;
@@ -400,4 +401,57 @@ export class MockApi {
     this.MOCK_POSTS = this.MOCK_POSTS.filter(p => p.title !== title);
     return of();
   }
+}
+
+export const MOCK_WRITER_POSTS: WriterPost[] = [
+  {
+    uuid: 'mock-001',
+    title: 'Mastering Angular Signals',
+    description: 'A deep dive into Angular newest reactive primitive...',
+    hashtags: ['angular', 'frontend'],
+    images: ['https://wallpapercave.com/wp/wp10822452.jpg'],
+    status: 'published',
+    lastEditedAt: '2026-03-15T10:00:00Z',
+    publishedAt: '2026-03-15T12:00:00Z',
+    views: 2100,
+    readTime: 5,
+    authorName: 'NkDev'
+  },
+  {
+    uuid: 'mock-002',
+    title: 'CI/CD Pipeline deep dive',
+    description: 'Slow pipelines kill deployment frequency...',
+    hashtags: ['devops', 'cicd'],
+    images: [],
+    status: 'draft',
+    lastEditedAt: '2026-04-09T18:00:00Z',
+    authorName: 'NkDev'
+  },
+  {
+    uuid: 'mock-003',
+    title: 'Rate limiting with Redis',
+    description: 'Token bucket, sliding window, and leaky bucket...',
+    hashtags: ['backend', 'redis'],
+    images: ['https://wallpapercave.com/wp/wp10822462.jpg'],
+    status: 'published',
+    lastEditedAt: '2026-02-20T09:00:00Z',
+    publishedAt: '2026-02-20T10:00:00Z',
+    views: 980,
+    readTime: 3,
+    authorName: 'NkDev'
+  }
+];
+
+export const MOCK_WRITER_STATS: WriterStats = {
+  totalPosts: 3,
+  totalDrafts: 1,
+  totalPublished: 2
+};
+
+export function getMockWriterPosts(): WriterPost[] {
+  return MOCK_WRITER_POSTS;
+}
+
+export function getMockWriterStats(): WriterStats {
+  return MOCK_WRITER_STATS;
 }
