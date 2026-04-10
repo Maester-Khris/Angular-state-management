@@ -2,7 +2,7 @@ import { HostListener, inject, Injectable, OnDestroy } from '@angular/core';
 import { bufferTime, filter, Subject, Subscription, tap } from 'rxjs';
 import { RemoteApi } from './remote-api';
 import { UserService } from '../user/user-service';
-import { PostEvent } from '../../features/dashboard/writer-console/data-access/post-event.model';
+import { PostEvent } from '../../features/dashboard/data-access/post-event.model';
 
 @Injectable({
   providedIn: 'root',

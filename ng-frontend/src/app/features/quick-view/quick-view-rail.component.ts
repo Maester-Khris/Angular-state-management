@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Post } from '../dashboard/writer-console/data-access/post.model';
+import { Post } from '../dashboard/data-access/post.model';
 
 @Component({
   selector: 'app-quick-view-rail',

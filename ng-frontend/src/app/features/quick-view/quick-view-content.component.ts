@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Post } from '../dashboard/writer-console/data-access/post.model';
+import { Post } from '../dashboard/data-access/post.model';
 import { TruncateWordsPipe } from '../../shared/pipes/truncate-words.pipe';
 
 @Component({
@@ -17,9 +17,9 @@ export class QuickViewContentComponent {
   @Input() queue: Post[] = [];
   @Input() activeIndex: number = 0;
 
-  @Output() readFull   = new EventEmitter<string>();
-  @Output() next       = new EventEmitter<void>();
-  @Output() prev       = new EventEmitter<void>();
+  @Output() readFull = new EventEmitter<string>();
+  @Output() next = new EventEmitter<void>();
+  @Output() prev = new EventEmitter<void>();
   @Output() navigateTo = new EventEmitter<number>();
 
   protected isMobile = signal(typeof window !== 'undefined' && window.innerWidth <= 600);
