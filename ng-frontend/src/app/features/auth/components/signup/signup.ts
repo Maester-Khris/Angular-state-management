@@ -71,22 +71,22 @@ export class Signup implements OnInit {
   }
 
   submit() {
-    this.onSuccess.emit();
-    // if (this.signupForm.valid) {
-    //   if (this.userCreated == false) {
-    //     const { name, email, password, bio } = this.signupForm.getRawValue();
-    //     this.authservice.signup(name, email, password).subscribe({
-    //       next: (res) => {
-    //         this.userCreated = true;
-    //         this.notifService.show(res.message, 'success');
-    //         this.onSuccess.emit();
-    //       },
-    //       error: (err) => {
-    //         this.notifService.show(err.error?.message || 'Signup failed', 'error');
-    //       }
-    //     });
-    //   }
-    // }
+    // this.onSuccess.emit();
+    if (this.signupForm.valid) {
+      if (this.userCreated == false) {
+        const { name, email, password, bio } = this.signupForm.getRawValue();
+        this.authservice.signup(name, email, password).subscribe({
+          next: (res) => {
+            this.userCreated = true;
+            this.notifService.show(res.message, 'success');
+            this.onSuccess.emit();
+          },
+          error: (err) => {
+            this.notifService.show(err.error?.message || 'Signup failed', 'error');
+          }
+        });
+      }
+    }
   }
 
 

@@ -199,5 +199,5 @@ Before marking any phase complete:
   - [ ] No secrets or API keys hardcoded
   - [ ] Build check passed for each service touched:
         ng-frontend:  cd ng-frontend && ng build 2>&1 | tail -20
-        node-backend: cd node-backend && npm test 2>&1 | tail -20
+        node-backend: cd node-backend && doppler setup --project postair --config test --no-interactive && doppler run -- npm run test 2>&1 | tail -20
         python:       cd python-search-api && python -m pytest 2>&1 | tail -20

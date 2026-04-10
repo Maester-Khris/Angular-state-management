@@ -44,17 +44,17 @@ export class OtpVerify implements OnDestroy {
     const otp = this.getOtpValue();
 
 
-    // this.authservice.verifyOtp(this.email, otp).subscribe({
-    //   next: (res) => {
-    //     this.isSubmitting = false;
-    //     this.notifService.show(res.message, 'success');
-    //     this.onVerified.emit(this.email);
-    //   },
-    //   error: (err) => {
-    //     this.isSubmitting = false;
-    //     this.notifService.show(err.error?.message || 'Verification failed', 'error');
-    //   }
-    // });
+    this.authservice.verifyOtp(this.email, otp).subscribe({
+      next: (res) => {
+        this.isSubmitting = false;
+        this.notifService.show(res.message, 'success');
+        this.onVerified.emit(this.email);
+      },
+      error: (err) => {
+        this.isSubmitting = false;
+        this.notifService.show(err.error?.message || 'Verification failed', 'error');
+      }
+    });
   }
 
   resendCode() {
