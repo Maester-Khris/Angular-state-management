@@ -1,42 +1,54 @@
-<div class="d-flex flex-column gap-3 p-3">
-  <div class="d-flex justify-content-between align-items-center mb-1">
+<div class="p-3">
+
+  <div class="d-flex justify-content-between align-items-center field-section">
     <h6 class="fw-bold mb-0 small">Edit post</h6>
-    <button type="button" class="btn-close" (click)="closed.emit()"></button>
+    <button type="button" class="panel-ctrl" (click)="closed.emit()">×</button>
   </div>
 
-  <div>
-    <label class="form-label smallest fw-medium text-muted">Title</label>
-    <input type="text" class="form-control form-control-sm border-0 bg-light py-2"
-      [(ngModel)]="title" />
+  <div class="field-section">
+    <label class="field-label">Title</label>
+    <input type="text" class="form-control form-control-sm border-0 bg-light py-2" [(ngModel)]="title" />
   </div>
 
-  <div>
-    <label class="form-label smallest fw-medium text-muted">Description</label>
-    <textarea class="form-control border-0 bg-light smallest" rows="6"
-      [(ngModel)]="description"></textarea>
+  <div class="field-section">
+    <label class="field-label">Description</label>
+    <textarea class="form-control border-0 bg-light smallest" rows="6" [(ngModel)]="description"></textarea>
   </div>
 
-  <div>
-    <label class="form-label smallest fw-medium text-muted">Cover Image</label>
-    <label class="upload-zone rounded-3 d-flex align-items-center justify-content-center gap-2">
-      <input type="file" class="d-none" accept="image/*" />
-      <i class="bi bi-image text-primary"></i>
-      <span class="smallest">Click to replace image</span>
-    </label>
+  <div class="field-section">
+    <label class="field-label">Cover Image</label>
+    <div class="upload-zone rounded-3" [class.uploading]="isUploading">
+      <input type="file" class="file-input" (change)="onFileSelected($event)" accept="image/*"
+        [disabled]="isUploading" />
+      <div class="upload-placeholder d-flex align-items-center gap-2">
+        <i class="bi" [class]="isUploading ? 'bi-hourglass-split spin' : 'bi-image text-primary'"></i>
+        <span class="smallest">{{ isUploading ? 'Uploading to vault...' : 'Click to upload image' }}</span>
+      </div>
+    </div>
+
+    <div class="image-preview-box mt-3 position-relative" *ngIf="imagePreview">
+      <img [src]="imagePreview" class="rounded-2 shadow-sm w-100" [style.opacity]="isUploading ? '0.5' : '1'"
+        alt="Preview" />
+      @if (isUploading) {
+      <div class="upload-overlay">
+        <div class="spinner-border spinner-border-sm text-white" role="status"></div>
+      </div>
+      }
+      <button type="button" class="btn-remove-img" (click)="removeImage()" *ngIf="!isUploading">&times;</button>
+    </div>
   </div>
 
-  <div>
-    <label class="form-label smallest fw-medium text-muted">Hashtags</label>
+  <div class="field-section">
+    <label class="field-label">Hashtags</label>
     <div class="d-flex gap-2 flex-wrap mb-2">
       @for (tag of hashtags; track tag) {
-        <span class="badge bg-light text-dark border">#{{ tag }}
-          <button type="button" class="btn-close btn-close-sm ms-1" (click)="removeHashtag(tag)"></button>
-        </span>
+      <span class="badge bg-light text-dark border">#{{ tag }}
+        <button type="button" class="btn-close btn-close-sm ms-1" (click)="removeHashtag(tag)"></button>
+      </span>
       }
     </div>
     <div class="input-group input-group-sm">
-      <input type="text" class="form-control border-0 bg-light"
-        placeholder="Add tag..." [(ngModel)]="hashtag"
+      <input type="text" class="form-control border-0 bg-light" placeholder="Add tag..." [(ngModel)]="hashtag"
         (keydown.enter)="$event.preventDefault(); addHashtag()" />
       <button class="btn btn-light border" type="button" (click)="addHashtag()">
         <i class="bi bi-plus"></i>
@@ -44,20 +56,16 @@
     </div>
   </div>
 
-  <div class="d-flex gap-2 mt-1">
-    <button type="button"
-      class="btn btn-light btn-save-draft flex-grow-1 py-2 rounded fw-bold small text-muted border"
-      (click)="onSaveDraft()">
-      <i class="bi bi-archive me-1"></i> Save Draft
+  <div class="action-row">
+    <button class="action-btn draft" (click)="onSaveDraft()" [disabled]="!title">
+      <span class="btn-icon">🗄</span> Save Draft
     </button>
-    <button type="button"
-      class="btn btn-success flex-grow-1 py-2 shadow-sm rounded fw-bold small"
-      (click)="onPublish()">
+    <button class="action-btn publish" (click)="onPublish()" [disabled]="!title || !description">
       Publish
+    </button>
+    <button class="action-btn delete" (click)="onDelete()">
+      <span class="btn-icon">🗑</span> Delete
     </button>
   </div>
 
-  <button type="button" class="btn btn-outline-danger btn-sm w-100" (click)="onDelete()">
-    <i class="bi bi-trash me-1"></i> Delete post
-  </button>
 </div>
