@@ -55,10 +55,10 @@
 
   <div class="action-row">
     <button class="action-btn draft" (click)="onSaveDraft()" [disabled]="!title">
-      <span class="btn-icon">🗄</span> Save Draft
+      <i class="bi bi-archive btn-icon"></i> Save Draft
     </button>
     <button class="action-btn publish" (click)="onPublish()" [disabled]="!title || !description">
-      Publish
+      <i class="bi bi-send btn-icon"></i> Publish
     </button>
   </div>
 
