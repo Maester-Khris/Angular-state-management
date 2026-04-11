@@ -1,3 +1,82 @@
+## [Sprint 06] — 2026-W16 — Completed
+**Theme: Writer Console UI — Panel System & Dashboard Architecture**
+
+### Completed
+- [x] `ng-frontend` — Dashboard refactored into `features/dashboard/` with
+      named sub-components: shell, sidebar, writer-console, writer-profile
+- [x] `ng-frontend` — Dashboard shell: full-width flex layout, Bootstrap col
+      constraints removed, sidebar stretches full viewport height
+- [x] `ng-frontend` — Dashboard data-access layer consolidated into shared
+      `features/dashboard/data-access/` — WriterPost, WriterStats interfaces
+- [x] `ng-frontend` — DashboardStateService scaffolded in `core/services/`
+- [x] `ng-frontend` — Writer console: signal-based orchestrator with
+      subcomponents — PostForm, PostList, PostEdit, PostPreview
+- [x] `ng-frontend` — Writer console: panel-based expand/collapse window
+      system matching approved UI design
+- [x] `ng-frontend` — Writer console: cover image upload with live preview
+      and remove button in both PostForm and PostEdit
+- [x] `ng-frontend` — Writer console: action-row with flex-grow hover effect
+      — Save Draft, Publish, Delete on single animated row
+- [x] `ng-frontend` — Writer console: PostPreview uses real PostCard
+      component from shared/ui via WriterPost → Post adapter
+- [x] `ng-frontend` — Writer console: PostList client-side pagination,
+      8 rows per page, prev/next at bottom
+- [x] `ng-frontend` — Writer console: panel-ctrl global design token —
+      square rounded buttons consistent across all panels
+- [x] `ng-frontend` — Writer console: state transitions — edit mode collapses
+      new post form, expands list; preview opened only via topbar toggle
+- [x] `ng-frontend` — Writer profile: driven from UserService, ProfileService
+      removed; profileResolver consumes userService.profile$ directly
+- [x] `ng-frontend` — Shell: dashboard container height adjusted, component
+      icons standardised, redundant headers removed
+
+### Deferred to next sprint
+- [ ] Writer console wired to live Node API (CRUD endpoints)
+- [ ] Writer profile: Edit profile form (name, bio, avatar upload)
+- [ ] Writer profile: Banner image upload
+
+---
+
+## [Sprint 07] — 2026-W17 — Current
+**Theme: Writer Console API + Profile Light Fixes**
+
+### Planned — writer console API (48h)
+- [ ] `node-backend` — Post CRUD endpoints for authenticated writers:
+      create, update, publish, unpublish, delete (`/api/writer/posts`)
+- [ ] `node-backend` — Image upload endpoint (Cloudinary or equivalent)
+- [ ] `node-backend` — Slug generation on publish, readTime on save,
+      publishedAt set on first publish — wire to existing utils
+- [ ] `ng-frontend` — WriterConsole wired to live API — replace mock data
+      with RemoteApi calls, wire form submissions to endpoints
+- [ ] `ng-frontend` — Auth guard confirmed on all writer routes
+- [ ] Auth: Google Sign-In only — manual auth deferred
+
+### Planned — profile UI light fixes (alongside API work)
+- [ ] `ng-frontend` — Edit profile inline form: display name, bio, avatar upload
+- [ ] `ng-frontend` — Profile banner image upload (same pattern as cover image)
+- [ ] `ng-frontend` — Draft row arrow → navigates to writer console with
+      that draft pre-loaded in edit panel
+
+---
+
+## [Sprint 08] — 2026-W18 — Planned
+**Theme: Writer Profile Data Layer**
+
+### Planned
+- [ ] `node-backend` — Stats aggregation endpoint: post count, publishedAt
+      range (since), reach sum (impressions per author)
+- [ ] `node-backend` — Heatmap data endpoint: daily post counts last 12
+      months via MongoDB aggregation pipeline
+- [ ] `ng-frontend` — Profile stats block wired to live data
+- [ ] `ng-frontend` — Contribution heatmap wired to live endpoint
+
+### Deferred to backlog (requires features not yet built)
+- [ ] Co-auth count (requires editors[] aggregation endpoint)
+- [ ] Saved insights panel (requires bookmarks/favourites feature)
+- [ ] Recent activity feed (requires activity log schema)
+
+---
+
 ## [Sprint 05] — 2026-W15 — Completed
 **Theme: Reader MVP — Post Model, Data Quality & UI Polish**
 
@@ -26,18 +105,5 @@
 
 ### Deferred to backlog
 - [ ] AI search results panel polish
-- [ ] Mobile quick view layout (≤600px)
 - [ ] User interactions: likes, favourites, share
 - [ ] View count increment on focus read open
-
----
-
-## [Sprint 06] — 2026-W16 — Current
-**Theme: Writer & Admin — Authoring MVP**
-
-### Planned
-- [ ] `ng-frontend`, `node-backend` — Post creation: rich text editor,
-      image upload, hashtag input, draft save
-- [ ] `node-backend` — Publish flow: slug generation, publishedAt set on
-      publish action, isPublic toggle
-- [ ] Auth: Google Sign-In only — manual auth deferred
