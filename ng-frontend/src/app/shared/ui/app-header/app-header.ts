@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { AuthService } from '../../../core/services/auth-service';
 import { UserService } from '../../../core/user/user-service';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -20,8 +20,13 @@ export class AppHeader {
   // 'user' is now a Signal<AppUser | null | undefined>
   user = toSignal(this.userService.user$);
 
-  // Computed signal for the template logic
+  // Computed signal for the template logicas
   isLoggedIn = computed(() => !!this.user());
+  constructor() {
+    effect((user) => {
+      console.log(this.user());
+    });
+  }
 
   avatarUrl = computed(() => {
     const url = this.user()?.avatarUrl;

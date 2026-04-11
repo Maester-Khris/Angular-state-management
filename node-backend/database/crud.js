@@ -22,6 +22,12 @@ const dbCrudOperator = {
       .lean();
   },
 
+  async findSessionUserById(id) {
+    return await User.findById(id)
+      .select('useruuid name email avatarUrl bio status isVerified')
+      .lean();
+  },
+
   async findUserByUUid(editorUuids) {
     return await User.find({ useruuid: { $in: editorUuids } })
       .select('_id')

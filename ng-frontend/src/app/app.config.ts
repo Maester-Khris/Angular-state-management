@@ -8,6 +8,7 @@ import { authInterceptorInterceptor } from './core/interceptors/auth-interceptor
 import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { firstValueFrom } from 'rxjs';
 import { AppConfigService } from './core/services/app-config.service';
+import { AuthService } from './core/services/auth-service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +25,11 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAppInitializer(() => {
       const configSvc = inject(AppConfigService);
-      return firstValueFrom(configSvc.load());
+      const authService = inject(AuthService);
+      return Promise.all([
+        firstValueFrom(configSvc.load()),
+        firstValueFrom(authService.restoreSession()),
+      ]);
     }),
   ]
 };

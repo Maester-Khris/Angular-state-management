@@ -11,6 +11,12 @@ Monorepo on Vercel (Angular + Node) and Railway (Python).
 | Node | node-backend/ | 3000 | API + Python proxy |
 | Python | python-search-api/ | 5000 | Semantic search |
 
+## Node backend — mandatory layering
+
+Every Node backend change must follow this exact three-layer pattern.
+Never put business logic in routing. Never put database calls in services
+directly — they go through the DAO in database/crud.js.
+
 ## Non-obvious architecture decisions
 - Angular calls Node for everything — never calls Python directly (security)
 - FEATURE_AI_SEARCH env var gates the AI path on Node — never in Angular bundle
