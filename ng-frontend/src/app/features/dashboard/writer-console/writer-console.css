@@ -1,8 +1,236 @@
 .writer-layout {
   display: flex;
   gap: 16px;
+  padding: 24px;
   width: 100%;
   align-items: flex-start;
+}
+
+/* ── Shared panel card ─────────────────────────────── */
+.panel {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* ── Window control buttons ────────────────────────── */
+/* Defined here; also published globally in styles.css */
+.panel-ctrl {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 0.5px solid var(--color-border-secondary, #e2e8f0);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--color-text-tertiary, #94a3b8);
+  padding: 0;
+  line-height: 1;
+}
+
+.panel-ctrl:hover {
+  background: var(--color-background-secondary, #F1F0ED);
+}
+
+/* ── Cover image upload ────────────────────────────── */
+.cover-upload-zone {
+  border: 1.5px dashed var(--color-border-secondary, #e2e8f0);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--color-text-secondary, #64748b);
+  transition: background 0.15s;
+}
+
+.cover-upload-zone:hover {
+  background: var(--color-background-secondary, #F1F0ED);
+}
+
+.cover-preview-row {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cover-thumb-wrapper {
+  position: relative;
+  width: 72px;
+  height: 56px;
+}
+
+.cover-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 0.5px solid var(--color-border-tertiary, #e2e8f0);
+  display: block;
+}
+
+.cover-remove-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ef4444;
+  color: white;
+  border: none;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* ── Form field labels ─────────────────────────────── */
+:host ::ng-deep .field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #64748b);
+  margin-bottom: 4px;
+}
+
+/* ── Field section spacing ─────────────────────────── */
+:host ::ng-deep .field-section {
+  margin-bottom: 16px;
+}
+
+/* ── Action row buttons ────────────────────────────── */
+:host ::ng-deep .action-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+:host ::ng-deep .action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 0.5px solid var(--color-border-secondary, #e2e8f0);
+  background: transparent;
+  color: var(--color-text-secondary, #64748b);
+  white-space: nowrap;
+  flex: 1;
+  transition: flex 0.2s ease, background 0.15s, color 0.15s;
+}
+:host ::ng-deep .action-btn:hover {
+  flex: 3;
+}
+:host ::ng-deep .action-btn.draft:hover {
+  background: var(--color-background-secondary, #F1F0ED);
+  color: var(--color-text-primary, #1e293b);
+  border-color: var(--color-border-primary, #94a3b8);
+}
+:host ::ng-deep .action-btn.publish {
+  background: #3B6D11;
+  color: #EAF3DE;
+  border-color: #3B6D11;
+}
+:host ::ng-deep .action-btn.publish:hover {
+  background: #27500A;
+  border-color: #27500A;
+  color: #EAF3DE;
+  flex: 3;
+}
+:host ::ng-deep .action-btn.delete {
+  color: #ef4444;
+  border-color: #fca5a5;
+}
+:host ::ng-deep .action-btn.delete:hover {
+  background: #fef2f2;
+  flex: 3;
+}
+:host ::ng-deep .btn-icon {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ── Empty workspace ───────────────────────────────── */
+.empty-workspace {
+  flex: 1;
+  /* min-height: 200px; */
+  height: 100%;
+  border: 1.5px dashed var(--color-border-secondary, #b8cfed);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--color-text-tertiary, #94a3b8);
+  font-size: 13px;
+}
+
+/* --------------------- Image Upload --------------------- */
+:host ::ng-deep .upload-zone {
+  position: relative;
+  border: 2px dashed #e2e8f0;
+  padding: 12px;
+  text-align: center;
+  transition: all .2s ease;
+  cursor: pointer;
+  background: #f8fafc;
+}
+
+:host ::ng-deep .upload-zone:hover {
+  border-color: var(--postair-primary);
+  background: #f0f3ff;
+}
+
+:host ::ng-deep .file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+:host ::ng-deep .image-preview-box {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  border: 1px solid #e2e8f0;
+  padding: 2px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+:host ::ng-deep .image-preview-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+:host ::ng-deep .btn-remove-img {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .writer-left-col {
@@ -368,6 +596,10 @@
   color: var(--bs-primary);
   transform: scale(1.1);
   text-shadow: 0 0 8px rgba(13, 110, 253, 0.4);
+}
+
+:host ::ng-deep .smallest {
+  font-size: 0.75rem;
 }
 
 .btn-expand-toggle i {

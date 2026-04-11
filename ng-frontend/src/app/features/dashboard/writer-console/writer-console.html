@@ -7,8 +7,7 @@
     <div class="card border-0 shadow-sm">
       <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center py-2 px-3">
         <span class="small fw-semibold">New post</span>
-        <button class="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center"
-          style="width:28px;height:28px" (click)="toggleNewForm()" [title]="showNewForm() ? 'Collapse' : 'Expand'">
+        <button class="panel-ctrl" (click)="toggleNewForm()" [title]="showNewForm() ? 'Collapse' : 'Expand'">
           <i class="bi" [class]="showNewForm() ? 'bi-dash' : 'bi-plus'"></i>
         </button>
       </div>
@@ -26,8 +25,7 @@
           My posts
           <span class="badge bg-light text-muted border ms-1">{{ posts().length }}</span>
         </span>
-        <button class="btn btn-sm btn-light border rounded-circle p-0 d-flex align-items-center justify-content-center"
-          style="width:28px;height:28px" (click)="toggleList()" [title]="showList() ? 'Collapse' : 'Expand'">
+        <button class="panel-ctrl" (click)="toggleList()" [title]="showList() ? 'Collapse' : 'Expand'">
           <i class="bi" [class]="showList() ? 'bi-dash' : 'bi-plus'"></i>
         </button>
       </div>
