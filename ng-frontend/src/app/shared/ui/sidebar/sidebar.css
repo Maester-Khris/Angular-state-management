@@ -1,5 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  /* background: var(--color-background-secondary, #F1F0ED); */
+  border-right: 0.5px solid var(--color-border-tertiary);
+}
+
 .sidebar-card {
-  background: white;
+  height: 100%;
   border: 1px solid var(--postair-border);
   border-radius: 12px;
   padding: 1rem;
@@ -35,7 +43,8 @@
   gap: 12px;
   padding: 0.7rem 1rem;
   border-radius: 12px;
-  color: #64748b; /* Slate 500 */
+  color: #64748b;
+  /* Slate 500 */
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
@@ -58,7 +67,8 @@
 .nav-link:hover {
   color: #6366f1;
   background-color: #f0f3ff;
-  transform: translateX(4px); /* Subtle slide effect */
+  transform: translateX(4px);
+  /* Subtle slide effect */
 }
 
 .nav-link:hover .icon-box {

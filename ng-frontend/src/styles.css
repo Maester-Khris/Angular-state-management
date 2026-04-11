@@ -299,3 +299,23 @@ body {
     color: #6366f1;
     transform: scale(1.1);
 }
+
+/* ── Shared window-control button — used across all dashboard panels ── */
+.panel-ctrl {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 0.5px solid var(--color-border-secondary, #e2e8f0);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--color-text-tertiary, #94a3b8);
+  padding: 0;
+  line-height: 1;
+}
+.panel-ctrl:hover {
+  background: var(--color-background-secondary, #F1F0ED);
+}
