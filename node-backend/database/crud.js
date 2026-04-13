@@ -5,6 +5,7 @@ const Favorite = require("./models/favorites");
 const TokenBlacklist = require("./models/blacklist");
 const Otp = require("./models/userotp"); // added
 const Newsletter = require("./models/newsletter");
+const Tag = require('./models/tag');
 
 const dbCrudOperator = {
 
@@ -295,6 +296,33 @@ const dbCrudOperator = {
       { $setOnInsert: { email: email.toLowerCase(), createdAt: new Date() } },
       { upsert: true, new: true, lean: true }
     );
+  },
+
+  // ==========================================
+  // TAG DAO
+  // ==========================================
+
+  async searchTagsByPrefix(prefix, limit = 20) {
+    const regex = new RegExp(`^${prefix}`, 'i');
+    return Tag.find({ name: regex }).limit(limit).lean();
+  },
+
+  async upsertTags(tagNames) {
+    if (!tagNames?.length) return;
+    return Tag.bulkWrite(
+      tagNames.map(name => ({
+        updateOne: {
+          filter: { name: name.toLowerCase().trim() },
+          update: { $setOnInsert: { name: name.toLowerCase().trim() } },
+          upsert: true
+        }
+      })),
+      { ordered: false }
+    );
+  },
+
+  async getAllTags() {
+    return Tag.find({}).sort({ name: 1 }).lean();
   },
 };
 
