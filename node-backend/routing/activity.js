@@ -5,6 +5,7 @@ const { uploadImage } = require('../services/cloudinary');
 const dbCrudOperator = require('../database/crud');
 const { authenticateJWT } = require("../middleware/auth");
 const { generateSlug, computeReadTime } = require('../utils/functions');
+const { syncPostTags, searchTags, getAllTags } = require('../services/tagService');
 
 // Configure Multer for memory storage
 const storage = multer.memoryStorage();
@@ -13,6 +14,32 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } // Limit: 5MB
 });
 
+
+// ==========================================
+// TAG SEARCH (Public — no auth required)
+// ==========================================
+
+router.get('/api/tags/search', async (req, res) => {
+  const { q } = req.query;
+  if (!q || q.trim().length < 2) {
+    return res.status(400).json({ message: 'Query must be at least 2 characters' });
+  }
+  try {
+    const results = await searchTags(q);
+    return res.status(200).json({ query: q, results });
+  } catch (err) {
+    return res.status(500).json({ message: 'Tag search failed' });
+  }
+});
+
+router.get('/api/tags', async (req, res) => {
+  try {
+    const tags = await getAllTags();
+    return res.status(200).json({ tags });
+  } catch (err) {
+    return res.status(500).json({ message: 'Failed to fetch tags' });
+  }
+});
 
 // All activity routes require authentication
 router.use(authenticateJWT);
@@ -114,6 +141,7 @@ router.post('/posts', async (req, res) => {
     }
 
     const newPost = await dbCrudOperator.createPost(postData);
+    await syncPostTags(hashtags);
     res.status(201).json(newPost);
 
   } catch (error) {
@@ -154,6 +182,7 @@ router.put('/posts/:postuuid', async (req, res) => {
       updates
     );
     if (!updatedPost) return res.status(404).json({ message: "Post not found or unauthorized" });
+    if (updates.hashtags) await syncPostTags(updates.hashtags);
     res.json(updatedPost);
   } catch (error) {
     console.error("Update failed:", error.message);
