@@ -36,20 +36,44 @@
 
   <div class="field-section">
     <label class="field-label">Hashtags</label>
-    <div class="d-flex gap-2 flex-wrap mb-2">
-      @for (tag of hashtags; track tag) {
-      <span class="badge bg-light text-dark border">#{{ tag }}
-        <button type="button" class="btn-close btn-close-sm ms-1" (click)="removeHashtag(tag)"></button>
-      </span>
+
+    <div class="tag-pills">
+      @for (tag of currentTags(); track tag) {
+        <span class="tag-pill">
+          #{{ tag }}
+          <button type="button" class="tag-remove" (click)="removeTag(tag)">✕</button>
+        </span>
       }
     </div>
 
-    <div class="input-group input-group-sm">
-      <input type="text" class="form-control border-0 bg-light" placeholder="Add tag..." [(ngModel)]="hashtag"
-        (keydown.enter)="$event.preventDefault(); addHashtag()" />
-      <button class="btn btn-light border" type="button" (click)="addHashtag()">
-        <i class="bi bi-plus"></i>
-      </button>
+    <div class="tag-input-wrap">
+      <input
+        type="text"
+        class="tag-input"
+        placeholder="Add tag..."
+        [value]="tagInput()"
+        (input)="onTagInputChange($any($event.target).value)"
+        (keydown)="onTagKeydown($event)"
+        (blur)="showSuggestions.set(false)"
+        autocomplete="off">
+
+      @if (showSuggestions() && tagSuggestions().length > 0) {
+        <div class="tag-dropdown">
+          @for (suggestion of tagSuggestions(); track suggestion) {
+            <div class="tag-suggestion" (mousedown)="selectTag(suggestion)">
+              #{{ suggestion }}
+            </div>
+          }
+        </div>
+      }
+
+      @if (tagInput().trim().length >= 2 && tagSuggestions().length === 0) {
+        <div class="tag-dropdown">
+          <div class="tag-new-hint" (mousedown)="selectTag(tagInput().trim().toLowerCase())">
+            Create "#{{ tagInput().trim().toLowerCase() }}"
+          </div>
+        </div>
+      }
     </div>
   </div>
 
