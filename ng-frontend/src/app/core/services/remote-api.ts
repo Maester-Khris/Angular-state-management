@@ -204,4 +204,21 @@ export class RemoteApi {
       })
     );
   }
+
+  searchTags(query: string): Observable<string[]> {
+    return this.http.get<{ query: string; results: string[] }>(
+      `${this.baseUrl}/api/tags/search`,
+      { params: { q: query } }
+    ).pipe(
+      map(res => res.results),
+      catchError(() => of([]))
+    );
+  }
+
+  getAllTags(): Observable<string[]> {
+    return this.http.get<{ tags: string[] }>(`${this.baseUrl}/api/tags`).pipe(
+      map(res => res.tags),
+      catchError(() => of([]))
+    );
+  }
 }
