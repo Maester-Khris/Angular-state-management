@@ -7,7 +7,16 @@
 
   <div class="field-section">
     <label class="field-label">Description</label>
-    <textarea class="form-control border-0 bg-light smallest" rows="6" [(ngModel)]="description"></textarea>
+    <textarea class="form-control border-0 bg-light smallest" rows="6" [value]="description()"
+      (input)="description.set($any($event.target).value)"></textarea>
+    <div class="description-meta">
+      <span class="char-counter" [class.over-limit]="description().length > DESCRIPTION_MAX">
+        {{ description().length }} / {{ DESCRIPTION_MAX }}
+        @if (description().length > DESCRIPTION_MAX) {
+        — {{ description().length - DESCRIPTION_MAX }} over limit
+        }
+      </span>
+    </div>
   </div>
 
   <div class="field-section">
@@ -38,59 +47,46 @@
 
     <div class="tag-pills">
       @for (tag of currentTags(); track tag) {
-        <span class="tag-pill">
-          #{{ tag }}
-          <button type="button" class="tag-remove" (click)="removeTag(tag)">✕</button>
-        </span>
+      <span class="tag-pill">
+        #{{ tag }}
+        <button type="button" class="tag-remove" (click)="removeTag(tag)">✕</button>
+      </span>
       }
     </div>
 
     <div class="tag-input-wrap">
-      <input
-        type="text"
-        class="tag-input"
-        placeholder="Add tag..."
-        [value]="tagInput()"
-        (input)="onTagInputChange($any($event.target).value)"
-        (keydown)="onTagKeydown($event)"
-        (blur)="showSuggestions.set(false)"
-        autocomplete="off">
+      <input type="text" class="tag-input" placeholder="Add tag..." [value]="tagInput()"
+        (input)="onTagInputChange($any($event.target).value)" (keydown)="onTagKeydown($event)"
+        (blur)="showSuggestions.set(false)" autocomplete="off">
 
       @if (showSuggestions() && tagSuggestions().length > 0) {
-        <div class="tag-dropdown">
-          @for (suggestion of tagSuggestions(); track suggestion) {
-            <div class="tag-suggestion" (mousedown)="selectTag(suggestion)">
-              #{{ suggestion }}
-            </div>
-          }
+      <div class="tag-dropdown">
+        @for (suggestion of tagSuggestions(); track suggestion) {
+        <div class="tag-suggestion" (mousedown)="selectTag(suggestion)">
+          #{{ suggestion }}
         </div>
+        }
+      </div>
       }
 
       @if (tagInput().trim().length >= 2 && tagSuggestions().length === 0) {
-        <div class="tag-dropdown">
-          <div class="tag-new-hint" (mousedown)="selectTag(tagInput().trim().toLowerCase())">
-            Create "#{{ tagInput().trim().toLowerCase() }}"
-          </div>
+      <div class="tag-dropdown">
+        <div class="tag-new-hint" (mousedown)="selectTag(tagInput().trim().toLowerCase())">
+          Create "#{{ tagInput().trim().toLowerCase() }}"
         </div>
+      </div>
       }
     </div>
   </div>
 
   <div class="action-row">
-    <!-- <button class="action-btn draft" (click)="onSaveDraft()" [disabled]="!title">
-      <span class="btn-icon">🗄</span> Save Draft
-    </button>
-    <button class="action-btn publish" (click)="onPublish()" [disabled]="!title || !description">
-      Publish
-    </button>
-    <button class="action-btn delete" (click)="onDelete()">
-      <span class="btn-icon">🗑</span> Delete
-    </button> -->
-    <button class="action-btn draft" (click)="onSaveDraft()" [disabled]="!title">
+    <button class="action-btn draft" (click)="onSaveDraft()"
+      [disabled]="!title || description().length > DESCRIPTION_MAX">
       <i class="bi bi-archive btn-icon"></i> Save Draft
     </button>
 
-    <button class="action-btn publish" (click)="onPublish()" [disabled]="!title || !description">
+    <button class="action-btn publish" (click)="onPublish()"
+      [disabled]="!title || !description() || description().length > DESCRIPTION_MAX">
       <i class="bi bi-send btn-icon"></i> Publish
     </button>
 
