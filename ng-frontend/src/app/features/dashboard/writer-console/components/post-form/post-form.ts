@@ -32,7 +32,13 @@ export class PostFormComponent implements OnInit, OnDestroy {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   title = '';
-  description = '';
+  description = signal('');
+
+  readonly DESCRIPTION_MAX = 400;
+
+  descriptionLength = computed(() => this.description().length);
+  descriptionOverLimit = computed(() => this.descriptionLength() > this.DESCRIPTION_MAX);
+  descriptionRemaining = computed(() => this.DESCRIPTION_MAX - this.descriptionLength());
 
   // Tag state
   formTags = signal<string[]>([]);
@@ -106,7 +112,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   private draft(): Partial<WriterPost> {
-    return { title: this.title, description: this.description, hashtags: this.formTags(), status: 'draft' };
+    return { title: this.title, description: this.description(), hashtags: this.formTags(), status: 'draft' };
   }
 
   onSaveDraft() { this.saved.emit(this.draft()); }

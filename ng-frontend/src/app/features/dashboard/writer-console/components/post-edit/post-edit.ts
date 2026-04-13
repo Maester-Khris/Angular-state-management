@@ -25,7 +25,13 @@ export class PostEditComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   title = '';
-  description = '';
+  description = signal('');
+
+  readonly DESCRIPTION_MAX = 400;
+
+  descriptionLength = computed(() => this.description().length);
+  descriptionOverLimit = computed(() => this.descriptionLength() > this.DESCRIPTION_MAX);
+  descriptionRemaining = computed(() => this.DESCRIPTION_MAX - this.descriptionLength());
 
   private readonly mediaService = inject(MediaService);
   private readonly notifService = inject(NotificationService);
@@ -62,7 +68,7 @@ export class PostEditComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['post']) {
       this.title = this.post.title;
-      this.description = this.post.description;
+      this.description.set(this.post.description);
       this.editedTags.set([...this.post.hashtags]);
     }
   }
@@ -147,7 +153,7 @@ export class PostEditComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private build(status: WriterPost['status']): WriterPost {
-    return { ...this.post, title: this.title, description: this.description, hashtags: this.editedTags(), status };
+    return { ...this.post, title: this.title, description: this.description(), hashtags: this.editedTags(), status };
   }
 
   onSaveDraft() { this.saved.emit(this.build('draft')); }
