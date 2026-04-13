@@ -169,6 +169,12 @@
   flex: 3;
 }
 
+:host ::ng-deep .action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 :host ::ng-deep .action-btn.draft:hover {
   background: var(--color-background-secondary, #F1F0ED);
   color: var(--color-text-primary, #1e293b);
@@ -380,4 +386,23 @@
 
 :host ::ng-deep .tag-new-hint:hover {
   background: var(--color-background-info, #eff6ff);
+}
+
+/* ── Description character counter ────────────────── */
+:host ::ng-deep .description-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+:host ::ng-deep .char-counter {
+  font-size: 11px;
+  color: var(--color-text-tertiary, #94a3b8);
+  transition: color 0.15s;
+}
+
+:host ::ng-deep .char-counter.over-limit {
+  color: var(--color-text-danger, #ef4444);
+  font-weight: 500;
 }
