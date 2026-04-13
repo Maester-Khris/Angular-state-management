@@ -301,9 +301,10 @@ const dbCrudOperator = {
   // ==========================================
   // TAG DAO
   // ==========================================
-
+  // current regex too strict not allowing search with typo using Levenshtein distance
   async searchTagsByPrefix(prefix, limit = 20) {
-    const regex = new RegExp(`^${prefix}`, 'i');
+    const regex = new RegExp(`^${prefix}`, 'i'); 
+    // const regex = new RegExp(prefix, 'i'); 
     return Tag.find({ name: regex }).limit(limit).lean();
   },
 

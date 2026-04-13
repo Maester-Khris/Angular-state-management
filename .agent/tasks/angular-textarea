@@ -1,0 +1,93 @@
+Read ng-frontend/src/app/features/dashboard/writer-console/components/post-form/post-form.ts,
+post-form.html, post-edit/post-edit.ts, and post-edit.html in full before making any change.
+
+Add a 400-character limit on the description field in both post-form and post-edit.
+Use form invalidation approach — the Publish and Save Draft buttons are disabled
+when the limit is exceeded, and a character counter is shown below the textarea.
+
+## post-form.ts and post-edit.ts
+
+In each component, add a computed signal for character count and validity:
+
+  readonly DESCRIPTION_MAX = 400;
+
+  descriptionLength = computed(() =>
+    (this.description() ?? '').length
+  );
+
+  descriptionOverLimit = computed(() =>
+    this.descriptionLength() > this.DESCRIPTION_MAX
+  );
+
+  descriptionRemaining = computed(() =>
+    this.DESCRIPTION_MAX - this.descriptionLength()
+  );
+
+Where this.description() reads from the component's existing description
+signal or form field — read the file to confirm the exact signal or
+property name before using it.
+
+## post-form.html and post-edit.html
+
+Below the description textarea, add the counter row:
+
+<div class="description-meta">
+  <span class="char-counter"
+    [class.over-limit]="descriptionOverLimit()">
+    {{ descriptionLength() }} / {{ DESCRIPTION_MAX }}
+    @if (descriptionOverLimit()) {
+      — {{ descriptionLength() - DESCRIPTION_MAX }} over limit
+    }
+  </span>
+</div>
+
+On the Publish button and Save Draft button, add:
+  [disabled]="descriptionOverLimit()"
+
+If the buttons already have other disabled conditions (e.g. !title),
+combine with OR:
+  [disabled]="!title() || descriptionOverLimit()"
+
+Read the existing disabled bindings on both buttons before modifying
+to avoid removing existing validation.
+
+## CSS (add to each component css or writer-console shared css)
+
+.description-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.char-counter {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  transition: color 0.15s;
+}
+
+.char-counter.over-limit {
+  color: var(--color-text-danger);
+  font-weight: 500;
+}
+
+## Constraints
+- Do not use Angular ReactiveFormsModule Validators unless already present
+- Do not block character input in the textarea — allow typing beyond 400
+  but disable submission and show the counter in danger state
+- counter must be visible at all times, not only when over limit
+- Do not change any @Output emitters or signal names
+- Do not touch any file outside post-form and post-edit
+
+## Build check
+cd ng-frontend && ng build 2>&1 | tail -20
+
+## Evaluation checklist
+- [ ] Counter shows "0 / 400" on empty description
+- [ ] Counter updates on every keystroke
+- [ ] At 401 characters counter turns red and shows "1 over limit"
+- [ ] Publish button disabled when over limit
+- [ ] Save Draft button disabled when over limit
+- [ ] Both buttons re-enable immediately when user deletes back to 400
+- [ ] Counter visible in both post-form and post-edit
+- [ ] ng build passes with zero errors
