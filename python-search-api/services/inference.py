@@ -121,11 +121,12 @@ Expand this query into 5–8 technical keywords relevant to software engineering
                 f"Snippet: {res.get('description')}"
             )
         
+        results_block = "\n\n".join(formatted_results_with_metadata)
         prompt = f"""You are a research assistant filtering web search results.
         Goal: {query}
-        
+
         Web Results:
-        {"\n\n".join(formatted_results_with_metadata)}
+        {results_block}
 
         Return a JSON array of the most relevant results (max 5).
         Schema:
