@@ -1,5 +1,5 @@
 export const environment = {
   angularProduction: true,
-  nodeServiceUrl: "https://angular-state-management.onrender.com", // Your Render Node URL
-  googleClientId: '554855208078-hk4802b9111gnlruvgipk2hejm8ngrh3.apps.googleusercontent.com',
+  nodeServiceUrl: '$NODE_SERVICE_URL', // Your Render Node URL
+  googleClientId: '$GOOGLE_CLIENT_ID',
 };
