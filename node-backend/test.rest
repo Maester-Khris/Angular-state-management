@@ -211,3 +211,32 @@ Content-Type: application/json
 # @name DeletePost
 DELETE {{baseUrl}}/myactivity/posts/{{postUuid}}
 Authorization: Bearer {{authToken}}
+
+### =========================================================================
+### 8. MEDIA — /myactivity/upload, /myactivity/media
+### =========================================================================
+
+# @name UploadPostImage
+# Multipart upload — use curl or a REST client that supports binary files:
+# curl -X POST "{{baseUrl}}/myactivity/upload?type=post" \
+#   -H "Authorization: Bearer {{authToken}}" \
+#   -F "file=@/path/to/cover.jpg" \
+#   -F "hash=<sha256-hex-of-file>"
+#
+# Response 201 (new upload):
+# { "exists": false, "url": "https://res.cloudinary.com/.../f_auto,q_auto/...", "publicId": "postair/.../post/abc", "mediaId": "uuid" }
+#
+# Response 200 (deduplicated — same hash seen before):
+# { "exists": true, "url": "...", "publicId": "...", "mediaId": "..." }
+#
+# Response 429 (rate limit exceeded):
+# { "message": "Upload limit reached. Try again in 10 minutes." }
+
+### -------------------------------------------------------------------------
+
+# @name DeleteMedia
+DELETE {{baseUrl}}/myactivity/media/{{mediaId}}
+Authorization: Bearer {{authToken}}
+
+# Response 204 — asset removed from Cloudinary, Media record soft-deleted
+# Response 404 — media not found or does not belong to this user

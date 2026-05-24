@@ -6,6 +6,7 @@ const TokenBlacklist = require("./models/blacklist");
 const Otp = require("./models/userotp"); // added
 const Newsletter = require("./models/newsletter");
 const Tag = require('./models/tag');
+const Media = require('./models/media');
 
 const dbCrudOperator = {
 
@@ -324,6 +325,35 @@ const dbCrudOperator = {
 
   async getAllTags() {
     return Tag.find({}).sort({ name: 1 }).lean();
+  },
+
+  // ==========================================
+  // MEDIA DAO
+  // ==========================================
+
+  async findMediaByHash(hash, useruuid) {
+    return Media.findOne({ hash, useruuid, status: { $in: ['confirmed', 'attached'] } }).lean();
+  },
+
+  async findMediaRecord(mediaId, useruuid) {
+    return Media.findOne({ mediaId, useruuid }).lean();
+  },
+
+  async createMediaRecord(data) {
+    const media = new Media(data);
+    return media.save();
+  },
+
+  async confirmMedia(mediaId) {
+    return Media.findOneAndUpdate({ mediaId }, { status: 'confirmed' }, { new: true }).lean();
+  },
+
+  async attachMedia(mediaId) {
+    return Media.findOneAndUpdate({ mediaId }, { status: 'attached', attachedAt: new Date() }, { new: true }).lean();
+  },
+
+  async deleteMedia(mediaId) {
+    return Media.findOneAndUpdate({ mediaId }, { status: 'deleted' }, { new: true }).lean();
   },
 };
 

@@ -24,6 +24,7 @@ const PostSchema = new mongoose.Schema({
   authorAvatar: { type: String },
 
   images: [{ type: String }], // Array of URLs
+  cloudinaryPublicIds: [{ type: String }], // Parallel array of Cloudinary public_ids for deletion
   hashtags: [{ type: String, lowercase: true }],
   isPublic: { type: Boolean, default: false },
   isDraft: { type: Boolean, default: false },
