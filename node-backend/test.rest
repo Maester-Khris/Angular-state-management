@@ -168,3 +168,46 @@ Content-Type: application/json
 # @name Logout
 GET {{baseUrl}}/profile/logout
 Authorization: Bearer {{authToken}}
+
+---
+
+### =========================================================================
+### 7. WRITER CONSOLE — /myactivity/posts
+### =========================================================================
+
+# @name CreateDraftPost
+POST {{baseUrl}}/myactivity/posts
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "My Draft Post",
+  "description": "Draft body content goes here",
+  "hashtags": ["engineering", "draft"],
+  "isDraft": true,
+  "isPublic": false
+}
+
+### -------------------------------------------------------------------------
+
+# @name ListWriterPosts
+GET {{baseUrl}}/myactivity/posts?page=1&limit=20
+Authorization: Bearer {{authToken}}
+
+### -------------------------------------------------------------------------
+
+# @name UpdatePost
+PUT {{baseUrl}}/myactivity/posts/{{postUuid}}
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "title": "Updated Title",
+  "description": "Updated post description"
+}
+
+### -------------------------------------------------------------------------
+
+# @name DeletePost
+DELETE {{baseUrl}}/myactivity/posts/{{postUuid}}
+Authorization: Bearer {{authToken}}
