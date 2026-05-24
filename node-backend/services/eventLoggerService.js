@@ -15,7 +15,10 @@ class EventLoggerService {
     async queueEvent(eventData) {
         console.log(`[EventLoggerService] Enqueuing event: ${eventData.type} for post ${eventData.postId}`);
         // Enqueue the job for later processing
-        return await queueService.addJob(this.ANALYTICS_QUEUE, 'log-event', eventData);
+        return await queueService.addJob(this.ANALYTICS_QUEUE, 'log-event', eventData, {
+            removeOnComplete: { count: 5 },
+            removeOnFail:     { count: 10 },
+        });
     }
 
     /**

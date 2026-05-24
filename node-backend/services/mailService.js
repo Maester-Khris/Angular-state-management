@@ -24,7 +24,10 @@ class MailService {
      * @param {string} otp - One-time password
      */
     async enqueueOtpEmail(to, otp) {
-        return await queueService.addJob(this.MAILING_QUEUE, 'send-otp', { to, otp });
+        return await queueService.addJob(this.MAILING_QUEUE, 'send-otp', { to, otp }, {
+            removeOnComplete: { count: 5 },
+            removeOnFail:     { count: 10 },
+        });
     }
 
     /**

@@ -64,7 +64,9 @@ const startServer = async () => {
 
       // Schedule repeatable batch processing (every 5 minutes)
       await queueService.addJob('analytics-control-queue', 'process-batch', {}, {
-        repeat: { cron: '*/5 * * * *' }
+        repeat:           { cron: '*/5 * * * *' },
+        removeOnComplete: { count: 5 },
+        removeOnFail:     { count: 10 },
       });
       console.log('Analytics batch scheduler started on analytics-control-queue.');
     });

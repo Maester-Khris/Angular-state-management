@@ -50,6 +50,8 @@ class QueueService {
 
         const worker = new Worker(queueName, processor, {
             connection: redisConfig.getConsumerConnection(),
+            removeOnComplete: { count: 5 },
+            removeOnFail: { count: 10 },
             ...options
         });
 
