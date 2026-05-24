@@ -21,24 +21,30 @@
 
   <div class="field-section">
     <label class="field-label">Cover Image</label>
-    <div class="upload-zone rounded-3" [class.uploading]="isUploading">
+    <div class="upload-zone rounded-3" [class.uploading]="uploading()">
       <input type="file" class="file-input" (change)="onFileSelected($event)" accept="image/*"
-        [disabled]="isUploading" />
+        [disabled]="uploading()" />
       <div class="upload-placeholder d-flex align-items-center gap-2">
-        <i class="bi" [class]="isUploading ? 'bi-hourglass-split spin' : 'bi-image text-primary'"></i>
-        <span class="smallest">{{ isUploading ? 'Uploading to vault...' : 'Click to upload image' }}</span>
+        <i class="bi" [class]="uploading() ? 'bi-hourglass-split spin' : 'bi-image text-primary'"></i>
+        <span class="smallest">{{ uploading() ? 'Uploading to vault...' : 'Click to upload image' }}</span>
       </div>
     </div>
 
-    <div class="image-preview-box mt-3 position-relative" *ngIf="imagePreview">
-      <img [src]="imagePreview" class="rounded-2 shadow-sm w-100" [style.opacity]="isUploading ? '0.5' : '1'"
-        alt="Preview" />
-      @if (isUploading) {
+    <div class="d-flex flex-wrap gap-2 mt-3 image-preview-container">
+    @for (preview of imagePreviews; track preview; let i = $index) {
+    <div class="image-preview-box position-relative">
+      <img [src]="preview" class="rounded-2 shadow-sm w-100"
+        [style.opacity]="uploading() && i === imagePreviews.length - 1 ? '0.5' : '1'" alt="Preview" />
+      @if (uploading() && i === imagePreviews.length - 1) {
       <div class="upload-overlay">
         <div class="spinner-border spinner-border-sm text-white" role="status"></div>
       </div>
       }
-      <button type="button" class="btn-remove-img" (click)="removeImage()" *ngIf="!isUploading">&times;</button>
+      @if (!uploading() || i < imagePreviews.length - 1) {
+      <button type="button" class="btn-remove-img" (click)="removeImage(i)">&times;</button>
+      }
+    </div>
+    }
     </div>
   </div>
 
@@ -81,16 +87,16 @@
 
   <div class="action-row">
     <button class="action-btn draft" (click)="onSaveDraft()"
-      [disabled]="!title || description().length > DESCRIPTION_MAX">
+      [disabled]="!title || description().length > DESCRIPTION_MAX || uploading()">
       <i class="bi bi-archive btn-icon"></i> Save Draft
     </button>
 
     <button class="action-btn publish" (click)="onPublish()"
-      [disabled]="!title || !description() || description().length > DESCRIPTION_MAX">
+      [disabled]="!title || !description() || description().length > DESCRIPTION_MAX || uploading()">
       <i class="bi bi-send btn-icon"></i> Publish
     </button>
 
-    <button class="action-btn delete" (click)="onDelete()">
+    <button class="action-btn delete" (click)="onDelete()" [disabled]="uploading()">
       <i class="bi bi-trash3 btn-icon"></i> Delete
     </button>
   </div>

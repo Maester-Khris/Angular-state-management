@@ -37,10 +37,12 @@ export class PostEditComponent implements OnInit, OnChanges, OnDestroy {
   private readonly notifService = inject(NotificationService);
   private readonly tagService = inject(TagService);
 
-  // image
-  imagePreview: string | null = "https://placehold.co/400";
-  cloudinaryUrl: string | null = null;
-  isUploading = false;
+  // image — parallel arrays, one entry per upload (file input disabled during upload so always in sync)
+  imagePreviews: string[] = [];
+  cloudinaryUrls: string[] = [];
+  cloudinaryPublicIds: string[] = [];
+  mediaIds: string[] = [];
+  uploading = signal(false);
 
   // Tag state
   editedTags = signal<string[]>([]);
@@ -70,6 +72,10 @@ export class PostEditComponent implements OnInit, OnChanges, OnDestroy {
       this.title = this.post.title;
       this.description.set(this.post.description);
       this.editedTags.set([...this.post.hashtags]);
+      this.imagePreviews = this.post.images ? [...this.post.images] : [];
+      this.cloudinaryUrls = this.post.images ? [...this.post.images] : [];
+      this.cloudinaryPublicIds = this.post.cloudinaryPublicIds ? [...this.post.cloudinaryPublicIds] : [];
+      this.mediaIds = [];
     }
   }
 
@@ -128,36 +134,46 @@ export class PostEditComponent implements OnInit, OnChanges, OnDestroy {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (!file) return;
-    this.imagePreview = URL.createObjectURL(file);
-    this.uploadToCloudinary(file);
+    const previewIndex = this.imagePreviews.length;
+    this.imagePreviews = [...this.imagePreviews, URL.createObjectURL(file)];
+    this.uploadToCloudinary(file, previewIndex);
   }
 
-  uploadToCloudinary(file: File) {
-    this.isUploading = true;
-    this.mediaService.uploadImage(file).subscribe({
+  uploadToCloudinary(file: File, previewIndex: number) {
+    this.uploading.set(true);
+    this.mediaService.uploadImage(file, 'post').subscribe({
       next: (res) => {
-        this.isUploading = false;
-        this.cloudinaryUrl = res.url;
+        this.uploading.set(false);
+        this.cloudinaryUrls = [...this.cloudinaryUrls, res.url];
+        this.cloudinaryPublicIds = [...this.cloudinaryPublicIds, res.publicId];
+        this.mediaIds = [...this.mediaIds, res.mediaId];
         this.notifService.show('Image uploaded and optimized', 'success');
       },
       error: (err) => {
-        this.isUploading = false;
-        this.removeImage();
+        this.uploading.set(false);
+        this.imagePreviews = this.imagePreviews.filter((_, i) => i !== previewIndex);
         this.notifService.show(err.message || 'Upload failed', 'error');
       }
     });
   }
 
-  removeImage() {
-    this.imagePreview = null;
-    this.cloudinaryUrl = null;
-    this.isUploading = false;
-    const fileInput = document.querySelector('.file-input') as HTMLInputElement;
-    if (fileInput) fileInput.value = '';
+  removeImage(index: number) {
+    this.imagePreviews = this.imagePreviews.filter((_, i) => i !== index);
+    this.cloudinaryUrls = this.cloudinaryUrls.filter((_, i) => i !== index);
+    this.cloudinaryPublicIds = this.cloudinaryPublicIds.filter((_, i) => i !== index);
+    this.mediaIds = this.mediaIds.filter((_, i) => i !== index);
   }
 
   private build(status: WriterPost['status']): WriterPost {
-    return { ...this.post, title: this.title, description: this.description(), hashtags: this.editedTags(), status };
+    return {
+      ...this.post,
+      title: this.title,
+      description: this.description(),
+      hashtags: this.editedTags(),
+      status,
+      images: [...this.cloudinaryUrls],
+      cloudinaryPublicIds: [...this.cloudinaryPublicIds],
+    };
   }
 
   onSaveDraft() { this.saved.emit(this.build('draft')); }

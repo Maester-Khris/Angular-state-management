@@ -24,10 +24,12 @@ export class PostFormComponent implements OnInit, OnDestroy {
   private readonly notifService = inject(NotificationService);
   private readonly tagService = inject(TagService);
 
-  // image
-  imagePreview: string | null = "https://placehold.co/400";
-  cloudinaryUrl: string | null = null;
-  isUploading = false;
+  // image — parallel arrays, one entry per upload (file input disabled during upload so always in sync)
+  imagePreviews: string[] = [];
+  cloudinaryUrls: string[] = [];
+  cloudinaryPublicIds: string[] = [];
+  mediaIds: string[] = [];
+  uploading = signal(false);
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
@@ -122,13 +124,25 @@ export class PostFormComponent implements OnInit, OnDestroy {
     this.tagInput.set('');
     this.tagSuggestions.set([]);
     this.showSuggestions.set(false);
-    this.cloudinaryUrl = null;
-    this.imagePreview = 'https://placehold.co/400';
-    this.isUploading = false;
+    this.imagePreviews = [];
+    this.cloudinaryUrls = [];
+    this.cloudinaryPublicIds = [];
+    this.mediaIds = [];
+    this.uploading.set(false);
   }
 
   private draft(): Partial<WriterPost> {
-    return { title: this.title, description: this.description(), hashtags: this.formTags(), status: 'draft' };
+    const payload: Partial<WriterPost> = {
+      title: this.title,
+      description: this.description(),
+      hashtags: this.formTags(),
+      status: 'draft',
+    };
+    if (this.cloudinaryUrls.length > 0) {
+      payload.images = [...this.cloudinaryUrls];
+      payload.cloudinaryPublicIds = [...this.cloudinaryPublicIds];
+    }
+    return payload;
   }
 
   onSaveDraft() { this.saved.emit(this.draft()); }
@@ -137,31 +151,33 @@ export class PostFormComponent implements OnInit, OnDestroy {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (!file) return;
-    this.imagePreview = URL.createObjectURL(file);
-    this.uploadToCloudinary(file);
+    const previewIndex = this.imagePreviews.length;
+    this.imagePreviews = [...this.imagePreviews, URL.createObjectURL(file)];
+    this.uploadToCloudinary(file, previewIndex);
   }
 
-  uploadToCloudinary(file: File) {
-    this.isUploading = true;
-    this.mediaService.uploadImage(file).subscribe({
+  uploadToCloudinary(file: File, previewIndex: number) {
+    this.uploading.set(true);
+    this.mediaService.uploadImage(file, 'post').subscribe({
       next: (res) => {
-        this.isUploading = false;
-        this.cloudinaryUrl = res.url;
+        this.uploading.set(false);
+        this.cloudinaryUrls = [...this.cloudinaryUrls, res.url];
+        this.cloudinaryPublicIds = [...this.cloudinaryPublicIds, res.publicId];
+        this.mediaIds = [...this.mediaIds, res.mediaId];
         this.notifService.show('Image uploaded and optimized', 'success');
       },
       error: (err) => {
-        this.isUploading = false;
-        this.removeImage();
+        this.uploading.set(false);
+        this.imagePreviews = this.imagePreviews.filter((_, i) => i !== previewIndex);
         this.notifService.show(err.message || 'Upload failed', 'error');
       }
     });
   }
 
-  removeImage() {
-    this.imagePreview = null;
-    this.cloudinaryUrl = null;
-    this.isUploading = false;
-    const fileInput = document.querySelector('.file-input') as HTMLInputElement;
-    if (fileInput) fileInput.value = '';
+  removeImage(index: number) {
+    this.imagePreviews = this.imagePreviews.filter((_, i) => i !== index);
+    this.cloudinaryUrls = this.cloudinaryUrls.filter((_, i) => i !== index);
+    this.cloudinaryPublicIds = this.cloudinaryPublicIds.filter((_, i) => i !== index);
+    this.mediaIds = this.mediaIds.filter((_, i) => i !== index);
   }
 }
