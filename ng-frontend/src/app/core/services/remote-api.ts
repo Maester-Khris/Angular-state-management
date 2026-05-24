@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, distinctUntilChanged, map, Observable, of, Subject, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Post } from '../../features/dashboard/data-access/post.model';
+import { WriterPost } from '../../features/dashboard/data-access/writer.models';
 
 // export interface AiSearchResponse {
 //   query: string;
@@ -154,16 +155,39 @@ export class RemoteApi {
     );
   }
 
+  fetchWriterPosts(page = 1, limit = 20): Observable<WriterPost[]> {
+    return this.http.get<any[]>(
+      `${this.baseUrl}/myactivity/posts?page=${page}&limit=${limit}`
+    ).pipe(map(posts => posts.map(p => this.mapToWriterPost(p))));
+  }
+
+  private mapToWriterPost(p: any): WriterPost {
+    return {
+      uuid:         p.uuid,
+      title:        p.title,
+      description:  p.description,
+      hashtags:     p.hashtags     || [],
+      images:       p.images       || [],
+      status:       p.isDraft ? 'draft' : 'published',
+      lastEditedAt: p.lastEditedAt || p.createdAt,
+      publishedAt:  p.publishedAt,
+      views:        p.views,
+      readTime:     p.readTime,
+      authorName:   p.authorName,
+      authorAvatar: p.authorAvatar,
+    };
+  }
+
   // Create post
   createPost(data: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/posts`, data).pipe(
+    return this.http.post<any>(`${this.baseUrl}/myactivity/posts`, data).pipe(
       tap(() => this.dataChangedTrigger.next())
     );
   }
 
   // Update post
   updatePost(id: string, data: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/posts/${id}`, data).pipe(
+    return this.http.put<any>(`${this.baseUrl}/myactivity/posts/${id}`, data).pipe(
       tap(() => this.dataChangedTrigger.next())
     );
   }
@@ -175,7 +199,7 @@ export class RemoteApi {
 
   // Delete post
   deletePost(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/api/posts/${id}`).pipe(
+    return this.http.delete<any>(`${this.baseUrl}/myactivity/posts/${id}`).pipe(
       tap(() => this.dataChangedTrigger.next())
     );
   }
