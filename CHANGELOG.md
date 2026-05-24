@@ -1,3 +1,95 @@
+## [Sprint 07] — 2026-W17 — Completed
+**Theme: Writer Console API + Media Management Base**
+
+### Completed — Writer Console CRUD
+- [x] `node-backend` — GET /myactivity/posts — list authenticated writer's own posts,
+      extended userPosts projection with all WriterPost fields
+- [x] `node-backend` — POST /myactivity/posts — create post with images[],
+      cloudinaryPublicIds[], slug generation on publish, readTime on save,
+      publishedAt set on first publish
+- [x] `node-backend` — PUT /myactivity/posts/:uuid — update post, re-slug and
+      set publishedAt on first publish transition
+- [x] `node-backend` — DELETE /myactivity/posts/:uuid — delete post, auth-gated
+- [x] `node-backend` — Tag management: Tag model, DAO, fuzzy search (Levenshtein),
+      syncPostTags wired into create and update
+- [x] `node-backend` — Post CRUD integration tests (Vitest) — 7 cases covering
+      create draft, publish, list, update, delete, 404 on unknown uuid
+- [x] `ng-frontend` — WriterConsole wired to live RemoteApi — mock data removed
+      from data layer, posts loaded on init via fetchWriterPosts()
+- [x] `ng-frontend` — onDraftSaved, onPostPublished, onDeletePost wired to
+      RemoteApi — optimistic delete with signal restore on error
+- [x] `ng-frontend` — RemoteApi: fixed createPost / updatePost / deletePost URLs
+      to /myactivity prefix, added fetchWriterPosts + mapToWriterPost
+- [x] `ng-frontend` — Form reset on save/publish — fields cleared, panel collapsed
+      on success only
+- [x] `ng-frontend` — Update-vs-create correctly distinguished on edit —
+      post-edit emits WriterPost with uuid, shell calls updatePost not createPost
+- [x] `ng-frontend` — Tag autocomplete: RxJS pipeline, 300ms debounce,
+      20-char cap enforced at input time in post-form and post-edit
+- [x] `ng-frontend` — Post-list: CSS flex layout — title truncates with ellipsis,
+      action buttons pinned to right, never overflow container
+- [x] `ng-frontend` — Auth guard confirmed on all writer dashboard routes
+
+### Completed — Media Management Base
+- [x] `node-backend` — Media mongoose model: mediaId, useruuid, cloudinaryId,
+      url, folder, hash, status, type, sizeBytes, mimeType, uploadedAt, attachedAt
+      Compound index on { hash, useruuid } for deduplication
+- [x] `node-backend` — Media DAO: findMediaByHash, createMediaRecord,
+      confirmMedia, attachMedia, deleteMedia
+- [x] `node-backend` — Post model extended: cloudinaryPublicIds[] added
+      alongside existing images[]
+- [x] `node-backend` — Upload endpoint updated: folder structure
+      postair/{useruuid}/{type}, postair_media Cloudinary preset,
+      SHA-256 deduplication check before upload,
+      returns { url, publicId, mediaId, exists }
+- [x] `node-backend` — DELETE /myactivity/media/:mediaId — cloudinary.destroy +
+      Media record status set to 'deleted'
+- [x] `node-backend` — Rate limit on POST /myactivity/upload:
+      20 requests per useruuid per 10 minutes (express-rate-limit)
+- [x] `ng-frontend` — MediaService: hashFile() via Web Crypto SHA-256,
+      uploadImage() sends hash + type, returns { url, publicId, mediaId }
+- [x] `ng-frontend` — uploading signal in post-form and post-edit —
+      Save Draft and Publish buttons disabled while uploading() is true
+- [x] `ng-frontend` — cloudinaryPublicId and mediaId stored in component,
+      included in save payload
+- [x] `ng-frontend` — post-card and post-detail: default-post.png fallback
+      when images[] is empty
+- [x] `ng-frontend` — Cloudinary f_auto/q_auto injected into delivery URLs
+      in post-card and post-detail carousel
+
+### Deferred to Sprint 08
+- [ ] Writer profile: Edit profile inline form (name, bio, avatar upload)
+- [ ] Writer profile: Banner image upload
+- [ ] Writer profile: Stats block wired to live aggregation endpoint
+- [ ] Writer profile: Contribution heatmap wired to live endpoint
+- [ ] Draft row arrow → navigates to writer console with draft pre-loaded
+- [ ] Reader: Intersection Observer lazy load on post cards
+- [ ] Reader: srcset responsive image variants
+- [ ] Media: orphan cleanup nightly job (pending records older than 24h)
+
+---
+
+## [Sprint 08] — 2026-W18 — Planned
+**Theme: Writer Profile Data Layer**
+
+### Planned
+- [ ] `node-backend` — Stats aggregation endpoint: post count, publishedAt
+      range (since), reach sum (impressions per author)
+- [ ] `node-backend` — Heatmap data endpoint: daily post counts last 12
+      months via MongoDB aggregation pipeline
+- [ ] `ng-frontend` — Profile stats block wired to live data
+- [ ] `ng-frontend` — Contribution heatmap wired to live endpoint
+- [ ] `ng-frontend` — Edit profile inline form: display name, bio, avatar upload
+- [ ] `ng-frontend` — Profile banner image upload
+- [ ] `ng-frontend` — Draft row → navigates to writer console with draft pre-loaded
+
+### Deferred to backlog (requires features not yet built)
+- [ ] Co-auth count (requires editors[] aggregation endpoint)
+- [ ] Saved insights panel (requires bookmarks/favourites feature)
+- [ ] Recent activity feed (requires activity log schema)
+
+---
+
 ## [Sprint 06] — 2026-W16 — Completed
 **Theme: Writer Console UI — Panel System & Dashboard Architecture**
 
@@ -31,49 +123,8 @@
       icons standardised, redundant headers removed
 
 ### Deferred to next sprint
-- [ ] Writer console wired to live Node API (CRUD endpoints)
 - [ ] Writer profile: Edit profile form (name, bio, avatar upload)
 - [ ] Writer profile: Banner image upload
-
----
-
-## [Sprint 07] — 2026-W17 — Current
-**Theme: Writer Console API + Profile Light Fixes**
-
-### Planned — writer console API (48h)
-- [ ] `node-backend` — Post CRUD endpoints for authenticated writers:
-      create, update, publish, unpublish, delete (`/api/writer/posts`)
-- [ ] `node-backend` — Image upload endpoint (Cloudinary or equivalent)
-- [ ] `node-backend` — Slug generation on publish, readTime on save,
-      publishedAt set on first publish — wire to existing utils
-- [ ] `ng-frontend` — WriterConsole wired to live API — replace mock data
-      with RemoteApi calls, wire form submissions to endpoints
-- [ ] `ng-frontend` — Auth guard confirmed on all writer routes
-- [ ] Auth: Google Sign-In only — manual auth deferred
-
-### Planned — profile UI light fixes (alongside API work)
-- [ ] `ng-frontend` — Edit profile inline form: display name, bio, avatar upload
-- [ ] `ng-frontend` — Profile banner image upload (same pattern as cover image)
-- [ ] `ng-frontend` — Draft row arrow → navigates to writer console with
-      that draft pre-loaded in edit panel
-
----
-
-## [Sprint 08] — 2026-W18 — Planned
-**Theme: Writer Profile Data Layer**
-
-### Planned
-- [ ] `node-backend` — Stats aggregation endpoint: post count, publishedAt
-      range (since), reach sum (impressions per author)
-- [ ] `node-backend` — Heatmap data endpoint: daily post counts last 12
-      months via MongoDB aggregation pipeline
-- [ ] `ng-frontend` — Profile stats block wired to live data
-- [ ] `ng-frontend` — Contribution heatmap wired to live endpoint
-
-### Deferred to backlog (requires features not yet built)
-- [ ] Co-auth count (requires editors[] aggregation endpoint)
-- [ ] Saved insights panel (requires bookmarks/favourites feature)
-- [ ] Recent activity feed (requires activity log schema)
 
 ---
 
