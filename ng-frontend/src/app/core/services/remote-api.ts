@@ -118,7 +118,7 @@ export class RemoteApi {
       lastModifiedAt: p.lastEditedAt ? new Date(p.lastEditedAt) : null,
       isPublic: p.isPublic !== undefined ? p.isPublic : true,
       createdBy: p.authorName || 'Unknown',
-      imageUrl: p.images && p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/150',
+      imageUrl: p.images && p.images.length > 0 ? p.images[0] : null,
       // pass-through backend fields for UI enrichment
       authorName: p.authorName,
       authorAvatar: p.authorAvatar,
