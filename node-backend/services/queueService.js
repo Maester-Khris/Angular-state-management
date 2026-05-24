@@ -11,12 +11,15 @@ class QueueService {
      * Create or retrieve a queue
      * @param {string} name - Queue name
      */
-    getQueue(name) {
+    async getQueue(name) {
         if (!this.queues[name]) {
             this.queues[name] = new Queue(name, {
-                connection: redisConfig.getProducerConnection(),
+                connection: await redisConfig.getProducerConnection(),
                 prefix: process.env.BULL_PREFIX || 'bull'
             });
+            this.queues[name].on('error', (err) =>
+                console.error(`[Queue:${name}] error: ${err.message}`)
+            );
         }
         return this.queues[name];
     }
@@ -29,7 +32,7 @@ class QueueService {
      * @param {object} options 
      */
     async addJob(queueName, jobName, data, options = {}) {
-        const queue = this.getQueue(queueName);
+        const queue = await this.getQueue(queueName);
         console.log(`[QueueService] Adding job [${jobName}] to queue [${queueName}]...`);
         const job = await queue.add(jobName, data, options);
         console.log(`[QueueService] Job enqueued: ${job.id}`);
@@ -42,18 +45,22 @@ class QueueService {
      * @param {function} processor 
      * @param {object} options 
      */
-    createWorker(queueName, processor, options = {}) {
+    async createWorker(queueName, processor, options = {}) {
         if (this.workers[queueName]) {
             console.warn(`Worker for queue ${queueName} already exists.`);
             return this.workers[queueName];
         }
 
         const worker = new Worker(queueName, processor, {
-            connection: redisConfig.getConsumerConnection(),
+            connection: await redisConfig.getConsumerConnection(),
             removeOnComplete: { count: 5 },
             removeOnFail: { count: 10 },
             ...options
         });
+
+        worker.on('error', (err) =>
+            console.error(`[Worker:${queueName}] error: ${err.message}`)
+        );
 
         worker.on('completed', (job) => {
             console.log(`Job ${job.id} in queue ${queueName} completed.`);
