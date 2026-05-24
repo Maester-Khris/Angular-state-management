@@ -17,8 +17,8 @@
         }
 
         <!-- Meta -->
-        <div class="flex-grow-1 min-w-0">
-          <p class="mb-0 small fw-semibold text-truncate">{{ post.title }}</p>
+        <div class="post-item-meta">
+          <p class="mb-0 small fw-semibold post-item-title">{{ post.title }}</p>
           <div class="d-flex align-items-center gap-2 mt-1">
             <span class="badge rounded-pill"
               [class]="post.status === 'published' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning'">
