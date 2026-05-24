@@ -68,10 +68,13 @@ export class PostFormComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  private readonly TAG_MAX_LENGTH = 20;
+
   onTagInputChange(value: string): void {
-    this.tagInput.set(value);
-    if (value.trim().length >= 2) {
-      this.tagInput$.next(value.trim());
+    const capped = value.slice(0, this.TAG_MAX_LENGTH);
+    this.tagInput.set(capped);
+    if (capped.trim().length >= 2) {
+      this.tagInput$.next(capped.trim());
     } else {
       this.tagSuggestions.set([]);
       this.showSuggestions.set(false);
@@ -79,8 +82,9 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
 
   selectTag(tag: string): void {
-    if (!this.currentTags().includes(tag)) {
-      this.addTagToList(tag);
+    const capped = tag.slice(0, this.TAG_MAX_LENGTH);
+    if (!this.currentTags().includes(capped)) {
+      this.addTagToList(capped);
     }
     this.tagInput.set('');
     this.tagSuggestions.set([]);
@@ -109,6 +113,18 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   triggerFileInput() {
     this.fileInput?.nativeElement.click();
+  }
+
+  reset(): void {
+    this.title = '';
+    this.description.set('');
+    this.formTags.set([]);
+    this.tagInput.set('');
+    this.tagSuggestions.set([]);
+    this.showSuggestions.set(false);
+    this.cloudinaryUrl = null;
+    this.imagePreview = 'https://placehold.co/400';
+    this.isUploading = false;
   }
 
   private draft(): Partial<WriterPost> {
