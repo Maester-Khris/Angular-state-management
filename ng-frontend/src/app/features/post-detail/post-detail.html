@@ -51,14 +51,14 @@
       @if (p.images!.length === 1) {
       <figure class="canvas-hero-image text-center">
         <div class="image-aspect-ratio">
-          <img [src]="p.images![0]" [alt]="p.title" class="post-image-single">
+          <img [src]="optimiseUrl(p.images![0])" [alt]="p.title" class="post-image-single">
         </div>
       </figure>
       } @else {
       <div class="carousel-wrapper">
         <div class="image-carousel" #carouselEl>
           @for (img of p.images; track img) {
-            <img [src]="img" [alt]="p.title" class="carousel-slide">
+            <img [src]="optimiseUrl(img)" [alt]="p.title" class="carousel-slide">
           }
         </div>
         <div class="carousel-controls">

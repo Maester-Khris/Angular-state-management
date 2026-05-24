@@ -1,7 +1,7 @@
 @if (mode() === 'card') {
 <div class="app-post-card h-100 d-flex flex-column">
   <div class="card-image-wrapper">
-    <img [src]="post().imageUrl" class="post-img" [alt]="post().title">
+    <img [src]="post().images?.[0] || post().imageUrl || '/assets/default-post.png'" class="post-img" [alt]="post().title">
     @let tagResult = (post().hashtags ?? []) | hashtagSlice:2;
     <div class="badge-overlay">
       @for (tag of tagResult.visible; track tag) {
