@@ -240,7 +240,7 @@ const dbCrudOperator = {
     return await Post.find({
       $or: [{ author: userId }, { editors: userId }]
     })
-    .select('title description images creator createdAt lastEditedAt isPublic uuid')
+    .select('title description images hashtags isDraft isPublic uuid readTime publishedAt createdAt lastEditedAt authorName authorAvatar')
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)

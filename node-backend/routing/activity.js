@@ -104,10 +104,21 @@ router.get('/users/lookup/:email', async (req, res) => {
 // 2. POST MANAGEMENT (CRUD)
 // ==========================================
 
+router.get('/myactivity/posts', async (req, res) => {
+  try {
+    const page  = parseInt(req.query.page)  || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const posts = await dbCrudOperator.userPosts(req.userId, page, limit);
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch writer posts" });
+  }
+});
+
 /**
  * Create a new post with support for initial co-editors.
  */
-router.post('/posts', async (req, res) => {
+router.post('/myactivity/posts', async (req, res) => {
   try {
     const { editorUuids, title, description, isPublic, hashtags, isDraft } = req.body;
 
@@ -153,7 +164,7 @@ router.post('/posts', async (req, res) => {
 /**
  * Update existing post metadata. Validates ownership/editor rights via Operator.
  */
-router.put('/posts/:postuuid', async (req, res) => {
+router.put('/myactivity/posts/:postuuid', async (req, res) => {
   try {
     const updates = { ...req.body };
 
@@ -193,7 +204,7 @@ router.put('/posts/:postuuid', async (req, res) => {
 /**
  * Atomic delete of post and its related favorites/analytics.
  */
-router.delete('/posts/:postuuid', async (req, res) => {
+router.delete('/myactivity/posts/:postuuid', async (req, res) => {
   try {
     const result = await dbCrudOperator.deletePost(req.params.postuuid, req.userId);
     if (!result) return res.status(404).json({ message: "Delete failed: Unauthorized" });
