@@ -1,10 +1,12 @@
 const router = require('express').Router();
 const multer = require('multer');
+const rateLimit = require('express-rate-limit');
 const { v4: uuidv4 } = require('uuid');
-const { uploadImage } = require('../services/cloudinary');
+const { uploadImage, deleteImage } = require('../services/cloudinary');
 const dbCrudOperator = require('../database/crud');
 const { authenticateJWT } = require("../middleware/auth");
 const { generateSlug, computeReadTime } = require('../utils/functions');
+const { syncPostTags, searchTags, getAllTags } = require('../services/tagService');
 
 // Configure Multer for memory storage
 const storage = multer.memoryStorage();
@@ -13,35 +15,117 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } // Limit: 5MB
 });
 
+// Rate limiter: 20 uploads per userId per 10 minutes
+const uploadRateLimit = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 20,
+  keyGenerator: (req) => req.userId?.toString() || req.ip,
+  message: { message: "Upload limit reached. Try again in 10 minutes." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+
+// ==========================================
+// TAG SEARCH (Public — no auth required)
+// ==========================================
+
+router.get('/api/tags/search', async (req, res) => {
+  const { q } = req.query;
+  if (!q || q.trim().length < 2) {
+    return res.status(400).json({ message: 'Query must be at least 2 characters' });
+  }
+  try {
+    const results = await searchTags(q);
+    return res.status(200).json({ query: q, results });
+  } catch (err) {
+    return res.status(500).json({ message: 'Tag search failed' });
+  }
+});
+
+router.get('/api/tags', async (req, res) => {
+  try {
+    const tags = await getAllTags();
+    return res.status(200).json({ tags });
+  } catch (err) {
+    return res.status(500).json({ message: 'Failed to fetch tags' });
+  }
+});
 
 // All activity routes require authentication
 router.use(authenticateJWT);
 
 // ==========================================
-// IMAGE UPLOAD (NEW)
+// IMAGE UPLOAD
 // ==========================================
 
-/**
- * Upload an image to Cloudinary and return the URL.
- * Angular usage: FormData with 'file' field.
- */
-router.post('/upload', upload.single('file'), async (req, res) => {
+router.post('/myactivity/upload', uploadRateLimit, upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ message: "No image file provided" });
     }
 
-    // Call our Cloudinary service
-    // We pass the buffer directly from Multer
-    const imageUrl = await uploadImage(req.file.buffer, 'user_content');
+    const type = req.query.type === 'profile' ? 'profile' : 'post';
+    const hash = req.body.hash || null;
+    const useruuid = req.userId.toString();
 
-    return res.status(200).json({
-      message: "Upload successful",
-      url: imageUrl
+    // Deduplication: if we've seen this exact file before, skip re-upload
+    if (hash) {
+      const existing = await dbCrudOperator.findMediaByHash(hash, useruuid);
+      if (existing) {
+        return res.status(200).json({
+          exists: true,
+          url: existing.url,
+          publicId: existing.cloudinaryId,
+          mediaId: existing.mediaId,
+        });
+      }
+    }
+
+    const folder = `postair/${useruuid}/${type}`;
+    const { url, publicId } = await uploadImage(req.file.buffer, folder);
+
+    const mediaId = uuidv4();
+    await dbCrudOperator.createMediaRecord({
+      mediaId,
+      useruuid,
+      cloudinaryId: publicId,
+      url,
+      folder,
+      hash,
+      status: 'confirmed',
+      type,
+      sizeBytes: req.file.size,
+      mimeType: req.file.mimetype,
     });
+
+    return res.status(201).json({ exists: false, url, publicId, mediaId });
   } catch (error) {
-    console.error("Cloudinary Upload Error:", error.message);
+    console.error("Upload Error:", error.message);
     return res.status(500).json({ message: "Failed to upload image" });
+  }
+});
+
+
+// ==========================================
+// MEDIA DELETE
+// ==========================================
+
+router.delete('/myactivity/media/:mediaId', async (req, res) => {
+  try {
+    const useruuid = req.userId.toString();
+    const { mediaId } = req.params;
+
+    const media = await dbCrudOperator.findMediaRecord(mediaId, useruuid);
+    if (!media) return res.status(404).json({ message: "Media not found" });
+
+    await deleteImage(media.cloudinaryId);
+    await dbCrudOperator.deleteMedia(mediaId);
+
+    return res.status(204).send();
+  } catch (error) {
+    console.error("Delete Media Error:", error.message);
+    return res.status(500).json({ message: "Failed to delete media" });
   }
 });
 
@@ -50,10 +134,6 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 // 1. COLLABORATOR DISCOVERY
 // ==========================================
 
-/**
- * Lookup a user's UUID by email for adding them as an editor.
- * Angular usage: User types email -> returns UUID to store in editorUuids array.
- */
 router.get('/users/lookup/:email', async (req, res) => {
   try {
     const { email } = req.params;
@@ -77,21 +157,27 @@ router.get('/users/lookup/:email', async (req, res) => {
 // 2. POST MANAGEMENT (CRUD)
 // ==========================================
 
-/**
- * Create a new post with support for initial co-editors.
- */
-router.post('/posts', async (req, res) => {
+router.get('/myactivity/posts', async (req, res) => {
   try {
-    const { editorUuids, title, description, isPublic, hashtags, isDraft } = req.body;
+    const page  = parseInt(req.query.page)  || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const posts = await dbCrudOperator.userPosts(req.userId, page, limit);
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch writer posts" });
+  }
+});
 
-    // 1. Convert external UUIDs to internal ObjectIDs
+router.post('/myactivity/posts', async (req, res) => {
+  try {
+    const { editorUuids, title, description, isPublic, hashtags, isDraft, images, cloudinaryPublicIds } = req.body;
+
     let editorIds = [];
     if (Array.isArray(editorUuids) && editorUuids.length > 0) {
       const editorUsers = await dbCrudOperator.findUserByUUid(editorUuids);
       editorIds = editorUsers.map(user => user._id);
     }
 
-    // 2. Consolidate post data
     const postUuid = uuidv4();
     const postData = {
       uuid: postUuid,
@@ -105,15 +191,17 @@ router.post('/posts', async (req, res) => {
       editors: editorIds,
       readTime: computeReadTime(description),
       createdAt: new Date(),
+      images: Array.isArray(images) ? images : [],
+      cloudinaryPublicIds: Array.isArray(cloudinaryPublicIds) ? cloudinaryPublicIds : [],
     };
 
-    // Set slug and publishedAt if publishing immediately
     if (isPublic) {
       postData.slug = generateSlug(title, postUuid);
       postData.publishedAt = new Date();
     }
 
     const newPost = await dbCrudOperator.createPost(postData);
+    await syncPostTags(hashtags);
     res.status(201).json(newPost);
 
   } catch (error) {
@@ -122,19 +210,14 @@ router.post('/posts', async (req, res) => {
   }
 });
 
-/**
- * Update existing post metadata. Validates ownership/editor rights via Operator.
- */
-router.put('/posts/:postuuid', async (req, res) => {
+router.put('/myactivity/posts/:postuuid', async (req, res) => {
   try {
     const updates = { ...req.body };
 
-    // Recompute readTime whenever description changes
     if (updates.description) {
       updates.readTime = computeReadTime(updates.description);
     }
 
-    // Handle publish transition: set slug and publishedAt exactly once
     if (updates.isPublic === true) {
       const existing = await dbCrudOperator.userPostDetails(req.userId, req.params.postuuid);
       if (existing) {
@@ -154,6 +237,7 @@ router.put('/posts/:postuuid', async (req, res) => {
       updates
     );
     if (!updatedPost) return res.status(404).json({ message: "Post not found or unauthorized" });
+    if (updates.hashtags) await syncPostTags(updates.hashtags);
     res.json(updatedPost);
   } catch (error) {
     console.error("Update failed:", error.message);
@@ -161,10 +245,7 @@ router.put('/posts/:postuuid', async (req, res) => {
   }
 });
 
-/**
- * Atomic delete of post and its related favorites/analytics.
- */
-router.delete('/posts/:postuuid', async (req, res) => {
+router.delete('/myactivity/posts/:postuuid', async (req, res) => {
   try {
     const result = await dbCrudOperator.deletePost(req.params.postuuid, req.userId);
     if (!result) return res.status(404).json({ message: "Delete failed: Unauthorized" });
@@ -179,9 +260,6 @@ router.delete('/posts/:postuuid', async (req, res) => {
 // 3. COLLABORATION CONTROL
 // ==========================================
 
-/**
- * Specifically for adding co-editors to an existing post.
- */
 router.post('/posts/:uuid/editors', async (req, res) => {
   try {
     const { editorUuids } = req.body;

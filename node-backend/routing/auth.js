@@ -5,6 +5,7 @@ const router = express.Router();
 const authService = require("../auth/authService");
 const db = require("../database/crud");
 const mailer = require("../services/mailService");
+const { authenticateJWT } = require("../middleware/auth");
 
 const analyticsDao = require("../database/analytics-dao");
 
@@ -92,6 +93,18 @@ router.post("/resend-otp", async (req, res) => {
   }
 
   res.status(200).json({ message: "New OTP sent." });
+});
+
+router.get("/me", authenticateJWT, async (req, res) => {
+  try {
+    const userProfile = await authService.getSessionUser(req.userId, deps);
+    return res.status(200).json(userProfile);
+  } catch (err) {
+    if (err.message === "USER_NOT_FOUND") {
+      return res.status(404).json({ message: "User not found" });
+    }
+    return res.status(500).json({ message: "Session restore failed" });
+  }
 });
 
 module.exports = router;

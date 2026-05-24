@@ -4,7 +4,7 @@ import { authGuardGuard } from './core/guards/auth-guard-guard';
 import { pendingChangesGuard } from './core/guards/pending-changes-guard';
 import { profileResolver } from './core/resolvers/profile-resolver';
 import { HomeResolver } from './core/resolvers/home-resolver';
-import { DashboardLayout } from './features/dashboard-layout/dashboard-layout';
+import { DashboardShell } from './features/dashboard/shell/shell';
 import { AuthShell } from './features/auth/auth-shell/auth-shell';
 
 export const routes: Routes = [
@@ -27,17 +27,17 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardLayout,
+        component: DashboardShell,
         children: [
             {
                 path: "myactivity",
-                loadComponent: () => import("./features/posts/posts").then(c => c.Posts),
+                loadComponent: () => import("./features/dashboard/writer-console/writer-console").then(c => c.WriterConsole),
                 canActivate: [authGuardGuard],
                 canDeactivate: [pendingChangesGuard]
             },
             {
                 path: "profile",
-                loadComponent: () => import("./features/profile/profile").then(c => c.Profile),
+                loadComponent: () => import("./features/dashboard/writer-profile/writer-profile").then(c => c.WriterProfile),
                 canActivate: [authGuardGuard],
                 resolve: { profileData: profileResolver }
             },

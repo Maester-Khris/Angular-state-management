@@ -106,6 +106,13 @@ const loginWithGoogle = async ({ idToken, guestId }, deps) => {
     throw new Error("GOOGLE_AUTH_FAILED");
   }
 };
+const getSessionUser = async (userId, deps) => {
+  const { db } = deps;
+  const user = await db.findSessionUserById(userId);
+  if (!user) throw new Error("USER_NOT_FOUND");
+  return transformToProfile(user);
+};
+
 const revokeToken = async (token, deps) => {
   const { db } = deps;
 
@@ -174,5 +181,6 @@ module.exports = {
   resendOtp,
   loginUser,
   loginWithGoogle,
-  revokeToken
+  revokeToken,
+  getSessionUser
 };

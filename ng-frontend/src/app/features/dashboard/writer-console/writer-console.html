@@ -1,0 +1,98 @@
+<div class="writer-layout">
+
+  <!-- Left column: New post + My posts panels -->
+  <div class="writer-left-col d-flex flex-column">
+
+    @if (!showNewForm()) {
+    <!-- Collapsed strip: header only with + button -->
+    <div class="panel-strip">
+      <div class="panel-header">
+        <span class="panel-title">New post</span>
+        <button class="panel-ctrl" (click)="onExpandNewPost()">+</button>
+      </div>
+    </div>
+    } @else {
+    <!-- Expanded: full form -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">New post</span>
+        <button class="panel-ctrl" (click)="onCollapseNewPost()">−</button>
+      </div>
+      <div class="panel-body">
+        <app-post-form (saved)="onDraftSaved($event)" (published)="onPostPublished($event)">
+        </app-post-form>
+      </div>
+    </div>
+    }
+
+    @if (!showList()) {
+    <div class="panel-strip mt-2">
+      <div class="panel-header">
+        <span class="panel-title">My posts</span>
+        <span class="panel-count">{{ posts().length }}</span>
+        <button class="panel-ctrl" (click)="onExpandList()">+</button>
+      </div>
+    </div>
+    } @else {
+    <div class="panel mt-2">
+      <div class="panel-header">
+        <span class="panel-title">My posts</span>
+        <span class="panel-count">{{ posts().length }}</span>
+        <button class="panel-ctrl" (click)="onCollapseList()">−</button>
+      </div>
+      <div class="panel-body">
+        <app-post-list [posts]="posts()" (editPost)="onEditPost($event)" (previewPost)="onPreviewPost($event)"
+          (deletePost)="onDeletePost($event)">
+        </app-post-list>
+      </div>
+    </div>
+    }
+
+  </div>
+
+  <!-- Right area: Edit + Preview panels -->
+  <div class="writer-right-area">
+
+    @if (!showEdit() && !showPreview()) {
+    <div class="empty-workspace">
+      <i class="bi bi-file-earmark-text" style="font-size:32px"></i>
+      <span>Click + to expand a panel or select a post to edit</span>
+    </div>
+    }
+
+    @if (showEdit() && activePost()) {
+    <div class="panel" style="flex:1;min-width:0">
+      <div class="panel-header">
+        <span class="panel-title">Edit post</span>
+        <!-- Preview toggle button in topbar — only here, not auto-opened -->
+        <button class="panel-ctrl preview-toggle" [class.active]="showPreview()" (click)="onTogglePreview()"
+          title="Toggle feed preview">
+          <i class="bi bi-eye"></i>
+        </button>
+        <button class="panel-ctrl" (click)="onCloseEdit()">✕</button>
+      </div>
+      <div class="panel-body">
+        <app-post-edit [post]="activePost()!" (saved)="onDraftSaved($event)" (published)="onPostPublished($event)"
+          (deleted)="onDeletePost($event)" (closed)="onCloseEdit()">
+        </app-post-edit>
+      </div>
+    </div>
+    }
+
+    @if (showPreview() && activePost()) {
+    <div class="panel" style="width:380px;flex-shrink:0">
+      <div class="panel-header">
+        <span class="bi bi-eye me-1"></span>
+        <span class="panel-title">Feed card preview</span>
+        <button class="panel-ctrl" (click)="onClosePreview()">✕</button>
+      </div>
+      <div class="panel-body">
+        <app-post-preview [post]="activePost()!">
+        </app-post-preview>
+      </div>
+    </div>
+    }
+
+  </div>
+
+</div>

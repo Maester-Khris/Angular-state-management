@@ -1,11 +1,11 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { Post } from '../../features/posts/data-access/post.model';
+import { Post } from '../../features/dashboard/data-access/post.model';
 
 @Injectable({ providedIn: 'root' })
 export class SessionQueueService {
   private readonly CAP = 30;
 
-  readonly queue       = signal<Post[]>([]);
+  readonly queue = signal<Post[]>([]);
   readonly activeIndex = signal<number>(0);
   readonly currentPost = computed(() =>
     this.queue()[this.activeIndex()] ?? null

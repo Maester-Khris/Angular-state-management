@@ -4,7 +4,7 @@ const ANGULAR_URL = process.env.NODE_ENV === 'production'
 
 const corsConfig = {
     origin: ANGULAR_URL,
-    methods: ["GET", "POST", "PUT"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
 };
 

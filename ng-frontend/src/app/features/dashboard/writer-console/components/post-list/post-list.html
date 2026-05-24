@@ -1,0 +1,51 @@
+<div class="d-flex flex-column gap-2 p-2">
+  @if (posts.length === 0) {
+    <p class="text-muted smallest text-center py-3">No posts yet.</p>
+  }
+  @for (post of pagedPosts; track post.uuid) {
+    <div class="card border-0 shadow-sm post-item-hover">
+      <div class="card-body p-2 d-flex align-items-center gap-2">
+        <!-- Thumbnail -->
+        @if (post.images.length > 0) {
+          <img [src]="post.images[0]" class="rounded" width="44" height="44"
+            style="object-fit:cover;flex-shrink:0" alt="" />
+        } @else {
+          <img src="/assets/default-post.png" class="rounded" width="44" height="44"
+            style="object-fit:cover;flex-shrink:0" alt="" />
+        }
+
+        <!-- Meta -->
+        <div class="post-item-meta">
+          <p class="mb-0 small fw-semibold post-item-title">{{ post.title }}</p>
+          <div class="d-flex align-items-center gap-2 mt-1">
+            <span class="badge rounded-pill"
+              [class]="post.status === 'published' ? 'bg-success-subtle text-success' : 'bg-warning-subtle text-warning'">
+              {{ post.status }}
+            </span>
+            <span class="post-date">{{ post.lastEditedAt | date:'MMM d' }}</span>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-1 flex-shrink-0">
+          <button class="panel-ctrl" title="Edit" (click)="editPost.emit(post)">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="panel-ctrl" title="Preview" (click)="previewPost.emit(post)">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button class="panel-ctrl" title="Delete" style="color:#ef4444"
+            (click)="deletePost.emit(post.uuid)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="list-pagination">
+  <button class="panel-ctrl" [disabled]="currentPage === 0" (click)="prevPage()">‹</button>
+  <span class="page-indicator">{{ currentPage + 1 }} / {{ totalPages }}</span>
+  <button class="panel-ctrl" [disabled]="currentPage >= totalPages - 1" (click)="nextPage()">›</button>
+</div>

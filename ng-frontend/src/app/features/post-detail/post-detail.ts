@@ -55,6 +55,12 @@ export class PostDetail implements OnInit {
     (el.children[i] as HTMLElement)?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
   }
 
+  optimiseUrl(url: string): string {
+    if (!url || !url.includes('cloudinary.com')) return url;
+    if (url.includes('/f_auto,q_auto/')) return url;
+    return url.replace('/upload/', '/upload/f_auto,q_auto/');
+  }
+
   // Retrieve post data
   // post uuid automatically populated by angular due to withInputBinding() on routing navigation
   // use signal to fecth full post with retrieved uuid

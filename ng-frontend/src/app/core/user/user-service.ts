@@ -2,6 +2,7 @@ import { inject, Injectable, NgZone, PLATFORM_ID, signal } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, of, throwError } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { AppUser } from './user.model';
+import { UserProfile } from '../../features/dashboard/data-access/profile.model';
 
 
 @Injectable({
@@ -14,6 +15,20 @@ export class UserService {
   private readonly userState = new BehaviorSubject<AppUser | null>(null);
   readonly user$ = this.userState.asObservable();
   readonly isLoggedIn$ = this.user$.pipe(map(user => !!user));
+  readonly profile$: Observable<UserProfile | null> = this.user$.pipe(
+    map(user => {
+      if (!user) return null;
+      return {
+        id: user.uuid,
+        name: user.name,
+        bio: user.bio ?? '',
+        avatar: user.avatarUrl,
+        stats: { posts: 0, reach: '0', coauth: 0, since: 0 },
+        savedInsights: [],
+        recentActivity: [],
+      };
+    })
+  );
 
   private _sessionId = signal<string | null>(null);
 

@@ -1,6 +1,5 @@
 const cloudinary = require('cloudinary').v2;
 
-// Configure Cloudinary with environment variables
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -8,30 +7,32 @@ cloudinary.config({
 });
 
 /**
- * Uploads an image buffer to Cloudinary
- * @param {Buffer} fileBuffer - The image file buffer from Multer
- * @param {String} folder - Optional folder name in Cloudinary
- * @returns {Promise<String>} - The secure URL of the uploaded image
+ * Uploads an image buffer to Cloudinary.
+ * Returns { url, publicId } where url already includes f_auto,q_auto delivery transformation.
  */
 const uploadImage = async (fileBuffer, folder = 'postair_uploads') => {
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
-        folder: folder,
-        resource_type: 'auto', // Automatically detect image/png/jpg
+        folder,
+        resource_type: 'auto',
+        upload_preset: process.env.CLOUDINARY_UPLOAD_PRESET,
       },
       (error, result) => {
         if (error) {
           console.error("Cloudinary Upload Error:", error);
           return reject(error);
         }
-        resolve(result.secure_url);
+        const url = result.secure_url.replace('/upload/', '/upload/f_auto,q_auto/');
+        resolve({ url, publicId: result.public_id });
       }
     );
-
-    // Write the buffer to the stream
     uploadStream.end(fileBuffer);
   });
 };
 
-module.exports = { uploadImage };
+const deleteImage = async (publicId) => {
+  return cloudinary.uploader.destroy(publicId);
+};
+
+module.exports = { uploadImage, deleteImage };

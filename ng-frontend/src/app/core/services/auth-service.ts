@@ -16,16 +16,53 @@ export class AuthService {
   private http = inject(HttpClient);
   private userService = inject(UserService); // Inject the state manager
   private zone = inject(NgZone);
+  private platformId = inject(PLATFORM_ID);
   private _accessToken = signal<string | null>(null);
+
+  constructor() {
+    this.rehydrateToken();
+  }
 
   // ================== Token Management ===================
   setToken(token: string | null) {
     this._accessToken.set(token);
-    // Logic for cookies/localstorage remains here
+    if (isPlatformBrowser(this.platformId)) {
+      if (token) {
+        localStorage.setItem('access_token', token);
+      } else {
+        localStorage.removeItem('access_token');
+      }
+    }
   }
 
   getAccessToken(): string | null {
-    return this._accessToken();
+    return this._accessToken() ?? (isPlatformBrowser(this.platformId) ? localStorage.getItem('access_token') : null);
+  }
+
+  private rehydrateToken(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const stored = localStorage.getItem('access_token');
+    if (stored) {
+      this._accessToken.set(stored);
+    }
+  }
+
+  restoreSession(): Observable<AppUser | null> {
+    const token = this.getAccessToken();
+    if (!token) return of(null);
+
+    return this.http.get<any>(`${this.baseUrl}/auth/me`).pipe(
+      map(res => {
+        const user = UserAdapter.fromMongo(res.user ?? res);
+        this.userService.setAuthenticatedUser(user);
+        return user;
+      }),
+      catchError(() => {
+        this.setToken(null);
+        this.userService.setAuthenticatedUser(null);
+        return of(null);
+      })
+    );
   }
 
   // ================== Manual Auth =========================

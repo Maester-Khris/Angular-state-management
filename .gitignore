@@ -3,6 +3,7 @@
 # ==========================================
 
 backup/
+internal_audit/
 
 # --- Environment & Secrets (CRITICAL) ---
 .env

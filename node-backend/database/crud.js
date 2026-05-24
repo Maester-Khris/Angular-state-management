@@ -5,6 +5,8 @@ const Favorite = require("./models/favorites");
 const TokenBlacklist = require("./models/blacklist");
 const Otp = require("./models/userotp"); // added
 const Newsletter = require("./models/newsletter");
+const Tag = require('./models/tag');
+const Media = require('./models/media');
 
 const dbCrudOperator = {
 
@@ -19,6 +21,12 @@ const dbCrudOperator = {
   async findUserByEmail(email) {
     return await User.findOne({ email: email.toLowerCase() })
       .select('+password') // Internal auth use only
+      .lean();
+  },
+
+  async findSessionUserById(id) {
+    return await User.findById(id)
+      .select('useruuid name email avatarUrl bio status isVerified')
       .lean();
   },
 
@@ -233,7 +241,7 @@ const dbCrudOperator = {
     return await Post.find({
       $or: [{ author: userId }, { editors: userId }]
     })
-    .select('title description images creator createdAt lastEditedAt isPublic uuid')
+    .select('title description images hashtags isDraft isPublic uuid readTime publishedAt createdAt lastEditedAt authorName authorAvatar')
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)
@@ -289,6 +297,63 @@ const dbCrudOperator = {
       { $setOnInsert: { email: email.toLowerCase(), createdAt: new Date() } },
       { upsert: true, new: true, lean: true }
     );
+  },
+
+  // ==========================================
+  // TAG DAO
+  // ==========================================
+  // current regex too strict not allowing search with typo using Levenshtein distance
+  async searchTagsByPrefix(prefix, limit = 20) {
+    const regex = new RegExp(`^${prefix}`, 'i'); 
+    // const regex = new RegExp(prefix, 'i'); 
+    return Tag.find({ name: regex }).limit(limit).lean();
+  },
+
+  async upsertTags(tagNames) {
+    if (!tagNames?.length) return;
+    return Tag.bulkWrite(
+      tagNames.map(name => ({
+        updateOne: {
+          filter: { name: name.toLowerCase().trim() },
+          update: { $setOnInsert: { name: name.toLowerCase().trim() } },
+          upsert: true
+        }
+      })),
+      { ordered: false }
+    );
+  },
+
+  async getAllTags() {
+    return Tag.find({}).sort({ name: 1 }).lean();
+  },
+
+  // ==========================================
+  // MEDIA DAO
+  // ==========================================
+
+  async findMediaByHash(hash, useruuid) {
+    return Media.findOne({ hash, useruuid, status: { $in: ['confirmed', 'attached'] } }).lean();
+  },
+
+  async findMediaRecord(mediaId, useruuid) {
+    return Media.findOne({ mediaId, useruuid }).lean();
+  },
+
+  async createMediaRecord(data) {
+    const media = new Media(data);
+    return media.save();
+  },
+
+  async confirmMedia(mediaId) {
+    return Media.findOneAndUpdate({ mediaId }, { status: 'confirmed' }, { new: true }).lean();
+  },
+
+  async attachMedia(mediaId) {
+    return Media.findOneAndUpdate({ mediaId }, { status: 'attached', attachedAt: new Date() }, { new: true }).lean();
+  },
+
+  async deleteMedia(mediaId) {
+    return Media.findOneAndUpdate({ mediaId }, { status: 'deleted' }, { new: true }).lean();
   },
 };
 
