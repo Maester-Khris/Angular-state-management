@@ -1,3 +1,42 @@
+## [Sprint 08] — 2026-W21 — Current
+**Theme: Writer Profile Data Layer**
+
+### Planned — 08a: Data layer unblock (no new UI)
+- [ ] `node-backend` — Fix stats field name mismatch in /me/full-profile response:
+      totalPosts → posts, totalReach → reach, totalCoAuthored → coauth,
+      since derived from profile.createdAt year
+- [ ] `node-backend` — Add CONTRIBUTION_ACTIVITY and RECENT_ACTIVITY feature flags
+      to gate heatmap and activity endpoints in production
+- [ ] `ng-frontend` — Add fetchFullProfile(), fetchWriterDrafts(), fetchWriterFavs()
+      to RemoteApi — call GET /profile/me/full-profile
+- [ ] `ng-frontend` — Rewire WriterProfile — drop MockApi, forkJoin three parallel
+      calls, per-section loading skeleton while fetching
+- [ ] `ng-frontend` — CONTRIBUTION_ACTIVITY and RECENT_ACTIVITY flag checks in
+      template — sections hidden in prod until flags enabled
+- [ ] `ng-frontend` — Draft row arrow → navigates to writer console with draft
+      pre-loaded in edit panel
+- [ ] `ng-frontend` — Scaffold /dashboard/profile/edit child route (empty shell)
+- [ ] `ng-frontend` — Scaffold /dashboard/profile/saved child route (empty shell)
+- [ ] `feature-flags.json` — Add CONTRIBUTION_ACTIVITY and RECENT_ACTIVITY flags
+- [ ] `node-backend` — /me/full-profile integration test (Vitest)
+
+### Planned — 08b: New UI (follow-on)
+- [ ] `node-backend` — Heatmap data endpoint: daily post counts last 12 months
+      via MongoDB aggregation pipeline
+- [ ] `ng-frontend` — Contribution heatmap wired to live endpoint
+- [ ] `ng-frontend` — Edit profile form: display name, bio, avatar upload
+- [ ] `ng-frontend` — Saved insights list view (/dashboard/profile/saved)
+- [ ] `ng-frontend` — Profile banner image upload
+
+### Deferred to backlog (requires features not yet built)
+- [ ] Co-auth count (requires editors[] aggregation endpoint)
+- [ ] Recent activity feed (requires activity log schema)
+- [ ] Media: orphan cleanup nightly job (pending records older than 24h)
+- [ ] Reader: Intersection Observer lazy load on post cards
+- [ ] Reader: srcset responsive image variants
+
+---
+
 ## [Sprint 07] — 2026-W17 — Completed
 **Theme: Writer Console API + Media Management Base**
 
@@ -57,36 +96,17 @@
 - [x] `ng-frontend` — Cloudinary f_auto/q_auto injected into delivery URLs
       in post-card and post-detail carousel
 
+### Completed — Infrastructure
+- [x] `node-backend` — BullMQ Redis command volume reduced ~80%:
+      removeOnComplete and removeOnFail on all workers and repeatable jobs
+- [x] `node-backend` — Redis fallback to Render Key Value: probe Upstash on init,
+      switch transparently on failure or rate-limit error (REDIS_FALLBACK_URL)
+
 ### Deferred to Sprint 08
-- [ ] Writer profile: Edit profile inline form (name, bio, avatar upload)
-- [ ] Writer profile: Banner image upload
-- [ ] Writer profile: Stats block wired to live aggregation endpoint
-- [ ] Writer profile: Contribution heatmap wired to live endpoint
-- [ ] Draft row arrow → navigates to writer console with draft pre-loaded
+- [ ] Writer profile data layer — see Sprint 08 above
 - [ ] Reader: Intersection Observer lazy load on post cards
 - [ ] Reader: srcset responsive image variants
-- [ ] Media: orphan cleanup nightly job (pending records older than 24h)
-
----
-
-## [Sprint 08] — 2026-W18 — Planned
-**Theme: Writer Profile Data Layer**
-
-### Planned
-- [ ] `node-backend` — Stats aggregation endpoint: post count, publishedAt
-      range (since), reach sum (impressions per author)
-- [ ] `node-backend` — Heatmap data endpoint: daily post counts last 12
-      months via MongoDB aggregation pipeline
-- [ ] `ng-frontend` — Profile stats block wired to live data
-- [ ] `ng-frontend` — Contribution heatmap wired to live endpoint
-- [ ] `ng-frontend` — Edit profile inline form: display name, bio, avatar upload
-- [ ] `ng-frontend` — Profile banner image upload
-- [ ] `ng-frontend` — Draft row → navigates to writer console with draft pre-loaded
-
-### Deferred to backlog (requires features not yet built)
-- [ ] Co-auth count (requires editors[] aggregation endpoint)
-- [ ] Saved insights panel (requires bookmarks/favourites feature)
-- [ ] Recent activity feed (requires activity log schema)
+- [ ] Media: orphan cleanup nightly job
 
 ---
 
@@ -122,9 +142,9 @@
 - [x] `ng-frontend` — Shell: dashboard container height adjusted, component
       icons standardised, redundant headers removed
 
-### Deferred to next sprint
-- [ ] Writer profile: Edit profile form (name, bio, avatar upload)
-- [ ] Writer profile: Banner image upload
+### Deferred
+- [ ] Writer profile: Edit profile form — Sprint 08b
+- [ ] Writer profile: Banner image upload — Sprint 08b
 
 ---
 
