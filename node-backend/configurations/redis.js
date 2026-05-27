@@ -61,7 +61,8 @@ class RedisConfig {
     _resolveUrl() {
         if (!this._resolvedUrlPromise) {
             this._resolvedUrlPromise = (async () => {
-                const primaryUrl = process.env.REDIS_URL;
+                const customurl = `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`;
+                const primaryUrl = process.env.REDIS_URL || customurl;
                 const fallbackUrl = process.env.REDIS_FALLBACK_URL;
 
                 try {
