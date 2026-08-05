@@ -279,6 +279,37 @@ Branch: `feat/writer-profile`
 13. **Scaffold `/dashboard/profile/edit` and `/dashboard/profile/saved` child routes**
    — empty shells, unchanged from original plan.
 
+14. **Fav card thumbnail + draft badge** (closes the eval checklist item below —
+   `crud.js`'s favorites select and `mapPost()` already surface `images`/`isPublic`/
+   `isDraft`; the template never rendered them)
+   - `writer-profile.html`, favs loop (`@for (fav of favs(); track fav.uuid)`):
+     replace the icon-only `.fav-icon-border` box with a thumbnail image, same
+     fallback chain `post-card.html` already uses:
+     ```html
+     <div class="fav-icon-border">
+       <img [src]="fav.images?.[0] || fav.imageUrl || '/assets/default-post.png'"
+            class="fav-thumb" [alt]="fav.title">
+       @if (fav.isDraft) {
+         <span class="draft-status fav-status-badge">DRAFT</span>
+       }
+     </div>
+     ```
+     Reuse the existing `.draft-status` class for the badge (same visual language as
+     the drafts-lab badge) — do not invent a new badge style. No badge for public favs.
+   - `writer-profile.css`: add `.fav-thumb` (32–40px square, `object-fit: cover`,
+     border-radius to match the existing card radius) and `.fav-status-badge`
+     (position: absolute, bottom-right corner of `.fav-icon-border`) — `.fav-icon-border`
+     itself currently has no dedicated rule in this file or `styles.css`, so this is a
+     net-new, isolated style, not an override.
+   - Update the loading-skeleton branch (`@else` — the 3-item `glass-loading` placeholder)
+     to the same box dimensions as `.fav-thumb` so there's no layout shift when data
+     resolves.
+   - No RemoteApi/model/TS changes — `fav.images`, `fav.imageUrl`, `fav.isDraft` are
+     already on the mapped `Post` object via the existing `mapPost()`.
+   - `.fav-icon-border`/`.fav-card-pro` are used nowhere else in the active app
+     (only in `app/backup/*`, which is dead code, not part of the build) — no
+     cross-component regression surface.
+
 ---
 
 ## API contract
@@ -344,8 +375,10 @@ ng-frontend
                                                                  initials avatar fallback,
                                                                  draft/fav field-name fixes,
                                                                  empty state messages,
-                                                                 feature flag gates
-- `features/dashboard/writer-profile/writer-profile.css`     — skeleton-loading + avatar-initials styles
+                                                                 feature flag gates,
+                                                                 fav thumbnail + draft badge
+- `features/dashboard/writer-profile/writer-profile.css`     — skeleton-loading + avatar-initials
+                                                                 + fav-thumb/fav-status-badge styles
 - `environments/environment.ts`                               — featureFlags added
 - `environments/environment-prod.ts`                          — featureFlags added (correct filename)
 - `feature-flags.json`                                        — two new flag entries
@@ -367,6 +400,8 @@ ng-frontend
 - [ ] Error interceptor registered in app.config.ts (confirm, do not change)
 - [ ] `/me/full-profile` integration test covers: envelope shape, stats field mapping,
       and one partial-failure case (e.g. favorites query fails) still returning 200
+- [ ] Favs panel renders real thumbnail (or default-post.png fallback), DRAFT badge
+      shown only when `fav.isDraft` is true, skeleton dimensions match loaded state
 
 ---
 
@@ -388,4 +423,36 @@ draft/fav template bindings corrected to live field names, `getUserFavorites` se
 extended, `environment-prod.ts` filename corrected.
 Action: Execute Node steps 1–3 first (stats mapper, favorites select, env vars — Angular
 depends on correct field names and complete fields), then Angular steps 4–13 in order.
+
+### Run 3 — 2026-08-05 (post-implementation codebase audit)
+Output: Steps 1–13 implemented and verified against this spec (Node tests pass,
+`ng build` clean, no model/constraint violations). Audit cross-referenced the
+working tree against this file's own eval checklist and found one gap: the
+favorites select (step 2) and `mapPost()` already surface `images`/`isPublic`/
+`isDraft`, but `writer-profile.html`'s fav loop never renders them — cards show
+title/date only, no thumbnail, no draft/public badge, contradicting the eval
+checklist's "with image, correct public/draft badge" requirement.
+Gap: Added step 14 above (thumbnail + DRAFT badge, template-only, reuses
+`post-card.html`'s image-fallback chain and the existing `.draft-status` badge
+class — no RemoteApi/model changes).
+Action: Execute step 14, then re-verify against the eval checklist in full before
+closing this task out.
+
+### Run 4 — 2026-08-05 (step 14 executed)
+Output: Fav cards now render `fav.images?.[0] || fav.imageUrl || '/assets/default-post.png'`
+in a 40x40 `.fav-thumb` (reusing `post-card.html`'s fallback chain), with a `DRAFT` badge
+(`.draft-status.fav-status-badge`, reused class) shown only when `fav.isDraft` is true.
+`.fav-icon-border` gained its first-ever CSS rule (fixed size, `position: relative`,
+`overflow: hidden`) — since the skeleton-loading placeholder shares the same class, it now
+matches the loaded-state dimensions automatically, no separate skeleton edit needed.
+`ng build` clean (only the pre-existing bundle-budget warnings, writer-profile.css grew
++1.14KB over budget — non-blocking, same warning class as 4 other unrelated files).
+`default-post.png` confirmed present at `public/assets/` and `src/assets/`.
+Gap: Not visually verified in a logged-in browser session — this environment has no
+running auth flow to reach `/dashboard/profile` with seeded favorites. Structural
+verification only: Angular's strict template type-checking passed at build time
+(would have failed if `fav.images`/`fav.imageUrl`/`fav.isDraft` weren't valid on `Post`),
+and `.fav-icon-border`/`.fav-card-pro` confirmed unused elsewhere in the active app.
+Action: Manually verify in-browser (public fav → no badge, draft fav → badge, fav with
+no images → default-post.png) before this task is marked fully closed.
 ```
