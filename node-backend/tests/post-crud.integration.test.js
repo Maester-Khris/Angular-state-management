@@ -3,17 +3,19 @@ import { beforeAll, afterAll, describe, it, expect, vi } from 'vitest';
 import request from 'supertest';
 import mongoose from 'mongoose';
 
-// var is hoisted alongside vi.mock — safe to reference in the mock closure
 var testUserId;
 var testUserName = 'Test Writer';
 
-vi.mock('../middleware/auth', () => ({
-  authenticateJWT: (req, res, next) => {
-    req.userId  = testUserId;
-    req.userName = testUserName;
-    next();
-  },
-}));
+// vi.mock('../middleware/auth', factory) doesn't reliably intercept the plain
+// require() that routing/activity.js uses — require + vi.spyOn patches the real
+// CJS module object in place, which every require()r of it then sees. Must run
+// before require('../server') binds authenticateJWT into router.use().
+const authMiddleware = require('../middleware/auth');
+vi.spyOn(authMiddleware, 'authenticateJWT').mockImplementation((req, res, next) => {
+  req.userId   = testUserId;
+  req.userName = testUserName;
+  next();
+});
 
 const { app } = require('../server');
 const Post    = require('../database/models/post');
@@ -29,7 +31,9 @@ describe('Post CRUD — /myactivity/posts integration tests', () => {
   let publishedUuid;
 
   beforeAll(async () => {
-    await mongoose.connect(MONGO_URI);
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.connect(MONGO_URI);
+    }
 
     const crypto = require('crypto');
     const user = await User.findOneAndUpdate(
@@ -47,7 +51,7 @@ describe('Post CRUD — /myactivity/posts integration tests', () => {
     ).lean();
 
     testUserId = user._id;
-  });
+  }, 30000);
 
   afterAll(async () => {
     if (createdUuids.length) {
@@ -55,7 +59,7 @@ describe('Post CRUD — /myactivity/posts integration tests', () => {
     }
     await User.deleteOne({ email: TEST_EMAIL });
     await mongoose.disconnect();
-  });
+  }, 30000);
 
   it('POST /myactivity/posts — creates a draft post', async () => {
     const res = await request(app)
@@ -63,7 +67,8 @@ describe('Post CRUD — /myactivity/posts integration tests', () => {
       .set('Authorization', 'Bearer test-token')
       .send({
         title:       'Integration Test Draft',
-        description: 'Draft body content for integration testing',
+        description: 'Draft body content for integration testing. This description is padded '
+          + 'to satisfy the Post schema minlength of 120 characters required for validation.',
         hashtags:    ['test'],
         isDraft:     true,
         isPublic:    false,
@@ -87,7 +92,8 @@ describe('Post CRUD — /myactivity/posts integration tests', () => {
       .set('Authorization', 'Bearer test-token')
       .send({
         title:       'Integration Test Published',
-        description: 'Published post content for integration testing',
+        description: 'Published post content for integration testing. This description is padded '
+          + 'to satisfy the Post schema minlength of 120 characters required for validation.',
         hashtags:    ['test'],
         isPublic:    true,
         isDraft:     false,
