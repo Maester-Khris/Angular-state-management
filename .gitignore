@@ -4,6 +4,7 @@
 
 backup/
 internal_audit/
+artifacts/
 
 # --- Environment & Secrets (CRITICAL) ---
 .env
@@ -53,6 +54,10 @@ connect.lock
 typings/
 __screenshots__/
 .history/
+
+# --- Playwright E2E ---
+e2e/playwright-report/
+e2e/test-results/
 
 
 # --- IDEs and Editors ---

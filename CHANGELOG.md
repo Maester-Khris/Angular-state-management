@@ -1,3 +1,42 @@
+## [E2E Platform Validation] — 2026-08-06 — Completed
+**Theme: Pure-CLI Playwright suite — reader view, writer console, writer dashboard**
+
+### Completed
+- [x] `data-utils` — `seed_e2e_account.py`: idempotent E2E test-account seeder against
+      `dev_nk` Mongo, bcrypt-compatible with the real `/auth/login` endpoint (verified
+      via a live curl round trip, not just DB presence)
+- [x] `e2e/` — new Playwright workspace (`package.json`, `playwright.config.ts`,
+      `.env.example`) — pure CLI execution, no LLM anywhere in the run path, per
+      `docs/research/2026-08-06-llm-agent-e2e-testing.md`'s findings
+- [x] `e2e/tests/auth.spec.ts` — real login round trip, session persistence through an
+      auth-guarded route, unauthenticated-visitor redirect
+- [x] `e2e/tests/reader.spec.ts` — home feed, keyword search, post detail, quick view
+- [x] `e2e/tests/writer-console.spec.ts` — full create → tag autocomplete → publish →
+      delete cycle against the real backend, self-cleaning (UI delete as the real test
+      step, API-level `afterEach` safety net)
+- [x] `e2e/tests/writer-profile.spec.ts` — live profile/stats load via the real
+      single-call endpoint; `CONTRIBUTION_ACTIVITY`/`RECENT_ACTIVITY` confirmed
+      genuinely absent from the DOM by default, not just CSS-hidden
+- [x] Result: **9/9 tests passing**, full suite run ~16s
+      (`.agent/tasks/e2e-platform-validation.exec.md` has the full run-by-run log)
+
+### Open calls — reviewed, passed on for now (not production-scoped, deferred)
+- [ ] `auth-service.ts:91`/`:120` — unguarded `window.google.accounts.id` access
+      crashes `Login.ngOnInit()` when Google's script hasn't loaded yet, corrupting the
+      login form's reactive bindings. Test suite works around it
+      (`stubGoogleIdentity()` in `e2e/tests/helpers.ts`); production code untouched by
+      decision. Judged an OAuth/Google Cloud integration issue solvable at the infra
+      level (authorized origins / client configuration), not purely an app-code fix —
+      deferred alongside the other polish items here, not fixed in this pass
+- [ ] Broader E2E coverage (media upload, signup+OTP, search hybrid/AI mode, the
+      async BullMQ-queue-driven paths) — deferred, not expanded this pass. The 9
+      specs cover the scope map's highest-risk paths (auth, core CRUD, cross-service
+      data loading), not full platform coverage
+- [ ] Merge timing for `chore/e2e-platform-validation` — deferred, kept as its own
+      branch for now rather than merged into `preview`/`main` immediately
+
+---
+
 ## [Sprint 08] — 2026-W21 — Completed
 **Theme: Writer Profile Data Layer**
 
