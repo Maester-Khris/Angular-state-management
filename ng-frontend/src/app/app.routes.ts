@@ -37,9 +37,22 @@ export const routes: Routes = [
             },
             {
                 path: "profile",
-                loadComponent: () => import("./features/dashboard/writer-profile/writer-profile").then(c => c.WriterProfile),
                 canActivate: [authGuardGuard],
-                resolve: { profileData: profileResolver }
+                resolve: { profileData: profileResolver },
+                children: [
+                    {
+                        path: '',
+                        loadComponent: () => import("./features/dashboard/writer-profile/writer-profile").then(c => c.WriterProfile),
+                    },
+                    {
+                        path: 'edit',
+                        loadComponent: () => import("./features/dashboard/writer-profile/profile-edit/profile-edit").then(c => c.ProfileEdit),
+                    },
+                    {
+                        path: 'saved',
+                        loadComponent: () => import("./features/dashboard/writer-profile/profile-saved/profile-saved").then(c => c.ProfileSaved),
+                    }
+                ]
             },
             { path: '', redirectTo: 'myactivity', pathMatch: 'full' }
         ]

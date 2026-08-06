@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, distinctUntilChanged, map, Observable, of,
 import { environment } from '../../../environments/environment';
 import { Post } from '../../features/dashboard/data-access/post.model';
 import { WriterPost } from '../../features/dashboard/data-access/writer.models';
+import { UserProfile } from '../../features/dashboard/data-access/profile.model';
 
 // export interface AiSearchResponse {
 //   query: string;
@@ -159,6 +160,29 @@ export class RemoteApi {
     return this.http.get<any[]>(
       `${this.baseUrl}/myactivity/posts?page=${page}&limit=${limit}`
     ).pipe(map(posts => posts.map(p => this.mapToWriterPost(p))));
+  }
+
+  /**
+   * Single-trip loader for WriterProfile.
+   * One HTTP call — server already aggregates via Promise.allSettled.
+   * Maps res.data.* and renames API fields to match Angular model (avatarUrl→avatar, useruuid→id).
+   */
+  fetchFullProfile(): Observable<{ profile: UserProfile; drafts: WriterPost[]; favs: Post[] }> {
+    return this.http.get<any>(`${this.baseUrl}/profile/me/full-profile`).pipe(
+      map(res => ({
+        profile: {
+          id:             res.data.profile.useruuid,
+          name:           res.data.profile.name,
+          bio:            res.data.profile.bio || '',
+          avatar:         res.data.profile.avatarUrl || null,
+          stats:          res.data.stats,
+          savedInsights:  [],
+          recentActivity: [],
+        } as UserProfile,
+        drafts: (res.data.drafts    || []).map((p: any) => this.mapToWriterPost(p)),
+        favs:   (res.data.favorites || []).map((p: any) => this.mapPost(p)),
+      }))
+    );
   }
 
   private mapToWriterPost(p: any): WriterPost {
