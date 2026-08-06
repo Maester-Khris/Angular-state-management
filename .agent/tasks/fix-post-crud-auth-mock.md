@@ -141,7 +141,7 @@ post-crud tests flipping to pass, nothing else moved. Remaining 4 failing files:
 environment issue, confirmed out of scope in Run 1) and, newly visible now that the
 suite runs further, `mailService.unit.test.js` + `eventLoggerService.unit.test.js` —
 both fail on `addJob` call-signature mismatches (`removeOnComplete`/`removeOnFail`
-options added by the Sprint 07 BullMQ change in `29f5865`, assertions never updated).
+options added by the Sprint 07 BullMQ change in `143b251`, assertions never updated).
 Pre-existing, unrelated to auth or post-crud — flagging for a separate task, not fixed
 here.
 Gap: None against this task's own scope.
@@ -175,3 +175,25 @@ Gap: None against this task's scope.
 Action: When running node-backend tests directly (not via `npm run test`), set
 `BULL_PREFIX=test-bull` explicitly to avoid colliding with any locally running dev server
 on the same Redis instance.
+
+### Run 4 — 2026-08-05 (last 2 failures fixed — suite fully green)
+Output: Root-caused and fixed both remaining `mailService.unit.test.js` /
+`eventLoggerService.unit.test.js` failures — confirmed via `git log -S removeOnComplete`
+that `143b251` added a 4th argument (`{ removeOnComplete, removeOnFail }`) to the
+`queueService.addJob()` calls in `mailService.js:27` and `eventLoggerService.js:18`,
+but never updated either test's `toHaveBeenCalledWith(...)` assertion (still 3 args).
+Added the same options object as the 4th expected argument in both.
+While in `eventLoggerService.js`, found a second, more serious bug one line below the
+already-fixed `queueEvent()`: `processAnalyticsBatch()` (line 29) had the identical
+missing-`await` pattern on `queueService.getQueue()` — but in **production code**, not
+a test. Silently masked because its own test
+(`eventLoggerService.unit.test.js`'s `processAnalyticsBatch` describe block) mocks
+`getQueue` with `mockReturnValue` (synchronous) rather than `mockResolvedValue`, so the
+missing `await` never mattered in the mocked test path — in real usage `getQueue()`
+returns a Promise, and `await queue.getWaiting()` would throw
+`queue.getWaiting is not a function`. Fixed with `await`.
+Verified: full `node-backend` suite (`BULL_PREFIX=test-bull`) — **8/8 files, 32/32 tests
+passing.** Zero known failures remain.
+Gap: None.
+Action: Task fully closed — no further follow-up items remain from the original
+post-implementation audit that spawned this task.
