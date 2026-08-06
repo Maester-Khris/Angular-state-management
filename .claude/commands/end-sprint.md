@@ -143,14 +143,20 @@ gh pr view <number> --json state,mergedAt,mergeCommit
 
 ## Step 6 — Local sync
 
+Per this repo's branch strategy (`.claude/CLAUDE.md`), `preview` is always the
+starting point for new work — fast-forward it to match `main` now that the PR merged,
+so the next branch starts from current work, not a stale snapshot:
+
 ```bash
 git checkout preview
-git pull origin preview
+git fetch origin
+git merge main
+git push origin preview
 ```
 
-This intentionally does **not** merge `main`'s new commits into `preview` — it only
-switches and pulls whatever `preview` currently is on remote. Updating `preview` with
-the newly-merged work is a separate, explicit action if/when wanted.
+If the merge doesn't fast-forward cleanly (unexpected — `preview` shouldn't normally
+diverge from `main` between end-sprint runs), stop and report rather than resolving
+conflicts blindly.
 
 ---
 
