@@ -1,26 +1,72 @@
-## [Sprint 08] — 2026-W21 — Current
+## [Sprint 08] — 2026-W21 — Completed
 **Theme: Writer Profile Data Layer**
 
-### Planned — 08a: Data layer unblock (no new UI)
-- [ ] `node-backend` — Fix stats field name mismatch in /me/full-profile response:
-      totalPosts → posts, totalReach → reach, totalCoAuthored → coauth,
-      since derived from profile.createdAt year
-- [ ] `node-backend` — Add CONTRIBUTION_ACTIVITY and RECENT_ACTIVITY feature flags
-      to gate heatmap and activity endpoints in production
-- [ ] `ng-frontend` — Add fetchFullProfile(), fetchWriterDrafts(), fetchWriterFavs()
-      to RemoteApi — call GET /profile/me/full-profile
-- [ ] `ng-frontend` — Rewire WriterProfile — drop MockApi, forkJoin three parallel
-      calls, per-section loading skeleton while fetching
-- [ ] `ng-frontend` — CONTRIBUTION_ACTIVITY and RECENT_ACTIVITY flag checks in
-      template — sections hidden in prod until flags enabled
-- [ ] `ng-frontend` — Draft row arrow → navigates to writer console with draft
-      pre-loaded in edit panel
-- [ ] `ng-frontend` — Scaffold /dashboard/profile/edit child route (empty shell)
-- [ ] `ng-frontend` — Scaffold /dashboard/profile/saved child route (empty shell)
-- [ ] `feature-flags.json` — Add CONTRIBUTION_ACTIVITY and RECENT_ACTIVITY flags
-- [ ] `node-backend` — /me/full-profile integration test (Vitest)
+### Completed — 08a: Data layer unblock
+- [x] `node-backend` — Fix stats field name mismatch in /me/full-profile response:
+      `mapProfileStats()` adapter in `profile.js` — totalPosts → posts, totalReach → reach,
+      totalCoAuthored → coauth, since derived from profile.createdAt year;
+      `Promise.allSettled` stats fallback extended to include totalCoAuthored
+- [x] `node-backend` — Extended `getUserFavorites` populate select (authorAvatar, images,
+      hashtags, isPublic, isDraft) — mirrors the Sprint 07 fix already applied to userPosts
+- [x] `node-backend` — Added NODE_FEATURE_CONTRIBUTION_ACTIVITY and
+      NODE_FEATURE_RECENT_ACTIVITY env vars to .env.example, provisioned for 08b
+- [x] `node-backend` — /profile/me/full-profile integration test (Vitest): envelope shape,
+      stats field mapping, partial-failure case (favorites query fails, still returns 200)
+- [x] `ng-frontend` — Single-call `fetchFullProfile()` on RemoteApi — one HTTP round trip,
+      not three (route's own `Promise.allSettled` already handles per-field resilience
+      server-side, per-field client resilience would have duplicated that concern)
+- [x] `ng-frontend` — WriterProfile rewired off MockApi — single subscribe, isLoading
+      signal, CSS-initials avatar fallback (no `default-avatar.png` asset needed)
+- [x] `ng-frontend` — Draft/fav template bindings fixed to live field names
+      (draft.uuid/lastEditedAt, fav.uuid), empty-state messages for both panels
+- [x] `ng-frontend` — Fav card thumbnail image + DRAFT badge — closed a gap the
+      post-implementation audit found: the favorites select and `mapPost()` already
+      surfaced images/isDraft, but the template never rendered them
+- [x] `ng-frontend` — CONTRIBUTION_ACTIVITY and RECENT_ACTIVITY feature flags added to
+      environment.ts/environment-prod.ts and feature-flags.json, template sections gated
+- [x] `ng-frontend` — Draft row click → navigates to writer console with draft pre-loaded
+- [x] `ng-frontend` — Scaffolded /dashboard/profile/edit and /dashboard/profile/saved
+      child routes (empty shells, "Coming in Sprint 08b")
 
-### Planned — 08b: New UI (follow-on)
+### Completed — Test Suite Fixes (found via post-implementation audit, not originally scoped)
+- [x] `node-backend` — Fixed `vi.mock`/CJS-`require` interop bug breaking the auth mock in
+      `post-crud.integration.test.js` (401 on 6/7 tests) and the crud/remotesearch/Post
+      mocks in `search.integration.test.js` — `vi.mock(factory)` doesn't reliably intercept
+      plain `require()` calls from already-loaded CJS route files under this Vitest setup;
+      swapped both to the `require()` + `vi.spyOn().mockImplementation()` pattern, which
+      patches the real module object in place
+- [x] `node-backend` — Fixed stale `post-crud.integration.test.js` fixtures: `description`
+      strings (42/46 chars) predated the Post model's `minlength: 120` constraint, masked
+      until the auth mock fix let requests reach validation
+- [x] `node-backend` — Fixed missing `await` on `queueService.getQueue()` in
+      `analytics.integration.test.js` and `otp.integration.test.js` — surfaced once local
+      Redis became available; also fixed the identical bug in **production code**
+      (`eventLoggerService.js`'s `processAnalyticsBatch()`), silently masked by its own
+      test's synchronous `mockReturnValue` instead of `mockResolvedValue`
+- [x] `node-backend` — Updated stale `mailService`/`eventLoggerService` unit assertions for
+      the `removeOnComplete`/`removeOnFail` options Sprint 07's BullMQ change added but
+      never updated the tests for
+- [x] Result: full `node-backend` suite — **8/8 test files, 32/32 tests passing**
+      (baseline at sprint start: 5 failed/8 total files)
+
+### Completed — OpenGraph / Social Preview Integration (reactive fix, not originally scoped)
+- [x] `ng-frontend` — Fixed favicon MIME type mismatch (`.png` served as `image/x-icon`),
+      added `favicon.ico` and `apple-touch-icon` links
+- [x] `ng-frontend` — Added title (was 7 chars, now a proper 48-char title), meta
+      description, full Open Graph, and Twitter Card tags to `index.html` — static, since
+      the app has no SSR/prerendering and social crawlers don't execute JS
+- [x] `ng-frontend` — Fixed a broken `og:image` fallback path in `post-detail.ts`
+      (relative `assets/...` path that also 404'd — file lives at site root)
+- [x] `ng-frontend` — Discovered `favicon-postair.png` (and separately, `postair-qr.png`)
+      were generic "Poster Maker" stock/template placeholders, not real Postair branding —
+      never previously verified visually. Generated a real Postair logomark and a proper
+      1200×630 social banner, wired both in, added `og:image:alt`/`twitter:image:alt`,
+      switched `twitter:card` to `summary_large_image` to match the banner's aspect ratio
+- [x] Result: social preview audit score went from **9/100 to 86/100+** (title/description/
+      image/OG tags all resolved; `postair-qr.png` in the footer is still the fake
+      placeholder — separate, deferred below)
+
+### Deferred to Sprint 09 — 08b: New UI (follow-on)
 - [ ] `node-backend` — Heatmap data endpoint: daily post counts last 12 months
       via MongoDB aggregation pipeline
 - [ ] `ng-frontend` — Contribution heatmap wired to live endpoint
@@ -28,12 +74,19 @@
 - [ ] `ng-frontend` — Saved insights list view (/dashboard/profile/saved)
 - [ ] `ng-frontend` — Profile banner image upload
 
-### Deferred to backlog (requires features not yet built)
+### Deferred to backlog (requires features not yet built, or found this sprint)
 - [ ] Co-auth count (requires editors[] aggregation endpoint)
 - [ ] Recent activity feed (requires activity log schema)
 - [ ] Media: orphan cleanup nightly job (pending records older than 24h)
 - [ ] Reader: Intersection Observer lazy load on post cards
 - [ ] Reader: srcset responsive image variants
+- [ ] `footer.html`'s `postair-qr.png` is fake "Poster Maker" placeholder branding, live on
+      the actual site — needs a real QR asset once the target URL it should encode is decided
+- [ ] `crud.js`'s `updatePost()` uses `findOneAndUpdate()` without `runValidators: true` —
+      schema validation (e.g. description minlength) never runs on post updates
+- [ ] Per-post social previews still show the site-default title/image/description to
+      crawlers — `post-detail.ts`'s dynamic Meta/Title calls only run client-side; real
+      per-post unfurls need SSR/prerendering or a bot-user-agent proxy
 
 ---
 
