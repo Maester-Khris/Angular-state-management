@@ -19,7 +19,7 @@ describe('Analytics Integration Tests (Real Redis)', () => {
     let analyticsQueue;
 
     beforeAll(async () => {
-        analyticsQueue = queueService.getQueue('analytics-queue');
+        analyticsQueue = await queueService.getQueue('analytics-queue');
         // Clean up queue before tests
         await analyticsQueue.drain(true);
     });
