@@ -33,6 +33,24 @@ AiSearchResponse interface is in the same file
 - Never change vm$ stream shape in HomeComponent — downstream templates depend on it
 - Never expose pythonBaseUrl or internalApiKey in Angular environment files
 
+## Branch strategy
+
+- `preview` is the starting point for all new work — cut every feature/fix/chore
+  branch from `preview`, never from `main`.
+- `main` is production-ready only — nothing lands there except a reviewed, merged PR.
+- Feature branches merge into `main` via PR (see `/end-sprint`).
+- After a PR merges into `main`, fast-forward `preview` to match before starting the
+  next branch:
+  ```bash
+  git checkout preview
+  git merge main
+  git push origin preview
+  ```
+  This keeps `preview` current so the next branch always starts from the latest
+  merged work, not a stale point-in-time snapshot.
+- Both `main` and `preview` are protected (see Git hygiene below) — never commit
+  directly to either.
+
 ## Git hygiene
 
 ### Branch check — run before staging anything
