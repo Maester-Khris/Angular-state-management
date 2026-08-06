@@ -36,7 +36,8 @@ export class PostDetail implements OnInit {
         this.meta.updateTag({ name: 'description', content: postData.description });
         this.meta.updateTag({ property: 'og:title', content: postData.title });
         this.meta.updateTag({ property: 'og:description', content: postData.description });
-        this.meta.updateTag({ property: 'og:image', content: postData.imageUrl || 'assets/favicon-postair.png' });
+        this.meta.updateTag({ property: 'og:image', content: postData.imageUrl || 'https://postair.nknext.dev/postair_social_banner.png' });
+        this.meta.updateTag({ property: 'og:image:alt', content: postData.title });
       }
     });
   }

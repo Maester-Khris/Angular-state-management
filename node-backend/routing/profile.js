@@ -37,6 +37,19 @@ router.get("/logout", async (req, res) => {
 // ==========================================
 
 /**
+ * Adapts raw stats from getStats() and profile.createdAt into the Angular UserProfile.stats shape.
+ * Presentation-layer shaping only — stays in the route file per project layering rules.
+ */
+function mapProfileStats(rawStats, profile) {
+  return {
+    posts:  rawStats.totalPosts      ?? 0,
+    reach:  String(rawStats.totalReach ?? '0'),
+    coauth: rawStats.totalCoAuthored ?? 0,
+    since:  profile.createdAt ? new Date(profile.createdAt).getFullYear() : null,
+  };
+}
+
+/**
  * Single-trip profile loader.
  * Reduces Frontend-to-Backend latency by aggregating all view-critical data.
  */
@@ -54,7 +67,7 @@ router.get("/me/full-profile", async (req, res) => {
 
   // Extract values with guaranteed fallbacks (Safe Return Pattern)
   const profile = results[0].status === 'fulfilled' ? results[0].value : {};
-  const stats = results[1].status === 'fulfilled' ? results[1].value : { totalPosts: 0, totalReach: 0 };
+  const stats = results[1].status === 'fulfilled' ? results[1].value : { totalPosts: 0, totalReach: 0, totalCoAuthored: 0 };
   const drafts = results[2].status === 'fulfilled' ? results[2].value : [];
   const favorites = results[3].status === 'fulfilled' ? results[3].value : [];
 
@@ -66,7 +79,7 @@ router.get("/me/full-profile", async (req, res) => {
     },
     data: {
       profile,
-      stats,
+      stats: mapProfileStats(stats, profile),
       drafts,
       favorites
     }

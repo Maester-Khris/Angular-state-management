@@ -43,7 +43,7 @@ const { Queue } = require('bullmq');
 let mailingQueue;
 
 beforeAll(async () => {
-  mailingQueue = queueService.getQueue('mailing-queue');
+  mailingQueue = await queueService.getQueue('mailing-queue');
   await mailingQueue.drain(true);
 });
 

@@ -49,6 +49,20 @@
             ],
             "enabled_prod": false,
             "priority": "stretch"
+        },
+        "CONTRIBUTION_ACTIVITY": {
+            "description": "Contribution heatmap grid on writer profile",
+            "status": "planned",
+            "sprint": "08b",
+            "modules": ["ng-frontend", "node-backend"],
+            "enabled_prod": false
+        },
+        "RECENT_ACTIVITY": {
+            "description": "Recent activity timeline on writer profile",
+            "status": "planned",
+            "sprint": "08b",
+            "modules": ["ng-frontend", "node-backend"],
+            "enabled_prod": false
         }
     }
 }

@@ -1,16 +1,17 @@
 <div class="profile-dashboard-grid">
   <main class="center-content-wrapper">
-    <!-- Profile -->
+    <!-- Profile card -->
     @if(profile()){
-    <section class="profile-card">
+    <section class="profile-card" [class.skeleton-loading]="isLoading()">
       <div class="profile-cover"></div>
       <div class="profile-content text-center d-flex flex-column justify-content-center">
         <div class="avatar-wrapper align-self-center">
-          @if (profile()) {
+          @if (profile()?.avatar) {
           <img [src]="profile()!.avatar" class="profile-avatar shadow" alt="Avatar">
           <span class="status-indicator online animate-fade-in"></span>
           } @else {
-          <div class="profile-avatar glass-loading"></div>
+          <div class="profile-avatar avatar-initials shadow">{{ initials() }}</div>
+          <span class="status-indicator online animate-fade-in"></span>
           }
         </div>
         <div class="mt-3">
@@ -28,27 +29,35 @@
     }
 
     <!-- Drafts -->
-    <section class="drafts-lab">
-      @if (drafts().length > 0 ) {
-      <h6 class="section-title mb-3">The Lab <span class="badge rounded-pill bg-light text-dark ms-2">2 Drafts</span>
+    <section class="drafts-lab" [class.skeleton-loading]="isLoading()">
+      @if (drafts().length > 0) {
+      <h6 class="section-title mb-3">The Lab <span class="badge rounded-pill bg-light text-dark ms-2">{{ drafts().length }} Drafts</span>
       </h6>
       <div class="draft-card-container">
-        @for (draft of drafts(); track draft.id) {
-        <div class="draft-card">
+        @for (draft of drafts(); track draft.uuid) {
+        <div class="draft-card" tabindex="0" role="button"
+             [attr.aria-label]="'Open draft ' + draft.title + ' in writer console'"
+             (click)="openDraftInConsole(draft)"
+             (keydown.enter)="openDraftInConsole(draft)"
+             (keydown.space)="$event.preventDefault(); openDraftInConsole(draft)">
           <div class="draft-status">DRAFT</div>
           <div class="draft-body">
-            <h6 class="mb-1 ">{{draft.title}}</h6>
-            <p class="smallest text-muted mb-0">Last edited {{ draft.lastModifiedAt | date:'shortTime' }}</p>
+            <h6 class="mb-1">{{draft.title}}</h6>
+            <p class="smallest text-muted mb-0">Last edited {{ draft.lastEditedAt | date:'shortTime' }}</p>
           </div>
           <i class="bi bi-arrow-right-short ms-auto"></i>
         </div>
         }
       </div>
-      }@else {
+      } @else if (!isLoading()) {
+      <p class="text-muted small py-3">No drafts yet — start writing from your console</p>
+      } @else {
       <div class="glass-loading" style="height: 150px;"></div>
       }
     </section>
 
+    <!-- Contribution grid — feature-flagged (08b) -->
+    @if (featureFlags.contributionActivity) {
     <section class="contribution-section">
       <div class="d-flex align-items-center justify-content-between mb-3">
         <h6 class="section-title mb-0">Contribution Activity</h6>
@@ -77,12 +86,13 @@
         </div>
       </div>
     </section>
+    }
   </main>
 
   <!-- Right Sidebar -->
   <aside class="right-sidebar-wrapper">
 
-    <div class=" mb-4">
+    <div class="mb-4" [class.skeleton-loading]="isLoading()">
       @if(profile()){
       <div class="stats-mini-grid animate-fade-in">
         @for (stat of [
@@ -109,7 +119,7 @@
       }
     </div>
 
-    <div class="sidebar-section p-3 glass-morphism mb-4">
+    <div class="sidebar-section p-3 glass-morphism mb-4" [class.skeleton-loading]="isLoading()">
       <div class="d-flex align-items-center justify-content-between mb-3">
         <h6 class="section-title mb-0">Saved Insights</h6>
         <a href="#" class="text-primary smallest fw-bold text-decoration-none">
@@ -119,9 +129,15 @@
 
       @if (favs().length > 0) {
       <div class="favorites-grid animate-fade-in">
-        @for (fav of favs(); track fav.id) {
+        @for (fav of favs(); track fav.uuid) {
         <div class="fav-card-pro">
-          <div class="fav-icon-border"><i class="bi bi-journal-text"></i></div>
+          <div class="fav-icon-border">
+            <img [src]="fav.images?.[0] || fav.imageUrl || '/assets/default-post.png'"
+                 class="fav-thumb" [alt]="fav.title">
+            @if (fav.isDraft) {
+            <span class="draft-status fav-status-badge">DRAFT</span>
+            }
+          </div>
           <div class="fav-info">
             <div class="fav-title">
               {{ fav.title.length > 20 ? (fav.title | slice:0:20) + '...' : fav.title }}
@@ -131,6 +147,8 @@
         </div>
         }
       </div>
+      } @else if (!isLoading()) {
+      <p class="text-muted small py-2">No saved insights yet</p>
       } @else {
       <div class="favorites-grid">
         @for (i of [1,2,3]; track $index) {
@@ -146,7 +164,8 @@
       }
     </div>
 
-    <!-- Account history -->
+    <!-- Recent Activity — feature-flagged (08b) -->
+    @if (featureFlags.recentActivity) {
     <div class="sidebar-section card border-0 shadow-sm glass-morphism">
       <div class="card-body p-3">
         <h6 class="section-title mb-4">Recent Activity</h6>
@@ -202,5 +221,7 @@
         </div>
       </div>
     </div>
+    }
   </aside>
 </div>
+<router-outlet></router-outlet>

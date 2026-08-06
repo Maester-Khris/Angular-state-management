@@ -26,7 +26,8 @@ describe('MailService Unit Tests', () => {
             expect(addJobSpy).toHaveBeenCalledWith(
                 'mailing-queue',
                 'send-otp',
-                { to, otp }
+                { to, otp },
+                { removeOnComplete: { count: 5 }, removeOnFail: { count: 10 } }
             );
             expect(result).toEqual({ id: 'job-1' });
         });

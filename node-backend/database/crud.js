@@ -96,7 +96,7 @@ const dbCrudOperator = {
         .limit(limit)
         .populate({
             path: 'post',
-            select: 'title description uuid lastEditedAt authorName'
+            select: 'title description uuid lastEditedAt authorName authorAvatar images hashtags isPublic isDraft'
         })
         .lean();
 
