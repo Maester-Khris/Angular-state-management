@@ -35,7 +35,11 @@
       </h6>
       <div class="draft-card-container">
         @for (draft of drafts(); track draft.uuid) {
-        <div class="draft-card" (click)="openDraftInConsole(draft)">
+        <div class="draft-card" tabindex="0" role="button"
+             [attr.aria-label]="'Open draft ' + draft.title + ' in writer console'"
+             (click)="openDraftInConsole(draft)"
+             (keydown.enter)="openDraftInConsole(draft)"
+             (keydown.space)="$event.preventDefault(); openDraftInConsole(draft)">
           <div class="draft-status">DRAFT</div>
           <div class="draft-body">
             <h6 class="mb-1">{{draft.title}}</h6>
