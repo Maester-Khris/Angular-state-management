@@ -26,7 +26,7 @@ class EventLoggerService {
      * This will be called by the scheduler or when queue reaches a threshold
      */
     async processAnalyticsBatch() {
-        const queue = queueService.getQueue(this.ANALYTICS_QUEUE);
+        const queue = await queueService.getQueue(this.ANALYTICS_QUEUE);
 
         // Fetch waiting jobs (up to a reasonable limit)
         const jobs = await queue.getWaiting();
