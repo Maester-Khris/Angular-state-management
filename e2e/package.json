@@ -1,0 +1,15 @@
+{
+  "name": "postair-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pure-CLI Playwright E2E suite for Postair — reader view, writer console, writer dashboard, cross-service integrations. No LLM in the execution path; see docs/research/2026-08-06-llm-agent-e2e-testing.md.",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1"
+  }
+}
