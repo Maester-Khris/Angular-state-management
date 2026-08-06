@@ -93,12 +93,15 @@ function — that's why it works where `vi.mock` doesn't.
 
 node-backend
 - `tests/post-crud.integration.test.js` — auth mock rewritten to `require` + `vi.spyOn`
+- `tests/analytics.integration.test.js` — `await` added to `queueService.getQueue()` call
+- `tests/otp.integration.test.js` — `await` added to `queueService.getQueue()` call
 
 ## Evaluation checklist
 - [x] `doppler run -- npx vitest run tests/post-crud.integration.test.js` — all 7 tests pass
-- [x] `doppler run -- npx vitest run` (from `node-backend/`) — no new failures vs. baseline;
-      2 pre-existing unrelated failures found (`mailService.unit`, `eventLoggerService.unit` —
-      see Run 2 log), the 2 Redis-dependent files remain out of scope, unchanged
+- [x] `doppler run -- npx vitest run` (from `node-backend/`, `BULL_PREFIX=test-bull` set) —
+      6/8 files, 30/32 tests pass. Only remaining failures: `mailService.unit`,
+      `eventLoggerService.unit` (pre-existing BullMQ assertion drift, see Run 2 log,
+      separate follow-up)
 - [x] `tests/profile.integration.test.js` and `tests/search.integration.test.js` still pass
       (regression check — same shared auth/mock mechanics)
 - [x] No production file changed (`git diff --stat` shows only the one test file)
@@ -145,3 +148,30 @@ Gap: None against this task's own scope.
 Action: None — task complete. Recommend opening a follow-up task for the
 `mailService`/`eventLoggerService` assertion drift and, separately, for the
 `findOneAndUpdate` validation gap in `updatePost()`.
+
+### Run 3 — 2026-08-05 (Redis became available — both remaining infra-flagged failures fixed)
+Output: Local Redis (`postair_redis` container) came up. Re-ran `analytics.integration.test.js`
+and `otp.integration.test.js` expecting the "needs real Redis" gap to just resolve itself —
+instead it surfaced a real code bug, previously invisible because these tests never got far
+enough to hit it: `services/queueService.js:14`'s `getQueue(name)` is `async`, but both test
+files called `queueService.getQueue(...)` without `await` (`analytics.integration.test.js:22`,
+`otp.integration.test.js:46`), so `analyticsQueue`/`mailingQueue` were Promises, not Queue
+instances — `TypeError: ...drain is not a function`. Fixed by adding `await` at both call
+sites (`node-backend/tests/analytics.integration.test.js`,
+`node-backend/tests/otp.integration.test.js`).
+Second layer found after that: with Redis live, tests raced against a real dev server
+(`npm run dev`'s `nodemon server.js`) also consuming the same Redis instance under the same
+default `bull` queue prefix — its worker completed/removed the OTP job before the test's
+`getJobs(['waiting'])` assertion ran. Not a code bug — this is exactly what `BULL_PREFIX=test-bull`
+in the project's own `npm run test` script exists to prevent, which I'd been bypassing by
+calling `npx vitest run` directly (since `local.entry.sh`'s Redis bootstrap fails in this
+sandbox). Running with `NODE_ENV=test BULL_PREFIX=test-bull` explicitly resolved it — both
+files now pass without touching the dev server or any production code.
+Verified: full `node-backend` suite now 6 failed/8→6 passed test files corrected to
+**6 passed / 2 failed** test files, **30 passed / 2 failed** tests (up from 4 passed/24 passed).
+Remaining 2 failures are exactly the `mailService.unit.test.js`/`eventLoggerService.unit.test.js`
+BullMQ assertion drift already flagged in Run 2 — untouched, still its own follow-up.
+Gap: None against this task's scope.
+Action: When running node-backend tests directly (not via `npm run test`), set
+`BULL_PREFIX=test-bull` explicitly to avoid colliding with any locally running dev server
+on the same Redis instance.
