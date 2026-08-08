@@ -1,3 +1,48 @@
+## [AI Search Pipeline Upgrade] — 2026-08-08 — In Progress
+**Theme: Query expansion quality, provider swap, semantic caching, and result-panel UX for `/search/ai`**
+
+### Scope
+- [ ] `python-search-api` — Swap SerpAPI → Exa for external web search (Tavily
+      evaluated and dropped — Exa's `title`/`url`/`favicon`/`image`/`summary` fields
+      cover the current `ExternalDoc` shape 1:1 from a single provider)
+- [ ] `python-search-api` — Query expansion: enforce output format in code
+      (`max_tokens` + post-hoc validation/truncation) instead of relying on prompt
+      instructions alone; extend few-shot examples beyond single-word disambiguation
+      to full query→expansion pairs
+- [ ] `python-search-api` — Spike: can Exa's schema-guided `summary` field replace
+      the `generate_relevant_sources` Groq reranking call outright? Validate against
+      the golden set before committing either way
+- [ ] `python-search-api` — Collapse the pipeline's 3× separate `asyncio.run()` calls
+      into one async handler/event loop; un-block the synchronous Qdrant/embedding
+      call (currently blocks Flask's worker thread, unlike the web-search leg)
+- [ ] `python-search-api` — Validate (golden set) whether `expand_query`'s dependency
+      on live Qdrant context can be dropped; if so, run Qdrant search and query
+      expansion concurrently instead of sequentially
+- [ ] `node-backend` — Redis-backed cache for `/search/ai` (hit rate, incorrect-hit
+      rate, latency p50/p95/p99 split by hit/miss, instrumented at the cache-read
+      call site)
+- [ ] `ng-frontend` — AI results panel: visual distinction between platform and web
+      results (currently section-heading-only), fix expanded-query display being
+      silently dropped when only internal results exist, empty-state fallback when
+      both result arrays are empty, remove dead `aiToggle`/`groqToggle` outputs
+
+### Evaluation plan
+- [ ] Golden query set (30–50 queries) + fixed corpus snapshot as the offline
+      regression harness — Precision@k/Recall@k at displayed-k for the AI path,
+      RAGAS Faithfulness/Answer Relevance for reranking, Redis cache hit/incorrect-hit
+      rate, per-stage latency, $ per query
+- [ ] Pre-registered thresholds, one variable changed at a time against the harness;
+      interleaving/A/B testing noted as the documented next step at scale, not
+      attempted prematurely on current traffic
+
+### Reference
+- `artifacts/ai-search-upgrade/codebase-audit.md` — pre-work state of the pipeline,
+  confirmed against all 6 planned points, file:line cited
+- `artifacts/ai-search-upgrade/evaluation-metrics-and-methodology.md` — metrics and
+  fair-comparison methodology, industry-cited
+
+---
+
 ## [E2E Platform Validation] — 2026-08-06 — Completed
 **Theme: Pure-CLI Playwright suite — reader view, writer console, writer dashboard**
 
