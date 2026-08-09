@@ -1,3 +1,4 @@
+import asyncio
 import os
 from fastembed import TextEmbedding
 from qdrant_client import QdrantClient
@@ -113,3 +114,9 @@ class EmbeddingService:
             }
             for hit in search_result.points
         ]
+
+    async def search_similar_post_async(self, query_text: str, limit: int = 10) -> list:
+        """Async wrapper — offloads the blocking Qdrant/embedding call to a thread,
+        matching the pattern WebSearchService already uses for its blocking SDK call."""
+        loop = asyncio.get_event_loop()
+        return await loop.run_in_executor(None, self.search_similar_post, query_text, limit)

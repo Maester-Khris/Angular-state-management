@@ -236,11 +236,33 @@ def search_augmented():
         return jsonify({"error": "Failed to perform search"}), 500
 
 
+async def _search_ai_pipeline(query: str, limit: int) -> dict:
+    # 1. Similarity Search (Qdrant) — offloaded, not blocking Flask's worker thread
+    similar_docs = await search_svc.search_similar_post_async(query, limit=limit)
+
+    # 2. Query Expansion (LLM)
+    expanded_query = await llm_svc.expand_query(query, similar_docs)
+    app.logger.info(f"Expanded query: {expanded_query}")
+
+    # 3. Web Search
+    web_results = await websearch_svc.search(expanded_query, limit=8)
+
+    # 4. Source Structuring & Reranking (LLM)
+    relevant_ext_docs = await llm_svc.generate_relevant_sources(query, web_results)
+
+    return {
+        "query": query,
+        "expanded_query": expanded_query,
+        "similar_docs": similar_docs,
+        "relevant_ext_docs": relevant_ext_docs,
+    }
+
+
 @app.route('/search/ai', methods=['POST'])
 @require_security_key
 def search_ai():
     """
-    Full AI Search Pipeline: 
+    Full AI Search Pipeline:
     Qdrant Similarity -> LLM Expansion -> SerpAPI Web Search -> LLM Source Structuring.
     Expected JSON: {"query": "...", "limit": 5}
     """
@@ -255,32 +277,8 @@ def search_ai():
 
     try:
         app.logger.info(f"AI Search starting for query: {query}")
-
-        # 1. Similarity Search (Qdrant)
-        similar_docs = search_svc.search_similar_post(query, limit=limit)
-        
-        # 2. Query Expansion (LLM)
-        expanded_query = asyncio.run(
-            llm_svc.expand_query(query, similar_docs)
-        )
-        app.logger.info(f"Expanded query: {expanded_query}")
-
-        # 3. Web Search (SerpAPI)
-        web_results = asyncio.run(
-             websearch_svc.search(expanded_query, limit=8)
-        )
-
-        # 4. Source Structuring & Reranking (LLM)
-        relevant_ext_docs = asyncio.run(
-            llm_svc.generate_relevant_sources(query, web_results)
-        )
-
-        return jsonify({
-            "query": query,
-            "expanded_query": expanded_query,
-            "similar_docs": similar_docs,
-            "relevant_ext_docs": relevant_ext_docs
-        }), 200
+        result = asyncio.run(_search_ai_pipeline(query, limit))
+        return jsonify(result), 200
 
     except Exception as e:
         app.logger.error(f"AI Search Pipeline failed: {e}")
