@@ -137,6 +137,20 @@ def health_check():
     }), 200
 
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    """
+    Public keepalive — real Qdrant round trip, no auth (hit by an external cron
+    pinger to stop the free-tier cluster from pausing on inactivity).
+    """
+    try:
+        search_svc.ping()
+        return jsonify({"qdrant": "up"}), 200
+    except Exception as e:
+        app.logger.warning(f"Ping: Qdrant unreachable: {e}")
+        return jsonify({"qdrant": "down", "message": str(e)}), 503
+
+
 @app.route('/embed', methods=['POST'])
 @require_security_key
 def embed_post():

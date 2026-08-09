@@ -163,6 +163,12 @@ class EmbeddingService:
         )
         return response.data[0].embedding
 
+    def ping(self) -> bool:
+        """Real round trip to Qdrant — used by the keepalive endpoint, not the search path."""
+        self._initialize_resources()
+        self.client.get_collections()
+        return True
+
     def store_post(self, post_uuid: str, title: str, description: str) -> bool:
         """Upserts a post into Qdrant after semantic vectorization."""
         combined_text = f"{title}. {description}"
