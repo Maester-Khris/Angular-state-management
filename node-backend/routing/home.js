@@ -37,6 +37,16 @@ router.get("/health", async (req, res) => {
     });
 });
 
+router.get('/api/ping', async (req, res) => {
+    try {
+        await MongoConnection.pingDb();
+        return res.status(200).json({ mongo: 'up' });
+    } catch (error) {
+        console.error('Ping: Mongo unreachable:', error.message);
+        return res.status(503).json({ mongo: 'down', message: error.message });
+    }
+});
+
 // ==========================================
 // 2. DISCOVERY & FEED
 // ==========================================
