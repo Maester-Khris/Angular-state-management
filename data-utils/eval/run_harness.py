@@ -32,7 +32,7 @@ def run(base_url: str, internal_key: str, queries: list[dict], k: int = 5) -> di
             f"{base_url}/search/ai",
             json={"query": query, "limit": k},
             headers={"X-Internal-Key": internal_key},
-            timeout=30,
+            timeout=60,
         )
         resp.raise_for_status()
         data = resp.json()
