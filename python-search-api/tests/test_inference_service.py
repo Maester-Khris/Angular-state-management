@@ -23,7 +23,7 @@ async def test_expand_query_truncates_over_limit_output():
     svc.client.chat.completions.create = AsyncMock(
         return_value=make_groq_response("one two three four five six seven eight nine ten")
     )
-    result = await svc.expand_query("test query", [])
+    result = await svc.expand_query("test query")
     assert len(result.split()) <= 8
 
 @pytest.mark.asyncio
@@ -32,14 +32,14 @@ async def test_expand_query_strips_punctuation():
     svc.client.chat.completions.create = AsyncMock(
         return_value=make_groq_response("caching, redis, and TTL invalidation.")
     )
-    result = await svc.expand_query("test query", [])
+    result = await svc.expand_query("test query")
     assert "," not in result and "." not in result
 
 @pytest.mark.asyncio
 async def test_expand_query_falls_back_to_original_on_empty():
     svc = InferenceService()
     svc.client.chat.completions.create = AsyncMock(return_value=make_groq_response(""))
-    result = await svc.expand_query("original query", [])
+    result = await svc.expand_query("original query")
     assert result == "original query"
 
 @pytest.mark.asyncio
@@ -47,6 +47,6 @@ async def test_expand_query_passes_max_tokens():
     svc = InferenceService()
     mock_create = AsyncMock(return_value=make_groq_response("redis caching ttl"))
     svc.client.chat.completions.create = mock_create
-    await svc.expand_query("test query", [])
+    await svc.expand_query("test query")
     _, kwargs = mock_create.call_args
     assert kwargs.get("max_tokens") is not None and kwargs["max_tokens"] <= 32

@@ -239,12 +239,16 @@ def search_augmented():
 async def _search_ai_pipeline(query: str, limit: int) -> dict:
     degraded_legs: list[str] = []
 
-    # 1. Similarity Search (Qdrant) — core retrieval, hard failure on error (propagates up)
-    similar_docs = await search_svc.search_similar_post_async(query, limit=limit)
+    # 1 & 2. Qdrant retrieval and query expansion no longer depend on each other
+    # (Phase 8.1 confirmed expand_query's own few-shot examples cover disambiguation
+    # without live Qdrant context) — run them concurrently.
+    qdrant_task = search_svc.search_similar_post_async(query, limit=limit)
+    expand_task = llm_svc.expand_query(query)
 
-    # 2. Query Expansion (LLM) — soft failure, falls back to the original query
+    similar_docs = await qdrant_task  # core retrieval — hard failure propagates
+
     try:
-        expanded_query = await llm_svc.expand_query(query, similar_docs)
+        expanded_query = await expand_task
         app.logger.info(f"Expanded query: {expanded_query}")
     except Exception as e:
         app.logger.warning(f"Expansion leg degraded: {e}")

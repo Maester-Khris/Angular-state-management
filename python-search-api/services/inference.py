@@ -32,17 +32,15 @@ class InferenceService:
             return False
 
 
-    async def expand_query(self, query: str, context_docs: list[dict]) -> str:
+    async def expand_query(self, query: str) -> str:
         """
-        Detects user intent and dominant topic from Qdrant snippets to produce a refined web search query.
+        Expands a user's search query into 5-8 technical keywords. No longer takes
+        live Qdrant context — measured (Phase 8.1) against ambiguous-term cases
+        ("life"/"intelligence"/"memory") and found no meaningful quality difference;
+        the prompt's own few-shot disambiguation covers it without live context.
         Constraints: Strictly tech/engineering domain, 5-8 space-separated keywords, enforced in code
         (not just the prompt) via _enforce_expansion_format.
         """
-        similar_docs_text = "\n".join(
-            f"- {doc.get('title', '')}: {doc.get('description', '')[:100]}"
-            for doc in (context_docs or [])
-        ) or "No similar documents found."
-
         system_prompt = """You are a search query expansion assistant for a software engineering and technology platform.
 
 Your only job is to expand a user's search query into a short list of related technical keywords that will improve search recall.
@@ -70,9 +68,6 @@ Output: kubernetes deployment rollback health checks pod scheduling
 """
 
         user_prompt = f"""Query: "{query}"
-
-Similar documents from our platform (use for context):
-{similar_docs_text}
 
 Expand this query into 5-8 technical keywords relevant to software engineering."""
 
