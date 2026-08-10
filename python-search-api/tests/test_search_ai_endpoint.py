@@ -2,6 +2,8 @@ import pytest
 import asyncio
 from unittest.mock import AsyncMock
 
+from services.search_providers.base import WebResult
+
 def test_search_ai_success(client, auth_headers, mock_embedding_svc, mock_inference_svc, mock_websearch_svc,
                            fake_qdrant_docs, fake_web_results, fake_structured_sources):
     """
@@ -47,6 +49,29 @@ def test_search_ai_uses_single_event_loop(client, auth_headers, mocker, mock_emb
 
     assert response.status_code == 200
     assert spy.call_count == 1
+
+def test_search_ai_maps_web_result_objects_to_dicts_for_reranking(client, auth_headers, mock_embedding_svc,
+                                                                    mock_inference_svc, mock_websearch_svc,
+                                                                    fake_qdrant_docs, fake_structured_sources):
+    """Regression test: websearch_svc.search() returns list[WebResult] (dataclass,
+    'snippet' field), but generate_relevant_sources expects list[dict] with a
+    'description' key — the pipeline must translate between them, not pass
+    WebResult objects straight through (they have no .get(), and no 'description')."""
+    mock_embedding_svc.search_similar_post_async = AsyncMock(return_value=fake_qdrant_docs)
+    mock_inference_svc.expand_query = AsyncMock(return_value="expanded search string")
+    mock_websearch_svc.search = AsyncMock(return_value=[
+        WebResult(title="Redis Guide", url="https://x.com", favicon="https://x.com/f.ico", snippet="About Redis"),
+    ])
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=fake_structured_sources)
+
+    response = client.post('/search/ai', json={"query": "test", "limit": 5}, headers=auth_headers)
+
+    assert response.status_code == 200
+    call_args = mock_inference_svc.generate_relevant_sources.call_args
+    passed_web_results = call_args[0][1]
+    assert passed_web_results == [
+        {"title": "Redis Guide", "url": "https://x.com", "favicon": "https://x.com/f.ico", "description": "About Redis"}
+    ]
 
 def test_search_ai_missing_query(client, auth_headers):
     """{} body -> 400"""

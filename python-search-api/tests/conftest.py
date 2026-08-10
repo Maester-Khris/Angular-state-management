@@ -66,10 +66,13 @@ def fake_qdrant_docs():
 
 @pytest.fixture
 def fake_web_results():
+    """websearch_svc.search() returns list[WebResult] (search_providers' own
+    value object) — not the pre-Exa SerpAPI dict shape."""
+    from services.search_providers.base import WebResult
     return [
-        {"title": "AI News", "url": "https://ainews.com", "description": "Latest AI research", "favicon": "https://ainews.com/favicon.ico"},
-        {"title": "ML Weekly", "url": "https://mlweekly.com", "description": "Weekly ML digest", "favicon": "https://mlweekly.com/favicon.ico"},
-        {"title": "Papers With Code", "url": "https://paperswithcode.com", "description": "ML papers", "favicon": "https://paperswithcode.com/favicon.ico"},
+        WebResult(title="AI News", url="https://ainews.com", favicon="https://ainews.com/favicon.ico", snippet="Latest AI research"),
+        WebResult(title="ML Weekly", url="https://mlweekly.com", favicon="https://mlweekly.com/favicon.ico", snippet="Weekly ML digest"),
+        WebResult(title="Papers With Code", url="https://paperswithcode.com", favicon="https://paperswithcode.com/favicon.ico", snippet="ML papers"),
     ]
 
 @pytest.fixture

@@ -248,7 +248,14 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
     web_results = await websearch_svc.search(expanded_query, limit=8)
 
     # 4. Source Structuring & Reranking (LLM)
-    relevant_ext_docs = await llm_svc.generate_relevant_sources(query, web_results)
+    # generate_relevant_sources expects plain dicts (title/url/favicon/description) —
+    # translate WebResult (search_providers' own value object, snippet not description)
+    # here at the pipeline boundary rather than coupling inference.py to search_providers.
+    web_results_dicts = [
+        {"title": r.title, "url": r.url, "favicon": r.favicon, "description": r.snippet}
+        for r in web_results
+    ]
+    relevant_ext_docs = await llm_svc.generate_relevant_sources(query, web_results_dicts)
 
     return {
         "query": query,
