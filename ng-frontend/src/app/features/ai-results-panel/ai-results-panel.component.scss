@@ -49,6 +49,25 @@
     font-size: 0.7rem;
     font-style: italic;
   }
+
+  &__badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 999px;
+
+    &--platform {
+      background: var(--bs-primary-bg-subtle, rgba(13, 110, 253, 0.1));
+      color: var(--bs-primary, #0d6efd);
+    }
+
+    &--web {
+      background: rgba(108, 117, 125, 0.12);
+      color: var(--bs-secondary, #6c757d);
+    }
+  }
 }
 
 .premium-glass-card {

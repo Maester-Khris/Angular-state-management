@@ -8,14 +8,23 @@
     </div>
     }
 
-    <!-- Loaded State -->
-    @else if (aiState.state === 'loaded') {
+    <!-- Loaded / Partial State — same layout, partial adds an inline notice per degraded section -->
+    @else if (aiState.state === 'loaded' || aiState.state === 'partial') {
     <div>
+        <!-- Expanded query — moved out of the External Docs block so it never
+             silently drops when web results are empty (bug found in the pre-upgrade audit) -->
+        @if (aiState.data.expanded_query) {
+        <p class="ai-results-panel__expanded-query text-muted smallest mb-3 italic">
+            "{{ aiState.data.expanded_query }}"
+        </p>
+        }
+
         <!-- Similar Docs Section -->
         @if (aiState.data.similar_docs.length) {
         <section class="ai-results-panel__section mb-4">
             <h3 class="ai-results-panel__heading h6 fw-bold mb-3 d-flex align-items-center">
                 <i class="bi bi-link-45deg me-2 text-primary"></i>Related posts
+                <span class="ai-results-panel__badge ai-results-panel__badge--platform ms-2">Platform</span>
             </h3>
             <div class="ai-results-panel__list d-flex flex-column gap-2">
                 @for (doc of aiState.data.similar_docs; track doc.uuid || $index) {
@@ -33,12 +42,8 @@
         <section class="ai-results-panel__section">
             <h3 class="ai-results-panel__heading h6 fw-bold mb-3 d-flex align-items-center">
                 <i class="bi bi-globe me-2 text-primary"></i>Web sources
+                <span class="ai-results-panel__badge ai-results-panel__badge--web ms-2">Web</span>
             </h3>
-            @if (aiState.data.expanded_query) {
-            <p class="ai-results-panel__expanded-query text-muted smallest mb-3 italic">
-                "{{ aiState.data.expanded_query }}"
-            </p>
-            }
             <div class="ai-results-panel__list d-flex flex-column gap-2">
                 @for (src of aiState.data.relevant_ext_docs; track src.source_url || $index) {
                 <a class="ai-results-panel__item premium-glass-card p-2 rounded-3 text-dark text-decoration-none small"
@@ -56,6 +61,20 @@
                 }
             </div>
         </section>
+        } @else if (aiState.state === 'partial' && aiState.data.degraded_legs.includes('web_search')) {
+        <p class="ai-results-panel__status ai-results-panel__status--degraded text-muted small">
+            <i class="bi bi-exclamation-circle me-2"></i>Web results unavailable right now.
+            <button type="button" class="btn btn-link btn-sm p-0 ms-1" (click)="onRetryClick()">Retry</button>
+        </p>
+        }
+
+        <!-- True empty state — both arrays empty and nothing is degraded (a real "nothing found",
+             not a failure) -->
+        @if (!aiState.data.similar_docs.length && !aiState.data.relevant_ext_docs.length
+             && (aiState.state === 'loaded' || !aiState.data.degraded_legs.length)) {
+        <p class="ai-results-panel__status text-muted small">
+            <i class="bi bi-search me-2"></i>No related results found for this query.
+        </p>
         }
     </div>
     }
@@ -65,6 +84,7 @@
     <div class="ai-results-panel__status-container">
         <p class="ai-results-panel__status ai-results-panel__status--error text-danger small">
             <i class="bi bi-exclamation-triangle me-2"></i>{{ aiState.message }}
+            <button type="button" class="btn btn-link btn-sm p-0 ms-1" (click)="onRetryClick()">Retry</button>
         </p>
     </div>
     }
