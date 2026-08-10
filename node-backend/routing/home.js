@@ -6,6 +6,7 @@ const remoteSearchSvc = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
 const eventLoggerService = require('../services/eventLoggerService');
 const aiSearchCache = require('../services/aiSearchCache');
+const redisConfig = require('../configurations/redis');
 
 // ==========================================
 // 1. SYSTEM INTEGRITY
@@ -34,7 +35,19 @@ router.get("/health", async (req, res) => {
         services: {
             database: { name: "MongoDB Atlas", status: dbStatus },
             semantic_engine: { name: "Python Flask / Qdrant", status: pythonStatus }
-        }
+        },
+        aiSearchCache: await (async () => {
+            try {
+                const conn = await redisConfig.getProducerConnection();
+                const [hits, misses] = await Promise.all([
+                    conn.get('ai_search_cache:hits'),
+                    conn.get('ai_search_cache:misses'),
+                ]);
+                return { hits: Number(hits) || 0, misses: Number(misses) || 0 };
+            } catch {
+                return { hits: 0, misses: 0 };
+            }
+        })()
     });
 });
 
