@@ -5,6 +5,7 @@ const Post = require('../database/models/post');
 const remoteSearchSvc = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
 const eventLoggerService = require('../services/eventLoggerService');
+const aiSearchCache = require('../services/aiSearchCache');
 
 // ==========================================
 // 1. SYSTEM INTEGRITY
@@ -214,6 +215,11 @@ router.post('/api/search/ai', async (req, res) => {
             });
         }
 
+        const cached = await aiSearchCache.getCached(query, limit);
+        if (cached) {
+            return res.status(200).json(cached);
+        }
+
         const pythonBaseUrl = process.env.NODE_ENV === 'production'
             ? process.env.PYTHON_SERVICE_URL
             : 'http://localhost:5000';
@@ -239,6 +245,10 @@ router.post('/api/search/ai', async (req, res) => {
 
         // Forward Python response exactly — no transformation
         const data = await pythonResponse.json();
+        // Caches degraded_legs responses too, for now — caching them differently
+        // (shorter TTL, or skip) is a follow-up once the incorrect-hit-rate metric
+        // shows it's actually a problem, not before.
+        await aiSearchCache.setCached(query, limit, data);
         return res.status(200).json(data);
 
     } catch (error) {
