@@ -237,31 +237,54 @@ def search_augmented():
 
 
 async def _search_ai_pipeline(query: str, limit: int) -> dict:
-    # 1. Similarity Search (Qdrant) — offloaded, not blocking Flask's worker thread
+    degraded_legs: list[str] = []
+
+    # 1. Similarity Search (Qdrant) — core retrieval, hard failure on error (propagates up)
     similar_docs = await search_svc.search_similar_post_async(query, limit=limit)
 
-    # 2. Query Expansion (LLM)
-    expanded_query = await llm_svc.expand_query(query, similar_docs)
-    app.logger.info(f"Expanded query: {expanded_query}")
+    # 2. Query Expansion (LLM) — soft failure, falls back to the original query
+    try:
+        expanded_query = await llm_svc.expand_query(query, similar_docs)
+        app.logger.info(f"Expanded query: {expanded_query}")
+    except Exception as e:
+        app.logger.warning(f"Expansion leg degraded: {e}")
+        expanded_query = query
+        degraded_legs.append("expansion")
 
-    # 3. Web Search
-    web_results = await websearch_svc.search(expanded_query, limit=8)
+    # 3. Web Search — soft failure, degrades to []
+    # (ExaWebSearchAdapter.search already never raises; this guard also covers
+    #  any future provider that doesn't hold that contract as strictly.)
+    try:
+        web_results = await websearch_svc.search(expanded_query, limit=8)
+        if not web_results:
+            degraded_legs.append("web_search")
+    except Exception as e:
+        app.logger.warning(f"Web search leg degraded: {e}")
+        web_results = []
+        degraded_legs.append("web_search")
 
-    # 4. Source Structuring & Reranking (LLM)
+    # 4. Source Structuring & Reranking (LLM) — soft failure, degrades to []
     # generate_relevant_sources expects plain dicts (title/url/favicon/description) —
     # translate WebResult (search_providers' own value object, snippet not description)
     # here at the pipeline boundary rather than coupling inference.py to search_providers.
-    web_results_dicts = [
-        {"title": r.title, "url": r.url, "favicon": r.favicon, "description": r.snippet}
-        for r in web_results
-    ]
-    relevant_ext_docs = await llm_svc.generate_relevant_sources(query, web_results_dicts)
+    try:
+        web_results_dicts = [
+            {"title": r.title, "url": r.url, "favicon": r.favicon, "description": r.snippet}
+            for r in web_results
+        ]
+        relevant_ext_docs = await llm_svc.generate_relevant_sources(query, web_results_dicts)
+    except Exception as e:
+        app.logger.warning(f"Reranking leg degraded: {e}")
+        relevant_ext_docs = []
+        if "web_search" not in degraded_legs:
+            degraded_legs.append("reranking")
 
     return {
         "query": query,
         "expanded_query": expanded_query,
         "similar_docs": similar_docs,
         "relevant_ext_docs": relevant_ext_docs,
+        "degraded_legs": degraded_legs,
     }
 
 

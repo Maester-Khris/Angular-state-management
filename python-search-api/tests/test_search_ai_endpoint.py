@@ -29,6 +29,7 @@ def test_search_ai_success(client, auth_headers, mock_embedding_svc, mock_infere
     assert len(data['similar_docs']) == 3
     assert len(data['relevant_ext_docs']) == 2
     assert data['relevant_ext_docs'][0]['source_name'] == "AI News"
+    assert data['degraded_legs'] == []
 
     # Verify pipeline wiring
     mock_inference_svc.expand_query.assert_called_once()
@@ -83,27 +84,54 @@ def test_search_ai_no_auth(client):
     response = client.post('/search/ai', json={"query": "q"})
     assert response.status_code == 401
 
-def test_search_ai_qdrant_failure(client, auth_headers, mock_embedding_svc):
-    """Qdrant failure -> 500"""
+def test_search_ai_qdrant_failure_still_500s(client, auth_headers, mock_embedding_svc):
+    """Qdrant (core retrieval) failure stays a hard failure — not degraded."""
     mock_embedding_svc.search_similar_post_async = AsyncMock(side_effect=Exception("Qdrant unavailable"))
     response = client.post('/search/ai', json={"query": "fail"}, headers=auth_headers)
     assert response.status_code == 500
     assert "error" in response.get_json()
 
-def test_search_ai_llm_failure(client, auth_headers, mock_embedding_svc, mock_inference_svc, fake_qdrant_docs):
-    """LLM expansion failure -> 500"""
+def test_search_ai_expansion_failure_degrades_not_500(client, auth_headers, mock_embedding_svc,
+                                                        mock_inference_svc, mock_websearch_svc,
+                                                        fake_qdrant_docs, fake_web_results, fake_structured_sources):
+    """Expansion failure -> 200, falls back to original query, marked degraded."""
     mock_embedding_svc.search_similar_post_async = AsyncMock(return_value=fake_qdrant_docs)
     mock_inference_svc.expand_query = AsyncMock(side_effect=Exception("Groq timeout"))
+    mock_websearch_svc.search = AsyncMock(return_value=fake_web_results)
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=fake_structured_sources)
 
-    response = client.post('/search/ai', json={"query": "fail"}, headers=auth_headers)
-    assert response.status_code == 500
+    response = client.post('/search/ai', json={"query": "fail case"}, headers=auth_headers)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['expanded_query'] == "fail case"
+    assert "expansion" in data['degraded_legs']
 
-def test_search_ai_websearch_failure(client, auth_headers, mock_embedding_svc, mock_inference_svc,
-                                     mock_websearch_svc, fake_qdrant_docs):
-    """Websearch failure -> 500"""
+def test_search_ai_websearch_failure_degrades_not_500(client, auth_headers, mock_embedding_svc,
+                                                        mock_inference_svc, mock_websearch_svc,
+                                                        fake_qdrant_docs):
+    """Web search failure -> 200, relevant_ext_docs empty, marked degraded."""
     mock_embedding_svc.search_similar_post_async = AsyncMock(return_value=fake_qdrant_docs)
     mock_inference_svc.expand_query = AsyncMock(return_value="exp")
-    mock_websearch_svc.search = AsyncMock(side_effect=Exception("SerpAPI 403"))
+    mock_websearch_svc.search = AsyncMock(side_effect=Exception("Exa MCP timeout"))
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=[])
 
-    response = client.post('/search/ai', json={"query": "fail"}, headers=auth_headers)
-    assert response.status_code == 500
+    response = client.post('/search/ai', json={"query": "fail case"}, headers=auth_headers)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['relevant_ext_docs'] == []
+    assert "web_search" in data['degraded_legs']
+
+def test_search_ai_websearch_empty_result_degrades_not_500(client, auth_headers, mock_embedding_svc,
+                                                             mock_inference_svc, mock_websearch_svc,
+                                                             fake_qdrant_docs):
+    """Web search returning [] (the adapter's real never-throw contract) -> 200, marked degraded."""
+    mock_embedding_svc.search_similar_post_async = AsyncMock(return_value=fake_qdrant_docs)
+    mock_inference_svc.expand_query = AsyncMock(return_value="exp")
+    mock_websearch_svc.search = AsyncMock(return_value=[])
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=[])
+
+    response = client.post('/search/ai', json={"query": "fail case"}, headers=auth_headers)
+    assert response.status_code == 200
+    data = response.get_json()
+    assert data['relevant_ext_docs'] == []
+    assert "web_search" in data['degraded_legs']
