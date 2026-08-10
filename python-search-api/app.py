@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from services.embedding_service import EmbeddingService
 from services.inference import InferenceService
-from services.websearch import WebSearchService
+from services.search_providers.exa_provider import ExaWebSearchAdapter
 import logging
 
 
@@ -77,7 +77,7 @@ def log_request(response):
 
 search_svc = EmbeddingService() # Initialize the model once on startup
 llm_svc = InferenceService() # Initialize the model once on startup
-websearch_svc = WebSearchService() # Initialize the model once on startup
+websearch_svc = ExaWebSearchAdapter() # Initialize the model once on startup
 
 # --- Eager warmup: force all services to fully initialize before accepting requests ---
 # This prevents "Lazy Loading" from happening mid-request and eliminates cold-start failures.
@@ -286,34 +286,6 @@ def search_ai():
             "error": "Failed to perform AI search",
             "message": str(e)
         }), 500
-
-
-@app.route('/web-search', methods=['POST'])
-@require_security_key
-def web_search():
-    """
-    Search the web using Serper API (async).
-    Expected JSON: {"query": "...", "limit": 5}
-    """
-    data = request.get_json()
-    query = data.get("query")
-    limit = data.get("limit", 5)
-
-    if not query:
-        return jsonify({"error": "Missing query string"}), 400
-
-    try:
-        app.logger.info(f"Web search for: {query}")
-        # results = await websearch_svc.search(query, limit=limit)
-        result  = asyncio.run(websearch_svc.search(query, limit=limit))
-        return jsonify({
-            "query": query,
-            "count": len(result),
-            "results": result
-        }), 200
-    except Exception as e:
-        app.logger.error(f"Web search error: {e}")
-        return jsonify({"error": "Failed to perform web search"}), 500
 
 
 if __name__ == '__main__':

@@ -7,7 +7,6 @@ fastembed
 fastmcp==3.4.6
 gunicorn
 python-dotenv
-serpapi
 pytest
 pytest-mock
 pytest-asyncio

@@ -6,15 +6,16 @@ from unittest.mock import MagicMock
 # Add the parent directory to sys.path so we can import 'app'
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from app import app as flask_app
+# Env defaults must be set before `from app import app` below — app.py constructs
+# its services (including ExaWebSearchAdapter, which raises if EXA_API_KEY is
+# missing) at module level, which runs before any pytest fixture ever gets a
+# chance to execute, session-scoped or not.
+os.environ['NODE_SHARED_SECURITY_KEY'] = os.getenv('NODE_SHARED_SECURITY_KEY', 'test-key')
+os.environ['NODE_SERVICE_URL'] = os.getenv('NODE_SERVICE_URL', 'http://test-node')
+os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY', 'test-groq-key')
+os.environ['EXA_API_KEY'] = os.getenv('EXA_API_KEY', 'test-exa-key')
 
-@pytest.fixture(scope='session', autouse=True)
-def setup_env():
-    """Set up environment variables for testing. If not already set, provide defaults."""
-    os.environ['NODE_SHARED_SECURITY_KEY'] = os.getenv('NODE_SHARED_SECURITY_KEY', 'test-key')
-    os.environ['NODE_SERVICE_URL'] = os.getenv('NODE_SERVICE_URL', 'http://test-node')
-    os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY', 'test-groq-key')
-    os.environ['SERPAPI_API_KEY'] = os.getenv('SERPAPI_API_KEY', 'test-serpapi-key')
+from app import app as flask_app
 
 @pytest.fixture
 def client():
