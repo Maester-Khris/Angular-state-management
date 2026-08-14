@@ -1,6 +1,58 @@
 ## [AI Search Pipeline Upgrade] — 2026-08-08 — In Progress
 **Theme: Query expansion quality, provider swap, semantic caching, and result-panel UX for `/search/ai`**
 
+### Completed — Phase 0: operational continuity (missed from original scope, added mid-sprint)
+- [x] `python-search-api` — Public `GET /ping` keepalive endpoint, real Qdrant round trip, no auth
+- [x] `node-backend` — Public `GET /api/ping` keepalive endpoint, real MongoDB round trip, no auth
+      (both exist to stop Render/Qdrant free-tier services pausing on inactivity — cronjobs.org
+      registration against the real deployed URLs is the next step, pending push)
+- [x] `data-utils` — `rebuild_qdrant_from_mongo.py`: one-time/recovery CLI, rebuilds the Qdrant
+      collection from live Mongo posts. Found real value immediately — Qdrant's collection was
+      completely empty mid-sprint, exactly the failure mode this script exists to recover from
+
+### Completed — Phase 1: pipeline plumbing
+- [x] `python-search-api` — Collapsed the pipeline's 3× separate `asyncio.run()` calls into one
+      async handler/event loop; un-blocked the synchronous Qdrant/embedding call (now offloaded
+      via `run_in_executor`, matching the web-search leg's existing pattern)
+
+### Completed — reactive fixes (found while verifying Phase 0/1, not originally scoped)
+- [x] `python-search-api` — Switched embeddings from Groq (`nomic-embed-text-v1_5`, which started
+      404ing — not a stable product surface on Groq's side) to local `fastembed`
+      (`BAAI/bge-small-en-v1.5`, 384-dim). Removes the embedding leg's external-API dependency
+      entirely; model name now reads from `EMBEDDING_MODEL` (Doppler) instead of being hardcoded
+- [x] `python-search-api` — Fixed a latent bug in `EmbeddingService.search_similar_post()`'s
+      readiness guard: it checked `client`/`model` for `None` *before* the only code path that
+      initializes them, so it silently returned `[]` forever on any fresh process — including
+      the app's own startup warmup — instead of ever performing a real search
+
+### Completed — Redis cache, eval diagnostics, Groq TPM fix (2026-08-14)
+- [x] `node-backend` — Redis exact-match cache for `/api/search/ai` + hit/miss counters on
+      `/health` (commits `348d738`, `434630f`, `4ceb788`) — incorrect-hit rate and latency
+      p50/p95 split by hit/miss remain unbuilt, still listed under Scope below
+- [x] `python-search-api` — Capped Groq's reranking completion tokens and Exa's unbounded
+      snippet length feeding that call — was tripping the org's 12000 TPM limit on a single
+      request regardless of call spacing; 0/10 golden queries degraded after the fix vs 3/10
+      before
+- [x] Ran the golden-query harness against real `relevant_uuids` labels for the first time
+      (`eval/golden_queries.json`, finalized 2026-08-14) — 0.4 avg Precision@5/Recall@5, 1.0
+      format compliance; root-caused to 6 pipeline causes plus a 7th finding that
+      `relevant_ext_docs` has zero eval coverage — evidence-verified against live retrieval
+      output, see `artifacts/ai-search-upgrade/eval-precision-recall-analysis-2026-08-14.md`
+- [x] Industry-research pass on validated, cited fixes for all 7 findings (RRF, MMR,
+      similarity-threshold calibration, FastEmbed's built-in cross-encoder reranker, RAGAS
+      Context Precision) — `artifacts/ai-search-upgrade/pipeline-improvement-research-2026-08-14.md`
+- [x] Selected and built tooling for a 30k-row eval corpus (Dev.to HF mirror, English-only,
+      schema-matched) — `eval/fetch_devto_dataset.py`, verified against the live dataset;
+      selection research at `artifacts/ai-search-upgrade/eval-corpus-dataset-research-2026-08-14.md`
+
+### In progress
+- [ ] Eval infra: populate dedicated `postair_eval` Mongo database + `posts_eval` Qdrant
+      collection from the 30k corpus — plan at
+      `docs/superpowers/plans/2026-08-14-eval-infra-setup.md`, not yet executed
+- [ ] Wire `expanded_query` into Qdrant retrieval via RRF fusion — highest-leverage fix
+      identified (simulated: `life` 1/5→2/5, `memory` unchanged 1/5, `intelligence` 2/5→3/5),
+      not yet implemented
+
 ### Scope
 - [ ] `python-search-api` — Swap SerpAPI → Exa for external web search (Tavily
       evaluated and dropped — Exa's `title`/`url`/`favicon`/`image`/`summary` fields
@@ -12,19 +64,23 @@
 - [ ] `python-search-api` — Spike: can Exa's schema-guided `summary` field replace
       the `generate_relevant_sources` Groq reranking call outright? Validate against
       the golden set before committing either way
-- [ ] `python-search-api` — Collapse the pipeline's 3× separate `asyncio.run()` calls
-      into one async handler/event loop; un-block the synchronous Qdrant/embedding
-      call (currently blocks Flask's worker thread, unlike the web-search leg)
 - [ ] `python-search-api` — Validate (golden set) whether `expand_query`'s dependency
       on live Qdrant context can be dropped; if so, run Qdrant search and query
       expansion concurrently instead of sequentially
 - [ ] `node-backend` — Redis-backed cache for `/search/ai` (hit rate, incorrect-hit
       rate, latency p50/p95/p99 split by hit/miss, instrumented at the cache-read
       call site)
+- [ ] `python-search-api` — Isolate `/search/ai`'s 4 pipeline stages so one leg's
+      failure (e.g. the new Exa adapter degrading) doesn't 500 the whole request —
+      response gains a `degraded_legs` signal instead of one outer try/except
+      discarding legs that already succeeded
 - [ ] `ng-frontend` — AI results panel: visual distinction between platform and web
       results (currently section-heading-only), fix expanded-query display being
       silently dropped when only internal results exist, empty-state fallback when
-      both result arrays are empty, remove dead `aiToggle`/`groqToggle` outputs
+      both result arrays are empty, remove dead `aiToggle`/`groqToggle` outputs,
+      add a `partial` state distinct from total failure (scoped inline notice per
+      degraded section instead of the full-panel error takeover) plus a retry
+      affordance on both `error` and `partial`
 
 ### Evaluation plan
 - [ ] Golden query set (30–50 queries) + fixed corpus snapshot as the offline
@@ -40,6 +96,26 @@
   confirmed against all 6 planned points, file:line cited
 - `artifacts/ai-search-upgrade/evaluation-metrics-and-methodology.md` — metrics and
   fair-comparison methodology, industry-cited
+- `artifacts/ai-search-upgrade/exa-fastmcp-client-design.md` — Exa/FastMCP adapter
+  design (clean-architecture, DDD, DDIA, release-it applied)
+- `artifacts/ai-search-upgrade/failure-mode-handling.md` — partial-failure design
+  for the pipeline and AI results panel, release-it applied
+- `docs/superpowers/plans/2026-08-09-ai-search-pipeline-upgrade.md` — full 10-phase
+  implementation plan (task-by-task, TDD steps), including Phase 0's operational
+  continuity work above
+- `artifacts/ai-search-upgrade/eval-run-2026-08-14-baseline.md` /
+  `eval-run-2026-08-14-postfix.md` — first labeled harness run and the Groq-TPM-fix
+  re-run, compared
+- `artifacts/ai-search-upgrade/eval-precision-recall-analysis-2026-08-14.md` — why
+  Precision@5/Recall@5 are low, 6 causes + the `relevant_ext_docs` coverage gap, full
+  per-query retrieval-vs-gold comparison
+- `artifacts/ai-search-upgrade/pipeline-improvement-research-2026-08-14.md` — cited,
+  industry-validated fixes per cause (RRF, MMR, threshold calibration, FastEmbed
+  reranker, RAGAS)
+- `artifacts/ai-search-upgrade/eval-corpus-dataset-research-2026-08-14.md` — public
+  tech-domain dataset research, Dev.to HF mirror selected
+- `docs/superpowers/plans/2026-08-14-eval-infra-setup.md` — plan to populate the
+  30k-row eval Mongo/Qdrant collections
 
 ---
 
