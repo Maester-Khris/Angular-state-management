@@ -12,6 +12,11 @@ _ENTRY_RE = re.compile(
     re.DOTALL,
 )
 
+# Exa's "highlights" text is unbounded — observed large enough on its own to blow
+# past Groq's reranking-call TPM ceiling (see generate_relevant_sources). Cap it to
+# what a highlight snippet is supposed to be, not a full page dump.
+MAX_SNIPPET_CHARS = 400
+
 
 class ExaWebSearchAdapter(WebSearchProvider):
     """Vendor name appears exactly once — here, at the edge. app.py only ever
@@ -45,7 +50,7 @@ class ExaWebSearchAdapter(WebSearchProvider):
                     title=match.group("title").strip(),
                     url=url,
                     favicon=self._build_favicon(url),
-                    snippet=match.group("highlights").strip(),
+                    snippet=match.group("highlights").strip()[:MAX_SNIPPET_CHARS],
                 )
             )
         return results

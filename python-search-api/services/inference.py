@@ -6,6 +6,9 @@ from groq import AsyncGroq
 _PUNCTUATION_RE = re.compile(r"[.,;:!?\"']")
 MAX_EXPANSION_KEYWORDS = 8
 MAX_EXPANSION_TOKENS = 32  # generous ceiling for 8 keywords at Groq's tokenizer rate
+MAX_RERANK_TOKENS = 1024  # generous ceiling for <=5 JSON source objects; unset default was
+                          # reserving enough of Groq's TPM budget on its own to trip the org's
+                          # 12000 TPM limit on a single reranking call
 
 
 def _enforce_expansion_format(raw: str, max_keywords: int = MAX_EXPANSION_KEYWORDS) -> str:
@@ -98,41 +101,6 @@ Expand this query into 5-8 technical keywords relevant to software engineering."
         if not web_results:
             return []
 
-        formatted_results = "\n\n".join(
-            f"Index: {i}\n"
-            f"Title: {res.get('title')}\n"
-            f"Desc: {res.get('description')}\n"
-            f"URL: {res.get('url')}"
-            for i, res in enumerate(web_results)
-        )
-
-        prompt = f"""You are a research assistant filtering web search results.
-        Original Goal: {query}
-        
-        Web Results:
-        {formatted_results}
-
-        Task: Select the top 3-5 most relevant sources from the provided list. 
-        Return them as a JSON array of objects with this EXACT schema:
-        {{
-            "source_name": "Site name or short title",
-            "source_url": "Full URL",
-            "source_small_headline": "Compelling headline from the result",
-            "source_small_description": "Brief 1-sentence summary of why this is relevant",
-            "favicon": "Use the favicon URL provided in the input if available, or stay empty"
-        }}
-
-        Rules:
-        1. Only include high-quality, relevant results.
-        2. Match the "favicon" field by looking up the corresponding index in the input data.
-        3. Return ONLY valid JSON. No markdown fences.
-        """
-
-        # Map back favicons after LLM returns indices or just rely on URL matching if needed.
-        # However, to be safer, we can pass favicons in the prompt or just re-map them by URL in post-processing.
-        # Let's pass the favicons in the prompt to make it easier for the LLM to include them.
-        
-        # Revised prompt formatting to include index and favicon
         formatted_results_with_metadata = []
         for i, res in enumerate(web_results):
             formatted_results_with_metadata.append(
@@ -169,6 +137,7 @@ Expand this query into 5-8 technical keywords relevant to software engineering."
                 {"role": "user", "content": prompt}
             ],
             temperature=0.0,
+            max_tokens=MAX_RERANK_TOKENS,
         )
 
         raw = response.choices[0].message.content.strip()

@@ -4,3 +4,4 @@ fastembed
 python-dotenv
 bcrypt
 requests
+datasets
