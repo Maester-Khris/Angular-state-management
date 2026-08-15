@@ -8,6 +8,7 @@ artifacts/
 # Bulk/generated eval corpus exports — regeneratable via eval/fetch_*.py, don't bloat git history.
 # Hand-curated eval files (posts.json, golden_queries.json, *.md) stay tracked.
 eval/*.jsonl
+eval/_pipeline/
 data-utils/eval/report.json
 
 # --- Environment & Secrets (CRITICAL) ---
