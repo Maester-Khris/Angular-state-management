@@ -101,8 +101,8 @@ def run_sweep(golden: list[dict], base_url: str, key: str, k: int) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--queries", default="eval/golden_queries.json",
-                        help="Path to golden queries JSON (default: eval/golden_queries.json)")
+    parser.add_argument("--queries", default="eval/golden_queries_30k.json",
+                        help="Path to golden queries JSON (default: eval/golden_queries_30k.json)")
     parser.add_argument("--k", type=int, default=5, help="K for Precision@K (default: 5)")
     args = parser.parse_args()
 
@@ -113,15 +113,25 @@ def main():
         print("ERROR: NODE_SHARED_SECURITY_KEY not set", file=sys.stderr)
         sys.exit(1)
 
-    golden_path = os.path.join(os.path.dirname(__file__), "..", "..", "python-search-api", args.queries)
+    golden_path = os.path.join(os.path.dirname(__file__), "..", "..", args.queries)
     if not os.path.exists(golden_path):
-        # Try relative to data-utils/eval/
-        golden_path = args.queries
+        golden_path = os.path.abspath(args.queries)
     if not os.path.exists(golden_path):
         print(f"ERROR: golden queries file not found: {args.queries}", file=sys.stderr)
         sys.exit(1)
 
     golden = load_golden(golden_path)
+    
+    # Validate non-empty relevant_uuids
+    valid_golden = [g for g in golden if g.get("relevant_uuids")]
+    if not valid_golden:
+        print(f"ERROR: No queries in {golden_path} have non-empty 'relevant_uuids'.", file=sys.stderr)
+        sys.exit(1)
+    
+    if len(valid_golden) != len(golden):
+        print(f"WARNING: {len(golden) - len(valid_golden)} queries have empty relevant_uuids. Using {len(valid_golden)} valid queries.", file=sys.stderr)
+        golden = valid_golden
+
     run_sweep(golden, base_url, key, args.k)
 
 
