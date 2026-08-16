@@ -83,7 +83,8 @@ rerank_svc = RerankingService() # Initialize the model once on startup
 
 # Empirically calibrated similarity floor for BAAI/bge-small-en-v1.5 on this corpus.
 # Set via sweep_score_threshold.py output. None = disabled (full top-K always returned).
-SCORE_THRESHOLD: float | None = 0.55
+_env_threshold = os.environ.get("SCORE_THRESHOLD")
+SCORE_THRESHOLD: float | None = float(_env_threshold) if _env_threshold else None
 
 # --- Eager warmup: force all services to fully initialize before accepting requests ---
 # This prevents "Lazy Loading" from happening mid-request and eliminates cold-start failures.
@@ -242,88 +243,113 @@ def search_augmented():
         return jsonify({"error": "Failed to perform search"}), 500
 
 
-async def _search_ai_pipeline(query: str, limit: int) -> dict:
-    degraded_legs: list[str] = []
+async def _soft_fail(coro_or_callable, leg_name: str, fallback, log_prefix: str):
+    """Run a coroutine or callable. If it fails, log and return (fallback, leg_name)."""
+    try:
+        if asyncio.iscoroutine(coro_or_callable):
+            res = await coro_or_callable
+        elif asyncio.iscoroutinefunction(coro_or_callable):
+            res = await coro_or_callable()
+        else:
+            res = coro_or_callable()
+        return res, None
+    except Exception as e:
+        app.logger.warning(f"{log_prefix} degraded: {e}")
+        return fallback, leg_name
 
-    # Phase A: raw-query Qdrant retrieval and query expansion run concurrently.
-    # Fetch a larger candidate pool (limit * 3) so RRF and downstream reranking
-    # have meaningful candidates before truncation.
-    candidate_limit = limit * 3
+
+async def _fetch_and_fuse_candidates(query: str, candidate_limit: int):
     qdrant_task = search_svc.search_similar_post_async(query, limit=candidate_limit, score_threshold=SCORE_THRESHOLD)
     expand_task = llm_svc.expand_query(query)
 
     raw_results = await qdrant_task  # hard failure propagates
+    degraded = []
 
-    try:
-        expanded_query = await expand_task
+    expanded_query, exp_deg = await _soft_fail(
+        expand_task, "expansion", query, "Expansion leg"
+    )
+    if exp_deg:
+        degraded.append(exp_deg)
+    else:
         app.logger.info(f"Expanded query: {expanded_query}")
-    except Exception as e:
-        app.logger.warning(f"Expansion leg degraded: {e}")
-        expanded_query = query
-        degraded_legs.append("expansion")
 
-    # Phase B: second Qdrant leg using expanded_query, then RRF fusion.
-    try:
-        expanded_results = await search_svc.search_similar_post_async(
-            expanded_query, limit=candidate_limit, score_threshold=SCORE_THRESHOLD
-        )
-    except Exception as e:
-        app.logger.warning(f"Expanded Qdrant leg degraded: {e}")
-        expanded_results = []
-        degraded_legs.append("expanded_retrieval")
+    expanded_results, exp_q_deg = await _soft_fail(
+        search_svc.search_similar_post_async(expanded_query, limit=candidate_limit, score_threshold=SCORE_THRESHOLD),
+        "expanded_retrieval", [], "Expanded Qdrant leg"
+    )
+    if exp_q_deg:
+        degraded.append(exp_q_deg)
 
-    # Fuse both ranked lists; result is ranked by RRF score, not cosine similarity.
     fused_docs = rrf_fuse(raw_results, expanded_results, k=60)
+    return expanded_query, fused_docs, degraded
 
-    try:
-        reranked_docs = rerank_svc.rerank(query, fused_docs)
-    except Exception as e:
-        app.logger.warning(f"Reranking (internal) leg degraded: {e}")
-        reranked_docs = fused_docs
-        degraded_legs.append("reranking_internal")
 
-    # Phase B3: MMR diversity rerank.
-    # Runs on already-relevance-sorted candidates (after cross-encoder rerank).
-    # Suppresses near-duplicate titles (e.g., series posts appearing 22x in
-    # the 30k corpus) in favour of topically distinct results.
-    # Requires each doc's embedding vector attached as '_vec'.
-    # Soft failure -- if embedding is unavailable, skip MMR.
-    try:
+async def _apply_internal_reranking(query: str, fused_docs: list[dict]):
+    reranked, deg = await _soft_fail(
+        lambda: rerank_svc.rerank(query, fused_docs),
+        "reranking_internal", fused_docs, "Reranking (internal) leg"
+    )
+    return reranked, [deg] if deg else []
+
+
+async def _apply_diversity_rerank(reranked_docs: list[dict]):
+    def _do_mmr():
         for doc in reranked_docs:
             if "_vec" not in doc:
-                doc["_vec"] = search_svc._get_embedding(
-                    f"{doc.get('title', '')}. {doc.get('description', '')}"
-                )
-        diverse_docs = mmr_rerank(reranked_docs, lambda_param=0.5)
-    except Exception as e:
-        app.logger.warning(f"MMR diversity leg degraded: {e}")
-        diverse_docs = reranked_docs
-        degraded_legs.append("mmr_diversity")
+                doc["_vec"] = search_svc._get_embedding(f"{doc.get('title', '')}. {doc.get('description', '')}")
+        return mmr_rerank(reranked_docs, lambda_param=0.5)
 
-    similar_docs = diverse_docs[:limit]
+    diverse_docs, deg = await _soft_fail(
+        _do_mmr, "mmr_diversity", reranked_docs, "MMR diversity leg"
+    )
+    return diverse_docs, [deg] if deg else []
 
-    # Phase C: Web Search -- soft failure, degrades to []
-    try:
-        web_results = await websearch_svc.search(expanded_query, limit=8)
-        if not web_results:
-            degraded_legs.append("web_search")
-    except Exception as e:
-        app.logger.warning(f"Web search leg degraded: {e}")
-        web_results = []
-        degraded_legs.append("web_search")
 
-    # Phase D: Source Structuring & Reranking (LLM) -- soft failure, degrades to []
-    try:
+async def _fetch_web_results(expanded_query: str):
+    web_results, deg = await _soft_fail(
+        websearch_svc.search(expanded_query, limit=8),
+        "web_search", [], "Web search leg"
+    )
+    if not web_results and not deg:
+        deg = "web_search"
+    return web_results, [deg] if deg else []
+
+
+async def _build_external_sources(query: str, web_results):
+    def _do_llm():
         web_results_dicts = [
             {"title": r.title, "url": r.url, "favicon": r.favicon, "description": r.snippet}
             for r in web_results
         ]
-        relevant_ext_docs = await llm_svc.generate_relevant_sources(query, web_results_dicts)
-    except Exception as e:
-        app.logger.warning(f"Reranking leg degraded: {e}")
-        relevant_ext_docs = []
-        if "web_search" not in degraded_legs:
-            degraded_legs.append("reranking")
+        return llm_svc.generate_relevant_sources(query, web_results_dicts)
+
+    ext_docs, deg = await _soft_fail(
+        _do_llm(), "reranking", [], "Reranking leg"
+    )
+    return ext_docs, [deg] if deg else []
+
+
+async def _search_ai_pipeline(query: str, limit: int) -> dict:
+    degraded_legs: list[str] = []
+    candidate_limit = limit * 3
+
+    expanded_query, fused_docs, deg1 = await _fetch_and_fuse_candidates(query, candidate_limit)
+    degraded_legs.extend(deg1)
+
+    reranked_docs, deg2 = await _apply_internal_reranking(query, fused_docs)
+    degraded_legs.extend(deg2)
+
+    diverse_docs, deg3 = await _apply_diversity_rerank(reranked_docs)
+    degraded_legs.extend(deg3)
+
+    similar_docs = diverse_docs[:limit]
+
+    web_results, deg4 = await _fetch_web_results(expanded_query)
+    degraded_legs.extend(deg4)
+
+    relevant_ext_docs, deg5 = await _build_external_sources(query, web_results)
+    if deg5 and "web_search" not in degraded_legs:
+        degraded_legs.extend(deg5)
 
     return {
         "query": query,
