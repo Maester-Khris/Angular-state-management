@@ -179,19 +179,28 @@ def test_mmr_rerank_strips_internal_keys():
         assert "_vec" not in doc, "_vec must be stripped"
         assert "_relevance" not in doc, "_relevance must be stripped"
 
-def test_mmr_rerank_missing_vec():
-    """Docs missing _vec should not crash, treated as 0 redundancy."""
-    doc_with_vec = _make_doc("A", [1.0, 0.0], relevance=0.8)
-    doc_without = {"uuid": "B", "score": 0.7, "_relevance": 0.7} # Missing _vec
-    result = mmr_rerank([doc_with_vec, doc_without], lambda_param=0.5)
-    assert len(result) == 2
-    assert result[0]["uuid"] == "A"
+def test_mmr_rerank_missing_vec_behaves_like_zero_vec():
+    """Docs missing _vec should behave identically to docs with a zero vector."""
+    doc1 = _make_doc("A", [1.0, 0.0], relevance=0.8)
+    
+    doc_missing = {"uuid": "B", "title": "B", "description": "d", "score": 0.7, "_relevance": 0.7}
+    doc_zero = {"uuid": "B", "title": "B", "description": "d", "score": 0.7, "_relevance": 0.7, "_vec": [0.0, 0.0]}
+    
+    result_missing = mmr_rerank([doc1, doc_missing], lambda_param=0.5)
+    result_zero = mmr_rerank([doc1, doc_zero], lambda_param=0.5)
+    
+    assert [d["uuid"] for d in result_missing] == [d["uuid"] for d in result_zero]
+    assert len(result_missing) == 2
 
-def test_mmr_rerank_missing_relevance():
-    """Docs missing _relevance should default to 0.0."""
-    doc_with_rel = _make_doc("A", [1.0, 0.0], relevance=0.8)
-    doc_without = {"uuid": "B", "_vec": [0.0, 1.0], "score": 0.7} # Missing _relevance
-    result = mmr_rerank([doc_with_rel, doc_without], lambda_param=0.5)
-    assert len(result) == 2
-    assert result[0]["uuid"] == "A"
-    assert result[1]["uuid"] == "B"
+def test_mmr_rerank_missing_relevance_behaves_like_zero_relevance():
+    """Docs missing _relevance should behave identically to docs with 0.0 relevance."""
+    doc1 = _make_doc("A", [1.0, 0.0], relevance=0.8)
+    
+    doc_missing = {"uuid": "B", "title": "B", "description": "d", "score": 0.7, "_vec": [0.0, 1.0]}
+    doc_zero = {"uuid": "B", "title": "B", "description": "d", "score": 0.7, "_vec": [0.0, 1.0], "_relevance": 0.0}
+    
+    result_missing = mmr_rerank([doc1, doc_missing], lambda_param=0.5)
+    result_zero = mmr_rerank([doc1, doc_zero], lambda_param=0.5)
+    
+    assert [d["uuid"] for d in result_missing] == [d["uuid"] for d in result_zero]
+    assert len(result_missing) == 2
