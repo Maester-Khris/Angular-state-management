@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from services.embedding_service import EmbeddingService, rrf_fuse
 from services.inference import InferenceService
+from services.reranking_service import RerankingService
 from services.search_providers.exa_provider import ExaWebSearchAdapter
 import logging
 
@@ -78,6 +79,7 @@ def log_request(response):
 search_svc = EmbeddingService() # Initialize the model once on startup
 llm_svc = InferenceService() # Initialize the model once on startup
 websearch_svc = ExaWebSearchAdapter() # Initialize the model once on startup
+rerank_svc = RerankingService() # Initialize the model once on startup
 
 # --- Eager warmup: force all services to fully initialize before accepting requests ---
 # This prevents "Lazy Loading" from happening mid-request and eliminates cold-start failures.
@@ -268,6 +270,12 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
 
     # Fuse both ranked lists; result is ranked by RRF score, not cosine similarity.
     fused_docs = rrf_fuse(raw_results, expanded_results, k=60)
+
+    try:
+        fused_docs = rerank_svc.rerank(query, fused_docs)
+    except Exception as e:
+        app.logger.warning(f"Reranking (internal) leg degraded: {e}")
+        degraded_legs.append("reranking_internal")
 
     # Truncate to the requested limit after fusion.
     similar_docs = fused_docs[:limit]

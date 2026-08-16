@@ -168,3 +168,50 @@ async def test_pipeline_calls_second_qdrant_leg_with_expanded_query(
     assert "exp-only" in uuids, "expanded-query hit must survive RRF fusion"
     # Two Qdrant calls must have been made
     assert call_count["n"] == 2, "pipeline must issue two Qdrant search calls"
+
+@pytest.mark.asyncio
+async def test_pipeline_applies_reranker_to_fused_docs(
+    mocker, mock_embedding_svc, mock_inference_svc, mock_websearch_svc
+):
+    """rerank_svc.rerank must be called with the original query and fused docs."""
+    from app import _search_ai_pipeline
+
+    mock_inference_svc.expand_query = AsyncMock(return_value="redis cache eviction")
+    mock_websearch_svc.search = AsyncMock(return_value=[])
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=[])
+
+    docs = [{"uuid": "u1", "title": "Redis", "description": "cache", "score": 0.7}]
+    mock_embedding_svc.search_similar_post_async = AsyncMock(return_value=docs)
+
+    mock_rerank_svc = mocker.patch('app.rerank_svc')
+    mock_rerank_svc.rerank.return_value = docs  # identity rerank for simplicity
+
+    await _search_ai_pipeline("redis caching", limit=5)
+
+    mock_rerank_svc.rerank.assert_called_once()
+    call_args = mock_rerank_svc.rerank.call_args
+    assert call_args.args[0] == "redis caching"  # original query, not expanded
+
+
+@pytest.mark.asyncio
+async def test_pipeline_degrades_gracefully_when_reranker_fails(
+    mocker, mock_embedding_svc, mock_inference_svc, mock_websearch_svc
+):
+    """If rerank_svc.rerank raises, pipeline returns fused docs unranked."""
+    from app import _search_ai_pipeline
+
+    mock_inference_svc.expand_query = AsyncMock(return_value="redis")
+    mock_websearch_svc.search = AsyncMock(return_value=[])
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=[])
+
+    docs = [{"uuid": "u1", "title": "Redis", "description": "cache", "score": 0.7}]
+    mock_embedding_svc.search_similar_post_async = AsyncMock(return_value=docs)
+
+    mock_rerank_svc = mocker.patch('app.rerank_svc')
+    mock_rerank_svc.rerank.side_effect = Exception("Model download failed")
+
+    result = await _search_ai_pipeline("redis caching", limit=5)
+
+    # Must fall back to the unranked docs, not crash
+    assert result["similar_docs"][0]["uuid"] == docs[0]["uuid"]
+    assert "reranking_internal" in result["degraded_legs"]
