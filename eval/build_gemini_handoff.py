@@ -18,7 +18,7 @@ For each query below, independently select the 3-5 most relevant documents from 
 list. A document counts as relevant only if a user typing this exact query would be satisfied
 landing on it as a top result — a passing/tangential mention of a related concept is NOT
 enough (e.g. a CI/CD post that mentions "cache aggressively" in passing is NOT relevant to a
-caching-strategies query unless caching is a central topic of that post).
+caching-strategies query@ unless caching is a central topic of that post).
 
 Return your answer as one line per query, in this exact format:
 

@@ -294,11 +294,11 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
                 doc["_vec"] = search_svc._get_embedding(
                     f"{doc.get('title', '')}. {doc.get('description', '')}"
                 )
-        query_vector = search_svc._get_embedding(query)
-        diverse_docs = mmr_rerank(query_vector, reranked_docs, lambda_param=0.5)
+        diverse_docs = mmr_rerank(reranked_docs, lambda_param=0.5)
     except Exception as e:
         app.logger.warning(f"MMR diversity leg degraded: {e}")
         diverse_docs = reranked_docs
+        degraded_legs.append("mmr_diversity")
 
     similar_docs = diverse_docs[:limit]
 

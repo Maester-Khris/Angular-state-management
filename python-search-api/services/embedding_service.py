@@ -183,7 +183,6 @@ import numpy as np
 
 
 def mmr_rerank(
-    query_vector: list[float],
     docs: list[dict],
     lambda_param: float = 0.5,
 ) -> list[dict]:
@@ -193,23 +192,24 @@ def mmr_rerank(
     document that maximises a combination of query relevance and dissimilarity
     from already-selected documents.
 
-        MMR(d) = lambda * sim(d, query) - (1-lambda) * max_{s in Selected} sim(d, s)
+        MMR(d) = lambda * relevance(d) - (1-lambda) * max_{s in Selected} sim(d, s)
 
-    Each doc in `docs` must carry a '_vec' key (list[float]) with its pre-computed
-    embedding. Docs missing '_vec' are treated as having zero similarity to all others.
+    Relevance comes from the '_relevance' key (expected [0, 1] normalized).
+    Docs missing '_relevance' default to 0.0.
+    Redundancy comes from cosine similarity between '_vec' keys (list[float]).
+    Docs missing '_vec' are treated as having zero similarity to all others.
 
     Args:
-        query_vector: Embedding of the user's query (list[float]).
-        docs:         Candidate docs from Qdrant with '_vec' key attached.
-                      Other keys (uuid, title, description, score) pass through.
+        docs:         Candidate docs from cross-encoder reranking with '_vec'
+                      and '_relevance' keys attached.
         lambda_param: Trade-off weight in [0, 1].
                       1.0 = pure relevance (preserves input order).
                       0.0 = pure diversity.
                       0.5 (default) = balanced.
 
     Returns:
-        All input docs reordered by MMR criterion. The '_vec' key is stripped
-        from output dicts (internal use only).
+        All input docs reordered by MMR criterion. The '_vec' and '_relevance'
+        keys are stripped from output dicts (internal use only).
     """
     if not docs:
         return []
@@ -219,7 +219,6 @@ def mmr_rerank(
         denom = np.linalg.norm(a) * np.linalg.norm(b)
         return float(np.dot(a, b) / denom) if denom > 0 else 0.0
 
-    q = np.array(query_vector, dtype=float)
     remaining = list(docs)
     selected: list[dict] = []
 
@@ -229,11 +228,10 @@ def mmr_rerank(
 
         for doc in remaining:
             vec = doc.get("_vec")
+            relevance = float(doc.get("_relevance", 0.0))
             if vec is None:
-                relevance = 0.0
                 redundancy = 0.0
             else:
-                relevance = cosine(q, vec)
                 redundancy = (
                     max(cosine(vec, s["_vec"]) for s in selected if s.get("_vec"))
                     if selected
@@ -248,5 +246,5 @@ def mmr_rerank(
         selected.append(best_doc)
         remaining.remove(best_doc)
 
-    # Strip internal _vec key before returning
-    return [{k: v for k, v in d.items() if k != "_vec"} for d in selected]
+    # Strip internal keys before returning
+    return [{k: v for k, v in d.items() if k not in ("_vec", "_relevance")} for d in selected]

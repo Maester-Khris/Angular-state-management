@@ -59,8 +59,8 @@ def test_rerank_initializes_model_with_threads_1(mocker):
     assert call_kwargs.get("threads") == 1
 
 
-def test_rerank_preserves_original_doc_fields(mocker):
-    """rerank() must return the original doc dicts unmodified (uuid, title, description, score)."""
+def test_rerank_preserves_original_doc_fields_and_adds_relevance(mocker):
+    """rerank() must return the original doc dicts unmodified, plus _relevance."""
     svc = RerankingService()
 
     mock_encoder_cls = mocker.patch('services.reranking_service.TextCrossEncoder')
@@ -73,3 +73,34 @@ def test_rerank_preserves_original_doc_fields(mocker):
     assert result[0]["title"] == "Redis Caching"
     assert result[0]["description"] == "LRU cache eviction policy"
     assert "score" in result[0]  # original cosine score field preserved
+    assert "_relevance" in result[0]
+    assert result[0]["_relevance"] == 1.0
+
+
+def test_rerank_normalizes_relevance_scores_min_max(mocker):
+    """Test that _relevance spans exactly [0.0, 1.0] for distinct scores."""
+    svc = RerankingService()
+
+    mock_encoder_cls = mocker.patch('services.reranking_service.TextCrossEncoder')
+    # Scores: 0.1 (min), 0.5 (middle), 0.9 (max). 
+    # Min-max norm: (0.1-0.1)/0.8 = 0.0, (0.5-0.1)/0.8 = 0.5, (0.9-0.1)/0.8 = 1.0
+    mock_encoder_cls.return_value.rerank.return_value = iter([0.5, 0.1, 0.9])
+
+    result = svc.rerank("query", SAMPLE_DOCS)
+
+    assert result[0]["_relevance"] == 1.0   # score 0.9
+    assert result[1]["_relevance"] == 0.5   # score 0.5
+    assert result[2]["_relevance"] == 0.0   # score 0.1
+
+
+def test_rerank_normalizes_equal_scores_to_one(mocker):
+    """If all cross-encoder scores are identical, all _relevance should be 1.0."""
+    svc = RerankingService()
+
+    mock_encoder_cls = mocker.patch('services.reranking_service.TextCrossEncoder')
+    mock_encoder_cls.return_value.rerank.return_value = iter([0.5, 0.5, 0.5])
+
+    result = svc.rerank("query", SAMPLE_DOCS)
+
+    for doc in result:
+        assert doc["_relevance"] == 1.0

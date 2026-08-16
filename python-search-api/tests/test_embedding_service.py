@@ -120,9 +120,9 @@ def test_search_similar_post_no_score_threshold_by_default(mocker):
 import numpy as np
 from services.embedding_service import mmr_rerank
 
-def _make_doc(uuid, vec, score=0.8):
+def _make_doc(uuid, vec, score=0.8, relevance=1.0):
     """Helper: doc dict with a pre-computed embedding vector attached."""
-    return {"uuid": uuid, "title": f"Title {uuid}", "description": "d", "score": score, "_vec": vec}
+    return {"uuid": uuid, "title": f"Title {uuid}", "description": "d", "score": score, "_vec": vec, "_relevance": relevance}
 
 def test_mmr_rerank_suppresses_near_duplicate():
     """MMR must push a near-duplicate (same title cluster) behind a diverse doc."""
@@ -131,13 +131,12 @@ def test_mmr_rerank_suppresses_near_duplicate():
     vec_c = [0.0, 1.0, 0.0]    # orthogonal to A
 
     docs = [
-        _make_doc("A", vec_a, score=0.9),
-        _make_doc("B", vec_b, score=0.88),
-        _make_doc("C", vec_c, score=0.85),
+        _make_doc("A", vec_a, score=0.9, relevance=0.9),
+        _make_doc("B", vec_b, score=0.88, relevance=0.88),
+        _make_doc("C", vec_c, score=0.85, relevance=0.85),
     ]
-    # Use lambda < 0.5 so diversity outweighs relevance, breaking the 0.0 tie
-    query_vector = [1.0, 0.0, 0.0]
-    result = mmr_rerank(query_vector, docs, lambda_param=0.4)
+
+    result = mmr_rerank(docs, lambda_param=0.5)
     uuids = [d["uuid"] for d in result]
 
     assert uuids[0] == "A"
@@ -149,32 +148,50 @@ def test_mmr_rerank_lambda_1_is_pure_relevance():
     """With lambda_param=1.0 (ignore diversity), output order == input order."""
     vec_a = [1.0, 0.0, 0.0]
     vec_b = [0.99, 0.14, 0.0]
-    docs = [_make_doc("A", vec_a, score=0.9), _make_doc("B", vec_b, score=0.88)]
-    result = mmr_rerank([1.0, 0.0, 0.0], docs, lambda_param=1.0)
+    docs = [_make_doc("A", vec_a, score=0.9, relevance=0.9), _make_doc("B", vec_b, score=0.88, relevance=0.88)]
+    result = mmr_rerank(docs, lambda_param=1.0)
     assert [d["uuid"] for d in result] == ["A", "B"]
 
 def test_mmr_rerank_preserves_all_docs():
     """mmr_rerank must return all input docs (MMR is a reorder, not a filter)."""
     vecs = [[1.0, 0.0], [0.0, 1.0], [0.7, 0.7]]
     docs = [_make_doc(str(i), v) for i, v in enumerate(vecs)]
-    result = mmr_rerank([1.0, 0.0], docs, lambda_param=0.5)
+    result = mmr_rerank(docs, lambda_param=0.5)
     assert len(result) == 3
 
 def test_mmr_rerank_empty_input():
     """mmr_rerank with no docs must return []."""
-    result = mmr_rerank([1.0, 0.0, 0.0], [], lambda_param=0.5)
+    result = mmr_rerank([], lambda_param=0.5)
     assert result == []
 
 def test_mmr_rerank_single_doc_returns_it():
     """Single-element input must be returned unchanged."""
     doc = _make_doc("only", [1.0, 0.0])
-    result = mmr_rerank([1.0, 0.0], [doc], lambda_param=0.5)
+    result = mmr_rerank([doc], lambda_param=0.5)
     assert len(result) == 1
     assert result[0]["uuid"] == "only"
 
-def test_mmr_rerank_strips_vec_key_from_output():
-    """_vec must not appear in output dicts -- internal key only."""
+def test_mmr_rerank_strips_internal_keys():
+    """_vec and _relevance must not appear in output dicts -- internal keys only."""
     docs = [_make_doc("A", [1.0, 0.0]), _make_doc("B", [0.0, 1.0])]
-    result = mmr_rerank([1.0, 0.0], docs, lambda_param=0.5)
+    result = mmr_rerank(docs, lambda_param=0.5)
     for doc in result:
-        assert "_vec" not in doc, "_vec is an internal key and must be stripped before returning"
+        assert "_vec" not in doc, "_vec must be stripped"
+        assert "_relevance" not in doc, "_relevance must be stripped"
+
+def test_mmr_rerank_missing_vec():
+    """Docs missing _vec should not crash, treated as 0 redundancy."""
+    doc_with_vec = _make_doc("A", [1.0, 0.0], relevance=0.8)
+    doc_without = {"uuid": "B", "score": 0.7, "_relevance": 0.7} # Missing _vec
+    result = mmr_rerank([doc_with_vec, doc_without], lambda_param=0.5)
+    assert len(result) == 2
+    assert result[0]["uuid"] == "A"
+
+def test_mmr_rerank_missing_relevance():
+    """Docs missing _relevance should default to 0.0."""
+    doc_with_rel = _make_doc("A", [1.0, 0.0], relevance=0.8)
+    doc_without = {"uuid": "B", "_vec": [0.0, 1.0], "score": 0.7} # Missing _relevance
+    result = mmr_rerank([doc_with_rel, doc_without], lambda_param=0.5)
+    assert len(result) == 2
+    assert result[0]["uuid"] == "A"
+    assert result[1]["uuid"] == "B"

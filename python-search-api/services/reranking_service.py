@@ -40,8 +40,8 @@ class RerankingService:
 
         Retrieves cross-encoder scores for each (query, doc_text) pair and
         returns the same dicts sorted descending by relevance. The original
-        doc dicts are returned unmodified -- the cross-encoder score is used
-        only for ordering, not added to the payload.
+        doc dicts are returned with a new '_relevance' key containing the
+        cross-encoder score min-max normalized to [0, 1] across the candidate set.
 
         Args:
             query: The original user search query (not the expanded query --
@@ -51,7 +51,7 @@ class RerankingService:
 
         Returns:
             The same dicts as `docs`, sorted descending by cross-encoder
-            relevance score. Returns [] if docs is empty (model not loaded).
+            relevance score, with '_relevance' attached. Returns [] if docs is empty.
         """
         if not docs:
             return []
@@ -65,6 +65,20 @@ class RerankingService:
 
         scores = list(self.reranker.rerank(query, doc_texts))
 
-        # Pair each doc with its cross-encoder score, sort descending, strip the score.
-        ranked = sorted(zip(scores, docs), key=lambda x: x[0], reverse=True)
-        return [doc for _, doc in ranked]
+        min_score = min(scores)
+        max_score = max(scores)
+        if max_score > min_score:
+            norm_scores = [(s - min_score) / (max_score - min_score) for s in scores]
+        else:
+            norm_scores = [1.0] * len(scores)
+
+        # Pair each doc with its cross-encoder score and normalized score, sort descending
+        ranked = sorted(zip(scores, norm_scores, docs), key=lambda x: x[0], reverse=True)
+        
+        result = []
+        for _, norm_s, doc in ranked:
+            doc_copy = dict(doc)
+            doc_copy["_relevance"] = norm_s
+            result.append(doc_copy)
+            
+        return result
