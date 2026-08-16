@@ -75,3 +75,44 @@ def test_rrf_fuse_empty_expanded_returns_raw():
     raw = [{"uuid": "A", "title": "t", "description": "d", "score": 0.7}]
     result = rrf_fuse(raw, [], k=60)
     assert [d["uuid"] for d in result] == ["A"]
+
+def test_search_similar_post_passes_score_threshold_to_qdrant(mocker):
+    """score_threshold must be forwarded to client.query_points when provided."""
+    svc = EmbeddingService()
+
+    mock_qdrant_cls = mocker.patch('services.embedding_service.QdrantClient')
+    mock_qdrant = mock_qdrant_cls.return_value
+    mock_qdrant.get_collections.return_value.collections = []
+    mock_qdrant.query_points.return_value.points = []
+
+    mock_embed_cls = mocker.patch('services.embedding_service.TextEmbedding')
+    mock_model = mock_embed_cls.return_value
+    mock_model.embed.side_effect = lambda texts: [
+        type('E', (), {'tolist': lambda self: [0.1] * 384})() for _ in texts
+    ]
+
+    svc.search_similar_post("heap memory", limit=5, score_threshold=0.55)
+
+    call_kwargs = mock_qdrant.query_points.call_args.kwargs
+    assert call_kwargs.get("score_threshold") == 0.55
+
+def test_search_similar_post_no_score_threshold_by_default(mocker):
+    """When score_threshold is not given, query_points must receive None
+    (Qdrant ignores None and returns all top-K -- existing behavior preserved)."""
+    svc = EmbeddingService()
+
+    mock_qdrant_cls = mocker.patch('services.embedding_service.QdrantClient')
+    mock_qdrant = mock_qdrant_cls.return_value
+    mock_qdrant.get_collections.return_value.collections = []
+    mock_qdrant.query_points.return_value.points = []
+
+    mock_embed_cls = mocker.patch('services.embedding_service.TextEmbedding')
+    mock_model = mock_embed_cls.return_value
+    mock_model.embed.side_effect = lambda texts: [
+        type('E', (), {'tolist': lambda self: [0.1] * 384})() for _ in texts
+    ]
+
+    svc.search_similar_post("heap memory", limit=5)  # no score_threshold
+
+    call_kwargs = mock_qdrant.query_points.call_args.kwargs
+    assert call_kwargs.get("score_threshold") is None

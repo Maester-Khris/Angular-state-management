@@ -90,19 +90,31 @@ class EmbeddingService:
         )
         return True
 
-    def search_similar_post(self, query_text: str, limit: int = 10) -> list:
-        """Retrieves Top-K results using cosine similarity."""
-        # _get_embedding() calls _initialize_resources() itself (idempotent lazy-init) —
-        # no separate readiness guard needed. The old guard checked client/model before
-        # ever giving _get_embedding a chance to set them, so it could never self-initialize
-        # and silently returned [] forever instead of surfacing a real failure.
+    def search_similar_post(
+        self,
+        query_text: str,
+        limit: int = 10,
+        score_threshold: float | None = None,
+    ) -> list:
+        """Retrieves Top-K results using cosine similarity.
+
+        Args:
+            query_text:      The search query string.
+            limit:           Maximum number of results to return.
+            score_threshold: Optional minimum cosine similarity. Results scoring
+                             below this value are excluded server-side by Qdrant.
+                             Must be calibrated empirically per the BAAI bge-small-en-v1.5
+                             model card guidance -- do not hardcode a universal value.
+                             None (default) disables the floor (existing behavior).
+        """
         query_vector = self._get_embedding(query_text)
 
         search_result = self.client.query_points(
             collection_name=self.collection_name,
             query=query_vector,
             limit=limit,
-            with_payload=True
+            with_payload=True,
+            score_threshold=score_threshold,
         )
 
         return [
@@ -115,11 +127,17 @@ class EmbeddingService:
             for hit in search_result.points
         ]
 
-    async def search_similar_post_async(self, query_text: str, limit: int = 10) -> list:
-        """Async wrapper — offloads the blocking Qdrant/embedding call to a thread,
-        matching the pattern WebSearchService already uses for its blocking SDK call."""
+    async def search_similar_post_async(
+        self,
+        query_text: str,
+        limit: int = 10,
+        score_threshold: float | None = None,
+    ) -> list:
+        """Async wrapper -- offloads the blocking Qdrant/embedding call to a thread."""
         loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, self.search_similar_post, query_text, limit)
+        return await loop.run_in_executor(
+            None, self.search_similar_post, query_text, limit, score_threshold
+        )
 
 def rrf_fuse(
     raw_results: list[dict],
