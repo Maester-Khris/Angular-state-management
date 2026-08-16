@@ -215,3 +215,32 @@ async def test_pipeline_degrades_gracefully_when_reranker_fails(
     # Must fall back to the unranked docs, not crash
     assert result["similar_docs"][0]["uuid"] == docs[0]["uuid"]
     assert "reranking_internal" in result["degraded_legs"]
+
+@pytest.mark.asyncio
+async def test_pipeline_applies_mmr_after_reranker(
+    mocker, mock_embedding_svc, mock_inference_svc, mock_websearch_svc
+):
+    """mmr_rerank must be called in the pipeline after cross-encoder rerank."""
+    from app import _search_ai_pipeline
+
+    mock_inference_svc.expand_query = AsyncMock(return_value="scalable api express")
+    mock_websearch_svc.search = AsyncMock(return_value=[])
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=[])
+
+    docs = [
+        {"uuid": "u1", "title": "Scalable APIs", "description": "express node", "score": 0.8},
+        {"uuid": "u2", "title": "Scalable APIs", "description": "express node", "score": 0.79},
+    ]
+    mock_embedding_svc.search_similar_post_async = AsyncMock(return_value=docs)
+    # _get_embedding is called inside the pipeline to attach _vec for MMR
+    mock_embedding_svc._get_embedding.return_value = [0.1] * 384
+
+    mock_rerank_svc = mocker.patch('app.rerank_svc')
+    mock_rerank_svc.rerank.return_value = docs
+
+    mock_mmr = mocker.patch('app.mmr_rerank')
+    mock_mmr.return_value = docs
+
+    await _search_ai_pipeline("scalable api", limit=5)
+
+    assert mock_mmr.called, "mmr_rerank must be called in the pipeline"

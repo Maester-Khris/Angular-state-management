@@ -4,7 +4,7 @@ import asyncio
 from functools import wraps
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from services.embedding_service import EmbeddingService, rrf_fuse
+from services.embedding_service import EmbeddingService, rrf_fuse, mmr_rerank
 from services.inference import InferenceService
 from services.reranking_service import RerankingService
 from services.search_providers.exa_provider import ExaWebSearchAdapter
@@ -272,13 +272,31 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
     fused_docs = rrf_fuse(raw_results, expanded_results, k=60)
 
     try:
-        fused_docs = rerank_svc.rerank(query, fused_docs)
+        reranked_docs = rerank_svc.rerank(query, fused_docs)
     except Exception as e:
         app.logger.warning(f"Reranking (internal) leg degraded: {e}")
+        reranked_docs = fused_docs
         degraded_legs.append("reranking_internal")
 
-    # Truncate to the requested limit after fusion.
-    similar_docs = fused_docs[:limit]
+    # Phase B3: MMR diversity rerank.
+    # Runs on already-relevance-sorted candidates (after cross-encoder rerank).
+    # Suppresses near-duplicate titles (e.g., series posts appearing 22x in
+    # the 30k corpus) in favour of topically distinct results.
+    # Requires each doc's embedding vector attached as '_vec'.
+    # Soft failure -- if embedding is unavailable, skip MMR.
+    try:
+        for doc in reranked_docs:
+            if "_vec" not in doc:
+                doc["_vec"] = search_svc._get_embedding(
+                    f"{doc.get('title', '')}. {doc.get('description', '')}"
+                )
+        query_vector = search_svc._get_embedding(query)
+        diverse_docs = mmr_rerank(query_vector, reranked_docs, lambda_param=0.5)
+    except Exception as e:
+        app.logger.warning(f"MMR diversity leg degraded: {e}")
+        diverse_docs = reranked_docs
+
+    similar_docs = diverse_docs[:limit]
 
     # Phase C: Web Search -- soft failure, degrades to []
     try:
