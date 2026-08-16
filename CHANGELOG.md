@@ -45,13 +45,35 @@
       schema-matched) — `eval/fetch_devto_dataset.py`, verified against the live dataset;
       selection research at `artifacts/ai-search-upgrade/eval-corpus-dataset-research-2026-08-14.md`
 
+### Completed — 30k eval corpus + golden set + first harness run (2026-08-15/16)
+- [x] Executed the eval infra plan — `postair_eval` Mongo database (30,000 docs) + `posts_eval`
+      Qdrant collection, same clusters as production, isolated by name only. Built a resumable
+      40-query golden set (`eval/golden_queries_30k.json`) via synthetic query generation +
+      diverse Qdrant+Mongo-text candidate pooling + two independent judging passes (Groq
+      automated, Gemini human-relayed, 0.646 average Jaccard agreement) —
+      `eval/golden-query-relevance-map-30k.md` has full methodology and provenance
+- [x] Ran `run_harness.py` against the 30k corpus for the first time: `format_compliance_rate
+      1.0, avg_precision_at_k 0.235, avg_recall_at_k 0.7542`. Verified (not assumed) this run's
+      Groq daily-token-limit exhaustion (18/40 queries degraded) had zero effect on these
+      numbers — `similar_docs` is computed from raw-query Qdrant search, independent of
+      expansion/reranking success. The precision drop / recall rise vs the original 0.4/0.4 is
+      a golden-set-shape effect (21/40 queries have exactly 1 relevant doc, mechanically
+      capping precision at 0.2 while making recall easy to hit for synthetic self-referential
+      queries) — not a pipeline regression. Re-checking the original 6 causes against 30k live
+      data refined three of them (thin score margins are NOT fixed by corpus size — that
+      original claim doesn't hold; duplicate-title crowding is worse in a new templated-series
+      form, up to 22x-repeated posts; and query expansion's fix needs to be fusion not
+      replacement — direct evidence a raw→expanded swap would have lost a real hit on
+      `memory`) and surfaced two new findings (golden-set incompleteness on redundant topics,
+      golden-label domain contamination from off-topic corpus content) — full writeup at
+      `artifacts/ai-search-upgrade/eval-precision-recall-analysis-30k-2026-08-16.md`
+
 ### In progress
-- [ ] Eval infra: populate dedicated `postair_eval` Mongo database + `posts_eval` Qdrant
-      collection from the 30k corpus — plan at
-      `docs/superpowers/plans/2026-08-14-eval-infra-setup.md`, not yet executed
 - [ ] Wire `expanded_query` into Qdrant retrieval via RRF fusion — highest-leverage fix
-      identified (simulated: `life` 1/5→2/5, `memory` unchanged 1/5, `intelligence` 2/5→3/5),
-      not yet implemented
+      identified (simulated on the 50-doc corpus: `life` 1/5→2/5, `memory` unchanged 1/5,
+      `intelligence` 2/5→3/5; re-confirmed on the 30k corpus that a naive swap, not fusion,
+      would actively lose a real hit on `memory`), not yet implemented — implementation plan
+      not yet written
 
 ### Scope
 - [ ] `python-search-api` — Swap SerpAPI → Exa for external web search (Tavily
@@ -116,6 +138,14 @@
   tech-domain dataset research, Dev.to HF mirror selected
 - `docs/superpowers/plans/2026-08-14-eval-infra-setup.md` — plan to populate the
   30k-row eval Mongo/Qdrant collections
+- `docs/superpowers/plans/2026-08-14-golden-query-set-30k.md` — plan to build the 40-query
+  golden set against the 30k corpus
+- `eval/golden-query-relevance-map-30k.md` — 30k golden-set methodology, agreement score,
+  reconciliation provenance
+- `artifacts/ai-search-upgrade/eval-precision-recall-analysis-30k-2026-08-16.md` — first 30k
+  harness run interpreted against the original 6 causes: 3 refined (thin margins not fixed by
+  corpus size, duplicate-title crowding worse in templated-series form, expansion fix must be
+  fusion not swap), 2 new (golden-set incompleteness, golden-label domain contamination)
 
 ---
 
