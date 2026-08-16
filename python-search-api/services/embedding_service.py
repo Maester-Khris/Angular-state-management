@@ -120,3 +120,43 @@ class EmbeddingService:
         matching the pattern WebSearchService already uses for its blocking SDK call."""
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(None, self.search_similar_post, query_text, limit)
+
+def rrf_fuse(
+    raw_results: list[dict],
+    expanded_results: list[dict],
+    k: int = 60,
+) -> list[dict]:
+    """Reciprocal Rank Fusion of two ranked result lists.
+
+    Implements Cormack, Clarke & Buettcher (SIGIR 2009): RRF(d) = sum 1/(k + rank(d))
+    across each query leg's ranked list. Operates on ranks, not raw scores -- no
+    score-scale compatibility required between the two legs.
+
+    Args:
+        raw_results:      Ranked list from the raw-query Qdrant search.
+        expanded_results: Ranked list from the expanded-query Qdrant search.
+        k:                RRF smoothing constant. 60 is the conventional default
+                          from the original paper.
+
+    Returns:
+        A deduplicated list of result dicts, sorted descending by RRF score.
+        The 'score' field is replaced with the RRF score (a float, not a raw
+        cosine similarity -- callers must not interpret it as a similarity).
+    """
+    scores: dict[str, float] = {}
+    payloads: dict[str, dict] = {}
+
+    for rank, doc in enumerate(raw_results, start=1):
+        uid = doc["uuid"]
+        scores[uid] = scores.get(uid, 0.0) + 1.0 / (k + rank)
+        payloads[uid] = doc
+
+    for rank, doc in enumerate(expanded_results, start=1):
+        uid = doc["uuid"]
+        scores[uid] = scores.get(uid, 0.0) + 1.0 / (k + rank)
+        payloads.setdefault(uid, doc)
+
+    return [
+        {**payloads[uid], "score": round(rrf_score, 6)}
+        for uid, rrf_score in sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    ]

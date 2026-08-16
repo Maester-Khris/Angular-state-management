@@ -4,7 +4,7 @@ import asyncio
 from functools import wraps
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from services.embedding_service import EmbeddingService
+from services.embedding_service import EmbeddingService, rrf_fuse
 from services.inference import InferenceService
 from services.search_providers.exa_provider import ExaWebSearchAdapter
 import logging
@@ -239,13 +239,14 @@ def search_augmented():
 async def _search_ai_pipeline(query: str, limit: int) -> dict:
     degraded_legs: list[str] = []
 
-    # 1 & 2. Qdrant retrieval and query expansion no longer depend on each other
-    # (Phase 8.1 confirmed expand_query's own few-shot examples cover disambiguation
-    # without live Qdrant context) — run them concurrently.
-    qdrant_task = search_svc.search_similar_post_async(query, limit=limit)
+    # Phase A: raw-query Qdrant retrieval and query expansion run concurrently.
+    # Fetch a larger candidate pool (limit * 3) so RRF and downstream reranking
+    # have meaningful candidates before truncation.
+    candidate_limit = limit * 3
+    qdrant_task = search_svc.search_similar_post_async(query, limit=candidate_limit)
     expand_task = llm_svc.expand_query(query)
 
-    similar_docs = await qdrant_task  # core retrieval — hard failure propagates
+    raw_results = await qdrant_task  # hard failure propagates
 
     try:
         expanded_query = await expand_task
@@ -255,9 +256,23 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
         expanded_query = query
         degraded_legs.append("expansion")
 
-    # 3. Web Search — soft failure, degrades to []
-    # (ExaWebSearchAdapter.search already never raises; this guard also covers
-    #  any future provider that doesn't hold that contract as strictly.)
+    # Phase B: second Qdrant leg using expanded_query, then RRF fusion.
+    try:
+        expanded_results = await search_svc.search_similar_post_async(
+            expanded_query, limit=candidate_limit
+        )
+    except Exception as e:
+        app.logger.warning(f"Expanded Qdrant leg degraded: {e}")
+        expanded_results = []
+        degraded_legs.append("expanded_retrieval")
+
+    # Fuse both ranked lists; result is ranked by RRF score, not cosine similarity.
+    fused_docs = rrf_fuse(raw_results, expanded_results, k=60)
+
+    # Truncate to the requested limit after fusion.
+    similar_docs = fused_docs[:limit]
+
+    # Phase C: Web Search -- soft failure, degrades to []
     try:
         web_results = await websearch_svc.search(expanded_query, limit=8)
         if not web_results:
@@ -267,10 +282,7 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
         web_results = []
         degraded_legs.append("web_search")
 
-    # 4. Source Structuring & Reranking (LLM) — soft failure, degrades to []
-    # generate_relevant_sources expects plain dicts (title/url/favicon/description) —
-    # translate WebResult (search_providers' own value object, snippet not description)
-    # here at the pipeline boundary rather than coupling inference.py to search_providers.
+    # Phase D: Source Structuring & Reranking (LLM) -- soft failure, degrades to []
     try:
         web_results_dicts = [
             {"title": r.title, "url": r.url, "favicon": r.favicon, "description": r.snippet}

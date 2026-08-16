@@ -135,3 +135,36 @@ def test_search_ai_websearch_empty_result_degrades_not_500(client, auth_headers,
     data = response.get_json()
     assert data['relevant_ext_docs'] == []
     assert "web_search" in data['degraded_legs']
+
+@pytest.mark.asyncio
+async def test_pipeline_calls_second_qdrant_leg_with_expanded_query(
+    mock_embedding_svc, mock_inference_svc, mock_websearch_svc
+):
+    """_search_ai_pipeline must issue a second search call using expanded_query
+    and pass both result lists through rrf_fuse -- not just return raw results."""
+    from app import _search_ai_pipeline
+
+    mock_inference_svc.expand_query = AsyncMock(return_value="heap garbage collection memory management")
+    mock_websearch_svc.search = AsyncMock(return_value=[])
+    mock_inference_svc.generate_relevant_sources = AsyncMock(return_value=[])
+
+    raw_docs = [{"uuid": "raw-only", "title": "Redis", "description": "cache", "score": 0.72}]
+    expanded_docs = [{"uuid": "exp-only", "title": "GC Tuning", "description": "gc", "score": 0.75}]
+
+    call_count = {"n": 0}
+    async def fake_search(query, limit):
+        call_count["n"] += 1
+        if call_count["n"] == 1:
+            return raw_docs
+        return expanded_docs
+
+    mock_embedding_svc.search_similar_post_async = fake_search
+
+    result = await _search_ai_pipeline("memory", limit=5)
+
+    # Both legs must survive fusion
+    uuids = [d["uuid"] for d in result["similar_docs"]]
+    assert "raw-only" in uuids, "raw-query hit must survive RRF fusion"
+    assert "exp-only" in uuids, "expanded-query hit must survive RRF fusion"
+    # Two Qdrant calls must have been made
+    assert call_count["n"] == 2, "pipeline must issue two Qdrant search calls"
