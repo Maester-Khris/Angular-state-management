@@ -81,6 +81,10 @@ llm_svc = InferenceService() # Initialize the model once on startup
 websearch_svc = ExaWebSearchAdapter() # Initialize the model once on startup
 rerank_svc = RerankingService() # Initialize the model once on startup
 
+# Empirically calibrated similarity floor for BAAI/bge-small-en-v1.5 on this corpus.
+# Set via sweep_score_threshold.py output. None = disabled (full top-K always returned).
+SCORE_THRESHOLD: float | None = 0.55
+
 # --- Eager warmup: force all services to fully initialize before accepting requests ---
 # This prevents "Lazy Loading" from happening mid-request and eliminates cold-start failures.
 with app.app_context():
@@ -245,7 +249,7 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
     # Fetch a larger candidate pool (limit * 3) so RRF and downstream reranking
     # have meaningful candidates before truncation.
     candidate_limit = limit * 3
-    qdrant_task = search_svc.search_similar_post_async(query, limit=candidate_limit)
+    qdrant_task = search_svc.search_similar_post_async(query, limit=candidate_limit, score_threshold=SCORE_THRESHOLD)
     expand_task = llm_svc.expand_query(query)
 
     raw_results = await qdrant_task  # hard failure propagates
@@ -261,7 +265,7 @@ async def _search_ai_pipeline(query: str, limit: int) -> dict:
     # Phase B: second Qdrant leg using expanded_query, then RRF fusion.
     try:
         expanded_results = await search_svc.search_similar_post_async(
-            expanded_query, limit=candidate_limit
+            expanded_query, limit=candidate_limit, score_threshold=SCORE_THRESHOLD
         )
     except Exception as e:
         app.logger.warning(f"Expanded Qdrant leg degraded: {e}")

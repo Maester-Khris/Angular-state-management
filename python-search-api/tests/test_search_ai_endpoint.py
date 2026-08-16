@@ -152,7 +152,7 @@ async def test_pipeline_calls_second_qdrant_leg_with_expanded_query(
     expanded_docs = [{"uuid": "exp-only", "title": "GC Tuning", "description": "gc", "score": 0.75}]
 
     call_count = {"n": 0}
-    async def fake_search(query, limit):
+    async def fake_search(query_str: str, limit: int, **kwargs) -> list[dict]:
         call_count["n"] += 1
         if call_count["n"] == 1:
             return raw_docs
