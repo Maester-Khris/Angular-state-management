@@ -27,9 +27,14 @@ from _pipeline_log import log_stage
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_MODEL = os.getenv("PYTHON_LLM_MODEL", "llama-3.3-70b-versatile")
-MAX_TOKENS = 400  # <=5 short rationales fit comfortably; tightened from an initial 768 after
-                  # hitting Groq's 12000 TPM limit on the full 40-query batch
+GROQ_MODEL = os.getenv("PYTHON_LLM_MODEL", "openai/gpt-oss-120b")  # llama-3.3-70b-versatile removed from Groq's catalog 2026-08-18
+MAX_TOKENS = 1500  # gpt-oss-120b is a reasoning model -- spends tokens on a hidden reasoning
+                   # field before the JSON answer (same issue as MAX_EXPANSION_TOKENS in
+                   # python-search-api/services/inference.py). 400 was fine for ~30-40 candidate
+                   # pools but returned empty content (JSON decode error) on wider ~65-80
+                   # candidate pools -- more candidates to reason through needs more budget.
+DESCRIPTION_CHARS = 150  # candidate descriptions are truncated in the prompt (not the judged
+                         # data) to cut per-call token cost — same TPM lesson as above
 DESCRIPTION_CHARS = 150  # candidate descriptions are truncated in the prompt (not the judged
                          # data) to cut per-call token cost — same TPM lesson as above
 PACING_SECONDS = 1.5  # small delay between calls to avoid bursting through the TPM budget
