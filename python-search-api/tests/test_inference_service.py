@@ -44,9 +44,13 @@ async def test_expand_query_falls_back_to_original_on_empty():
 
 @pytest.mark.asyncio
 async def test_expand_query_passes_max_tokens():
+    """Asserts a bound is passed at all -- not a specific number. The specific value
+    (MAX_EXPANSION_TOKENS in inference.py) depends on the active model: reasoning models
+    (e.g. gpt-oss-120b) need headroom for hidden reasoning tokens before the answer, which
+    non-reasoning models (e.g. the retired llama-3.3-70b-versatile) didn't need."""
     svc = InferenceService()
     mock_create = AsyncMock(return_value=make_groq_response("redis caching ttl"))
     svc.client.chat.completions.create = mock_create
     await svc.expand_query("test query")
     _, kwargs = mock_create.call_args
-    assert kwargs.get("max_tokens") is not None and kwargs["max_tokens"] <= 32
+    assert kwargs.get("max_tokens") is not None and kwargs["max_tokens"] > 0

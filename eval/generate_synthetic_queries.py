@@ -20,9 +20,10 @@ from _pipeline_log import log_stage
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-GROQ_MODEL = os.getenv("PYTHON_LLM_MODEL", "llama-3.3-70b-versatile")
-MAX_TOKENS = 40  # generous ceiling for a 2-6 word query; explicit per this project's own
-                 # earlier Groq TPM lesson (python-search-api/services/inference.py)
+GROQ_MODEL = os.getenv("PYTHON_LLM_MODEL", "openai/gpt-oss-120b")  # llama-3.3-70b-versatile removed from Groq's catalog 2026-08-18
+MAX_TOKENS = 200  # gpt-oss-120b is a reasoning model -- spends tokens on hidden reasoning
+                  # before the answer; 40 left content empty 100% of the time in testing
+                  # (same issue as MAX_EXPANSION_TOKENS in python-search-api/services/inference.py)
 
 if not GROQ_API_KEY:
     print("Error: Missing GROQ_API_KEY in environment.", file=sys.stderr)

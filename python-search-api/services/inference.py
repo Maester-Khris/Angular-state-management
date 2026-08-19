@@ -5,7 +5,11 @@ from groq import AsyncGroq
 
 _PUNCTUATION_RE = re.compile(r"[.,;:!?\"']")
 MAX_EXPANSION_KEYWORDS = 8
-MAX_EXPANSION_TOKENS = 32  # generous ceiling for 8 keywords at Groq's tokenizer rate
+MAX_EXPANSION_TOKENS = 200  # gpt-oss-120b is a reasoning model -- spends tokens on a hidden
+                            # "reasoning" field before the actual answer (observed ~30-95
+                            # reasoning tokens for this prompt shape). 32 was calibrated for the
+                            # old non-reasoning llama-3.3-70b-versatile and left content empty
+                            # (finish_reason=length) 100% of the time against this model.
 MAX_RERANK_TOKENS = 1024  # generous ceiling for <=5 JSON source objects; unset default was
                           # reserving enough of Groq's TPM budget on its own to trip the org's
                           # 12000 TPM limit on a single reranking call
@@ -22,7 +26,10 @@ def _enforce_expansion_format(raw: str, max_keywords: int = MAX_EXPANSION_KEYWOR
 class InferenceService:
     def __init__(self):
         self.client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
-        self.model = os.getenv("PYTHON_LLM_MODEL", "llama-3.3-70b-versatile")
+        # llama-3.3-70b-versatile was removed from Groq's catalog entirely (2026-08-18,
+        # confirmed via GET /v1/models — no llama-3.3 variant remains). gpt-oss-120b is the
+        # closest capability replacement currently available.
+        self.model = os.getenv("PYTHON_LLM_MODEL", "openai/gpt-oss-120b")
 
     async def check_readiness(self):
         """Probes the AI provider for a minimal response to confirm API key/quota."""
