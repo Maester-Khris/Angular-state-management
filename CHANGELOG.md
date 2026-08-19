@@ -68,41 +68,108 @@
       golden-label domain contamination from off-topic corpus content) — full writeup at
       `artifacts/ai-search-upgrade/eval-precision-recall-analysis-30k-2026-08-16.md`
 
-### In progress
-- [ ] Wire `expanded_query` into Qdrant retrieval via RRF fusion — highest-leverage fix
-      identified (simulated on the 50-doc corpus: `life` 1/5→2/5, `memory` unchanged 1/5,
-      `intelligence` 2/5→3/5; re-confirmed on the 30k corpus that a naive swap, not fusion,
-      would actively lose a real hit on `memory`), not yet implemented — implementation plan
-      not yet written
+### Completed — RRF fusion, cross-encoder reranking, MMR diversity, per-leg isolation (2026-08-16/17)
+- [x] `python-search-api` — Implemented all 3 fixes from the 30k diagnosis, per
+      `docs/superpowers/plans/2026-08-16-ai-search-improvements.md`: RRF fusion (Cormack et al.
+      2009) of raw-query and expanded-query Qdrant results — fusion, not replacement, per the
+      `memory`-query evidence above; FastEmbed cross-encoder reranking
+      (`Xenova/ms-marco-MiniLM-L-6-v2`, CPU-only, Railway-hobby-plan compatible) via new
+      `RerankingService`; MMR diversity reranking (Carbonell & Goldstein 1998) against the
+      duplicate-title crowding finding, reading the cross-encoder's own `_relevance` score
+      instead of recomputing cosine similarity against the raw query vector (an early version
+      did the latter — architecturally wasteful, fixed in review); env-configurable
+      `SCORE_THRESHOLD`, left disabled (`None`) after a real sweep
+      (`data-utils/eval/sweep_score_threshold.py`) showed zero precision benefit up to 0.70 with
+      recall cost rising sharply past 0.60
+- [x] `python-search-api` — `_search_ai_pipeline` refactored into named phase functions
+      (`_fetch_and_fuse_candidates`, `_apply_internal_reranking`, `_apply_diversity_rerank`,
+      `_fetch_web_results`, `_build_external_sources`) sharing one `_soft_fail()` helper —
+      collapses the repeated per-leg try/except-degrade blocks and produces `degraded_legs` in
+      the response, closing the pipeline-isolation scope item below
+- [x] Two independent review rounds against `clean-code`/`clean-architecture`/
+      `pragmatic-programmer`, both rounds of findings verified by direct code reading (not
+      taken on the implementer's self-report) — 63/63 tests passing, live zero-degraded-legs
+      harness run confirmed working end to end
+
+### Completed — Groq model migration: llama-3.3-70b-versatile removed from catalog (2026-08-18)
+- [x] `python-search-api`, `eval` — `llama-3.3-70b-versatile` was removed from Groq's model
+      catalog entirely (confirmed live via `GET /v1/models`), breaking query expansion and all
+      golden-set judging with `404 model_not_found`. Root-caused and switched the default model
+      to `openai/gpt-oss-120b` in `services/inference.py`, `eval/judge_candidate_pools.py`,
+      `eval/generate_synthetic_queries.py` — chosen over `gpt-oss-20b`/`qwen3.6-27b` after
+      comparing Groq's own published TPM/TPD limits for each. Being a reasoning model, it spends
+      part of its token budget on a hidden `reasoning` field before the answer; this silently
+      emptied `expand_query`'s output (`finish_reason: length`) at the old `max_tokens=32`
+      ceiling (calibrated for the old non-reasoning model) — raised to 200 after empirical
+      testing, same root cause required raising `judge_candidate_pools.py`'s token ceiling
+      400→4000 in three steps as candidate-pool width grew through the reconciliation work below
+
+### Completed — golden-set reconciliation, Stage 2 scarcity check, final harness run (2026-08-19)
+- [x] `eval` — Replaced the original intersection-only reconciliation policy (all 74
+      Claude/Gemini disagreements on the 40-query set left unresolved by design) with a real
+      two-round adjudication: Claude independently re-judged all 74 (52 relevant/22 not); an
+      independent, unlabeled Gemini pass judged the same 74 blind (only 30 relevant, 0.622
+      Jaccard agreement — lower than the original round); the 28 still-disputed items went back
+      to Gemini a second time with rationale required, surfacing genuine verdict instability (3
+      items flipped with no new evidence) and a real rubric gap (Gemini judging `intelligence`
+      in a vacuum, without the product's own AI/ML domain-lock context) — all 28 resolved to
+      Claude's original verdict (25 relevant, 3 not) per that analysis
+- [x] `eval` — Dropped 4 contaminated queries (`life`, `buy high quality beeswax`,
+      `custom varsity jackets for sale`, `london mart noida extension`) whose only labeled
+      relevant doc was off-domain spam content injected as "relevant by construction" by a
+      synthetic query's own seed document, never checked for domain fit
+      — no on-topic candidate existed in the pool to replace it with
+- [x] `eval` — Stage 2: the 12 queries still stuck at `n_relevant=1` after reconciliation were
+      re-pooled at 2x depth (63–80 candidates vs. 26–40) and re-judged — all 12 stayed at
+      exactly 1 relevant doc, confirming genuine corpus scarcity on these hyper-specific queries
+      rather than a labeling-pool-depth bug
+- [x] Result: 36-query final golden set (`eval/golden_queries_30k.json`), avg relevant docs/query
+      3.11 (up from 1.7), structural Precision@5 ceiling 0.589 (up from 0.335) — full
+      methodology and provenance in `eval/golden-query-relevance-map-30k.md`
+- [x] Ran `run_harness.py` against the finalized set + the improved pipeline for the first real
+      (not simulated) post-improvement number: **avg Precision@5 0.372, avg Recall@5 0.720**,
+      100% format compliance, **zero queries at 0 precision** (previously 3-4) —
+      `data-utils/eval/report_30k_v3.json`. Precision is up ~55% over the pre-reconciliation
+      baseline; recall's small drop is expected — 3.11 avg relevant docs/query is a harder
+      top-5-recall bar than 1.7 was, not a regression. 63% of the golden set's own structural
+      ceiling achieved
+- [x] Full sprint coverage audit against all 4 superpowers plans (master 10-phase plan +
+      eval-infra-setup + golden-query-set-30k + ai-search-improvements), verified against
+      actual code/tests, not plan checkboxes: 8/10 master-plan phases DONE, Phase 0 PARTIAL
+      (code done, cronjobs.org registration still an open ops step), Phase 9 (Exa-summary
+      spike replacing `generate_relevant_sources`) confirmed genuinely NOT DONE via full-repo
+      grep. All 3 sub-plans DONE. Found and fixed changelog drift — 4 Scope bullets that were
+      actually already done (Exa swap, expansion enforcement, Qdrant/expansion concurrency,
+      AI-results-panel UX) — see below
 
 ### Scope
-- [ ] `python-search-api` — Swap SerpAPI → Exa for external web search (Tavily
-      evaluated and dropped — Exa's `title`/`url`/`favicon`/`image`/`summary` fields
-      cover the current `ExternalDoc` shape 1:1 from a single provider)
-- [ ] `python-search-api` — Query expansion: enforce output format in code
-      (`max_tokens` + post-hoc validation/truncation) instead of relying on prompt
-      instructions alone; extend few-shot examples beyond single-word disambiguation
-      to full query→expansion pairs
 - [ ] `python-search-api` — Spike: can Exa's schema-guided `summary` field replace
       the `generate_relevant_sources` Groq reranking call outright? Validate against
-      the golden set before committing either way
-- [ ] `python-search-api` — Validate (golden set) whether `expand_query`'s dependency
-      on live Qdrant context can be dropped; if so, run Qdrant search and query
-      expansion concurrently instead of sequentially
-- [ ] `node-backend` — Redis-backed cache for `/search/ai` (hit rate, incorrect-hit
-      rate, latency p50/p95/p99 split by hit/miss, instrumented at the cache-read
-      call site)
-- [ ] `python-search-api` — Isolate `/search/ai`'s 4 pipeline stages so one leg's
-      failure (e.g. the new Exa adapter degrading) doesn't 500 the whole request —
-      response gains a `degraded_legs` signal instead of one outer try/except
-      discarding legs that already succeeded
-- [ ] `ng-frontend` — AI results panel: visual distinction between platform and web
-      results (currently section-heading-only), fix expanded-query display being
-      silently dropped when only internal results exist, empty-state fallback when
-      both result arrays are empty, remove dead `aiToggle`/`groqToggle` outputs,
-      add a `partial` state distinct from total failure (scoped inline notice per
-      degraded section instead of the full-panel error takeover) plus a retry
-      affordance on both `error` and `partial`
+      the golden set before committing either way. **NEEDS VERIFICATION**: no code
+      (`services/search_providers/exa_summary_provider.py` or equivalent), decision
+      doc, or commit found anywhere in the repo as of the 2026-08-19 sprint coverage
+      audit — but it's unconfirmed whether this spike was actually investigated and
+      the outcome just never got written down, versus genuinely never attempted.
+      Don't assume either way; check with whoever ran the original implementation
+      pass before treating this as either done or not started
+- [ ] `node-backend` — Redis cache metrics: incorrect-hit rate and latency
+      p50/p95/p99 split by hit/miss, instrumented at the cache-read call site (the
+      cache itself — `services/aiSearchCache.js`, wired into `/api/search/ai`,
+      hit/miss counters on `/health` — is done, see above; only this extended
+      instrumentation remains, explicitly scoped as YAGNI-until-needed in the
+      original plan)
+- [ ] Ops — register `GET /ping` and `GET /api/ping` with an external cron pinger
+      (cronjobs.org) against the real deployed URLs once both are live. Code side
+      (both endpoints, Task 0.1/0.2) is done; this is the one purely-operational
+      step from Phase 0 that can't be verified or completed by a coding pass —
+      full runbook (endpoint contracts, interval, step-by-step, Railway-migration
+      timing note) at `artifacts/ai-search-upgrade/ops-keepalive-cron-registration.md`
+
+<!-- Swap SerpAPI → Exa, query expansion code-level enforcement, Qdrant/expand_query
+     concurrency, and the AI-results-panel UX fixes (retry/partial-state/dead-outputs)
+     were all previously listed here as open — confirmed DONE via the 2026-08-19 full
+     sprint coverage audit (code + tests read directly, not taken from plan checkboxes)
+     and moved to Completed sections above. -->
 
 ### Evaluation plan
 - [ ] Golden query set (30–50 queries) + fixed corpus snapshot as the offline
@@ -146,6 +213,15 @@
   harness run interpreted against the original 6 causes: 3 refined (thin margins not fixed by
   corpus size, duplicate-title crowding worse in templated-series form, expansion fix must be
   fusion not swap), 2 new (golden-set incompleteness, golden-label domain contamination)
+- `docs/superpowers/plans/2026-08-16-ai-search-improvements.md` — RRF/reranking/MMR/threshold
+  implementation plan, reviewed twice against clean-code/clean-architecture/pragmatic-programmer
+- `eval/golden-query-relevance-map-30k.md` — now also covers the Stage 1 reconciliation
+  methodology (two-round Claude/Gemini adjudication with real agreement numbers) and Stage 2's
+  wider-pool scarcity confirmation for the 12 stuck queries
+- `artifacts/ai-search-upgrade/eval-precision-recall-final-2026-08-19.md` — final post-improvement
+  harness numbers (avg P@5 0.372, avg R@5 0.720) against the finalized 36-query golden set,
+  interpreted against its 0.589 structural ceiling
+- `data-utils/eval/report_30k_v3.json` — raw harness output backing the final numbers above
 
 ---
 
