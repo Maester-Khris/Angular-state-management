@@ -11,10 +11,11 @@
 # Deliberately NOT the `ragas` pip package -- direct Groq call, matching the proven pattern in
 # judge_candidate_pools.py, consistent with this project's dependency-minimalism.
 
+import asyncio
 import json
 import os
 
-from groq import AsyncGroq
+from groq import AsyncGroq, RateLimitError
 
 GROQ_MODEL = os.getenv("PYTHON_LLM_MODEL", "openai/gpt-oss-120b")
 # openai/gpt-oss-120b is a reasoning model -- starts generous per this sprint's earlier
@@ -22,6 +23,16 @@ GROQ_MODEL = os.getenv("PYTHON_LLM_MODEL", "openai/gpt-oss-120b")
 # candidate pools in judge_candidate_pools.py). This prompt is short and single-verdict, but
 # starting low again after two prior failures on the same root cause isn't worth repeating.
 MAX_TOKENS = 2000
+
+# TPM (tokens per minute) retry -- judge_candidate_pools.py's proven pattern, ported here after
+# hitting a real 429 mid-spike-run (2026-08-19): compare_swap_augmented fires 2 judge_pair calls
+# back-to-back per query with no pacing, easily bursting past the org's 8000 TPM ceiling on
+# gpt-oss-120b. This is TPM (transient, retriable), not TPD -- unlike judge_candidate_pools.py
+# this module doesn't need a DailyLimitExceeded fast-fail path since the spike runner's sample
+# size (10 queries) is nowhere near a daily-limit risk.
+MAX_RETRIES = 4
+DEFAULT_BACKOFF_SECONDS = 20
+MAX_BACKOFF_SECONDS = 65
 
 _client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
 
@@ -59,15 +70,27 @@ Candidate B:
 Headline: {answer_b.get('source_small_headline', '')}
 Description: {answer_b.get('source_small_description', '')}
 """
-    response = await _client.chat.completions.create(
-        model=GROQ_MODEL,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user_prompt},
-        ],
-        temperature=0.0,
-        max_tokens=MAX_TOKENS,
-    )
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            response = await _client.chat.completions.create(
+                model=GROQ_MODEL,
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=0.0,
+                max_tokens=MAX_TOKENS,
+            )
+            break
+        except RateLimitError as e:
+            # groq's RateLimitError exposes .response (httpx.Response) -- no retry_after
+            # shortcut attribute -- same Retry-After header read judge_candidate_pools.py uses.
+            wait = min(float(e.response.headers.get("Retry-After", DEFAULT_BACKOFF_SECONDS)), MAX_BACKOFF_SECONDS)
+            print(f"    429 rate limited, waiting {wait:.0f}s (attempt {attempt}/{MAX_RETRIES})...")
+            await asyncio.sleep(wait)
+    else:
+        raise RuntimeError(f"gave up after {MAX_RETRIES} retries, still rate limited")
+
     raw = response.choices[0].message.content.strip()
     if raw.startswith("```"):
         raw = raw.split("```")[1]
