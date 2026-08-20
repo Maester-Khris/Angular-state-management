@@ -142,16 +142,37 @@
       actually already done (Exa swap, expansion enforcement, Qdrant/expansion concurrency,
       AI-results-panel UX) — see below
 
+### Completed — Phase 9 decision: Exa summary vs. reranking, resolved KEEP (2026-08-20)
+- [x] Resolved the "NEEDS VERIFICATION" item below — the spike was never actually attempted
+      before this sprint (confirmed genuinely, not just undocumented). Built and ran it for
+      real: `python-search-api/services/search_providers/{exa_contents_client,
+      exa_summary_provider}.py`, `eval/{pairwise_judge,spike_exa_summary_vs_reranking}.py` —
+      full implementation plan at `docs/superpowers/plans/2026-08-19-exa-summary-vs-reranking-
+      spike.md`
+- [x] Tracer bullet found the original premise wrong in a new way: Exa's MCP server (what
+      `ExaWebSearchAdapter` already integrates with) exposes only `web_search_exa`/
+      `web_fetch_exa` — no schema-guided summary tool. That capability is real, but only on
+      Exa's REST API (`POST https://api.exa.ai/contents`, `summary: {query, schema}`) —
+      verified against Exa's own docs then confirmed with a real live call before building
+      anything on top of it
+- [x] Found and fixed a real, pre-existing production bug while building the comparison:
+      `generate_relevant_sources`'s `MAX_RERANK_TOKENS=1024` silently truncated
+      (`finish_reason: length`) on realistic 8-result `web_results` inputs — gpt-oss-120b's
+      hidden reasoning tokens ate into the same ceiling that bit `expand_query` and
+      `judge_candidate_pools.py` earlier this sprint — raised to 2048, verified clean
+      (`services/inference.py`)
+- [x] Ran the real, swap-augmented (bias-mitigated per `evaluation-metrics-and-methodology.md`
+      Part B2), pairwise-judged comparison against the finalized golden set: **6 of 10 queries
+      completed before hitting the daily Groq budget a second time — result was already
+      decisive, so concluded here rather than chasing the remaining 4.** Exa's summary (`new`)
+      won **zero** of 12 total metric-comparisons (6 queries × faithfulness + answer
+      relevance): faithfulness `{old: 4, new: 0, tie: 2}`, answer relevance
+      `{old: 3, new: 0, tie: 3}` — `eval/_pipeline/exa_summary_spike_report.json`
+- [x] **Decision: KEEP `generate_relevant_sources`.** `ExaSourceSummaryAdapter` stays
+      built-but-unused — a real, useful spike outcome per the plan's own framing, not a failed
+      one. No composition-root change made
+
 ### Scope
-- [ ] `python-search-api` — Spike: can Exa's schema-guided `summary` field replace
-      the `generate_relevant_sources` Groq reranking call outright? Validate against
-      the golden set before committing either way. **NEEDS VERIFICATION**: no code
-      (`services/search_providers/exa_summary_provider.py` or equivalent), decision
-      doc, or commit found anywhere in the repo as of the 2026-08-19 sprint coverage
-      audit — but it's unconfirmed whether this spike was actually investigated and
-      the outcome just never got written down, versus genuinely never attempted.
-      Don't assume either way; check with whoever ran the original implementation
-      pass before treating this as either done or not started
 - [ ] `node-backend` — Redis cache metrics: incorrect-hit rate and latency
       p50/p95/p99 split by hit/miss, instrumented at the cache-read call site (the
       cache itself — `services/aiSearchCache.js`, wired into `/api/search/ai`,
@@ -222,6 +243,11 @@
   harness numbers (avg P@5 0.372, avg R@5 0.720) against the finalized 36-query golden set,
   interpreted against its 0.589 structural ceiling
 - `data-utils/eval/report_30k_v3.json` — raw harness output backing the final numbers above
+- `docs/superpowers/plans/2026-08-19-exa-summary-vs-reranking-spike.md` — Phase 9 spike plan,
+  updated in place with the real MCP-vs-REST finding and the retry/resumability fixes made
+  while executing it
+- `eval/_pipeline/exa_summary_spike_report.json` — raw per-query verdicts backing the KEEP
+  decision above
 
 ---
 
