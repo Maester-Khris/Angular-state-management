@@ -10,9 +10,12 @@ MAX_EXPANSION_TOKENS = 200  # gpt-oss-120b is a reasoning model -- spends tokens
                             # reasoning tokens for this prompt shape). 32 was calibrated for the
                             # old non-reasoning llama-3.3-70b-versatile and left content empty
                             # (finish_reason=length) 100% of the time against this model.
-MAX_RERANK_TOKENS = 1024  # generous ceiling for <=5 JSON source objects; unset default was
-                          # reserving enough of Groq's TPM budget on its own to trip the org's
-                          # 12000 TPM limit on a single reranking call
+MAX_RERANK_TOKENS = 2048  # gpt-oss-120b's hidden reasoning field ate into this the same way it
+                          # hit MAX_EXPANSION_TOKENS above -- 1024 truncated (finish_reason=length)
+                          # on a realistic 8-result web_results input (238-323 reasoning tokens
+                          # observed, verified live 2026-08-19), silently returning [] every time
+                          # since the truncated JSON failed to parse. 2048 confirmed clean
+                          # (finish_reason=stop) against the same real input.
 
 
 def _enforce_expansion_format(raw: str, max_keywords: int = MAX_EXPANSION_KEYWORDS) -> str:
