@@ -63,7 +63,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run the golden-query harness against /search/ai.")
     parser.add_argument("--base-url", default="http://localhost:5000")
     parser.add_argument("--internal-key", required=True)
-    parser.add_argument("--queries", default=os.path.join(os.path.dirname(__file__), "golden_queries.json"))
+    parser.add_argument("--queries", required=True, help="Path to a golden-query JSON file (e.g. ../../eval/golden_queries_v2_eval.json)")
     parser.add_argument("--out", default=None)
     parser.add_argument("--k", type=int, default=5)
     args = parser.parse_args()
