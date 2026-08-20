@@ -1,6 +1,18 @@
 ## [AI Search Pipeline Upgrade] — 2026-08-08 — In Progress
 **Theme: Query expansion quality, provider swap, semantic caching, and result-panel UX for `/search/ai`**
 
+**Scope expansion (2026-08-20):** this sprint's eval work has so far measured `/search/ai` only
+(query-expansion + RRF fusion + cross-encoder reranking + MMR, over Qdrant). It never touched
+`GET /api/search` — the separate, unrelated hybrid endpoint that fuses MongoDB lexical (`$text`)
+and Qdrant semantic search via Reciprocal Rank Fusion (`node-backend/services/rankprocessor.js`)
+— which has had **zero eval coverage of any kind** until now. Scope now includes: Precision@5/
+Recall@5/nDCG@10 for the Mongo lexical leg, a BM25 baseline (Mongo's native `$text` scoring is
+an undocumented black box, confirmed via MongoDB's own docs — not BM25, unlike Atlas Search's
+`$search` stage), the Qdrant semantic leg alone (a plainer, cheaper measurement than `/search/ai`'s
+elaborate pipeline — different endpoint, `POST /search`), and the RRF-fused hybrid result — all
+reusing the existing 36-query golden set's labels, zero new LLM/token cost. Industry-methodology
+research backing this: `artifacts/ai-search-upgrade/hybrid-search-eval-methodology-research-2026-08-20.md`.
+
 ### Completed — Phase 0: operational continuity (missed from original scope, added mid-sprint)
 - [x] `python-search-api` — Public `GET /ping` keepalive endpoint, real Qdrant round trip, no auth
 - [x] `node-backend` — Public `GET /api/ping` keepalive endpoint, real MongoDB round trip, no auth
@@ -171,6 +183,30 @@
 - [x] **Decision: KEEP `generate_relevant_sources`.** `ExaSourceSummaryAdapter` stays
       built-but-unused — a real, useful spike outcome per the plan's own framing, not a failed
       one. No composition-root change made
+
+### Completed — hybrid search (`GET /api/search`) eval: first coverage, 4-way ablation (2026-08-20)
+- [x] `data-utils` — Built and ran the first-ever eval of `GET /api/search` (Mongo `$text`
+      lexical + Qdrant semantic + RRF fusion — previously zero coverage of any kind, entirely
+      separate from `/search/ai`'s already-evaluated pipeline). Four legs measured against the
+      existing 36-query golden set, zero new LLM/token cost: `data-utils/eval/{metrics.py
+      (+ndcg_at_k), semantic_http, lexical_mongo, rrf_fusion, run_harness_lexical_mongo,
+      run_harness_semantic, build_bm25_baseline, run_harness_hybrid_rrf,
+      generate_ablation_report}.py`. Full plan:
+      `docs/superpowers/plans/2026-08-20-hybrid-search-eval.md`
+- [x] Results: Precision@5/Recall@5/nDCG@10 — Mongo `$text` 0.244/0.468/0.550, BM25 baseline
+      0.294/0.639/0.691, Qdrant semantic 0.333/0.689/0.767, **RRF hybrid 0.156/0.293/0.466 —
+      worst of all four columns on every metric**, contradicting the Elastic/Turnbull precedents
+      this design was expected to match
+- [x] Root-caused, not just observed: `home.js`'s hydration-filter (strips semantic matches
+      already in the lexical results, before fusion) re-indexes the surviving semantic items
+      from rank 1 — a document found by *both* legs loses its semantic-rank RRF contribution
+      entirely, while whatever ranked just below it inherits an inflated rank-1 score. Confirmed
+      quantitatively: 30/36 queries have cross-leg overlap subject to this quirk, 25/36 score
+      worse than their best individual leg, 16/36 score worse than *both* legs. Full analysis
+      and per-query evidence: `artifacts/ai-search-upgrade/hybrid-search-eval-results-2026-08-20.md`
+- [x] Bonus finding: BM25 beats Mongo's native `$text` on every metric — confirms the
+      methodology research's finding that `$text`'s undocumented scoring formula is measurably
+      weaker than standard BM25 on this corpus, independent of the fusion issue above
 
 ### Scope
 - [ ] `node-backend` — Redis cache metrics: incorrect-hit rate and latency
