@@ -1,9 +1,9 @@
 {
   "summary": {
     "total_queries": 54,
-    "avg_precision_at_5": 0.3963,
-    "avg_recall_at_5": 0.5467,
-    "avg_ndcg_at_10": 0.712,
+    "avg_precision_at_5": 0.4,
+    "avg_recall_at_5": 0.5471,
+    "avg_ndcg_at_10": 0.7122,
     "avg_mrr": 0.8602,
     "avg_r_precision": 0.681
   },
@@ -14,17 +14,17 @@
         "08a09ac3-6a43-48c7-ad76-0351839f71ea",
         "dd8e62f8-ea73-4cf3-bc82-ca824906b9ce",
         "ea985daf-4692-4445-97f5-c5a439c9d8cd",
+        "2e70977e-6d3d-4a0b-8a83-ccbf14b55c86",
         "b8fa1511-e67d-466e-969c-1f842537d66b",
         "c8c45c91-e7e5-42fe-a269-7ba5b5f921af",
-        "2e70977e-6d3d-4a0b-8a83-ccbf14b55c86",
         "711c155e-30fc-4525-bb50-bdd7f05f1640",
         "170ed03d-b138-4f07-9e22-3fe04ccef8e6",
         "6274152b-5bf6-49e0-9d77-c5d2875d66a2",
         "a81b2379-33ea-4053-b686-5c1ecb311ac3"
       ],
-      "precision_at_5": 0.8,
-      "recall_at_5": 0.0975609756097561,
-      "ndcg_at_10": 0.6455010129375797,
+      "precision_at_5": 1.0,
+      "recall_at_5": 0.12195121951219512,
+      "ndcg_at_10": 0.6478488778354878,
       "mrr": 1.0,
       "r_precision": 0.9
     },
@@ -94,8 +94,8 @@
         "0deff858-8964-4c63-9611-cb7c53100f59",
         "5642c487-eb6b-4706-8706-7e84f0adb3c2",
         "6539c641-7c23-44fc-91e4-6998ff60540d",
-        "15a9f553-eb9c-47b9-8541-75711a9e5613",
         "8fa11676-4766-4d23-b018-27c02d9e59a5",
+        "15a9f553-eb9c-47b9-8541-75711a9e5613",
         "dc2db824-80b8-4416-b29c-d999b5c2643b",
         "0832ce24-6c22-4979-a7ea-664a48a18518",
         "3878c4cd-3f47-4d7c-8201-acac03b107da",
@@ -152,8 +152,8 @@
       "query": "kubernetes deployment rollback",
       "retrieved": [
         "19fb0959-eb97-496c-bf97-091dd8f541c7",
-        "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
         "9f28fc77-7d8f-408f-9dc7-3020d031938e",
+        "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
         "96f8ca24-a2e7-4119-b924-93726b4753e3",
         "7903e59e-97b7-463b-8e7c-f8e61f3b4ec5",
         "f920a592-b2b0-48d4-92d2-b878d3b67616",
@@ -277,14 +277,14 @@
         "cc68ba67-7a56-4a40-aa76-7e3916f08a61",
         "3d6d9327-e190-4f26-85c6-164a754786ce",
         "9d564e9b-d7ff-4a93-bb77-f221ce13056a",
-        "08ae082d-7351-4285-b8b3-b4ebe1dde713",
         "eebece5f-54e7-484b-bb1b-ce0ee80527fb",
+        "08ae082d-7351-4285-b8b3-b4ebe1dde713",
         "a8265e92-0ba9-417c-a701-6914f9f19bb4",
         "fa8638db-e091-40af-a863-a3b8b28d3d1b"
       ],
       "precision_at_5": 0.6,
       "recall_at_5": 0.12,
-      "ndcg_at_10": 0.28108445274014754,
+      "ndcg_at_10": 0.28501715290273033,
       "mrr": 1.0,
       "r_precision": 0.5
     },
@@ -419,8 +419,8 @@
         "a547f39d-2699-4697-a6b9-ea14c9cee80d",
         "4424aee5-502d-4d9e-a21d-c871c7f5f2dc",
         "0e368705-91e6-405a-8bfd-f210439e9d56",
-        "15dd1e3b-a547-437d-976f-8b75f8cf849c",
-        "37c88087-0d08-4274-8815-9d7a2ca9b7a3"
+        "37c88087-0d08-4274-8815-9d7a2ca9b7a3",
+        "15dd1e3b-a547-437d-976f-8b75f8cf849c"
       ],
       "precision_at_5": 0.4,
       "recall_at_5": 0.4,
@@ -460,7 +460,7 @@
         "2b852bd5-b98f-43b8-9a1d-f0dc001c624a",
         "518ad2eb-a617-468f-a902-9c9148e22f00",
         "68766c63-b217-4a27-9c21-0d0274997cef",
-        "43c90e0a-3199-4817-a03f-58c4d7063bb1"
+        "9c4a24ba-2ed2-4999-a312-d999e5896a21"
       ],
       "precision_at_5": 0.2,
       "recall_at_5": 1.0,
@@ -500,7 +500,7 @@
         "962954fd-ebdf-4296-887b-f9b5518c4a2a",
         "ed3232aa-6d13-4ca2-8f73-0290ce9c38db",
         "10eaa405-042d-4490-8f2f-336022923b22",
-        "65a2980a-db62-415b-ae00-549e1a5abd2b"
+        "99679cd1-f8a4-413e-959a-6219ca84f135"
       ],
       "precision_at_5": 0.4,
       "recall_at_5": 1.0,
@@ -577,10 +577,10 @@
         "2fa42df1-1d72-4ea6-bd51-a59eed11e639",
         "cada3c0a-324b-4853-acd4-228b4a271a32",
         "068abab0-a9ec-486b-9ae6-d6300eab5472",
-        "6b2cc8df-fdd8-4da9-becd-2e176a91c6ae",
         "f9a5ed72-8684-464a-82d6-8767443a5d30",
-        "4b750e66-e687-458e-85d7-da78725ce87a",
-        "4c59bacf-87a4-4ef1-ad43-f5b3607143c2"
+        "6b2cc8df-fdd8-4da9-becd-2e176a91c6ae",
+        "4c59bacf-87a4-4ef1-ad43-f5b3607143c2",
+        "4b750e66-e687-458e-85d7-da78725ce87a"
       ],
       "precision_at_5": 0.4,
       "recall_at_5": 0.25,
@@ -656,8 +656,8 @@
         "cc9f0026-2ab1-400a-b0ae-65e99b9aa678",
         "a1a430d9-dda3-4eb5-b3c2-58ec298ec7e3",
         "c0946db9-284f-4fe1-82e1-f8b483211cd6",
-        "de3f8f05-b0d3-44ba-8d9c-d1b61038bf8d",
         "b51005f2-02e9-459a-8543-d8da375e2b22",
+        "de3f8f05-b0d3-44ba-8d9c-d1b61038bf8d",
         "c58d95f2-18e3-4a92-8b11-1eae3ce39e19",
         "bf5a0283-5c90-4255-9b85-ba9870bf2a5e",
         "176c93ca-4397-4481-983a-5d38013f94f8"
@@ -899,7 +899,7 @@
         "f9a5ed72-8684-464a-82d6-8767443a5d30",
         "a504c66b-acac-4094-97c1-e864edd302de",
         "fc7a5b57-a96d-4738-8864-c1ccd166e54c",
-        "df1db0e6-d83f-437c-bb28-93b044e9b1aa",
+        "4c59bacf-87a4-4ef1-ad43-f5b3607143c2",
         "4b750e66-e687-458e-85d7-da78725ce87a"
       ],
       "precision_at_5": 0.2,
@@ -979,8 +979,8 @@
         "5e8996df-f832-4d87-bfdb-45810ab3f27d",
         "5489ea71-8775-40e3-9dd1-91935918bb74",
         "321ae69a-d86e-4d16-adc0-774827f3563d",
-        "b0c80388-6d7a-4dc0-8fe7-37a57c4d4359",
-        "ae3ab382-1e0f-41ad-832f-ba436a2b9ca6"
+        "ae3ab382-1e0f-41ad-832f-ba436a2b9ca6",
+        "84ba6133-b944-4812-a588-ca5993028e97"
       ],
       "precision_at_5": 0.2,
       "recall_at_5": 1.0,

@@ -15,6 +15,8 @@ Saturday 2026-08-22.
 
 **Accepted measures implemented (2026-08-21):** deployed weighted RRF (semantic=0.8) and R-precision CAP=10. Re-verified against the eval split: RRF hybrid Precision@5 improved to 0.3963, R-precision improved to 0.6810. Mongo $text baseline Precision@5 is 0.3741, R-precision corrected by cap to 0.6224.
 
+**Atlas Search fuzzy fallback deployed (2026-08-21):** scoped as a strict fallback when $text returns zero results to sidestep structural ranking divergence on working queries (Item D decision). Verified against eval split: Mongo $text baseline Precision@5 unchanged at 0.3741, Recall@5 unchanged at 0.5179 (golden set lacks the zero-hit typo queries that trigger this branch, but fallback behavior is verified mechanically via unit tests).
+
 **Remaining hypothesis checklist — 5 items investigated, 1 promoted to accepted, 4 still open
 (2026-08-21):** delegated first-principles → root-cause → confirming-test pass on scenarios the
 `/api/search` engine itself doesn't handle (not eval-methodology gaps — those are closed). Full
