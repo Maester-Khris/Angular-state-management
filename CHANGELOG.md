@@ -1,6 +1,18 @@
 ## [AI Search Pipeline Upgrade] — 2026-08-08 — In Progress
 **Theme: Query expansion quality, provider swap, semantic caching, and result-panel UX for `/search/ai`**
 
+**Golden-set v2 rebuild (2026-08-21):** replaced the flawed 36-query golden set (2-source pooling,
+mixed Groq/Gemini judging standards, quota-padded labels, P@5 structural ceiling 0.589) with a
+70-query, 3-source-pooled (Mongo + Qdrant + BM25), graded (0/1/2), OpenAI `gpt-5-mini` +
+Claude-judged set — full 3-round reconciliation, stratified query types, corpus noise filtering,
+dev/eval split, and R-precision/MRR/bootstrap-CI metrics added. Results locked:
+`artifacts/ai-search-upgrade/golden-set-v2-results-2026-08-21.md`. Semantic reaches P@5 0.419
+against a 0.626 ceiling (R-precision 0.721, ceiling-free). RRF hybrid underperformance (0.274 P@5,
+below every one of its own input legs) reproduces under the clean v2 labels — confirms the
+existing `hybrid-search-eval-results-2026-08-20.md` root-cause finding isn't a labeling artifact.
+Sprint plan: optimize hybrid/RRF fusion first, then the remaining ranking-quality gap, target
+Saturday 2026-08-22.
+
 **Scope expansion (2026-08-20):** this sprint's eval work has so far measured `/search/ai` only
 (query-expansion + RRF fusion + cross-encoder reranking + MMR, over Qdrant). It never touched
 `GET /api/search` — the separate, unrelated hybrid endpoint that fuses MongoDB lexical (`$text`)
