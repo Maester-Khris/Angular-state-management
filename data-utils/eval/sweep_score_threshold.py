@@ -101,8 +101,8 @@ def run_sweep(golden: list[dict], base_url: str, key: str, k: int) -> None:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--queries", default="eval/golden_queries_30k.json",
-                        help="Path to golden queries JSON (default: eval/golden_queries_30k.json)")
+    parser.add_argument("--split", choices=["dev", "eval"], help="Use eval/golden_queries_v2_<split>.json (hyperparameter tuning should use 'dev')")
+    parser.add_argument("--queries", default=None, help="Explicit query file path (overrides --split; for ad-hoc checks only)")
     parser.add_argument("--k", type=int, default=5, help="K for Precision@K (default: 5)")
     args = parser.parse_args()
 
@@ -112,6 +112,12 @@ def main():
     if not key:
         print("ERROR: NODE_SHARED_SECURITY_KEY not set", file=sys.stderr)
         sys.exit(1)
+
+    if not args.queries:
+        if not args.split:
+            print("ERROR: pass --split dev|eval, or --queries for an explicit ad-hoc override.", file=sys.stderr)
+            sys.exit(1)
+        args.queries = f"eval/golden_queries_v2_{args.split}.json"
 
     golden_path = os.path.join(os.path.dirname(__file__), "..", "..", args.queries)
     if not os.path.exists(golden_path):

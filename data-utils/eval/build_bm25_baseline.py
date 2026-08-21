@@ -21,14 +21,13 @@ import sys
 import bm25s
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from metrics import ndcg_at_k, precision_at_k, recall_at_k
+from metrics import mrr, ndcg_at_k, precision_at_k, r_precision, recall_at_k
 
 FETCH_LIMIT = 10
 K_PRECISION_RECALL = 5
 K_NDCG = 10
 
 DEFAULT_CORPUS = os.path.join(os.path.dirname(__file__), "..", "..", "eval", "devto_corpus.jsonl")
-DEFAULT_QUERIES = os.path.join(os.path.dirname(__file__), "..", "..", "eval", "golden_queries_30k.json")
 
 
 def load_corpus(path: str) -> tuple[list[str], list[str]]:
@@ -65,6 +64,7 @@ def run(corpus_path: str, queries: list[dict]) -> dict:
     for entry in queries:
         query = entry["query"]
         relevant = set(entry.get("relevant_uuids", []))
+        relevance = {k: int(v) for k, v in entry.get("relevance", {}).items()}
 
         query_tokens = bm25s.tokenize([query], stopwords="en")
         doc_indices, _scores = retriever.retrieve(query_tokens, k=FETCH_LIMIT)
@@ -75,7 +75,9 @@ def run(corpus_path: str, queries: list[dict]) -> dict:
             "retrieved": retrieved,
             "precision_at_5": precision_at_k(retrieved, relevant, K_PRECISION_RECALL),
             "recall_at_5": recall_at_k(retrieved, relevant, K_PRECISION_RECALL),
-            "ndcg_at_10": ndcg_at_k(retrieved, relevant, K_NDCG),
+            "ndcg_at_10": ndcg_at_k(retrieved, relevance, K_NDCG),
+            "mrr": mrr(retrieved, relevant),
+            "r_precision": r_precision(retrieved, relevant),
         })
 
     summary = {
@@ -83,16 +85,25 @@ def run(corpus_path: str, queries: list[dict]) -> dict:
         "avg_precision_at_5": round(sum(r["precision_at_5"] for r in results) / len(results), 4),
         "avg_recall_at_5": round(sum(r["recall_at_5"] for r in results) / len(results), 4),
         "avg_ndcg_at_10": round(sum(r["ndcg_at_10"] for r in results) / len(results), 4),
+        "avg_mrr": round(sum(r["mrr"] for r in results) / len(results), 4),
+        "avg_r_precision": round(sum(r["r_precision"] for r in results) / len(results), 4),
     }
     return {"summary": summary, "results": results}
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Score a from-scratch BM25 baseline (bm25s) against the 30k golden set.")
+    parser = argparse.ArgumentParser(description="Score a from-scratch BM25 baseline (bm25s) against the v2 golden set.")
     parser.add_argument("--corpus", default=DEFAULT_CORPUS)
-    parser.add_argument("--queries", default=DEFAULT_QUERIES)
+    parser.add_argument("--split", choices=["dev", "eval"], help="Use eval/golden_queries_v2_<split>.json")
+    parser.add_argument("--queries", default=None, help="Explicit query file path (overrides --split; for ad-hoc checks only)")
     parser.add_argument("--out", default=None)
     args = parser.parse_args()
+
+    if not args.queries:
+        if not args.split:
+            print("ERROR: pass --split dev|eval, or --queries for an explicit ad-hoc override.", file=sys.stderr)
+            sys.exit(1)
+        args.queries = os.path.join(os.path.dirname(__file__), "..", "..", "eval", f"golden_queries_v2_{args.split}.json")
 
     report = run(args.corpus, load_queries(args.queries))
     output = json.dumps(report, indent=2)
