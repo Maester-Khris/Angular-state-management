@@ -1,0 +1,398 @@
+[
+  {
+    "query": "async python event loop",
+    "relevant_uuids": [
+      "032dfcb2-b3bb-42b8-9357-9f837bdd8790",
+      "387f50c2-4292-4b9b-a7a3-7665dfd14ea1",
+      "46ae0391-e54c-4e54-b87b-6d124299285e",
+      "874d4878-8144-4295-9f3e-e9af3e73bb8d",
+      "be5c9661-dca1-4611-a1c0-5340e9f95a5f",
+      "d50c763d-c94e-4acb-893a-5da0bdd3687b",
+      "d81144ce-08ee-46c7-933d-42119507b9d2",
+      "ed2bf985-80c2-44ca-8ed2-ae58b55e6e9d"
+    ],
+    "relevance": {
+      "032dfcb2-b3bb-42b8-9357-9f837bdd8790": 2,
+      "387f50c2-4292-4b9b-a7a3-7665dfd14ea1": 2,
+      "d81144ce-08ee-46c7-933d-42119507b9d2": 2,
+      "ed2bf985-80c2-44ca-8ed2-ae58b55e6e9d": 2,
+      "874d4878-8144-4295-9f3e-e9af3e73bb8d": 1,
+      "d50c763d-c94e-4acb-893a-5da0bdd3687b": 1,
+      "46ae0391-e54c-4e54-b87b-6d124299285e": 1,
+      "be5c9661-dca1-4611-a1c0-5340e9f95a5f": 1
+    }
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "relevant_uuids": [
+      "10456f9e-9731-4c4a-a554-352724ec80ce",
+      "33e44ce4-eea6-49b3-9d64-65f2f0cdd33b",
+      "472ddcb0-063b-4c47-abbe-dac64ce9c798",
+      "613ecc40-a2ae-48ec-b6c7-3f0741689cfc",
+      "6549d575-c54a-43f3-b091-9fe6f3584518",
+      "785cf405-8970-4d91-ab58-780e64207c2d",
+      "86dc49b6-8229-47ec-9722-cad938a66248",
+      "94518132-0442-47c6-af1d-8f1833b5e459",
+      "954e8677-fd4a-42ae-9c10-4879debac770",
+      "9871263f-a015-4f74-bb37-299c825bc5fa",
+      "a7705d2c-0c28-4b78-9c80-ef7cf7210359",
+      "a8c70c02-5582-49b2-8ab8-f66d629fb985",
+      "b10c9d45-9348-4492-896e-3b5406913f95",
+      "b2717d77-5742-4879-9d6a-d64cd7e3814d",
+      "bb647885-b0c9-4c2e-be8e-c6011d19d5a0",
+      "c136be16-1957-49dc-ba77-aa0985bf0645",
+      "c6a509c8-88b1-49f3-b23c-e6d9ffcd7dc3",
+      "ceb387f8-af65-4beb-972e-a00471764ced",
+      "e1fc9e96-0db8-41b8-952f-91edf85822a3",
+      "ede2868d-240a-4557-bef0-410230d7842b",
+      "ef6b5d2b-e2a4-4c62-b433-2dfa069596ae",
+      "f24c3e51-2940-4a5d-a6ca-93a2dcb23dce",
+      "f7972993-c24e-4322-88d2-9e335e7d5b04",
+      "f8838112-d0be-40e3-9cf4-330a8cc45313",
+      "ff357183-007f-4d6c-bb32-5ff46a0c0f25"
+    ],
+    "relevance": {
+      "10456f9e-9731-4c4a-a554-352724ec80ce": 1,
+      "86dc49b6-8229-47ec-9722-cad938a66248": 2,
+      "9871263f-a015-4f74-bb37-299c825bc5fa": 2,
+      "a8c70c02-5582-49b2-8ab8-f66d629fb985": 1,
+      "33e44ce4-eea6-49b3-9d64-65f2f0cdd33b": 1,
+      "b10c9d45-9348-4492-896e-3b5406913f95": 1,
+      "472ddcb0-063b-4c47-abbe-dac64ce9c798": 1,
+      "f7972993-c24e-4322-88d2-9e335e7d5b04": 1,
+      "ede2868d-240a-4557-bef0-410230d7842b": 1,
+      "ceb387f8-af65-4beb-972e-a00471764ced": 1,
+      "c136be16-1957-49dc-ba77-aa0985bf0645": 1,
+      "6549d575-c54a-43f3-b091-9fe6f3584518": 1,
+      "a7705d2c-0c28-4b78-9c80-ef7cf7210359": 1,
+      "94518132-0442-47c6-af1d-8f1833b5e459": 1,
+      "ff357183-007f-4d6c-bb32-5ff46a0c0f25": 1,
+      "ef6b5d2b-e2a4-4c62-b433-2dfa069596ae": 1,
+      "954e8677-fd4a-42ae-9c10-4879debac770": 1,
+      "f8838112-d0be-40e3-9cf4-330a8cc45313": 1,
+      "bb647885-b0c9-4c2e-be8e-c6011d19d5a0": 1,
+      "e1fc9e96-0db8-41b8-952f-91edf85822a3": 1,
+      "613ecc40-a2ae-48ec-b6c7-3f0741689cfc": 1,
+      "c6a509c8-88b1-49f3-b23c-e6d9ffcd7dc3": 1,
+      "b2717d77-5742-4879-9d6a-d64cd7e3814d": 1,
+      "f24c3e51-2940-4a5d-a6ca-93a2dcb23dce": 1,
+      "785cf405-8970-4d91-ab58-780e64207c2d": 1
+    }
+  },
+  {
+    "query": "intelligence",
+    "relevant_uuids": [
+      "14416b29-230e-4ad9-a236-7330ba3ee0e6",
+      "321095c4-5e67-4eab-8bb8-362b9c6677dc",
+      "32f4c61a-fe3a-44ed-bc69-0545f9e4b950",
+      "337728f9-0f34-42ea-a3e9-c5cfbd23ac30",
+      "42cb104f-db6e-4442-a0fa-52a3c3c4fce8",
+      "48101fb8-8a20-4ad5-960a-cd5aea7ac2aa",
+      "4d0832f5-eeba-4c94-9369-3a3478df6258",
+      "5a5a4339-cddb-42b1-8164-781e12e16c0c",
+      "5b554ba6-9f2a-4952-9837-aea05e9988db",
+      "5d405be5-9be5-4355-a687-6b42535d44ef",
+      "6117b19f-6dd3-4a61-b625-190d97848d92",
+      "68aa15a4-8d40-46b6-a682-2c9a3ee71bff",
+      "6b66b52f-bb21-40ef-998a-5b0072ebfb3e",
+      "6e5fb03f-4f64-4f72-a575-d2f9f8554984",
+      "89266e57-4a6c-4516-97f2-de53a04bf017",
+      "942b6f04-8845-4706-929d-5ce8e477889b",
+      "98614395-23ac-4891-a2ab-db76208e3bcd",
+      "991b4dc8-28ed-4c4d-a890-13f46e21f3f8",
+      "9cfa9873-cfdc-4262-85f8-d7575215ccec",
+      "9f899f2c-dc28-4239-9710-3f167f73c905",
+      "b58b7248-d215-4da5-af03-c17831cdb430",
+      "c19afaf5-fc05-4b9c-ad5f-f09d603368f7",
+      "c49a50d8-f362-4be4-a1bb-09cd7c5d97fb",
+      "d1b6119a-ec1b-4a9f-8d77-9b9c17e5a2ba",
+      "d6ecaa79-0e25-459d-8537-f80809d6052f",
+      "dbe9ed84-9ff7-4869-93de-0b784d4e04bb",
+      "dc54910e-4289-48d6-aa6c-48fdec4565b7",
+      "f8edd413-0e27-4a99-a30e-1bd41a1e8e28",
+      "fbe3ef22-c81d-4a95-b5cd-5910f60723b8",
+      "feb6bb20-c98f-4488-8aa1-7ed2eae1395b"
+    ],
+    "relevance": {
+      "321095c4-5e67-4eab-8bb8-362b9c6677dc": 2,
+      "32f4c61a-fe3a-44ed-bc69-0545f9e4b950": 1,
+      "337728f9-0f34-42ea-a3e9-c5cfbd23ac30": 2,
+      "42cb104f-db6e-4442-a0fa-52a3c3c4fce8": 1,
+      "48101fb8-8a20-4ad5-960a-cd5aea7ac2aa": 2,
+      "4d0832f5-eeba-4c94-9369-3a3478df6258": 2,
+      "5a5a4339-cddb-42b1-8164-781e12e16c0c": 2,
+      "5b554ba6-9f2a-4952-9837-aea05e9988db": 1,
+      "5d405be5-9be5-4355-a687-6b42535d44ef": 1,
+      "68aa15a4-8d40-46b6-a682-2c9a3ee71bff": 2,
+      "942b6f04-8845-4706-929d-5ce8e477889b": 1,
+      "98614395-23ac-4891-a2ab-db76208e3bcd": 2,
+      "991b4dc8-28ed-4c4d-a890-13f46e21f3f8": 1,
+      "9cfa9873-cfdc-4262-85f8-d7575215ccec": 1,
+      "9f899f2c-dc28-4239-9710-3f167f73c905": 1,
+      "b58b7248-d215-4da5-af03-c17831cdb430": 1,
+      "d1b6119a-ec1b-4a9f-8d77-9b9c17e5a2ba": 2,
+      "d6ecaa79-0e25-459d-8537-f80809d6052f": 1,
+      "dbe9ed84-9ff7-4869-93de-0b784d4e04bb": 2,
+      "dc54910e-4289-48d6-aa6c-48fdec4565b7": 1,
+      "f8edd413-0e27-4a99-a30e-1bd41a1e8e28": 1,
+      "fbe3ef22-c81d-4a95-b5cd-5910f60723b8": 2,
+      "feb6bb20-c98f-4488-8aa1-7ed2eae1395b": 1,
+      "6b66b52f-bb21-40ef-998a-5b0072ebfb3e": 1,
+      "14416b29-230e-4ad9-a236-7330ba3ee0e6": 1,
+      "6117b19f-6dd3-4a61-b625-190d97848d92": 1,
+      "6e5fb03f-4f64-4f72-a575-d2f9f8554984": 1,
+      "c19afaf5-fc05-4b9c-ad5f-f09d603368f7": 1,
+      "89266e57-4a6c-4516-97f2-de53a04bf017": 1,
+      "c49a50d8-f362-4be4-a1bb-09cd7c5d97fb": 1
+    }
+  },
+  {
+    "query": "nodejs backend development",
+    "relevant_uuids": [
+      "0698656b-fd31-4c60-b74e-5f75fcd2ba35",
+      "14f8cf62-d467-4e1d-ac9f-69c12d10af17",
+      "236b3caa-0f2f-464a-9187-16282559b241",
+      "2e06599d-f0bd-4af6-b30a-3dedae8b0d90",
+      "351abea6-1816-42cd-99f6-5d3d4f3546a8",
+      "35cdab67-0d55-42d3-9830-ea9313aba29e",
+      "40c2d588-2ed0-428c-a6f7-a59a61b70b1f",
+      "660b602a-36ef-421b-9113-6bcefbcfe5db",
+      "6904454a-455d-45cf-82eb-157327085fe5",
+      "69c162b5-ad81-4f72-ae28-e3f7589b0764",
+      "9f3909c1-72b0-48a7-ac37-02cbed719d65",
+      "a4968534-8c9a-40c9-98fd-0b9230268482",
+      "b248d8d2-4801-4f35-8228-f6b40e280eac",
+      "bb485a60-1fcb-43f7-86d4-eada3c228859",
+      "bc607385-e866-4c39-a580-0a1a7daddb08",
+      "cd79dc6c-9d3a-43f5-9f32-4b4e45a27aff",
+      "d3b142ce-78a4-42b8-9eb5-d8d5cd92b4ca",
+      "faa84517-8d2c-46c2-9b46-8fa88a5527b2"
+    ],
+    "relevance": {
+      "0698656b-fd31-4c60-b74e-5f75fcd2ba35": 2,
+      "14f8cf62-d467-4e1d-ac9f-69c12d10af17": 2,
+      "236b3caa-0f2f-464a-9187-16282559b241": 2,
+      "2e06599d-f0bd-4af6-b30a-3dedae8b0d90": 2,
+      "351abea6-1816-42cd-99f6-5d3d4f3546a8": 2,
+      "35cdab67-0d55-42d3-9830-ea9313aba29e": 2,
+      "40c2d588-2ed0-428c-a6f7-a59a61b70b1f": 2,
+      "660b602a-36ef-421b-9113-6bcefbcfe5db": 2,
+      "69c162b5-ad81-4f72-ae28-e3f7589b0764": 2,
+      "9f3909c1-72b0-48a7-ac37-02cbed719d65": 2,
+      "a4968534-8c9a-40c9-98fd-0b9230268482": 2,
+      "b248d8d2-4801-4f35-8228-f6b40e280eac": 2,
+      "bb485a60-1fcb-43f7-86d4-eada3c228859": 1,
+      "bc607385-e866-4c39-a580-0a1a7daddb08": 1,
+      "d3b142ce-78a4-42b8-9eb5-d8d5cd92b4ca": 2,
+      "faa84517-8d2c-46c2-9b46-8fa88a5527b2": 2,
+      "6904454a-455d-45cf-82eb-157327085fe5": 2,
+      "cd79dc6c-9d3a-43f5-9f32-4b4e45a27aff": 1
+    }
+  },
+  {
+    "query": "nextjs server side rendering",
+    "relevant_uuids": [
+      "2a265f45-c1c2-4443-b266-89cb4e906734",
+      "64b06efa-c099-425b-b796-64965ee8230b",
+      "8758083b-b145-4fb8-9c49-a6022dc09249",
+      "94c54c84-cf0f-4132-a4ee-f1fbcecdb9b6",
+      "a0585953-c7ca-4abf-8ab0-ca858d68f332",
+      "a1703f2e-30a7-4eed-9bf7-462cd1472763",
+      "d61cd85e-90c6-45be-beab-6232fd822645"
+    ],
+    "relevance": {
+      "64b06efa-c099-425b-b796-64965ee8230b": 2,
+      "8758083b-b145-4fb8-9c49-a6022dc09249": 1,
+      "94c54c84-cf0f-4132-a4ee-f1fbcecdb9b6": 2,
+      "a0585953-c7ca-4abf-8ab0-ca858d68f332": 2,
+      "d61cd85e-90c6-45be-beab-6232fd822645": 2,
+      "a1703f2e-30a7-4eed-9bf7-462cd1472763": 1,
+      "2a265f45-c1c2-4443-b266-89cb4e906734": 1
+    }
+  },
+  {
+    "query": "machine learning model deployment",
+    "relevant_uuids": [
+      "0fc9a6c9-eff8-4767-a866-3d2a93dfa1db",
+      "13d5380c-c62f-4fd3-8715-dd4e4055107e",
+      "2f321852-17fa-4044-bdcf-a65d1b10fb01",
+      "42a576be-f1d4-4879-a359-c888613857dd",
+      "4a4aefe7-d7b9-4ca3-b775-5b3421c06a20",
+      "7d427f9e-a313-4b14-b987-cd517fca68fd",
+      "8afcd4fa-c753-44b6-b31c-5d33e3fba1c8",
+      "906baec3-18ae-4a49-9f8a-1ae52b0c8574",
+      "9df7aac9-80b3-48be-a415-c6fe225cc02d",
+      "a74ef83b-1d50-4265-8066-175da9990171",
+      "bac55106-06a6-41be-8540-b200ee8609c4",
+      "c5f0dff1-ba69-4540-99ee-1668f44c4f71",
+      "d15ec1ea-2451-449f-be6a-f1ac4eacc8b4",
+      "d693ac7f-71c6-46c9-8b19-9768e06d1b7a",
+      "dba6bd7d-a54b-43f4-8799-e1e4249fba4d",
+      "f8e91755-2551-462e-9411-6dc1b3168f02"
+    ],
+    "relevance": {
+      "0fc9a6c9-eff8-4767-a866-3d2a93dfa1db": 2,
+      "13d5380c-c62f-4fd3-8715-dd4e4055107e": 2,
+      "2f321852-17fa-4044-bdcf-a65d1b10fb01": 2,
+      "42a576be-f1d4-4879-a359-c888613857dd": 2,
+      "4a4aefe7-d7b9-4ca3-b775-5b3421c06a20": 2,
+      "7d427f9e-a313-4b14-b987-cd517fca68fd": 2,
+      "8afcd4fa-c753-44b6-b31c-5d33e3fba1c8": 2,
+      "906baec3-18ae-4a49-9f8a-1ae52b0c8574": 2,
+      "9df7aac9-80b3-48be-a415-c6fe225cc02d": 2,
+      "a74ef83b-1d50-4265-8066-175da9990171": 2,
+      "bac55106-06a6-41be-8540-b200ee8609c4": 2,
+      "d15ec1ea-2451-449f-be6a-f1ac4eacc8b4": 2,
+      "d693ac7f-71c6-46c9-8b19-9768e06d1b7a": 2,
+      "dba6bd7d-a54b-43f4-8799-e1e4249fba4d": 2,
+      "f8e91755-2551-462e-9411-6dc1b3168f02": 2,
+      "c5f0dff1-ba69-4540-99ee-1668f44c4f71": 1
+    }
+  },
+  {
+    "query": "distributed transaction introduction",
+    "relevant_uuids": [
+      "05858e88-666f-4441-94af-f18e618d951e",
+      "2fd7dc07-1fb5-483a-b77f-9e7a88f5897c",
+      "5f1af0e1-5655-4350-ae71-a5106bcb6982"
+    ],
+    "relevance": {
+      "05858e88-666f-4441-94af-f18e618d951e": 1,
+      "2fd7dc07-1fb5-483a-b77f-9e7a88f5897c": 1,
+      "5f1af0e1-5655-4350-ae71-a5106bcb6982": 2
+    }
+  },
+  {
+    "query": "dynamodb expression package",
+    "relevant_uuids": [
+      "e8fcdab5-175c-4806-8094-2dc512f1b7fa"
+    ],
+    "relevance": {
+      "e8fcdab5-175c-4806-8094-2dc512f1b7fa": 2
+    }
+  },
+  {
+    "query": "linux socks proxy server",
+    "relevant_uuids": [
+      "15918cc9-aba5-47e9-b12f-c31cd4d87723",
+      "1e899b76-21c6-407f-a79d-c958b0357e58",
+      "abd558ff-1700-48bf-8cbe-9ef5cfba4063",
+      "d3fe0ff4-2c8e-46ef-a816-ba6403ef3c0b"
+    ],
+    "relevance": {
+      "15918cc9-aba5-47e9-b12f-c31cd4d87723": 1,
+      "1e899b76-21c6-407f-a79d-c958b0357e58": 1,
+      "abd558ff-1700-48bf-8cbe-9ef5cfba4063": 1,
+      "d3fe0ff4-2c8e-46ef-a816-ba6403ef3c0b": 2
+    }
+  },
+  {
+    "query": "gcd tutorial ios",
+    "relevant_uuids": [
+      "34b77deb-bf42-4455-93ea-104c98d4bf0b"
+    ],
+    "relevance": {
+      "34b77deb-bf42-4455-93ea-104c98d4bf0b": 2
+    }
+  },
+  {
+    "query": "sripriya kalyanasundaram lambda test strategy",
+    "relevant_uuids": [
+      "b49dafaf-9282-480f-b8e1-d1e86f3dc2eb"
+    ],
+    "relevance": {
+      "b49dafaf-9282-480f-b8e1-d1e86f3dc2eb": 2
+    }
+  },
+  {
+    "query": "system integration testing streamlining",
+    "relevant_uuids": [
+      "036f5340-fa1d-43cd-ae0a-5b98b70101fb",
+      "0829a064-522f-4230-baf1-271e80fa5fa7",
+      "173fee7b-fb41-4234-9528-922d0e18ac1b",
+      "3c60cb9a-911a-4c6a-95d6-e4b0318998d4",
+      "4631d316-fb5a-43f1-b526-b19dc94de9d1",
+      "5711297a-f88a-4ae2-a96c-7062745c9818",
+      "632c77f2-60be-476d-b34e-2dea61f1ceb4",
+      "643bd886-917e-43ab-80a3-9f9970e566e7",
+      "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+      "f0c3cc6b-e4ef-4923-8bfd-90e512b91709",
+      "fb2ad045-6503-484b-b7ce-e402ee6a4aa1",
+      "fe3efefa-1b86-494b-9f95-f9562bf65522"
+    ],
+    "relevance": {
+      "036f5340-fa1d-43cd-ae0a-5b98b70101fb": 1,
+      "0829a064-522f-4230-baf1-271e80fa5fa7": 1,
+      "3c60cb9a-911a-4c6a-95d6-e4b0318998d4": 1,
+      "5711297a-f88a-4ae2-a96c-7062745c9818": 2,
+      "632c77f2-60be-476d-b34e-2dea61f1ceb4": 1,
+      "f0c3cc6b-e4ef-4923-8bfd-90e512b91709": 2,
+      "fb2ad045-6503-484b-b7ce-e402ee6a4aa1": 1,
+      "fe3efefa-1b86-494b-9f95-f9562bf65522": 1,
+      "643bd886-917e-43ab-80a3-9f9970e566e7": 1,
+      "d7b78ce2-8380-4002-b459-265cf4f96ef3": 1,
+      "173fee7b-fb41-4234-9528-922d0e18ac1b": 1,
+      "4631d316-fb5a-43f1-b526-b19dc94de9d1": 1
+    }
+  },
+  {
+    "query": "nrwl nx react hmr",
+    "relevant_uuids": [
+      "f29fdb2f-ab9f-4e2d-b4c5-59c37ddcd8c7"
+    ],
+    "relevance": {
+      "f29fdb2f-ab9f-4e2d-b4c5-59c37ddcd8c7": 2
+    }
+  },
+  {
+    "query": "cloudinary auth0 file storage",
+    "relevant_uuids": [
+      "7531d1d8-f3bf-48e7-a390-117fd70d015d"
+    ],
+    "relevance": {
+      "7531d1d8-f3bf-48e7-a390-117fd70d015d": 2
+    }
+  },
+  {
+    "query": "my public inbox",
+    "relevant_uuids": [
+      "c42106b9-8ff9-4e79-81f7-b89bb2606a47"
+    ],
+    "relevance": {
+      "c42106b9-8ff9-4e79-81f7-b89bb2606a47": 2
+    }
+  },
+  {
+    "query": "best automated testing tools",
+    "relevant_uuids": [
+      "084c5e32-bcc7-4f34-8dee-b6d25fbba92a",
+      "0f88632c-e672-43e2-85ee-85e5f7f083d5",
+      "1ca4effc-753c-4e55-a347-4128220dcc87",
+      "31126b88-6812-4801-aa4f-54ef857f3361",
+      "4779db65-0416-4027-b71f-bac42d62481e",
+      "5258ea95-2ba3-4ece-b3ae-f4e5d82ad6be",
+      "88e5d6d8-5ab8-49a9-99bb-ef1c22461c5e",
+      "a202df6b-4b60-450e-adcc-8efbff62b616",
+      "aaede71e-8aa2-4e9c-8f41-857fd5a5f6fc",
+      "d37dc148-2bb4-4e5c-96df-89d7120ee28a",
+      "db8af6fd-3776-4cb6-bd94-1db6a663dbc5",
+      "e0074a4a-ab39-4594-a68b-b01fa6018980",
+      "f2f4a406-6c99-4d08-9d7d-f163a9163f24"
+    ],
+    "relevance": {
+      "0f88632c-e672-43e2-85ee-85e5f7f083d5": 2,
+      "1ca4effc-753c-4e55-a347-4128220dcc87": 1,
+      "4779db65-0416-4027-b71f-bac42d62481e": 2,
+      "88e5d6d8-5ab8-49a9-99bb-ef1c22461c5e": 2,
+      "a202df6b-4b60-450e-adcc-8efbff62b616": 1,
+      "aaede71e-8aa2-4e9c-8f41-857fd5a5f6fc": 2,
+      "d37dc148-2bb4-4e5c-96df-89d7120ee28a": 1,
+      "db8af6fd-3776-4cb6-bd94-1db6a663dbc5": 2,
+      "e0074a4a-ab39-4594-a68b-b01fa6018980": 1,
+      "f2f4a406-6c99-4d08-9d7d-f163a9163f24": 2,
+      "5258ea95-2ba3-4ece-b3ae-f4e5d82ad6be": 1,
+      "084c5e32-bcc7-4f34-8dee-b6d25fbba92a": 1,
+      "31126b88-6812-4801-aa4f-54ef857f3361": 1
+    }
+  }
+]
