@@ -13,6 +13,27 @@ existing `hybrid-search-eval-results-2026-08-20.md` root-cause finding isn't a l
 Sprint plan: optimize hybrid/RRF fusion first, then the remaining ranking-quality gap, target
 Saturday 2026-08-22.
 
+**Accepted measures implemented (2026-08-21):** deployed weighted RRF (semantic=0.8) and R-precision CAP=10. Re-verified against the eval split: RRF hybrid Precision@5 improved to 0.3963, R-precision improved to 0.6810. Mongo $text baseline Precision@5 is 0.3741, R-precision corrected by cap to 0.6224.
+
+**Remaining hypothesis checklist — 5 items investigated, 1 promoted to accepted, 4 still open
+(2026-08-21):** delegated first-principles → root-cause → confirming-test pass on scenarios the
+`/api/search` engine itself doesn't handle (not eval-methodology gaps — those are closed). Full
+writeup: `artifacts/ai-search-upgrade/hypothesis-checklist-remaining-items-2026-08-21.md`.
+- **Promoted:** `$search`-vs-`$text` ranking divergence confirmed structural, not a missing-boost
+  gap (field boosting made it worse on `postgres index tuning`, not better) — this finalized
+  Measure 3's scope to a zero-results fallback rather than a full query-path replacement, see below.
+- **Still open, ongoing verification:** (a) off-domain query rejection — `score_threshold` floor
+  mechanism already exists in `embedding_service.py`, unused; cleanly separates a 7+7 test sample
+  but needs full golden-set calibration before a production value is accepted. (b) one-keyword/
+  ambiguous queries — pseudo-relevance feedback tested and **falsified** (hurts all 4 ambiguous
+  golden queries, `life` recall 0→0 via topic drift); no LLM-free fix found yet, escalated as a
+  design question given the no-LLM-on-`/api/search` constraint. (c) C#/C++ vocabulary mismatch —
+  standard Atlas Search analyzer confirmed to *not* fix it; `charFilter: mapping` identified as the
+  documented correct fix, not yet tested. (d) narrow-corpus queries (`aws cloud infrastructure
+  services` etc.) — deeper candidate pools alone don't help (Recall@5 flat L=10→L=50), but confirmed
+  as a necessary prerequisite for cross-encoder reranking, which needs a Railway free-tier memory
+  feasibility check (~440MB) before any test.
+
 **Hybrid RRF fusion bug fixed (2026-08-21):** root-caused via a first-principles fusion-invariant
 framework + `superpowers:systematic-debugging` pass, refining the 2026-08-20 finding — the bug
 was two upstream defects in `home.js`'s hydration step, not the RRF math itself: semantic matches
