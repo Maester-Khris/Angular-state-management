@@ -1,0 +1,547 @@
+[
+  {
+    "query": "redis caching strategies",
+    "uuid": "5a27e03e-1ee2-4ca9-9a9f-23fe6f2f1837",
+    "relevant": true
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "uuid": "19fb0959-eb97-496c-bf97-091dd8f541c7",
+    "relevant": false
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "uuid": "f7972993-c24e-4322-88d2-9e335e7d5b04",
+    "relevant": false
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "uuid": "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
+    "relevant": false
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "uuid": "93d6887f-a884-4ef4-8c4c-da2e4713a17f",
+    "relevant": false
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "uuid": "96f8ca24-a2e7-4119-b924-93726b4753e3",
+    "relevant": false
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "uuid": "9f28fc77-7d8f-408f-9dc7-3020d031938e",
+    "relevant": false
+  },
+  {
+    "query": "react state management",
+    "uuid": "6bf31c82-0c04-4704-92d2-cd76fa519e1d",
+    "relevant": false
+  },
+  {
+    "query": "life",
+    "uuid": "e9793257-820b-4128-a6c7-5403a309fe9e",
+    "relevant": false
+  },
+  {
+    "query": "life",
+    "uuid": "f5f13626-a71d-4dd0-aceb-e2f5204c5dd1",
+    "relevant": false
+  },
+  {
+    "query": "life",
+    "uuid": "fcea9235-1fab-49a0-98e4-199a80aa5a21",
+    "relevant": true
+  },
+  {
+    "query": "life",
+    "uuid": "f5031a76-608e-4bde-8b86-9dc8ddb82caf",
+    "relevant": true
+  },
+  {
+    "query": "life",
+    "uuid": "bdab74ab-d758-4857-8b16-9ed22cf16733",
+    "relevant": false
+  },
+  {
+    "query": "life",
+    "uuid": "6bf9f8ee-9663-4b94-9ca7-ed2e462d4efc",
+    "relevant": false
+  },
+  {
+    "query": "intelligence",
+    "uuid": "7018ed88-8ea4-447e-816a-09ec147aeccf",
+    "relevant": false
+  },
+  {
+    "query": "intelligence",
+    "uuid": "ae2722dd-7052-4b37-b35b-b3cdadd7f39b",
+    "relevant": true
+  },
+  {
+    "query": "intelligence",
+    "uuid": "3f864714-7004-4167-b8f0-5bcdfd7d6300",
+    "relevant": true
+  },
+  {
+    "query": "intelligence",
+    "uuid": "bef52e17-b907-4bc2-a382-b63afb461998",
+    "relevant": true
+  },
+  {
+    "query": "memory",
+    "uuid": "719eb233-9d23-4a8d-a32d-d7b63689e404",
+    "relevant": true
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "uuid": "03d4b583-383e-4728-97f1-69caf5934aa0",
+    "relevant": false
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "uuid": "c2ecc61c-8a3a-468b-90ad-86e19d8fae36",
+    "relevant": true
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "uuid": "f1238be3-b8c0-46cc-8c78-78574e3c0e60",
+    "relevant": false
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "uuid": "fb24326c-ea75-4abc-a472-1777b5f3ad10",
+    "relevant": false
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "uuid": "541a48e1-2a9f-454d-8270-a8b285e59f09",
+    "relevant": false
+  },
+  {
+    "query": "aws cloud infrastructure services",
+    "uuid": "b917fe99-1067-49a6-b2b0-e0e0ebfdef9a",
+    "relevant": true
+  },
+  {
+    "query": "aws cloud infrastructure services",
+    "uuid": "88307b26-be07-4cac-bf47-0aa57dfe39ff",
+    "relevant": true
+  },
+  {
+    "query": "aws cloud infrastructure services",
+    "uuid": "7e3b537f-db83-4bcc-8d29-b5b76568e84d",
+    "relevant": false
+  },
+  {
+    "query": "aws cloud infrastructure services",
+    "uuid": "4793f57f-29db-4278-9050-2551e20c5f53",
+    "relevant": false
+  },
+  {
+    "query": "aws cloud infrastructure services",
+    "uuid": "bb5ed348-0ad8-472a-9c71-b636d5cbf5db",
+    "relevant": false
+  },
+  {
+    "query": "software engineer career growth",
+    "uuid": "5aa4ecb6-5695-4573-bcfe-2cd80b035461",
+    "relevant": true
+  },
+  {
+    "query": "software engineer career growth",
+    "uuid": "a128d993-47a1-461d-881f-496d5108f88b",
+    "relevant": true
+  },
+  {
+    "query": "software engineer career growth",
+    "uuid": "b8f2bf3a-504f-4115-a761-d403e15087de",
+    "relevant": true
+  },
+  {
+    "query": "software engineer career growth",
+    "uuid": "56cc14fa-acaf-4eb6-84b9-66ecdb37bdd1",
+    "relevant": true
+  },
+  {
+    "query": "software engineer career growth",
+    "uuid": "bb4ab9d5-bda1-40a4-b690-e36c959913a2",
+    "relevant": false
+  },
+  {
+    "query": "software engineer career growth",
+    "uuid": "8af37a58-7cd0-4a19-b41f-590d1e974a49",
+    "relevant": true
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "e31e45e5-87b8-4fa6-a167-b0eb8bf2b1b2",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "231ece93-045f-42ac-ba34-fe4aa0691125",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "6d11fb81-8c63-4e46-8671-5690f8561e3b",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "65058ee6-4e86-43ab-843d-06e71472f2b4",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "7992b54c-54c5-46e7-887e-a2bfdaa8a6e7",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "6a2676a0-d073-44fc-9b0f-b9e485edf56a",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "62f32d5b-751d-4b5f-a205-ef0f4ab1eb12",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "c2f3abe0-aef7-4215-b734-3d2b6978a12e",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "34b985e3-fa12-4d6b-aa66-50c5397d6774",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "00174e44-7496-4e97-8f79-06b4b25dc14e",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "5153a2a0-eb75-4594-98fe-ab588d2aed29",
+    "relevant": false
+  },
+  {
+    "query": "nodejs backend development",
+    "uuid": "95eafe1e-9e28-49ff-bad8-288abe3e5977",
+    "relevant": false
+  },
+  {
+    "query": "typescript type safety patterns",
+    "uuid": "352a1c5c-277b-4b6c-a139-c989b417110b",
+    "relevant": false
+  },
+  {
+    "query": "multi cloud deployment strategies",
+    "uuid": "15dd1e3b-a547-437d-976f-8b75f8cf849c",
+    "relevant": false
+  },
+  {
+    "query": "multi cloud deployment strategies",
+    "uuid": "7ae0e0fb-3b55-44b1-97ae-e45c07f5fa3e",
+    "relevant": false
+  },
+  {
+    "query": "multi cloud deployment strategies",
+    "uuid": "e3abd6b5-1237-457f-bd58-5aa3ad4d3d69",
+    "relevant": false
+  },
+  {
+    "query": "css layout and styling techniques",
+    "uuid": "510b733e-f6d0-4592-b224-3c40d6c771f2",
+    "relevant": false
+  },
+  {
+    "query": "css layout and styling techniques",
+    "uuid": "ac34368d-f74c-47a5-a962-031447741d0e",
+    "relevant": false
+  },
+  {
+    "query": "css layout and styling techniques",
+    "uuid": "23ebeb6c-cbb4-4ecb-90e0-d38365a41bd5",
+    "relevant": true
+  },
+  {
+    "query": "linux command line tools",
+    "uuid": "66571d78-7a44-4598-bb1b-4f9eee9827ab",
+    "relevant": true
+  },
+  {
+    "query": "linux command line tools",
+    "uuid": "3aabece4-3926-46ee-a518-e9698c266ddd",
+    "relevant": true
+  },
+  {
+    "query": "linux command line tools",
+    "uuid": "2ee91f98-7f12-4ac6-ae1e-5c8c2d026272",
+    "relevant": true
+  },
+  {
+    "query": "php web development frameworks",
+    "uuid": "cc08b732-4e94-4402-925c-77cdd45b3ce2",
+    "relevant": false
+  },
+  {
+    "query": "php web development frameworks",
+    "uuid": "81631660-a48e-4cbe-8a6f-3eaa7aabc086",
+    "relevant": true
+  },
+  {
+    "query": "php web development frameworks",
+    "uuid": "3c5e51a7-8302-4494-ba0a-34ad13a8f5aa",
+    "relevant": true
+  },
+  {
+    "query": "php web development frameworks",
+    "uuid": "e7f8f0dc-a4b1-4dc9-8e51-0afe89842d62",
+    "relevant": true
+  },
+  {
+    "query": "nextjs server side rendering",
+    "uuid": "bef5f8a8-0643-4dca-891a-fb68ea33a192",
+    "relevant": true
+  },
+  {
+    "query": "nextjs server side rendering",
+    "uuid": "aad28ab4-6548-4877-82d3-22c69c6d6506",
+    "relevant": true
+  },
+  {
+    "query": "dotnet core web api",
+    "uuid": "738c4f05-e17b-4d76-bd8c-b74e0a0449b5",
+    "relevant": false
+  },
+  {
+    "query": "dotnet core web api",
+    "uuid": "bb6bf4b7-8fe7-4b79-9ce9-54b4084beed7",
+    "relevant": false
+  },
+  {
+    "query": "csharp async programming patterns",
+    "uuid": "8d002bf7-ab2c-4472-b864-8d1ac0657224",
+    "relevant": false
+  },
+  {
+    "query": "cache",
+    "uuid": "43425191-c3fe-4317-bcf6-b08ad3e541e5",
+    "relevant": true
+  },
+  {
+    "query": "stack",
+    "uuid": "083d322c-5081-47a7-bb67-55db4d07fea2",
+    "relevant": true
+  },
+  {
+    "query": "backtracking n queens",
+    "uuid": "93dc43ac-1fe3-475f-8424-6c40d89ad135",
+    "relevant": false
+  },
+  {
+    "query": "backtracking n queens",
+    "uuid": "f4e02aae-6cf8-4489-bd6d-8fa552c85ab1",
+    "relevant": false
+  },
+  {
+    "query": "distributed transaction introduction",
+    "uuid": "49515eb5-70b5-4d15-a990-c977e202718a",
+    "relevant": false
+  },
+  {
+    "query": "distributed transaction introduction",
+    "uuid": "e9893ac4-c3e2-4806-aa07-d2ea58f8c619",
+    "relevant": false
+  },
+  {
+    "query": "distributed transaction introduction",
+    "uuid": "76758e76-900d-4f45-97e8-6d8f95fbd8ec",
+    "relevant": false
+  },
+  {
+    "query": "dynamodb expression package",
+    "uuid": "a8365eb6-b920-45c5-84ac-ba5501299bf3",
+    "relevant": true
+  },
+  {
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "bd80d99d-4dcc-49bd-9868-e9a4fe4d1d40",
+    "relevant": true
+  },
+  {
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "133b7f73-988e-4d43-8cd4-fcafae823f8f",
+    "relevant": true
+  },
+  {
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "098885a7-8649-4015-8395-b1fb4b4f65e2",
+    "relevant": true
+  },
+  {
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "7826b7eb-fb4e-446f-8ca0-2fa74b021019",
+    "relevant": true
+  },
+  {
+    "query": "drones construction site management",
+    "uuid": "011940ed-22cc-474d-ad4b-00188e1bd4c3",
+    "relevant": false
+  },
+  {
+    "query": "emacs macos catalina",
+    "uuid": "a541cc51-99e4-4591-b5e4-7b75588164e2",
+    "relevant": false
+  },
+  {
+    "query": "nrwl nx react hmr",
+    "uuid": "32634914-defe-431a-8c62-6139ff95e48f",
+    "relevant": false
+  },
+  {
+    "query": "nrwl nx react hmr",
+    "uuid": "f2b4f54b-6c6b-4b4d-88e4-d86af57f2194",
+    "relevant": false
+  },
+  {
+    "query": "how spellcheckers work",
+    "uuid": "2e9bf2db-ca95-4fcd-908f-cbc7cd6aacab",
+    "relevant": false
+  },
+  {
+    "query": "how spellcheckers work",
+    "uuid": "81266a23-29d5-47e1-b28b-24266334fc2a",
+    "relevant": false
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "71e6ab6f-9add-4bc4-9041-6b812a1e457d",
+    "relevant": false
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "d825ea5c-6f46-4848-b3eb-28144b8f8ff6",
+    "relevant": true
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "91c37a1a-2b06-403a-a17e-e8f62abe1ff5",
+    "relevant": false
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "8847d049-be09-4667-9127-c37ee44f5d09",
+    "relevant": true
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+    "relevant": true
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "d2df02a6-5a08-4439-8840-f8174f933b52",
+    "relevant": true
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "4f5f4361-b4d9-428b-a7d6-70ad0a10df60",
+    "relevant": true
+  },
+  {
+    "query": "best automated testing tools",
+    "uuid": "01525b44-a3b6-4a6e-bfef-649661f3a154",
+    "relevant": false
+  },
+  {
+    "query": "load balancing 101 guide",
+    "uuid": "24ec1a60-fdd1-4d1e-9994-38e8085f00d8",
+    "relevant": false
+  },
+  {
+    "query": "load balancing 101 guide",
+    "uuid": "51552ab8-71c4-4df5-b179-8f3f52c94175",
+    "relevant": false
+  },
+  {
+    "query": "load balancing 101 guide",
+    "uuid": "f347f7d7-21ed-4fb8-837c-805371a060f1",
+    "relevant": false
+  },
+  {
+    "query": "load balancing 101 guide",
+    "uuid": "8ff0a6ef-c8ab-447b-a29b-5ac5d5335b38",
+    "relevant": false
+  },
+  {
+    "query": "load balancing 101 guide",
+    "uuid": "cda2dc3d-cbe4-4e34-bf95-b540a65b5093",
+    "relevant": false
+  },
+  {
+    "query": "linux socks proxy server",
+    "uuid": "3066c7e8-67a3-469b-8b9e-3ac9af4adf7b",
+    "relevant": true
+  },
+  {
+    "query": "microsoft entra id intro",
+    "uuid": "d64ae163-92db-417e-b78d-4ff64db6cd3e",
+    "relevant": false
+  },
+  {
+    "query": "microsoft entra id intro",
+    "uuid": "124d7d31-e5a1-4599-a301-271585032fa1",
+    "relevant": false
+  },
+  {
+    "query": "microsoft entra id intro",
+    "uuid": "3f3040ea-3fdc-4eb7-a08d-db262f76bf41",
+    "relevant": false
+  },
+  {
+    "query": "pkce oauth javascript apps",
+    "uuid": "4dfb37d8-7e37-49bf-8deb-1bab4e9e59d9",
+    "relevant": true
+  },
+  {
+    "query": "docker disk bandwidth limits",
+    "uuid": "751b9f2d-c3c7-4768-b29a-aa1f5c084488",
+    "relevant": false
+  },
+  {
+    "query": "docker disk bandwidth limits",
+    "uuid": "87d905d5-9760-454e-a44c-66b377bdc859",
+    "relevant": false
+  },
+  {
+    "query": "system integration testing streamlining",
+    "uuid": "296df62e-5edd-4413-8eaa-74cc56f8fe38",
+    "relevant": true
+  },
+  {
+    "query": "smart solutions future education",
+    "uuid": "e2dd9259-b915-4b7b-ae2f-e5e67d43ef4a",
+    "relevant": false
+  },
+  {
+    "query": "smart solutions future education",
+    "uuid": "fc34ff08-9f73-4faa-ab40-67714c5a580a",
+    "relevant": true
+  },
+  {
+    "query": "spring microservices gateway thymeleaf",
+    "uuid": "7fbde689-0179-45de-a0d1-c94ad5943b50",
+    "relevant": false
+  },
+  {
+    "query": "spring microservices gateway thymeleaf",
+    "uuid": "e6a47231-d6ba-41f2-8327-8966842edb8e",
+    "relevant": false
+  }
+]
