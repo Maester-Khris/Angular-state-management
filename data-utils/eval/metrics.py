@@ -48,9 +48,13 @@ def mrr(retrieved: list[str], relevant: set[str]) -> float:
 
 
 def r_precision(retrieved: list[str], relevant: set[str]) -> float:
-    """Precision at rank R, where R = number of relevant docs for this query -- avoids the
-    fixed-k=5 assumption when the true relevant-doc count varies per query."""
-    r = len(relevant)
+    """Precision at rank R, where R = number of relevant docs for this query, capped at 10
+    (FETCH_LIMIT) -- avoids the fixed-k=5 assumption while guaranteeing R never exceeds what's
+    actually fetched. Without the cap, queries with >10 relevant docs silently degenerate into
+    precision@10 anyway (precision_at_k's denominator is len(top_k), not r), making the metric
+    misleadingly report "R-precision" when it measured precision@10. Capping r directly makes
+    that the honest, intended behavior instead of a silent side effect."""
+    r = min(len(relevant), 10)
     if r == 0:
         return 0.0
     return precision_at_k(retrieved, relevant, r)

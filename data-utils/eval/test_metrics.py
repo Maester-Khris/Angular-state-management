@@ -40,3 +40,19 @@ def test_r_precision_uses_relevant_count_as_k():
 
 def test_r_precision_no_relevant_docs_is_zero():
     assert r_precision(["a", "b"], set()) == 0.0
+
+
+def test_r_precision_caps_k_at_10_for_large_relevant_sets():
+    relevant = {f"rel{i}" for i in range(15)}
+    # 20 retrieved items: top 10 are 5 hits + 5 misses, items 11-20 are all hits.
+    retrieved = ([f"rel{i}" for i in range(5)] + [f"missA{i}" for i in range(5)]
+                 + [f"rel{i}" for i in range(5, 15)])
+    # Uncapped (r=15): top_15 = 5 hits + 5 miss + 5 hits = 10 hits / 15 = 0.667
+    # Capped at 10 (r=10):  top_10 = 5 hits + 5 miss = 5 hits / 10 = 0.5
+    assert r_precision(retrieved, relevant) == 0.5
+
+
+def test_r_precision_uncapped_below_10_is_unchanged():
+    # Regression guard: existing behavior for small relevant sets (r < 10) must not change.
+    assert r_precision(["a", "x", "b", "c"], {"a", "b", "c"}) == 2 / 3
+
