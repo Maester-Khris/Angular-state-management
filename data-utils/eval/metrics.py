@@ -22,21 +22,38 @@ def recall_at_k(retrieved: list[str], relevant: set[str], k: int) -> float:
     return hits / len(relevant)
 
 
-def ndcg_at_k(retrieved: list[str], relevant: set[str], k: int) -> float:
-    """Binary-relevance nDCG@k (BEIR's own convention: rel_i in {0,1}).
-    DCG@k  = sum_{i=1}^{k} rel_i / log2(i+1)          (i is the 1-indexed rank)
-    IDCG@k = DCG of the ideal ranking (all relevant docs first, capped at k)
+def ndcg_at_k(retrieved: list[str], relevance: dict[str, int], k: int) -> float:
+    """Graded nDCG@k (Jarvelin & Kekalainen gain function: 2^rel - 1).
+    DCG@k  = sum_{i=1}^{k} (2^rel_i - 1) / log2(i+1)   (i is the 1-indexed rank, rel_i in {0,1,2})
+    IDCG@k = DCG of the ideal ranking (highest-grade docs first, capped at k)
     Returns 0.0 when there are no relevant docs (IDCG would be 0, undefined)."""
-    if not relevant:
+    if not relevance:
         return 0.0
     top_k = retrieved[:k]
     dcg = sum(
-        (1.0 if doc_id in relevant else 0.0) / math.log2(i + 2)
+        (2 ** relevance.get(doc_id, 0) - 1) / math.log2(i + 2)
         for i, doc_id in enumerate(top_k)
     )
-    ideal_hits = min(len(relevant), k)
-    idcg = sum(1.0 / math.log2(i + 2) for i in range(ideal_hits))
+    ideal_grades = sorted(relevance.values(), reverse=True)[:k]
+    idcg = sum((2 ** grade - 1) / math.log2(i + 2) for i, grade in enumerate(ideal_grades))
     return dcg / idcg if idcg > 0 else 0.0
+
+
+def mrr(retrieved: list[str], relevant: set[str]) -> float:
+    """Mean Reciprocal Rank for a single query: 1/rank of the first relevant hit, 0 if none."""
+    for i, doc_id in enumerate(retrieved):
+        if doc_id in relevant:
+            return 1.0 / (i + 1)
+    return 0.0
+
+
+def r_precision(retrieved: list[str], relevant: set[str]) -> float:
+    """Precision at rank R, where R = number of relevant docs for this query -- avoids the
+    fixed-k=5 assumption when the true relevant-doc count varies per query."""
+    r = len(relevant)
+    if r == 0:
+        return 0.0
+    return precision_at_k(retrieved, relevant, r)
 
 
 _PUNCTUATION_RE = re.compile(r"[.,;:!?\"']")
