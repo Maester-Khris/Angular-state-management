@@ -1,0 +1,370 @@
+[
+  {
+    "uuid": "7531d1d8-f3bf-48e7-a390-117fd70d015d",
+    "title": "Build a file storage system with Cloudinary + Auth0",
+    "description": "File hosting and synchronization services like Google Drive, OneDrive, iCloud, e.t.c allow users to...",
+    "hashtags": [
+      "cloudinary",
+      "hackjamstack",
+      "auth0",
+      "jamstack"
+    ]
+  },
+  {
+    "uuid": "b9d0b0dd-d8ef-4db3-b62f-4ba758864ee1",
+    "title": "A Beginner's Guide to Solidity: Understanding the Fundamentals of the Ethereum Smart Contract Language",
+    "description": "Just a decade ago, it was difficult to imagine a world where you could create unique digital assets...",
+    "hashtags": [
+      "solidity",
+      "beginners",
+      "programming",
+      "blockchain"
+    ]
+  },
+  {
+    "uuid": "9bc034ac-400d-4026-87d6-4eedccfc58b5",
+    "title": "How Drones are Changing the Face of Construction Site Management",
+    "description": "Explore how drones are revolutionizing construction site management with real-time data, improved safety, and enhanced efficiency.",
+    "hashtags": [
+      "drones",
+      "construction",
+      "technology"
+    ]
+  },
+  {
+    "uuid": "61c6344f-19a3-46cc-8e0b-1da3eb1a842c",
+    "title": "If you need emacs on macOS Catalina or Big Sur",
+    "description": "Occasionally, we may still need emacs for small editing, but on Catalina or Big Sur, emacs is not...",
+    "hashtags": [
+      "emacs",
+      "macos",
+      "catalina",
+      "bigsur"
+    ]
+  },
+  {
+    "uuid": "f29fdb2f-ab9f-4e2d-b4c5-59c37ddcd8c7",
+    "title": "Enable Hot Module Replacement(HMR) in Nrwl/Nx React Project",
+    "description": "HMR offer many benefits. Here is a quote from the official webpack website:   Hot Module Replacement...",
+    "hashtags": [
+      "nrwl",
+      "react",
+      "hmr",
+      "nx"
+    ]
+  },
+  {
+    "uuid": "b8658f9b-ec30-4177-b5e7-d1b477a2cc94",
+    "title": "Building a Full-Stack Application with Apache AGE and GraphQL",
+    "description": "In this blog, we'll look at how to create a full-stack application with Apache AGE as the backend...",
+    "hashtags": [
+      "apacheage",
+      "graphql",
+      "graphprocessing",
+      "opensource"
+    ]
+  },
+  {
+    "uuid": "b49dafaf-9282-480f-b8e1-d1e86f3dc2eb",
+    "title": "Sripriya Kalyanasundaram to take a new mantle of Strategy and Evangelism, CEO’s Office at LambdaTest",
+    "description": "We are elated to announce that Sripriya Kalyanasundaram will take the mantle of Strategy and...",
+    "hashtags": [
+      "testing",
+      "leadership",
+      "programming"
+    ]
+  },
+  {
+    "uuid": "34b77deb-bf42-4455-93ea-104c98d4bf0b",
+    "title": "GCD once and for all",
+    "description": "Introduction   Hello! My name is Kiryl Famin, and I am an iOS developer.  In this article,...",
+    "hashtags": [
+      "gcd",
+      "ios",
+      "multithreading",
+      "swift"
+    ]
+  },
+  {
+    "uuid": "89237bcf-a84d-4976-8a1d-50054eb7c891",
+    "title": "Authentication with Flask and GitHub | Authlib",
+    "description": "For this example we will use Authlib which is the ultimate Python library in building OAuth and...",
+    "hashtags": [
+      "authlib",
+      "flask",
+      "github",
+      "nelsoncode"
+    ]
+  },
+  {
+    "uuid": "78d3a6ee-69a5-4091-87f8-b793504d5768",
+    "title": "How do spellcheckers work?",
+    "description": "We all know those wiggly red lines that show up under misspelled words—a small but helpful feature we...",
+    "hashtags": [
+      "spellchecker",
+      "algorithms",
+      "ai"
+    ]
+  },
+  {
+    "uuid": "d9527e08-502b-4f96-abb4-dacfd200585d",
+    "title": "Back Of The Envelop Estimation",
+    "description": "Back of the envelop estimation is exactly what the name implies “Back Of The Envelop”....",
+    "hashtags": [
+      "backofenvelop",
+      "systems",
+      "productivity",
+      "architecture"
+    ]
+  },
+  {
+    "uuid": "74c421f2-a80a-4e05-8efa-39773c7ca2d1",
+    "title": "Awesome J2ME: An Awesome List About Everything Related to J2ME",
+    "description": "Introduction to J2ME   Java ME, also known as J2ME, is a Java specification for old keypad...",
+    "hashtags": [
+      "j2me",
+      "retrocomputing",
+      "java",
+      "resources"
+    ]
+  },
+  {
+    "uuid": "db8af6fd-3776-4cb6-bd94-1db6a663dbc5",
+    "title": "Top 5 Best Automated Software Testing Tools",
+    "description": "In today’s digitally driven world, software testing has been growing exponentially. Not to mention...",
+    "hashtags": [
+      "automationtool",
+      "softwaretesting",
+      "testingtools"
+    ]
+  },
+  {
+    "uuid": "f1cc3204-6782-4f15-ab28-11fbf18accf1",
+    "title": "Load Balancing 101 ⚖️: Achieving Scalability and High Availability 🤹🏻‍♀️",
+    "description": "Achieving Scalability and High Availability in the Cloud: A Comprehensive Guide to Load...",
+    "hashtags": [
+      "loadbalancing",
+      "loadbalancer",
+      "highavailability",
+      "nginx"
+    ]
+  },
+  {
+    "uuid": "cc10d9d1-f47e-4b4c-958e-380c50c89f9d",
+    "title": "What Is a Business Playbook? Best Practices + Examples + Templates",
+    "description": "Is your team struggling with inconsistent processes and long onboarding times for new employees? Are...",
+    "hashtags": [
+      "businessplaybook",
+      "bestpractices",
+      "templates"
+    ]
+  },
+  {
+    "uuid": "b93a57f9-1224-4f21-8560-a334b59320b2",
+    "title": "Enhancing User Experience with React 19: Exploring New Frontend Features",
+    "description": "In the realm of supply chain management applications, user experience (UX) is a critical factor that...",
+    "hashtags": [
+      "react19",
+      "supplychainmanagement",
+      "performance",
+      "ux"
+    ]
+  },
+  {
+    "uuid": "d3fe0ff4-2c8e-46ef-a816-ba6403ef3c0b",
+    "title": "Protect Your Browsing with Linux SOCKS Proxy Server",
+    "description": "In the digital world, privacy is becoming a rare commodity. Every click, search, and website visit is...",
+    "hashtags": [
+      "socks5proxy",
+      "proxy"
+    ]
+  },
+  {
+    "uuid": "f9b33f8f-1ef8-45e9-a7f0-adc597c805e6",
+    "title": "Introduction to Microsoft Entra ID",
+    "description": "Microsoft's cloud-based identity and access management solution, formerly known as Azure Active...",
+    "hashtags": [
+      "entraid",
+      "activedirectory",
+      "microsoft"
+    ]
+  },
+  {
+    "uuid": "176c93ca-4397-4481-983a-5d38013f94f8",
+    "title": "Gravitational Waves The Symphony of the Cosmos",
+    "description": "Dive into the fascinating world of gravitational waves and discover how these ripples in spacetime revolutionize our understanding of the universe.",
+    "hashtags": [
+      "physics",
+      "astronomy",
+      "innovation"
+    ]
+  },
+  {
+    "uuid": "aaa1d029-bc00-4519-8ece-0a69ab0f21b6",
+    "title": "The Importance of Implementing Leave Management Solutions in Modern Workplaces",
+    "description": "Implementing leave management solutions in modern workplaces has become a critical factor for...",
+    "hashtags": [
+      "leavemanagementsolutions",
+      "usa",
+      "uk"
+    ]
+  },
+  {
+    "uuid": "fd0520d1-8737-4cf8-86d1-9bb13cbf628c",
+    "title": "No More Secrets: Using PKCE in OAuth for your JavaScript apps",
+    "description": "Thanks to everyone who came to Scottish Developers to see myself and Christos talking about identity....",
+    "hashtags": [
+      "development",
+      "authentication",
+      "security",
+      "web"
+    ]
+  },
+  {
+    "uuid": "62cf6ebd-829e-4248-a008-466867a0579f",
+    "title": "Most Popular Websites in Lebanon",
+    "description": "A list of the most visited websites in Lebanon in 2023, to help you better understand the Lebanese...",
+    "hashtags": [
+      "lebanon",
+      "statistics",
+      "data",
+      "beirut"
+    ]
+  },
+  {
+    "uuid": "761ce2cc-36e8-4503-acde-6faa8e11625b",
+    "title": "How to Set up Disk and Bandwidth Limits in Docker",
+    "description": "Containerized applications are increasingly popular due to their portability and...",
+    "hashtags": [
+      "devops",
+      "docker",
+      "sre",
+      "kubernetes"
+    ]
+  },
+  {
+    "uuid": "23f55727-7a4d-4854-8119-5421debd96ee",
+    "title": "Data Is Valuable with Aaron Marks",
+    "description": "Relicans host, Rachael Wright-Munn talks to Senior Software Engineer, Aaron Marks about analyzing...",
+    "hashtags": [
+      "polyglot",
+      "podcast",
+      "database",
+      "automation"
+    ]
+  },
+  {
+    "uuid": "f0c3cc6b-e4ef-4923-8bfd-90e512b91709",
+    "title": "Streamlining Software Development with System Integration Testing",
+    "description": "One of the most important steps in the software development process is system integration testing....",
+    "hashtags": [
+      "system",
+      "integration",
+      "testing"
+    ]
+  },
+  {
+    "uuid": "9d445512-e102-4866-a412-5b9d0b612dd2",
+    "title": "DePINed Python And Javascript Bot.",
+    "description": "📈 New GitHub Repository out with a Javascript and Python Automation script that farms the DePINed...",
+    "hashtags": [
+      "airdrop",
+      "depined",
+      "javascript",
+      "python"
+    ]
+  },
+  {
+    "uuid": "a4669a9e-54d9-4814-bdc5-19957042c795",
+    "title": "Smart Solutions for the Future of Education",
+    "description": "As the world rapidly evolves, so too must the way we approach education. The traditional classroom...",
+    "hashtags": [
+      "infustry",
+      "education"
+    ]
+  },
+  {
+    "uuid": "f8733914-0ac1-450c-b151-223e33e5ccac",
+    "title": "Building An On-Demand Home Service App: A Fundamental Guide For Entrepreneurs",
+    "description": "Calling service providers and receiving no response from the other side can be the most annoying scen...",
+    "hashtags": [
+      "ondemandapp",
+      "homeserviceapp",
+      "mobileapp",
+      "iosappdevelopment"
+    ]
+  },
+  {
+    "uuid": "b7c9eb55-4a98-4fc6-83fe-24c4609a11be",
+    "title": "Meteor 2.4 And New Meteor Installer",
+    "description": "Version 2.4 brings you new features, performance improvements, and a new installer.  You probably...",
+    "hashtags": [
+      "meteor",
+      "mongodb",
+      "apollo",
+      "vue"
+    ]
+  },
+  {
+    "uuid": "1b1ee179-c623-46e3-952a-91a83b51b9ca",
+    "title": "FIX CrowdStrike Microsoft Windows on Azure VM",
+    "description": "Connect to Serial Console and Use PowerShell:   First, ensure that the Serial Console is enabled...",
+    "hashtags": [
+      "crowdstrike",
+      "azure",
+      "virtualmachine"
+    ]
+  },
+  {
+    "uuid": "8257dace-6d79-4fcb-a39c-fe97c9f3f2c6",
+    "title": "Microservices: Set Up a Gateway with UI (Thymeleaf)",
+    "description": "Hello there, this is the structure of my microservices project with Spring;  *1 Gateway (this is what...",
+    "hashtags": [
+      "thymeleaf",
+      "microservices",
+      "spring",
+      "gateway"
+    ]
+  },
+  {
+    "uuid": "62f7eb3e-1bd1-4957-a19e-eb3213e29370",
+    "title": "Payload CMS vs Strapi",
+    "description": "When choosing between Payload CMS and Strapi, both of which are powerful headless content management...",
+    "hashtags": [
+      "payload",
+      "programming",
+      "webdev",
+      "cms"
+    ]
+  },
+  {
+    "uuid": "84ba6133-b944-4812-a588-ca5993028e97",
+    "title": "Introducing the Judges for XRPL Grants Wave 6",
+    "description": "As we continue our journey of supporting innovative projects and ideas within the XRPL community,...",
+    "hashtags": [
+      "xrpl",
+      "xrplgrants",
+      "financeapp",
+      "defi"
+    ]
+  },
+  {
+    "uuid": "c42106b9-8ff9-4e79-81f7-b89bb2606a47",
+    "title": "My Public Inbox",
+    "description": "I'm going to pin this post to the top of my profile so there's a place for anyone to publicly ask me...",
+    "hashtags": [
+      "publicinbox",
+      "ama"
+    ]
+  },
+  {
+    "uuid": "4d1ccd2c-222f-48b9-b646-5818320da500",
+    "title": "Beginner's Guide to Formal Methods",
+    "description": "What Are Formal Methods?   Formal methods are mathematical techniques used to specify,...",
+    "hashtags": [
+      "formalmethods",
+      "softwaredevelopment",
+      "systemdesign"
+    ]
+  }
+]
