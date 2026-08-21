@@ -33,12 +33,15 @@ def build_uri(database: str) -> str:
     return f"mongodb+srv://{MONGO_USERNAME}:{MONGO_PASSWORD}@cluster0.sgdzstx.mongodb.net/{database}?appName=Cluster0"
 
 
-def sample(database: str, collection: str, count: int, seed: int) -> tuple[list[dict], int]:
+def sample(database: str, collection: str, count: int, seed: int, excluded_uuids: set[str]) -> tuple[list[dict], int]:
     client = MongoClient(build_uri(database))
     coll = client.get_database()[collection]
 
     docs = list(coll.find({}, {"uuid": 1, "title": 1, "description": 1, "hashtags": 1, "_id": 0}))
     print(f"Loaded {len(docs)} docs from {database}.{collection}.")
+
+    docs = [d for d in docs if d["uuid"] not in excluded_uuids]
+    print(f"{len(docs)} docs remain after excluding {len(excluded_uuids)} flagged uuids.")
 
     by_hashtag = defaultdict(list)
     for doc in docs:
@@ -76,10 +79,16 @@ if __name__ == "__main__":
     parser.add_argument("--collection", default="posts")
     parser.add_argument("--count", type=int, default=30)
     parser.add_argument("--seed", type=int, default=7)
+    parser.add_argument("--exclude-flagged", default=None, help="Path to a JSON array of uuids to exclude (e.g. _pipeline_v2/flagged_uuids.json)")
     parser.add_argument("--out", default=os.path.join(os.path.dirname(__file__), "_pipeline", "synthesis_candidates.json"))
     args = parser.parse_args()
 
-    results, total_docs = sample(args.database, args.collection, args.count, args.seed)
+    excluded = set()
+    if args.exclude_flagged:
+        with open(args.exclude_flagged) as f:
+            excluded = set(json.load(f))
+
+    results, total_docs = sample(args.database, args.collection, args.count, args.seed, excluded)
 
     out_path = os.path.abspath(args.out)
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
