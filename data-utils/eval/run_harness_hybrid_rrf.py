@@ -3,12 +3,13 @@
 #        [--database postair_eval] [--collection posts]
 #        [--queries ../../eval/golden_queries_30k.json] [--out report.json]
 #
-# Faithfully replicates GET /api/search's hybrid path (node-backend/routing/home.js:137-172):
-# Mongo $text lexical leg + Qdrant semantic leg, fused via node-backend/services/rankprocessor.js's
-# exact RRF formula (k=60, semantic 1.2x weight) -- INCLUDING the hydration-filter quirk where
-# only semantic matches NOT already in the lexical result set are fed into the fusion scoring
-# (home.js:146-159). Direct pymongo + direct HTTP call to python-search-api's plain /search --
-# no node-backend process required. python-search-api MUST be running with
+# Faithfully replicates GET /api/search's hybrid path (node-backend/routing/home.js), post
+# 2026-08-21 fix: Mongo $text lexical leg + Qdrant semantic leg, fused via
+# node-backend/services/rankprocessor.js's exact RRF formula (k=60, semantic 1.2x weight),
+# with the semantic leg rebuilt in its own original rank order and cross-leg-consensus docs
+# kept in scoring (see rrf_fusion.py's build_ordered_semantic_results). Direct pymongo +
+# direct HTTP call to python-search-api's plain /search -- no node-backend process required.
+# python-search-api MUST be running with
 # QDRANT_COLLECTION_NAME=posts_eval (same precondition as run_harness_semantic.py, Task 6).
 
 import argparse
@@ -19,7 +20,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from lexical_mongo import ensure_text_index, get_collection, search_posts_by_keyword
 from metrics import mrr, ndcg_at_k, precision_at_k, r_precision, recall_at_k
-from rrf_fusion import filter_missing_from_lexical, merge_results
+from rrf_fusion import build_ordered_semantic_results, merge_results
 from semantic_http import search_semantic
 
 FETCH_LIMIT = 10
@@ -45,8 +46,8 @@ def run(database: str, collection_name: str, base_url: str, internal_key: str, q
         keyword_results = search_posts_by_keyword(collection, query, FETCH_LIMIT)
         semantic_results = search_semantic(base_url, internal_key, query, FETCH_LIMIT)
 
-        hydrated_semantic = filter_missing_from_lexical(semantic_results, keyword_results)
-        fused = merge_results(keyword_results, hydrated_semantic)
+        ordered_semantic = build_ordered_semantic_results(semantic_results, keyword_results)
+        fused = merge_results(keyword_results, ordered_semantic)
         retrieved = [doc["uuid"] for doc in fused[:FETCH_LIMIT]]
 
         results.append({

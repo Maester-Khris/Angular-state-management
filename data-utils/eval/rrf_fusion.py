@@ -1,18 +1,24 @@
 # data-utils/eval/rrf_fusion.py
 # Faithful Python port of node-backend/services/rankprocessor.js's mergeResults, plus the
-# hydration-filter step node-backend/routing/home.js:146-159 runs before calling it. Kept as
+# hydration/reordering step node-backend/routing/home.js runs before calling it. Kept as
 # two separate functions because they're two separate responsibilities in two separate
-# production files -- home.js's route never calls mergeResults with the full, unfiltered
-# semantic result list.
+# production files.
+#
+# Fixed 2026-08-21: home.js used to filter out any semantic match already present in the
+# lexical results before fusion, and hydrate the rest via an unordered Mongo `$in` fetch --
+# silently dropping cross-leg-consensus docs' semantic RRF contribution and scrambling the
+# rank of the survivors. Root cause: systematic-debugging pass verifying the first-principles
+# invariant that a leg's rank must reach fusion intact. See node-backend/tests/
+# search.integration.test.js for the production-side regression test.
 
 
-def filter_missing_from_lexical(semantic_results: list[dict], keyword_results: list[dict]) -> list[dict]:
-    """Port of home.js:146-151. Only the semantic matches NOT already present in the lexical
-    result set are kept, in their original relative order -- this filtered (and effectively
-    re-indexed) list is what production passes as mergeResults' second argument, never the
-    full semantic ranking."""
-    lexical_uuids = {item["uuid"] for item in keyword_results}
-    return [item for item in semantic_results if item["uuid"] not in lexical_uuids]
+def build_ordered_semantic_results(semantic_results: list[dict], keyword_results: list[dict]) -> list[dict]:
+    """Port of home.js's fixed hydration/reordering logic. Rebuilds the semantic leg in its
+    own original rank order (never re-derived from an unordered hydration fetch), substituting
+    full lexical-leg doc data for any uuid the lexical leg also found instead of dropping it --
+    so cross-leg agreement still earns both legs' RRF contribution."""
+    keyword_by_uuid = {item["uuid"]: item for item in keyword_results}
+    return [keyword_by_uuid.get(item["uuid"], item) for item in semantic_results]
 
 
 def merge_results(keyword_results: list[dict], semantic_results: list[dict], k: int = 60, semantic_weight: float = 1.2) -> list[dict]:
