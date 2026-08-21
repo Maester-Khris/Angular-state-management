@@ -60,23 +60,28 @@ def render_table(reports: dict[str, dict]) -> str:
 
 
 def render_type_breakdown(reports: dict[str, dict], types_path: str) -> str:
+    """Per-type breakdown for every metric in METRICS, not just Precision@5 -- Principle 5
+    (eval/eval-protocol.md) requires stratification for every reported metric, not a
+    single flat aggregate or a single stratified metric standing in for the rest."""
     with open(types_path) as f:
         types_by_query = json.load(f)
 
-    lines = ["", "## Precision@5 by query type", ""]
-    header = "| Type | " + " | ".join(label for _, label in COLUMNS) + " |"
-    separator = "|---" * (len(COLUMNS) + 1) + "|"
-    lines += [header, separator]
-
     type_names = sorted(set(types_by_query.values()))
-    for type_name in type_names:
-        row = [type_name]
-        for column_key, _ in COLUMNS:
-            values = [r["precision_at_5"] for r in reports[column_key]["results"] if types_by_query.get(r["query"]) == type_name]
-            mean = sum(values) / len(values) if values else 0.0
-            row.append(f"{mean:.4f} (n={len(values)})")
-        lines.append("| " + " | ".join(row) + " |")
-    return "\n".join(lines) + "\n"
+    sections = []
+    for metric_key, metric_label in METRICS:
+        lines = ["", f"## {metric_label} by query type", ""]
+        header = "| Type | " + " | ".join(label for _, label in COLUMNS) + " |"
+        separator = "|---" * (len(COLUMNS) + 1) + "|"
+        lines += [header, separator]
+        for type_name in type_names:
+            row = [type_name]
+            for column_key, _ in COLUMNS:
+                values = [r[metric_key] for r in reports[column_key]["results"] if types_by_query.get(r["query"]) == type_name]
+                mean = sum(values) / len(values) if values else 0.0
+                row.append(f"{mean:.4f} (n={len(values)})")
+            lines.append("| " + " | ".join(row) + " |")
+        sections.append("\n".join(lines))
+    return "\n".join(sections) + "\n"
 
 
 if __name__ == "__main__":
