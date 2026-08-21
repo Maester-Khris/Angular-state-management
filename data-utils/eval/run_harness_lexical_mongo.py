@@ -12,7 +12,7 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from lexical_mongo import ensure_text_index, get_collection, search_posts_by_keyword
+from lexical_mongo import ensure_search_index, ensure_text_index, get_collection, search_posts_by_keyword, search_posts_by_keyword_fuzzy
 from metrics import mrr, ndcg_at_k, precision_at_k, r_precision, recall_at_k
 
 FETCH_LIMIT = 10
@@ -21,13 +21,14 @@ K_NDCG = 10
 
 
 def load_queries(path: str) -> list[dict]:
-    with open(path) as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def run(database: str, collection_name: str, queries: list[dict]) -> dict:
     collection = get_collection(database, collection_name)
     ensure_text_index(collection)
+    ensure_search_index(collection)
 
     results = []
     for entry in queries:
@@ -36,6 +37,8 @@ def run(database: str, collection_name: str, queries: list[dict]) -> dict:
         relevance = {k: int(v) for k, v in entry.get("relevance", {}).items()}
 
         docs = search_posts_by_keyword(collection, query, FETCH_LIMIT)
+        if not docs:
+            docs = search_posts_by_keyword_fuzzy(collection, query, FETCH_LIMIT)
         retrieved = [doc["uuid"] for doc in docs]
 
         results.append({

@@ -18,10 +18,11 @@ import os
 import sys
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from lexical_mongo import ensure_text_index, get_collection, search_posts_by_keyword
 from metrics import mrr, ndcg_at_k, precision_at_k, r_precision, recall_at_k
 from rrf_fusion import build_ordered_semantic_results, merge_results
 from semantic_http import search_semantic
+from lexical_mongo import ensure_search_index, ensure_text_index, get_collection, search_posts_by_keyword, search_posts_by_keyword_fuzzy
+
 
 FETCH_LIMIT = 10
 K_PRECISION_RECALL = 5
@@ -29,13 +30,14 @@ K_NDCG = 10
 
 
 def load_queries(path: str) -> list[dict]:
-    with open(path) as f:
+    with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def run(database: str, collection_name: str, base_url: str, internal_key: str, queries: list[dict]) -> dict:
     collection = get_collection(database, collection_name)
     ensure_text_index(collection)
+    ensure_search_index(collection)
 
     results = []
     for entry in queries:
@@ -44,6 +46,8 @@ def run(database: str, collection_name: str, base_url: str, internal_key: str, q
         relevance = {k: int(v) for k, v in entry.get("relevance", {}).items()}
 
         keyword_results = search_posts_by_keyword(collection, query, FETCH_LIMIT)
+        if not keyword_results:
+            keyword_results = search_posts_by_keyword_fuzzy(collection, query, FETCH_LIMIT)
         semantic_results = search_semantic(base_url, internal_key, query, FETCH_LIMIT)
 
         ordered_semantic = build_ordered_semantic_results(semantic_results, keyword_results)
