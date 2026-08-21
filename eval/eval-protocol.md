@@ -74,8 +74,8 @@ the principles above.
 | Reference-only baselines | BM25 — must be labeled "(reference, not a fusion input)" per Principle 3 |
 | Metrics reported | P@5, R@5, nDCG@10, MRR, R-precision |
 | Grading scale | graded 0/1/2 (v2 golden set) |
-| CI coverage | P@5 only currently — non-compliant with Principle 7, needs extending to all 4 other metrics |
-| Diversity/redundancy | Never checked — same corpus has documented duplicate-title crowding (up to 22x-repeated posts) found via `/search/ai`'s investigation; Principle 9 requires at minimum a "checked, not applicable" note for `/api/search` too |
+| CI coverage | Full 95% bootstrap CI on all 5 metrics, compliant with Principle 7 — `data-utils/eval/generate_ablation_report.py` computes it per cell already (`data-utils/eval/ablation_table_v2.md` has the full table). Correction 2026-08-21: an earlier audit flagged this as "P@5 only," based on a hand-copied summary table in a since-merged results doc that dropped 4 of 5 rows' brackets in transcription — the underlying harness was never non-compliant, verified directly against `ablation_table_v2.md`. |
+| Diversity/redundancy | **Checked, 2026-08-21** (`data-utils/eval/check_diversity.py`, `data-utils/eval/diversity_report.json`, 54-query eval split): duplicate/near-duplicate title pairs (SequenceMatcher ≥0.7, matching `eval/flag_corpus_noise.py`'s calibrated threshold) do occur in top-5 results, but at low prevalence and well short of `/search/ai`'s severity (22x-repeated posts, 2/5 slots on one title) — Mongo 3/54 (5.6%), BM25 4/54 (7.4%), semantic 3/54 (5.6%), **RRF hybrid 2/54 (3.7%), the least affected leg**. Includes one genuine exact-title duplicate (two distinct posts both titled "The Role of Semantic HTML in Enhancing SEO and Web Accessibility"). Conclusion: present but minor — not severe enough to justify MMR for `/api/search` at this corpus/query-set size; revisit if either grows. |
 
 ## Audit Closure
 
