@@ -13,6 +13,22 @@ existing `hybrid-search-eval-results-2026-08-20.md` root-cause finding isn't a l
 Sprint plan: optimize hybrid/RRF fusion first, then the remaining ranking-quality gap, target
 Saturday 2026-08-22.
 
+**Hybrid RRF fusion bug fixed (2026-08-21):** root-caused via a first-principles fusion-invariant
+framework + `superpowers:systematic-debugging` pass, refining the 2026-08-20 finding — the bug
+was two upstream defects in `home.js`'s hydration step, not the RRF math itself: semantic matches
+also found by the lexical leg were dropped from fusion entirely (zeroing cross-leg consensus)
+and the surviving semantic-only docs were re-fetched via an unordered Mongo `$in` query,
+discarding their true similarity-rank order. Fixed by rebuilding the semantic leg in its own
+rank order with full doc data substituted, never filtered or re-derived from Mongo
+(`node-backend/routing/home.js`, commit `e4d3491`; eval harness parity, `d8f490c`). TDD
+red→green regression test added (`search.integration.test.js` + `data-utils/eval/test_rrf_fusion.py`,
+the latter's first coverage ever). Live re-run against golden-set v2's 54-query eval split:
+hybrid P@5 0.274 → **0.4222**, now beating every individual leg (Mongo/BM25/semantic) on P@5,
+R@5, nDCG@10, and R-precision, effectively tied with BM25 on MRR — empirical confirmation of the
+fusion-invariant framework, not just the code fix. Full writeup:
+`artifacts/ai-search-upgrade/hybrid-rrf-fusion-fix-2026-08-21.md`. Subgoal 1 of the sprint plan
+done; subgoal 2 (remaining ranking-quality gap) next.
+
 **Scope expansion (2026-08-20):** this sprint's eval work has so far measured `/search/ai` only
 (query-expansion + RRF fusion + cross-encoder reranking + MMR, over Qdrant). It never touched
 `GET /api/search` — the separate, unrelated hybrid endpoint that fuses MongoDB lexical (`$text`)
