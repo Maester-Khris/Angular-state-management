@@ -1,12 +1,11 @@
 // services/rankProcessor.js
 
-const mergeResults = (keywordResults, semanticResults) => {
+const mergeResults = (keywordResults, semanticResults, lexicalWeight = 1.0, semanticWeight = 0.8) => {
   const k = 60; // RRF constant to smooth out high-ranking bias
-  const semanticWeight = 1.2; // 20% boost for semantic matches
   const scores = new Map();
 
   // Helper to update RRF score
-  const updateScore = (items, weight = 1.0) => {
+  const updateScore = (items, weight) => {
     items.forEach((item, index) => {
       const id = item.uuid;
       const currentScore = scores.get(id) || 0;
@@ -16,7 +15,7 @@ const mergeResults = (keywordResults, semanticResults) => {
     });
   };
 
-  updateScore(keywordResults, 1.0);
+  updateScore(keywordResults, lexicalWeight);
   updateScore(semanticResults, semanticWeight);
 
   // Combine unique items from both lists
