@@ -19,3 +19,26 @@ def test_consensus_doc_ranks_first_and_semantic_order_is_preserved():
 if __name__ == "__main__":
     test_consensus_doc_ranks_first_and_semantic_order_is_preserved()
     print("ok")
+
+def test_semantic_weight_defaults_to_point_eight_not_one_point_two():
+    keyword_results = [{"uuid": "L"}]
+    semantic_results = [{"uuid": "S"}]
+
+    fused = merge_results(keyword_results, semantic_results)
+    l_score = next(r["matchPercentage"] for r in fused if r["uuid"] == "L")
+    s_score = next(r["matchPercentage"] for r in fused if r["uuid"] == "S")
+
+    # Mirrors rankprocessor.unit.test.js's equivalent case: under the new 0.8 default,
+    # lexical (weight 1.0) must outrank semantic-only at the same rank.
+    assert l_score > s_score
+
+
+def test_custom_lexical_weight():
+    keyword_results = [{"uuid": "L"}]
+    semantic_results = [{"uuid": "S"}]
+
+    fused = merge_results(keyword_results, semantic_results, lexical_weight=0.5, semantic_weight=0.8)
+    l_score = next(r["matchPercentage"] for r in fused if r["uuid"] == "L")
+    s_score = next(r["matchPercentage"] for r in fused if r["uuid"] == "S")
+
+    assert s_score > l_score
