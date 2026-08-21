@@ -1,0 +1,202 @@
+{
+  "lexical": {
+    "total_queries": 54,
+    "queries_with_top5_duplicate": 3,
+    "pct_affected": 0.0556,
+    "affected_queries": [
+      {
+        "query": "kubernetes deployment rollback",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
+            "uuid_b": "96f8ca24-a2e7-4119-b924-93726b4753e3",
+            "title_a": "StatefulSets and Deployments in Kubernetes",
+            "title_b": "Mastering Deployments in Kubernetes",
+            "similarity": 0.779
+          }
+        ]
+      },
+      {
+        "query": "go concurrency patterns",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "0c1318d5-9744-43cc-8a9d-c1154bd919e4",
+            "uuid_b": "3596ad82-ebf9-4abd-af30-aa6f3185bd20",
+            "title_a": "Concurrency Patterns in Go",
+            "title_b": "Concurrency Patterns: Balking Pattern",
+            "similarity": 0.762
+          }
+        ]
+      },
+      {
+        "query": "html semantic markup practices",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "85f33636-c3b7-4226-a9ad-95c12fdf93ff",
+            "uuid_b": "4dda6dac-e1ef-4a7c-9df8-ef937636c2ce",
+            "title_a": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "title_b": "Importance of semantic HTML for SEO and accessibility",
+            "similarity": 0.718
+          },
+          {
+            "uuid_a": "85f33636-c3b7-4226-a9ad-95c12fdf93ff",
+            "uuid_b": "da3d0b0b-d391-4390-ba75-42cda6038f8c",
+            "title_a": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "title_b": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "similarity": 1.0
+          },
+          {
+            "uuid_a": "4dda6dac-e1ef-4a7c-9df8-ef937636c2ce",
+            "uuid_b": "da3d0b0b-d391-4390-ba75-42cda6038f8c",
+            "title_a": "Importance of semantic HTML for SEO and accessibility",
+            "title_b": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "similarity": 0.718
+          }
+        ]
+      }
+    ]
+  },
+  "bm25": {
+    "total_queries": 54,
+    "queries_with_top5_duplicate": 4,
+    "pct_affected": 0.0741,
+    "affected_queries": [
+      {
+        "query": "go concurrency patterns",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "0c1318d5-9744-43cc-8a9d-c1154bd919e4",
+            "uuid_b": "3596ad82-ebf9-4abd-af30-aa6f3185bd20",
+            "title_a": "Concurrency Patterns in Go",
+            "title_b": "Concurrency Patterns: Balking Pattern",
+            "similarity": 0.762
+          }
+        ]
+      },
+      {
+        "query": "software engineer career growth",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "cc68ba67-7a56-4a40-aa76-7e3916f08a61",
+            "uuid_b": "90b5388f-ba8e-43aa-a06d-a096dc735bbb",
+            "title_a": "Things I Learned as a Software Engineer",
+            "title_b": "Things I learned as a software engineer \u2014 career development",
+            "similarity": 0.788
+          }
+        ]
+      },
+      {
+        "query": "html semantic markup practices",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "85f33636-c3b7-4226-a9ad-95c12fdf93ff",
+            "uuid_b": "4dda6dac-e1ef-4a7c-9df8-ef937636c2ce",
+            "title_a": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "title_b": "Importance of semantic HTML for SEO and accessibility",
+            "similarity": 0.718
+          },
+          {
+            "uuid_a": "85f33636-c3b7-4226-a9ad-95c12fdf93ff",
+            "uuid_b": "da3d0b0b-d391-4390-ba75-42cda6038f8c",
+            "title_a": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "title_b": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "similarity": 1.0
+          },
+          {
+            "uuid_a": "4dda6dac-e1ef-4a7c-9df8-ef937636c2ce",
+            "uuid_b": "da3d0b0b-d391-4390-ba75-42cda6038f8c",
+            "title_a": "Importance of semantic HTML for SEO and accessibility",
+            "title_b": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "similarity": 0.718
+          }
+        ]
+      },
+      {
+        "query": "txtai postgres integration",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "1bebc4d8-7134-4b27-b9de-131c82798f05",
+            "uuid_b": "fc31c1ba-9e54-44ff-9bf8-f066541ac5b0",
+            "title_a": "\ud83d\udca1 What's new in txtai 8.0",
+            "title_b": "\ud83d\udca1 What's new in txtai 7.0",
+            "similarity": 0.96
+          }
+        ]
+      }
+    ]
+  },
+  "semantic": {
+    "total_queries": 54,
+    "queries_with_top5_duplicate": 3,
+    "pct_affected": 0.0556,
+    "affected_queries": [
+      {
+        "query": "microservices vs monolith",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "bd77d809-b60c-48de-a979-2956f9e53eca",
+            "uuid_b": "d90a09ec-0a01-4937-8337-4be73c86e171",
+            "title_a": "Microservices vs Monoliths: Choosing the Right Architecture",
+            "title_b": "Microservices VS Monolith: Making the Right Choice",
+            "similarity": 0.826
+          }
+        ]
+      },
+      {
+        "query": "html semantic markup practices",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "85f33636-c3b7-4226-a9ad-95c12fdf93ff",
+            "uuid_b": "da3d0b0b-d391-4390-ba75-42cda6038f8c",
+            "title_a": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "title_b": "The Role of Semantic HTML in Enhancing SEO and Web Accessibility",
+            "similarity": 1.0
+          }
+        ]
+      },
+      {
+        "query": "txtai postgres integration",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "1bebc4d8-7134-4b27-b9de-131c82798f05",
+            "uuid_b": "fc31c1ba-9e54-44ff-9bf8-f066541ac5b0",
+            "title_a": "\ud83d\udca1 What's new in txtai 8.0",
+            "title_b": "\ud83d\udca1 What's new in txtai 7.0",
+            "similarity": 0.96
+          }
+        ]
+      }
+    ]
+  },
+  "hybrid": {
+    "total_queries": 54,
+    "queries_with_top5_duplicate": 2,
+    "pct_affected": 0.037,
+    "affected_queries": [
+      {
+        "query": "txtai postgres integration",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "1bebc4d8-7134-4b27-b9de-131c82798f05",
+            "uuid_b": "fc31c1ba-9e54-44ff-9bf8-f066541ac5b0",
+            "title_a": "\ud83d\udca1 What's new in txtai 8.0",
+            "title_b": "\ud83d\udca1 What's new in txtai 7.0",
+            "similarity": 0.96
+          }
+        ]
+      },
+      {
+        "query": "agens sql vs postgresql",
+        "duplicate_pairs": [
+          {
+            "uuid_a": "ead7afdc-1e71-4ffc-b9bb-d6f32ac13eab",
+            "uuid_b": "aa6aa660-c918-47eb-863a-0ffa35e7f24e",
+            "title_a": "Postgres vs. MySQL",
+            "title_b": "PostgreSQL vs. MySQL",
+            "similarity": 0.947
+          }
+        ]
+      }
+    ]
+  }
+}
