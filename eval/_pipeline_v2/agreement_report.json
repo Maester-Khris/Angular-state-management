@@ -1,0 +1,4349 @@
+{
+  "average_jaccard": 0.726,
+  "per_query": {
+    "redis caching strategies": {
+      "jaccard": 0.917,
+      "agreed": [
+        "08a09ac3-6a43-48c7-ad76-0351839f71ea",
+        "126f9594-1e16-4b2b-bd72-c5aea0b39ce9",
+        "20c905c7-eb2a-429a-a02e-0442e2f7b5ce",
+        "4c09c2b4-0d7d-411c-a44f-08a879f2ffde",
+        "62b6a0bc-6661-44da-8a51-79a64574553e",
+        "711c155e-30fc-4525-bb50-bdd7f05f1640",
+        "767798a6-6e98-42ae-84e9-d573e01e007d",
+        "79df9a96-7527-4b49-b51b-76965dc5af7f",
+        "7aa3fcf9-6576-46e0-8a99-af28ff685c74",
+        "9c956b87-49ce-4318-a76a-e1ab61bb3afa",
+        "ccd78e7a-4204-4103-b6d3-564a1f69142b"
+      ],
+      "a_only": [],
+      "b_only": [
+        "5a27e03e-1ee2-4ca9-9a9f-23fe6f2f1837"
+      ]
+    },
+    "kubernetes deployment rollback": {
+      "jaccard": 0.0,
+      "agreed": [],
+      "a_only": [
+        "19fb0959-eb97-496c-bf97-091dd8f541c7",
+        "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
+        "93d6887f-a884-4ef4-8c4c-da2e4713a17f",
+        "96f8ca24-a2e7-4119-b924-93726b4753e3",
+        "9f28fc77-7d8f-408f-9dc7-3020d031938e",
+        "f7972993-c24e-4322-88d2-9e335e7d5b04"
+      ],
+      "b_only": []
+    },
+    "react state management": {
+      "jaccard": 0.962,
+      "agreed": [
+        "018824a6-a0c1-4c37-9ed7-c462c7aca17b",
+        "067916b1-c5b0-4f78-af1e-94cff6fc0d2a",
+        "0b469e26-a000-41d2-8027-2cac520eeea9",
+        "1322b93f-54ac-4b9a-8c4f-e5611912d733",
+        "18166b20-ea10-4172-ac69-25a710296431",
+        "2a2293f0-9273-459b-9d01-9ff1738af72e",
+        "3c6f9b7b-1521-45a7-9ec0-02c1565e35ff",
+        "3dc5beeb-2559-4316-9612-aeb47cb89844",
+        "46a76783-569f-4917-bb74-fe8aa126d5c3",
+        "5110db1e-d72e-4b4e-8cf6-d1da16068f4c",
+        "5b257e4e-68ae-4186-b2c8-3a84ae1ead59",
+        "5e4b1100-128a-4eb6-8e92-1fbfd9c123f5",
+        "632ee2de-97b1-4c92-811d-e5669ff14a9b",
+        "66f40d87-4bc7-4156-9e0a-16a4987bcb80",
+        "8396ddaf-c15c-45d0-96a1-604a00d57ee4",
+        "84bce2d7-8724-4be7-91d2-c96f76816dcf",
+        "866f8d93-2a0b-416a-a844-cd4121b06ab0",
+        "900044c6-80ab-485b-bce0-cd7df7fe204f",
+        "951cb8de-41e0-4242-b8cf-2a7728f5c6a3",
+        "9b007ea9-ed5d-42a3-a454-a09d03944f0c",
+        "9cd48d95-73fb-429a-aaac-fb5a2b475704",
+        "a164f96f-c042-4a0e-9c66-a7b21f8afb93",
+        "be3b084e-e25b-4156-b8df-182bcb7aad5b",
+        "d479f333-7a42-4440-8bac-0ac468f1c7b1",
+        "e7f08f43-2e23-4a1e-995f-59034be8662d"
+      ],
+      "a_only": [
+        "6bf31c82-0c04-4704-92d2-cd76fa519e1d"
+      ],
+      "b_only": []
+    },
+    "postgres index tuning": {
+      "jaccard": 1.0,
+      "agreed": [
+        "0a128979-ed0e-4674-9283-79ed6c5b366d",
+        "29d8f6b2-a53d-4d9d-a537-b1441f378f2c",
+        "338ab341-0158-4eb4-9b7d-368dc345498e",
+        "3bc921fe-beef-4c02-8e8b-895d3bc5f22b",
+        "4f64101b-61be-4e39-93b2-df0c744a8cb6",
+        "522f015e-460c-43e5-9b08-06a64eb06d00",
+        "52744229-a15c-4a6a-96f0-8d9e3b4096db",
+        "6937760d-807e-4cd0-ae35-d8c6e9bea718",
+        "6f10ad1a-0b5b-4476-bbdd-d46316ae3b8f",
+        "7acdda7c-24fa-4143-ad49-e3c27c1d829c",
+        "8cb899dd-140a-41a2-8ab9-6e9511b03af7",
+        "99d051b2-860a-4087-a717-65bdf0d55ece",
+        "d4537535-6e0f-4db2-9a38-3a6cd257e058",
+        "d47eca23-7dd0-4318-9441-313a3c90e1b3",
+        "e36b1b65-73a0-43bc-9e3a-0e2c5125f9b7"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "life": {
+      "jaccard": 0.0,
+      "agreed": [],
+      "a_only": [
+        "67ef1f2e-4791-45a7-a528-963e6b52200a",
+        "6bf9f8ee-9663-4b94-9ca7-ed2e462d4efc",
+        "9357d902-492f-4cf4-9aa9-9d4159be1af2",
+        "a57bae4e-bfa6-495d-afd9-ae6cded28262",
+        "bdab74ab-d758-4857-8b16-9ed22cf16733",
+        "cf23a0f2-3912-4bcf-a160-c2f02c301794",
+        "d937bd9e-9cbf-4499-be6b-c93ea6d81859",
+        "e9793257-820b-4128-a6c7-5403a309fe9e",
+        "f5031a76-608e-4bde-8b86-9dc8ddb82caf",
+        "f5f13626-a71d-4dd0-aceb-e2f5204c5dd1",
+        "fcea9235-1fab-49a0-98e4-199a80aa5a21",
+        "ff7cc8a1-7c8a-4c49-943f-8b5a37608a5f"
+      ],
+      "b_only": []
+    },
+    "intelligence": {
+      "jaccard": 0.676,
+      "agreed": [
+        "321095c4-5e67-4eab-8bb8-362b9c6677dc",
+        "32f4c61a-fe3a-44ed-bc69-0545f9e4b950",
+        "337728f9-0f34-42ea-a3e9-c5cfbd23ac30",
+        "42cb104f-db6e-4442-a0fa-52a3c3c4fce8",
+        "48101fb8-8a20-4ad5-960a-cd5aea7ac2aa",
+        "4d0832f5-eeba-4c94-9369-3a3478df6258",
+        "5a5a4339-cddb-42b1-8164-781e12e16c0c",
+        "5b554ba6-9f2a-4952-9837-aea05e9988db",
+        "5d405be5-9be5-4355-a687-6b42535d44ef",
+        "68aa15a4-8d40-46b6-a682-2c9a3ee71bff",
+        "942b6f04-8845-4706-929d-5ce8e477889b",
+        "98614395-23ac-4891-a2ab-db76208e3bcd",
+        "991b4dc8-28ed-4c4d-a890-13f46e21f3f8",
+        "9cfa9873-cfdc-4262-85f8-d7575215ccec",
+        "9f899f2c-dc28-4239-9710-3f167f73c905",
+        "b58b7248-d215-4da5-af03-c17831cdb430",
+        "d1b6119a-ec1b-4a9f-8d77-9b9c17e5a2ba",
+        "d6ecaa79-0e25-459d-8537-f80809d6052f",
+        "dbe9ed84-9ff7-4869-93de-0b784d4e04bb",
+        "dc54910e-4289-48d6-aa6c-48fdec4565b7",
+        "f8edd413-0e27-4a99-a30e-1bd41a1e8e28",
+        "fbe3ef22-c81d-4a95-b5cd-5910f60723b8",
+        "feb6bb20-c98f-4488-8aa1-7ed2eae1395b"
+      ],
+      "a_only": [
+        "7018ed88-8ea4-447e-816a-09ec147aeccf"
+      ],
+      "b_only": [
+        "14416b29-230e-4ad9-a236-7330ba3ee0e6",
+        "3f864714-7004-4167-b8f0-5bcdfd7d6300",
+        "6117b19f-6dd3-4a61-b625-190d97848d92",
+        "6b66b52f-bb21-40ef-998a-5b0072ebfb3e",
+        "6e5fb03f-4f64-4f72-a575-d2f9f8554984",
+        "89266e57-4a6c-4516-97f2-de53a04bf017",
+        "ae2722dd-7052-4b37-b35b-b3cdadd7f39b",
+        "bef52e17-b907-4bc2-a382-b63afb461998",
+        "c19afaf5-fc05-4b9c-ad5f-f09d603368f7",
+        "c49a50d8-f362-4be4-a1bb-09cd7c5d97fb"
+      ]
+    },
+    "memory": {
+      "jaccard": 0.868,
+      "agreed": [
+        "0832ce24-6c22-4979-a7ea-664a48a18518",
+        "0a05cb51-5890-47f2-917f-323962a39edd",
+        "0deff858-8964-4c63-9611-cb7c53100f59",
+        "15a9f553-eb9c-47b9-8541-75711a9e5613",
+        "21eb5713-04da-48ae-8da3-f480825f9c2e",
+        "256eb9c3-02c2-464b-863d-645e9ddaf76a",
+        "2639dd19-4c3f-4b5d-9975-2e880d8d7402",
+        "31c5c2a5-bf97-4ab6-a5cd-8e34728cd92b",
+        "35997a95-f161-4460-8b67-81a7a70448f7",
+        "3878c4cd-3f47-4d7c-8201-acac03b107da",
+        "3ea6a948-fa2f-4ddb-8408-0ba8ebc4572d",
+        "3fde5628-d6cd-4683-9be3-e270b83d2b24",
+        "44bf4f88-cf78-4408-9d78-be788501007f",
+        "525ddf04-4039-4931-9daf-b8cf6209863d",
+        "5642c487-eb6b-4706-8706-7e84f0adb3c2",
+        "645b1192-f73a-4425-af80-00e442f3bc11",
+        "6539c641-7c23-44fc-91e4-6998ff60540d",
+        "793f13bb-27d2-4f45-9053-8dfe961683c7",
+        "7beef51c-c201-41ee-826e-6dcd5bd2fbd3",
+        "83b23ef0-693b-4a98-9827-f9f0abd01263",
+        "83ddf7a0-6b59-4f9d-bca6-8f3355ca71bc",
+        "8af898a4-d517-466b-8444-f315497fd065",
+        "8d9bdaab-7dbc-4320-a260-3d8c5421bab1",
+        "8fa11676-4766-4d23-b018-27c02d9e59a5",
+        "93494b7a-c0ef-4ee6-8839-b868796f50a2",
+        "a88cb8f8-8c58-44e2-8a99-73f688e359f6",
+        "af297d7d-c118-4275-a2ef-f8e340d27b33",
+        "b56e287d-03cc-45e3-bc14-e4161838ff98",
+        "ba6fa693-0987-4a25-9c2b-5625d9854869",
+        "c045a6da-53a7-4e32-86e7-0c47d24b6494",
+        "dc2db824-80b8-4416-b29c-d999b5c2643b",
+        "f0a13dab-d9fe-4c85-8373-922531d5f685",
+        "fb041da4-54e9-40e6-b790-c7c7f10f833b"
+      ],
+      "a_only": [
+        "9c0ecaf5-8947-4cd1-9ace-d56218eef93b",
+        "ea985daf-4692-4445-97f5-c5a439c9d8cd",
+        "f46f54d2-e770-4e27-b861-b2359fc4b239"
+      ],
+      "b_only": [
+        "17c12e0e-07ee-43c3-884e-57a3ce9618b7",
+        "719eb233-9d23-4a8d-a32d-d7b63689e404"
+      ]
+    },
+    "async python event loop": {
+      "jaccard": 0.5,
+      "agreed": [
+        "032dfcb2-b3bb-42b8-9357-9f837bdd8790",
+        "387f50c2-4292-4b9b-a7a3-7665dfd14ea1",
+        "d81144ce-08ee-46c7-933d-42119507b9d2",
+        "ed2bf985-80c2-44ca-8ed2-ae58b55e6e9d"
+      ],
+      "a_only": [],
+      "b_only": [
+        "46ae0391-e54c-4e54-b87b-6d124299285e",
+        "874d4878-8144-4295-9f3e-e9af3e73bb8d",
+        "be5c9661-dca1-4611-a1c0-5340e9f95a5f",
+        "d50c763d-c94e-4acb-893a-5da0bdd3687b"
+      ]
+    },
+    "microservices vs monolith": {
+      "jaccard": 0.923,
+      "agreed": [
+        "11d3e0dd-6623-4e8e-92a1-0ca6718fda57",
+        "24db1038-66fd-40e0-b1aa-b7772499a310",
+        "2c3e1728-5b44-4028-aa0b-7977b1a53d92",
+        "3b94e1fd-c6f4-497d-921a-f349daed36aa",
+        "48982a0e-dedf-4550-bdcd-1a3637ecfe24",
+        "5e00576a-49ff-474c-824c-3cd60ea7d833",
+        "93cd4c6e-3e43-4a7b-a65b-0ebf53f8705f",
+        "aae81e05-c3d2-4c95-be8a-5dd88899fc46",
+        "b44ef398-533c-4551-90ce-a5ad95eb919e",
+        "b737e53e-3782-4566-83e9-91ce1dd9f8a3",
+        "c26e5313-099c-4b49-b1f6-2e121f91011c",
+        "d3cd0f23-9bcf-4da7-847a-fe72badf7fcb"
+      ],
+      "a_only": [
+        "f0f8da56-6a6a-4059-afd0-c8da8f0e4b83"
+      ],
+      "b_only": []
+    },
+    "ci cd pipeline best practices": {
+      "jaccard": 0.133,
+      "agreed": [
+        "10456f9e-9731-4c4a-a554-352724ec80ce",
+        "86dc49b6-8229-47ec-9722-cad938a66248",
+        "9871263f-a015-4f74-bb37-299c825bc5fa",
+        "a8c70c02-5582-49b2-8ab8-f66d629fb985"
+      ],
+      "a_only": [
+        "472ddcb0-063b-4c47-abbe-dac64ce9c798",
+        "785cf405-8970-4d91-ab58-780e64207c2d"
+      ],
+      "b_only": [
+        "03d4b583-383e-4728-97f1-69caf5934aa0",
+        "33e44ce4-eea6-49b3-9d64-65f2f0cdd33b",
+        "541a48e1-2a9f-454d-8270-a8b285e59f09",
+        "613ecc40-a2ae-48ec-b6c7-3f0741689cfc",
+        "6549d575-c54a-43f3-b091-9fe6f3584518",
+        "94518132-0442-47c6-af1d-8f1833b5e459",
+        "954e8677-fd4a-42ae-9c10-4879debac770",
+        "a7705d2c-0c28-4b78-9c80-ef7cf7210359",
+        "b10c9d45-9348-4492-896e-3b5406913f95",
+        "b2717d77-5742-4879-9d6a-d64cd7e3814d",
+        "bb647885-b0c9-4c2e-be8e-c6011d19d5a0",
+        "c136be16-1957-49dc-ba77-aa0985bf0645",
+        "c2ecc61c-8a3a-468b-90ad-86e19d8fae36",
+        "c6a509c8-88b1-49f3-b23c-e6d9ffcd7dc3",
+        "ceb387f8-af65-4beb-972e-a00471764ced",
+        "e1fc9e96-0db8-41b8-952f-91edf85822a3",
+        "ede2868d-240a-4557-bef0-410230d7842b",
+        "ef6b5d2b-e2a4-4c62-b433-2dfa069596ae",
+        "f1238be3-b8c0-46cc-8c78-78574e3c0e60",
+        "f24c3e51-2940-4a5d-a6ca-93a2dcb23dce",
+        "f7972993-c24e-4322-88d2-9e335e7d5b04",
+        "f8838112-d0be-40e3-9cf4-330a8cc45313",
+        "fb24326c-ea75-4abc-a472-1777b5f3ad10",
+        "ff357183-007f-4d6c-bb32-5ff46a0c0f25"
+      ]
+    },
+    "aws cloud infrastructure services": {
+      "jaccard": 0.452,
+      "agreed": [
+        "133efd8c-53da-4696-ae79-e12913a4ca1d",
+        "14f5b651-f1f5-4fbe-bf84-976cfa4e4e64",
+        "1f5e2e4e-daba-449e-b855-6a610b974545",
+        "38e1a4c6-8c5b-4386-8e56-8925d84c662a",
+        "69f9f84a-f1fd-4814-8ef2-05c95f357892",
+        "8fd72291-544d-4f0a-9049-71bbfcf7a4ba",
+        "919bf6cd-2fe1-469d-842c-8f587ef77e8c",
+        "925716dd-6fc1-4a89-a40d-2cc9d3c03525",
+        "b37fa784-02ac-474d-a407-94384e4b3365",
+        "bcdb5fba-1864-4147-9b3e-df81d0a822c6",
+        "c32ccf31-ba76-42a9-9f97-39464a904b2c",
+        "cc6a0c0b-32fa-40a1-8481-5879ad084340",
+        "df14bb4c-9f62-4835-abfc-6669d804a428",
+        "ea0c576f-fad5-474e-8246-1912f4e42b80"
+      ],
+      "a_only": [
+        "0b4748f6-7367-4374-8976-4ca653852d57",
+        "2e12c603-5302-4579-b043-0ef695ef2c71",
+        "303d9ae0-2c6b-4508-878a-3d792c41e21f",
+        "32fe49a5-6ba6-466e-9d47-fd54e026a37c",
+        "3ed23063-b7f1-43a8-a395-c5f7945e2740",
+        "40ea5465-c447-484e-ab19-65f985895628",
+        "b2b44064-0662-4357-8276-cc1d9adf3ae8",
+        "d6c695f9-38e9-499d-a849-107c39b0cd20",
+        "f59979d4-8b49-4e6b-8cff-068be1d385b4"
+      ],
+      "b_only": [
+        "4793f57f-29db-4278-9050-2551e20c5f53",
+        "5da24ca1-a5bf-4e27-9f65-fd306f3993df",
+        "7e3b537f-db83-4bcc-8d29-b5b76568e84d",
+        "88307b26-be07-4cac-bf47-0aa57dfe39ff",
+        "98790da3-129c-4aad-b50e-cef7c560e85e",
+        "b917fe99-1067-49a6-b2b0-e0e0ebfdef9a",
+        "bb5ed348-0ad8-472a-9c71-b636d5cbf5db",
+        "d0efef98-86fe-4e3d-8c1a-6e8ae0a067d3"
+      ]
+    },
+    "software engineer career growth": {
+      "jaccard": 0.548,
+      "agreed": [
+        "0b5fba56-23eb-4c7c-b0e0-e21fe5da4b34",
+        "0d71f867-a5e9-445a-b7b2-276f29186820",
+        "0f0eb3b8-04e5-4762-8e14-bb5a714a64bc",
+        "13082d73-7edc-47fa-a242-d1734b8669f4",
+        "3acc0c19-a10f-4206-b2f6-debb7de64913",
+        "4ba875a6-c52a-4e49-897a-0a9ae9021a8d",
+        "6201ecd6-b99f-47eb-8fcf-1b732cf44fb1",
+        "748759bd-c6e8-48e6-93c4-7ca0dda23cdb",
+        "8410395f-a88a-41b2-8ca6-489147110123",
+        "9c982ec6-c140-4e32-8a87-f4161fa39a19",
+        "a6b94343-70b3-4757-8108-66d90cdd90cf",
+        "b2b39ccf-5bae-4f66-90a5-105c1b3ff47e",
+        "c14ab9d3-265a-42ab-a331-3be80e929ca4",
+        "c43662dd-50bf-4b33-8560-c1d8f69a2a39",
+        "ee63a080-936f-473e-b85e-dfdc76c24b6e",
+        "eebece5f-54e7-484b-bb1b-ce0ee80527fb",
+        "f0f882af-0802-4c03-93d3-1c391c456a78"
+      ],
+      "a_only": [
+        "2f056bc3-ad21-4b7c-a7d5-b5f3da92a131",
+        "3d6d9327-e190-4f26-85c6-164a754786ce",
+        "54cac08c-d80d-4ed1-a84d-8112d15a5f7e",
+        "56cc14fa-acaf-4eb6-84b9-66ecdb37bdd1",
+        "5aa4ecb6-5695-4573-bcfe-2cd80b035461",
+        "70419ed9-ea6c-4010-8e69-18225e389fb3",
+        "8af37a58-7cd0-4a19-b41f-590d1e974a49",
+        "8dc89a63-6579-4597-81cd-078a11657b1c",
+        "a128d993-47a1-461d-881f-496d5108f88b",
+        "b3eae333-3876-44fc-9bf0-72498d8dda2d",
+        "b8f2bf3a-504f-4115-a761-d403e15087de",
+        "bb4ab9d5-bda1-40a4-b690-e36c959913a2",
+        "d54d85d1-987b-4509-96a6-e0a99cc18c10",
+        "fa8638db-e091-40af-a863-a3b8b28d3d1b"
+      ],
+      "b_only": []
+    },
+    "nodejs backend development": {
+      "jaccard": 0.533,
+      "agreed": [
+        "0698656b-fd31-4c60-b74e-5f75fcd2ba35",
+        "14f8cf62-d467-4e1d-ac9f-69c12d10af17",
+        "236b3caa-0f2f-464a-9187-16282559b241",
+        "2e06599d-f0bd-4af6-b30a-3dedae8b0d90",
+        "351abea6-1816-42cd-99f6-5d3d4f3546a8",
+        "35cdab67-0d55-42d3-9830-ea9313aba29e",
+        "40c2d588-2ed0-428c-a6f7-a59a61b70b1f",
+        "660b602a-36ef-421b-9113-6bcefbcfe5db",
+        "69c162b5-ad81-4f72-ae28-e3f7589b0764",
+        "9f3909c1-72b0-48a7-ac37-02cbed719d65",
+        "a4968534-8c9a-40c9-98fd-0b9230268482",
+        "b248d8d2-4801-4f35-8228-f6b40e280eac",
+        "bb485a60-1fcb-43f7-86d4-eada3c228859",
+        "bc607385-e866-4c39-a580-0a1a7daddb08",
+        "d3b142ce-78a4-42b8-9eb5-d8d5cd92b4ca",
+        "faa84517-8d2c-46c2-9b46-8fa88a5527b2"
+      ],
+      "a_only": [
+        "6904454a-455d-45cf-82eb-157327085fe5",
+        "95eafe1e-9e28-49ff-bad8-288abe3e5977",
+        "cd79dc6c-9d3a-43f5-9f32-4b4e45a27aff"
+      ],
+      "b_only": [
+        "00174e44-7496-4e97-8f79-06b4b25dc14e",
+        "231ece93-045f-42ac-ba34-fe4aa0691125",
+        "34b985e3-fa12-4d6b-aa66-50c5397d6774",
+        "5153a2a0-eb75-4594-98fe-ab588d2aed29",
+        "62f32d5b-751d-4b5f-a205-ef0f4ab1eb12",
+        "65058ee6-4e86-43ab-843d-06e71472f2b4",
+        "6a2676a0-d073-44fc-9b0f-b9e485edf56a",
+        "6d11fb81-8c63-4e46-8671-5690f8561e3b",
+        "7992b54c-54c5-46e7-887e-a2bfdaa8a6e7",
+        "c2f3abe0-aef7-4215-b734-3d2b6978a12e",
+        "e31e45e5-87b8-4fa6-a167-b0eb8bf2b1b2"
+      ]
+    },
+    "typescript type safety patterns": {
+      "jaccard": 0.889,
+      "agreed": [
+        "0742cae3-9dc0-4f85-8d04-b372736b4e6d",
+        "09874d3f-2155-46d9-882d-b8b3ebeeb9bc",
+        "209204fd-5754-405c-9014-fd04846cdbac",
+        "44b7ebf4-9340-4f72-892e-3cec6f8026c1",
+        "5e18d11e-7f47-45a4-b38d-e7e1a36a2d8f",
+        "67a5aeb0-b8c2-49c7-92b6-bc25eb37f7e5",
+        "6813e989-09f0-497a-8086-fc5e27f623be",
+        "76bf3559-8672-42d1-9f1b-60d37506d8ac",
+        "7b2c6cd9-43b1-4ab3-a26e-bf10b37bc813",
+        "7ebb16b0-2238-47f2-8e1c-35985a40feb8",
+        "9775be5c-9783-4a62-9bbf-3b7a788ff49f",
+        "aac174a2-f47d-4061-b536-734f14261a81",
+        "d1d792fb-b96d-4ca9-afa9-8313e84cc41c",
+        "dc720fbc-04b0-49cd-aa36-528dd6658542",
+        "f4514d72-4c4c-4783-822e-688293e831b0",
+        "fc21e4e0-ed62-454e-9b18-ebca80a4053e"
+      ],
+      "a_only": [
+        "352a1c5c-277b-4b6c-a139-c989b417110b",
+        "d5aa17ca-7ce7-467f-896e-63001b377893"
+      ],
+      "b_only": []
+    },
+    "multi cloud deployment strategies": {
+      "jaccard": 0.625,
+      "agreed": [
+        "0e368705-91e6-405a-8bfd-f210439e9d56",
+        "2375f3f8-2a67-47b1-9892-bffab91e3bcd",
+        "27bd1ada-44ab-4263-9681-62cd999ca1eb",
+        "3dd774f1-2687-4411-802d-ce9ebaf62e98",
+        "a532d83b-0567-4131-b29d-64b4c74a7c1b"
+      ],
+      "a_only": [],
+      "b_only": [
+        "15dd1e3b-a547-437d-976f-8b75f8cf849c",
+        "7ae0e0fb-3b55-44b1-97ae-e45c07f5fa3e",
+        "e3abd6b5-1237-457f-bd58-5aa3ad4d3d69"
+      ]
+    },
+    "css layout and styling techniques": {
+      "jaccard": 0.595,
+      "agreed": [
+        "0a5f0cdb-bff5-4355-9005-343c1e0d03a5",
+        "1c444d97-9045-4426-9f29-9f6b8325aba7",
+        "2485b8ae-db4a-4fa0-89ec-56b96d4a56b3",
+        "2795f6e0-ae40-49db-86d8-c5bb6fa4088c",
+        "27d92cb4-092c-402e-af3f-085f83e7bfe9",
+        "3324592b-8c25-45cc-b76a-9996f988ed17",
+        "3559baaf-bf73-465d-963d-b7d915e9ccad",
+        "3de4ef57-e054-4ce0-9eec-8bb577c2c9b3",
+        "49c948e3-967b-4fa9-8c13-d47648aa4f0d",
+        "4ac95a10-4562-4fa3-a934-9c14e9f7e058",
+        "4c07dced-9b23-452d-9427-b01f02e82a88",
+        "4dc31c38-3f89-4117-bcbf-8200858d7efc",
+        "4ea17052-d1cf-4771-b14d-7f5b4cc73ab7",
+        "62903f5e-90d8-487e-87d2-5ed5d5fea174",
+        "6734a782-d880-44f1-855a-6873ccd4e743",
+        "6ba8e056-1af6-4000-a56c-ec9f71ff17c9",
+        "6c31415f-f431-4d0b-898f-355a0aec7b9b",
+        "6f7b1b10-7317-40e4-bbe0-8b6a141adea0",
+        "7fcb6a16-2398-42e5-a071-a70abd06efcd",
+        "83f3cdeb-ee9a-45fa-b2b7-35be347877e3",
+        "87cf8455-1aa6-49ab-9aaa-1936da3ed95a",
+        "8a427d15-fa7d-490c-b6d3-8eec20de1734",
+        "b1a43266-7ab1-4a69-8d2a-a151aaa9296a",
+        "d2fb702d-96fe-4bc1-b224-aac7e02867c5",
+        "d8e0c7e7-ddb7-45c1-80bd-ce1b19f307bd"
+      ],
+      "a_only": [
+        "24fc0a72-eb47-4cd7-9efc-ea54f6d1b5e8",
+        "2a1a1a76-aa0a-412e-9d61-50457d7e727a",
+        "38df088d-978b-4634-bed4-38818efd416f",
+        "3ddd8645-0fe2-4c01-aaec-944cec57f522",
+        "4a11809d-fb28-4eb2-b8de-8181708ced0e",
+        "510b733e-f6d0-4592-b224-3c40d6c771f2",
+        "53981dd8-7d34-4fe8-90bb-848c36b77e30",
+        "6ae649ee-e540-4107-bda6-c5ab302c4c86",
+        "7a9ad4f6-e7fc-48e8-98d1-dfd3f3cec4b1",
+        "86f5a0f3-3ad2-47a3-a4e9-9243a320fc93",
+        "8f45eefc-f006-4b1e-b14e-622bd70e1dd0",
+        "ac34368d-f74c-47a5-a962-031447741d0e",
+        "bebbeaab-cba2-421d-9206-37291d860233",
+        "c2d88816-344a-4f0f-8c9c-9609f018ecca",
+        "cb5784b3-9dea-4043-a5f5-0603794d652e",
+        "db67bd6d-20a7-4481-9764-2a30bc24bde6"
+      ],
+      "b_only": [
+        "23ebeb6c-cbb4-4ecb-90e0-d38365a41bd5"
+      ]
+    },
+    "machine learning model deployment": {
+      "jaccard": 0.938,
+      "agreed": [
+        "0fc9a6c9-eff8-4767-a866-3d2a93dfa1db",
+        "13d5380c-c62f-4fd3-8715-dd4e4055107e",
+        "2f321852-17fa-4044-bdcf-a65d1b10fb01",
+        "42a576be-f1d4-4879-a359-c888613857dd",
+        "4a4aefe7-d7b9-4ca3-b775-5b3421c06a20",
+        "7d427f9e-a313-4b14-b987-cd517fca68fd",
+        "8afcd4fa-c753-44b6-b31c-5d33e3fba1c8",
+        "906baec3-18ae-4a49-9f8a-1ae52b0c8574",
+        "9df7aac9-80b3-48be-a415-c6fe225cc02d",
+        "a74ef83b-1d50-4265-8066-175da9990171",
+        "bac55106-06a6-41be-8540-b200ee8609c4",
+        "d15ec1ea-2451-449f-be6a-f1ac4eacc8b4",
+        "d693ac7f-71c6-46c9-8b19-9768e06d1b7a",
+        "dba6bd7d-a54b-43f4-8799-e1e4249fba4d",
+        "f8e91755-2551-462e-9411-6dc1b3168f02"
+      ],
+      "a_only": [],
+      "b_only": [
+        "c5f0dff1-ba69-4540-99ee-1668f44c4f71"
+      ]
+    },
+    "linux command line tools": {
+      "jaccard": 0.828,
+      "agreed": [
+        "0291b9ce-4315-4bad-aa7d-8a1426257b5b",
+        "0d18d621-a824-41dc-a242-26b4286f7982",
+        "0d64f400-382d-40b5-abe4-33dafeb5097c",
+        "2edb539f-8107-48ee-ac96-a3879d08728b",
+        "335869a1-91d2-4a29-8725-68b951cb2e08",
+        "352fc748-e86e-4880-80fc-77179bf54455",
+        "4aad1dc4-7b97-424b-84f9-af089066db54",
+        "4c52a3e3-6094-466f-8a5d-d4775d669a69",
+        "4dc3a301-1317-4cb1-8579-5bf582f50c66",
+        "5c61ef55-c067-4c9f-a38f-5aebbc35a13b",
+        "5ff63f69-e1ed-4659-bc65-d6eed82dee36",
+        "68be9356-b5a5-4d46-8a6f-a6cbbd114215",
+        "73ac6f9d-6531-4f16-ada6-5797f441c909",
+        "7acbdb86-08fe-46cf-a999-3d3495ec0309",
+        "7f9319a2-8dd9-45f7-80b0-f6f0bfcbb8b7",
+        "86859985-6394-40b1-9f88-d416e528d7bb",
+        "914d9328-8d96-4c2c-b805-669eab64d75e",
+        "932605fc-6084-447b-b9bf-cf82e307cd8d",
+        "b183c151-7967-4d10-afa6-59949d432280",
+        "b2d166e9-b785-453f-b4fd-345d3439ef0a",
+        "b780dbbd-43a4-4d2d-9987-f8423097ff93",
+        "ca769a80-0e58-46e5-88c6-7f89bd8a60cb",
+        "d4614623-ce16-4f2d-a18f-e49fedd496f8",
+        "f88f4edd-d7ee-40b2-93d8-d7fd42767655"
+      ],
+      "a_only": [
+        "2ee91f98-7f12-4ac6-ae1e-5c8c2d026272",
+        "8186e48a-cede-4a59-ac6c-5b586af1c971",
+        "b7ccda87-9e14-4e22-adde-96b45cbac07d"
+      ],
+      "b_only": [
+        "3aabece4-3926-46ee-a518-e9698c266ddd",
+        "66571d78-7a44-4598-bb1b-4f9eee9827ab"
+      ]
+    },
+    "php web development frameworks": {
+      "jaccard": 0.455,
+      "agreed": [
+        "87a5935a-97eb-4e7b-857f-7a73dbfcea48",
+        "b07159a9-0337-4d21-8e61-1471f201bdcf",
+        "b5a03494-795c-4571-99bf-2c920f2229d0",
+        "d428393b-e0d7-45d2-90db-878f0d2ae17b",
+        "f9884c18-4a9c-4ddf-8a13-c37362880118"
+      ],
+      "a_only": [
+        "b561810c-56b7-43e0-b05d-35a34ed967cf",
+        "bc1fc2a0-996e-492b-92ff-9a6a2a68434e",
+        "cc08b732-4e94-4402-925c-77cdd45b3ce2"
+      ],
+      "b_only": [
+        "3c5e51a7-8302-4494-ba0a-34ad13a8f5aa",
+        "81631660-a48e-4cbe-8a6f-3eaa7aabc086",
+        "e7f8f0dc-a4b1-4dc9-8e51-0afe89842d62"
+      ]
+    },
+    "data science model evaluation": {
+      "jaccard": 1.0,
+      "agreed": [
+        "aa1f3ef8-ad38-49e2-a117-4ac9de122dac",
+        "c9f6d8cb-ae2c-466c-acce-d23cfdbcaf31",
+        "dfd41c87-cc92-4021-a5be-8db76b7689f3"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "nextjs server side rendering": {
+      "jaccard": 0.556,
+      "agreed": [
+        "64b06efa-c099-425b-b796-64965ee8230b",
+        "8758083b-b145-4fb8-9c49-a6022dc09249",
+        "94c54c84-cf0f-4132-a4ee-f1fbcecdb9b6",
+        "a0585953-c7ca-4abf-8ab0-ca858d68f332",
+        "d61cd85e-90c6-45be-beab-6232fd822645"
+      ],
+      "a_only": [
+        "a1703f2e-30a7-4eed-9bf7-462cd1472763"
+      ],
+      "b_only": [
+        "2a265f45-c1c2-4443-b266-89cb4e906734",
+        "aad28ab4-6548-4877-82d3-22c69c6d6506",
+        "bef5f8a8-0643-4dca-891a-fb68ea33a192"
+      ]
+    },
+    "dotnet core web api": {
+      "jaccard": 0.688,
+      "agreed": [
+        "0b6aceca-c247-4eff-9a3f-a6121d6840ca",
+        "19d18efb-48e0-4eca-9f5a-4f122abd492b",
+        "6c27946f-08d4-4eeb-9348-db3aa9ab69f2",
+        "7201e859-298e-4d35-8ce3-a34279d92ca6",
+        "7caec93e-8043-4a29-b7b0-0e73c1e27e22",
+        "9869647a-9ee2-44ac-9669-a8408961f561",
+        "a9ea7263-58fb-4a28-9638-69e3ae73a37f",
+        "aef69ce9-0791-4ad9-8a84-6592c8737174",
+        "b5c83784-0a31-4177-9dcf-40e4bfcf3d3c",
+        "eab5546b-259f-4be4-b309-067166c28242",
+        "fce8271d-9b67-4dc6-8267-792a0c22ff82"
+      ],
+      "a_only": [
+        "55430317-59e5-4df7-9567-92b59434c168",
+        "738c4f05-e17b-4d76-bd8c-b74e0a0449b5",
+        "bb6bf4b7-8fe7-4b79-9ce9-54b4084beed7",
+        "d7bfc4eb-e2d9-4d67-9c36-4ce00121f133",
+        "f637377f-bf9e-4f36-a2a1-e067d12cec37"
+      ],
+      "b_only": []
+    },
+    "html semantic markup practices": {
+      "jaccard": 0.875,
+      "agreed": [
+        "4a5b6a5e-01d3-425d-9a8c-dd662ce864c7",
+        "4dda6dac-e1ef-4a7c-9df8-ef937636c2ce",
+        "6144a75f-8826-41c6-b456-8da10750e53f",
+        "6d7fd108-7050-464b-8ea2-2d8c68fcbb82",
+        "cd27b24c-f83c-4aaf-85cf-5dfa0c6ba2bc",
+        "ec26fd2a-3152-4d8a-9f12-63992e8a9647",
+        "fd64c83f-14fe-41a4-b22d-e6c994dd524a"
+      ],
+      "a_only": [
+        "8ae5053a-2882-4d95-8bf0-541c10dad349"
+      ],
+      "b_only": []
+    },
+    "csharp async programming patterns": {
+      "jaccard": 0.833,
+      "agreed": [
+        "04b804cf-8ba7-4f6d-9765-3d06aeeff996",
+        "760b0e28-06a2-4e13-a194-89ba0293ea6d",
+        "b1d2c0ac-85da-4fe6-b442-91afea1b7fcb",
+        "bded80ae-f8f7-4619-95c7-d2a8cc95ff3d",
+        "cdca1bc4-2cae-4e3d-b7df-8eafa00571f0"
+      ],
+      "a_only": [],
+      "b_only": [
+        "8d002bf7-ab2c-4472-b864-8d1ac0657224"
+      ]
+    },
+    "go concurrency patterns": {
+      "jaccard": 1.0,
+      "agreed": [
+        "01c1d70b-2830-487d-b3ac-fe6a7c9d3d4e",
+        "073e4abf-3eba-4ef5-b5fc-0dad12ee01aa",
+        "0c1318d5-9744-43cc-8a9d-c1154bd919e4",
+        "6541779d-2821-4cbd-b023-c4f111efc7e7",
+        "68cda177-8152-40db-b5b0-d78bdb7fb7a2",
+        "6a51793f-0e47-40c1-9a49-e476b884e7b4",
+        "93cfb9f8-f128-48f3-bfee-f339b8efabd6",
+        "9a15bdb9-eea6-451b-b455-d86c7f4e7b2c",
+        "9e499458-df04-4e9e-94a6-cf14bd255992",
+        "a0ec994a-6dac-4a1d-b0c6-c8f2079be36f",
+        "a99e39a5-e0a0-4ec3-9c49-6d0b1e4c7268",
+        "b07d2df1-b3b9-4d8c-be76-5d26b4e4d28a",
+        "bda34cfd-73bc-41bb-abc4-54416b752a31",
+        "c40c67b7-ebd8-4060-867c-68766bddf79a"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "cache": {
+      "jaccard": 0.905,
+      "agreed": [
+        "0439f0df-b4d3-4940-a73d-35d52c00026a",
+        "08a09ac3-6a43-48c7-ad76-0351839f71ea",
+        "0a6227e0-af21-4dac-8c43-5c0b046d2394",
+        "126f9594-1e16-4b2b-bd72-c5aea0b39ce9",
+        "127cda19-3986-4daa-bc66-b04d6ab1c2ab",
+        "12f8b16c-8583-4cda-9349-748064a751db",
+        "170ed03d-b138-4f07-9e22-3fe04ccef8e6",
+        "1eafcbf9-c279-43f7-a872-81f8ab9dda75",
+        "2784c77d-c78a-4498-ae62-91d13650e775",
+        "28022a3a-39ca-46ed-996c-d9d3d318cc8d",
+        "29749e65-d8df-4ff9-8fa0-a73958b5d28a",
+        "2e70977e-6d3d-4a0b-8a83-ccbf14b55c86",
+        "2f4171b2-7c4d-4ff7-9a28-1604505ca26a",
+        "487238aa-9145-4f2c-884e-45558281c53d",
+        "542d6a01-be7b-4845-bf37-2b28da9c60eb",
+        "6274152b-5bf6-49e0-9d77-c5d2875d66a2",
+        "6d57ed29-90bf-4c92-b0c1-659614f21cfa",
+        "711c155e-30fc-4525-bb50-bdd7f05f1640",
+        "79df9a96-7527-4b49-b51b-76965dc5af7f",
+        "7f4b96fc-0781-4bc1-8ac3-487c11e45625",
+        "8630153f-7744-4984-958d-c872467b8a7c",
+        "8988a2b0-7c78-4c2c-96c2-4ba3b75086d3",
+        "96fb5859-211f-4e55-a205-b618e1fc227d",
+        "9756bad5-bbc3-4b09-8b8e-e48b4bb66eda",
+        "9c0ecaf5-8947-4cd1-9ace-d56218eef93b",
+        "a81b2379-33ea-4053-b686-5c1ecb311ac3",
+        "b8fa1511-e67d-466e-969c-1f842537d66b",
+        "ba8fbf32-54f9-4423-8e8a-d75978b11557",
+        "c2555b29-7147-4efb-b4e3-ed2c459206a2",
+        "c270f16d-3985-45e0-a508-02564b401739",
+        "c351239c-c711-48a3-9176-0bc03eb9cd13",
+        "ccd78e7a-4204-4103-b6d3-564a1f69142b",
+        "d9335e90-cea4-4413-8dc3-8631b279e01c",
+        "d9973775-accc-4d65-aeed-ca2359b5b8fb",
+        "dd8e62f8-ea73-4cf3-bc82-ca824906b9ce",
+        "ea985daf-4692-4445-97f5-c5a439c9d8cd",
+        "eda6fbc5-d67c-4ed0-9996-bc2bcfcf0f53",
+        "ee97585b-f808-48ec-a50c-6a4176e18602"
+      ],
+      "a_only": [
+        "30093e1b-b3ff-406b-aba0-3ddc24dd7904",
+        "40538da8-394f-4149-aab7-b314150c8fc6",
+        "43425191-c3fe-4317-bcf6-b08ad3e541e5",
+        "dae9b422-e954-406f-862b-6369e19da355"
+      ],
+      "b_only": []
+    },
+    "stack": {
+      "jaccard": 0.655,
+      "agreed": [
+        "0fd15df1-7251-463a-95a0-7f25d0e91217",
+        "1e66e80b-d276-4f9b-b4f0-9dd6aca2a02c",
+        "2b478f37-ed21-4a26-94cd-ae5322ff671b",
+        "351a458d-780e-4908-aade-a95350955804",
+        "3b1f5afd-e3ed-47b7-9f9b-7308591489e9",
+        "3d5ed3ee-e48d-48ff-a5d9-a59dbce15e3c",
+        "4424aee5-502d-4d9e-a21d-c871c7f5f2dc",
+        "45882494-02f8-4b8d-8132-e8a7f5683b7e",
+        "7b9f9562-3f05-4b27-ba0d-e4560a96abda",
+        "7c426610-4509-40cf-b869-a5fc01352007",
+        "9ede119e-43e8-41ae-973c-5def984bf61f",
+        "b4cb7045-2f7a-4809-a3e0-7435f5d5b633",
+        "c18a054b-6cdd-4042-ae31-dd12db6524f5",
+        "c61a7857-51c7-403c-bbff-a29d7446fece",
+        "d113ac1f-fa6d-4423-817c-f3fc28827e13",
+        "d1a1765f-56a0-401f-ae8a-97ca18873918",
+        "d4a547d1-c059-441c-8195-6d434c1dc343",
+        "ec138504-4cfd-4b7d-a98d-d8835a26a1ff",
+        "f4cc13ed-3082-42e4-bb26-a08a7e4376ce"
+      ],
+      "a_only": [
+        "0d651f08-6513-427d-a219-9f2cc4b42ba5",
+        "20d87035-8cf5-4270-8238-34dbe570644b",
+        "2d616eb6-4876-4f74-849d-cef8b4eb048f",
+        "31bf1c22-37e9-46d3-b0a4-f8baf3de4542",
+        "79ea40c9-e2dc-43f7-b101-7eb2e5fbcc23",
+        "9b653f55-dcac-41e8-9878-a0e4d305d3a6",
+        "a82d14f1-3da6-47b5-94fa-5e13e2706714",
+        "f1e2426a-b22c-4092-b851-65f76288768b",
+        "f59a67e3-97d2-4cbb-93c9-14e5b1a93dc2"
+      ],
+      "b_only": [
+        "083d322c-5081-47a7-bb67-55db4d07fea2"
+      ]
+    },
+    "backtracking n queens": {
+      "jaccard": 0.5,
+      "agreed": [
+        "16f89b28-ddc4-4062-923d-b06d238171f1",
+        "6e41bbad-562b-4d11-9518-cc050131fb15"
+      ],
+      "a_only": [],
+      "b_only": [
+        "93dc43ac-1fe3-475f-8424-6c40d89ad135",
+        "f4e02aae-6cf8-4489-bd6d-8fa552c85ab1"
+      ]
+    },
+    "hexadecimal conversion kotlin": {
+      "jaccard": 1.0,
+      "agreed": [
+        "d87beb6f-e12a-41ee-8448-6b9896679b6a"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "implementing computed gotos": {
+      "jaccard": 1.0,
+      "agreed": [
+        "eb694081-1f95-434b-9433-1d659e093a95"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "distributed transaction introduction": {
+      "jaccard": 0.5,
+      "agreed": [
+        "05858e88-666f-4441-94af-f18e618d951e",
+        "2fd7dc07-1fb5-483a-b77f-9e7a88f5897c",
+        "5f1af0e1-5655-4350-ae71-a5106bcb6982"
+      ],
+      "a_only": [],
+      "b_only": [
+        "49515eb5-70b5-4d15-a990-c977e202718a",
+        "76758e76-900d-4f45-97e8-6d8f95fbd8ec",
+        "e9893ac4-c3e2-4806-aa07-d2ea58f8c619"
+      ]
+    },
+    "dynamodb expression package": {
+      "jaccard": 0.5,
+      "agreed": [
+        "e8fcdab5-175c-4806-8094-2dc512f1b7fa"
+      ],
+      "a_only": [],
+      "b_only": [
+        "a8365eb6-b920-45c5-84ac-ba5501299bf3"
+      ]
+    },
+    "eks optimizer kubernetes costs": {
+      "jaccard": 0.467,
+      "agreed": [
+        "3652f076-0591-43de-be46-2fa000abd566",
+        "63752a28-b8ea-4ff8-a7ac-6a77266d9e00",
+        "80f09410-7213-4457-9ee1-46b70eea1b13",
+        "9774fbca-7dba-4ec9-bf64-90f27ad9f2f0",
+        "a6ff93c1-2179-427c-a1ef-94d0d2ce62c6",
+        "d0281f39-ef0a-4a59-b149-217a2a5141c8",
+        "d192888e-7ab3-403a-8b09-4587f726802f"
+      ],
+      "a_only": [
+        "0fe93eb4-9867-4517-af00-aabef1f9156a",
+        "380f17ab-6009-4eea-9234-7db5730a3888",
+        "427c9543-2a62-46a1-a5c9-260d0e502700",
+        "540ce5a7-0d7a-44df-ac6b-a42af29759f5",
+        "b496892d-359e-4192-a630-9d4f18c02633",
+        "c4032d65-5efb-4438-b054-da261c84564f",
+        "d11b444b-a547-4213-bf86-b5e9b1ea58d5",
+        "ebdbe79c-6e91-4261-98ee-9e0a8a4e0ea3"
+      ],
+      "b_only": []
+    },
+    "agens sql vs postgresql": {
+      "jaccard": 1.0,
+      "agreed": [
+        "61b35dfe-ac9a-43c0-a690-17d0c512c6c9",
+        "70c25f43-945f-4823-a167-119fc567540f",
+        "eea2d09a-9f10-49e8-a1be-cf09006562c9"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "txtai postgres integration": {
+      "jaccard": 1.0,
+      "agreed": [
+        "d478530d-b2d9-46ab-bc26-400df0f603e7"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "cloudinary auth0 file storage": {
+      "jaccard": 1.0,
+      "agreed": [
+        "7531d1d8-f3bf-48e7-a390-117fd70d015d"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "solidity beginner guide fundamentals": {
+      "jaccard": 0.333,
+      "agreed": [
+        "29725931-680e-4541-974d-e0e5c9671582",
+        "b9d0b0dd-d8ef-4db3-b62f-4ba758864ee1",
+        "ca66836c-38aa-4c25-b984-27223023e2a0",
+        "d845bead-d078-4b2a-bd84-f5bf27b4ca80"
+      ],
+      "a_only": [
+        "8fcdccfa-73b0-4cfc-8dfc-a90501d55a30",
+        "f16b8621-5359-47f9-a5c4-c5690e131c74",
+        "f49c6c95-c3e1-4c26-896c-470aacbd87fd"
+      ],
+      "b_only": [
+        "098885a7-8649-4015-8395-b1fb4b4f65e2",
+        "133b7f73-988e-4d43-8cd4-fcafae823f8f",
+        "7826b7eb-fb4e-446f-8ca0-2fa74b021019",
+        "94847929-cd24-4c42-9826-325b412a6bad",
+        "bd80d99d-4dcc-49bd-9868-e9a4fe4d1d40"
+      ]
+    },
+    "drones construction site management": {
+      "jaccard": 0.5,
+      "agreed": [
+        "92bab653-93ca-4aec-8da3-e132f6f8245f",
+        "9bc034ac-400d-4026-87d6-4eedccfc58b5"
+      ],
+      "a_only": [],
+      "b_only": [
+        "011940ed-22cc-474d-ad4b-00188e1bd4c3",
+        "0698ca22-b3c2-4432-a2bc-a4a4b5cce055"
+      ]
+    },
+    "emacs macos catalina": {
+      "jaccard": 0.5,
+      "agreed": [
+        "61c6344f-19a3-46cc-8e0b-1da3eb1a842c"
+      ],
+      "a_only": [],
+      "b_only": [
+        "a541cc51-99e4-4591-b5e4-7b75588164e2"
+      ]
+    },
+    "nrwl nx react hmr": {
+      "jaccard": 0.333,
+      "agreed": [
+        "f29fdb2f-ab9f-4e2d-b4c5-59c37ddcd8c7"
+      ],
+      "a_only": [],
+      "b_only": [
+        "32634914-defe-431a-8c62-6139ff95e48f",
+        "f2b4f54b-6c6b-4b4d-88e4-d86af57f2194"
+      ]
+    },
+    "apache age graphql full stack": {
+      "jaccard": 1.0,
+      "agreed": [
+        "b8658f9b-ec30-4177-b5e7-d1b477a2cc94"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "sripriya kalyanasundaram lambda test strategy": {
+      "jaccard": 1.0,
+      "agreed": [
+        "b49dafaf-9282-480f-b8e1-d1e86f3dc2eb"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "gcd tutorial ios": {
+      "jaccard": 1.0,
+      "agreed": [
+        "34b77deb-bf42-4455-93ea-104c98d4bf0b"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "flask github authlib authentication": {
+      "jaccard": 0.5,
+      "agreed": [
+        "89237bcf-a84d-4976-8a1d-50054eb7c891"
+      ],
+      "a_only": [
+        "f875636c-d06c-4e17-8fba-39464acda81a"
+      ],
+      "b_only": []
+    },
+    "how spellcheckers work": {
+      "jaccard": 0.5,
+      "agreed": [
+        "3d34c6fd-a7a5-4323-a509-5e196dec9be2",
+        "78d3a6ee-69a5-4091-87f8-b793504d5768"
+      ],
+      "a_only": [],
+      "b_only": [
+        "2e9bf2db-ca95-4fcd-908f-cbc7cd6aacab",
+        "81266a23-29d5-47e1-b28b-24266334fc2a"
+      ]
+    },
+    "back of the envelope estimation": {
+      "jaccard": 1.0,
+      "agreed": [
+        "7836e9c8-a276-4a54-8afa-7a7b6877a9f5",
+        "d9527e08-502b-4f96-abb4-dacfd200585d"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "awesome j2me list": {
+      "jaccard": 1.0,
+      "agreed": [
+        "74c421f2-a80a-4e05-8efa-39773c7ca2d1"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "best automated testing tools": {
+      "jaccard": 0.476,
+      "agreed": [
+        "0f88632c-e672-43e2-85ee-85e5f7f083d5",
+        "1ca4effc-753c-4e55-a347-4128220dcc87",
+        "4779db65-0416-4027-b71f-bac42d62481e",
+        "88e5d6d8-5ab8-49a9-99bb-ef1c22461c5e",
+        "a202df6b-4b60-450e-adcc-8efbff62b616",
+        "aaede71e-8aa2-4e9c-8f41-857fd5a5f6fc",
+        "d37dc148-2bb4-4e5c-96df-89d7120ee28a",
+        "db8af6fd-3776-4cb6-bd94-1db6a663dbc5",
+        "e0074a4a-ab39-4594-a68b-b01fa6018980",
+        "f2f4a406-6c99-4d08-9d7d-f163a9163f24"
+      ],
+      "a_only": [
+        "084c5e32-bcc7-4f34-8dee-b6d25fbba92a",
+        "5258ea95-2ba3-4ece-b3ae-f4e5d82ad6be",
+        "91c37a1a-2b06-403a-a17e-e8f62abe1ff5"
+      ],
+      "b_only": [
+        "01525b44-a3b6-4a6e-bfef-649661f3a154",
+        "31126b88-6812-4801-aa4f-54ef857f3361",
+        "4f5f4361-b4d9-428b-a7d6-70ad0a10df60",
+        "71e6ab6f-9add-4bc4-9041-6b812a1e457d",
+        "8847d049-be09-4667-9127-c37ee44f5d09",
+        "d2df02a6-5a08-4439-8840-f8174f933b52",
+        "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+        "d825ea5c-6f46-4848-b3eb-28144b8f8ff6"
+      ]
+    },
+    "load balancing 101 guide": {
+      "jaccard": 0.529,
+      "agreed": [
+        "03aec6eb-9e08-4053-8f51-b4e17712cf0b",
+        "0cb482cd-4350-424f-929c-e86254cd4ffc",
+        "13ebf940-9620-4f0e-b128-71c7041971c3",
+        "3e32e59e-d46a-4d41-bbe4-3681ec4393d5",
+        "4a24a9c3-7e29-4a3f-bcfd-b550abddc9dc",
+        "4eb27c58-7e91-4491-9853-984cd19cece9",
+        "7b21b2ad-f2c6-4812-82f7-82ab356febd3",
+        "aabe57b0-eeac-44d2-95e6-e09006f80877",
+        "f1cc3204-6782-4f15-ab28-11fbf18accf1"
+      ],
+      "a_only": [
+        "24ec1a60-fdd1-4d1e-9994-38e8085f00d8",
+        "51552ab8-71c4-4df5-b179-8f3f52c94175",
+        "8ff0a6ef-c8ab-447b-a29b-5ac5d5335b38",
+        "aa81c561-73db-4a90-97e4-fb0fb666c829",
+        "b37fa784-02ac-474d-a407-94384e4b3365",
+        "cda2dc3d-cbe4-4e34-bf95-b540a65b5093",
+        "f347f7d7-21ed-4fb8-837c-805371a060f1"
+      ],
+      "b_only": [
+        "901a5b7a-423b-4783-afdb-91547c31fe5f"
+      ]
+    },
+    "business playbook templates": {
+      "jaccard": 1.0,
+      "agreed": [
+        "cc10d9d1-f47e-4b4c-958e-380c50c89f9d"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "react 19 ux features": {
+      "jaccard": 0.875,
+      "agreed": [
+        "1f4a6adb-9204-44a8-b0a0-c3878e3b5c8d",
+        "49cfbd32-c30c-4bda-b6a9-1aaf8ac090bb",
+        "552a6439-06d6-4b0e-a00b-28b177c0bc4c",
+        "62d2d17b-8d5c-4c0f-b13b-74c7df6eb74b",
+        "7e3410d4-cc28-484b-a700-55c0347e3d49",
+        "b19ec9c5-e8aa-48a8-b539-f16e9b771c7f",
+        "b93a57f9-1224-4f21-8560-a334b59320b2"
+      ],
+      "a_only": [
+        "652d70fa-4920-4f3e-9ad0-2dcd30d0813c"
+      ],
+      "b_only": []
+    },
+    "linux socks proxy server": {
+      "jaccard": 0.8,
+      "agreed": [
+        "15918cc9-aba5-47e9-b12f-c31cd4d87723",
+        "1e899b76-21c6-407f-a79d-c958b0357e58",
+        "abd558ff-1700-48bf-8cbe-9ef5cfba4063",
+        "d3fe0ff4-2c8e-46ef-a816-ba6403ef3c0b"
+      ],
+      "a_only": [],
+      "b_only": [
+        "3066c7e8-67a3-469b-8b9e-3ac9af4adf7b"
+      ]
+    },
+    "microsoft entra id intro": {
+      "jaccard": 0.25,
+      "agreed": [
+        "f9b33f8f-1ef8-45e9-a7f0-adc597c805e6"
+      ],
+      "a_only": [],
+      "b_only": [
+        "124d7d31-e5a1-4599-a301-271585032fa1",
+        "3f3040ea-3fdc-4eb7-a08d-db262f76bf41",
+        "d64ae163-92db-417e-b78d-4ff64db6cd3e"
+      ]
+    },
+    "gravitational waves symphony cosmos": {
+      "jaccard": 1.0,
+      "agreed": [
+        "176c93ca-4397-4481-983a-5d38013f94f8"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "importance of leave management": {
+      "jaccard": 1.0,
+      "agreed": [
+        "aaa1d029-bc00-4519-8ece-0a69ab0f21b6",
+        "f9593469-2130-4a6b-9361-85679b3968d7"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "pkce oauth javascript apps": {
+      "jaccard": 0.667,
+      "agreed": [
+        "2f4a14a4-0f27-4212-a4f8-a1663a2ad871",
+        "fd0520d1-8737-4cf8-86d1-9bb13cbf628c"
+      ],
+      "a_only": [],
+      "b_only": [
+        "4dfb37d8-7e37-49bf-8deb-1bab4e9e59d9"
+      ]
+    },
+    "most popular websites lebanon 2023": {
+      "jaccard": 1.0,
+      "agreed": [
+        "62cf6ebd-829e-4248-a008-466867a0579f"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "docker disk bandwidth limits": {
+      "jaccard": 0.333,
+      "agreed": [
+        "761ce2cc-36e8-4503-acde-6faa8e11625b"
+      ],
+      "a_only": [],
+      "b_only": [
+        "751b9f2d-c3c7-4768-b29a-aa1f5c084488",
+        "87d905d5-9760-454e-a44c-66b377bdc859"
+      ]
+    },
+    "data is valuable aaron marks": {
+      "jaccard": 1.0,
+      "agreed": [
+        "23f55727-7a4d-4854-8119-5421debd96ee"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "system integration testing streamlining": {
+      "jaccard": 0.462,
+      "agreed": [
+        "036f5340-fa1d-43cd-ae0a-5b98b70101fb",
+        "0829a064-522f-4230-baf1-271e80fa5fa7",
+        "3c60cb9a-911a-4c6a-95d6-e4b0318998d4",
+        "5711297a-f88a-4ae2-a96c-7062745c9818",
+        "632c77f2-60be-476d-b34e-2dea61f1ceb4",
+        "f0c3cc6b-e4ef-4923-8bfd-90e512b91709"
+      ],
+      "a_only": [
+        "173fee7b-fb41-4234-9528-922d0e18ac1b",
+        "4631d316-fb5a-43f1-b526-b19dc94de9d1",
+        "643bd886-917e-43ab-80a3-9f9970e566e7",
+        "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+        "fb2ad045-6503-484b-b7ce-e402ee6a4aa1",
+        "fe3efefa-1b86-494b-9f95-f9562bf65522"
+      ],
+      "b_only": [
+        "296df62e-5edd-4413-8eaa-74cc56f8fe38"
+      ]
+    },
+    "depin python javascript bot": {
+      "jaccard": 1.0,
+      "agreed": [
+        "9d445512-e102-4866-a412-5b9d0b612dd2"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "smart solutions future education": {
+      "jaccard": 0.438,
+      "agreed": [
+        "39178b3a-c5c2-49a5-90b1-964519731af9",
+        "45167039-802c-4630-9e4e-b8e74d1d956f",
+        "542c5be9-acc6-4e7c-9b52-28a9b7b11c3f",
+        "a4669a9e-54d9-4814-bdc5-19957042c795",
+        "c7646953-f645-4512-873e-fdd8d0c59128",
+        "ea494154-d9b8-4ee7-98ec-e73c9db35db9",
+        "f54a6f71-7d8c-47ac-aee6-b0838fec47f1"
+      ],
+      "a_only": [
+        "13282552-dfda-42cd-8022-440bcc9629e8",
+        "51b2edce-f275-4698-97bd-c7bc9fb2f167",
+        "5c24cc49-a3f4-4b8f-a1e3-54ed40236020",
+        "9ff9473c-e344-4832-9d26-00b726601de8",
+        "a6db7fc3-47a5-466c-8db9-c27302e7bc26",
+        "e2dd9259-b915-4b7b-ae2f-e5e67d43ef4a",
+        "e32bd60c-6ee0-4408-a45c-79c8bc1dc4ce",
+        "f1110138-6735-418a-bd9e-2a64d893202a",
+        "fc34ff08-9f73-4faa-ab40-67714c5a580a"
+      ],
+      "b_only": []
+    },
+    "on demand home service app guide": {
+      "jaccard": 0.667,
+      "agreed": [
+        "1aed3a1b-816e-453f-88d8-496922558915",
+        "25e9fdf8-375d-4afc-9cd3-29a0808d3f06",
+        "b953eb38-dcf9-4a6d-a35c-4d7de92dc6ff",
+        "f8733914-0ac1-450c-b151-223e33e5ccac"
+      ],
+      "a_only": [
+        "de83fa99-31ee-4baf-bf5f-e1084e5166fd",
+        "eff87213-d6a0-4811-afc1-5cb91ddad43f"
+      ],
+      "b_only": []
+    },
+    "meteor 24 new installer": {
+      "jaccard": 1.0,
+      "agreed": [
+        "b7c9eb55-4a98-4fc6-83fe-24c4609a11be"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "formal methods beginner guide": {
+      "jaccard": 1.0,
+      "agreed": [
+        "4d1ccd2c-222f-48b9-b646-5818320da500",
+        "ce2c9929-6d79-4173-81a8-e572623eff4d"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "crowdstrike windows azure vm fix": {
+      "jaccard": 1.0,
+      "agreed": [
+        "1b1ee179-c623-46e3-952a-91a83b51b9ca"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "spring microservices gateway thymeleaf": {
+      "jaccard": 0.333,
+      "agreed": [
+        "8257dace-6d79-4fcb-a39c-fe97c9f3f2c6"
+      ],
+      "a_only": [],
+      "b_only": [
+        "7fbde689-0179-45de-a0d1-c94ad5943b50",
+        "e6a47231-d6ba-41f2-8327-8966842edb8e"
+      ]
+    },
+    "payload cms vs strapi": {
+      "jaccard": 1.0,
+      "agreed": [
+        "62f7eb3e-1bd1-4957-a19e-eb3213e29370"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "xrpl grants wave 6 judges": {
+      "jaccard": 1.0,
+      "agreed": [
+        "84ba6133-b944-4812-a588-ca5993028e97"
+      ],
+      "a_only": [],
+      "b_only": []
+    },
+    "my public inbox": {
+      "jaccard": 1.0,
+      "agreed": [
+        "c42106b9-8ff9-4e79-81f7-b89bb2606a47"
+      ],
+      "a_only": [],
+      "b_only": []
+    }
+  },
+  "disagreements": [
+    {
+      "query": "redis caching strategies",
+      "uuid": "5a27e03e-1ee2-4ca9-9a9f-23fe6f2f1837",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "uuid": "19fb0959-eb97-496c-bf97-091dd8f541c7",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses deployment strategies for Kubernetes, which commonly include rollback and recovery approaches.",
+      "b_rationale": null
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "uuid": "f7972993-c24e-4322-88d2-9e335e7d5b04",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers CI/CD automation for Kubernetes deployments, which typically addresses rollback procedures and automated rollback strategies.",
+      "b_rationale": null
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "uuid": "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers Deployments in Kubernetes (contrasted with StatefulSets), so it should address deployment lifecycle actions like rollbacks.",
+      "b_rationale": null
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "uuid": "93d6887f-a884-4ef4-8c4c-da2e4713a17f",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Helm is a common tool for deploying on Kubernetes and includes built-in rollback commands, making this directly useful for rollback scenarios.",
+      "b_rationale": null
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "uuid": "96f8ca24-a2e7-4119-b924-93726b4753e3",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focused on Kubernetes Deployments and likely covers managing rollout history and rollback operations as a core topic.",
+      "b_rationale": null
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "uuid": "9f28fc77-7d8f-408f-9dc7-3020d031938e",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A troubleshooting guide for Kubernetes deployments that would reasonably include rollback techniques as remediation steps.",
+      "b_rationale": null
+    },
+    {
+      "query": "react state management",
+      "uuid": "6bf31c82-0c04-4704-92d2-cd76fa519e1d",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses persisting data on page refresh in React which touches on state persistence concerns but is narrower than general state management.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "e9793257-820b-4128-a6c7-5403a309fe9e",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focus on 'college life' in the title makes this a relevant match for users searching about life-related experiences.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "cf23a0f2-3912-4bcf-a160-c2f02c301794",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "'Time is a tool, not a toy' discusses how life is shaped by time use, aligning with life and lifestyle advice.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "9357d902-492f-4cf4-9aa9-9d4159be1af2",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Title 'Life is all about Composition' indicates the piece is centrally about life, making it highly relevant to the query.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "f5f13626-a71d-4dd0-aceb-e2f5204c5dd1",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explicitly about transforming one's life (title: 'Transform Your Life'), making it a near-perfect match for the query.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "ff7cc8a1-7c8a-4c49-943f-8b5a37608a5f",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Title and description explicitly present '8 Essentials for Life'—a direct match for the query focusing on life advice.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "fcea9235-1fab-49a0-98e4-199a80aa5a21",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Title 'What a life Changer!!!' indicates the core subject is a significant life change or reflection, which matches the query's intent.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "a57bae4e-bfa6-495d-afd9-ae6cded28262",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "'On my social life in the future' explicitly addresses aspects of personal/social life, making it relevant to the query.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "67ef1f2e-4791-45a7-a528-963e6b52200a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Title 'Hacks To Automate Your Life' directly targets life-improvement content, closely matching the query.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "f5031a76-608e-4bde-8b86-9dc8ddb82caf",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Title 'Life as a Bootcamper!' is explicitly about a lifestyle topic, directly matching the user's query for life-related content.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "bdab74ab-d758-4857-8b16-9ed22cf16733",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Titled 'Decoding Life' and focused on bioinformatics and biological life, it directly addresses the concept of life.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "d937bd9e-9cbf-4499-be6b-c93ea6d81859",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "'What Really Matters in Your 20s?' centers on life perspectives and changes in one's twenties, relevant to someone searching for life topics.",
+      "b_rationale": null
+    },
+    {
+      "query": "life",
+      "uuid": "6bf9f8ee-9663-4b94-9ca7-ed2e462d4efc",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Title promises content that will 'Change Your Life And Mindset', making it a strong, direct match for the query.",
+      "b_rationale": null
+    },
+    {
+      "query": "intelligence",
+      "uuid": "7018ed88-8ea4-447e-816a-09ec147aeccf",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "About building an 'intelligent' audio-to-insight pipeline, this technical project is relevant to applied intelligence topics.",
+      "b_rationale": null
+    },
+    {
+      "query": "intelligence",
+      "uuid": "6b66b52f-bb21-40ef-998a-5b0072ebfb3e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "ae2722dd-7052-4b37-b35b-b3cdadd7f39b",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "14416b29-230e-4ad9-a236-7330ba3ee0e6",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "6117b19f-6dd3-4a61-b625-190d97848d92",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "6e5fb03f-4f64-4f72-a575-d2f9f8554984",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "3f864714-7004-4167-b8f0-5bcdfd7d6300",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "bef52e17-b907-4bc2-a382-b63afb461998",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "c19afaf5-fc05-4b9c-ad5f-f09d603368f7",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "89266e57-4a6c-4516-97f2-de53a04bf017",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "intelligence",
+      "uuid": "c49a50d8-f362-4be4-a1bb-09cd7c5d97fb",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "memory",
+      "uuid": "9c0ecaf5-8947-4cd1-9ace-d56218eef93b",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Presents an in-memory key-value cache in Go, directly related to using memory for caching purposes.",
+      "b_rationale": null
+    },
+    {
+      "query": "memory",
+      "uuid": "719eb233-9d23-4a8d-a32d-d7b63689e404",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "memory",
+      "uuid": "f46f54d2-e770-4e27-b861-b2359fc4b239",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Introduces Redis as an in-memory database, which is specifically about using memory for data storage.",
+      "b_rationale": null
+    },
+    {
+      "query": "memory",
+      "uuid": "ea985daf-4692-4445-97f5-c5a439c9d8cd",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains caching and cached memory, directly related to memory usage and performance.",
+      "b_rationale": null
+    },
+    {
+      "query": "memory",
+      "uuid": "17c12e0e-07ee-43c3-884e-57a3ce9618b7",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "async python event loop",
+      "uuid": "874d4878-8144-4295-9f3e-e9af3e73bb8d",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "async python event loop",
+      "uuid": "d50c763d-c94e-4acb-893a-5da0bdd3687b",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "async python event loop",
+      "uuid": "46ae0391-e54c-4e54-b87b-6d124299285e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "async python event loop",
+      "uuid": "be5c9661-dca1-4611-a1c0-5340e9f95a5f",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "microservices vs monolith",
+      "uuid": "f0f8da56-6a6a-4059-afd0-c8da8f0e4b83",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Presents a focused comparison of monolith vs microservices using Netflix's story, directly addressing the query.",
+      "b_rationale": null
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "33e44ce4-eea6-49b3-9d64-65f2f0cdd33b",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "b10c9d45-9348-4492-896e-3b5406913f95",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "472ddcb0-063b-4c47-abbe-dac64ce9c798",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focuses on integrating security (SSDL) into the SDLC and CI/CD pipelines, covering important best-practice considerations.",
+      "b_rationale": null
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "f7972993-c24e-4322-88d2-9e335e7d5b04",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "ede2868d-240a-4557-bef0-410230d7842b",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "03d4b583-383e-4728-97f1-69caf5934aa0",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "ceb387f8-af65-4beb-972e-a00471764ced",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "c136be16-1957-49dc-ba77-aa0985bf0645",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "c2ecc61c-8a3a-468b-90ad-86e19d8fae36",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "6549d575-c54a-43f3-b091-9fe6f3584518",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "a7705d2c-0c28-4b78-9c80-ef7cf7210359",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "94518132-0442-47c6-af1d-8f1833b5e459",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "ff357183-007f-4d6c-bb32-5ff46a0c0f25",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "f1238be3-b8c0-46cc-8c78-78574e3c0e60",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "ef6b5d2b-e2a4-4c62-b433-2dfa069596ae",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "954e8677-fd4a-42ae-9c10-4879debac770",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "fb24326c-ea75-4abc-a472-1777b5f3ad10",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "f8838112-d0be-40e3-9cf4-330a8cc45313",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "bb647885-b0c9-4c2e-be8e-c6011d19d5a0",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "e1fc9e96-0db8-41b8-952f-91edf85822a3",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "613ecc40-a2ae-48ec-b6c7-3f0741689cfc",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "c6a509c8-88b1-49f3-b23c-e6d9ffcd7dc3",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "b2717d77-5742-4879-9d6a-d64cd7e3814d",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "f24c3e51-2940-4a5d-a6ca-93a2dcb23dce",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "541a48e1-2a9f-454d-8270-a8b285e59f09",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "uuid": "785cf405-8970-4d91-ab58-780e64207c2d",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains improving CI/CD pipeline security using AWS IAM Access Analyzer, a specific best-practice topic.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "32fe49a5-6ba6-466e-9d47-fd54e026a37c",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers using AWS CDK to define infrastructure and web services, directly relevant to building AWS cloud infrastructure services.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "b2b44064-0662-4357-8276-cc1d9adf3ae8",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains running AWS CloudFormation via CLI and use cases, directly addressing an AWS infrastructure service used for resource management.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "b917fe99-1067-49a6-b2b0-e0e0ebfdef9a",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "303d9ae0-2c6b-4508-878a-3d792c41e21f",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Provides best practices for building scalable infrastructure with AWS CDK, directly applicable to AWS cloud infrastructure services.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "f59979d4-8b49-4e6b-8cff-068be1d385b4",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains AWS EBS encryption for block storage, covering a core AWS infrastructure storage service.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "d0efef98-86fe-4e3d-8c1a-6e8ae0a067d3",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "88307b26-be07-4cac-bf47-0aa57dfe39ff",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "98790da3-129c-4aad-b50e-cef7c560e85e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "0b4748f6-7367-4374-8976-4ca653852d57",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses AWS CloudFormation stack refactoring, relevant to organizing and managing AWS cloud infrastructure resources.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "7e3b537f-db83-4bcc-8d29-b5b76568e84d",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "3ed23063-b7f1-43a8-a395-c5f7945e2740",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Dedicated to AWS CloudFormation as Infrastructure as Code for cloud management, a near-perfect match for AWS infrastructure services.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "2e12c603-5302-4579-b043-0ef695ef2c71",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Compares Terraform and AWS CloudFormation, directly relevant to provisioning and managing AWS cloud infrastructure services.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "4793f57f-29db-4278-9050-2551e20c5f53",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "40ea5465-c447-484e-ab19-65f985895628",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focused on AWS CloudWatch, the primary AWS monitoring service, directly relevant to AWS cloud infrastructure services.",
+      "b_rationale": null
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "5da24ca1-a5bf-4e27-9f65-fd306f3993df",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "bb5ed348-0ad8-472a-9c71-b636d5cbf5db",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "d6c695f9-38e9-499d-a849-107c39b0cd20",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes AWS Cloud Map service discovery for ECS Fargate containers, a specific AWS infrastructure service relevant to cloud architectures.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "5aa4ecb6-5695-4573-bcfe-2cd80b035461",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Outlines steps to become a GCP engineer, a concrete career specialization path within software engineering.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "3d6d9327-e190-4f26-85c6-164a754786ce",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A survey of early-career developers contains evidence-based insights relevant to career growth and challenges.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "a128d993-47a1-461d-881f-496d5108f88b",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A roadmap to becoming an ML engineer is a specific software engineering career path useful for growth planning.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "b3eae333-3876-44fc-9bf0-72498d8dda2d",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers transitioning from campus to a software engineering role, which is a key career growth stage.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "fa8638db-e091-40af-a863-a3b8b28d3d1b",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A detailed piece on the Software Engineering Manager role is highly relevant to software engineers planning managerial career growth.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "70419ed9-ea6c-4010-8e69-18225e389fb3",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Advice for surviving a first internship is directly relevant to early career development for software engineers.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "b8f2bf3a-504f-4115-a761-d403e15087de",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Information on software engineer compensation is a practical component of career growth and planning.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "56cc14fa-acaf-4eb6-84b9-66ecdb37bdd1",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses productivity and balance in a software engineer's journey, relevant to sustainable career growth.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "bb4ab9d5-bda1-40a4-b690-e36c959913a2",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Guidance on investing tailored to software engineers addresses a practical aspect of long-term career planning.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "8dc89a63-6579-4597-81cd-078a11657b1c",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Provides an overview of a test automation engineer career, useful for exploring growth paths in QA/testing.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "d54d85d1-987b-4509-96a6-e0a99cc18c10",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Provides tips for becoming a better software engineer, which supports professional growth.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "2f056bc3-ad21-4b7c-a7d5-b5f3da92a131",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A blueprint for backend software engineers offers career-focused guidance for a specific discipline.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "8af37a58-7cd0-4a19-b41f-590d1e974a49",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Outlines common mistakes engineers make, useful for people seeking to improve and advance their careers.",
+      "b_rationale": null
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "54cac08c-d80d-4ed1-a84d-8112d15a5f7e",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A firsthand account of interviewing for a senior role offers insights into steps for career advancement.",
+      "b_rationale": null
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "e31e45e5-87b8-4fa6-a167-b0eb8bf2b1b2",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "231ece93-045f-42ac-ba34-fe4aa0691125",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "6d11fb81-8c63-4e46-8671-5690f8561e3b",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "65058ee6-4e86-43ab-843d-06e71472f2b4",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "7992b54c-54c5-46e7-887e-a2bfdaa8a6e7",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "6a2676a0-d073-44fc-9b0f-b9e485edf56a",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "62f32d5b-751d-4b5f-a205-ef0f4ab1eb12",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "c2f3abe0-aef7-4215-b734-3d2b6978a12e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "6904454a-455d-45cf-82eb-157327085fe5",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Step-by-step guide to deploying a Node.js/Express backend on Vercel, directly relevant to Node.js backend deployment.",
+      "b_rationale": null
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "34b985e3-fa12-4d6b-aa66-50c5397d6774",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "00174e44-7496-4e97-8f79-06b4b25dc14e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "cd79dc6c-9d3a-43f5-9f32-4b4e45a27aff",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Compares Node.js with other backend languages for performance, which is relevant to Node.js backend decision-making.",
+      "b_rationale": null
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "5153a2a0-eb75-4594-98fe-ab588d2aed29",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "95eafe1e-9e28-49ff-bad8-288abe3e5977",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A post addressed to Node.js developers, indicating Node.js-focused backend issues or discussion.",
+      "b_rationale": null
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "352a1c5c-277b-4b6c-a139-c989b417110b",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes techniques for adding type checking to global JavaScript libraries in VS Code, useful for improving type safety during development.",
+      "b_rationale": null
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "d5aa17ca-7ce7-467f-896e-63001b377893",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains how to wrap Prisma methods and reuse TypeScript types, a practical pattern for maintaining type safety across code.",
+      "b_rationale": null
+    },
+    {
+      "query": "multi cloud deployment strategies",
+      "uuid": "15dd1e3b-a547-437d-976f-8b75f8cf849c",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "multi cloud deployment strategies",
+      "uuid": "7ae0e0fb-3b55-44b1-97ae-e45c07f5fa3e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "multi cloud deployment strategies",
+      "uuid": "e3abd6b5-1237-457f-bd58-5aa3ad4d3d69",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "2a1a1a76-aa0a-412e-9d61-50457d7e727a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes Stylify CSS for Angular, a styling tool relevant to techniques for structuring CSS in apps.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "3ddd8645-0fe2-4c01-aaec-944cec57f522",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Compares Bootstrap and Tailwind, which informs choices in styling approaches and layout frameworks.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "cb5784b3-9dea-4043-a5f5-0603794d652e",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Compares Tailwind and traditional CSS, relevant to choices in styling techniques and workflow.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "c2d88816-344a-4f0f-8c9c-9609f018ecca",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses important CSS topics and questions to level up skills in styling and layout.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "7a9ad4f6-e7fc-48e8-98d1-dfd3f3cec4b1",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Shows how to implement dark/light mode with modern CSS features, a practical styling technique.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "db67bd6d-20a7-4481-9764-2a30bc24bde6",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "General overview of Cascading Style Sheets, covering basic ways to apply and organize CSS for styling.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "510b733e-f6d0-4592-b224-3c40d6c771f2",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Offers tips for creating a CSS framework, touching on organization and styling practices.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "24fc0a72-eb47-4cd7-9efc-ea54f6d1b5e8",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains REM and EM units, fundamental styling techniques for responsive CSS layouts.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "bebbeaab-cba2-421d-9206-37291d860233",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Compares CSS and SASS, relevant to choices in styling workflows and techniques.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "4a11809d-fb28-4eb2-b8de-8181708ced0e",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Introductory resource for learning HTML and CSS that likely covers basic layout and styling techniques.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "ac34368d-f74c-47a5-a962-031447741d0e",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A learning-focused post requesting help with CSS fundamentals, relevant for mastering styling techniques.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "23ebeb6c-cbb4-4ecb-90e0-d38365a41bd5",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "38df088d-978b-4634-bed4-38818efd416f",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses a tool for visualizing CSS layouts, directly related to understanding and working with CSS layout techniques.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "8f45eefc-f006-4b1e-b14e-622bd70e1dd0",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A beginner project demonstrating HTML/CSS layout and styling practices in a practical context.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "53981dd8-7d34-4fe8-90bb-848c36b77e30",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers Sass, a key styling technique used to write and organize CSS more effectively.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "86f5a0f3-3ad2-47a3-a4e9-9243a320fc93",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "General overview of what CSS is, useful background for layout and styling techniques.",
+      "b_rationale": null
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "6ae649ee-e540-4107-bda6-c5ab302c4c86",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes approaches to writing CSS (vanilla, Sass, PostCSS), relevant to styling techniques and workflows.",
+      "b_rationale": null
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "c5f0dff1-ba69-4540-99ee-1668f44c4f71",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "66571d78-7a44-4598-bb1b-4f9eee9827ab",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "3aabece4-3926-46ee-a518-e9698c266ddd",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "b7ccda87-9e14-4e22-adde-96b45cbac07d",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes Xecrets File, a command-line cryptographic toolbox available on Linux, making it relevant as a specific CLI tool.",
+      "b_rationale": null
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "8186e48a-cede-4a59-ac6c-5b586af1c971",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focuses on the 'whatis' command, which is a specific but directly relevant Linux command-line tool.",
+      "b_rationale": null
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "2ee91f98-7f12-4ac6-ae1e-5c8c2d026272",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Introduces TOD, a command-line tool for testing CI/CD jobs, which is a concrete example of a Linux CLI tool.",
+      "b_rationale": null
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "b561810c-56b7-43e0-b05d-35a34ed967cf",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Provides tools and guidance specifically for Laravel developers, addressing development within a top PHP framework.",
+      "b_rationale": null
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "cc08b732-4e94-4402-925c-77cdd45b3ce2",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "References working with PHP or the Laravel framework and thus relates to PHP web development frameworks, though it's project-oriented.",
+      "b_rationale": null
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "81631660-a48e-4cbe-8a6f-3eaa7aabc086",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "bc1fc2a0-996e-492b-92ff-9a6a2a68434e",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Directly about Laravel, a major PHP web framework, and tools for developing with it.",
+      "b_rationale": null
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "3c5e51a7-8302-4494-ba0a-34ad13a8f5aa",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "e7f8f0dc-a4b1-4dc9-8e51-0afe89842d62",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nextjs server side rendering",
+      "uuid": "bef5f8a8-0643-4dca-891a-fb68ea33a192",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nextjs server side rendering",
+      "uuid": "a1703f2e-30a7-4eed-9bf7-462cd1472763",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focuses on solving hydration problems in Next.js server-side rendering using dynamic imports, pertinent to SSR troubleshooting.",
+      "b_rationale": null
+    },
+    {
+      "query": "nextjs server side rendering",
+      "uuid": "aad28ab4-6548-4877-82d3-22c69c6d6506",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nextjs server side rendering",
+      "uuid": "2a265f45-c1c2-4443-b266-89cb4e906734",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "d7bfc4eb-e2d9-4d67-9c36-4ce00121f133",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains JWT token claims in ASP.NET Core, a common authentication topic for .NET Core Web APIs.",
+      "b_rationale": null
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "55430317-59e5-4df7-9567-92b59434c168",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers authentication and authorization in dotnet core, directly relevant to securing .NET Core Web APIs.",
+      "b_rationale": null
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "738c4f05-e17b-4d76-bd8c-b74e0a0449b5",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Provides guidance on setting up a development environment for Web API projects, applicable to .NET Core Web API development.",
+      "b_rationale": null
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "bb6bf4b7-8fe7-4b79-9ce9-54b4084beed7",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes building a .NET Core-based CLI to test API performance, which is relevant to .NET Core Web API tooling and performance testing.",
+      "b_rationale": null
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "f637377f-bf9e-4f36-a2a1-e067d12cec37",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Addresses handling XML in an ASP.NET Core API, a specific but relevant implementation detail for .NET Core Web APIs.",
+      "b_rationale": null
+    },
+    {
+      "query": "html semantic markup practices",
+      "uuid": "8ae5053a-2882-4d95-8bf0-541c10dad349",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Lists HTML tags developers might be missing, likely including semantic elements useful for improving markup practices.",
+      "b_rationale": null
+    },
+    {
+      "query": "csharp async programming patterns",
+      "uuid": "8d002bf7-ab2c-4472-b864-8d1ac0657224",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "cache",
+      "uuid": "43425191-c3fe-4317-bcf6-b08ad3e541e5",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses consistent hashing and its impact on cache hit rates, directly relevant to caching systems.",
+      "b_rationale": null
+    },
+    {
+      "query": "cache",
+      "uuid": "dae9b422-e954-406f-862b-6369e19da355",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers Google Cache issues causing 404s for React pages, directly about web caching problems.",
+      "b_rationale": null
+    },
+    {
+      "query": "cache",
+      "uuid": "30093e1b-b3ff-406b-aba0-3ddc24dd7904",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses recurring conversations and issues around cache in development and QA, centered on caching.",
+      "b_rationale": null
+    },
+    {
+      "query": "cache",
+      "uuid": "40538da8-394f-4149-aab7-b314150c8fc6",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes React deployment issues caused by caching, specifically about cache-related problems.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "f1e2426a-b22c-4092-b851-65f76288768b",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A complete MERN Stack Todo application, clearly focused on the MERN software stack.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "79ea40c9-e2dc-43f7-b101-7eb2e5fbcc23",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Centred on the call stack concept (and its async variant), making it highly relevant to 'stack'.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "9b653f55-dcac-41e8-9878-a0e4d305d3a6",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Announces a product named 'Stack.new', so it is directly related to the term 'stack'.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "2d616eb6-4876-4f74-849d-cef8b4eb048f",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses MongoDB's role within the MEAN Stack architecture, so it's focused on a specific software stack.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "f59a67e3-97d2-4cbb-93c9-14e5b1a93dc2",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses Terraform 'stacks' in the context of S3 cross-region replication, so stacks are a core topic.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "31bf1c22-37e9-46d3-b0a4-f8baf3de4542",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses creating a 'Local First Stack' (a specific software/technology stack) as its core topic.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "a82d14f1-3da6-47b5-94fa-5e13e2706714",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "About building a 'stack' for data rendering/handling, making a software stack the central theme.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "20d87035-8cf5-4270-8238-34dbe570644b",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses responsibilities of full-stack developers, relating directly to the concept of a software stack.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "0d651f08-6513-427d-a219-9f2cc4b42ba5",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Centers on hiring for Full Stack Engineers with MERN, so it meaningfully concerns the MERN stack.",
+      "b_rationale": null
+    },
+    {
+      "query": "stack",
+      "uuid": "083d322c-5081-47a7-bb67-55db4d07fea2",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "backtracking n queens",
+      "uuid": "93dc43ac-1fe3-475f-8424-6c40d89ad135",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "backtracking n queens",
+      "uuid": "f4e02aae-6cf8-4489-bd6d-8fa552c85ab1",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "distributed transaction introduction",
+      "uuid": "49515eb5-70b5-4d15-a990-c977e202718a",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "distributed transaction introduction",
+      "uuid": "e9893ac4-c3e2-4806-aa07-d2ea58f8c619",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "distributed transaction introduction",
+      "uuid": "76758e76-900d-4f45-97e8-6d8f95fbd8ec",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "dynamodb expression package",
+      "uuid": "a8365eb6-b920-45c5-84ac-ba5501299bf3",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "0fe93eb4-9867-4517-af00-aabef1f9156a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers Kubernetes cluster autoscaling which is a common method to optimize resource usage and reduce costs.",
+      "b_rationale": null
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "b496892d-359e-4192-a630-9d4f18c02633",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focuses on Goldilocks for optimizing Kubernetes resource requests, which helps rightsize workloads and lower costs.",
+      "b_rationale": null
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "d11b444b-a547-4213-bf86-b5e9b1ea58d5",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Provides a how-to for configuring the Cluster Autoscaler on AWS EKS, which directly helps control node costs.",
+      "b_rationale": null
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "427c9543-2a62-46a1-a5c9-260d0e502700",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes KEDA on EKS, an event-driven autoscaler that can reduce resource usage and thus Kubernetes costs.",
+      "b_rationale": null
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "ebdbe79c-6e91-4261-98ee-9e0a8a4e0ea3",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains Service Internal Traffic Policy and explicitly mentions reducing network costs within Kubernetes.",
+      "b_rationale": null
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "c4032d65-5efb-4438-b054-da261c84564f",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers setting up EKS with Karpenter, a provisioning tool that can optimize node usage and reduce EKS costs.",
+      "b_rationale": null
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "540ce5a7-0d7a-44df-ac6b-a42af29759f5",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses intelligent auto-scaling for Kubernetes cluster management, a relevant approach to lowering costs.",
+      "b_rationale": null
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "380f17ab-6009-4eea-9234-7db5730a3888",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers Kubernetes resource usage monitoring, a key practice for identifying inefficiencies and reducing costs.",
+      "b_rationale": null
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "bd80d99d-4dcc-49bd-9868-e9a4fe4d1d40",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "94847929-cd24-4c42-9826-325b412a6bad",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "133b7f73-988e-4d43-8cd4-fcafae823f8f",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "f16b8621-5359-47f9-a5c4-c5690e131c74",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A general guide to building decentralized applications with Solidity is relevant for beginners seeking foundational knowledge and practical examples.",
+      "b_rationale": null
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "8fcdccfa-73b0-4cfc-8dfc-a90501d55a30",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A step-by-step Hello World smart contract tutorial that includes Solidity is appropriate for beginners learning fundamental concepts.",
+      "b_rationale": null
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "f49c6c95-c3e1-4c26-896c-470aacbd87fd",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A beginner-oriented guide to developing your first DApp likely introduces core Solidity concepts and fundamentals relevant to newcomers.",
+      "b_rationale": null
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "098885a7-8649-4015-8395-b1fb4b4f65e2",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "uuid": "7826b7eb-fb4e-446f-8ca0-2fa74b021019",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "drones construction site management",
+      "uuid": "011940ed-22cc-474d-ad4b-00188e1bd4c3",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "drones construction site management",
+      "uuid": "0698ca22-b3c2-4432-a2bc-a4a4b5cce055",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "emacs macos catalina",
+      "uuid": "a541cc51-99e4-4591-b5e4-7b75588164e2",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nrwl nx react hmr",
+      "uuid": "32634914-defe-431a-8c62-6139ff95e48f",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "nrwl nx react hmr",
+      "uuid": "f2b4f54b-6c6b-4b4d-88e4-d86af57f2194",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "flask github authlib authentication",
+      "uuid": "f875636c-d06c-4e17-8fba-39464acda81a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Flask starter project that includes GitHub OAuth integration, relevant for Flask+GitHub authentication examples (though it may not specifically use Authlib).",
+      "b_rationale": null
+    },
+    {
+      "query": "how spellcheckers work",
+      "uuid": "2e9bf2db-ca95-4fcd-908f-cbc7cd6aacab",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "how spellcheckers work",
+      "uuid": "81266a23-29d5-47e1-b28b-24266334fc2a",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "71e6ab6f-9add-4bc4-9041-6b812a1e457d",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "d825ea5c-6f46-4848-b3eb-28144b8f8ff6",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "91c37a1a-2b06-403a-a17e-e8f62abe1ff5",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers the best test management tools in 2024, relevant to users looking for top automated testing solutions in test management.",
+      "b_rationale": null
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "8847d049-be09-4667-9127-c37ee44f5d09",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "d2df02a6-5a08-4439-8840-f8174f933b52",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "5258ea95-2ba3-4ece-b3ae-f4e5d82ad6be",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Lists the top WebSocket testing tools for real-time apps, a specialized list of automated testing tools.",
+      "b_rationale": null
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "4f5f4361-b4d9-428b-a7d6-70ad0a10df60",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "084c5e32-bcc7-4f34-8dee-b6d25fbba92a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focuses on unit testing frameworks (including Selenium) for automating web testing, a narrower but relevant subset of automated testing tools.",
+      "b_rationale": null
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "31126b88-6812-4801-aa4f-54ef857f3361",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "01525b44-a3b6-4a6e-bfef-649661f3a154",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "24ec1a60-fdd1-4d1e-9994-38e8085f00d8",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers client-side load balancing for REST calls with Java/Spring Boot, a specific but relevant aspect of load balancing useful to beginners exploring patterns.",
+      "b_rationale": null
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "901a5b7a-423b-4783-afdb-91547c31fe5f",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "b37fa784-02ac-474d-a407-94384e4b3365",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers load balancing alongside VPCs, subnets, and CDNs as part of cloud infrastructure, providing relevant introductory context.",
+      "b_rationale": null
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "51552ab8-71c4-4df5-b179-8f3f52c94175",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains load balancer error codes and metrics, which is relevant for newcomers who need to understand operational aspects after learning the basics.",
+      "b_rationale": null
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "f347f7d7-21ed-4fb8-837c-805371a060f1",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A focused guide on WebSocket load balancing and session routing, relevant for users wanting specific load balancing techniques for real-time apps.",
+      "b_rationale": null
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "8ff0a6ef-c8ab-447b-a29b-5ac5d5335b38",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses advanced load balancing topics (Traefik, sticky sessions, health checks) that build on fundamental 101 concepts and are relevant for learners progressing beyond basics.",
+      "b_rationale": null
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "aa81c561-73db-4a90-97e4-fb0fb666c829",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A step-by-step guide to EC2 auto scaling and load balancing on AWS, relevant as a hands-on 101-style resource for AWS users.",
+      "b_rationale": null
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "cda2dc3d-cbe4-4e34-bf95-b540a65b5093",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A practical tutorial on load balancing Node.js apps with Nginx, useful as an applied introductory guide for learners.",
+      "b_rationale": null
+    },
+    {
+      "query": "react 19 ux features",
+      "uuid": "652d70fa-4920-4f3e-9ad0-2dcd30d0813c",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focused guide on hydration in React 19, covering a specific feature that impacts rendering performance and UX but narrower in scope.",
+      "b_rationale": null
+    },
+    {
+      "query": "linux socks proxy server",
+      "uuid": "3066c7e8-67a3-469b-8b9e-3ac9af4adf7b",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "microsoft entra id intro",
+      "uuid": "d64ae163-92db-417e-b78d-4ff64db6cd3e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "microsoft entra id intro",
+      "uuid": "124d7d31-e5a1-4599-a301-271585032fa1",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "microsoft entra id intro",
+      "uuid": "3f3040ea-3fdc-4eb7-a08d-db262f76bf41",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "pkce oauth javascript apps",
+      "uuid": "4dfb37d8-7e37-49bf-8deb-1bab4e9e59d9",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "docker disk bandwidth limits",
+      "uuid": "751b9f2d-c3c7-4768-b29a-aa1f5c084488",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "docker disk bandwidth limits",
+      "uuid": "87d905d5-9760-454e-a44c-66b377bdc859",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "fb2ad045-6503-484b-b7ce-e402ee6a4aa1",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Addresses integration testing challenges and solutions, providing guidance applicable to making system integration testing more efficient.",
+      "b_rationale": null
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "fe3efefa-1b86-494b-9f95-f9562bf65522",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "A comprehensive guide to integration testing that likely includes practices and techniques useful for streamlining SIT.",
+      "b_rationale": null
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "643bd886-917e-43ab-80a3-9f9970e566e7",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses challenges and strategies in integration testing, offering practical approaches relevant to streamlining workflows.",
+      "b_rationale": null
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "296df62e-5edd-4413-8eaa-74cc56f8fe38",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focuses on streamlining software testing through codeless automation, which can be applied to simplify and accelerate system integration testing.",
+      "b_rationale": null
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "173fee7b-fb41-4234-9528-922d0e18ac1b",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses streamlining microservices testing via platform engineering, relevant to streamlining system integration testing in microservices architectures.",
+      "b_rationale": null
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "4631d316-fb5a-43f1-b526-b19dc94de9d1",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Practical article on using TestContainers for integration testing, offering tool-based techniques that can streamline SIT automation.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "e32bd60c-6ee0-4408-a45c-79c8bc1dc4ce",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers the intersection of education and technology in 2024, relevant to smart solutions for future education.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "13282552-dfda-42cd-8022-440bcc9629e8",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Shows how WhatsApp can be used to transform learning, offering a practical smart-solution angle for education's future.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "5c24cc49-a3f4-4b8f-a1e3-54ed40236020",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Describes techniques to make online education more effective, aligning with smart solutions for future education.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "e2dd9259-b915-4b7b-ae2f-e5e67d43ef4a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Explains how design enables accessible K-12 education, a key aspect of future-focused smart education solutions.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "a6db7fc3-47a5-466c-8db9-c27302e7bc26",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Focuses on building AI/ML higher education and workforce development with AWS, directly relevant to future education innovation.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "51b2edce-f275-4698-97bd-c7bc9fb2f167",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Discusses the role of data science in personalizing education, relevant to smart, future-ready educational solutions.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "f1110138-6735-418a-bd9e-2a64d893202a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Directly addresses smart classrooms and their importance in educational institutions, matching the query closely.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "fc34ff08-9f73-4faa-ab40-67714c5a580a",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Promotes an eLearning experience and development services, relevant to smart education solutions though promotional in nature.",
+      "b_rationale": null
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "9ff9473c-e344-4832-9d26-00b726601de8",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Covers AI in academia and industry collaboration, pertinent to future-focused educational solutions and innovation.",
+      "b_rationale": null
+    },
+    {
+      "query": "on demand home service app guide",
+      "uuid": "de83fa99-31ee-4baf-bf5f-e1084e5166fd",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Relevant — a case study on building a domestic care app (Nannyz) that provides practical insights for home service apps.",
+      "b_rationale": null
+    },
+    {
+      "query": "on demand home service app guide",
+      "uuid": "eff87213-d6a0-4811-afc1-5cb91ddad43f",
+      "a_relevant": true,
+      "b_relevant": false,
+      "a_rationale": "Relevant — explains why service-based businesses need custom Android app development, applicable to on-demand home service apps.",
+      "b_rationale": null
+    },
+    {
+      "query": "spring microservices gateway thymeleaf",
+      "uuid": "7fbde689-0179-45de-a0d1-c94ad5943b50",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    },
+    {
+      "query": "spring microservices gateway thymeleaf",
+      "uuid": "e6a47231-d6ba-41f2-8327-8966842edb8e",
+      "a_relevant": false,
+      "b_relevant": true,
+      "a_rationale": null,
+      "b_rationale": ""
+    }
+  ],
+  "grade_conflicts": [
+    {
+      "query": "redis caching strategies",
+      "uuid": "4c09c2b4-0d7d-411c-a44f-08a879f2ffde",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "redis caching strategies",
+      "uuid": "767798a6-6e98-42ae-84e9-d573e01e007d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "redis caching strategies",
+      "uuid": "20c905c7-eb2a-429a-a02e-0442e2f7b5ce",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "e7f08f43-2e23-4a1e-995f-59034be8662d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "46a76783-569f-4917-bb74-fe8aa126d5c3",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "8396ddaf-c15c-45d0-96a1-604a00d57ee4",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "018824a6-a0c1-4c37-9ed7-c462c7aca17b",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "2a2293f0-9273-459b-9d01-9ff1738af72e",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "66f40d87-4bc7-4156-9e0a-16a4987bcb80",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "900044c6-80ab-485b-bce0-cd7df7fe204f",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "1322b93f-54ac-4b9a-8c4f-e5611912d733",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "be3b084e-e25b-4156-b8df-182bcb7aad5b",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "a164f96f-c042-4a0e-9c66-a7b21f8afb93",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "5e4b1100-128a-4eb6-8e92-1fbfd9c123f5",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "0b469e26-a000-41d2-8027-2cac520eeea9",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "9b007ea9-ed5d-42a3-a454-a09d03944f0c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "3dc5beeb-2559-4316-9612-aeb47cb89844",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "18166b20-ea10-4172-ac69-25a710296431",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "3c6f9b7b-1521-45a7-9ec0-02c1565e35ff",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "84bce2d7-8724-4be7-91d2-c96f76816dcf",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "9cd48d95-73fb-429a-aaac-fb5a2b475704",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "5b257e4e-68ae-4186-b2c8-3a84ae1ead59",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react state management",
+      "uuid": "d479f333-7a42-4440-8bac-0ac468f1c7b1",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "postgres index tuning",
+      "uuid": "4f64101b-61be-4e39-93b2-df0c744a8cb6",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "postgres index tuning",
+      "uuid": "d47eca23-7dd0-4318-9441-313a3c90e1b3",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "postgres index tuning",
+      "uuid": "e36b1b65-73a0-43bc-9e3a-0e2c5125f9b7",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "postgres index tuning",
+      "uuid": "3bc921fe-beef-4c02-8e8b-895d3bc5f22b",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "postgres index tuning",
+      "uuid": "52744229-a15c-4a6a-96f0-8d9e3b4096db",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "intelligence",
+      "uuid": "68aa15a4-8d40-46b6-a682-2c9a3ee71bff",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "intelligence",
+      "uuid": "d1b6119a-ec1b-4a9f-8d77-9b9c17e5a2ba",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "intelligence",
+      "uuid": "321095c4-5e67-4eab-8bb8-362b9c6677dc",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "intelligence",
+      "uuid": "98614395-23ac-4891-a2ab-db76208e3bcd",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "3878c4cd-3f47-4d7c-8201-acac03b107da",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "44bf4f88-cf78-4408-9d78-be788501007f",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "93494b7a-c0ef-4ee6-8839-b868796f50a2",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "7beef51c-c201-41ee-826e-6dcd5bd2fbd3",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "b56e287d-03cc-45e3-bc14-e4161838ff98",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "21eb5713-04da-48ae-8da3-f480825f9c2e",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "35997a95-f161-4460-8b67-81a7a70448f7",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "793f13bb-27d2-4f45-9053-8dfe961683c7",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "a88cb8f8-8c58-44e2-8a99-73f688e359f6",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "ba6fa693-0987-4a25-9c2b-5625d9854869",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "memory",
+      "uuid": "0deff858-8964-4c63-9611-cb7c53100f59",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "async python event loop",
+      "uuid": "032dfcb2-b3bb-42b8-9357-9f837bdd8790",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "async python event loop",
+      "uuid": "ed2bf985-80c2-44ca-8ed2-ae58b55e6e9d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "microservices vs monolith",
+      "uuid": "48982a0e-dedf-4550-bdcd-1a3637ecfe24",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "microservices vs monolith",
+      "uuid": "11d3e0dd-6623-4e8e-92a1-0ca6718fda57",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "microservices vs monolith",
+      "uuid": "b737e53e-3782-4566-83e9-91ce1dd9f8a3",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "38e1a4c6-8c5b-4386-8e56-8925d84c662a",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "133efd8c-53da-4696-ae79-e12913a4ca1d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "bcdb5fba-1864-4147-9b3e-df81d0a822c6",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "8fd72291-544d-4f0a-9049-71bbfcf7a4ba",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "c32ccf31-ba76-42a9-9f97-39464a904b2c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "1f5e2e4e-daba-449e-b855-6a610b974545",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "14f5b651-f1f5-4fbe-bf84-976cfa4e4e64",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "ea0c576f-fad5-474e-8246-1912f4e42b80",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "uuid": "925716dd-6fc1-4a89-a40d-2cc9d3c03525",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "c14ab9d3-265a-42ab-a331-3be80e929ca4",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "13082d73-7edc-47fa-a242-d1734b8669f4",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "0d71f867-a5e9-445a-b7b2-276f29186820",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "9c982ec6-c140-4e32-8a87-f4161fa39a19",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "b2b39ccf-5bae-4f66-90a5-105c1b3ff47e",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "6201ecd6-b99f-47eb-8fcf-1b732cf44fb1",
+      "a_grade": 1,
+      "b_grade": 2
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "eebece5f-54e7-484b-bb1b-ce0ee80527fb",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "8410395f-a88a-41b2-8ca6-489147110123",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "software engineer career growth",
+      "uuid": "748759bd-c6e8-48e6-93c4-7ca0dda23cdb",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "35cdab67-0d55-42d3-9830-ea9313aba29e",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "40c2d588-2ed0-428c-a6f7-a59a61b70b1f",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "236b3caa-0f2f-464a-9187-16282559b241",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "14f8cf62-d467-4e1d-ac9f-69c12d10af17",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "d3b142ce-78a4-42b8-9eb5-d8d5cd92b4ca",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "9f3909c1-72b0-48a7-ac37-02cbed719d65",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "69c162b5-ad81-4f72-ae28-e3f7589b0764",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "0698656b-fd31-4c60-b74e-5f75fcd2ba35",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "faa84517-8d2c-46c2-9b46-8fa88a5527b2",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "351abea6-1816-42cd-99f6-5d3d4f3546a8",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "b248d8d2-4801-4f35-8228-f6b40e280eac",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "2e06599d-f0bd-4af6-b30a-3dedae8b0d90",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nodejs backend development",
+      "uuid": "660b602a-36ef-421b-9113-6bcefbcfe5db",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "76bf3559-8672-42d1-9f1b-60d37506d8ac",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "9775be5c-9783-4a62-9bbf-3b7a788ff49f",
+      "a_grade": 1,
+      "b_grade": 2
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "d1d792fb-b96d-4ca9-afa9-8313e84cc41c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "09874d3f-2155-46d9-882d-b8b3ebeeb9bc",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "0742cae3-9dc0-4f85-8d04-b372736b4e6d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "f4514d72-4c4c-4783-822e-688293e831b0",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "typescript type safety patterns",
+      "uuid": "7b2c6cd9-43b1-4ab3-a26e-bf10b37bc813",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "multi cloud deployment strategies",
+      "uuid": "0e368705-91e6-405a-8bfd-f210439e9d56",
+      "a_grade": 1,
+      "b_grade": 2
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "2795f6e0-ae40-49db-86d8-c5bb6fa4088c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "6f7b1b10-7317-40e4-bbe0-8b6a141adea0",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "62903f5e-90d8-487e-87d2-5ed5d5fea174",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "3559baaf-bf73-465d-963d-b7d915e9ccad",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "87cf8455-1aa6-49ab-9aaa-1936da3ed95a",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "d2fb702d-96fe-4bc1-b224-aac7e02867c5",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "3de4ef57-e054-4ce0-9eec-8bb577c2c9b3",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "2485b8ae-db4a-4fa0-89ec-56b96d4a56b3",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "49c948e3-967b-4fa9-8c13-d47648aa4f0d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "3324592b-8c25-45cc-b76a-9996f988ed17",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "4ea17052-d1cf-4771-b14d-7f5b4cc73ab7",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "4c07dced-9b23-452d-9427-b01f02e82a88",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "4ac95a10-4562-4fa3-a934-9c14e9f7e058",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "css layout and styling techniques",
+      "uuid": "6734a782-d880-44f1-855a-6873ccd4e743",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "a74ef83b-1d50-4265-8066-175da9990171",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "2f321852-17fa-4044-bdcf-a65d1b10fb01",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "9df7aac9-80b3-48be-a415-c6fe225cc02d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "0fc9a6c9-eff8-4767-a866-3d2a93dfa1db",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "906baec3-18ae-4a49-9f8a-1ae52b0c8574",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "4a4aefe7-d7b9-4ca3-b775-5b3421c06a20",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "7d427f9e-a313-4b14-b987-cd517fca68fd",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "d693ac7f-71c6-46c9-8b19-9768e06d1b7a",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "bac55106-06a6-41be-8540-b200ee8609c4",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "machine learning model deployment",
+      "uuid": "8afcd4fa-c753-44b6-b31c-5d33e3fba1c8",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "0291b9ce-4315-4bad-aa7d-8a1426257b5b",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "4c52a3e3-6094-466f-8a5d-d4775d669a69",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "932605fc-6084-447b-b9bf-cf82e307cd8d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "b2d166e9-b785-453f-b4fd-345d3439ef0a",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "d4614623-ce16-4f2d-a18f-e49fedd496f8",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "73ac6f9d-6531-4f16-ada6-5797f441c909",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "b780dbbd-43a4-4d2d-9987-f8423097ff93",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "5c61ef55-c067-4c9f-a38f-5aebbc35a13b",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "f88f4edd-d7ee-40b2-93d8-d7fd42767655",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "ca769a80-0e58-46e5-88c6-7f89bd8a60cb",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "7f9319a2-8dd9-45f7-80b0-f6f0bfcbb8b7",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "68be9356-b5a5-4d46-8a6f-a6cbbd114215",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "0d64f400-382d-40b5-abe4-33dafeb5097c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "linux command line tools",
+      "uuid": "4aad1dc4-7b97-424b-84f9-af089066db54",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "b07159a9-0337-4d21-8e61-1471f201bdcf",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "f9884c18-4a9c-4ddf-8a13-c37362880118",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "b5a03494-795c-4571-99bf-2c920f2229d0",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "php web development frameworks",
+      "uuid": "87a5935a-97eb-4e7b-857f-7a73dbfcea48",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "data science model evaluation",
+      "uuid": "aa1f3ef8-ad38-49e2-a117-4ac9de122dac",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "nextjs server side rendering",
+      "uuid": "94c54c84-cf0f-4132-a4ee-f1fbcecdb9b6",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "0b6aceca-c247-4eff-9a3f-a6121d6840ca",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "9869647a-9ee2-44ac-9669-a8408961f561",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "b5c83784-0a31-4177-9dcf-40e4bfcf3d3c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "dotnet core web api",
+      "uuid": "a9ea7263-58fb-4a28-9638-69e3ae73a37f",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "html semantic markup practices",
+      "uuid": "4a5b6a5e-01d3-425d-9a8c-dd662ce864c7",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "html semantic markup practices",
+      "uuid": "fd64c83f-14fe-41a4-b22d-e6c994dd524a",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "csharp async programming patterns",
+      "uuid": "04b804cf-8ba7-4f6d-9765-3d06aeeff996",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "csharp async programming patterns",
+      "uuid": "760b0e28-06a2-4e13-a194-89ba0293ea6d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "csharp async programming patterns",
+      "uuid": "bded80ae-f8f7-4619-95c7-d2a8cc95ff3d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "go concurrency patterns",
+      "uuid": "c40c67b7-ebd8-4060-867c-68766bddf79a",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "go concurrency patterns",
+      "uuid": "68cda177-8152-40db-b5b0-d78bdb7fb7a2",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "go concurrency patterns",
+      "uuid": "6541779d-2821-4cbd-b023-c4f111efc7e7",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "go concurrency patterns",
+      "uuid": "9a15bdb9-eea6-451b-b455-d86c7f4e7b2c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "cache",
+      "uuid": "487238aa-9145-4f2c-884e-45558281c53d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "cache",
+      "uuid": "6d57ed29-90bf-4c92-b0c1-659614f21cfa",
+      "a_grade": 1,
+      "b_grade": 2
+    },
+    {
+      "query": "cache",
+      "uuid": "711c155e-30fc-4525-bb50-bdd7f05f1640",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "cache",
+      "uuid": "96fb5859-211f-4e55-a205-b618e1fc227d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "cache",
+      "uuid": "08a09ac3-6a43-48c7-ad76-0351839f71ea",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "7c426610-4509-40cf-b869-a5fc01352007",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "45882494-02f8-4b8d-8132-e8a7f5683b7e",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "c61a7857-51c7-403c-bbff-a29d7446fece",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "b4cb7045-2f7a-4809-a3e0-7435f5d5b633",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "4424aee5-502d-4d9e-a21d-c871c7f5f2dc",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "ec138504-4cfd-4b7d-a98d-d8835a26a1ff",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "3d5ed3ee-e48d-48ff-a5d9-a59dbce15e3c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "9ede119e-43e8-41ae-973c-5def984bf61f",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "d113ac1f-fa6d-4423-817c-f3fc28827e13",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "stack",
+      "uuid": "d4a547d1-c059-441c-8195-6d434c1dc343",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "backtracking n queens",
+      "uuid": "16f89b28-ddc4-4062-923d-b06d238171f1",
+      "a_grade": 1,
+      "b_grade": 2
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "a6ff93c1-2179-427c-a1ef-94d0d2ce62c6",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "3652f076-0591-43de-be46-2fa000abd566",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "uuid": "9774fbca-7dba-4ec9-bf64-90f27ad9f2f0",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "how spellcheckers work",
+      "uuid": "3d34c6fd-a7a5-4323-a509-5e196dec9be2",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "back of the envelope estimation",
+      "uuid": "7836e9c8-a276-4a54-8afa-7a7b6877a9f5",
+      "a_grade": 1,
+      "b_grade": 2
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "aaede71e-8aa2-4e9c-8f41-857fd5a5f6fc",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "88e5d6d8-5ab8-49a9-99bb-ef1c22461c5e",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "best automated testing tools",
+      "uuid": "0f88632c-e672-43e2-85ee-85e5f7f083d5",
+      "a_grade": 1,
+      "b_grade": 2
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "4eb27c58-7e91-4491-9853-984cd19cece9",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "load balancing 101 guide",
+      "uuid": "aabe57b0-eeac-44d2-95e6-e09006f80877",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react 19 ux features",
+      "uuid": "b19ec9c5-e8aa-48a8-b539-f16e9b771c7f",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react 19 ux features",
+      "uuid": "1f4a6adb-9204-44a8-b0a0-c3878e3b5c8d",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react 19 ux features",
+      "uuid": "62d2d17b-8d5c-4c0f-b13b-74c7df6eb74b",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react 19 ux features",
+      "uuid": "49cfbd32-c30c-4bda-b6a9-1aaf8ac090bb",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "react 19 ux features",
+      "uuid": "552a6439-06d6-4b0e-a00b-28b177c0bc4c",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "system integration testing streamlining",
+      "uuid": "5711297a-f88a-4ae2-a96c-7062745c9818",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "ea494154-d9b8-4ee7-98ec-e73c9db35db9",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "45167039-802c-4630-9e4e-b8e74d1d956f",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "c7646953-f645-4512-873e-fdd8d0c59128",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "f54a6f71-7d8c-47ac-aee6-b0838fec47f1",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "smart solutions future education",
+      "uuid": "39178b3a-c5c2-49a5-90b1-964519731af9",
+      "a_grade": 2,
+      "b_grade": 1
+    },
+    {
+      "query": "on demand home service app guide",
+      "uuid": "1aed3a1b-816e-453f-88d8-496922558915",
+      "a_grade": 2,
+      "b_grade": 1
+    }
+  ]
+}
