@@ -1,6 +1,6 @@
 # eval/judge_pass_openai_smoketest.py
 # Usage: python judge_pass_openai_smoketest.py [--in _pipeline_v2/candidate_pools.json] [--count 2]
-# Requires: OPENAI_API_KEY in environment
+# Requires: OPENAI_API_KEY in eval/.env.local (gitignored -- not in doppler)
 #
 # Synchronous smoke test against 1-2 real query pools before committing to the full Batch run --
 # confirms actual reasoning-token consumption and rationale quality on real pool data, per the
@@ -16,11 +16,18 @@ import sys
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv()  # picks up doppler-injected vars if present
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env.local"))  # OPENAI_API_KEY lives here, not doppler
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 MODEL = "gpt-5-mini"
 DESCRIPTION_CHARS = 150
+MAX_COMPLETION_TOKENS = 8000  # gpt-5-mini spends completion tokens on hidden reasoning before
+                              # the JSON answer (same lesson as Groq's gpt-oss-120b elsewhere in
+                              # this pipeline). Smoke-tested empirically: a 35-candidate pool at
+                              # 2000 burned the entire budget on reasoning with zero output; at
+                              # 6000 it used ~3000 total (2048 reasoning + output) successfully.
+                              # 8000 gives headroom for the largest pool seen (55 candidates).
 
 if not OPENAI_API_KEY:
     print("Error: Missing OPENAI_API_KEY in environment.", file=sys.stderr)
@@ -57,7 +64,7 @@ def call_openai_sync(user_prompt: str) -> str:
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ],
-            "max_completion_tokens": 2000,
+            "max_completion_tokens": MAX_COMPLETION_TOKENS,
         },
         timeout=120,
     )

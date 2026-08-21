@@ -1,6 +1,6 @@
 # eval/judge_pass_openai_batch.py
 # Usage: python judge_pass_openai_batch.py [--in _pipeline_v2/candidate_pools.json] [--out _pipeline_v2/llm_judgments_openai.json]
-# Requires: OPENAI_API_KEY in environment
+# Requires: OPENAI_API_KEY in eval/.env.local (gitignored -- not in doppler)
 #
 # Judging pass A (v2): OpenAI gpt-5-mini via the Batch API (50% discount vs sync, no real-time
 # requirement for this offline workload). One request per query, graded relevance (1/2, omit 0),
@@ -18,12 +18,12 @@ import requests
 from dotenv import load_dotenv
 
 from _pipeline_log import log_stage
-from judge_pass_openai_smoketest import MODEL, SYSTEM_PROMPT, build_user_prompt
+from judge_pass_openai_smoketest import MAX_COMPLETION_TOKENS, MODEL, SYSTEM_PROMPT, build_user_prompt
 
 load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env.local"))
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-MAX_COMPLETION_TOKENS = 2000  # raise if the smoke test showed truncation
 POLL_SECONDS = 30
 
 if not OPENAI_API_KEY:
