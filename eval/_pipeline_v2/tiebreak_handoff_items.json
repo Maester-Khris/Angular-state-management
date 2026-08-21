@@ -1,0 +1,983 @@
+[
+  {
+    "idx": 1,
+    "query": "redis caching strategies",
+    "uuid": "5a27e03e-1ee2-4ca9-9a9f-23fe6f2f1837",
+    "title": "How Redis works(deep dive)",
+    "description": "What is Redis?   Single-threaded in-memory cache Single-threaded means it has only one...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 2,
+    "query": "kubernetes deployment rollback",
+    "uuid": "19fb0959-eb97-496c-bf97-091dd8f541c7",
+    "title": "Consistent Deployment Strategies for Kubernetes",
+    "description": "There are a few different ways to deploy manifests to Kubernetes. Picking one and sticking with it...",
+    "a_rationale": "Discusses deployment strategies for Kubernetes, which commonly include rollback and recovery approaches.",
+    "b_rationale": null
+  },
+  {
+    "idx": 3,
+    "query": "kubernetes deployment rollback",
+    "uuid": "f7972993-c24e-4322-88d2-9e335e7d5b04",
+    "title": "Automating Kubernetes Deployments with CI/CD Pipelines (GitLab, Jenkins)",
+    "description": "Automating Kubernetes Deployments with CI/CD Pipelines (GitLab, Jenkins)   In modern...",
+    "a_rationale": "Covers CI/CD automation for Kubernetes deployments, which typically addresses rollback procedures and automated rollback strategies.",
+    "b_rationale": null
+  },
+  {
+    "idx": 4,
+    "query": "kubernetes deployment rollback",
+    "uuid": "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
+    "title": "StatefulSets and Deployments in Kubernetes",
+    "description": "1. Understanding Deployments   Deployments are the most commonly used Kubernetes resource...",
+    "a_rationale": "Covers Deployments in Kubernetes (contrasted with StatefulSets), so it should address deployment lifecycle actions like rollbacks.",
+    "b_rationale": null
+  },
+  {
+    "idx": 5,
+    "query": "kubernetes deployment rollback",
+    "uuid": "93d6887f-a884-4ef4-8c4c-da2e4713a17f",
+    "title": "Helm Charts: An Organised Way to Install Apps on a Kubernetes Cluster",
+    "description": "Helm is a package manager for Kubernetes that helps in automating the deployment of applications in...",
+    "a_rationale": "Helm is a common tool for deploying on Kubernetes and includes built-in rollback commands, making this directly useful for rollback scenarios.",
+    "b_rationale": null
+  },
+  {
+    "idx": 6,
+    "query": "kubernetes deployment rollback",
+    "uuid": "96f8ca24-a2e7-4119-b924-93726b4753e3",
+    "title": "Mastering Deployments in Kubernetes",
+    "description": "Deployments in Kubernetes play a pivotal role in managing scalable and reliable applications. In this...",
+    "a_rationale": "Focused on Kubernetes Deployments and likely covers managing rollout history and rollback operations as a core topic.",
+    "b_rationale": null
+  },
+  {
+    "idx": 7,
+    "query": "kubernetes deployment rollback",
+    "uuid": "9f28fc77-7d8f-408f-9dc7-3020d031938e",
+    "title": "Troubleshooting Common Issues in Kubernetes Deployments",
+    "description": "Working with Kubernetes deployments can be challenging, and being prepared to tackle common issues is...",
+    "a_rationale": "A troubleshooting guide for Kubernetes deployments that would reasonably include rollback techniques as remediation steps.",
+    "b_rationale": null
+  },
+  {
+    "idx": 8,
+    "query": "react state management",
+    "uuid": "6bf31c82-0c04-4704-92d2-cd76fa519e1d",
+    "title": "React - Persisting Data on Page Refresh",
+    "description": "It's been nearly a year since I wholeheartedly delved into learning programming and coding and one...",
+    "a_rationale": "Discusses persisting data on page refresh in React which touches on state persistence concerns but is narrower than general state management.",
+    "b_rationale": null
+  },
+  {
+    "idx": 9,
+    "query": "life",
+    "uuid": "e9793257-820b-4128-a6c7-5403a309fe9e",
+    "title": "How I Hacked a Company Recruitment Test The Unexpected Tech Adventure of My College Life",
+    "description": "Ah, college life! The thrill of final year comes with the excitement of job placements. We all know...",
+    "a_rationale": "Focus on 'college life' in the title makes this a relevant match for users searching about life-related experiences.",
+    "b_rationale": null
+  },
+  {
+    "idx": 10,
+    "query": "life",
+    "uuid": "f5f13626-a71d-4dd0-aceb-e2f5204c5dd1",
+    "title": "Maximize Success: Transform Your Life with Azure OpenAI",
+    "description": "Are you ready to revolutionize your life and unlock unprecedented success? Look no further than Azure...",
+    "a_rationale": "Explicitly about transforming one's life (title: 'Transform Your Life'), making it a near-perfect match for the query.",
+    "b_rationale": null
+  },
+  {
+    "idx": 11,
+    "query": "life",
+    "uuid": "fcea9235-1fab-49a0-98e4-199a80aa5a21",
+    "title": "What a life Changer!!!",
+    "description": "This is a submission for the 2025 New Year Writing challenge: Retro’ing and Debugging 2024.          ...",
+    "a_rationale": "Title 'What a life Changer!!!' indicates the core subject is a significant life change or reflection, which matches the query's intent.",
+    "b_rationale": null
+  },
+  {
+    "idx": 12,
+    "query": "life",
+    "uuid": "f5031a76-608e-4bde-8b86-9dc8ddb82caf",
+    "title": "Life as a Bootcamper!",
+    "description": "I remember vividly the first time I attended my first ever bootcamp. It was an outdoor group fitness...",
+    "a_rationale": "Title 'Life as a Bootcamper!' is explicitly about a lifestyle topic, directly matching the user's query for life-related content.",
+    "b_rationale": null
+  },
+  {
+    "idx": 13,
+    "query": "life",
+    "uuid": "bdab74ab-d758-4857-8b16-9ed22cf16733",
+    "title": "Decoding Life: Navigating the World of Bioinformatics",
+    "description": "Introduction:  In the ever-expanding landscape of biological sciences, bioinformatics stands as a...",
+    "a_rationale": "Titled 'Decoding Life' and focused on bioinformatics and biological life, it directly addresses the concept of life.",
+    "b_rationale": null
+  },
+  {
+    "idx": 14,
+    "query": "life",
+    "uuid": "6bf9f8ee-9663-4b94-9ca7-ed2e462d4efc",
+    "title": "12 YouTube Channels That Will Change Your Life And Mindset - UpSkillYourLife",
+    "description": "Original Tweet From  @UpSkillYourLife                                                       ...",
+    "a_rationale": "Title promises content that will 'Change Your Life And Mindset', making it a strong, direct match for the query.",
+    "b_rationale": null
+  },
+  {
+    "idx": 15,
+    "query": "intelligence",
+    "uuid": "7018ed88-8ea4-447e-816a-09ec147aeccf",
+    "title": "Building an Intelligent Audio-to-Insight Pipeline Using Python and Flask",
+    "description": "This is a submission for the AssemblyAI Challenge : Sophisticated Speech-to-Text.           What I...",
+    "a_rationale": "About building an 'intelligent' audio-to-insight pipeline, this technical project is relevant to applied intelligence topics.",
+    "b_rationale": null
+  },
+  {
+    "idx": 16,
+    "query": "intelligence",
+    "uuid": "ae2722dd-7052-4b37-b35b-b3cdadd7f39b",
+    "title": "What did I learn from Artificial intelligence for robotics course by Udacity",
+    "description": "Short post about my experiences with the Artificial intelligence for robotics Udacity course",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 17,
+    "query": "intelligence",
+    "uuid": "3f864714-7004-4167-b8f0-5bcdfd7d6300",
+    "title": "Benefits of AI in Enhancing Student Creativity",
+    "description": "In today’s fast-evolving educational landscape, artificial intelligence (AI) has emerged as a...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 18,
+    "query": "intelligence",
+    "uuid": "bef52e17-b907-4bc2-a382-b63afb461998",
+    "title": "🤖🧠 Unraveling the Intricacies of Sarcasm in AI: A Thought-provoking Reflection 🧠🤖",
+    "description": "Thrilled to share an insightful article penned by Manish Sharma for Gadfly.AI's \"Future of AI\"...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 19,
+    "query": "memory",
+    "uuid": "719eb233-9d23-4a8d-a32d-d7b63689e404",
+    "title": "Tackling Memory Leaks in Node.js",
+    "description": "Memory leaks in Node.js can be silent killers for your applications. They degrade performance,...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 20,
+    "query": "ci cd pipeline best practices",
+    "uuid": "03d4b583-383e-4728-97f1-69caf5934aa0",
+    "title": "AWS CI/CD Pipeline to Deploy a Serverless Framework Project",
+    "description": "Introduction   In this article, we will set up an AWS CI/CD Pipeline to Deploy a Serverless...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 21,
+    "query": "ci cd pipeline best practices",
+    "uuid": "c2ecc61c-8a3a-468b-90ad-86e19d8fae36",
+    "title": "Best CI/CD Tools to Simplify Your DevOps Pipeline",
+    "description": "In software development, QA analysts and testers often find it tough to deliver high-quality software...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 22,
+    "query": "ci cd pipeline best practices",
+    "uuid": "f1238be3-b8c0-46cc-8c78-78574e3c0e60",
+    "title": "AWS Code Pipeline - CloudFront - S3 CI/CD Pipeline",
+    "description": "Steps to create an automated pipeline in AWS without losing the plot      Resources...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 23,
+    "query": "ci cd pipeline best practices",
+    "uuid": "fb24326c-ea75-4abc-a472-1777b5f3ad10",
+    "title": "How to deploy a Web App with CI/CD pipeline on Azure app service.",
+    "description": "Deploying a web app with a Continuous Integration/Continuous Deployment (CI/CD) pipeline on Azure App...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 24,
+    "query": "ci cd pipeline best practices",
+    "uuid": "541a48e1-2a9f-454d-8270-a8b285e59f09",
+    "title": "How to Build a CI/CD Pipeline for Your Database",
+    "description": "I thought that it would be a good idea to do a quick blog post on how to build a ci/cd database...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 25,
+    "query": "aws cloud infrastructure services",
+    "uuid": "b917fe99-1067-49a6-b2b0-e0e0ebfdef9a",
+    "title": "Unlocking the Secrets of AWS Scaling Policies: A Journey to Cloud Resilience",
+    "description": "Introduction   In the rapidly evolving landscape of cloud computing, understanding scaling...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 26,
+    "query": "aws cloud infrastructure services",
+    "uuid": "88307b26-be07-4cac-bf47-0aa57dfe39ff",
+    "title": "Navigating Common Challenges and Issues with AWS",
+    "description": "Amazon Web Services (AWS) offers a robust and comprehensive cloud platform that includes a wide range...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 27,
+    "query": "aws cloud infrastructure services",
+    "uuid": "7e3b537f-db83-4bcc-8d29-b5b76568e84d",
+    "title": "Which Cloud Managed Services Subscription Plan Should You Choose?",
+    "description": "Introduction   As businesses grow, their cloud infrastructure needs become more complex....",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 28,
+    "query": "aws cloud infrastructure services",
+    "uuid": "4793f57f-29db-4278-9050-2551e20c5f53",
+    "title": "Infrastructure as a Service (IaaS)- Brilliant Cloud",
+    "description": "Cloud Infrastructure services, in general, refer to computer infrastructure services, storage, and ne...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 29,
+    "query": "aws cloud infrastructure services",
+    "uuid": "bb5ed348-0ad8-472a-9c71-b636d5cbf5db",
+    "title": "Mastering AWS AI and ML Services: Key Concepts for the AWS AI Practitioner Exam",
+    "description": "AWS offers a comprehensive suite of services across three layers: ML Frameworks, AI and ML Services,...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 30,
+    "query": "software engineer career growth",
+    "uuid": "5aa4ecb6-5695-4573-bcfe-2cd80b035461",
+    "title": "How to Become a Google Cloud Platform (GCP) Engineer in 2025",
+    "description": "Embarking on a career as a Google Cloud Platform (GCP) Engineer is an exciting opportunity to delve...",
+    "a_rationale": "Outlines steps to become a GCP engineer, a concrete career specialization path within software engineering.",
+    "b_rationale": null
+  },
+  {
+    "idx": 31,
+    "query": "software engineer career growth",
+    "uuid": "a128d993-47a1-461d-881f-496d5108f88b",
+    "title": "✨FREE✨ Career Mentoring: [ Roadmap to Becoming an ML Engineer ]",
+    "description": "Hello, Everyone 👋! We are Metacode.   Here is a link to our previous career mentoring...",
+    "a_rationale": "A roadmap to becoming an ML engineer is a specific software engineering career path useful for growth planning.",
+    "b_rationale": null
+  },
+  {
+    "idx": 32,
+    "query": "software engineer career growth",
+    "uuid": "b8f2bf3a-504f-4115-a761-d403e15087de",
+    "title": "How Much Do Software Engineers Make?",
+    "description": "The post How Much Do Software Engineers Make? first appeared on Qvault.  Software engineering...",
+    "a_rationale": "Information on software engineer compensation is a practical component of career growth and planning.",
+    "b_rationale": null
+  },
+  {
+    "idx": 33,
+    "query": "software engineer career growth",
+    "uuid": "56cc14fa-acaf-4eb6-84b9-66ecdb37bdd1",
+    "title": "Maximizing Productivity and Balance: Insights from a Software Engineer's Journey",
+    "description": "Software engineering is a marathon, not a sprint! That's why working smart produces better results...",
+    "a_rationale": "Discusses productivity and balance in a software engineer's journey, relevant to sustainable career growth.",
+    "b_rationale": null
+  },
+  {
+    "idx": 34,
+    "query": "software engineer career growth",
+    "uuid": "bb4ab9d5-bda1-40a4-b690-e36c959913a2",
+    "title": "Investing setup for software engineers",
+    "description": "Before we get started here, I want to call out that this post applies mostly to software engineers. B...",
+    "a_rationale": "Guidance on investing tailored to software engineers addresses a practical aspect of long-term career planning.",
+    "b_rationale": null
+  },
+  {
+    "idx": 35,
+    "query": "software engineer career growth",
+    "uuid": "8af37a58-7cd0-4a19-b41f-590d1e974a49",
+    "title": "10 Common Mistakes Made by Software Engineers",
+    "description": "As a software engineer, it’s crucial to learn from both your experiences and mistakes to continuously...",
+    "a_rationale": "Outlines common mistakes engineers make, useful for people seeking to improve and advance their careers.",
+    "b_rationale": null
+  },
+  {
+    "idx": 36,
+    "query": "nodejs backend development",
+    "uuid": "e31e45e5-87b8-4fa6-a167-b0eb8bf2b1b2",
+    "title": "Building Resilient Backends: Secure Development Practices for Modern Applications",
+    "description": "Backend development forms the backbone of any software application, managing critical operations such...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 37,
+    "query": "nodejs backend development",
+    "uuid": "231ece93-045f-42ac-ba34-fe4aa0691125",
+    "title": "The Basics : Backend Development [Part 1/2]",
+    "description": "This article will include all the major terms you hear when backend development is discussed. You can...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 38,
+    "query": "nodejs backend development",
+    "uuid": "6d11fb81-8c63-4e46-8671-5690f8561e3b",
+    "title": "Hire Backend Developers",
+    "description": "Hire backend developers to write server-side code, develop APIs, and develop databases and security....",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 39,
+    "query": "nodejs backend development",
+    "uuid": "65058ee6-4e86-43ab-843d-06e71472f2b4",
+    "title": "8 Must-Learn Backend Development Tools for 2025: Your Ultimate Guide",
+    "description": "Hey there, fellow backend developer! 👋 As we wave goodbye to 2024 and gear up for an exciting 2025,...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 40,
+    "query": "nodejs backend development",
+    "uuid": "7992b54c-54c5-46e7-887e-a2bfdaa8a6e7",
+    "title": "Top 10 Development Toolkits Every Backend Developer Needs",
+    "description": "In the rapidly evolving world of software development, backend developers are the unsung heroes...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 41,
+    "query": "nodejs backend development",
+    "uuid": "6a2676a0-d073-44fc-9b0f-b9e485edf56a",
+    "title": "A Generic Backend for All Your Apps",
+    "description": "In modern application development, having a reusable and scalable backend is crucial for efficiency...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 42,
+    "query": "nodejs backend development",
+    "uuid": "62f32d5b-751d-4b5f-a205-ef0f4ab1eb12",
+    "title": "Backstage with Backend",
+    "description": "Hello everyone! Today we are going to dive into the exhilarating world of backend development. The...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 43,
+    "query": "nodejs backend development",
+    "uuid": "c2f3abe0-aef7-4215-b734-3d2b6978a12e",
+    "title": "Backend Development Roadmap",
+    "description": "To all aspiring backend developers, I know how daunting it can be to navigate your learning path....",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 44,
+    "query": "nodejs backend development",
+    "uuid": "34b985e3-fa12-4d6b-aa66-50c5397d6774",
+    "title": "Journey into Backend Development with the Blotz Task App 🚀",
+    "description": "Hey Dev Community! 👋  I’m excited to share the start of my journey into backend development and SQL...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 45,
+    "query": "nodejs backend development",
+    "uuid": "00174e44-7496-4e97-8f79-06b4b25dc14e",
+    "title": "If we want to Learn Backend development where is roadmap?",
+    "description": "Website development is very emerging field now a days Every one is going to learn website development...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 46,
+    "query": "nodejs backend development",
+    "uuid": "5153a2a0-eb75-4594-98fe-ab588d2aed29",
+    "title": "Top Backend Development Trends [2024 Updated]",
+    "description": "Backend development refers to the server-side of web and mobile applications, encompassing the logic,...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 47,
+    "query": "nodejs backend development",
+    "uuid": "95eafe1e-9e28-49ff-bad8-288abe3e5977",
+    "title": "Hello Nodejs Developers",
+    "description": "**I am Really stuck **on my website because i want developer to solve this problem anyone ready to...",
+    "a_rationale": "A post addressed to Node.js developers, indicating Node.js-focused backend issues or discussion.",
+    "b_rationale": null
+  },
+  {
+    "idx": 48,
+    "query": "typescript type safety patterns",
+    "uuid": "352a1c5c-277b-4b6c-a139-c989b417110b",
+    "title": "Type checking global JavaScript libraries in VS Code for when you just want learn and code.",
+    "description": "Sometimes when you're prototyping and learning a new library you want a quick way to get type-checking/intellisense/auto-complete to assist with your learning. Here is a quick way to enable type checking without fully opting into TypeScript.",
+    "a_rationale": "Describes techniques for adding type checking to global JavaScript libraries in VS Code, useful for improving type safety during development.",
+    "b_rationale": null
+  },
+  {
+    "idx": 49,
+    "query": "multi cloud deployment strategies",
+    "uuid": "15dd1e3b-a547-437d-976f-8b75f8cf849c",
+    "title": "Implementing Advanced Data Governance in Hybrid and Multi-Cloud Environments",
+    "description": "As organizations increasingly adopt hybrid and multi-cloud environments to drive business agility and...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 50,
+    "query": "multi cloud deployment strategies",
+    "uuid": "7ae0e0fb-3b55-44b1-97ae-e45c07f5fa3e",
+    "title": "Crafting a Comprehensive Plan for Enterprise Cloud Migration",
+    "description": "The technological advancement of cloud computing has forced many companies to integrate cloud...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 51,
+    "query": "multi cloud deployment strategies",
+    "uuid": "e3abd6b5-1237-457f-bd58-5aa3ad4d3d69",
+    "title": "Cloud Migration Strategies: A Comprehensive Guide to Moving Your Business to the Cloud",
+    "description": "As organizations continue to adopt digital transformation, moving operations to the cloud has become...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 52,
+    "query": "css layout and styling techniques",
+    "uuid": "510b733e-f6d0-4592-b224-3c40d6c771f2",
+    "title": "Some tips before creating a CSS framework",
+    "description": "Hello everyone, first I have to say that this advice is purely subjective, and I don't pretend at all...",
+    "a_rationale": "Offers tips for creating a CSS framework, touching on organization and styling practices.",
+    "b_rationale": null
+  },
+  {
+    "idx": 53,
+    "query": "css layout and styling techniques",
+    "uuid": "ac34368d-f74c-47a5-a962-031447741d0e",
+    "title": "Please help me in learning CSS!!",
+    "description": "I just started a coding bootcamp and I need help understanding CSS and how to properly format...",
+    "a_rationale": "A learning-focused post requesting help with CSS fundamentals, relevant for mastering styling techniques.",
+    "b_rationale": null
+  },
+  {
+    "idx": 54,
+    "query": "css layout and styling techniques",
+    "uuid": "23ebeb6c-cbb4-4ecb-90e0-d38365a41bd5",
+    "title": "Highlight Text in CSS",
+    "description": "How to Highlight Text in CSS: Techniques and Examples   Text highlighting is a common design...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 55,
+    "query": "linux command line tools",
+    "uuid": "66571d78-7a44-4598-bb1b-4f9eee9827ab",
+    "title": "How to make command-line apps accessible?",
+    "description": "Hi, recently I started working on a command-line tool and wanted to make it accessible. I posted a...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 56,
+    "query": "linux command line tools",
+    "uuid": "3aabece4-3926-46ee-a518-e9698c266ddd",
+    "title": "How To Use Vim Mode On The Command Line In Bash",
+    "description": "Introduction   Learn how to use Vi mode on the command line in Bash.           Vim lovers...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 57,
+    "query": "linux command line tools",
+    "uuid": "2ee91f98-7f12-4ac6-ae1e-5c8c2d026272",
+    "title": "TOD - command line tool to run OneDev CI/CD jobs against local changes",
+    "description": "OneDev 10.2 comes with TOD (The*OneD*ev), a command line tool to test/debug CI/CD jobs against local...",
+    "a_rationale": "Introduces TOD, a command-line tool for testing CI/CD jobs, which is a concrete example of a Linux CLI tool.",
+    "b_rationale": null
+  },
+  {
+    "idx": 58,
+    "query": "php web development frameworks",
+    "uuid": "cc08b732-4e94-4402-925c-77cdd45b3ce2",
+    "title": "work with projects in php or laravel framework with html, css, js, boostrap, mysql.",
+    "description": "I'm looking for projects in PHP or PDO or Laravel with bootstrap web to apply my knowledge and...",
+    "a_rationale": "References working with PHP or the Laravel framework and thus relates to PHP web development frameworks, though it's project-oriented.",
+    "b_rationale": null
+  },
+  {
+    "idx": 59,
+    "query": "php web development frameworks",
+    "uuid": "81631660-a48e-4cbe-8a6f-3eaa7aabc086",
+    "title": "The Best Web Development Frameworks in 2024",
+    "description": "Introduction:  When it comes to the rapidly developing field of web development, selecting the...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 60,
+    "query": "php web development frameworks",
+    "uuid": "3c5e51a7-8302-4494-ba0a-34ad13a8f5aa",
+    "title": "Best Frameworks For Web Development",
+    "description": "Frameworks for web development have become essential as the standards of web applications are always...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 61,
+    "query": "php web development frameworks",
+    "uuid": "e7f8f0dc-a4b1-4dc9-8e51-0afe89842d62",
+    "title": "Master PHP, Web Development with Websjyoti 🚀",
+    "description": "Are you looking to kickstart your web development journey or enhance your PHP skills?  PHP remains...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 62,
+    "query": "nextjs server side rendering",
+    "uuid": "bef5f8a8-0643-4dca-891a-fb68ea33a192",
+    "title": "Argument Against Solving the Double Data Problem in JavaScript SSR Frameworks",
+    "description": "The \"double data problem\" in JavaScript Server-Side Rendering (SSR) frameworks refers to the...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 63,
+    "query": "nextjs server side rendering",
+    "uuid": "aad28ab4-6548-4877-82d3-22c69c6d6506",
+    "title": "Server-side rendering for any React app on any FaaS provider",
+    "description": "By this document, I'd like to introduce a general method to set up server-side rendering(SSR) for any...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 64,
+    "query": "dotnet core web api",
+    "uuid": "738c4f05-e17b-4d76-bd8c-b74e0a0449b5",
+    "title": "Web API – Dev environment in 120 seconds",
+    "description": "Quite a few recent engagements saw us developing APIs for clients. Setting these projects up is a lot of fun at first. After a few deployments, however, we felt there &hellip; Continue reading &#8220;Web API – Dev environment in 120 seconds&#8221;",
+    "a_rationale": "Provides guidance on setting up a development environment for Web API projects, applicable to .NET Core Web API development.",
+    "b_rationale": null
+  },
+  {
+    "idx": 65,
+    "query": "dotnet core web api",
+    "uuid": "bb6bf4b7-8fe7-4b79-9ce9-54b4084beed7",
+    "title": "Crafting a Powerful API Performance CLI: Approach with .NET Core and System.CommandLine",
+    "description": "Hey there, fellow developers! Ever felt the need to quickly test the performance of your APIs, but...",
+    "a_rationale": "Describes building a .NET Core-based CLI to test API performance, which is relevant to .NET Core Web API tooling and performance testing.",
+    "b_rationale": null
+  },
+  {
+    "idx": 66,
+    "query": "csharp async programming patterns",
+    "uuid": "8d002bf7-ab2c-4472-b864-8d1ac0657224",
+    "title": "Strategies for Asynchronous APIs",
+    "description": "Most APIs will require some form of non-blocking or asynchronous mechanisms for specific endpoints. Read about the strategies you can use to support this.",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 67,
+    "query": "cache",
+    "uuid": "43425191-c3fe-4317-bcf6-b08ad3e541e5",
+    "title": "3 mins into [Consistent Hashing]",
+    "description": "TLDR    For: Load Balancing If without: will lead to lots of cache missing when adding and...",
+    "a_rationale": "Discusses consistent hashing and its impact on cache hit rates, directly relevant to caching systems.",
+    "b_rationale": null
+  },
+  {
+    "idx": 68,
+    "query": "stack",
+    "uuid": "083d322c-5081-47a7-bb67-55db4d07fea2",
+    "title": "Valid Parentheses | LeetCode | Java",
+    "description": "class Solution {     public boolean isValid(String s) {          Stack&lt;Character&gt; stack = new...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 69,
+    "query": "backtracking n queens",
+    "uuid": "93dc43ac-1fe3-475f-8424-6c40d89ad135",
+    "title": "Count Number of Maximum Bitwise-OR Subsets",
+    "description": "Problem  BACKTRACKING: OPTIMAL APPROACH:  TC :      O(2n)O(2^n)O(2n)   where n = 16 (given)    class...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 70,
+    "query": "backtracking n queens",
+    "uuid": "f4e02aae-6cf8-4489-bd6d-8fa552c85ab1",
+    "title": "LeetCode Day19 BackTracking Part 1",
+    "description": "77. Combinations   Given two integers n and k, return all possible combinations of k numbers...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 71,
+    "query": "distributed transaction introduction",
+    "uuid": "49515eb5-70b5-4d15-a990-c977e202718a",
+    "title": "Confused, Aggregate Transaction Boundaries in Domain-Driven Design",
+    "description": "Explore the nuances of aligning aggregates with transaction boundaries in DDD. We discuss challenges like spanning transactions across aggregates, and solutions including merging aggregates and eventual consistency, with practical examples in Golang.",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 72,
+    "query": "distributed transaction introduction",
+    "uuid": "e9893ac4-c3e2-4806-aa07-d2ea58f8c619",
+    "title": "Transactions and ACID Properties",
+    "description": "Day 7: Transactions and ACID Properties  Date: January 25, 2025  Today, we focus on Transactions and...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 73,
+    "query": "distributed transaction introduction",
+    "uuid": "76758e76-900d-4f45-97e8-6d8f95fbd8ec",
+    "title": "Transactions",
+    "description": "In this section, we will explore the concept of transactions and ACID properties—an important topic...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 74,
+    "query": "dynamodb expression package",
+    "uuid": "a8365eb6-b920-45c5-84ac-ba5501299bf3",
+    "title": "[20 Days of DynamoDB] Day 10 - Query API with Filter Expression",
+    "description": "Posted: 19/Jan/2024  With the DynamoDB Query API, you can use Filter Expressions to discard specific...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 75,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "bd80d99d-4dcc-49bd-9868-e9a4fe4d1d40",
+    "title": "Enums in Solidity",
+    "description": "In Solidity, Enums stand for Enumerable. Enums are user-defined data types that restrict the variable...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 76,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "133b7f73-988e-4d43-8cd4-fcafae823f8f",
+    "title": "Constructor in Solidity",
+    "description": "In Solidity, a constructor is a special function that is used to initialize the state variables of a...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 77,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "098885a7-8649-4015-8395-b1fb4b4f65e2",
+    "title": "Valuetypes in Solidity",
+    "description": "Solidity is a smart contract programming language. It is most commonly used to write smart contracts...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 78,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "7826b7eb-fb4e-446f-8ca0-2fa74b021019",
+    "title": "The Require Statement in Solidity",
+    "description": "In Solidity, the require statement is used to check a condition and throw an exception if the...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 79,
+    "query": "drones construction site management",
+    "uuid": "011940ed-22cc-474d-ad4b-00188e1bd4c3",
+    "title": "How IoT is Transforming Construction Site Safety and Efficiency",
+    "description": "Discover the groundbreaking ways IoT is revolutionizing construction site safety and operational efficiency. From wearable tech to smart machinery, explore the future of building with interconnected devices.",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 80,
+    "query": "emacs macos catalina",
+    "uuid": "a541cc51-99e4-4591-b5e4-7b75588164e2",
+    "title": "Skip macOS Catalina security check",
+    "description": "What ?  Do you want to run your own custom applications on mac ? ... or did you ask yourself the ques...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 81,
+    "query": "nrwl nx react hmr",
+    "uuid": "32634914-defe-431a-8c62-6139ff95e48f",
+    "title": "The Nx Node/React Stack part 2 - Libraries",
+    "description": "Now we have an environment, we need to start building our project, but nx will split the codebase...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 82,
+    "query": "nrwl nx react hmr",
+    "uuid": "f2b4f54b-6c6b-4b4d-88e4-d86af57f2194",
+    "title": "HMR, the revolution in development experience",
+    "description": "Introduction   Hot Module Replacement (HMR) is an essential mechanism for modern developers,...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 83,
+    "query": "how spellcheckers work",
+    "uuid": "2e9bf2db-ca95-4fcd-908f-cbc7cd6aacab",
+    "title": "Spellcheck in Google Docs",
+    "description": "I'm not a native english Speaker and didn't use google docs that much before. But in the last few wee...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 84,
+    "query": "how spellcheckers work",
+    "uuid": "81266a23-29d5-47e1-b28b-24266334fc2a",
+    "title": "Massively spellcheck Markdown files with Linux and MacOS",
+    "description": "Today I've learned how to spellcheck a batch of Markdown files with Aspell, a free software spell...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 85,
+    "query": "best automated testing tools",
+    "uuid": "71e6ab6f-9add-4bc4-9041-6b812a1e457d",
+    "title": "AI in Test Automation: Transforming Quality Assurance",
+    "description": "AI is revolutionizing software testing through automation and insight. Harnessing machine learning,...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 86,
+    "query": "best automated testing tools",
+    "uuid": "d825ea5c-6f46-4848-b3eb-28144b8f8ff6",
+    "title": "Tips to Go for Codeless Automation Testing Tools",
+    "description": "Automated testing has become essential for businesses to keep up with the fast pace of software...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 87,
+    "query": "best automated testing tools",
+    "uuid": "91c37a1a-2b06-403a-a17e-e8f62abe1ff5",
+    "title": "Best Test Management Tools in 2024",
+    "description": "As the importance of quality assurance and testing continues to grow in the rapidly-evolving...",
+    "a_rationale": "Covers the best test management tools in 2024, relevant to users looking for top automated testing solutions in test management.",
+    "b_rationale": null
+  },
+  {
+    "idx": 88,
+    "query": "best automated testing tools",
+    "uuid": "8847d049-be09-4667-9127-c37ee44f5d09",
+    "title": "Introducing Shirates, a Mobile Testing Automation Tool",
+    "description": "This article is an introduction of Shirates, a mobile testing automation tool.           Automating...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 89,
+    "query": "best automated testing tools",
+    "uuid": "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+    "title": "Streamlining Software Testing With Codeless Automation!",
+    "description": "Codeless test automation refers to the practice of automating software testing processes without the...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 90,
+    "query": "best automated testing tools",
+    "uuid": "d2df02a6-5a08-4439-8840-f8174f933b52",
+    "title": "Reasons to Go for Codeless Automation Testing Tools",
+    "description": "Codeless test automation has gained popularity in the software development cycle. While coding...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 91,
+    "query": "best automated testing tools",
+    "uuid": "4f5f4361-b4d9-428b-a7d6-70ad0a10df60",
+    "title": "Automated UI Testing: Benefits, Challenges & Solution",
+    "description": "Manual test processes that check the UI functionality are automated by specific frameworks and tools...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 92,
+    "query": "best automated testing tools",
+    "uuid": "01525b44-a3b6-4a6e-bfef-649661f3a154",
+    "title": "Test Automation Best Practices: Deciding What and When to Automate",
+    "description": "Test automation is generally introduced into a project to solve issues such as repetitive manual work...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 93,
+    "query": "load balancing 101 guide",
+    "uuid": "24ec1a60-fdd1-4d1e-9994-38e8085f00d8",
+    "title": "Client Side Load Balancing External REST Calls with Java and Spring Boot",
+    "description": "Targets   Java 8+, Spring Boot 5, Any Client Side Framework such as Angular/React/Vue/etc....",
+    "a_rationale": "Covers client-side load balancing for REST calls with Java/Spring Boot, a specific but relevant aspect of load balancing useful to beginners exploring patterns.",
+    "b_rationale": null
+  },
+  {
+    "idx": 94,
+    "query": "load balancing 101 guide",
+    "uuid": "51552ab8-71c4-4df5-b179-8f3f52c94175",
+    "title": "Understanding Load Balancer Error Codes & Metrics for Optimal Performance",
+    "description": "In today’s cloud-native world, load balancers play a pivotal role in ensuring high availability and...",
+    "a_rationale": "Explains load balancer error codes and metrics, which is relevant for newcomers who need to understand operational aspects after learning the basics.",
+    "b_rationale": null
+  },
+  {
+    "idx": 95,
+    "query": "load balancing 101 guide",
+    "uuid": "f347f7d7-21ed-4fb8-837c-805371a060f1",
+    "title": "Mastering WebSocket Load Balancing: Unlocking Resilience with Sticky IPs and Session Routing",
+    "description": "Introduction   In high-demand real-time applications like ride-hailing or booking platforms,...",
+    "a_rationale": "A focused guide on WebSocket load balancing and session routing, relevant for users wanting specific load balancing techniques for real-time apps.",
+    "b_rationale": null
+  },
+  {
+    "idx": 96,
+    "query": "load balancing 101 guide",
+    "uuid": "8ff0a6ef-c8ab-447b-a29b-5ac5d5335b38",
+    "title": "Advanced Load Balancing with Traefik: An Introduction to Progressive Delivery, Mirroring, Sticky Sessions, and Health Checks",
+    "description": "In modern cloud-native environments, efficient traffic management is critical for ensuring high...",
+    "a_rationale": "Discusses advanced load balancing topics (Traefik, sticky sessions, health checks) that build on fundamental 101 concepts and are relevant for learners progressing beyond basics.",
+    "b_rationale": null
+  },
+  {
+    "idx": 97,
+    "query": "load balancing 101 guide",
+    "uuid": "cda2dc3d-cbe4-4e34-bf95-b540a65b5093",
+    "title": "Load Balancing Node.js Applications with Nginx Upstream Configuration",
+    "description": "As web applications grow in traffic and complexity, ensuring their reliability, scalability, and...",
+    "a_rationale": "A practical tutorial on load balancing Node.js apps with Nginx, useful as an applied introductory guide for learners.",
+    "b_rationale": null
+  },
+  {
+    "idx": 98,
+    "query": "linux socks proxy server",
+    "uuid": "3066c7e8-67a3-469b-8b9e-3ac9af4adf7b",
+    "title": "Discover the Best Proxy Server: HTTP, HTTPS, or SOCKS5?",
+    "description": "Proxy servers have become an important tool for many users to access network resources and protect...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 99,
+    "query": "microsoft entra id intro",
+    "uuid": "d64ae163-92db-417e-b78d-4ff64db6cd3e",
+    "title": "Datawiza Solution: Microsoft Entra ID (Azure AD) SSO and MFA for E-Business Suite (EBS)",
+    "description": "Oracle E-Business Suite (EBS), a comprehensive suite of applications for enterprise resource...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 100,
+    "query": "microsoft entra id intro",
+    "uuid": "124d7d31-e5a1-4599-a301-271585032fa1",
+    "title": "Docusaurus authentication with Entra ID and MSAL",
+    "description": "Introduction   Docusaurus (https://docusaurus.io)  is a well-regarded open-source tool for...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 101,
+    "query": "microsoft entra id intro",
+    "uuid": "3f3040ea-3fdc-4eb7-a08d-db262f76bf41",
+    "title": "Datawiza Solution: Migrating Header-Based Apps from Broadcom SiteMinder to Microsoft Entra ID (Azure AD)",
+    "description": "No-Code Solution Certified by Microsoft   Datawiza helps enterprises  seamless migrate...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 102,
+    "query": "pkce oauth javascript apps",
+    "uuid": "4dfb37d8-7e37-49bf-8deb-1bab4e9e59d9",
+    "title": "Bluesky OAuth2 Client, with Vanilla JavaScript",
+    "description": "Hi, there! ;^)           Introduction   This post talks about integrating Bluesky Authentication...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 103,
+    "query": "docker disk bandwidth limits",
+    "uuid": "751b9f2d-c3c7-4768-b29a-aa1f5c084488",
+    "title": "Docker high disk space usage 💾 📈",
+    "description": "Did you find an heavy disk space usage on your server and you don't know what is the root ca...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 104,
+    "query": "docker disk bandwidth limits",
+    "uuid": "87d905d5-9760-454e-a44c-66b377bdc859",
+    "title": "How to manage docker search rate limits",
+    "description": "Explore effective strategies to overcome Docker search rate limits, optimize image downloads, and manage container registry restrictions with expert techniques.",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 105,
+    "query": "system integration testing streamlining",
+    "uuid": "296df62e-5edd-4413-8eaa-74cc56f8fe38",
+    "title": "Continuous Integration Testing: Streamlining Software Development and Ensuring Quality",
+    "description": "In the rapidly evolving world of software development, delivering high-quality software quickly and...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 106,
+    "query": "smart solutions future education",
+    "uuid": "e2dd9259-b915-4b7b-ae2f-e5e67d43ef4a",
+    "title": "How Design Enables the Principles of Accessible K-12 Education",
+    "description": "Introduction  To begin with, accessibility in education means that information becomes easily...",
+    "a_rationale": "Explains how design enables accessible K-12 education, a key aspect of future-focused smart education solutions.",
+    "b_rationale": null
+  },
+  {
+    "idx": 107,
+    "query": "smart solutions future education",
+    "uuid": "fc34ff08-9f73-4faa-ab40-67714c5a580a",
+    "title": "An Exciting eLearning Experience with Capanicus Development Services",
+    "description": "In the digital world, education is a more significant transformation and E-learning is a revolution...",
+    "a_rationale": "Promotes an eLearning experience and development services, relevant to smart education solutions though promotional in nature.",
+    "b_rationale": null
+  },
+  {
+    "idx": 108,
+    "query": "spring microservices gateway thymeleaf",
+    "uuid": "7fbde689-0179-45de-a0d1-c94ad5943b50",
+    "title": "How thymeleaf processes value of \"sec:authorize\" attribute (Spring Security integration module)",
+    "description": "Notice   I wrote this article and was originally published on Qiita on 3 September...",
+    "a_rationale": null,
+    "b_rationale": ""
+  },
+  {
+    "idx": 109,
+    "query": "spring microservices gateway thymeleaf",
+    "uuid": "e6a47231-d6ba-41f2-8327-8966842edb8e",
+    "title": "Understanding Thymeleaf: A Powerful Java Template Engine",
+    "description": "Thymeleaf is a modern server-side Java template engine designed to work with web and non-web...",
+    "a_rationale": null,
+    "b_rationale": ""
+  }
+]
