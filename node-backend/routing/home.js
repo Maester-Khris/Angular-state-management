@@ -178,9 +178,19 @@ router.get('/api/search', async (req, res) => {
             hydratedDocs = await Post.find({ uuid: { $in: missingUuids } }).lean();
         }
 
+        // Rebuild the semantic leg in Python's original rank order, with full doc data.
+        // Post.find({ $in }) gives no ordering guarantee, so re-deriving order from
+        // hydratedDocs (instead of semanticMatches) would scramble the semantic rank.
+        // Docs also found lexically must stay in this list too, or they lose their
+        // semantic-leg RRF contribution entirely when mergeResults fuses the two legs.
+        const keywordByUuid = new Map(keywordResults.map(d => [d.uuid, d]));
+        const hydratedByUuid = new Map(hydratedDocs.map(d => [d.uuid, d]));
+        const orderedSemanticResults = semanticMatches
+            .map(match => keywordByUuid.get(match.uuid) || hydratedByUuid.get(match.uuid))
+            .filter(Boolean);
+
         // Merge and Rank
-        // Note: hydratedDocs needs to be combined with semanticMatches scores in mergeResults
-        const hybridResults = mergeResults(keywordResults, hydratedDocs);
+        const hybridResults = mergeResults(keywordResults, orderedSemanticResults);
 
         const pythonStatus = await remoteSearchSvc.checkPythonStatus();
 

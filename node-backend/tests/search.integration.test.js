@@ -44,5 +44,37 @@ describe('Search API Integration Tests', () => {
             const response = await request(app).get('/api/search');
             expect(response.status).toBe(400);
         });
+
+        it('rewards cross-leg consensus and preserves semantic rank order despite an unordered hydration fetch', async () => {
+            const lexicalDoc = { uuid: 'A', title: 'Lexical+Semantic', score: 5 };
+
+            vi.spyOn(dbCrudOperator, 'searchPostsByKeyword').mockResolvedValue([lexicalDoc]);
+            vi.spyOn(remoteSearch, 'checkPythonStatus').mockResolvedValue('connected');
+            vi.spyOn(remoteSearch, 'getSemanticMatches').mockResolvedValue([
+                { uuid: 'A' }, // found by both legs - rank 1 semantically too
+                { uuid: 'B' }, // semantic-only, rank 2
+                { uuid: 'C' }, // semantic-only, rank 3
+            ]);
+            // Mongo's real $in fetch gives no order guarantee - simulate it shuffled
+            vi.spyOn(Post, 'find').mockReturnValue({
+                lean: vi.fn().mockResolvedValue([
+                    { uuid: 'C', title: 'C' },
+                    { uuid: 'B', title: 'B' },
+                ])
+            });
+
+            const response = await request(app)
+                .get('/api/search')
+                .query({ q: 'test', mode: 'hybrid' });
+
+            expect(response.status).toBe(200);
+            const uuids = response.body.results.map(r => r.uuid);
+
+            // Consensus doc (found by both legs) must rank first, not last
+            expect(uuids[0]).toBe('A');
+            // Semantic-only docs must keep Python's rank order (B before C),
+            // not Mongo's unordered hydration-fetch order (C before B)
+            expect(uuids.indexOf('B')).toBeLessThan(uuids.indexOf('C'));
+        });
     });
 });
