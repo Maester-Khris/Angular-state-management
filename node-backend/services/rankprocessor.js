@@ -1,6 +1,6 @@
 // services/rankProcessor.js
 
-const mergeResults = (keywordResults, semanticResults, lexicalWeight = 1.0, semanticWeight = 0.8) => {
+const mergeResults = (keywordResults, semanticResults, lexicalWeight = 1.0, semanticWeight = 1.2) => {
   const k = 60; // RRF constant to smooth out high-ranking bias
   const scores = new Map();
 
