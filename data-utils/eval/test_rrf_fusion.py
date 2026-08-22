@@ -20,7 +20,7 @@ if __name__ == "__main__":
     test_consensus_doc_ranks_first_and_semantic_order_is_preserved()
     print("ok")
 
-def test_semantic_weight_defaults_to_point_eight_not_one_point_two():
+def test_semantic_weight_defaults_to_one_point_two_reverted_from_regressing_zero_point_eight():
     keyword_results = [{"uuid": "L"}]
     semantic_results = [{"uuid": "S"}]
 
@@ -28,9 +28,10 @@ def test_semantic_weight_defaults_to_point_eight_not_one_point_two():
     l_score = next(r["matchPercentage"] for r in fused if r["uuid"] == "L")
     s_score = next(r["matchPercentage"] for r in fused if r["uuid"] == "S")
 
-    # Mirrors rankprocessor.unit.test.js's equivalent case: under the new 0.8 default,
-    # lexical (weight 1.0) must outrank semantic-only at the same rank.
-    assert l_score > s_score
+    # Mirrors rankprocessor.unit.test.js's equivalent case. semanticWeight=0.8 was tried and
+    # reverted: it helped 2-3 specific hard queries but regressed full-eval-set Precision@5
+    # (0.4222 -> 0.3963, confirmed live) -- see subgoal2 artifact, Measure 1 reopened.
+    assert s_score > l_score
 
 
 def test_custom_lexical_weight():

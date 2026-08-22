@@ -21,7 +21,7 @@ def build_ordered_semantic_results(semantic_results: list[dict], keyword_results
     return [keyword_by_uuid.get(item["uuid"], item) for item in semantic_results]
 
 
-def merge_results(keyword_results: list[dict], semantic_results: list[dict], k: int = 60, lexical_weight: float = 1.0, semantic_weight: float = 0.8) -> list[dict]:
+def merge_results(keyword_results: list[dict], semantic_results: list[dict], k: int = 60, lexical_weight: float = 1.0, semantic_weight: float = 1.2) -> list[dict]:
     """Line-for-line port of rankprocessor.js's mergeResults. RRF score per item:
     (1 / (k + rank)) * weight, rank is the 1-indexed position in whichever input list the
     item came from, weights summed across lists if an item appears in both. Ties on uuid use
