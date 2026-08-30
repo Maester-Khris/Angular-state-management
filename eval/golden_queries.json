@@ -1,0 +1,102 @@
+[
+  {
+    "query": "redis caching strategies",
+    "relevant_uuids": [
+      "ad987052-fd76-4070-ada5-e20fb2d6a175",
+      "6353d23c-c255-43ba-9cb6-0560265f51f2",
+      "0d512ff8-26da-426d-9419-dd454313c951",
+      "1d482626-8b9a-467c-87f0-97067f3cf61c",
+      "b5587ad5-c76a-497d-b156-09d9bc9813e6"
+    ]
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "relevant_uuids": [
+      "046b5238-ad7b-48ee-907b-d78eca9ddec4",
+      "f8f03b3e-9665-43db-a062-1fa2b3d1990f",
+      "08197a98-a69e-48f8-9a96-8124251d158c",
+      "030cd780-870e-4971-8e9d-31a036f63319",
+      "b5587ad5-c76a-497d-b156-09d9bc9813e6"
+    ]
+  },
+  {
+    "query": "react state management",
+    "relevant_uuids": [
+      "28296e1d-591c-4e1a-852a-010c7e717f04",
+      "cd2485cb-f7af-418b-94a9-1e78a9d5eb40",
+      "19c25a94-c55f-46b0-a610-072a876a7638",
+      "5613de0e-a0a6-4778-a3cd-cd76ee07c69d",
+      "bc744634-dbc1-47eb-84f6-553f4b5f13df"
+    ]
+  },
+  {
+    "query": "postgres index tuning",
+    "relevant_uuids": [
+      "c0f07cfc-7717-4c0f-96c0-d736302ee329",
+      "ecd6dc03-356a-4e72-87d6-c6e8863341a7",
+      "ae0cb546-299a-411e-a18b-2083a499167d",
+      "9ef0a85b-bfb3-40d0-a71a-7450b019816b",
+      "e45d24b8-d059-43f1-9389-7fc6d24d0dd4"
+    ]
+  },
+  {
+    "query": "life",
+    "relevant_uuids": [
+      "c33c8110-0f0e-43f4-8aae-2de4a5b79462",
+      "ec7841de-a3d3-47f0-b1cf-be2c339906f4",
+      "ddb3c303-0ef9-434e-b68d-2b0726df6ef6",
+      "697cd16f-c097-4dc4-b381-38654c51439c",
+      "1d0cc623-ed9a-4cd3-9a9d-abc5faea057c"
+    ]
+  },
+  {
+    "query": "intelligence",
+    "relevant_uuids": [
+      "c123d8bb-6c1e-4bdb-8f78-c993ce008151",
+      "152c9c88-1cea-44e9-a347-55e6932b3001",
+      "0399c50f-5552-4aa5-9520-16e4871d3c70",
+      "eaf8ef94-079c-4004-bed7-36ac6a446bcf",
+      "18e8ed2f-45ab-4add-86dd-19f8fba3e28f"
+    ]
+  },
+  {
+    "query": "memory",
+    "relevant_uuids": [
+      "ad987052-fd76-4070-ada5-e20fb2d6a175",
+      "7a9832e1-5238-43a6-9c0f-3d012c8b3e66",
+      "1d482626-8b9a-467c-87f0-97067f3cf61c",
+      "c912e2f4-a5a6-4db7-95cc-683b79b9117a",
+      "1aaad19f-96d0-49e3-a9e1-51b777671c4c"
+    ]
+  },
+  {
+    "query": "async python event loop",
+    "relevant_uuids": [
+      "1d482626-8b9a-467c-87f0-97067f3cf61c",
+      "18e8ed2f-45ab-4add-86dd-19f8fba3e28f",
+      "152c9c88-1cea-44e9-a347-55e6932b3001",
+      "f8f03b3e-9665-43db-a062-1fa2b3d1990f",
+      "92db9a85-a218-4dbe-afb4-7c1d7d1d0b13"
+    ]
+  },
+  {
+    "query": "microservices vs monolith",
+    "relevant_uuids": [
+      "f8f03b3e-9665-43db-a062-1fa2b3d1990f",
+      "046b5238-ad7b-48ee-907b-d78eca9ddec4",
+      "899ef421-d516-4e62-af5d-61518fbcfa02",
+      "08197a98-a69e-48f8-9a96-8124251d158c",
+      "7a9832e1-5238-43a6-9c0f-3d012c8b3e66"
+    ]
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "relevant_uuids": [
+      "b5587ad5-c76a-497d-b156-09d9bc9813e6",
+      "aa0a5950-2392-42ce-9e65-83c273589905",
+      "5613de0e-a0a6-4778-a3cd-cd76ee07c69d",
+      "e45d24b8-d059-43f1-9389-7fc6d24d0dd4",
+      "f289c917-b298-4a1f-9a70-6e4f56850053"
+    ]
+  }
+]

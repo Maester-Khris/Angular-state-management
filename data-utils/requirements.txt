@@ -4,3 +4,5 @@ fastembed
 python-dotenv
 bcrypt
 requests
+datasets
+bm25s==0.3.10

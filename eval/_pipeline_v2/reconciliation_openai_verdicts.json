@@ -1,0 +1,786 @@
+[
+  {
+    "idx": 1,
+    "query": "redis caching strategies",
+    "uuid": "5a27e03e-1ee2-4ca9-9a9f-23fe6f2f1837",
+    "relevant": false,
+    "rationale": "The document focuses on Redis internals and being an in-memory single-threaded cache rather than providing actionable caching strategies (e.g., cache-aside, write-through, eviction policies), so it would not satisfy someone specifically searching for 'redis caching strategies'."
+  },
+  {
+    "idx": 22,
+    "query": "intelligence",
+    "uuid": "6b66b52f-bb21-40ef-998a-5b0072ebfb3e",
+    "relevant": true,
+    "rationale": "The document focuses on Artificial Intelligence (AI), which directly matches the query 'intelligence' by discussing AI applications and trends in HR rather than merely mentioning the term in passing."
+  },
+  {
+    "idx": 23,
+    "query": "intelligence",
+    "uuid": "ae2722dd-7052-4b37-b35b-b3cdadd7f39b",
+    "relevant": false,
+    "rationale": "The document is a personal review of a specific 'Artificial intelligence for robotics' course and does not provide general information about 'intelligence', so it would not satisfy a user searching for that broad topic."
+  },
+  {
+    "idx": 24,
+    "query": "intelligence",
+    "uuid": "14416b29-230e-4ad9-a236-7330ba3ee0e6",
+    "relevant": true,
+    "rationale": "The document specifically discusses artificial intelligence technologies (7 best AI technologies and their websites), so it directly matches and would satisfy a user searching for \"intelligence.\""
+  },
+  {
+    "idx": 25,
+    "query": "intelligence",
+    "uuid": "6117b19f-6dd3-4a61-b625-190d97848d92",
+    "relevant": true,
+    "rationale": "The article specifically discusses artificial intelligence and its applications in games and simulated worlds, so it directly addresses the search term 'intelligence' rather than merely mentioning it in passing."
+  },
+  {
+    "idx": 26,
+    "query": "intelligence",
+    "uuid": "6e5fb03f-4f64-4f72-a575-d2f9f8554984",
+    "relevant": true,
+    "rationale": "The document's title directly addresses artificial intelligence (comparing it with smart algorithms), so a user searching for 'intelligence' would reasonably expect and be satisfied by this content."
+  },
+  {
+    "idx": 27,
+    "query": "intelligence",
+    "uuid": "3f864714-7004-4167-b8f0-5bcdfd7d6300",
+    "relevant": false,
+    "rationale": "The article specifically discusses artificial intelligence in education and student creativity rather than the broader concept of 'intelligence', so it would not satisfy a user searching that exact, general term."
+  },
+  {
+    "idx": 28,
+    "query": "intelligence",
+    "uuid": "bef52e17-b907-4bc2-a382-b63afb461998",
+    "relevant": false,
+    "rationale": "The document focuses narrowly on sarcasm in AI rather than the broad concept of 'intelligence', so it would not satisfy a user seeking general information on 'intelligence' as a top result."
+  },
+  {
+    "idx": 29,
+    "query": "intelligence",
+    "uuid": "c19afaf5-fc05-4b9c-ad5f-f09d603368f7",
+    "relevant": true,
+    "rationale": "The document discusses artificial intelligence (AI) and its applications, which directly addresses the user's query 'intelligence'."
+  },
+  {
+    "idx": 30,
+    "query": "intelligence",
+    "uuid": "89266e57-4a6c-4516-97f2-de53a04bf017",
+    "relevant": true,
+    "rationale": "The article directly addresses artificial intelligence (AI), so a user searching for 'intelligence' would reasonably find its discussion of AI's applications and impact relevant."
+  },
+  {
+    "idx": 31,
+    "query": "intelligence",
+    "uuid": "c49a50d8-f362-4be4-a1bb-09cd7c5d97fb",
+    "relevant": true,
+    "rationale": "The article substantively addresses cognitive development and the nature of consciousness in AI—core aspects of 'intelligence'—rather than merely mentioning the term in passing, so it would satisfy a user searching for information on intelligence."
+  },
+  {
+    "idx": 33,
+    "query": "memory",
+    "uuid": "719eb233-9d23-4a8d-a32d-d7b63689e404",
+    "relevant": false,
+    "rationale": "The document is a narrow technical article about Node.js memory leaks and would not satisfy a user searching the broad term \"memory\" as a top result."
+  },
+  {
+    "idx": 36,
+    "query": "memory",
+    "uuid": "17c12e0e-07ee-43c3-884e-57a3ce9618b7",
+    "relevant": true,
+    "rationale": "The document directly addresses RAM (memory) constraints and database solutions for memory-limited IoT devices, so it would satisfy a user searching for 'memory' in a computing context."
+  },
+  {
+    "idx": 37,
+    "query": "async python event loop",
+    "uuid": "874d4878-8144-4295-9f3e-e9af3e73bb8d",
+    "relevant": true,
+    "rationale": "The article describes building an in-memory async event bus in Python, which directly covers use of Python's asynchronous/event-loop patterns and would satisfy someone searching for 'async python event loop.'"
+  },
+  {
+    "idx": 38,
+    "query": "async python event loop",
+    "uuid": "d50c763d-c94e-4acb-893a-5da0bdd3687b",
+    "relevant": true,
+    "rationale": "The article demonstrates practical use of Python's asyncio (including running coroutines and scheduling tasks) which a user searching for 'async python event loop' would find directly relevant and useful."
+  },
+  {
+    "idx": 39,
+    "query": "async python event loop",
+    "uuid": "46ae0391-e54c-4e54-b87b-6d124299285e",
+    "relevant": true,
+    "rationale": "The article discusses Python's async/await model and how it compares to threads, which directly addresses the async execution model and event loop behavior a user searching for 'async python event loop' would expect."
+  },
+  {
+    "idx": 40,
+    "query": "async python event loop",
+    "uuid": "be5c9661-dca1-4611-a1c0-5340e9f95a5f",
+    "relevant": true,
+    "rationale": "The document explains what the Python event loop is and how idle (asynchronous) connections can keep it running and cause AWS Lambda timeouts, directly addressing async Python event-loop behavior."
+  },
+  {
+    "idx": 42,
+    "query": "ci cd pipeline best practices",
+    "uuid": "33e44ce4-eea6-49b3-9d64-65f2f0cdd33b",
+    "relevant": true,
+    "rationale": "The article directly addresses setting up a CI/CD pipeline for web app deployment and therefore is likely to cover recommended practices and guidance a user searching for CI/CD pipeline best practices would expect."
+  },
+  {
+    "idx": 43,
+    "query": "ci cd pipeline best practices",
+    "uuid": "b10c9d45-9348-4492-896e-3b5406913f95",
+    "relevant": true,
+    "rationale": "The article explicitly covers CI/CD tools and practices (contrasting with DevOps), so a user searching for 'ci cd pipeline best practices' would reasonably find guidance on CI/CD pipeline best practices there."
+  },
+  {
+    "idx": 45,
+    "query": "ci cd pipeline best practices",
+    "uuid": "f7972993-c24e-4322-88d2-9e335e7d5b04",
+    "relevant": true,
+    "rationale": "The document directly addresses CI/CD pipelines by describing how to automate Kubernetes deployments with GitLab and Jenkins and therefore provides practical pipeline design and deployment practices that match a user searching for \"ci cd pipeline best practices.\""
+  },
+  {
+    "idx": 46,
+    "query": "ci cd pipeline best practices",
+    "uuid": "ede2868d-240a-4557-bef0-410230d7842b",
+    "relevant": true,
+    "rationale": "The document directly provides guidance on setting up an efficient Jenkins CI/CD pipeline (building binaries, pushing Docker images, and deploying to Kubernetes), which matches the user's intent for 'ci cd pipeline best practices.'"
+  },
+  {
+    "idx": 47,
+    "query": "ci cd pipeline best practices",
+    "uuid": "03d4b583-383e-4728-97f1-69caf5934aa0",
+    "relevant": false,
+    "rationale": "The document is a hands‑on tutorial for setting up an AWS Serverless CI/CD pipeline rather than a general guide on CI/CD pipeline best practices, so it would not satisfy a user seeking broad best practices."
+  },
+  {
+    "idx": 48,
+    "query": "ci cd pipeline best practices",
+    "uuid": "ceb387f8-af65-4beb-972e-a00471764ced",
+    "relevant": true,
+    "rationale": "The document discusses multi-cluster CI/CD pipelines and how they enhance resilience and scalability, which directly addresses CI/CD pipeline best practices."
+  },
+  {
+    "idx": 49,
+    "query": "ci cd pipeline best practices",
+    "uuid": "c136be16-1957-49dc-ba77-aa0985bf0645",
+    "relevant": true,
+    "rationale": "This end-to-end tutorial on building and pushing to Google Artifact Registry and deploying to GKE describes a streamlined CI/CD pipeline and practical build/push/deploy steps that would satisfy someone searching for CI/CD pipeline best practices."
+  },
+  {
+    "idx": 50,
+    "query": "ci cd pipeline best practices",
+    "uuid": "c2ecc61c-8a3a-468b-90ad-86e19d8fae36",
+    "relevant": false,
+    "rationale": "The document appears to be a roundup of CI/CD tools rather than a guide on actionable CI/CD pipeline best practices, so it would not satisfy a user specifically seeking pipeline best-practice guidance."
+  },
+  {
+    "idx": 51,
+    "query": "ci cd pipeline best practices",
+    "uuid": "6549d575-c54a-43f3-b091-9fe6f3584518",
+    "relevant": true,
+    "rationale": "Although it’s a Jenkins-specific tutorial, the article explains practical CI/CD techniques (including multistage Docker builds and pipeline implementation) that align with common CI/CD pipeline best practices and would satisfy the query."
+  },
+  {
+    "idx": 52,
+    "query": "ci cd pipeline best practices",
+    "uuid": "a7705d2c-0c28-4b78-9c80-ef7cf7210359",
+    "relevant": true,
+    "rationale": "The article directly addresses optimizing CI/CD pipelines and describes practical approaches (dynamic JavaScript configuration) to streamline builds and deployments, matching a user's intent for CI/CD pipeline best practices."
+  },
+  {
+    "idx": 53,
+    "query": "ci cd pipeline best practices",
+    "uuid": "94518132-0442-47c6-af1d-8f1833b5e459",
+    "relevant": true,
+    "rationale": "This is a practical guide specifically about setting up self-hosted CI/CD Git pipelines (GitLab/GitHub Actions), which would satisfy a user searching for CI/CD pipeline best practices."
+  },
+  {
+    "idx": 54,
+    "query": "ci cd pipeline best practices",
+    "uuid": "ff357183-007f-4d6c-bb32-5ff46a0c0f25",
+    "relevant": true,
+    "rationale": "A deep dive into a company's CI/CD pipelines will likely describe practical approaches, configurations, and lessons that someone searching for 'ci cd pipeline best practices' would find useful."
+  },
+  {
+    "idx": 55,
+    "query": "ci cd pipeline best practices",
+    "uuid": "f1238be3-b8c0-46cc-8c78-78574e3c0e60",
+    "relevant": false,
+    "rationale": "The document is a hands-on AWS CodePipeline/CloudFront/S3 setup tutorial rather than a general guide on CI/CD pipeline best practices, so it wouldn't satisfy a user seeking high-level or comprehensive best-practice recommendations."
+  },
+  {
+    "idx": 56,
+    "query": "ci cd pipeline best practices",
+    "uuid": "ef6b5d2b-e2a4-4c62-b433-2dfa069596ae",
+    "relevant": true,
+    "rationale": "The article series directly covers building end-to-end AWS DevSecOps CI/CD pipelines and continuous delivery, which matches a user seeking CI/CD pipeline best practices."
+  },
+  {
+    "idx": 57,
+    "query": "ci cd pipeline best practices",
+    "uuid": "954e8677-fd4a-42ae-9c10-4879debac770",
+    "relevant": true,
+    "rationale": "The document is directly about building CI/CD pipelines using Tekton and Argo CD on Kubernetes, which a user searching for CI/CD pipeline best practices would find relevant."
+  },
+  {
+    "idx": 58,
+    "query": "ci cd pipeline best practices",
+    "uuid": "fb24326c-ea75-4abc-a472-1777b5f3ad10",
+    "relevant": false,
+    "rationale": "This is a platform-specific how-to for deploying a web app on Azure App Service rather than a general guide on CI/CD pipeline best practices, so it would not satisfy a user seeking broad best-practice recommendations."
+  },
+  {
+    "idx": 59,
+    "query": "ci cd pipeline best practices",
+    "uuid": "f8838112-d0be-40e3-9cf4-330a8cc45313",
+    "relevant": true,
+    "rationale": "The document is explicitly a comprehensive guide to building production-level CI/CD pipelines, which matches and would satisfy a user searching for CI/CD pipeline best practices."
+  },
+  {
+    "idx": 60,
+    "query": "ci cd pipeline best practices",
+    "uuid": "bb647885-b0c9-4c2e-be8e-c6011d19d5a0",
+    "relevant": true,
+    "rationale": "The document directly covers setting up CI/CD pipelines with automated build and test stages, which addresses core best practices a user searching for 'ci cd pipeline best practices' would expect."
+  },
+  {
+    "idx": 61,
+    "query": "ci cd pipeline best practices",
+    "uuid": "e1fc9e96-0db8-41b8-952f-91edf85822a3",
+    "relevant": true,
+    "rationale": "The project demonstrates a robust Node.js CI/CD pipeline implemented with GitHub Actions and provides practical implementation details and recommended practices that directly address CI/CD pipeline best practices."
+  },
+  {
+    "idx": 62,
+    "query": "ci cd pipeline best practices",
+    "uuid": "613ecc40-a2ae-48ec-b6c7-3f0741689cfc",
+    "relevant": true,
+    "rationale": "A practical tutorial titled 'Building a CI/CD Integration with Amazon EC2, Jenkins and Docker' that introduces CI/CD and shows implementation with common tools would satisfy a user looking for CI/CD pipeline best practices."
+  },
+  {
+    "idx": 63,
+    "query": "ci cd pipeline best practices",
+    "uuid": "c6a509c8-88b1-49f3-b23c-e6d9ffcd7dc3",
+    "relevant": true,
+    "rationale": "The document’s title and description specifically address implementing CI/CD for DevOps, which aligns with a user searching for CI/CD pipeline best practices and would likely contain guidance on implementing best practices."
+  },
+  {
+    "idx": 64,
+    "query": "ci cd pipeline best practices",
+    "uuid": "b2717d77-5742-4879-9d6a-d64cd7e3814d",
+    "relevant": true,
+    "rationale": "The article clearly covers designing and implementing CI/CD pipelines for serverless applications using AWS CodePipeline and CodeBuild, offering practical practices and guidance that would satisfy someone searching for 'ci cd pipeline best practices'."
+  },
+  {
+    "idx": 65,
+    "query": "ci cd pipeline best practices",
+    "uuid": "f24c3e51-2940-4a5d-a6ca-93a2dcb23dce",
+    "relevant": true,
+    "rationale": "A step-by-step guide for creating a CI/CD pipeline with Docker and GitHub Actions will cover practical recommendations and actionable patterns that satisfy a user searching for CI/CD pipeline best practices."
+  },
+  {
+    "idx": 66,
+    "query": "ci cd pipeline best practices",
+    "uuid": "541a48e1-2a9f-454d-8270-a8b285e59f09",
+    "relevant": false,
+    "rationale": "The document is specific to building a CI/CD pipeline for databases and does not present general CI/CD pipeline best practices that would satisfy a user searching broadly for 'ci cd pipeline best practices'."
+  },
+  {
+    "idx": 70,
+    "query": "aws cloud infrastructure services",
+    "uuid": "b917fe99-1067-49a6-b2b0-e0e0ebfdef9a",
+    "relevant": false,
+    "rationale": "The document focuses specifically on AWS scaling policies and resilience rather than providing a general overview or listing of AWS cloud infrastructure services that a user searching 'aws cloud infrastructure services' would expect."
+  },
+  {
+    "idx": 73,
+    "query": "aws cloud infrastructure services",
+    "uuid": "d0efef98-86fe-4e3d-8c1a-6e8ae0a067d3",
+    "relevant": true,
+    "rationale": "An AWS Cloud Practitioner overview provides introductory coverage of AWS and its core cloud infrastructure services (compute, storage, networking), so a user searching for 'aws cloud infrastructure services' would find it suitable as a top result."
+  },
+  {
+    "idx": 74,
+    "query": "aws cloud infrastructure services",
+    "uuid": "88307b26-be07-4cac-bf47-0aa57dfe39ff",
+    "relevant": false,
+    "rationale": "The document focuses on troubleshooting challenges with AWS rather than providing a substantive overview or list of AWS cloud infrastructure services, so it would not satisfy a user seeking information about those services."
+  },
+  {
+    "idx": 75,
+    "query": "aws cloud infrastructure services",
+    "uuid": "98790da3-129c-4aad-b50e-cef7c560e85e",
+    "relevant": true,
+    "rationale": "A direct comparison of AWS and GCP titled ‘Cloud Showdown’ will contain substantive coverage of AWS cloud infrastructure services and their benefits, so it would satisfy a user searching for information about AWS infrastructure services."
+  },
+  {
+    "idx": 77,
+    "query": "aws cloud infrastructure services",
+    "uuid": "7e3b537f-db83-4bcc-8d29-b5b76568e84d",
+    "relevant": false,
+    "rationale": "The document appears to discuss selecting cloud managed services subscription plans in general and does not specifically address or provide information on AWS cloud infrastructure services, so it would not satisfy a user searching for 'aws cloud infrastructure services.'"
+  },
+  {
+    "idx": 80,
+    "query": "aws cloud infrastructure services",
+    "uuid": "4793f57f-29db-4278-9050-2551e20c5f53",
+    "relevant": false,
+    "rationale": "The page offers a general overview of IaaS/cloud infrastructure rather than specific information about AWS services, so it would not satisfy someone searching for 'aws cloud infrastructure services'."
+  },
+  {
+    "idx": 82,
+    "query": "aws cloud infrastructure services",
+    "uuid": "5da24ca1-a5bf-4e27-9f65-fd306f3993df",
+    "relevant": true,
+    "rationale": "The article describes AWS as a cloud computing platform and outlines its range of services and benefits, which would satisfy a user looking for information on AWS cloud infrastructure services."
+  },
+  {
+    "idx": 83,
+    "query": "aws cloud infrastructure services",
+    "uuid": "bb5ed348-0ad8-472a-9c71-b636d5cbf5db",
+    "relevant": false,
+    "rationale": "The document focuses specifically on AWS AI and ML services and exam concepts, not on general AWS cloud infrastructure services such as compute, networking, storage, and core infrastructure offerings, so it would not satisfy a user searching for 'aws cloud infrastructure services'."
+  },
+  {
+    "idx": 99,
+    "query": "nodejs backend development",
+    "uuid": "e31e45e5-87b8-4fa6-a167-b0eb8bf2b1b2",
+    "relevant": false,
+    "rationale": "The title and description describe general secure/resilient backend practices but do not indicate Node.js-specific guidance, so it would not satisfy a user seeking Node.js backend development content."
+  },
+  {
+    "idx": 100,
+    "query": "nodejs backend development",
+    "uuid": "231ece93-045f-42ac-ba34-fe4aa0691125",
+    "relevant": false,
+    "rationale": "The article appears to cover general backend development terms without any indication it specifically addresses Node.js, so it would not satisfy a user searching for Node.js backend development."
+  },
+  {
+    "idx": 101,
+    "query": "nodejs backend development",
+    "uuid": "6d11fb81-8c63-4e46-8671-5690f8561e3b",
+    "relevant": false,
+    "rationale": "The document is a generic hiring page for backend developers and does not mention Node.js specifically, so it would not satisfy a user searching for 'nodejs backend development'."
+  },
+  {
+    "idx": 102,
+    "query": "nodejs backend development",
+    "uuid": "65058ee6-4e86-43ab-843d-06e71472f2b4",
+    "relevant": false,
+    "rationale": "The title and description indicate a general list of backend tools for 2025 rather than focused guidance on Node.js backend development, so it would not satisfy a user specifically seeking Node.js resources."
+  },
+  {
+    "idx": 103,
+    "query": "nodejs backend development",
+    "uuid": "7992b54c-54c5-46e7-887e-a2bfdaa8a6e7",
+    "relevant": false,
+    "rationale": "The document appears to be a general list of backend development toolkits without a specific focus on Node.js, so it would not directly satisfy a user searching for \"nodejs backend development.\""
+  },
+  {
+    "idx": 104,
+    "query": "nodejs backend development",
+    "uuid": "6a2676a0-d073-44fc-9b0f-b9e485edf56a",
+    "relevant": false,
+    "rationale": "The title and description are generic about backends and do not mention Node.js or Node-specific tools/frameworks, so it would not satisfy a user specifically searching for 'nodejs backend development.'"
+  },
+  {
+    "idx": 105,
+    "query": "nodejs backend development",
+    "uuid": "62f32d5b-751d-4b5f-a205-ef0f4ab1eb12",
+    "relevant": false,
+    "rationale": "The snippet only indicates general backend development content and does not mention Node.js or Node.js-specific topics, so it would not satisfy a user specifically searching for 'nodejs backend development'."
+  },
+  {
+    "idx": 106,
+    "query": "nodejs backend development",
+    "uuid": "c2f3abe0-aef7-4215-b734-3d2b6978a12e",
+    "relevant": false,
+    "rationale": "The document appears to be a general backend development roadmap and does not specifically focus on Node.js, so it would not satisfy a user searching specifically for Node.js backend development."
+  },
+  {
+    "idx": 108,
+    "query": "nodejs backend development",
+    "uuid": "34b985e3-fa12-4d6b-aa66-50c5397d6774",
+    "relevant": false,
+    "rationale": "The document discusses beginning backend development and SQL but does not mention Node.js specifically, so it would not satisfy a user searching explicitly for 'nodejs backend development.'"
+  },
+  {
+    "idx": 109,
+    "query": "nodejs backend development",
+    "uuid": "00174e44-7496-4e97-8f79-06b4b25dc14e",
+    "relevant": false,
+    "rationale": "The page appears to ask about a general backend development roadmap and does not provide Node.js-specific guidance, so it would not satisfy a user explicitly searching for 'nodejs backend development'."
+  },
+  {
+    "idx": 111,
+    "query": "nodejs backend development",
+    "uuid": "5153a2a0-eb75-4594-98fe-ab588d2aed29",
+    "relevant": false,
+    "rationale": "Not relevant because the document is a general overview of backend development trends and does not specifically address Node.js backend development, so it would not satisfy a user seeking Node.js-specific guidance."
+  },
+  {
+    "idx": 115,
+    "query": "multi cloud deployment strategies",
+    "uuid": "15dd1e3b-a547-437d-976f-8b75f8cf849c",
+    "relevant": false,
+    "rationale": "The document focuses on data governance in hybrid and multi-cloud environments rather than providing concrete multi-cloud deployment strategies (architecture, orchestration, or deployment patterns) a user searching that exact query would expect."
+  },
+  {
+    "idx": 116,
+    "query": "multi cloud deployment strategies",
+    "uuid": "7ae0e0fb-3b55-44b1-97ae-e45c07f5fa3e",
+    "relevant": false,
+    "rationale": "The title and description indicate a general enterprise cloud migration plan but do not specifically address multi‑cloud deployment strategies, so it would not satisfy a user searching for that exact topic."
+  },
+  {
+    "idx": 117,
+    "query": "multi cloud deployment strategies",
+    "uuid": "e3abd6b5-1237-457f-bd58-5aa3ad4d3d69",
+    "relevant": false,
+    "rationale": "The title and description indicate general cloud migration strategies but do not explicitly address multi‑cloud deployment approaches, so it would not reliably satisfy a user searching specifically for 'multi cloud deployment strategies'."
+  },
+  {
+    "idx": 129,
+    "query": "css layout and styling techniques",
+    "uuid": "23ebeb6c-cbb4-4ecb-90e0-d38365a41bd5",
+    "relevant": false,
+    "rationale": "The article only covers a specific styling technique (text highlighting) and does not address CSS layout or the broader set of layout and styling techniques a user searching for 'css layout and styling techniques' would expect."
+  },
+  {
+    "idx": 135,
+    "query": "machine learning model deployment",
+    "uuid": "c5f0dff1-ba69-4540-99ee-1668f44c4f71",
+    "relevant": true,
+    "rationale": "The document is a detailed roadmap that explicitly includes model deployment alongside data collection and training, so it directly addresses machine learning model deployment."
+  },
+  {
+    "idx": 136,
+    "query": "linux command line tools",
+    "uuid": "66571d78-7a44-4598-bb1b-4f9eee9827ab",
+    "relevant": false,
+    "rationale": "The document specifically addresses accessibility for command-line apps rather than providing information about Linux command-line tools in general, so it would not satisfy someone searching for 'linux command line tools'."
+  },
+  {
+    "idx": 137,
+    "query": "linux command line tools",
+    "uuid": "3aabece4-3926-46ee-a518-e9698c266ddd",
+    "relevant": false,
+    "rationale": "The article is a narrow tutorial on enabling Vi editing mode in Bash (line-editing behavior), not a general guide or list of Linux command-line tools, so it would not satisfy a user searching for \"linux command line tools\"."
+  },
+  {
+    "idx": 143,
+    "query": "php web development frameworks",
+    "uuid": "81631660-a48e-4cbe-8a6f-3eaa7aabc086",
+    "relevant": false,
+    "rationale": "The title and description are generic about web development frameworks and do not indicate a focus on PHP frameworks, so a user searching specifically for PHP web development frameworks would not be reliably satisfied by this document."
+  },
+  {
+    "idx": 145,
+    "query": "php web development frameworks",
+    "uuid": "3c5e51a7-8302-4494-ba0a-34ad13a8f5aa",
+    "relevant": false,
+    "rationale": "Not relevant: the title and description indicate a general overview of web development frameworks without explicit focus on PHP, so it would not satisfy a user specifically searching for PHP web development frameworks."
+  },
+  {
+    "idx": 146,
+    "query": "php web development frameworks",
+    "uuid": "e7f8f0dc-a4b1-4dc9-8e51-0afe89842d62",
+    "relevant": false,
+    "rationale": "The title and description indicate a general PHP/web development overview or course promo rather than specific coverage or comparison of PHP web development frameworks (e.g., Laravel, Symfony), so it would not satisfy a user specifically searching for frameworks."
+  },
+  {
+    "idx": 147,
+    "query": "nextjs server side rendering",
+    "uuid": "bef5f8a8-0643-4dca-891a-fb68ea33a192",
+    "relevant": false,
+    "rationale": "The document discusses the double data problem in JavaScript SSR frameworks generally and does not specifically address Next.js server-side rendering or provide Next.js-specific guidance a user searching for \"nextjs server side rendering\" would expect."
+  },
+  {
+    "idx": 149,
+    "query": "nextjs server side rendering",
+    "uuid": "aad28ab4-6548-4877-82d3-22c69c6d6506",
+    "relevant": false,
+    "rationale": "The document describes a general SSR method for React on FaaS providers but does not target Next.js specifically, so it would not satisfy a user looking for Next.js server-side rendering guidance."
+  },
+  {
+    "idx": 150,
+    "query": "nextjs server side rendering",
+    "uuid": "2a265f45-c1c2-4443-b266-89cb4e906734",
+    "relevant": true,
+    "rationale": "The document explicitly includes a section titled 'Server-Side Rendering (SSR)' describing how Next.js enables SSR and its performance benefits, which directly answers the query."
+  },
+  {
+    "idx": 157,
+    "query": "csharp async programming patterns",
+    "uuid": "8d002bf7-ab2c-4472-b864-8d1ac0657224",
+    "relevant": false,
+    "rationale": "The document covers general strategies for asynchronous APIs but does not address C#-specific async programming patterns, so it would not satisfy a user seeking C#-focused guidance."
+  },
+  {
+    "idx": 171,
+    "query": "stack",
+    "uuid": "083d322c-5081-47a7-bb67-55db4d07fea2",
+    "relevant": false,
+    "rationale": "This LeetCode solution merely uses a Java Stack for parentheses validation rather than providing general information or resources about stacks, so it would not satisfy a user searching for 'stack'."
+  },
+  {
+    "idx": 172,
+    "query": "backtracking n queens",
+    "uuid": "93dc43ac-1fe3-475f-8424-6c40d89ad135",
+    "relevant": false,
+    "rationale": "The document concerns counting bitwise-OR subsets and complexity notes, not the N-Queens backtracking problem, so it would not satisfy a user searching for 'backtracking n queens.'"
+  },
+  {
+    "idx": 173,
+    "query": "backtracking n queens",
+    "uuid": "f4e02aae-6cf8-4489-bd6d-8fa552c85ab1",
+    "relevant": false,
+    "rationale": "The document discusses backtracking for LeetCode 77 (Combinations) but does not address the N-Queens problem, so it would not satisfy the query 'backtracking n queens.'"
+  },
+  {
+    "idx": 174,
+    "query": "distributed transaction introduction",
+    "uuid": "49515eb5-70b5-4d15-a990-c977e202718a",
+    "relevant": false,
+    "rationale": "The article focuses on DDD aggregate transaction boundaries and patterns like eventual consistency within a specific domain and Go examples, not a general introduction to distributed transactions that a user typing 'distributed transaction introduction' would expect."
+  },
+  {
+    "idx": 175,
+    "query": "distributed transaction introduction",
+    "uuid": "e9893ac4-c3e2-4806-aa07-d2ea58f8c619",
+    "relevant": false,
+    "rationale": "The document appears to cover general transactions and ACID properties but does not indicate it addresses distributed transactions or their coordination/commit protocols, so it would not satisfy someone seeking an introduction specifically to distributed transactions."
+  },
+  {
+    "idx": 176,
+    "query": "distributed transaction introduction",
+    "uuid": "76758e76-900d-4f45-97e8-6d8f95fbd8ec",
+    "relevant": false,
+    "rationale": "The document provides a general introduction to transactions and ACID properties but does not specifically introduce or cover distributed transactions, so it would not satisfy a user searching for an introduction to distributed transactions."
+  },
+  {
+    "idx": 177,
+    "query": "dynamodb expression package",
+    "uuid": "a8365eb6-b920-45c5-84ac-ba5501299bf3",
+    "relevant": false,
+    "rationale": "The article describes using Filter Expressions in the DynamoDB Query API but does not cover a programming 'expression' package or library that someone searching for 'dynamodb expression package' would expect."
+  },
+  {
+    "idx": 186,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "bd80d99d-4dcc-49bd-9868-e9a4fe4d1d40",
+    "relevant": false,
+    "rationale": "The document covers only the specific topic of Enums rather than a broad beginner’s guide to Solidity fundamentals, so it would not satisfy a user seeking an overall beginner guide."
+  },
+  {
+    "idx": 187,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "94847929-cd24-4c42-9826-325b412a6bad",
+    "relevant": true,
+    "rationale": "The document is explicitly titled as a 'Beginner's Guide' to Solidity (part 1) and therefore would satisfy a user searching for Solidity beginner fundamentals."
+  },
+  {
+    "idx": 188,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "133b7f73-988e-4d43-8cd4-fcafae823f8f",
+    "relevant": false,
+    "rationale": "A page focused solely on constructors explains one specific Solidity feature and would not satisfy a user seeking a broad beginner guide covering the fundamentals."
+  },
+  {
+    "idx": 192,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "098885a7-8649-4015-8395-b1fb4b4f65e2",
+    "relevant": false,
+    "rationale": "The document focuses solely on Solidity value types (one fundamental topic) and does not provide a comprehensive beginner guide covering the broader Solidity fundamentals a user typing that query would expect."
+  },
+  {
+    "idx": 193,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "7826b7eb-fb4e-446f-8ca0-2fa74b021019",
+    "relevant": false,
+    "rationale": "The document focuses narrowly on the single 'require' statement rather than providing a comprehensive beginner guide covering Solidity fundamentals, so it would not satisfy a user seeking an overall beginner guide."
+  },
+  {
+    "idx": 194,
+    "query": "drones construction site management",
+    "uuid": "011940ed-22cc-474d-ad4b-00188e1bd4c3",
+    "relevant": false,
+    "rationale": "The document focuses on IoT, wearables, and smart machinery broadly and does not specifically address drones or drone-based construction site management, so it would not satisfy a user searching for 'drones construction site management.'"
+  },
+  {
+    "idx": 195,
+    "query": "drones construction site management",
+    "uuid": "0698ca22-b3c2-4432-a2bc-a4a4b5cce055",
+    "relevant": true,
+    "rationale": "An article about future trends and innovations in construction site management would reasonably cover drones as a key technology for site surveying, monitoring, and operations, matching the user's query."
+  },
+  {
+    "idx": 196,
+    "query": "emacs macos catalina",
+    "uuid": "a541cc51-99e4-4591-b5e4-7b75588164e2",
+    "relevant": false,
+    "rationale": "The page is about bypassing Catalina's security checks in general and does not specifically address Emacs installation or compatibility, so it would not satisfy a user searching for 'emacs macos catalina'."
+  },
+  {
+    "idx": 197,
+    "query": "nrwl nx react hmr",
+    "uuid": "32634914-defe-431a-8c62-6139ff95e48f",
+    "relevant": false,
+    "rationale": "The article is about Nx libraries and project structure (Node/React stack part 2) and does not address configuring or using hot module replacement (HMR) with Nrwl/Nx React."
+  },
+  {
+    "idx": 198,
+    "query": "nrwl nx react hmr",
+    "uuid": "f2b4f54b-6c6b-4b4d-88e4-d86af57f2194",
+    "relevant": false,
+    "rationale": "The document is a general introduction to Hot Module Replacement and does not cover Nrwl/Nx or configuring HMR for React projects, so it would not satisfy the specific query 'nrwl nx react hmr'."
+  },
+  {
+    "idx": 200,
+    "query": "how spellcheckers work",
+    "uuid": "2e9bf2db-ca95-4fcd-908f-cbc7cd6aacab",
+    "relevant": false,
+    "rationale": "The document appears to be a user-help thread about using Google Docs' spellcheck, not an explanation of how spellchecking algorithms or general spellcheckers work, so it wouldn't satisfy a user wanting to know how spellcheckers work."
+  },
+  {
+    "idx": 201,
+    "query": "how spellcheckers work",
+    "uuid": "81266a23-29d5-47e1-b28b-24266334fc2a",
+    "relevant": false,
+    "rationale": "This is a practical guide for using Aspell to batch-check Markdown files, not an explanation of how spellcheckers operate or their algorithms, so it wouldn't satisfy a user asking 'how spellcheckers work.'"
+  },
+  {
+    "idx": 202,
+    "query": "best automated testing tools",
+    "uuid": "71e6ab6f-9add-4bc4-9041-6b812a1e457d",
+    "relevant": false,
+    "rationale": "Not relevant: the document appears to be a high-level overview of AI in test automation rather than a comparison or list of the best automated testing tools, so it would not satisfy a user seeking top tool recommendations."
+  },
+  {
+    "idx": 203,
+    "query": "best automated testing tools",
+    "uuid": "d825ea5c-6f46-4848-b3eb-28144b8f8ff6",
+    "relevant": false,
+    "rationale": "The document focuses on tips for codeless automation testing rather than providing a broad comparison or list of the best automated testing tools, so it would not satisfy a user searching for 'best automated testing tools'."
+  },
+  {
+    "idx": 205,
+    "query": "best automated testing tools",
+    "uuid": "8847d049-be09-4667-9127-c37ee44f5d09",
+    "relevant": false,
+    "rationale": "Not relevant because the query asks for the best automated testing tools (implying a comparative list or ranking), whereas this document only introduces a single mobile automation tool (Shirates) and does not provide broader comparisons or a list of top tools."
+  },
+  {
+    "idx": 206,
+    "query": "best automated testing tools",
+    "uuid": "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+    "relevant": false,
+    "rationale": "The document focuses narrowly on codeless test automation rather than offering a broad comparison or list of the best automated testing tools, so it would not satisfy a user seeking general 'best automated testing tools' results."
+  },
+  {
+    "idx": 207,
+    "query": "best automated testing tools",
+    "uuid": "d2df02a6-5a08-4439-8840-f8174f933b52",
+    "relevant": false,
+    "rationale": "The article outlines reasons to adopt codeless automation rather than offering a ranked list or comparisons of the best automated testing tools, so it would not satisfy a user specifically seeking 'best automated testing tools'."
+  },
+  {
+    "idx": 209,
+    "query": "best automated testing tools",
+    "uuid": "4f5f4361-b4d9-428b-a7d6-70ad0a10df60",
+    "relevant": false,
+    "rationale": "Although the article discusses automated UI testing frameworks and tools, it focuses on benefits, challenges, and solutions for UI automation rather than providing a general comparative list of the 'best automated testing tools' that a user issuing that exact query would expect."
+  },
+  {
+    "idx": 211,
+    "query": "best automated testing tools",
+    "uuid": "31126b88-6812-4801-aa4f-54ef857f3361",
+    "relevant": true,
+    "rationale": "The document directly discusses no-code automation testing tools—a category of automated testing tools—so it would be useful to users searching for the best automated testing tools."
+  },
+  {
+    "idx": 212,
+    "query": "best automated testing tools",
+    "uuid": "01525b44-a3b6-4a6e-bfef-649661f3a154",
+    "relevant": false,
+    "rationale": "The document focuses on test automation best practices and deciding what/when to automate rather than listing, comparing, or recommending specific automated testing tools, so it would not satisfy a user searching for the 'best automated testing tools'."
+  },
+  {
+    "idx": 214,
+    "query": "load balancing 101 guide",
+    "uuid": "901a5b7a-423b-4783-afdb-91547c31fe5f",
+    "relevant": true,
+    "rationale": "The article’s title and description indicate it provides an introductory overview of load balancing (its importance), which would satisfy a user looking for a 'Load balancing 101' guide."
+  },
+  {
+    "idx": 222,
+    "query": "linux socks proxy server",
+    "uuid": "3066c7e8-67a3-469b-8b9e-3ac9af4adf7b",
+    "relevant": false,
+    "rationale": "The page appears to be a general comparison of HTTP/HTTPS/SOCKS5 proxies and does not specifically address setting up or configuring a SOCKS proxy on Linux, so it would not satisfy a user searching for 'linux socks proxy server'."
+  },
+  {
+    "idx": 223,
+    "query": "microsoft entra id intro",
+    "uuid": "d64ae163-92db-417e-b78d-4ff64db6cd3e",
+    "relevant": false,
+    "rationale": "Not relevant — the document is a vendor solution page about using Microsoft Entra ID (Azure AD) for SSO/MFA with Oracle E-Business Suite rather than an introductory overview of Microsoft Entra ID."
+  },
+  {
+    "idx": 224,
+    "query": "microsoft entra id intro",
+    "uuid": "124d7d31-e5a1-4599-a301-271585032fa1",
+    "relevant": false,
+    "rationale": "This is a Docusaurus-specific integration guide for using Entra ID and MSAL, not a general introduction to Microsoft Entra ID, so it would not satisfy a user seeking an overall 'Microsoft Entra ID intro.'"
+  },
+  {
+    "idx": 225,
+    "query": "microsoft entra id intro",
+    "uuid": "3f3040ea-3fdc-4eb7-a08d-db262f76bf41",
+    "relevant": false,
+    "rationale": "This is a vendor migration/solution page about moving apps to Microsoft Entra ID, not a general introductory overview that would satisfy a user seeking an 'microsoft entra id intro'."
+  },
+  {
+    "idx": 226,
+    "query": "pkce oauth javascript apps",
+    "uuid": "4dfb37d8-7e37-49bf-8deb-1bab4e9e59d9",
+    "relevant": false,
+    "rationale": "Not relevant — the document appears to cover Bluesky OAuth2 in vanilla JavaScript but does not specifically address PKCE for OAuth in JavaScript apps, so it would not satisfy the exact query."
+  },
+  {
+    "idx": 227,
+    "query": "docker disk bandwidth limits",
+    "uuid": "751b9f2d-c3c7-4768-b29a-aa1f5c084488",
+    "relevant": false,
+    "rationale": "The document addresses high disk space usage and root causes rather than how to configure or limit Docker disk I/O/bandwidth, so it would not satisfy a user seeking disk bandwidth limits."
+  },
+  {
+    "idx": 228,
+    "query": "docker disk bandwidth limits",
+    "uuid": "87d905d5-9760-454e-a44c-66b377bdc859",
+    "relevant": false,
+    "rationale": "The document addresses Docker search and registry rate limits for image downloads, not disk I/O or disk bandwidth throttling, so it would not satisfy a user seeking information on docker disk bandwidth limits."
+  },
+  {
+    "idx": 232,
+    "query": "system integration testing streamlining",
+    "uuid": "296df62e-5edd-4413-8eaa-74cc56f8fe38",
+    "relevant": false,
+    "rationale": "The document addresses continuous integration testing and broad streamlining of software development, not practical guidance specifically on streamlining system integration testing, so it would not satisfy a user searching for system integration testing streamlining."
+  },
+  {
+    "idx": 247,
+    "query": "spring microservices gateway thymeleaf",
+    "uuid": "7fbde689-0179-45de-a0d1-c94ad5943b50",
+    "relevant": false,
+    "rationale": "The document explains Thymeleaf's sec:authorize (Spring Security) processing but does not address Spring Cloud Gateway or microservices gateway concerns, so it would not satisfy the query."
+  },
+  {
+    "idx": 248,
+    "query": "spring microservices gateway thymeleaf",
+    "uuid": "e6a47231-d6ba-41f2-8327-8966842edb8e",
+    "relevant": false,
+    "rationale": "The document is a general introduction to Thymeleaf and does not address Spring, microservices, or gateway-specific usage, so it would not satisfy a user searching for 'spring microservices gateway thymeleaf'."
+  }
+]

@@ -1,11 +1,38 @@
 import os
 import json
+import re
 from groq import AsyncGroq
+
+_PUNCTUATION_RE = re.compile(r"[.,;:!?\"']")
+MAX_EXPANSION_KEYWORDS = 8
+MAX_EXPANSION_TOKENS = 200  # gpt-oss-120b is a reasoning model -- spends tokens on a hidden
+                            # "reasoning" field before the actual answer (observed ~30-95
+                            # reasoning tokens for this prompt shape). 32 was calibrated for the
+                            # old non-reasoning llama-3.3-70b-versatile and left content empty
+                            # (finish_reason=length) 100% of the time against this model.
+MAX_RERANK_TOKENS = 2048  # gpt-oss-120b's hidden reasoning field ate into this the same way it
+                          # hit MAX_EXPANSION_TOKENS above -- 1024 truncated (finish_reason=length)
+                          # on a realistic 8-result web_results input (238-323 reasoning tokens
+                          # observed, verified live 2026-08-19), silently returning [] every time
+                          # since the truncated JSON failed to parse. 2048 confirmed clean
+                          # (finish_reason=stop) against the same real input.
+
+
+def _enforce_expansion_format(raw: str, max_keywords: int = MAX_EXPANSION_KEYWORDS) -> str:
+    """Code-level contract for expand_query's output — the prompt asks nicely,
+    this makes it true. Strips punctuation, truncates to max_keywords tokens."""
+    cleaned = _PUNCTUATION_RE.sub("", raw).strip()
+    tokens = cleaned.split()
+    return " ".join(tokens[:max_keywords])
+
 
 class InferenceService:
     def __init__(self):
         self.client = AsyncGroq(api_key=os.getenv("GROQ_API_KEY"))
-        self.model = os.getenv("PYTHON_LLM_MODEL", "llama-3.3-70b-versatile")
+        # llama-3.3-70b-versatile was removed from Groq's catalog entirely (2026-08-18,
+        # confirmed via GET /v1/models — no llama-3.3 variant remains). gpt-oss-120b is the
+        # closest capability replacement currently available.
+        self.model = os.getenv("PYTHON_LLM_MODEL", "openai/gpt-oss-120b")
 
     async def check_readiness(self):
         """Probes the AI provider for a minimal response to confirm API key/quota."""
@@ -18,16 +45,15 @@ class InferenceService:
             return False
 
 
-    async def expand_query(self, query: str, context_docs: list[dict]) -> str:
+    async def expand_query(self, query: str) -> str:
         """
-        Detects user intent and dominant topic from Qdrant snippets to produce a refined web search query.
-        Constraints: Strictly tech/engineering domain.
+        Expands a user's search query into 5-8 technical keywords. No longer takes
+        live Qdrant context — measured (Phase 8.1) against ambiguous-term cases
+        ("life"/"intelligence"/"memory") and found no meaningful quality difference;
+        the prompt's own few-shot disambiguation covers it without live context.
+        Constraints: Strictly tech/engineering domain, 5-8 space-separated keywords, enforced in code
+        (not just the prompt) via _enforce_expansion_format.
         """
-        similar_docs_text = "\n".join(
-            f"- {doc.get('title', '')}: {doc.get('description', '')[:100]}"
-            for doc in (context_docs or [])
-        ) or "No similar documents found."
-
         system_prompt = """You are a search query expansion assistant for a software engineering and technology platform.
 
 Your only job is to expand a user's search query into a short list of related technical keywords that will improve search recall.
@@ -41,15 +67,22 @@ STRICT RULES:
     "memory"      → memory management, heap, garbage collection, caching
 - NEVER expand into: biology, philosophy, geography, history, lifestyle, wellness, or any non-technical domain.
 - Use the provided similar documents as additional context clues for the technical intent.
-- Output 5–8 keywords maximum.
+- Output 5-8 keywords maximum.
+
+FULL EXAMPLES (query -> correct expansion, exactly this format):
+Query: "how do I make my api faster"
+Output: api latency optimization caching database indexing profiling
+
+Query: "react app crashing randomly"
+Output: react error boundary state management debugging stack trace
+
+Query: "kubernetes deployment issues"
+Output: kubernetes deployment rollback health checks pod scheduling
 """
 
         user_prompt = f"""Query: "{query}"
 
-Similar documents from our platform (use for context):
-{similar_docs_text}
-
-Expand this query into 5–8 technical keywords relevant to software engineering."""
+Expand this query into 5-8 technical keywords relevant to software engineering."""
 
         response = await self.client.chat.completions.create(
             model=self.model,
@@ -58,14 +91,16 @@ Expand this query into 5–8 technical keywords relevant to software engineering
                 {"role": "user", "content": user_prompt}
             ],
             temperature=0.0,
+            max_tokens=MAX_EXPANSION_TOKENS,
         )
 
-        expanded = response.choices[0].message.content.strip().strip('"')
-        
-        # Guard: if LLM returns garbage or empty, fallback to original query
+        raw = response.choices[0].message.content.strip().strip('"')
+        expanded = _enforce_expansion_format(raw)
+
+        # Guard: if enforcement collapsed it to nothing (or the LLM returned garbage), fall back
         if not expanded or len(expanded) < 3:
             return query
-            
+
         return expanded
 
 
@@ -76,41 +111,6 @@ Expand this query into 5–8 technical keywords relevant to software engineering
         if not web_results:
             return []
 
-        formatted_results = "\n\n".join(
-            f"Index: {i}\n"
-            f"Title: {res.get('title')}\n"
-            f"Desc: {res.get('description')}\n"
-            f"URL: {res.get('url')}"
-            for i, res in enumerate(web_results)
-        )
-
-        prompt = f"""You are a research assistant filtering web search results.
-        Original Goal: {query}
-        
-        Web Results:
-        {formatted_results}
-
-        Task: Select the top 3-5 most relevant sources from the provided list. 
-        Return them as a JSON array of objects with this EXACT schema:
-        {{
-            "source_name": "Site name or short title",
-            "source_url": "Full URL",
-            "source_small_headline": "Compelling headline from the result",
-            "source_small_description": "Brief 1-sentence summary of why this is relevant",
-            "favicon": "Use the favicon URL provided in the input if available, or stay empty"
-        }}
-
-        Rules:
-        1. Only include high-quality, relevant results.
-        2. Match the "favicon" field by looking up the corresponding index in the input data.
-        3. Return ONLY valid JSON. No markdown fences.
-        """
-
-        # Map back favicons after LLM returns indices or just rely on URL matching if needed.
-        # However, to be safer, we can pass favicons in the prompt or just re-map them by URL in post-processing.
-        # Let's pass the favicons in the prompt to make it easier for the LLM to include them.
-        
-        # Revised prompt formatting to include index and favicon
         formatted_results_with_metadata = []
         for i, res in enumerate(web_results):
             formatted_results_with_metadata.append(
@@ -147,6 +147,7 @@ Expand this query into 5–8 technical keywords relevant to software engineering
                 {"role": "user", "content": prompt}
             ],
             temperature=0.0,
+            max_tokens=MAX_RERANK_TOKENS,
         )
 
         raw = response.choices[0].message.content.strip()

@@ -6,6 +6,7 @@ export type AiResultsState =
     | { state: 'idle' }
     | { state: 'loading' }
     | { state: 'loaded'; data: AiSearchResponse }
+    | { state: 'partial'; data: AiSearchResponse }
     | { state: 'error'; message: string };
 
 @Component({
@@ -19,8 +20,13 @@ export type AiResultsState =
 export class AiResultsPanelComponent {
     @Input() aiState: AiResultsState = { state: 'idle' };
     @Output() docSelected = new EventEmitter<string>();
+    @Output() retry = new EventEmitter<void>();
 
     onDocClick(uuid: string) {
         this.docSelected.emit(uuid);
+    }
+
+    onRetryClick() {
+        this.retry.emit();
     }
 }

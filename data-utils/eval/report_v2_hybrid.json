@@ -1,0 +1,1092 @@
+{
+  "summary": {
+    "total_queries": 54,
+    "avg_precision_at_5": 0.3963,
+    "avg_recall_at_5": 0.5467,
+    "avg_ndcg_at_10": 0.711,
+    "avg_mrr": 0.8602,
+    "avg_r_precision": 0.681
+  },
+  "results": [
+    {
+      "query": "cache",
+      "retrieved": [
+        "08a09ac3-6a43-48c7-ad76-0351839f71ea",
+        "dd8e62f8-ea73-4cf3-bc82-ca824906b9ce",
+        "ea985daf-4692-4445-97f5-c5a439c9d8cd",
+        "c8c45c91-e7e5-42fe-a269-7ba5b5f921af",
+        "2e70977e-6d3d-4a0b-8a83-ccbf14b55c86",
+        "b8fa1511-e67d-466e-969c-1f842537d66b",
+        "711c155e-30fc-4525-bb50-bdd7f05f1640",
+        "170ed03d-b138-4f07-9e22-3fe04ccef8e6",
+        "6274152b-5bf6-49e0-9d77-c5d2875d66a2",
+        "a81b2379-33ea-4053-b686-5c1ecb311ac3"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.0975609756097561,
+      "ndcg_at_10": 0.6421435267498493,
+      "mrr": 1.0,
+      "r_precision": 0.9
+    },
+    {
+      "query": "react state management",
+      "retrieved": [
+        "067916b1-c5b0-4f78-af1e-94cff6fc0d2a",
+        "2f2b3a09-88e2-4fd8-bc35-1749a9b94a76",
+        "3c6f9b7b-1521-45a7-9ec0-02c1565e35ff",
+        "2a2293f0-9273-459b-9d01-9ff1738af72e",
+        "5e4b1100-128a-4eb6-8e92-1fbfd9c123f5",
+        "5110db1e-d72e-4b4e-8cf6-d1da16068f4c",
+        "03646b42-226e-46b5-9ee1-92daf9fe4d38",
+        "46a76783-569f-4917-bb74-fe8aa126d5c3",
+        "18166b20-ea10-4172-ac69-25a710296431",
+        "9b007ea9-ed5d-42a3-a454-a09d03944f0c"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.16,
+      "ndcg_at_10": 0.7877736340270853,
+      "mrr": 1.0,
+      "r_precision": 0.8
+    },
+    {
+      "query": "microservices vs monolith",
+      "retrieved": [
+        "bd77d809-b60c-48de-a979-2956f9e53eca",
+        "93cd4c6e-3e43-4a7b-a65b-0ebf53f8705f",
+        "f0f8da56-6a6a-4059-afd0-c8da8f0e4b83",
+        "b737e53e-3782-4566-83e9-91ce1dd9f8a3",
+        "5e00576a-49ff-474c-824c-3cd60ea7d833",
+        "48982a0e-dedf-4550-bdcd-1a3637ecfe24",
+        "35b1b2a9-4fdd-4b2f-8c31-e6ae1ea7f4d1",
+        "453ce91c-9048-42c4-b078-f7d88f4b996c",
+        "c467ad40-ab9b-4e44-8d7a-1f836638e404",
+        "0fba4b5a-a221-4ed6-87bc-e2a7dee585dd"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.3076923076923077,
+      "ndcg_at_10": 0.5849625305107344,
+      "mrr": 0.5,
+      "r_precision": 0.5
+    },
+    {
+      "query": "postgres index tuning",
+      "retrieved": [
+        "21d61d6a-bdcb-42ab-87ab-4d193d9a29f2",
+        "a924da77-268b-4aeb-94ec-c0d20643af64",
+        "dce5ee73-a331-450a-a54c-5ba8d4a0bffb",
+        "29d8f6b2-a53d-4d9d-a537-b1441f378f2c",
+        "d4537535-6e0f-4db2-9a38-3a6cd257e058",
+        "3a4470b5-214d-436d-b7be-3ac2b4a029cc",
+        "e102be8a-dce1-4904-87db-a17efb047ea4",
+        "d47eca23-7dd0-4318-9441-313a3c90e1b3",
+        "b6bdef96-cf4c-4fd9-90d2-a512adb20edb",
+        "8cb899dd-140a-41a2-8ab9-6e9511b03af7"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 0.13333333333333333,
+      "ndcg_at_10": 0.1736942036970088,
+      "mrr": 0.25,
+      "r_precision": 0.4
+    },
+    {
+      "query": "memory",
+      "retrieved": [
+        "0deff858-8964-4c63-9611-cb7c53100f59",
+        "5642c487-eb6b-4706-8706-7e84f0adb3c2",
+        "6539c641-7c23-44fc-91e4-6998ff60540d",
+        "8fa11676-4766-4d23-b018-27c02d9e59a5",
+        "15a9f553-eb9c-47b9-8541-75711a9e5613",
+        "dc2db824-80b8-4416-b29c-d999b5c2643b",
+        "0832ce24-6c22-4979-a7ea-664a48a18518",
+        "3878c4cd-3f47-4d7c-8201-acac03b107da",
+        "c045a6da-53a7-4e32-86e7-0c47d24b6494",
+        "256eb9c3-02c2-464b-863d-645e9ddaf76a"
+      ],
+      "precision_at_5": 1.0,
+      "recall_at_5": 0.13513513513513514,
+      "ndcg_at_10": 0.5786141714756885,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "stack",
+      "retrieved": [
+        "941365e1-cd79-404d-aec3-77e689ad9fdf",
+        "351a458d-780e-4908-aade-a95350955804",
+        "1e66e80b-d276-4f9b-b4f0-9dd6aca2a02c",
+        "466586b7-c301-4071-be5e-4cda441bae87",
+        "3d5ed3ee-e48d-48ff-a5d9-a59dbce15e3c",
+        "0d651f08-6513-427d-a219-9f2cc4b42ba5",
+        "d7c12b1a-fb5c-4721-aba3-b595b9e0b835",
+        "ec138504-4cfd-4b7d-a98d-d8835a26a1ff",
+        "f59a67e3-97d2-4cbb-93c9-14e5b1a93dc2",
+        "0fd15df1-7251-463a-95a0-7f25d0e91217"
+      ],
+      "precision_at_5": 0.6,
+      "recall_at_5": 0.10714285714285714,
+      "ndcg_at_10": 0.5153209522776326,
+      "mrr": 0.5,
+      "r_precision": 0.7
+    },
+    {
+      "query": "redis caching strategies",
+      "retrieved": [
+        "08a09ac3-6a43-48c7-ad76-0351839f71ea",
+        "62b6a0bc-6661-44da-8a51-79a64574553e",
+        "79df9a96-7527-4b49-b51b-76965dc5af7f",
+        "126f9594-1e16-4b2b-bd72-c5aea0b39ce9",
+        "9e32c1f1-8c02-4746-9a7b-6006b2741165",
+        "07d68751-6e18-40b3-84ab-bfdecd5ba0b1",
+        "711c155e-30fc-4525-bb50-bdd7f05f1640",
+        "767798a6-6e98-42ae-84e9-d573e01e007d",
+        "dd8e62f8-ea73-4cf3-bc82-ca824906b9ce",
+        "e3aa5372-0a02-43a2-8b5b-9fc1994f9c1f"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.36363636363636365,
+      "ndcg_at_10": 0.39737507936287025,
+      "mrr": 1.0,
+      "r_precision": 0.6
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "retrieved": [
+        "19fb0959-eb97-496c-bf97-091dd8f541c7",
+        "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
+        "9f28fc77-7d8f-408f-9dc7-3020d031938e",
+        "96f8ca24-a2e7-4119-b924-93726b4753e3",
+        "7903e59e-97b7-463b-8e7c-f8e61f3b4ec5",
+        "f920a592-b2b0-48d4-92d2-b878d3b67616",
+        "e17ee470-3a0a-46a9-8139-f8f4a312d414",
+        "e92a895a-ff3e-4b0c-9532-2a4a9b18c6f5",
+        "a88e0de4-bac4-4e90-bc83-11a6cb8bf428",
+        "da755b49-1faf-4ccb-a6c7-178e866d4ff5"
+      ],
+      "precision_at_5": 0.0,
+      "recall_at_5": 0.0,
+      "ndcg_at_10": 0.0,
+      "mrr": 0.0,
+      "r_precision": 0.0
+    },
+    {
+      "query": "life",
+      "retrieved": [
+        "9357d902-492f-4cf4-9aa9-9d4159be1af2",
+        "02b7d499-4df3-440e-92d0-eaae8e788bdb",
+        "a57bae4e-bfa6-495d-afd9-ae6cded28262",
+        "6ce9679d-014e-4ea0-b2fc-7e2e773d3aa8",
+        "f5f13626-a71d-4dd0-aceb-e2f5204c5dd1",
+        "9ca8b5ed-9d46-42c0-860b-cb73a3fcfada",
+        "3e6dc993-f9f4-4662-8743-9cfc5bfcb3f7",
+        "e9793257-820b-4128-a6c7-5403a309fe9e",
+        "37c60118-9e45-42a3-b9fb-c060e02e457c",
+        "d2853b27-3992-4961-a926-4559179754a8"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 0.3333333333333333,
+      "ndcg_at_10": 0.46256367670435833,
+      "mrr": 1.0,
+      "r_precision": 0.3333333333333333
+    },
+    {
+      "query": "go concurrency patterns",
+      "retrieved": [
+        "a0ec994a-6dac-4a1d-b0c6-c8f2079be36f",
+        "0c1318d5-9744-43cc-8a9d-c1154bd919e4",
+        "9e499458-df04-4e9e-94a6-cf14bd255992",
+        "68cda177-8152-40db-b5b0-d78bdb7fb7a2",
+        "073e4abf-3eba-4ef5-b5fc-0dad12ee01aa",
+        "93cfb9f8-f128-48f3-bfee-f339b8efabd6",
+        "3596ad82-ebf9-4abd-af30-aa6f3185bd20",
+        "d50c763d-c94e-4acb-893a-5da0bdd3687b",
+        "534c5077-a50a-4bd5-9ace-9f50b2209d47",
+        "a7216626-99ae-4ef9-8ee5-1b6623828a53"
+      ],
+      "precision_at_5": 1.0,
+      "recall_at_5": 0.35714285714285715,
+      "ndcg_at_10": 0.7273298443105218,
+      "mrr": 1.0,
+      "r_precision": 0.6
+    },
+    {
+      "query": "dotnet core web api",
+      "retrieved": [
+        "09c23fdf-bfee-4fd8-937b-013c713cd1b6",
+        "b5c83784-0a31-4177-9dcf-40e4bfcf3d3c",
+        "55430317-59e5-4df7-9567-92b59434c168",
+        "6c27946f-08d4-4eeb-9348-db3aa9ab69f2",
+        "ac209dcd-07ca-4d59-bc72-383f424fabc8",
+        "a9ea7263-58fb-4a28-9638-69e3ae73a37f",
+        "bea8d0a2-4d49-4e31-9730-2ef84f5c8463",
+        "d61cd48a-274b-4d53-8fce-9a878e4287bd",
+        "df77ca2c-426f-4142-a8fe-49c8489e96d3",
+        "0770fe59-037c-4e10-96b6-1c9b429cdb15"
+      ],
+      "precision_at_5": 0.6,
+      "recall_at_5": 0.21428571428571427,
+      "ndcg_at_10": 0.4552895652259403,
+      "mrr": 0.5,
+      "r_precision": 0.4
+    },
+    {
+      "query": "css layout and styling techniques",
+      "retrieved": [
+        "3559baaf-bf73-465d-963d-b7d915e9ccad",
+        "d2fb702d-96fe-4bc1-b224-aac7e02867c5",
+        "87cf8455-1aa6-49ab-9aaa-1936da3ed95a",
+        "2795f6e0-ae40-49db-86d8-c5bb6fa4088c",
+        "2a1a1a76-aa0a-412e-9d61-50457d7e727a",
+        "4c07dced-9b23-452d-9427-b01f02e82a88",
+        "cb5784b3-9dea-4043-a5f5-0603794d652e",
+        "4dc31c38-3f89-4117-bcbf-8200858d7efc",
+        "6ba8e056-1af6-4000-a56c-ec9f71ff17c9",
+        "38df088d-978b-4634-bed4-38818efd416f"
+      ],
+      "precision_at_5": 1.0,
+      "recall_at_5": 0.1282051282051282,
+      "ndcg_at_10": 0.8056273000821934,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "php web development frameworks",
+      "retrieved": [
+        "3c5e51a7-8302-4494-ba0a-34ad13a8f5aa",
+        "e7f8f0dc-a4b1-4dc9-8e51-0afe89842d62",
+        "71e119f5-6c30-4791-b93f-40c9cf072169",
+        "e28812af-d103-414f-805e-d61659d56698",
+        "81631660-a48e-4cbe-8a6f-3eaa7aabc086",
+        "c17f9b09-efa4-471e-8fd3-5a172779e8dd",
+        "029db16f-1f9c-4f53-862b-368441474d3a",
+        "0843378f-126b-4984-9f5b-17a43d454602",
+        "603cbcf1-61f9-470c-b9ab-4dfe0b92a748",
+        "81ecec4c-dc49-4486-ba03-3f9f3e045bb8"
+      ],
+      "precision_at_5": 0.0,
+      "recall_at_5": 0.0,
+      "ndcg_at_10": 0.0,
+      "mrr": 0.0,
+      "r_precision": 0.0
+    },
+    {
+      "query": "software engineer career growth",
+      "retrieved": [
+        "c43662dd-50bf-4b33-8560-c1d8f69a2a39",
+        "ee63a080-936f-473e-b85e-dfdc76c24b6e",
+        "b8f2bf3a-504f-4115-a761-d403e15087de",
+        "cc68ba67-7a56-4a40-aa76-7e3916f08a61",
+        "3d6d9327-e190-4f26-85c6-164a754786ce",
+        "9d564e9b-d7ff-4a93-bb77-f221ce13056a",
+        "eebece5f-54e7-484b-bb1b-ce0ee80527fb",
+        "08ae082d-7351-4285-b8b3-b4ebe1dde713",
+        "a8265e92-0ba9-417c-a701-6914f9f19bb4",
+        "fa8638db-e091-40af-a863-a3b8b28d3d1b"
+      ],
+      "precision_at_5": 0.6,
+      "recall_at_5": 0.12,
+      "ndcg_at_10": 0.28501715290273033,
+      "mrr": 1.0,
+      "r_precision": 0.5
+    },
+    {
+      "query": "html semantic markup practices",
+      "retrieved": [
+        "85f33636-c3b7-4226-a9ad-95c12fdf93ff",
+        "da3d0b0b-d391-4390-ba75-42cda6038f8c",
+        "6ca3b862-05f7-46bd-baa3-f7a8d3cd8ba8",
+        "da755b43-bc46-49f8-a262-d261845200df",
+        "4dda6dac-e1ef-4a7c-9df8-ef937636c2ce",
+        "743cc581-2887-429b-af7a-dbf8cae054c5",
+        "6144a75f-8826-41c6-b456-8da10750e53f",
+        "cd27b24c-f83c-4aaf-85cf-5dfa0c6ba2bc",
+        "46f1f37d-3a2c-4eee-9f78-a4476cd8e85b",
+        "8ae5053a-2882-4d95-8bf0-541c10dad349"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 0.125,
+      "ndcg_at_10": 0.32150744137178877,
+      "mrr": 0.2,
+      "r_precision": 0.375
+    },
+    {
+      "query": "csharp async programming patterns",
+      "retrieved": [
+        "c3136d56-591a-458e-9920-b227d95c9c61",
+        "387f50c2-4292-4b9b-a7a3-7665dfd14ea1",
+        "1920dd27-4ae9-49aa-920f-5649d4db0c4c",
+        "2b71adbf-54cd-45b4-9b14-118f6363e169",
+        "3596ad82-ebf9-4abd-af30-aa6f3185bd20",
+        "a7216626-99ae-4ef9-8ee5-1b6623828a53",
+        "3ad31621-cee5-4366-a762-cb47afa381dc",
+        "3713961a-11cc-481f-8572-ba187c084087",
+        "ebecee11-87a2-46b4-a158-3dd81f5e7537",
+        "534c5077-a50a-4bd5-9ace-9f50b2209d47"
+      ],
+      "precision_at_5": 0.0,
+      "recall_at_5": 0.0,
+      "ndcg_at_10": 0.0,
+      "mrr": 0.0,
+      "r_precision": 0.0
+    },
+    {
+      "query": "data science model evaluation",
+      "retrieved": [
+        "0e3272bd-26fd-4066-a46c-6036606a4506",
+        "fb09140e-41b0-4c35-9263-6b4c996f4e7c",
+        "2da3488e-62db-43be-bee7-5f4faace32a2",
+        "a14d640e-52c2-43ad-b07c-b125c5925779",
+        "c4a59e97-c726-4c44-9d7b-9b753f4f8633",
+        "aae9cb94-6fdc-4915-9f90-9e766dd58124",
+        "1f6ec535-21ac-4642-83f4-42f1d0381ef9",
+        "b408061a-7373-4b3d-8bc6-698ad5d8428f",
+        "a96abe36-47c4-4b72-af84-f4cc162b61bc",
+        "f5728617-9921-4aca-a1b3-39a6d58a5165"
+      ],
+      "precision_at_5": 0.0,
+      "recall_at_5": 0.0,
+      "ndcg_at_10": 0.0,
+      "mrr": 0.0,
+      "r_precision": 0.0
+    },
+    {
+      "query": "typescript type safety patterns",
+      "retrieved": [
+        "9775be5c-9783-4a62-9bbf-3b7a788ff49f",
+        "7ebb16b0-2238-47f2-8e1c-35985a40feb8",
+        "44b7ebf4-9340-4f72-892e-3cec6f8026c1",
+        "67a5aeb0-b8c2-49c7-92b6-bc25eb37f7e5",
+        "3713961a-11cc-481f-8572-ba187c084087",
+        "7ba1311c-0704-4483-b71e-8e8024301286",
+        "7b2c6cd9-43b1-4ab3-a26e-bf10b37bc813",
+        "209204fd-5754-405c-9014-fd04846cdbac",
+        "d52bdd47-dd7a-4027-9fbe-15c5d3fe66c8",
+        "fc21e4e0-ed62-454e-9b18-ebca80a4053e"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.23529411764705882,
+      "ndcg_at_10": 0.5973596536321639,
+      "mrr": 1.0,
+      "r_precision": 0.7
+    },
+    {
+      "query": "aws cloud infrastructure services",
+      "retrieved": [
+        "3ed23063-b7f1-43a8-a395-c5f7945e2740",
+        "69f9f84a-f1fd-4814-8ef2-05c95f357892",
+        "4793f57f-29db-4278-9050-2551e20c5f53",
+        "40ea5465-c447-484e-ab19-65f985895628",
+        "133efd8c-53da-4696-ae79-e12913a4ca1d",
+        "32fe49a5-6ba6-466e-9d47-fd54e026a37c",
+        "f59979d4-8b49-4e6b-8cff-068be1d385b4",
+        "d0efef98-86fe-4e3d-8c1a-6e8ae0a067d3",
+        "74984c54-1211-4f41-bd6f-90c03a4c1ff9",
+        "ea0c576f-fad5-474e-8246-1912f4e42b80"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.15384615384615385,
+      "ndcg_at_10": 0.5836626554709927,
+      "mrr": 1.0,
+      "r_precision": 0.8
+    },
+    {
+      "query": "linux command line tools",
+      "retrieved": [
+        "0291b9ce-4315-4bad-aa7d-8a1426257b5b",
+        "b183c151-7967-4d10-afa6-59949d432280",
+        "4bd00318-8133-4b63-b033-e53d9c78f42a",
+        "5ff63f69-e1ed-4659-bc65-d6eed82dee36",
+        "2ee91f98-7f12-4ac6-ae1e-5c8c2d026272",
+        "68be9356-b5a5-4d46-8a6f-a6cbbd114215",
+        "0d64f400-382d-40b5-abe4-33dafeb5097c",
+        "2edb539f-8107-48ee-ac96-a3879d08728b",
+        "ca769a80-0e58-46e5-88c6-7f89bd8a60cb",
+        "66571d78-7a44-4598-bb1b-4f9eee9827ab"
+      ],
+      "precision_at_5": 0.6,
+      "recall_at_5": 0.11538461538461539,
+      "ndcg_at_10": 0.6023277671368327,
+      "mrr": 1.0,
+      "r_precision": 0.7
+    },
+    {
+      "query": "multi cloud deployment strategies",
+      "retrieved": [
+        "a532d83b-0567-4131-b29d-64b4c74a7c1b",
+        "5a67cceb-723a-489e-8c06-3a7e91da07c4",
+        "b370eaf2-9f50-4fc0-8683-e4b4381d506a",
+        "3dd774f1-2687-4411-802d-ce9ebaf62e98",
+        "ce6c2ce6-85cc-42e3-966a-a6e62b4189d1",
+        "a547f39d-2699-4697-a6b9-ea14c9cee80d",
+        "4424aee5-502d-4d9e-a21d-c871c7f5f2dc",
+        "0e368705-91e6-405a-8bfd-f210439e9d56",
+        "15dd1e3b-a547-437d-976f-8b75f8cf849c",
+        "37c88087-0d08-4274-8815-9d7a2ca9b7a3"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 0.4,
+      "ndcg_at_10": 0.6489887686103608,
+      "mrr": 1.0,
+      "r_precision": 0.4
+    },
+    {
+      "query": "implementing computed gotos",
+      "retrieved": [
+        "eb694081-1f95-434b-9433-1d659e093a95",
+        "ec671d07-d42d-4bb0-b3b9-26e03dab8c1d",
+        "0cf0c52e-2d84-4d43-9786-8a6d4011d37e",
+        "0e1fc5db-238c-4761-8619-26b97bd50f9e",
+        "ba5b57cf-81db-43e5-b8d2-f2694d04ac46",
+        "97125d60-b282-420d-bc5a-90ed1cf58790",
+        "116576e1-ebba-4e0a-9b79-5d191b8f4281",
+        "95db2872-218c-4b03-b1dd-b470f3202bb8",
+        "4f7ba81c-db98-4528-aedb-0ee1b6b740e6",
+        "5d7fb671-8b58-4f41-9379-2a3d2ed759b8"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "txtai postgres integration",
+      "retrieved": [
+        "d478530d-b2d9-46ab-bc26-400df0f603e7",
+        "1ca554e8-5ac0-4f1e-9e7b-8455ffa5bff6",
+        "e102be8a-dce1-4904-87db-a17efb047ea4",
+        "bfd0fc2a-ecf0-41ae-9001-27f2d753385f",
+        "fb2ad045-6503-484b-b7ce-e402ee6a4aa1",
+        "7a9e3ff5-b869-4e36-aa33-4d2321559edd",
+        "2b852bd5-b98f-43b8-9a1d-f0dc001c624a",
+        "518ad2eb-a617-468f-a902-9c9148e22f00",
+        "68766c63-b217-4a27-9c21-0d0274997cef",
+        "9c4a24ba-2ed2-4999-a312-d999e5896a21"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "hexadecimal conversion kotlin",
+      "retrieved": [
+        "d87beb6f-e12a-41ee-8448-6b9896679b6a",
+        "77d77920-8683-40df-a382-29bdacd969fc",
+        "2fcdc8bd-7311-43b4-ae60-ed6bdf39e11d",
+        "a19f2122-0858-4249-a03d-04b1d2a17b51",
+        "c89ec4b3-465d-4cea-9024-c5828082f873",
+        "8db6448b-56ee-4fdd-9703-ed9e5db2f6b4",
+        "1ceab66e-3248-4c28-b108-8459f42a5381",
+        "adedf9b6-a81b-4964-8fe8-edf401a64435",
+        "14c4321f-21f7-4764-a353-3a17f7ca20c9",
+        "84f31346-9f14-4178-86cd-b473b7365cff"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "backtracking n queens",
+      "retrieved": [
+        "16f89b28-ddc4-4062-923d-b06d238171f1",
+        "6e41bbad-562b-4d11-9518-cc050131fb15",
+        "f4e02aae-6cf8-4489-bd6d-8fa552c85ab1",
+        "dcc6340d-0588-41d3-960b-7964cd563d6e",
+        "93dc43ac-1fe3-475f-8424-6c40d89ad135",
+        "bfeeeb72-a764-47cd-8d6c-ac91d7459a80",
+        "962954fd-ebdf-4296-887b-f9b5518c4a2a",
+        "ed3232aa-6d13-4ca2-8f73-0290ce9c38db",
+        "10eaa405-042d-4490-8f2f-336022923b22",
+        "99679cd1-f8a4-413e-959a-6219ca84f135"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "agens sql vs postgresql",
+      "retrieved": [
+        "70c25f43-945f-4823-a167-119fc567540f",
+        "f9f02ccf-70d5-4565-81e3-a0f4cb2795da",
+        "958d97b8-adc3-4a7d-8967-6de62d8171f5",
+        "35b1b2a9-4fdd-4b2f-8c31-e6ae1ea7f4d1",
+        "a3e74eb8-8bce-4341-9f58-92d855a44513",
+        "ff8c3f92-596e-4364-a6c0-fb2d6a5f5567",
+        "36568399-2e0a-4494-bfda-b6e03f143d78",
+        "0cb09405-c928-41aa-9056-b6662e7ef803",
+        "74c5f2e0-e25c-455e-bc4b-070a9fc31cb3",
+        "f00dd981-7ac4-4ce1-8bdf-78ea80584cc1"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 0.3333333333333333,
+      "ndcg_at_10": 0.7262287617954056,
+      "mrr": 1.0,
+      "r_precision": 0.3333333333333333
+    },
+    {
+      "query": "eks optimizer kubernetes costs",
+      "retrieved": [
+        "80f09410-7213-4457-9ee1-46b70eea1b13",
+        "3652f076-0591-43de-be46-2fa000abd566",
+        "a6ff93c1-2179-427c-a1ef-94d0d2ce62c6",
+        "f066711e-71cf-4d94-90cf-389f5f09fbe3",
+        "63752a28-b8ea-4ff8-a7ac-6a77266d9e00",
+        "f141c837-6af6-41fc-8bb6-2dff9a77e9fb",
+        "c7407f25-1ce6-4cdd-8cc1-e718887c822c",
+        "ebdbe79c-6e91-4261-98ee-9e0a8a4e0ea3",
+        "cb4dbb19-58ae-41ac-83f5-ccc8cd9d2b0d",
+        "6119dfe3-9f28-4889-9d63-83efdb4c8a55"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.26666666666666666,
+      "ndcg_at_10": 0.6657450429719023,
+      "mrr": 1.0,
+      "r_precision": 0.5
+    },
+    {
+      "query": "importance of leave management",
+      "retrieved": [
+        "aaa1d029-bc00-4519-8ece-0a69ab0f21b6",
+        "f9593469-2130-4a6b-9361-85679b3968d7",
+        "dc3ce8ea-c3dc-4888-83e9-2ccdbfc6b42a",
+        "7d5595e9-f070-4f10-a26f-2b95826c8fe2",
+        "2a07bbe6-7517-4fd6-bf90-5df69a41610b",
+        "1c9ed623-7f51-4f8b-8ca2-e6328e1ba01d",
+        "141f8622-b667-46b0-b58a-2d4f68d42976",
+        "fd3dbd60-e7af-4e4a-b728-95763740ddc4",
+        "949572e3-b48d-47d2-8548-a5906fa152aa",
+        "0079be06-9756-4b0d-8d75-693103ee092b"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "solidity beginner guide fundamentals",
+      "retrieved": [
+        "b9d0b0dd-d8ef-4db3-b62f-4ba758864ee1",
+        "94847929-cd24-4c42-9826-325b412a6bad",
+        "cbd80dfb-8583-47a7-a6f1-b2c3a3975fff",
+        "2fa42df1-1d72-4ea6-bd51-a59eed11e639",
+        "cada3c0a-324b-4853-acd4-228b4a271a32",
+        "068abab0-a9ec-486b-9ae6-d6300eab5472",
+        "f9a5ed72-8684-464a-82d6-8767443a5d30",
+        "6b2cc8df-fdd8-4da9-becd-2e176a91c6ae",
+        "4c59bacf-87a4-4ef1-ad43-f5b3607143c2",
+        "4b750e66-e687-458e-85d7-da78725ce87a"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 0.25,
+      "ndcg_at_10": 0.6098851758918453,
+      "mrr": 1.0,
+      "r_precision": 0.25
+    },
+    {
+      "query": "meteor 24 new installer",
+      "retrieved": [
+        "b7c9eb55-4a98-4fc6-83fe-24c4609a11be",
+        "7ddacb3c-e831-4aac-a6e8-10706ac412da",
+        "9b653f55-dcac-41e8-9878-a0e4d305d3a6",
+        "6b1ff65d-294d-4fa1-a234-9d0a0239148d",
+        "bb45fa39-f395-4ea5-8a24-bc7684b17efa",
+        "c88a26aa-f927-4ce8-8929-d9c44d19e76b",
+        "6f036be9-ac3d-4dc8-b5a7-b29cd99b482a",
+        "8483e1af-9423-435d-8698-cd9e93234757",
+        "3a020430-8918-4abd-b47e-b892bf1a1256",
+        "ca66836c-38aa-4c25-b984-27223023e2a0"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "emacs macos catalina",
+      "retrieved": [
+        "61c6344f-19a3-46cc-8e0b-1da3eb1a842c",
+        "a541cc51-99e4-4591-b5e4-7b75588164e2",
+        "7ef666c9-6252-420c-86a0-33f3410a3a54",
+        "405fa99e-0cae-41a5-b6d9-70cc72a21839",
+        "1e28f7b1-8d28-41a3-9027-38a9defc59d7",
+        "2d01d21e-d7c2-4bd4-9210-1cde28342cc5",
+        "8422d020-b2d2-41f0-9449-cc77bee20efa",
+        "6945ab7c-8c55-4528-9f1f-3546a806a8f5",
+        "61c456e7-dcfa-4417-9047-65bc4c2e3a70",
+        "73676949-c264-4c65-aaf8-c4a535b5bc07"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "flask github authlib authentication",
+      "retrieved": [
+        "89237bcf-a84d-4976-8a1d-50054eb7c891",
+        "611a0e8f-fc78-4847-afc7-74336530192c",
+        "dfe36727-c427-4dd5-99a1-0cdad2bc1c62",
+        "cca257aa-31d5-4b43-a77f-7e9b5de41be8",
+        "bef103ef-3145-4761-bc6b-7416fabcc03b",
+        "d1dc6271-0865-4139-9619-5e6d37cd0847",
+        "5a21a08c-213a-4f0b-a581-78f02d457bae",
+        "0bb18b10-5ed2-4f74-a65d-04b9eeac65df",
+        "9b656f5d-33a9-4fd6-beb4-43b420f36a2b",
+        "f3646cf5-f8db-410f-8b85-63a026a8be37"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 0.5,
+      "ndcg_at_10": 0.8262346571285599,
+      "mrr": 1.0,
+      "r_precision": 0.5
+    },
+    {
+      "query": "xrpl grants wave 6 judges",
+      "retrieved": [
+        "84ba6133-b944-4812-a588-ca5993028e97",
+        "8483e1af-9423-435d-8698-cd9e93234757",
+        "cc9f0026-2ab1-400a-b0ae-65e99b9aa678",
+        "a1a430d9-dda3-4eb5-b3c2-58ec298ec7e3",
+        "c0946db9-284f-4fe1-82e1-f8b483211cd6",
+        "de3f8f05-b0d3-44ba-8d9c-d1b61038bf8d",
+        "b51005f2-02e9-459a-8543-d8da375e2b22",
+        "c58d95f2-18e3-4a92-8b11-1eae3ce39e19",
+        "bf5a0283-5c90-4255-9b85-ba9870bf2a5e",
+        "176c93ca-4397-4481-983a-5d38013f94f8"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "on demand home service app guide",
+      "retrieved": [
+        "f8733914-0ac1-450c-b151-223e33e5ccac",
+        "e90757ec-4f96-431b-8be5-fcdb8b517f7c",
+        "1aed3a1b-816e-453f-88d8-496922558915",
+        "858ace9a-4830-4c45-8145-ae2e01581324",
+        "f189484b-35e0-4afa-9de1-f8ef6679df49",
+        "e5d980ca-9d33-48d2-a851-460133f07382",
+        "adf52d4c-138a-4911-ba30-c01d8b6c0f16",
+        "cc54925e-80de-4866-8cb2-106aae555006",
+        "d6502dee-0c58-4d3a-b4ab-79313621fe50",
+        "3e764da4-2bf5-4c47-922b-55a22b1edf7a"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 0.3333333333333333,
+      "ndcg_at_10": 0.6852938872183926,
+      "mrr": 1.0,
+      "r_precision": 0.3333333333333333
+    },
+    {
+      "query": "smart solutions future education",
+      "retrieved": [
+        "a4669a9e-54d9-4814-bdc5-19957042c795",
+        "f1110138-6735-418a-bd9e-2a64d893202a",
+        "3dd2867b-1f86-467e-a500-11eb04a3cdd5",
+        "e5fdd52d-e91a-4ce4-8256-fd4f75cc2a41",
+        "9444ad50-f073-4fff-852a-53e6d23d7ab3",
+        "4a9275e6-b984-4f14-9834-4ef6c5269fca",
+        "bf75e3f8-9648-4698-92ff-69c117ab7494",
+        "c3755188-8229-4468-bb4f-777b21222d5c",
+        "731c54ea-99a8-4ddc-a029-cc53fc0709fb",
+        "444cb23c-ab5b-4cef-b3cf-64f0cf6d1bf7"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 0.14285714285714285,
+      "ndcg_at_10": 0.3589542101716347,
+      "mrr": 1.0,
+      "r_precision": 0.2
+    },
+    {
+      "query": "microsoft entra id intro",
+      "retrieved": [
+        "f9b33f8f-1ef8-45e9-a7f0-adc597c805e6",
+        "3f3040ea-3fdc-4eb7-a08d-db262f76bf41",
+        "d64ae163-92db-417e-b78d-4ff64db6cd3e",
+        "f0dba76b-cd70-44d2-9030-26741e5c2657",
+        "9a400f72-b715-4113-90bd-a654cf0f295f",
+        "6751e1b4-3f7a-4797-9cde-39224177c27f",
+        "2785b8c7-d201-44a7-8b66-5a978f464594",
+        "ed4bacbc-9a49-4862-a15a-a6f34424be13",
+        "494bf403-60af-4d22-9978-0d9c02b3d992",
+        "63ff4c88-3a75-4f0b-98a8-e8f450d22bca"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "pkce oauth javascript apps",
+      "retrieved": [
+        "fd0520d1-8737-4cf8-86d1-9bb13cbf628c",
+        "2f4a14a4-0f27-4212-a4f8-a1663a2ad871",
+        "95c11cc1-f3b4-4556-bee6-5a6758b9b1fd",
+        "1b031c2e-dd46-42f3-8945-0638fa5b429f",
+        "3d6e04fb-3ad0-47a8-870c-7477fb2db4d8",
+        "d22587f0-2e53-4583-9f04-ab76c4750eab",
+        "a4488ffd-4e23-4fb0-9884-d0d75bdb4887",
+        "88386ab1-6721-4fa0-998b-a7e455103bfd",
+        "2e7c1688-57ad-4df7-9d73-a243a3ca1a0e",
+        "0c3302b9-c8bd-4e4e-8f1f-c00c7ca7ad43"
+      ],
+      "precision_at_5": 0.4,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "docker disk bandwidth limits",
+      "retrieved": [
+        "761ce2cc-36e8-4503-acde-6faa8e11625b",
+        "87d905d5-9760-454e-a44c-66b377bdc859",
+        "3214ba05-adb3-497e-a4f3-a815f4e2f34b",
+        "58fd62be-8abd-4605-b520-ffc03671ff10",
+        "edba29cb-bbc5-43c4-914d-2fcd9a9ae192",
+        "09c23fdf-bfee-4fd8-937b-013c713cd1b6",
+        "fc2fe1db-988e-4037-a448-b8fe3055e844",
+        "56eb5f64-2b3b-437a-ad84-76a3bcd0d650",
+        "6a351eb0-7ac5-4fc5-b83d-55d9555514b6",
+        "9748be68-2437-4d7c-aa8e-6614eba4947b"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "business playbook templates",
+      "retrieved": [
+        "9ef133b1-19ed-41ab-923b-cab99321ee24",
+        "cc10d9d1-f47e-4b4c-958e-380c50c89f9d",
+        "9c8a07cd-e400-4715-b205-ea4bac9e7a71",
+        "842dff45-d6b4-452c-b2b1-5cdded203567",
+        "b076c14d-b2de-4b5b-9151-adf9d4b8a2ea",
+        "18eff9b8-21a6-41c9-9094-b4e6b9725322",
+        "782c51fa-20f8-41a7-a3c5-c75b2516040c",
+        "d1cc96ea-3d80-4bdf-a3e4-a481debe7297",
+        "4ea95274-1242-4785-ad00-db5374f80c4c",
+        "1657b0cc-fec4-48ce-ba39-058eaf63ac59"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 0.6309297535714574,
+      "mrr": 0.5,
+      "r_precision": 0.0
+    },
+    {
+      "query": "depin python javascript bot",
+      "retrieved": [
+        "9d445512-e102-4866-a412-5b9d0b612dd2",
+        "57cd9e9c-fcb2-4e61-9dd5-94d9b1a5b9a1",
+        "2d807dda-390a-49b7-92d6-07e949464e75",
+        "c113496e-d2de-4b15-a514-aa16a354c18e",
+        "8b19bcd1-63d9-4d4d-8d7d-1f14708831df",
+        "5c281322-12d8-4688-a8b6-82e6a81be7c8",
+        "3f87bbe1-0742-466d-9d49-9148e3df1e27",
+        "2e7c1688-57ad-4df7-9d73-a243a3ca1a0e",
+        "92174231-133e-44af-aa73-2f2be6677447",
+        "0fda8a11-660e-4284-9be6-3c3570582eb9"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "spring microservices gateway thymeleaf",
+      "retrieved": [
+        "8257dace-6d79-4fcb-a39c-fe97c9f3f2c6",
+        "a77f97a7-cf20-4604-860b-a70a4ae591e6",
+        "39841459-aede-4724-99ca-ef50528b566b",
+        "1b194164-b767-411f-a5ca-26a8175e74b2",
+        "18673420-dd0a-4d9c-b547-01c2dbcea414",
+        "ce409617-f831-40e1-a558-467c88f4cc84",
+        "11c08691-a6d0-4d97-8e59-44c497b8820f",
+        "c0fe6bdc-1153-4d69-8db3-7690e374dd55",
+        "6553dd19-9844-4447-8bd5-ac5c1bd47760",
+        "98b3a7df-2012-4937-841e-330ca58696d5"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "apache age graphql full stack",
+      "retrieved": [
+        "b8658f9b-ec30-4177-b5e7-d1b477a2cc94",
+        "fbc4a8c1-261c-4e70-837b-2525f5276fcb",
+        "3dda4aee-996a-4fdc-9255-e61d9c0fbed9",
+        "fe729348-e421-44f2-a176-69d8eadae3f8",
+        "0d651f08-6513-427d-a219-9f2cc4b42ba5",
+        "20d87035-8cf5-4270-8238-34dbe570644b",
+        "7be21527-f994-494a-9b2c-da81c757763d",
+        "aac7013e-ad24-4ad4-82e2-1e40307f117f",
+        "5e359662-61d5-4bb3-bf56-f1f71fcf87b1",
+        "1efebed8-e556-481a-8868-b5ace2e4529f"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "react 19 ux features",
+      "retrieved": [
+        "552a6439-06d6-4b0e-a00b-28b177c0bc4c",
+        "49cfbd32-c30c-4bda-b6a9-1aaf8ac090bb",
+        "b93a57f9-1224-4f21-8560-a334b59320b2",
+        "185ac5f0-0904-43a5-b6b0-19936772355f",
+        "5d2bda1c-c542-43ef-9ee3-55c02e292542",
+        "652d70fa-4920-4f3e-9ad0-2dcd30d0813c",
+        "7e3410d4-cc28-484b-a700-55c0347e3d49",
+        "1f4a6adb-9204-44a8-b0a0-c3878e3b5c8d",
+        "fa6eac53-f667-4b1f-8c1e-c0b1640ce1b7",
+        "b2183616-1381-42a5-8757-b3ecd0e57624"
+      ],
+      "precision_at_5": 0.6,
+      "recall_at_5": 0.375,
+      "ndcg_at_10": 0.7600945388005671,
+      "mrr": 1.0,
+      "r_precision": 0.75
+    },
+    {
+      "query": "drones construction site management",
+      "retrieved": [
+        "9bc034ac-400d-4026-87d6-4eedccfc58b5",
+        "0698ca22-b3c2-4432-a2bc-a4a4b5cce055",
+        "92bab653-93ca-4aec-8da3-e132f6f8245f",
+        "1ee40190-f841-45af-a3c6-45632c71897e",
+        "968312d1-04c6-4117-9365-1fb9a1b2504c",
+        "4c36905c-d086-4544-84bd-1df2d6bcddbe",
+        "011940ed-22cc-474d-ad4b-00188e1bd4c3",
+        "52552ed9-8eb6-418a-b868-0a5bf3de76f0",
+        "dc3ce8ea-c3dc-4888-83e9-2ccdbfc6b42a",
+        "7d5595e9-f070-4f10-a26f-2b95826c8fe2"
+      ],
+      "precision_at_5": 0.6,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 0.9514426589871553,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "formal methods beginner guide",
+      "retrieved": [
+        "4d1ccd2c-222f-48b9-b646-5818320da500",
+        "cbd80dfb-8583-47a7-a6f1-b2c3a3975fff",
+        "2fa42df1-1d72-4ea6-bd51-a59eed11e639",
+        "cada3c0a-324b-4853-acd4-228b4a271a32",
+        "068abab0-a9ec-486b-9ae6-d6300eab5472",
+        "f9a5ed72-8684-464a-82d6-8767443a5d30",
+        "a504c66b-acac-4094-97c1-e864edd302de",
+        "fc7a5b57-a96d-4738-8864-c1ccd166e54c",
+        "df1db0e6-d83f-437c-bb28-93b044e9b1aa",
+        "4b750e66-e687-458e-85d7-da78725ce87a"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 0.5,
+      "ndcg_at_10": 0.8262346571285599,
+      "mrr": 1.0,
+      "r_precision": 0.5
+    },
+    {
+      "query": "back of the envelope estimation",
+      "retrieved": [
+        "d9527e08-502b-4f96-abb4-dacfd200585d",
+        "855a51ed-c2e1-4fc3-af20-041e078279e5",
+        "7c6b7f0e-b8ef-4f64-a6c9-e46c93e03412",
+        "af497b1b-bc5a-4baa-904c-6fee26b72b58",
+        "955ea509-bdf4-4655-9156-a164585fd322",
+        "5b540743-dcce-417c-bb3e-6702c8d97181",
+        "7836e9c8-a276-4a54-8afa-7a7b6877a9f5",
+        "d84fab3c-7144-4519-b837-24d98a4e3e08",
+        "39b2e2c3-83d0-41a3-b76e-b6f619e9baae",
+        "0aaea9ef-e8c7-414a-bf71-1e19974fa9b3"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 0.5,
+      "ndcg_at_10": 0.8175295903539446,
+      "mrr": 1.0,
+      "r_precision": 0.5
+    },
+    {
+      "query": "most popular websites lebanon 2023",
+      "retrieved": [
+        "62cf6ebd-829e-4248-a008-466867a0579f",
+        "84e9b949-83be-4946-8b46-04a7f2c89761",
+        "61896785-9897-45d8-b8ed-86337098d942",
+        "06e4e381-ec01-47e7-bae1-3919a122de86",
+        "970c6573-a065-495f-b043-01c08fe8296d",
+        "0277ba18-040e-403e-95f2-9f5b178e4d72",
+        "f0dbe1cb-aed7-4b29-b7f6-a7366e921621",
+        "db25c893-24ec-49a9-a0e2-08ae4ac06475",
+        "edc7d168-b7d6-4f49-b670-45df0633b7f7",
+        "e5397410-c952-4855-86df-771f16a04572"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "how spellcheckers work",
+      "retrieved": [
+        "78d3a6ee-69a5-4091-87f8-b793504d5768",
+        "40da8093-777a-4a16-8445-b71a24c5ef27",
+        "dc3ce8ea-c3dc-4888-83e9-2ccdbfc6b42a",
+        "4b8fb9ec-4cbf-4f25-a288-2f70195c7369",
+        "fe237595-0060-4e0a-9533-3ed9d13fa90f",
+        "fc07bc8c-1100-4f51-88f5-b103136277f9",
+        "a6ef5cb2-d364-4877-b095-fe358bc8449f",
+        "a8acb8d4-76e2-4a32-b84d-1a20b4e1d862",
+        "87aa028a-41d3-4ada-b2dc-74cbbd47b024",
+        "a0327192-723d-47f8-9ac8-8dfd7a01236c"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 0.5,
+      "ndcg_at_10": 0.6131471927654584,
+      "mrr": 1.0,
+      "r_precision": 0.5
+    },
+    {
+      "query": "gravitational waves symphony cosmos",
+      "retrieved": [
+        "176c93ca-4397-4481-983a-5d38013f94f8",
+        "5711d62f-338e-468a-a5fc-a731fe9711e7",
+        "2ed165c7-07ac-4e16-86da-67fd81b22fe9",
+        "a42d4bda-3a5d-43f2-a0b9-e8a7342031a3",
+        "f4927c96-efa8-42cd-a494-7e19d0590663",
+        "5e8996df-f832-4d87-bfdb-45810ab3f27d",
+        "5489ea71-8775-40e3-9dd1-91935918bb74",
+        "321ae69a-d86e-4d16-adc0-774827f3563d",
+        "84ba6133-b944-4812-a588-ca5993028e97",
+        "ae3ab382-1e0f-41ad-832f-ba436a2b9ca6"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "crowdstrike windows azure vm fix",
+      "retrieved": [
+        "1b1ee179-c623-46e3-952a-91a83b51b9ca",
+        "739edf82-6994-44bc-8fbb-3dcb3a612f71",
+        "bbe158b7-8dc4-4b42-b483-524c50e2ba01",
+        "f4b338ec-79b2-4914-90b7-d1f7e9dbff38",
+        "ce889f22-e642-490f-b179-2a6605053f34",
+        "2c37b785-2b35-4af8-9f06-8a97677f426f",
+        "6031c7f0-e030-44e5-aa60-23760811108d",
+        "d1105718-f9a2-4f78-8f58-e93f24003399",
+        "2f049264-0a66-4f16-9e87-c5c528292dc3",
+        "65778a4f-d364-4cf1-8963-1a8f5fb61d6c"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "payload cms vs strapi",
+      "retrieved": [
+        "62f7eb3e-1bd1-4957-a19e-eb3213e29370",
+        "72b2da3b-7b83-4f29-9df9-016a8ecb34ff",
+        "4bcd363d-d4e3-46d5-938d-d541c1e24b4d",
+        "ee136834-7128-49a6-a773-c01313dcabd2",
+        "8cdf9ae0-451c-46c2-aa1e-9e56f08bdda4",
+        "35b1b2a9-4fdd-4b2f-8c31-e6ae1ea7f4d1",
+        "5e638558-83d1-47b5-a8c4-77dc7657123e",
+        "c467ad40-ab9b-4e44-8d7a-1f836638e404",
+        "4a0da57c-dbc1-4cef-a57d-b6a408ea337c",
+        "0fba4b5a-a221-4ed6-87bc-e2a7dee585dd"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "data is valuable aaron marks",
+      "retrieved": [
+        "23f55727-7a4d-4854-8119-5421debd96ee",
+        "441a0deb-d82c-4d76-8ceb-4bf0f4ffb1b1",
+        "9b99b8f6-8a8c-4ee0-96d9-cbb2f9ff1fb4",
+        "b30a36cf-cb0a-4c43-8e27-471f7415813d",
+        "d29fed3a-ef0e-4900-a89a-6c7785f892b7",
+        "fb09140e-41b0-4c35-9263-6b4c996f4e7c",
+        "65778a4f-d364-4cf1-8963-1a8f5fb61d6c",
+        "6dbf1754-91bc-4a41-8e7d-2e5b8e252916",
+        "ebf60d47-463b-400e-a4e4-cbddf39998ad",
+        "fdf256e0-6295-408f-b8cc-a8f70ba4e059"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    },
+    {
+      "query": "load balancing 101 guide",
+      "retrieved": [
+        "f1cc3204-6782-4f15-ab28-11fbf18accf1",
+        "05253ca2-8441-42b5-9fb5-9e3d4ce2907a",
+        "aabe57b0-eeac-44d2-95e6-e09006f80877",
+        "4eb27c58-7e91-4491-9853-984cd19cece9",
+        "aa81c561-73db-4a90-97e4-fb0fb666c829",
+        "4a24a9c3-7e29-4a3f-bcfd-b550abddc9dc",
+        "3e32e59e-d46a-4d41-bbe4-3681ec4393d5",
+        "0cb482cd-4350-424f-929c-e86254cd4ffc",
+        "ebec098d-a421-436d-a70c-fb42cfee33ce",
+        "51552ab8-71c4-4df5-b179-8f3f52c94175"
+      ],
+      "precision_at_5": 0.8,
+      "recall_at_5": 0.3333333333333333,
+      "ndcg_at_10": 0.7519344290829997,
+      "mrr": 1.0,
+      "r_precision": 0.7
+    },
+    {
+      "query": "awesome j2me list",
+      "retrieved": [
+        "74c421f2-a80a-4e05-8efa-39773c7ca2d1",
+        "0f6097b1-5ccd-4133-86d4-5f4f5b006675",
+        "0dff0447-76c4-4ba6-bf76-b8e44f656fc5",
+        "c59481cc-46dc-40b6-a38d-19185f491676",
+        "fc863de0-c43a-49d6-86e3-d0c242ab1f47",
+        "209200d7-821f-4b68-9337-3b6f1fbd64be",
+        "efe13034-4235-4674-a00c-7a8fe7d472b3",
+        "cafcd8fd-3f91-4692-88c1-113cb769a0f4",
+        "8f7a6fab-873c-4a0b-a97c-e748c37a26db",
+        "0233a57d-3109-4930-83ff-a1869f428e99"
+      ],
+      "precision_at_5": 0.2,
+      "recall_at_5": 1.0,
+      "ndcg_at_10": 1.0,
+      "mrr": 1.0,
+      "r_precision": 1.0
+    }
+  ]
+}

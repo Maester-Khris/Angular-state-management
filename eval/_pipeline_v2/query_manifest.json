@@ -1,0 +1,352 @@
+[
+  {
+    "query": "redis caching strategies",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "react state management",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "postgres index tuning",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "life",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "intelligence",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "memory",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "async python event loop",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "microservices vs monolith",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "aws cloud infrastructure services",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "software engineer career growth",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "nodejs backend development",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "typescript type safety patterns",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "multi cloud deployment strategies",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "css layout and styling techniques",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "machine learning model deployment",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "linux command line tools",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "php web development frameworks",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "data science model evaluation",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "nextjs server side rendering",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "dotnet core web api",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "html semantic markup practices",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "csharp async programming patterns",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "go concurrency patterns",
+    "type": "broad",
+    "seed_uuid": null
+  },
+  {
+    "query": "cache",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "stack",
+    "type": "ambiguous",
+    "seed_uuid": null
+  },
+  {
+    "query": "backtracking n queens",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "hexadecimal conversion kotlin",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "implementing computed gotos",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "distributed transaction introduction",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "dynamodb expression package",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "eks optimizer kubernetes costs",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "agens sql vs postgresql",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "txtai postgres integration",
+    "type": "hard_negative",
+    "seed_uuid": null
+  },
+  {
+    "query": "cloudinary auth0 file storage",
+    "type": "doc2query",
+    "seed_uuid": "7531d1d8-f3bf-48e7-a390-117fd70d015d"
+  },
+  {
+    "query": "solidity beginner guide fundamentals",
+    "type": "doc2query",
+    "seed_uuid": "b9d0b0dd-d8ef-4db3-b62f-4ba758864ee1"
+  },
+  {
+    "query": "drones construction site management",
+    "type": "doc2query",
+    "seed_uuid": "9bc034ac-400d-4026-87d6-4eedccfc58b5"
+  },
+  {
+    "query": "emacs macos catalina",
+    "type": "doc2query",
+    "seed_uuid": "61c6344f-19a3-46cc-8e0b-1da3eb1a842c"
+  },
+  {
+    "query": "nrwl nx react hmr",
+    "type": "doc2query",
+    "seed_uuid": "f29fdb2f-ab9f-4e2d-b4c5-59c37ddcd8c7"
+  },
+  {
+    "query": "apache age graphql full stack",
+    "type": "doc2query",
+    "seed_uuid": "b8658f9b-ec30-4177-b5e7-d1b477a2cc94"
+  },
+  {
+    "query": "sripriya kalyanasundaram lambda test strategy",
+    "type": "doc2query",
+    "seed_uuid": "b49dafaf-9282-480f-b8e1-d1e86f3dc2eb"
+  },
+  {
+    "query": "gcd tutorial ios",
+    "type": "doc2query",
+    "seed_uuid": "34b77deb-bf42-4455-93ea-104c98d4bf0b"
+  },
+  {
+    "query": "flask github authlib authentication",
+    "type": "doc2query",
+    "seed_uuid": "89237bcf-a84d-4976-8a1d-50054eb7c891"
+  },
+  {
+    "query": "how spellcheckers work",
+    "type": "doc2query",
+    "seed_uuid": "78d3a6ee-69a5-4091-87f8-b793504d5768"
+  },
+  {
+    "query": "back of the envelope estimation",
+    "type": "doc2query",
+    "seed_uuid": "d9527e08-502b-4f96-abb4-dacfd200585d"
+  },
+  {
+    "query": "awesome j2me list",
+    "type": "doc2query",
+    "seed_uuid": "74c421f2-a80a-4e05-8efa-39773c7ca2d1"
+  },
+  {
+    "query": "best automated testing tools",
+    "type": "doc2query",
+    "seed_uuid": "db8af6fd-3776-4cb6-bd94-1db6a663dbc5"
+  },
+  {
+    "query": "load balancing 101 guide",
+    "type": "doc2query",
+    "seed_uuid": "f1cc3204-6782-4f15-ab28-11fbf18accf1"
+  },
+  {
+    "query": "business playbook templates",
+    "type": "doc2query",
+    "seed_uuid": "cc10d9d1-f47e-4b4c-958e-380c50c89f9d"
+  },
+  {
+    "query": "react 19 ux features",
+    "type": "doc2query",
+    "seed_uuid": "b93a57f9-1224-4f21-8560-a334b59320b2"
+  },
+  {
+    "query": "linux socks proxy server",
+    "type": "doc2query",
+    "seed_uuid": "d3fe0ff4-2c8e-46ef-a816-ba6403ef3c0b"
+  },
+  {
+    "query": "microsoft entra id intro",
+    "type": "doc2query",
+    "seed_uuid": "f9b33f8f-1ef8-45e9-a7f0-adc597c805e6"
+  },
+  {
+    "query": "gravitational waves symphony cosmos",
+    "type": "doc2query",
+    "seed_uuid": "176c93ca-4397-4481-983a-5d38013f94f8"
+  },
+  {
+    "query": "importance of leave management",
+    "type": "doc2query",
+    "seed_uuid": "aaa1d029-bc00-4519-8ece-0a69ab0f21b6"
+  },
+  {
+    "query": "pkce oauth javascript apps",
+    "type": "doc2query",
+    "seed_uuid": "fd0520d1-8737-4cf8-86d1-9bb13cbf628c"
+  },
+  {
+    "query": "most popular websites lebanon 2023",
+    "type": "doc2query",
+    "seed_uuid": "62cf6ebd-829e-4248-a008-466867a0579f"
+  },
+  {
+    "query": "docker disk bandwidth limits",
+    "type": "doc2query",
+    "seed_uuid": "761ce2cc-36e8-4503-acde-6faa8e11625b"
+  },
+  {
+    "query": "data is valuable aaron marks",
+    "type": "doc2query",
+    "seed_uuid": "23f55727-7a4d-4854-8119-5421debd96ee"
+  },
+  {
+    "query": "system integration testing streamlining",
+    "type": "doc2query",
+    "seed_uuid": "f0c3cc6b-e4ef-4923-8bfd-90e512b91709"
+  },
+  {
+    "query": "depin python javascript bot",
+    "type": "doc2query",
+    "seed_uuid": "9d445512-e102-4866-a412-5b9d0b612dd2"
+  },
+  {
+    "query": "smart solutions future education",
+    "type": "doc2query",
+    "seed_uuid": "a4669a9e-54d9-4814-bdc5-19957042c795"
+  },
+  {
+    "query": "on demand home service app guide",
+    "type": "doc2query",
+    "seed_uuid": "f8733914-0ac1-450c-b151-223e33e5ccac"
+  },
+  {
+    "query": "meteor 24 new installer",
+    "type": "doc2query",
+    "seed_uuid": "b7c9eb55-4a98-4fc6-83fe-24c4609a11be"
+  },
+  {
+    "query": "formal methods beginner guide",
+    "type": "doc2query",
+    "seed_uuid": "4d1ccd2c-222f-48b9-b646-5818320da500"
+  },
+  {
+    "query": "crowdstrike windows azure vm fix",
+    "type": "doc2query",
+    "seed_uuid": "1b1ee179-c623-46e3-952a-91a83b51b9ca"
+  },
+  {
+    "query": "spring microservices gateway thymeleaf",
+    "type": "doc2query",
+    "seed_uuid": "8257dace-6d79-4fcb-a39c-fe97c9f3f2c6"
+  },
+  {
+    "query": "payload cms vs strapi",
+    "type": "doc2query",
+    "seed_uuid": "62f7eb3e-1bd1-4957-a19e-eb3213e29370"
+  },
+  {
+    "query": "xrpl grants wave 6 judges",
+    "type": "doc2query",
+    "seed_uuid": "84ba6133-b944-4812-a588-ca5993028e97"
+  },
+  {
+    "query": "my public inbox",
+    "type": "doc2query",
+    "seed_uuid": "c42106b9-8ff9-4e79-81f7-b89bb2606a47"
+  }
+]

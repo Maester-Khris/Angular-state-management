@@ -1,0 +1,954 @@
+[
+  {
+    "idx": 2,
+    "query": "kubernetes deployment rollback",
+    "uuid": "19fb0959-eb97-496c-bf97-091dd8f541c7",
+    "relevant": false,
+    "rationale": "This is about picking a consistent deployment strategy, not about rollback mechanics specifically, so it's a tangential fit for \"rollback.\""
+  },
+  {
+    "idx": 3,
+    "query": "kubernetes deployment rollback",
+    "uuid": "f7972993-c24e-4322-88d2-9e335e7d5b04",
+    "relevant": false,
+    "rationale": "Covers CI/CD automation of deployments generally; rollback is only speculated, not shown to be a covered topic."
+  },
+  {
+    "idx": 4,
+    "query": "kubernetes deployment rollback",
+    "uuid": "616492af-9ce3-4ecd-8cfe-9ba88f4bebf3",
+    "relevant": false,
+    "rationale": "A general overview of Deployments vs StatefulSets, not centered on rollback operations."
+  },
+  {
+    "idx": 5,
+    "query": "kubernetes deployment rollback",
+    "uuid": "93d6887f-a884-4ef4-8c4c-da2e4713a17f",
+    "relevant": false,
+    "rationale": "Helm's general install/package-manager role is the core topic, not rollback specifically, despite Helm supporting rollback commands."
+  },
+  {
+    "idx": 6,
+    "query": "kubernetes deployment rollback",
+    "uuid": "96f8ca24-a2e7-4119-b924-93726b4753e3",
+    "relevant": false,
+    "rationale": "A general \"mastering Deployments\" piece without evidence its core content is rollback/rollout history."
+  },
+  {
+    "idx": 7,
+    "query": "kubernetes deployment rollback",
+    "uuid": "9f28fc77-7d8f-408f-9dc7-3020d031938e",
+    "relevant": false,
+    "rationale": "General deployment troubleshooting guide; rollback is only a plausible inferred subtopic, not the stated focus."
+  },
+  {
+    "idx": 8,
+    "query": "react state management",
+    "uuid": "6bf31c82-0c04-4704-92d2-cd76fa519e1d",
+    "relevant": false,
+    "rationale": "Covers persisting data on page refresh, a narrow persistence trick rather than general React state management."
+  },
+  {
+    "idx": 9,
+    "query": "life",
+    "uuid": "e9793257-820b-4128-a6c7-5403a309fe9e",
+    "relevant": false,
+    "rationale": "\"College life\" is scene-setting for a recruitment-test hacking story, not a piece about life itself."
+  },
+  {
+    "idx": 10,
+    "query": "life",
+    "uuid": "cf23a0f2-3912-4bcf-a160-c2f02c301794",
+    "relevant": true,
+    "rationale": "Directly discusses how one's time and choices shape their life, genuinely on-topic for a bare \"life\" query."
+  },
+  {
+    "idx": 11,
+    "query": "life",
+    "uuid": "9357d902-492f-4cf4-9aa9-9d4159be1af2",
+    "relevant": true,
+    "rationale": "Title and intro explicitly frame the piece around \"life,\" making it a direct topical match."
+  },
+  {
+    "idx": 12,
+    "query": "life",
+    "uuid": "f5f13626-a71d-4dd0-aceb-e2f5204c5dd1",
+    "relevant": false,
+    "rationale": "\"Transform Your Life\" is marketing language for an Azure OpenAI promotion, not content about life itself."
+  },
+  {
+    "idx": 13,
+    "query": "life",
+    "uuid": "ff7cc8a1-7c8a-4c49-943f-8b5a37608a5f",
+    "relevant": true,
+    "rationale": "Explicitly presents \"8 Essentials for Life,\" directly on-topic life advice content."
+  },
+  {
+    "idx": 14,
+    "query": "life",
+    "uuid": "fcea9235-1fab-49a0-98e4-199a80aa5a21",
+    "relevant": false,
+    "rationale": "\"Life Changer\" is used as an idiom for a coding-challenge retrospective, not substantive content about life."
+  },
+  {
+    "idx": 15,
+    "query": "life",
+    "uuid": "a57bae4e-bfa6-495d-afd9-ae6cded28262",
+    "relevant": true,
+    "rationale": "A personal essay explicitly about one's social life, directly on-topic for the query."
+  },
+  {
+    "idx": 16,
+    "query": "life",
+    "uuid": "67ef1f2e-4791-45a7-a528-963e6b52200a",
+    "relevant": true,
+    "rationale": "Title and content are explicitly about automating and improving one's life."
+  },
+  {
+    "idx": 17,
+    "query": "life",
+    "uuid": "f5031a76-608e-4bde-8b86-9dc8ddb82caf",
+    "relevant": false,
+    "rationale": "\"Life as a Bootcamper\" is really about the bootcamp experience, not a piece about life itself."
+  },
+  {
+    "idx": 18,
+    "query": "life",
+    "uuid": "bdab74ab-d758-4857-8b16-9ed22cf16733",
+    "relevant": false,
+    "rationale": "\"Decoding Life\" is really a bioinformatics technical article; \"life\" functions as a stylistic hook, not the substantive topic."
+  },
+  {
+    "idx": 19,
+    "query": "life",
+    "uuid": "d937bd9e-9cbf-4499-be6b-c93ea6d81859",
+    "relevant": true,
+    "rationale": "A personal reflection explicitly about life perspective and priorities in one's twenties."
+  },
+  {
+    "idx": 20,
+    "query": "life",
+    "uuid": "6bf9f8ee-9663-4b94-9ca7-ed2e462d4efc",
+    "relevant": false,
+    "rationale": "A curated listicle of YouTube channels using \"change your life\" as clickbait, not itself about life as a topic."
+  },
+  {
+    "idx": 21,
+    "query": "intelligence",
+    "uuid": "7018ed88-8ea4-447e-816a-09ec147aeccf",
+    "relevant": false,
+    "rationale": "\"Intelligent\" here is an adjective for a technical audio pipeline, not content about intelligence as a concept."
+  },
+  {
+    "idx": 32,
+    "query": "memory",
+    "uuid": "9c0ecaf5-8947-4cd1-9ace-d56218eef93b",
+    "relevant": true,
+    "rationale": "An in-memory key-value cache project is directly about using memory for storage/caching."
+  },
+  {
+    "idx": 34,
+    "query": "memory",
+    "uuid": "f46f54d2-e770-4e27-b861-b2359fc4b239",
+    "relevant": true,
+    "rationale": "Redis is explicitly introduced as an in-memory database, directly on-topic for \"memory.\""
+  },
+  {
+    "idx": 35,
+    "query": "memory",
+    "uuid": "ea985daf-4692-4445-97f5-c5a439c9d8cd",
+    "relevant": true,
+    "rationale": "Explains caching via cached memory, directly centered on memory usage and performance."
+  },
+  {
+    "idx": 41,
+    "query": "microservices vs monolith",
+    "uuid": "f0f8da56-6a6a-4059-afd0-c8da8f0e4b83",
+    "relevant": true,
+    "rationale": "A focused, direct comparison of monolith vs microservices architecture, exactly matching the query."
+  },
+  {
+    "idx": 44,
+    "query": "ci cd pipeline best practices",
+    "uuid": "472ddcb0-063b-4c47-abbe-dac64ce9c798",
+    "relevant": true,
+    "rationale": "Covers integrating security best practices into CI/CD pipelines, a legitimate best-practices topic for the query."
+  },
+  {
+    "idx": 67,
+    "query": "ci cd pipeline best practices",
+    "uuid": "785cf405-8970-4d91-ab58-780e64207c2d",
+    "relevant": true,
+    "rationale": "A concrete CI/CD pipeline security best practice using AWS IAM Access Analyzer."
+  },
+  {
+    "idx": 68,
+    "query": "aws cloud infrastructure services",
+    "uuid": "32fe49a5-6ba6-466e-9d47-fd54e026a37c",
+    "relevant": true,
+    "rationale": "Covers AWS CDK for defining cloud infrastructure and web services, directly on-topic."
+  },
+  {
+    "idx": 69,
+    "query": "aws cloud infrastructure services",
+    "uuid": "b2b44064-0662-4357-8276-cc1d9adf3ae8",
+    "relevant": true,
+    "rationale": "CloudFormation is a core AWS infrastructure service and this covers using it via CLI directly."
+  },
+  {
+    "idx": 71,
+    "query": "aws cloud infrastructure services",
+    "uuid": "303d9ae0-2c6b-4508-878a-3d792c41e21f",
+    "relevant": true,
+    "rationale": "Best practices for building scalable AWS infrastructure with CDK, directly on-topic."
+  },
+  {
+    "idx": 72,
+    "query": "aws cloud infrastructure services",
+    "uuid": "f59979d4-8b49-4e6b-8cff-068be1d385b4",
+    "relevant": true,
+    "rationale": "Covers EBS, a core AWS infrastructure storage service, and its protection."
+  },
+  {
+    "idx": 76,
+    "query": "aws cloud infrastructure services",
+    "uuid": "0b4748f6-7367-4374-8976-4ca653852d57",
+    "relevant": true,
+    "rationale": "Covers organizing/refactoring AWS CloudFormation infrastructure stacks, directly on-topic."
+  },
+  {
+    "idx": 78,
+    "query": "aws cloud infrastructure services",
+    "uuid": "3ed23063-b7f1-43a8-a395-c5f7945e2740",
+    "relevant": true,
+    "rationale": "Dedicated to AWS CloudFormation as an infrastructure-as-code cloud management service."
+  },
+  {
+    "idx": 79,
+    "query": "aws cloud infrastructure services",
+    "uuid": "2e12c603-5302-4579-b043-0ef695ef2c71",
+    "relevant": true,
+    "rationale": "Compares two tools for provisioning AWS cloud infrastructure, directly relevant."
+  },
+  {
+    "idx": 81,
+    "query": "aws cloud infrastructure services",
+    "uuid": "40ea5465-c447-484e-ab19-65f985895628",
+    "relevant": true,
+    "rationale": "Focused on AWS CloudWatch, a core AWS cloud infrastructure monitoring service."
+  },
+  {
+    "idx": 84,
+    "query": "aws cloud infrastructure services",
+    "uuid": "d6c695f9-38e9-499d-a849-107c39b0cd20",
+    "relevant": true,
+    "rationale": "Covers AWS Cloud Map, a specific AWS infrastructure service for container service discovery."
+  },
+  {
+    "idx": 85,
+    "query": "software engineer career growth",
+    "uuid": "5aa4ecb6-5695-4573-bcfe-2cd80b035461",
+    "relevant": false,
+    "rationale": "A guide to becoming a GCP Engineer is a distinct cloud-specialist career track, not general software engineer career growth."
+  },
+  {
+    "idx": 86,
+    "query": "software engineer career growth",
+    "uuid": "3d6d9327-e190-4f26-85c6-164a754786ce",
+    "relevant": true,
+    "rationale": "A survey of early-career software developer experiences directly informs career growth insights."
+  },
+  {
+    "idx": 87,
+    "query": "software engineer career growth",
+    "uuid": "a128d993-47a1-461d-881f-496d5108f88b",
+    "relevant": false,
+    "rationale": "An ML engineer roadmap targets a distinct specialization rather than general software engineer career growth."
+  },
+  {
+    "idx": 88,
+    "query": "software engineer career growth",
+    "uuid": "b3eae333-3876-44fc-9bf0-72498d8dda2d",
+    "relevant": true,
+    "rationale": "Directly covers the career transition from campus to a software engineering role."
+  },
+  {
+    "idx": 89,
+    "query": "software engineer career growth",
+    "uuid": "fa8638db-e091-40af-a863-a3b8b28d3d1b",
+    "relevant": true,
+    "rationale": "The engineering manager role is a natural career growth path for software engineers."
+  },
+  {
+    "idx": 90,
+    "query": "software engineer career growth",
+    "uuid": "70419ed9-ea6c-4010-8e69-18225e389fb3",
+    "relevant": true,
+    "rationale": "Advice for surviving a first internship is directly relevant early-career growth content."
+  },
+  {
+    "idx": 91,
+    "query": "software engineer career growth",
+    "uuid": "b8f2bf3a-504f-4115-a761-d403e15087de",
+    "relevant": false,
+    "rationale": "Compensation data is a related but distinct topic from career growth/advancement."
+  },
+  {
+    "idx": 92,
+    "query": "software engineer career growth",
+    "uuid": "56cc14fa-acaf-4eb6-84b9-66ecdb37bdd1",
+    "relevant": false,
+    "rationale": "Focuses on productivity and work-life balance, tangential to career growth/advancement specifically."
+  },
+  {
+    "idx": 93,
+    "query": "software engineer career growth",
+    "uuid": "bb4ab9d5-bda1-40a4-b690-e36c959913a2",
+    "relevant": false,
+    "rationale": "Personal investing guidance is a financial topic unrelated to career growth itself."
+  },
+  {
+    "idx": 94,
+    "query": "software engineer career growth",
+    "uuid": "8dc89a63-6579-4597-81cd-078a11657b1c",
+    "relevant": true,
+    "rationale": "A career overview of a specific tech role directly addresses career path exploration for engineers."
+  },
+  {
+    "idx": 95,
+    "query": "software engineer career growth",
+    "uuid": "d54d85d1-987b-4509-96a6-e0a99cc18c10",
+    "relevant": true,
+    "rationale": "Tips for becoming a better software engineer directly support professional growth."
+  },
+  {
+    "idx": 96,
+    "query": "software engineer career growth",
+    "uuid": "2f056bc3-ad21-4b7c-a7d5-b5f3da92a131",
+    "relevant": true,
+    "rationale": "A career success blueprint for backend engineers directly addresses career growth."
+  },
+  {
+    "idx": 97,
+    "query": "software engineer career growth",
+    "uuid": "8af37a58-7cd0-4a19-b41f-590d1e974a49",
+    "relevant": false,
+    "rationale": "A list of common engineer mistakes is tangential to career growth rather than centrally about advancement."
+  },
+  {
+    "idx": 98,
+    "query": "software engineer career growth",
+    "uuid": "54cac08c-d80d-4ed1-a84d-8112d15a5f7e",
+    "relevant": true,
+    "rationale": "A firsthand account of interviewing for a senior role directly reflects career advancement."
+  },
+  {
+    "idx": 107,
+    "query": "nodejs backend development",
+    "uuid": "6904454a-455d-45cf-82eb-157327085fe5",
+    "relevant": true,
+    "rationale": "A step-by-step guide to deploying a Node.js/Express backend directly matches the query."
+  },
+  {
+    "idx": 110,
+    "query": "nodejs backend development",
+    "uuid": "cd79dc6c-9d3a-43f5-9f32-4b4e45a27aff",
+    "relevant": true,
+    "rationale": "Compares Node.js against other languages specifically for backend development performance."
+  },
+  {
+    "idx": 112,
+    "query": "nodejs backend development",
+    "uuid": "95eafe1e-9e28-49ff-bad8-288abe3e5977",
+    "relevant": false,
+    "rationale": "A thin help-request post with no substantive Node.js backend development content."
+  },
+  {
+    "idx": 113,
+    "query": "typescript type safety patterns",
+    "uuid": "352a1c5c-277b-4b6c-a139-c989b417110b",
+    "relevant": false,
+    "rationale": "Explicitly about type-checking JS without adopting TypeScript, tangential to TypeScript type safety patterns."
+  },
+  {
+    "idx": 114,
+    "query": "typescript type safety patterns",
+    "uuid": "d5aa17ca-7ce7-467f-896e-63001b377893",
+    "relevant": true,
+    "rationale": "Directly demonstrates a TypeScript type-reuse pattern for type safety with Prisma."
+  },
+  {
+    "idx": 118,
+    "query": "css layout and styling techniques",
+    "uuid": "2a1a1a76-aa0a-412e-9d61-50457d7e727a",
+    "relevant": true,
+    "rationale": "Covers a CSS styling tool/technique for structuring styles in an app, on-topic."
+  },
+  {
+    "idx": 119,
+    "query": "css layout and styling techniques",
+    "uuid": "3ddd8645-0fe2-4c01-aaec-944cec57f522",
+    "relevant": true,
+    "rationale": "Compares two major CSS styling frameworks, directly relevant to styling technique choices."
+  },
+  {
+    "idx": 120,
+    "query": "css layout and styling techniques",
+    "uuid": "cb5784b3-9dea-4043-a5f5-0603794d652e",
+    "relevant": true,
+    "rationale": "Compares Tailwind and traditional CSS approaches, directly relevant to styling techniques."
+  },
+  {
+    "idx": 121,
+    "query": "css layout and styling techniques",
+    "uuid": "c2d88816-344a-4f0f-8c9c-9609f018ecca",
+    "relevant": true,
+    "rationale": "General CSS knowledge/skill content that broadly covers styling topics."
+  },
+  {
+    "idx": 122,
+    "query": "css layout and styling techniques",
+    "uuid": "7a9ad4f6-e7fc-48e8-98d1-dfd3f3cec4b1",
+    "relevant": true,
+    "rationale": "Demonstrates a concrete modern CSS styling technique (dark/light mode switch)."
+  },
+  {
+    "idx": 123,
+    "query": "css layout and styling techniques",
+    "uuid": "db67bd6d-20a7-4481-9764-2a30bc24bde6",
+    "relevant": true,
+    "rationale": "Directly explains ways to apply CSS styles to markup, core to styling techniques."
+  },
+  {
+    "idx": 124,
+    "query": "css layout and styling techniques",
+    "uuid": "510b733e-f6d0-4592-b224-3c40d6c771f2",
+    "relevant": false,
+    "rationale": "About the meta-process of creating a CSS framework, not about applying layout/styling techniques."
+  },
+  {
+    "idx": 125,
+    "query": "css layout and styling techniques",
+    "uuid": "24fc0a72-eb47-4cd7-9efc-ea54f6d1b5e8",
+    "relevant": true,
+    "rationale": "Explains relative CSS units used for responsive layout styling, a core technique."
+  },
+  {
+    "idx": 126,
+    "query": "css layout and styling techniques",
+    "uuid": "bebbeaab-cba2-421d-9206-37291d860233",
+    "relevant": true,
+    "rationale": "Compares CSS and SASS as styling workflow choices, directly relevant."
+  },
+  {
+    "idx": 127,
+    "query": "css layout and styling techniques",
+    "uuid": "4a11809d-fb28-4eb2-b8de-8181708ced0e",
+    "relevant": true,
+    "rationale": "A learning log on HTML/CSS basics is on-topic for CSS styling fundamentals."
+  },
+  {
+    "idx": 128,
+    "query": "css layout and styling techniques",
+    "uuid": "ac34368d-f74c-47a5-a962-031447741d0e",
+    "relevant": false,
+    "rationale": "A thin help-request post asking for basic CSS help, unlikely to satisfy a \"techniques\" query."
+  },
+  {
+    "idx": 130,
+    "query": "css layout and styling techniques",
+    "uuid": "38df088d-978b-4634-bed4-38818efd416f",
+    "relevant": true,
+    "rationale": "Directly about visualizing and understanding CSS layouts via a dedicated tool."
+  },
+  {
+    "idx": 131,
+    "query": "css layout and styling techniques",
+    "uuid": "8f45eefc-f006-4b1e-b14e-622bd70e1dd0",
+    "relevant": true,
+    "rationale": "A practical HTML/CSS project demonstrating layout and styling in action."
+  },
+  {
+    "idx": 132,
+    "query": "css layout and styling techniques",
+    "uuid": "53981dd8-7d34-4fe8-90bb-848c36b77e30",
+    "relevant": true,
+    "rationale": "Covers Sass, a widely used CSS styling technique/preprocessor."
+  },
+  {
+    "idx": 133,
+    "query": "css layout and styling techniques",
+    "uuid": "86f5a0f3-3ad2-47a3-a4e9-9243a320fc93",
+    "relevant": true,
+    "rationale": "A basic overview of what CSS is, directly on-topic background for styling techniques."
+  },
+  {
+    "idx": 134,
+    "query": "css layout and styling techniques",
+    "uuid": "6ae649ee-e540-4107-bda6-c5ab302c4c86",
+    "relevant": true,
+    "rationale": "Explicitly compares multiple approaches to writing CSS, directly relevant to styling techniques."
+  },
+  {
+    "idx": 138,
+    "query": "linux command line tools",
+    "uuid": "b7ccda87-9e14-4e22-adde-96b45cbac07d",
+    "relevant": true,
+    "rationale": "A cross-platform command-line tool usable on Linux fits the broad \"linux command line tools\" query."
+  },
+  {
+    "idx": 139,
+    "query": "linux command line tools",
+    "uuid": "8186e48a-cede-4a59-ac6c-5b586af1c971",
+    "relevant": true,
+    "rationale": "Explains a specific well-known Linux/UNIX command-line tool directly."
+  },
+  {
+    "idx": 140,
+    "query": "linux command line tools",
+    "uuid": "2ee91f98-7f12-4ac6-ae1e-5c8c2d026272",
+    "relevant": false,
+    "rationale": "No Linux-specific framing is given; it's a generic CI/CD testing CLI tool, tangential to \"linux\" specifically."
+  },
+  {
+    "idx": 141,
+    "query": "php web development frameworks",
+    "uuid": "b561810c-56b7-43e0-b05d-35a34ed967cf",
+    "relevant": true,
+    "rationale": "Covers tooling for Laravel, a major PHP web development framework, directly on-topic."
+  },
+  {
+    "idx": 142,
+    "query": "php web development frameworks",
+    "uuid": "cc08b732-4e94-4402-925c-77cdd45b3ce2",
+    "relevant": false,
+    "rationale": "A thin collaboration-seeking post rather than substantive content about PHP frameworks."
+  },
+  {
+    "idx": 144,
+    "query": "php web development frameworks",
+    "uuid": "bc1fc2a0-996e-492b-92ff-9a6a2a68434e",
+    "relevant": true,
+    "rationale": "Directly about Laravel tooling, a leading PHP web development framework."
+  },
+  {
+    "idx": 148,
+    "query": "nextjs server side rendering",
+    "uuid": "a1703f2e-30a7-4eed-9bf7-462cd1472763",
+    "relevant": true,
+    "rationale": "Directly addresses a Next.js SSR hydration issue, on-topic for Next.js server-side rendering."
+  },
+  {
+    "idx": 151,
+    "query": "dotnet core web api",
+    "uuid": "d7bfc4eb-e2d9-4d67-9c36-4ce00121f133",
+    "relevant": true,
+    "rationale": "JWT authentication is a common, directly relevant topic for building ASP.NET Core Web APIs."
+  },
+  {
+    "idx": 152,
+    "query": "dotnet core web api",
+    "uuid": "55430317-59e5-4df7-9567-92b59434c168",
+    "relevant": true,
+    "rationale": "Authentication/authorization in .NET Core is directly relevant to securing a Web API."
+  },
+  {
+    "idx": 153,
+    "query": "dotnet core web api",
+    "uuid": "738c4f05-e17b-4d76-bd8c-b74e0a0449b5",
+    "relevant": false,
+    "rationale": "The tech stack isn't confirmed as .NET Core, making the \"dotnet\" match speculative rather than core."
+  },
+  {
+    "idx": 154,
+    "query": "dotnet core web api",
+    "uuid": "bb6bf4b7-8fe7-4b79-9ce9-54b4084beed7",
+    "relevant": false,
+    "rationale": "Building a CLI performance-testing tool with .NET Core is tangential to actually developing a dotnet Web API."
+  },
+  {
+    "idx": 155,
+    "query": "dotnet core web api",
+    "uuid": "f637377f-bf9e-4f36-a2a1-e067d12cec37",
+    "relevant": true,
+    "rationale": "Directly discusses an ASP.NET Core Web API implementation detail (XML handling)."
+  },
+  {
+    "idx": 156,
+    "query": "html semantic markup practices",
+    "uuid": "8ae5053a-2882-4d95-8bf0-541c10dad349",
+    "relevant": true,
+    "rationale": "Covers HTML tags likely including semantic elements, reasonably on-topic for semantic markup practices."
+  },
+  {
+    "idx": 158,
+    "query": "cache",
+    "uuid": "43425191-c3fe-4317-bcf6-b08ad3e541e5",
+    "relevant": false,
+    "rationale": "Core topic is consistent hashing for load balancing; cache misses are a side effect, not the central subject."
+  },
+  {
+    "idx": 159,
+    "query": "cache",
+    "uuid": "dae9b422-e954-406f-862b-6369e19da355",
+    "relevant": true,
+    "rationale": "Directly about a caching (Google Cache) problem affecting web pages."
+  },
+  {
+    "idx": 160,
+    "query": "cache",
+    "uuid": "30093e1b-b3ff-406b-aba0-3ddc24dd7904",
+    "relevant": true,
+    "rationale": "Explicitly centered on cache-related conversations and issues in development."
+  },
+  {
+    "idx": 161,
+    "query": "cache",
+    "uuid": "40538da8-394f-4149-aab7-b314150c8fc6",
+    "relevant": true,
+    "rationale": "Directly about a caching issue in a React deployment."
+  },
+  {
+    "idx": 162,
+    "query": "stack",
+    "uuid": "f1e2426a-b22c-4092-b851-65f76288768b",
+    "relevant": true,
+    "rationale": "Explicitly about a MERN \"Stack\" application, directly on-topic."
+  },
+  {
+    "idx": 163,
+    "query": "stack",
+    "uuid": "79ea40c9-e2dc-43f7-b101-7eb2e5fbcc23",
+    "relevant": true,
+    "rationale": "Directly centered on the call stack concept."
+  },
+  {
+    "idx": 164,
+    "query": "stack",
+    "uuid": "9b653f55-dcac-41e8-9878-a0e4d305d3a6",
+    "relevant": true,
+    "rationale": "A product literally named \"Stack.new,\" directly matching the query term."
+  },
+  {
+    "idx": 165,
+    "query": "stack",
+    "uuid": "2d616eb6-4876-4f74-849d-cef8b4eb048f",
+    "relevant": true,
+    "rationale": "Explicitly about the MEAN \"Stack\" architecture."
+  },
+  {
+    "idx": 166,
+    "query": "stack",
+    "uuid": "f59a67e3-97d2-4cbb-93c9-14e5b1a93dc2",
+    "relevant": true,
+    "rationale": "Terraform \"stacks\" concepts are central to how the described solution is structured."
+  },
+  {
+    "idx": 167,
+    "query": "stack",
+    "uuid": "31bf1c22-37e9-46d3-b0a4-f8baf3de4542",
+    "relevant": true,
+    "rationale": "Explicitly about building a specific tech \"stack\" (Local First Stack)."
+  },
+  {
+    "idx": 168,
+    "query": "stack",
+    "uuid": "a82d14f1-3da6-47b5-94fa-5e13e2706714",
+    "relevant": true,
+    "rationale": "Explicitly titled and centered on building a software stack."
+  },
+  {
+    "idx": 169,
+    "query": "stack",
+    "uuid": "20d87035-8cf5-4270-8238-34dbe570644b",
+    "relevant": true,
+    "rationale": "Directly about full-stack developer responsibilities, on-topic for \"stack.\""
+  },
+  {
+    "idx": 170,
+    "query": "stack",
+    "uuid": "0d651f08-6513-427d-a219-9f2cc4b42ba5",
+    "relevant": true,
+    "rationale": "Explicitly centers on hiring Full Stack (MERN Stack) engineers."
+  },
+  {
+    "idx": 178,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "0fe93eb4-9867-4517-af00-aabef1f9156a",
+    "relevant": true,
+    "rationale": "Cluster autoscaling is a core Kubernetes technique for optimizing resources and costs."
+  },
+  {
+    "idx": 179,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "b496892d-359e-4192-a630-9d4f18c02633",
+    "relevant": true,
+    "rationale": "Directly about rightsizing Kubernetes resource requests to reduce costs."
+  },
+  {
+    "idx": 180,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "d11b444b-a547-4213-bf86-b5e9b1ea58d5",
+    "relevant": true,
+    "rationale": "Explicitly covers configuring the Cluster Autoscaler on AWS EKS, a direct cost-optimization technique."
+  },
+  {
+    "idx": 181,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "427c9543-2a62-46a1-a5c9-260d0e502700",
+    "relevant": true,
+    "rationale": "KEDA on EKS is an event-driven autoscaler directly relevant to EKS cost optimization."
+  },
+  {
+    "idx": 182,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "ebdbe79c-6e91-4261-98ee-9e0a8a4e0ea3",
+    "relevant": true,
+    "rationale": "Explicitly discusses reducing network costs within Kubernetes clusters."
+  },
+  {
+    "idx": 183,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "c4032d65-5efb-4438-b054-da261c84564f",
+    "relevant": true,
+    "rationale": "Karpenter is a well-known EKS node-provisioning tool for cost optimization."
+  },
+  {
+    "idx": 184,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "540ce5a7-0d7a-44df-ac6b-a42af29759f5",
+    "relevant": true,
+    "rationale": "Directly about intelligent auto-scaling for optimizing Kubernetes cluster management and costs."
+  },
+  {
+    "idx": 185,
+    "query": "eks optimizer kubernetes costs",
+    "uuid": "380f17ab-6009-4eea-9234-7db5730a3888",
+    "relevant": true,
+    "rationale": "Resource usage monitoring directly supports identifying inefficiencies to optimize Kubernetes costs."
+  },
+  {
+    "idx": 189,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "f16b8621-5359-47f9-a5c4-c5690e131c74",
+    "relevant": true,
+    "rationale": "A general Solidity DApp-building guide is reasonably beginner-oriented and fundamentals-focused."
+  },
+  {
+    "idx": 190,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "8fcdccfa-73b0-4cfc-8dfc-a90501d55a30",
+    "relevant": true,
+    "rationale": "A step-by-step Hello World Solidity smart contract tutorial is squarely beginner fundamentals content."
+  },
+  {
+    "idx": 191,
+    "query": "solidity beginner guide fundamentals",
+    "uuid": "f49c6c95-c3e1-4c26-896c-470aacbd87fd",
+    "relevant": true,
+    "rationale": "An explicitly beginner-oriented first-DApp guide likely covers Solidity fundamentals."
+  },
+  {
+    "idx": 199,
+    "query": "flask github authlib authentication",
+    "uuid": "f875636c-d06c-4e17-8fba-39464acda81a",
+    "relevant": true,
+    "rationale": "A Flask starter with GitHub OAuth directly matches the core Flask+GitHub authentication intent of the query."
+  },
+  {
+    "idx": 204,
+    "query": "best automated testing tools",
+    "uuid": "91c37a1a-2b06-403a-a17e-e8f62abe1ff5",
+    "relevant": false,
+    "rationale": "Test management tools are a distinct category from automated testing tools."
+  },
+  {
+    "idx": 208,
+    "query": "best automated testing tools",
+    "uuid": "5258ea95-2ba3-4ece-b3ae-f4e5d82ad6be",
+    "relevant": true,
+    "rationale": "A curated list of automated WebSocket testing tools directly matches the query category."
+  },
+  {
+    "idx": 210,
+    "query": "best automated testing tools",
+    "uuid": "084c5e32-bcc7-4f34-8dee-b6d25fbba92a",
+    "relevant": true,
+    "rationale": "Directly covers automated testing frameworks/tools including Selenium."
+  },
+  {
+    "idx": 213,
+    "query": "load balancing 101 guide",
+    "uuid": "24ec1a60-fdd1-4d1e-9994-38e8085f00d8",
+    "relevant": false,
+    "rationale": "A narrow Java/Spring-specific implementation doesn't match the beginner \"101 guide\" intent of the query."
+  },
+  {
+    "idx": 215,
+    "query": "load balancing 101 guide",
+    "uuid": "b37fa784-02ac-474d-a407-94384e4b3365",
+    "relevant": true,
+    "rationale": "An introductory cloud infrastructure overview covering load balancing fits a \"101 guide\" intent."
+  },
+  {
+    "idx": 216,
+    "query": "load balancing 101 guide",
+    "uuid": "51552ab8-71c4-4df5-b179-8f3f52c94175",
+    "relevant": false,
+    "rationale": "Focuses on advanced operational metrics/troubleshooting, not introductory 101 content."
+  },
+  {
+    "idx": 217,
+    "query": "load balancing 101 guide",
+    "uuid": "f347f7d7-21ed-4fb8-837c-805371a060f1",
+    "relevant": false,
+    "rationale": "A specialized advanced topic (WebSocket load balancing), not a beginner 101 guide."
+  },
+  {
+    "idx": 218,
+    "query": "load balancing 101 guide",
+    "uuid": "8ff0a6ef-c8ab-447b-a29b-5ac5d5335b38",
+    "relevant": false,
+    "rationale": "Explicitly labeled \"Advanced,\" directly contradicting the \"101\" beginner intent of the query."
+  },
+  {
+    "idx": 219,
+    "query": "load balancing 101 guide",
+    "uuid": "aa81c561-73db-4a90-97e4-fb0fb666c829",
+    "relevant": true,
+    "rationale": "A step-by-step hands-on guide to AWS load balancing fits the practical \"101 guide\" intent."
+  },
+  {
+    "idx": 220,
+    "query": "load balancing 101 guide",
+    "uuid": "cda2dc3d-cbe4-4e34-bf95-b540a65b5093",
+    "relevant": false,
+    "rationale": "A narrow Node.js/Nginx implementation tutorial, not a general introductory load balancing guide."
+  },
+  {
+    "idx": 221,
+    "query": "react 19 ux features",
+    "uuid": "652d70fa-4920-4f3e-9ad0-2dcd30d0813c",
+    "relevant": true,
+    "rationale": "A React 19 feature (hydration) guide directly on-topic for React 19 features affecting UX."
+  },
+  {
+    "idx": 229,
+    "query": "system integration testing streamlining",
+    "uuid": "fb2ad045-6503-484b-b7ce-e402ee6a4aa1",
+    "relevant": true,
+    "rationale": "Covers integration testing challenges and solutions applicable to streamlining SIT."
+  },
+  {
+    "idx": 230,
+    "query": "system integration testing streamlining",
+    "uuid": "fe3efefa-1b86-494b-9f95-f9562bf65522",
+    "relevant": true,
+    "rationale": "A comprehensive integration testing guide likely covers streamlining practices."
+  },
+  {
+    "idx": 231,
+    "query": "system integration testing streamlining",
+    "uuid": "643bd886-917e-43ab-80a3-9f9970e566e7",
+    "relevant": true,
+    "rationale": "Discusses strategies for overcoming integration testing challenges, relevant to streamlining."
+  },
+  {
+    "idx": 233,
+    "query": "system integration testing streamlining",
+    "uuid": "d7b78ce2-8380-4002-b459-265cf4f96ef3",
+    "relevant": true,
+    "rationale": "Explicitly about streamlining software testing via codeless automation."
+  },
+  {
+    "idx": 234,
+    "query": "system integration testing streamlining",
+    "uuid": "173fee7b-fb41-4234-9528-922d0e18ac1b",
+    "relevant": true,
+    "rationale": "Explicitly about streamlining microservices testing, closely related to system integration testing."
+  },
+  {
+    "idx": 235,
+    "query": "system integration testing streamlining",
+    "uuid": "4631d316-fb5a-43f1-b526-b19dc94de9d1",
+    "relevant": true,
+    "rationale": "Covers a practical tool (TestContainers) for integration testing, relevant to streamlining SIT."
+  },
+  {
+    "idx": 236,
+    "query": "smart solutions future education",
+    "uuid": "e32bd60c-6ee0-4408-a45c-79c8bc1dc4ce",
+    "relevant": true,
+    "rationale": "Covers the intersection of education and technology broadly, relevant to future-education solutions."
+  },
+  {
+    "idx": 237,
+    "query": "smart solutions future education",
+    "uuid": "13282552-dfda-42cd-8022-440bcc9629e8",
+    "relevant": true,
+    "rationale": "A practical smart-solution example (WhatsApp) for transforming education."
+  },
+  {
+    "idx": 238,
+    "query": "smart solutions future education",
+    "uuid": "5c24cc49-a3f4-4b8f-a1e3-54ed40236020",
+    "relevant": true,
+    "rationale": "Directly about techniques to improve online education effectiveness, matching \"smart solutions\" intent."
+  },
+  {
+    "idx": 239,
+    "query": "smart solutions future education",
+    "uuid": "e2dd9259-b915-4b7b-ae2f-e5e67d43ef4a",
+    "relevant": false,
+    "rationale": "Centers on accessibility design principles rather than smart/future education solutions specifically."
+  },
+  {
+    "idx": 240,
+    "query": "smart solutions future education",
+    "uuid": "a6db7fc3-47a5-466c-8db9-c27302e7bc26",
+    "relevant": true,
+    "rationale": "Explicitly framed as building the future of AI/ML education, directly matching the query."
+  },
+  {
+    "idx": 241,
+    "query": "smart solutions future education",
+    "uuid": "51b2edce-f275-4698-97bd-c7bc9fb2f167",
+    "relevant": true,
+    "rationale": "Discusses a tech-driven (data science) approach to personalizing education, a smart-solution angle."
+  },
+  {
+    "idx": 242,
+    "query": "smart solutions future education",
+    "uuid": "f1110138-6735-418a-bd9e-2a64d893202a",
+    "relevant": true,
+    "rationale": "Explicitly about \"Smart Class Rooms,\" directly matching the query."
+  },
+  {
+    "idx": 243,
+    "query": "smart solutions future education",
+    "uuid": "fc34ff08-9f73-4faa-ab40-67714c5a580a",
+    "relevant": false,
+    "rationale": "A largely promotional eLearning vendor piece without substantive smart-solution or future-education content."
+  },
+  {
+    "idx": 244,
+    "query": "smart solutions future education",
+    "uuid": "9ff9473c-e344-4832-9d26-00b726601de8",
+    "relevant": true,
+    "rationale": "Covers AI applications in academia relevant to future education innovation."
+  },
+  {
+    "idx": 245,
+    "query": "on demand home service app guide",
+    "uuid": "de83fa99-31ee-4baf-bf5f-e1084e5166fd",
+    "relevant": true,
+    "rationale": "A direct case study of building an on-demand home/domestic-care service app."
+  },
+  {
+    "idx": 246,
+    "query": "on demand home service app guide",
+    "uuid": "eff87213-d6a0-4811-afc1-5cb91ddad43f",
+    "relevant": true,
+    "rationale": "Explains the rationale for custom apps for service-based businesses, applicable to on-demand home service apps."
+  }
+]

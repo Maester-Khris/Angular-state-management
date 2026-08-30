@@ -179,23 +179,33 @@ export class Home implements OnInit, OnDestroy {
     shareReplay(1)
   );
 
-  aiResults$ = this.searchQuery$.pipe(
-    debounceTime(500),
-    distinctUntilChanged((prev, curr) => prev.query === curr.query && prev.withAi === curr.withAi),
-    switchMap(({ query, withAi }) => {
+  private aiRetryTick$ = new BehaviorSubject<number>(0);
+
+  aiResults$ = combineLatest([
+    this.searchQuery$.pipe(debounceTime(500), distinctUntilChanged((a, b) => a.query === b.query && a.withAi === b.withAi)),
+    this.aiRetryTick$
+  ]).pipe(
+    switchMap(([{ query, withAi }]) => {
       // Skip entirely if server flag is off — no request fired
       const flagOn = this.configSvc.config().features.aiSearch;
       if (!flagOn || !withAi || !query.trim()) {
         return of({ state: 'idle' as const });
       }
       return this.RemoteApi.fetchAiResults(query).pipe(
-        map(data => ({ state: 'loaded' as const, data })),
+        map(data => ({
+          state: (data.degraded_legs?.length ? 'partial' : 'loaded') as 'partial' | 'loaded',
+          data
+        })),
         startWith({ state: 'loading' as const }),
         catchError(() => of({ state: 'error' as const, message: 'AI search unavailable' }))
       );
     }),
     shareReplay(1)
   );
+
+  onAiRetry() {
+    this.aiRetryTick$.next(this.aiRetryTick$.value + 1);
+  }
 
   // =============== Lifecycle hooks ================
   ngOnInit(): void {

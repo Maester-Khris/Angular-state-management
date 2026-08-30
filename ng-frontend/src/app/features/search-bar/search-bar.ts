@@ -27,8 +27,6 @@ export class SearchBar implements OnInit {
   @Input() isAiActive = true;
   @Output() search = new EventEmitter<SearchEvent>();
   @Output() typeChange = new EventEmitter<SearchType>();
-  @Output() aiToggle = new EventEmitter<boolean>();
-  @Output() groqToggle = new EventEmitter<boolean>();
 
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
   isFocused = false;
@@ -129,8 +127,8 @@ export class SearchBar implements OnInit {
 
   toggleAi() {
     this.isAiActive = !this.isAiActive;
-    this.aiToggle.emit(this.isAiActive);
-    this.groqToggle.emit(this.isAiActive);
+    // aiToggle/groqToggle removed — neither was ever bound in home.html;
+    // withAi already flows through the next search() emission via isAiActive.
   }
 
   prefillSearch(value: string) {

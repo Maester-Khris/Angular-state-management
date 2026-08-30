@@ -1,0 +1,262 @@
+{
+  "summary": {
+    "total_queries": 36,
+    "format_compliance_rate": 1.0,
+    "avg_precision_at_k": 0.3722,
+    "avg_recall_at_k": 0.7199
+  },
+  "results": [
+    {
+      "query": "redis caching strategies",
+      "expanded_query": "redis caching eviction ttl sharding replication persistence",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 0.3333333333333333
+    },
+    {
+      "query": "kubernetes deployment rollback",
+      "expanded_query": "kubernetes deployment rollback helm rolling-update canary blue-green pod-disruption-budget",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.3333333333333333
+    },
+    {
+      "query": "react state management",
+      "expanded_query": "react redux mobx context hooks state management",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 0.4
+    },
+    {
+      "query": "postgres index tuning",
+      "expanded_query": "postgres index optimization query planning btree gin vacuum",
+      "format_compliant": true,
+      "precision_at_k": 0.8,
+      "recall_at_k": 0.6666666666666666
+    },
+    {
+      "query": "intelligence",
+      "expanded_query": "artificial_intelligence machine_learning deep_learning neural_networks natural_language_processing reinforcement_learning",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.3333333333333333
+    },
+    {
+      "query": "memory",
+      "expanded_query": "memory management garbage collection heap caching memory leaks",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.2
+    },
+    {
+      "query": "async python event loop",
+      "expanded_query": "asyncio event-loop concurrency coroutine async-await task-scheduling nonblocking-io",
+      "format_compliant": true,
+      "precision_at_k": 0.6,
+      "recall_at_k": 0.6
+    },
+    {
+      "query": "microservices vs monolith",
+      "expanded_query": "microservices monolith architecture scalability deployment containerization APIgateway",
+      "format_compliant": true,
+      "precision_at_k": 0.8,
+      "recall_at_k": 0.8
+    },
+    {
+      "query": "ci cd pipeline best practices",
+      "expanded_query": "continuous integration continuous deployment pipeline automation testing artifact",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 0.5
+    },
+    {
+      "query": "hybrid integration deployment",
+      "expanded_query": "hybrid integration deployment ci cd microservices api gateway",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "beyond the basics tutorial",
+      "expanded_query": "beyond the basics tutorial",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.3333333333333333
+    },
+    {
+      "query": "what is hybrid cloud",
+      "expanded_query": "hybrid cloud multi cloud workload migration cloud integration",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 0.6666666666666666
+    },
+    {
+      "query": "best billing software companies",
+      "expanded_query": "billing software invoicing api payment gateway integration subscription",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 0.6666666666666666
+    },
+    {
+      "query": "create web browser extension",
+      "expanded_query": "webextensions manifest javascript api content-script packaging",
+      "format_compliant": true,
+      "precision_at_k": 0.8,
+      "recall_at_k": 0.6666666666666666
+    },
+    {
+      "query": "create erc20 token guide",
+      "expanded_query": "erc20 solidity token deployment ethereum smartcontract web3",
+      "format_compliant": true,
+      "precision_at_k": 0.6,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "clickhouse cpu performance comparison",
+      "expanded_query": "clickhouse benchmarking cpu utilization query optimization columnar storage",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "seo for new domains",
+      "expanded_query": "seo technical-seo crawling indexing sitemaps meta-tags page-speed",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "openrgb not working after sleep",
+      "expanded_query": "openrgb rgb lighting sleep resume power management usb",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "hreflang seo guide",
+      "expanded_query": "hreflang seo internationalization localization html-rel canonical sitemap",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "what is server sent events",
+      "expanded_query": "server-sent events sse eventsource http streaming real-time communication",
+      "format_compliant": true,
+      "precision_at_k": 0.6,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "question answering on tables",
+      "expanded_query": "question answering tables semantic parsing sql generation natural",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "javascript calculator tutorial",
+      "expanded_query": "javascript calculator tutorial dom events arithmetic operations ui",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.3333333333333333
+    },
+    {
+      "query": "kusk cloudentity integration",
+      "expanded_query": "kusk gateway cloudentity integration oauth2 oidc jwt validation",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "javascript destructuring arrays",
+      "expanded_query": "javascript destructuring arrays es6 rest operator default values",
+      "format_compliant": true,
+      "precision_at_k": 0.6,
+      "recall_at_k": 0.75
+    },
+    {
+      "query": "google maps scraping tutorial",
+      "expanded_query": "google-maps-api web-scraping geocoding rate-limiting anti-scraping proxies",
+      "format_compliant": true,
+      "precision_at_k": 0.6,
+      "recall_at_k": 0.75
+    },
+    {
+      "query": "google solution challenge 2025",
+      "expanded_query": "google cloud firebase mlkit api integration app development",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "whitebophir project contributions",
+      "expanded_query": "whitebophir project contributions",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "rust vs zig comparison",
+      "expanded_query": "rust zig memory safety performance benchmarking ownership model",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "accessibility in tech",
+      "expanded_query": "accessibility in tech",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 0.3333333333333333
+    },
+    {
+      "query": "fluxninja rate limiting service",
+      "expanded_query": "fluxninja rate limiting service",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "real time website security",
+      "expanded_query": "real time website security",
+      "format_compliant": true,
+      "precision_at_k": 0.6,
+      "recall_at_k": 0.5
+    },
+    {
+      "query": "what is voice sdk",
+      "expanded_query": "what is voice sdk",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "inclusive business practices",
+      "expanded_query": "inclusive business practices",
+      "format_compliant": true,
+      "precision_at_k": 0.4,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "turbopack in next js",
+      "expanded_query": "turbopack in next js",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 1.0
+    },
+    {
+      "query": "ai software developer trends",
+      "expanded_query": "ai software developer trends",
+      "format_compliant": true,
+      "precision_at_k": 0.6,
+      "recall_at_k": 0.5
+    },
+    {
+      "query": "spring microservices gateway setup",
+      "expanded_query": "spring microservices gateway setup",
+      "format_compliant": true,
+      "precision_at_k": 0.2,
+      "recall_at_k": 0.25
+    }
+  ]
+}

@@ -168,15 +168,42 @@ const dbCrudOperator = {
   },
 
   async searchPostsByKeyword(term, limit = 10) {
-    try {
-      return await Post.find(
-        { $text: { $search: term }, isPublic: true, isDraft: { $ne: true } },
-        { score: { $meta: "textScore" } }
-      )
+    const textResults = await Post.find(
+      { $text: { $search: term }, isPublic: true, isDraft: { $ne: true } },
+      { score: { $meta: "textScore" } }
+    )
       .sort({ score: { $meta: "textScore" } })
       .limit(limit)
       .lean();
-    } catch (e) { throw e; }
+
+    if (textResults.length > 0) return textResults;
+
+    // Fallback only -- $text found nothing. Atlas Search fuzzy recovers real hits on
+    // misspelled query terms that $text's exact tokenizer can't match (confirmed live,
+    // see artifacts/ai-search-upgrade/subgoal2-metric-improvement-root-cause-2026-08-21.md).
+    // Never runs when $text already has results: a full $search cutover was tested and
+    // regresses ranking on some queries (see hypothesis-checklist-remaining-items, Item D) --
+    // this fallback-only scope sidesteps that entirely, since it only fires where $text had
+    // nothing to lose.
+    try {
+      return await Post.aggregate([
+        {
+          $search: {
+            index: 'posts_lexical_search',
+            text: {
+              query: term,
+              path: ['title', 'description'],
+              fuzzy: { maxEdits: 2, prefixLength: 0 },
+            },
+          },
+        },
+        { $match: { isPublic: true, isDraft: { $ne: true } } },
+        { $limit: limit },
+      ]);
+    } catch (e) {
+      console.warn('Atlas Search fuzzy fallback failed, returning empty $text result:', e.message);
+      return textResults;
+    }
   },
 
   // ==========================================
