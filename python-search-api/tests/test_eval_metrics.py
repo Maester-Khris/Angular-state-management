@@ -26,21 +26,23 @@ def test_format_compliant_rejects_punctuation():
     assert format_compliant("caching, redis, and TTL invalidation.", max_keywords=8) is False
 
 def test_ndcg_at_k_perfect_ranking():
+    # ndcg_at_k takes graded relevance (dict of doc_id -> grade); grade=1 for every relevant
+    # doc reduces the 2^rel-1 gain formula to classic binary nDCG.
     retrieved = ["a", "b", "c"]
-    relevant = {"a", "b", "c"}
-    assert ndcg_at_k(retrieved, relevant, k=3) == pytest.approx(1.0)
+    relevance = {"a": 1, "b": 1, "c": 1}
+    assert ndcg_at_k(retrieved, relevance, k=3) == pytest.approx(1.0)
 
 def test_ndcg_at_k_no_relevant_set():
-    assert ndcg_at_k(["a", "b"], set(), k=2) == 0.0
+    assert ndcg_at_k(["a", "b"], {}, k=2) == 0.0
 
 def test_ndcg_at_k_no_hits():
     retrieved = ["x", "y"]
-    relevant = {"a"}
-    assert ndcg_at_k(retrieved, relevant, k=2) == 0.0
+    relevance = {"a": 1}
+    assert ndcg_at_k(retrieved, relevance, k=2) == 0.0
 
 def test_ndcg_at_k_partial_out_of_order():
     retrieved = ["x", "a", "b"]
-    relevant = {"a", "b", "c"}
+    relevance = {"a": 1, "b": 1, "c": 1}
     # dcg = 0/log2(2) + 1/log2(3) + 1/log2(4) = 0 + 0.63093 + 0.5 = 1.13093
     # idcg (min(3,3)=3 ideal hits) = 1/log2(2) + 1/log2(3) + 1/log2(4) = 1 + 0.63093 + 0.5 = 2.13093
-    assert ndcg_at_k(retrieved, relevant, k=3) == pytest.approx(1.13093 / 2.13093, rel=1e-4)
+    assert ndcg_at_k(retrieved, relevance, k=3) == pytest.approx(1.13093 / 2.13093, rel=1e-4)
