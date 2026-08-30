@@ -5,6 +5,8 @@ const Post = require('../database/models/post');
 const remoteSearchSvc = require('../services/remotesearch');
 const { mergeResults } = require('../services/rankprocessor');
 const eventLoggerService = require('../services/eventLoggerService');
+const aiSearchCache = require('../services/aiSearchCache');
+const redisConfig = require('../configurations/redis');
 
 // ==========================================
 // 1. SYSTEM INTEGRITY
@@ -33,8 +35,30 @@ router.get("/health", async (req, res) => {
         services: {
             database: { name: "MongoDB Atlas", status: dbStatus },
             semantic_engine: { name: "Python Flask / Qdrant", status: pythonStatus }
-        }
+        },
+        aiSearchCache: await (async () => {
+            try {
+                const conn = await redisConfig.getProducerConnection();
+                const [hits, misses] = await Promise.all([
+                    conn.get('ai_search_cache:hits'),
+                    conn.get('ai_search_cache:misses'),
+                ]);
+                return { hits: Number(hits) || 0, misses: Number(misses) || 0 };
+            } catch {
+                return { hits: 0, misses: 0 };
+            }
+        })()
     });
+});
+
+router.get('/api/ping', async (req, res) => {
+    try {
+        await MongoConnection.pingDb();
+        return res.status(200).json({ mongo: 'up' });
+    } catch (error) {
+        console.error('Ping: Mongo unreachable:', error.message);
+        return res.status(503).json({ mongo: 'down', message: error.message });
+    }
 });
 
 // ==========================================
@@ -154,9 +178,19 @@ router.get('/api/search', async (req, res) => {
             hydratedDocs = await Post.find({ uuid: { $in: missingUuids } }).lean();
         }
 
+        // Rebuild the semantic leg in Python's original rank order, with full doc data.
+        // Post.find({ $in }) gives no ordering guarantee, so re-deriving order from
+        // hydratedDocs (instead of semanticMatches) would scramble the semantic rank.
+        // Docs also found lexically must stay in this list too, or they lose their
+        // semantic-leg RRF contribution entirely when mergeResults fuses the two legs.
+        const keywordByUuid = new Map(keywordResults.map(d => [d.uuid, d]));
+        const hydratedByUuid = new Map(hydratedDocs.map(d => [d.uuid, d]));
+        const orderedSemanticResults = semanticMatches
+            .map(match => keywordByUuid.get(match.uuid) || hydratedByUuid.get(match.uuid))
+            .filter(Boolean);
+
         // Merge and Rank
-        // Note: hydratedDocs needs to be combined with semanticMatches scores in mergeResults
-        const hybridResults = mergeResults(keywordResults, hydratedDocs);
+        const hybridResults = mergeResults(keywordResults, orderedSemanticResults);
 
         const pythonStatus = await remoteSearchSvc.checkPythonStatus();
 
@@ -204,6 +238,11 @@ router.post('/api/search/ai', async (req, res) => {
             });
         }
 
+        const cached = await aiSearchCache.getCached(query, limit);
+        if (cached) {
+            return res.status(200).json(cached);
+        }
+
         const pythonBaseUrl = process.env.NODE_ENV === 'production'
             ? process.env.PYTHON_SERVICE_URL
             : 'http://localhost:5000';
@@ -229,6 +268,10 @@ router.post('/api/search/ai', async (req, res) => {
 
         // Forward Python response exactly — no transformation
         const data = await pythonResponse.json();
+        // Caches degraded_legs responses too, for now — caching them differently
+        // (shorter TTL, or skip) is a follow-up once the incorrect-hit-rate metric
+        // shows it's actually a problem, not before.
+        await aiSearchCache.setCached(query, limit, data);
         return res.status(200).json(data);
 
     } catch (error) {

@@ -1,3 +1,124 @@
+## [AI Search Pipeline Upgrade] — 2026-08-08 — In Progress
+**Theme: Query expansion quality, provider swap, semantic caching, and result-panel UX for `/search/ai`**
+
+### Completed — Phase 0: operational continuity (missed from original scope, added mid-sprint)
+- [x] `python-search-api` — Public `GET /ping` keepalive endpoint, real Qdrant round trip, no auth
+- [x] `node-backend` — Public `GET /api/ping` keepalive endpoint, real MongoDB round trip, no auth
+      (stops Render/Qdrant free-tier services pausing on inactivity; cronjobs.org registration
+      still open, see Scope)
+- [x] `data-utils` — `rebuild_qdrant_from_mongo.py`: one-time recovery CLI, rebuilds Qdrant from
+      live Mongo posts — used for real when Qdrant's collection went empty mid-sprint
+
+### Completed — Phase 1: pipeline plumbing + reactive fixes (found while verifying)
+- [x] `python-search-api` — Collapsed 3 separate `asyncio.run()` calls into one async handler,
+      un-blocked the synchronous Qdrant/embedding call via `run_in_executor`
+- [x] Switched embeddings from Groq (404ing, unstable) to local `fastembed`
+      (`BAAI/bge-small-en-v1.5`); fixed a readiness-guard bug that checked `client`/`model` for
+      `None` before they were ever initialized, silently returning `[]` on every fresh process
+
+### Completed — Redis cache, eval diagnostics, Groq TPM fix (2026-08-14)
+- [x] `node-backend` — Redis exact-match cache for `/api/search/ai` + hit/miss counters on
+      `/health`; extended latency/incorrect-hit metrics still open, see Scope
+- [x] `python-search-api` — Capped Groq reranking/Exa snippet tokens, was tripping the 12k TPM
+      limit — degraded queries dropped 3/10 → 0/10
+- [x] First labeled harness run (`eval/golden_queries.json`) — 0.4 avg P@5/R@5, root-caused to
+      6 pipeline causes + a 7th (`relevant_ext_docs` had zero eval coverage) —
+      `artifacts/ai-search-upgrade/eval-precision-recall-analysis-2026-08-14.md`
+- [x] Cited fixes researched for all 7 causes (RRF, MMR, threshold calibration, FastEmbed
+      cross-encoder, RAGAS Context Precision); built 30k-row eval corpus tooling (Dev.to HF
+      mirror) — `eval/fetch_devto_dataset.py`
+
+### Completed — 30k eval corpus + golden set + first harness run (2026-08-15/16)
+- [x] Populated `postair_eval` Mongo (30k docs) + `posts_eval` Qdrant, built a 40-query golden
+      set via synthetic generation + dual judging (Groq + Gemini, 0.646 Jaccard agreement)
+- [x] First 30k harness run: P@5 0.235, R@5 0.7542 — a golden-set-shape effect (21/40 queries
+      have exactly 1 relevant doc), not a pipeline regression. Refined 3 of the original 6
+      causes, surfaced 2 new ones (golden-set incompleteness, label domain contamination) —
+      `eval-precision-recall-analysis-30k-2026-08-16.md`
+
+### Completed — RRF fusion, cross-encoder reranking, MMR diversity (2026-08-16/17)
+- [x] `python-search-api` — RRF fusion of raw+expanded Qdrant results, FastEmbed cross-encoder
+      reranking (`RerankingService`), MMR diversity reranking against duplicate-title crowding,
+      `SCORE_THRESHOLD` left disabled after a sweep showed no precision benefit
+- [x] `_search_ai_pipeline` refactored into named phase functions sharing one `_soft_fail()`
+      helper, exposing `degraded_legs` in the response
+- [x] Two clean-code/architecture review rounds, 63/63 tests passing, zero-degraded-legs live run
+
+### Completed — Groq model migration (2026-08-18)
+- [x] `llama-3.3-70b-versatile` removed from Groq's catalog (404s) — switched default to
+      `openai/gpt-oss-120b` in `services/inference.py` + eval scripts; raised `max_tokens`
+      ceilings across `expand_query`/`judge_candidate_pools.py` for the new model's hidden
+      reasoning tokens
+
+### Completed — Phase 9 decision: Exa summary vs. reranking, resolved KEEP (2026-08-20)
+- [x] Built and ran the spike for real (previously never attempted) — Exa's schema-guided
+      summary only exists on their REST API, not the MCP server already integrated
+- [x] Found and fixed a real truncation bug in `generate_relevant_sources`
+      (`MAX_RERANK_TOKENS` too low for the new reasoning model) while building the comparison
+- [x] Pairwise-judged comparison: Exa's summary won zero of 12 metric-comparisons against the
+      existing pipeline — **decision: KEEP `generate_relevant_sources`**, Exa adapter stays
+      built-but-unused
+
+### Completed — hybrid search (`GET /api/search`) eval: first coverage (2026-08-20)
+- [x] `data-utils` — Built and ran the first-ever eval of `GET /api/search` (Mongo `$text` +
+      Qdrant + RRF, previously zero coverage) — harness scripts under `data-utils/eval/`
+- [x] Results: Mongo $text / BM25 / semantic / RRF hybrid P@5 = 0.244 / 0.294 / 0.333 /
+      **0.156 — worst of all four**, contradicting the expected Elastic/Turnbull precedent
+- [x] Root-caused: `home.js`'s hydration filter drops cross-leg-consensus docs from fusion and
+      re-fetches survivors in unordered `$in` order, discarding true rank —
+      `hybrid-search-eval-results-2026-08-20.md`
+- [x] Bonus finding: BM25 beats Mongo's undocumented `$text` scoring on every metric
+
+### Completed — golden-set-based eval: reconciliation → v2 rebuild → RRF fix → paused (2026-08-19 to 2026-08-30)
+- [x] Reconciled 74 Claude/Gemini disagreements, dropped 4 spam-contaminated queries, confirmed
+      12 stuck-at-1-relevant-doc queries as genuine corpus scarcity — final 36-query v1 set,
+      P@5 ceiling 0.589, post-improvement run avg P@5 0.372/R@5 0.720. Full sprint audit vs. all
+      4 plans: 8/10 master phases DONE
+- [x] Rebuilt as golden-set v2: 70 queries, 3-source-pooled (Mongo+Qdrant+BM25), graded 0/1/2,
+      OpenAI+Claude-judged — replaces the flawed v1 set, confirms RRF hybrid underperformance
+      (0.274 P@5) isn't a labeling artifact — `golden-set-v2-results-2026-08-21.md`
+- [x] Fixed the hybrid RRF fusion bug: semantic-only docs were losing rank order and cross-leg
+      consensus was dropped before fusion (`node-backend/routing/home.js`, `e4d3491`). Hybrid
+      P@5 0.274 → **0.4222**, now beats every individual leg
+- [x] Deployed 3 "accepted measures": R-precision CAP=10 and Atlas Search fuzzy fallback hold
+      up; weighted RRF semantic=0.8 **reverted** after full re-verification regressed hybrid
+      P@5 to 0.3963 (back to 1.2, `c40eca5`/`cc40b2c`)
+- [x] Hypothesis checklist on 5 remaining scenarios: 1 promoted (`$search`-vs-`$text`
+      divergence structural), 4 still open — off-domain rejection, ambiguous queries, C#/C++
+      vocabulary mismatch, narrow-corpus reranking —
+      `hypothesis-checklist-remaining-items-2026-08-21.md`
+- [x] **Paused (2026-08-30):** stopping mid-investigation, not abandoning — net position
+      unchanged since the fusion fix (hybrid P@5 0.4222). All eval code/data/reports (retired
+      v1 `eval/` pipeline + current `data-utils/eval/` v2 harness) committed at this pause
+      point (`760c712`)
+
+### Deferred — eval, resume when unpaused
+- [ ] The 4 hypothesis-checklist items above: off-domain rejection calibration, ambiguous-query
+      fix, C#/C++ `charFilter: mapping`, narrow-corpus cross-encoder reranking
+- [ ] Full `semanticWeight` sweep (0.9/1.0/1.1 alongside the tested 0.8/1.2) against the full
+      54-query split — only two points were ever compared
+- Ideas floated, none attempted: side finding that plain `$search` already tokenizes `C#`
+  better than `$text`, worth checking before building the `charFilter` config from scratch
+- Ruled out, don't retry without new evidence: alias-table fix and naive query decomposition
+  for ambiguous queries; reusing `/search/ai`'s `expand_query` on `/api/search` (breaks the
+  eval protocol's scope boundary between the two)
+
+### Scope
+- [ ] `node-backend` — Redis cache metrics: incorrect-hit rate, latency p50/p95/p99 split by
+      hit/miss (cache itself is done, this instrumentation is YAGNI-until-needed)
+- [ ] Ops — register `GET /ping`/`GET /api/ping` with cronjobs.org against the live URLs; code
+      is done, this is the one manual step left —
+      `artifacts/ai-search-upgrade/ops-keepalive-cron-registration.md`
+- [ ] Per-stage latency and $-per-query instrumentation for the AI search pipeline — never
+      built, from the original evaluation plan
+
+### Reference
+- `docs/superpowers/plans/2026-08-09-ai-search-pipeline-upgrade.md` — full 10-phase plan
+- `artifacts/ai-search-upgrade/` — analysis, research, and decision writeups cited above
+- `eval/` — retired v1 golden-set pipeline; `data-utils/eval/` — current v2 harness
+
+---
+
 ## [E2E Platform Validation] — 2026-08-06 — Completed
 **Theme: Pure-CLI Playwright suite — reader view, writer console, writer dashboard**
 

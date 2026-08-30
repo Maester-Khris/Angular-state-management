@@ -55,7 +55,9 @@
     <!-- AI rail: fixed width, only mounts when AI state is not idle -->
     @if ((aiResults$ | async)?.state !== 'idle') {
     <aside class="home-ai-rail">
-      <app-ai-results-panel [aiState]="(aiResults$ | async) ?? { state: 'idle' }" (docSelected)="openDetails($event)">
+      <app-ai-results-panel [aiState]="(aiResults$ | async) ?? { state: 'idle' }"
+        (docSelected)="openDetails($event)"
+        (retry)="onAiRetry()">
       </app-ai-results-panel>
     </aside>
     }

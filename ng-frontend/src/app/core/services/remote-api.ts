@@ -6,12 +6,6 @@ import { Post } from '../../features/dashboard/data-access/post.model';
 import { WriterPost } from '../../features/dashboard/data-access/writer.models';
 import { UserProfile } from '../../features/dashboard/data-access/profile.model';
 
-// export interface AiSearchResponse {
-//   query: string;
-//   expanded_query: string;
-//   similar_docs: Array<{ uuid: string; title: string; description: string; score: number }>;
-//   relevant_ext_docs: Array<{ title: string; url: string; snippet: string }>;
-// }
 export interface ExternalDoc {
   source_url: string;
   source_name: string;
@@ -32,6 +26,7 @@ export interface AiSearchResponse {
   expanded_query: string;
   similar_docs: SimilarDoc[];
   relevant_ext_docs: ExternalDoc[];
+  degraded_legs: string[];
 }
 
 @Injectable({

@@ -41,9 +41,15 @@ function getDbStatus() {
   return mongoose.connection.readyState;
 }
 
+async function pingDb() {
+  await mongoose.connection.db.admin().command({ ping: 1 });
+  return true;
+}
+
 module.exports = {
   connectDB,
   closeConnection,
   getDbStatus,
+  pingDb,
   connectionEventListeners,
 };

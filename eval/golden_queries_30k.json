@@ -1,0 +1,294 @@
+[
+  {
+    "query": "redis caching strategies",
+    "relevant_uuids": [
+      "126f9594-1e16-4b2b-bd72-c5aea0b39ce9",
+      "20c905c7-eb2a-429a-a02e-0442e2f7b5ce",
+      "433ad03d-0b41-4f2a-9f47-4663fc91b933",
+      "767798a6-6e98-42ae-84e9-d573e01e007d",
+      "79df9a96-7527-4b49-b51b-76965dc5af7f",
+      "9c956b87-49ce-4318-a76a-e1ab61bb3afa"
+    ]
+  },
+  {
+    "query": "kubernetes deployment rollback",
+    "relevant_uuids": [
+      "19fb0959-eb97-496c-bf97-091dd8f541c7",
+      "96f8ca24-a2e7-4119-b924-93726b4753e3",
+      "9f28fc77-7d8f-408f-9dc7-3020d031938e"
+    ]
+  },
+  {
+    "query": "react state management",
+    "relevant_uuids": [
+      "067916b1-c5b0-4f78-af1e-94cff6fc0d2a",
+      "2f2b3a09-88e2-4fd8-bc35-1749a9b94a76",
+      "5110db1e-d72e-4b4e-8cf6-d1da16068f4c",
+      "5e4b1100-128a-4eb6-8e92-1fbfd9c123f5",
+      "9b007ea9-ed5d-42a3-a454-a09d03944f0c"
+    ]
+  },
+  {
+    "query": "postgres index tuning",
+    "relevant_uuids": [
+      "0a128979-ed0e-4674-9283-79ed6c5b366d",
+      "338ab341-0158-4eb4-9b7d-368dc345498e",
+      "3bc921fe-beef-4c02-8e8b-895d3bc5f22b",
+      "522f015e-460c-43e5-9b08-06a64eb06d00",
+      "52744229-a15c-4a6a-96f0-8d9e3b4096db",
+      "6937760d-807e-4cd0-ae35-d8c6e9bea718"
+    ]
+  },
+  {
+    "query": "intelligence",
+    "relevant_uuids": [
+      "337728f9-0f34-42ea-a3e9-c5cfbd23ac30",
+      "48101fb8-8a20-4ad5-960a-cd5aea7ac2aa",
+      "dbe9ed84-9ff7-4869-93de-0b784d4e04bb"
+    ]
+  },
+  {
+    "query": "memory",
+    "relevant_uuids": [
+      "0deff858-8964-4c63-9611-cb7c53100f59",
+      "3fde5628-d6cd-4683-9be3-e270b83d2b24",
+      "793f13bb-27d2-4f45-9053-8dfe961683c7",
+      "a88cb8f8-8c58-44e2-8a99-73f688e359f6",
+      "dc2db824-80b8-4416-b29c-d999b5c2643b"
+    ]
+  },
+  {
+    "query": "async python event loop",
+    "relevant_uuids": [
+      "032dfcb2-b3bb-42b8-9357-9f837bdd8790",
+      "387f50c2-4292-4b9b-a7a3-7665dfd14ea1",
+      "874d4878-8144-4295-9f3e-e9af3e73bb8d",
+      "d81144ce-08ee-46c7-933d-42119507b9d2",
+      "ed2bf985-80c2-44ca-8ed2-ae58b55e6e9d"
+    ]
+  },
+  {
+    "query": "microservices vs monolith",
+    "relevant_uuids": [
+      "48982a0e-dedf-4550-bdcd-1a3637ecfe24",
+      "93cd4c6e-3e43-4a7b-a65b-0ebf53f8705f",
+      "bd77d809-b60c-48de-a979-2956f9e53eca",
+      "d90a09ec-0a01-4937-8337-4be73c86e171",
+      "f0f8da56-6a6a-4059-afd0-c8da8f0e4b83"
+    ]
+  },
+  {
+    "query": "ci cd pipeline best practices",
+    "relevant_uuids": [
+      "10456f9e-9731-4c4a-a554-352724ec80ce",
+      "86dc49b6-8229-47ec-9722-cad938a66248",
+      "9871263f-a015-4f74-bb37-299c825bc5fa",
+      "f8838112-d0be-40e3-9cf4-330a8cc45313"
+    ]
+  },
+  {
+    "query": "hybrid integration deployment",
+    "relevant_uuids": [
+      "06961346-ac3b-466d-97d5-3cb494a069e2"
+    ]
+  },
+  {
+    "query": "beyond the basics tutorial",
+    "relevant_uuids": [
+      "b61ea209-9c2c-44cf-a4ef-74809f00effd",
+      "de05961a-3ec5-4950-a1d3-09e4f299a602",
+      "fbebc038-961c-4cf6-882a-868fbc4d2c48"
+    ]
+  },
+  {
+    "query": "what is hybrid cloud",
+    "relevant_uuids": [
+      "15dd1e3b-a547-437d-976f-8b75f8cf849c",
+      "1a6a4e81-9308-40a6-a69f-2e0f4f9042cc",
+      "e077e245-65d3-4717-9100-06186150f08e"
+    ]
+  },
+  {
+    "query": "best billing software companies",
+    "relevant_uuids": [
+      "04ccf75b-3f4f-4fd4-98cf-b191cba2d7b0",
+      "0f67088c-d9ec-4d8e-8b64-4a0b69783340",
+      "1c8df1b8-15c4-4f02-860e-43dd686c4d49"
+    ]
+  },
+  {
+    "query": "create web browser extension",
+    "relevant_uuids": [
+      "12dad611-6c95-4651-a1c8-8e0c1e22da4a",
+      "19d9543f-b3a1-4ac3-9105-b912ad659405",
+      "46519ad4-8033-4f54-b3f8-f7848eb0ba96",
+      "46dd02e1-af78-44f7-a863-60f3d383a69a",
+      "c61b92ce-676d-46ca-8043-8173817c636f",
+      "d65db5e8-be2c-49a2-ad20-f08914de3775"
+    ]
+  },
+  {
+    "query": "create erc20 token guide",
+    "relevant_uuids": [
+      "4b00fa7b-fcd8-4690-a375-3d3f1e969975",
+      "aca84f2a-7823-43ab-90ff-c0ba60064b0e",
+      "f9dbf5f4-7268-48d1-955a-5a9335c2117d"
+    ]
+  },
+  {
+    "query": "clickhouse cpu performance comparison",
+    "relevant_uuids": [
+      "22f8a7d1-dce8-4b49-891d-a4fa3078ab99"
+    ]
+  },
+  {
+    "query": "seo for new domains",
+    "relevant_uuids": [
+      "4b97baa6-e18c-43d8-a0ff-820d85f52907"
+    ]
+  },
+  {
+    "query": "openrgb not working after sleep",
+    "relevant_uuids": [
+      "e0230cd9-c6df-4a75-93e7-a69d045b488d"
+    ]
+  },
+  {
+    "query": "hreflang seo guide",
+    "relevant_uuids": [
+      "3c6772c2-6390-48c4-a6fe-d16fe091f1c1"
+    ]
+  },
+  {
+    "query": "what is server sent events",
+    "relevant_uuids": [
+      "3563994d-d4b1-4fd1-89fd-74e8b4155317",
+      "a6c133be-cdea-4068-b64c-0fe36b53c892",
+      "c467ad40-ab9b-4e44-8d7a-1f836638e404"
+    ]
+  },
+  {
+    "query": "question answering on tables",
+    "relevant_uuids": [
+      "e7bc4696-f0d6-46ec-bbe5-9762e2968df4"
+    ]
+  },
+  {
+    "query": "javascript calculator tutorial",
+    "relevant_uuids": [
+      "650ed839-92b3-4995-93a0-f4a0dcb83628",
+      "db07b06d-74f9-4e87-9478-2900e592dbad",
+      "f1d27323-1752-4028-b3cb-89a6268ae592"
+    ]
+  },
+  {
+    "query": "kusk cloudentity integration",
+    "relevant_uuids": [
+      "b5f27fed-0690-4404-9a3a-7a29944d6a3a"
+    ]
+  },
+  {
+    "query": "javascript destructuring arrays",
+    "relevant_uuids": [
+      "1ee0def6-31db-497b-b621-ff0e5c67afd3",
+      "2847787c-e9f1-4f72-9789-0306d498a41f",
+      "4b683487-0e23-48f6-be1f-b067271540c5",
+      "a305fa2c-2596-4801-8f1a-531a0088c429"
+    ]
+  },
+  {
+    "query": "google maps scraping tutorial",
+    "relevant_uuids": [
+      "2d7bf3f7-34b6-47a6-8ba4-f0224b4fe815",
+      "2dc1c976-d8b0-4be9-93dd-a87442898988",
+      "8f411c08-833c-4371-9cdf-b324b331a638",
+      "bf11d373-c4ae-42ba-a6a4-4d2e21e0cab8"
+    ]
+  },
+  {
+    "query": "google solution challenge 2025",
+    "relevant_uuids": [
+      "8cc4f8b3-2c27-4104-acfe-20b00d1b7212"
+    ]
+  },
+  {
+    "query": "whitebophir project contributions",
+    "relevant_uuids": [
+      "46d10d97-e98c-4450-8917-7ca5ded08994"
+    ]
+  },
+  {
+    "query": "rust vs zig comparison",
+    "relevant_uuids": [
+      "8007136e-4691-4278-85b7-3e943ff2be42",
+      "c1e4bd77-a931-46ed-9907-96bb0e398695"
+    ]
+  },
+  {
+    "query": "accessibility in tech",
+    "relevant_uuids": [
+      "013b12f0-3fb7-4ced-a336-144eb959d175",
+      "30ca3bef-b5cd-4347-a3be-c4c5697aca65",
+      "86645ae8-f27f-4f56-9db8-2f64410e8f45",
+      "b24a069e-cd63-4a48-934e-d4f45fb0b394",
+      "b649a610-2a0e-403a-a131-3909e1f07f89",
+      "c0d6deaf-9880-4631-a68d-3dee7bc6acc1"
+    ]
+  },
+  {
+    "query": "fluxninja rate limiting service",
+    "relevant_uuids": [
+      "485abee4-e7bc-45b7-8296-12edaaeba519"
+    ]
+  },
+  {
+    "query": "real time website security",
+    "relevant_uuids": [
+      "2a85963f-81f3-4f16-beb4-fa76e5a2b3bf",
+      "5708a86f-4206-4568-a145-b5aa9be6b1ae",
+      "71b620c2-853f-4fc6-9933-dcd515e529d9",
+      "7af19910-12ce-4108-9307-d5ea6ca13250",
+      "9bdeee5d-09ab-4adb-8165-d6b337987c91",
+      "9d8ea16f-2343-409d-86cd-1d6bce8692e0"
+    ]
+  },
+  {
+    "query": "what is voice sdk",
+    "relevant_uuids": [
+      "811364b4-2883-450d-8a4f-c1b52deb0668"
+    ]
+  },
+  {
+    "query": "inclusive business practices",
+    "relevant_uuids": [
+      "cd13aaa3-7a5f-4b28-bad2-97e4c5d79eb5",
+      "cf61fcea-7c2f-49c2-8689-fd73a3ea7c3c"
+    ]
+  },
+  {
+    "query": "turbopack in next js",
+    "relevant_uuids": [
+      "797c5154-6031-4b10-aa71-cea5bbed361b"
+    ]
+  },
+  {
+    "query": "ai software developer trends",
+    "relevant_uuids": [
+      "2d8a37f0-f5cc-4288-a791-67e9538deff7",
+      "7ce7c90b-fa84-4d90-92cb-d2ed3dc48a85",
+      "8ab9acd3-52c6-4e30-be87-56e80ded57a4",
+      "93b659ac-4607-494e-a0ec-afbd80bc54cf",
+      "ab2e7fe1-39cc-4b57-8450-794f75686a58",
+      "b104ae00-ce08-4489-a516-fc0e06a1cca7"
+    ]
+  },
+  {
+    "query": "spring microservices gateway setup",
+    "relevant_uuids": [
+      "1b194164-b767-411f-a5ca-26a8175e74b2",
+      "5826e554-109a-40a4-b3c8-4176ea3c47dc",
+      "8257dace-6d79-4fcb-a39c-fe97c9f3f2c6",
+      "98b3a7df-2012-4937-841e-330ca58696d5"
+    ]
+  }
+]
