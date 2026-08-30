@@ -3,7 +3,7 @@
     "total_queries": 54,
     "avg_precision_at_5": 0.3741,
     "avg_recall_at_5": 0.5179,
-    "avg_ndcg_at_10": 0.6549,
+    "avg_ndcg_at_10": 0.6539,
     "avg_mrr": 0.7805,
     "avg_r_precision": 0.6224
   },
@@ -15,8 +15,8 @@
         "08a09ac3-6a43-48c7-ad76-0351839f71ea",
         "ea985daf-4692-4445-97f5-c5a439c9d8cd",
         "c8c45c91-e7e5-42fe-a269-7ba5b5f921af",
-        "2e70977e-6d3d-4a0b-8a83-ccbf14b55c86",
         "b8fa1511-e67d-466e-969c-1f842537d66b",
+        "2e70977e-6d3d-4a0b-8a83-ccbf14b55c86",
         "711c155e-30fc-4525-bb50-bdd7f05f1640",
         "170ed03d-b138-4f07-9e22-3fe04ccef8e6",
         "6274152b-5bf6-49e0-9d77-c5d2875d66a2",
@@ -259,8 +259,8 @@
         "c17f9b09-efa4-471e-8fd3-5a172779e8dd",
         "029db16f-1f9c-4f53-862b-368441474d3a",
         "0843378f-126b-4984-9f5b-17a43d454602",
-        "603cbcf1-61f9-470c-b9ab-4dfe0b92a748",
-        "81ecec4c-dc49-4486-ba03-3f9f3e045bb8"
+        "81ecec4c-dc49-4486-ba03-3f9f3e045bb8",
+        "603cbcf1-61f9-470c-b9ab-4dfe0b92a748"
       ],
       "precision_at_5": 0.0,
       "recall_at_5": 0.0,
@@ -277,14 +277,14 @@
         "c43662dd-50bf-4b33-8560-c1d8f69a2a39",
         "3d6d9327-e190-4f26-85c6-164a754786ce",
         "9d564e9b-d7ff-4a93-bb77-f221ce13056a",
-        "08ae082d-7351-4285-b8b3-b4ebe1dde713",
         "eebece5f-54e7-484b-bb1b-ce0ee80527fb",
+        "08ae082d-7351-4285-b8b3-b4ebe1dde713",
         "a8265e92-0ba9-417c-a701-6914f9f19bb4",
         "fa8638db-e091-40af-a863-a3b8b28d3d1b"
       ],
       "precision_at_5": 0.6,
       "recall_at_5": 0.12,
-      "ndcg_at_10": 0.26639309290547963,
+      "ndcg_at_10": 0.2703257930680624,
       "mrr": 1.0,
       "r_precision": 0.5
     },
@@ -418,8 +418,8 @@
         "a547f39d-2699-4697-a6b9-ea14c9cee80d",
         "4424aee5-502d-4d9e-a21d-c871c7f5f2dc",
         "0e368705-91e6-405a-8bfd-f210439e9d56",
-        "15dd1e3b-a547-437d-976f-8b75f8cf849c",
         "5a67cceb-723a-489e-8c06-3a7e91da07c4",
+        "15dd1e3b-a547-437d-976f-8b75f8cf849c",
         "37c88087-0d08-4274-8815-9d7a2ca9b7a3"
       ],
       "precision_at_5": 0.4,
@@ -477,8 +477,8 @@
         "2fcdc8bd-7311-43b4-ae60-ed6bdf39e11d",
         "c89ec4b3-465d-4cea-9024-c5828082f873",
         "8db6448b-56ee-4fdd-9703-ed9e5db2f6b4",
-        "adedf9b6-a81b-4964-8fe8-edf401a64435",
         "1ceab66e-3248-4c28-b108-8459f42a5381",
+        "adedf9b6-a81b-4964-8fe8-edf401a64435",
         "14c4321f-21f7-4764-a353-3a17f7ca20c9",
         "84f31346-9f14-4178-86cd-b473b7365cff"
       ],
@@ -500,7 +500,7 @@
         "962954fd-ebdf-4296-887b-f9b5518c4a2a",
         "ed3232aa-6d13-4ca2-8f73-0290ce9c38db",
         "10eaa405-042d-4490-8f2f-336022923b22",
-        "65a2980a-db62-415b-ae00-549e1a5abd2b"
+        "99679cd1-f8a4-413e-959a-6219ca84f135"
       ],
       "precision_at_5": 0.4,
       "recall_at_5": 1.0,
@@ -576,8 +576,8 @@
         "94847929-cd24-4c42-9826-325b412a6bad",
         "cada3c0a-324b-4853-acd4-228b4a271a32",
         "068abab0-a9ec-486b-9ae6-d6300eab5472",
-        "f9a5ed72-8684-464a-82d6-8767443a5d30",
         "6b2cc8df-fdd8-4da9-becd-2e176a91c6ae",
+        "f9a5ed72-8684-464a-82d6-8767443a5d30",
         "b9d0b0dd-d8ef-4db3-b62f-4ba758864ee1",
         "4c59bacf-87a4-4ef1-ad43-f5b3607143c2",
         "4b750e66-e687-458e-85d7-da78725ce87a"
@@ -656,8 +656,8 @@
         "cc9f0026-2ab1-400a-b0ae-65e99b9aa678",
         "a1a430d9-dda3-4eb5-b3c2-58ec298ec7e3",
         "c0946db9-284f-4fe1-82e1-f8b483211cd6",
-        "de3f8f05-b0d3-44ba-8d9c-d1b61038bf8d",
         "b51005f2-02e9-459a-8543-d8da375e2b22",
+        "de3f8f05-b0d3-44ba-8d9c-d1b61038bf8d",
         "c58d95f2-18e3-4a92-8b11-1eae3ce39e19",
         "bf5a0283-5c90-4255-9b85-ba9870bf2a5e",
         "176c93ca-4397-4481-983a-5d38013f94f8"
@@ -794,8 +794,8 @@
         "9d445512-e102-4866-a412-5b9d0b612dd2",
         "c113496e-d2de-4b15-a514-aa16a354c18e",
         "57cd9e9c-fcb2-4e61-9dd5-94d9b1a5b9a1",
-        "8b19bcd1-63d9-4d4d-8d7d-1f14708831df",
         "2d807dda-390a-49b7-92d6-07e949464e75",
+        "8b19bcd1-63d9-4d4d-8d7d-1f14708831df",
         "5c281322-12d8-4688-a8b6-82e6a81be7c8",
         "3f87bbe1-0742-466d-9d49-9148e3df1e27",
         "2e7c1688-57ad-4df7-9d73-a243a3ca1a0e",
@@ -839,7 +839,7 @@
         "7be21527-f994-494a-9b2c-da81c757763d",
         "aac7013e-ad24-4ad4-82e2-1e40307f117f",
         "5e359662-61d5-4bb3-bf56-f1f71fcf87b1",
-        "1efebed8-e556-481a-8868-b5ace2e4529f",
+        "159fb93b-2674-41f0-854c-c6eaf435469c",
         "fbc4a8c1-261c-4e70-837b-2525f5276fcb"
       ],
       "precision_at_5": 0.2,
@@ -899,8 +899,8 @@
         "f9a5ed72-8684-464a-82d6-8767443a5d30",
         "a504c66b-acac-4094-97c1-e864edd302de",
         "fc7a5b57-a96d-4738-8864-c1ccd166e54c",
-        "4b750e66-e687-458e-85d7-da78725ce87a",
-        "df1db0e6-d83f-437c-bb28-93b044e9b1aa"
+        "4c59bacf-87a4-4ef1-ad43-f5b3607143c2",
+        "4b750e66-e687-458e-85d7-da78725ce87a"
       ],
       "precision_at_5": 0.2,
       "recall_at_5": 0.5,
@@ -920,7 +920,7 @@
         "7836e9c8-a276-4a54-8afa-7a7b6877a9f5",
         "d84fab3c-7144-4519-b837-24d98a4e3e08",
         "39b2e2c3-83d0-41a3-b76e-b6f619e9baae",
-        "03908d15-2c2f-429f-b55f-b07e6910e8ad"
+        "21e730f3-803f-4438-9c3f-8e495c7216da"
       ],
       "precision_at_5": 0.2,
       "recall_at_5": 0.5,
@@ -952,8 +952,8 @@
       "query": "how spellcheckers work",
       "retrieved": [
         "40da8093-777a-4a16-8445-b71a24c5ef27",
-        "dc3ce8ea-c3dc-4888-83e9-2ccdbfc6b42a",
         "4b8fb9ec-4cbf-4f25-a288-2f70195c7369",
+        "dc3ce8ea-c3dc-4888-83e9-2ccdbfc6b42a",
         "fe237595-0060-4e0a-9533-3ed9d13fa90f",
         "fc07bc8c-1100-4f51-88f5-b103136277f9",
         "a6ef5cb2-d364-4877-b095-fe358bc8449f",
@@ -978,9 +978,9 @@
         "5e8996df-f832-4d87-bfdb-45810ab3f27d",
         "5489ea71-8775-40e3-9dd1-91935918bb74",
         "321ae69a-d86e-4d16-adc0-774827f3563d",
-        "84ba6133-b944-4812-a588-ca5993028e97",
         "5711d62f-338e-468a-a5fc-a731fe9711e7",
-        "ae3ab382-1e0f-41ad-832f-ba436a2b9ca6"
+        "b0c80388-6d7a-4dc0-8fe7-37a57c4d4359",
+        "84ba6133-b944-4812-a588-ca5993028e97"
       ],
       "precision_at_5": 0.2,
       "recall_at_5": 1.0,
@@ -1060,11 +1060,11 @@
         "ebec098d-a421-436d-a70c-fb42cfee33ce",
         "51552ab8-71c4-4df5-b179-8f3f52c94175",
         "05253ca2-8441-42b5-9fb5-9e3d4ce2907a",
-        "03aec6eb-9e08-4053-8f51-b4e17712cf0b"
+        "aa81c561-73db-4a90-97e4-fb0fb666c829"
       ],
       "precision_at_5": 1.0,
       "recall_at_5": 0.4166666666666667,
-      "ndcg_at_10": 0.8292705683938701,
+      "ndcg_at_10": 0.7738966979520416,
       "mrr": 1.0,
       "r_precision": 0.7
     },

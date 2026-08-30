@@ -1,0 +1,1293 @@
+[
+  {
+    "_id": "69d675ce0b0470dbde503887",
+    "uuid": "258c22ec-efaa-4ced-a2ac-e8c9a2d76765",
+    "slug": "mastering-typescript",
+    "title": "Mastering TypeScript",
+    "description": "Strict mode is non-negotiable on any serious codebase. Enable noUncheckedIndexedAccess and exactOptionalPropertyTypes beyond the default strict flag — they catch an entire class of runtime errors that strict alone misses.",
+    "author": "69d675cc0b0470dbde50387d",
+    "authorName": "Sam Smith",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sam Smith",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12896970.jpg",
+      "https://wallpapercave.com/dwp2x/wp15768506.webp",
+      "https://wallpapercave.com/dwp2x/wp10822462.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822425.jpg"
+    ],
+    "hashtags": [
+      "javascript"
+    ],
+    "readTime": 1,
+    "likes": 6,
+    "views": 3729,
+    "createdAt": "2026-03-14T07:35:41.205000",
+    "updatedAt": "2026-03-14T07:35:41.205000",
+    "publishedAt": "2026-02-26T08:38:45.653000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503888",
+    "uuid": "1d482626-8b9a-467c-87f0-97067f3cf61c",
+    "slug": "nodejs-performance-tips",
+    "title": "Node.js Performance Tips",
+    "description": "The event loop is single-threaded, so the rule is simple: never block it. Move CPU-bound work to worker_threads, batch your DB calls with Promise.all instead of awaiting in a loop, and profile with --prof before assuming where the bottleneck is.",
+    "author": "69d675cd0b0470dbde503881",
+    "authorName": "Taylor Swiftly",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Taylor Swiftly",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12019409.jpg",
+      "https://wallpapercave.com/dwp2x/wp12897000.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822346.jpg"
+    ],
+    "hashtags": [
+      "redis",
+      "cicd"
+    ],
+    "readTime": 1,
+    "likes": 157,
+    "views": 1398,
+    "createdAt": "2026-03-13T07:35:41.205000",
+    "updatedAt": "2026-03-13T07:35:41.205000",
+    "publishedAt": "2025-11-15T17:59:26.595000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50388d",
+    "uuid": "57202f94-9c54-40ea-9209-0c181bb0876b",
+    "slug": "api-design-patterns",
+    "title": "API Design Patterns",
+    "description": "Versioning your API from day one is cheap. Migrating a versioning strategy after you have hundreds of clients is a nightmare. Use URL versioning (/v1/) for public APIs where clarity trumps elegance, and keep breaking changes behind a new major version — never in a patch.",
+    "author": "69d675cc0b0470dbde50387e",
+    "authorName": "Jordan Lee",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan Lee",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822348.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347580.jpg",
+      "https://wallpapercave.com/dwp2x/wp2669242.png"
+    ],
+    "hashtags": [
+      "data",
+      "terraform"
+    ],
+    "readTime": 1,
+    "likes": 84,
+    "views": 663,
+    "createdAt": "2026-02-12T03:35:41.206000",
+    "updatedAt": "2026-02-12T03:35:41.206000",
+    "publishedAt": "2025-10-30T03:55:18.899000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50389e",
+    "uuid": "01b51ab6-b93a-421f-8bfd-dd6bbc082c20",
+    "slug": "rag-architecture",
+    "title": "RAG Architecture",
+    "description": "Naive RAG breaks in predictable ways: the retrieved chunks are too large and dilute the signal, the embedding model doesn't match the query style, or the top-k results include contradictory information. Hybrid search — combining dense vector similarity with sparse BM25 keyword scoring — consistently outperforms pure vector retrieval on factual QA benchmarks.",
+    "author": "69d675cc0b0470dbde50387e",
+    "authorName": "Jordan Lee",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan Lee",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12896987.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822403.jpg"
+    ],
+    "hashtags": [
+      "fullstack"
+    ],
+    "readTime": 1,
+    "likes": 2,
+    "views": 4651,
+    "createdAt": "2026-04-07T12:35:41.208000",
+    "updatedAt": "2026-04-07T12:35:41.208000",
+    "publishedAt": "2025-12-24T11:31:16.832000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038aa",
+    "uuid": "899ef421-d516-4e62-af5d-61518fbcfa02",
+    "slug": "monorepo-strategy",
+    "title": "Monorepo Strategy",
+    "description": "A monorepo isn't just one big repo — it's a shared dependency graph with enforced boundaries. Turborepo caches task outputs by hashing inputs, so if nothing changed in a package, its build is skipped. The key insight: you get atomic cross-package changes and shared tooling config without the coordination overhead of polyrepo PRs.",
+    "author": "69d675cc0b0470dbde50387d",
+    "authorName": "Sam Smith",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sam Smith",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp2347694.jpg"
+    ],
+    "hashtags": [
+      "fullstack"
+    ],
+    "readTime": 1,
+    "likes": 100,
+    "views": 3080,
+    "createdAt": "2026-03-28T05:35:41.209000",
+    "updatedAt": "2026-03-28T05:35:41.209000",
+    "publishedAt": "2026-03-26T21:08:28.282000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50388c",
+    "uuid": "da36ed35-5085-4fe0-9b90-d941028c1ca8",
+    "slug": "css-grid-vs-flexbox",
+    "title": "CSS Grid vs Flexbox",
+    "description": "Flexbox is one-dimensional — use it for aligning items along a single axis inside a component. Grid is two-dimensional — use it for page-level layout where rows and columns need to coordinate. The real insight: they compose beautifully, with Grid as the outer shell and Flexbox handling the internals of each cell.",
+    "author": "69d675cc0b0470dbde50387f",
+    "authorName": "Casey Jones",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Casey Jones",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp3929818.jpg",
+      "https://wallpapercave.com/dwp2x/wp12019558.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347547.jpg"
+    ],
+    "hashtags": [
+      "cybersecurity"
+    ],
+    "readTime": 1,
+    "likes": 264,
+    "views": 78,
+    "createdAt": "2026-04-07T18:35:41.206000",
+    "updatedAt": "2026-04-07T18:35:41.206000",
+    "publishedAt": "2026-01-18T06:30:51.398000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503891",
+    "uuid": "08197a98-a69e-48f8-9a96-8124251d158c",
+    "slug": "cloud-native-apps",
+    "title": "Cloud Native Apps",
+    "description": "Cloud native means designing for failure, not preventing it. Your instances will be terminated, your network calls will timeout, and your dependencies will occasionally return 500s. Build with health checks, circuit breakers, and graceful degradation from the start — retrofitting resilience is far harder.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp15768619.png",
+      "https://wallpapercave.com/dwp2x/wp12896989.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822343.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822469.jpg"
+    ],
+    "hashtags": [
+      "aws",
+      "performance"
+    ],
+    "readTime": 1,
+    "likes": 1,
+    "views": 4129,
+    "createdAt": "2026-04-08T10:35:41.206000",
+    "updatedAt": "2026-04-08T10:35:41.206000",
+    "publishedAt": "2026-03-30T04:41:36.057000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50389d",
+    "uuid": "87c4f432-8035-4c7c-9b57-a8d8beb5de87",
+    "slug": "vector-databases-explained",
+    "title": "Vector Databases Explained",
+    "description": "Embeddings turn unstructured text into points in high-dimensional space where semantic similarity becomes geometric proximity. When you index those vectors in a database like Pinecone or pgvector and query with approximate nearest neighbor search, you get semantic search that understands meaning — not just keyword overlap.",
+    "author": "69d675cd0b0470dbde503885",
+    "authorName": "Skyler White",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Skyler White",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp2347571.jpg",
+      "https://wallpapercave.com/dwp2x/wp10317279.jpg"
+    ],
+    "hashtags": [
+      "azure"
+    ],
+    "readTime": 1,
+    "likes": 115,
+    "views": 3794,
+    "createdAt": "2026-03-23T00:35:41.208000",
+    "updatedAt": "2026-03-23T00:35:41.208000",
+    "publishedAt": "2025-11-30T00:26:29.037000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038ac",
+    "uuid": "c123d8bb-6c1e-4bdb-8f78-c993ce008151",
+    "slug": "machine-learning-for-devs",
+    "title": "Machine Learning for Devs",
+    "description": "You don't need to implement backpropagation to ship ML features. You do need to understand train/validation/test splits, why overfitting happens, and how to interpret a confusion matrix. These fundamentals determine whether you can evaluate a model's production readiness — which is the actual engineering decision you'll face.",
+    "author": "69d675cd0b0470dbde503885",
+    "authorName": "Skyler White",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Skyler White",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822464.jpg",
+      "https://wallpapercave.com/dwp2x/wp11543670.png",
+      "https://wallpapercave.com/dwp2x/wp12019412.jpg"
+    ],
+    "hashtags": [
+      "docker"
+    ],
+    "readTime": 1,
+    "likes": 78,
+    "views": 4656,
+    "createdAt": "2026-02-18T09:35:41.209000",
+    "updatedAt": "2026-02-18T09:35:41.209000",
+    "publishedAt": "2026-03-07T18:25:24.758000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038af",
+    "uuid": "ae0cb546-299a-411e-a18b-2083a499167d",
+    "slug": "supabase-vs-firebase",
+    "title": "Supabase vs Firebase",
+    "description": "Supabase gives you a real Postgres database — row-level security, foreign keys, joins, and the full SQL surface area. Firebase's Firestore is a document store that scales reads effortlessly but makes relational queries awkward and expensive. If your data has any relational shape, Supabase's complexity is worth it over modeling everything as nested documents.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12896973.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347590.jpg"
+    ],
+    "hashtags": [
+      "frontend",
+      "performance"
+    ],
+    "readTime": 1,
+    "likes": 301,
+    "views": 760,
+    "createdAt": "2026-03-25T17:35:41.209000",
+    "updatedAt": "2026-03-25T17:35:41.209000",
+    "publishedAt": "2025-12-14T03:49:53.707000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b3",
+    "uuid": "b5587ad5-c76a-497d-b156-09d9bc9813e6",
+    "slug": "cicd-pipeline-setup-1",
+    "title": "CI/CD Pipeline Setup",
+    "description": "Slow pipelines kill deployment frequency. Parallelize independent jobs, cache aggressively, and run your fastest checks first so failures are caught in 30 seconds instead of 15 minutes. A pipeline that takes 45 minutes end-to-end will train your team to batch changes into big PRs — the opposite of what continuous delivery requires.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp3929762.jpg",
+      "https://wallpapercave.com/dwp2x/wp12896973.jpg"
+    ],
+    "hashtags": [
+      "cicd"
+    ],
+    "readTime": 1,
+    "likes": 184,
+    "views": 1909,
+    "createdAt": "2026-03-30T10:35:41.209000",
+    "updatedAt": "2026-03-30T10:35:41.209000",
+    "publishedAt": "2026-02-08T06:30:30.799000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b4",
+    "uuid": "ecd6dc03-356a-4e72-87d6-c6e8863341a7",
+    "slug": "postgresql-deep-dive-1",
+    "title": "PostgreSQL Deep Dive",
+    "description": "Partial indexes are one of Postgres's most underused features. If you query a table with a WHERE status = 'pending' condition frequently, an index on (created_at) WHERE status = 'pending' is a fraction of the size of a full index and dramatically faster for that specific query pattern.",
+    "author": "69d675cd0b0470dbde503885",
+    "authorName": "Skyler White",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Skyler White",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822346.jpg"
+    ],
+    "hashtags": [
+      "react"
+    ],
+    "readTime": 1,
+    "likes": 331,
+    "views": 513,
+    "createdAt": "2026-02-22T19:35:41.209000",
+    "updatedAt": "2026-02-22T19:35:41.209000",
+    "publishedAt": "2025-12-01T21:02:31.557000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50389c",
+    "uuid": "18e8ed2f-45ab-4add-86dd-19f8fba3e28f",
+    "slug": "llms-in-production",
+    "title": "LLMs in Production",
+    "description": "The gap between a demo and a production LLM feature is enormous. In production you need to handle token limits gracefully, stream responses to avoid timeout errors, implement retry logic with exponential backoff for rate limit 429s, and log every input/output pair for debugging — because when it hallucinates, you need to reproduce it.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10317279.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822363.jpg"
+    ],
+    "hashtags": [
+      "openai",
+      "dataops"
+    ],
+    "readTime": 1,
+    "likes": 55,
+    "views": 3992,
+    "createdAt": "2026-04-06T06:35:41.208000",
+    "updatedAt": "2026-04-06T06:35:41.208000",
+    "publishedAt": "2025-12-31T01:02:01.702000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b5",
+    "uuid": "ec7841de-a3d3-47f0-b1cf-be2c339906f4",
+    "slug": "the-future-of-education",
+    "title": "The Future of Education",
+    "description": "The credential isn't disappearing — it's being supplemented. A CS degree signals baseline rigor; a public GitHub with production systems signals applied skill. The engineers getting hired in 2025 have both, or compensate for the absence of one with an unusually strong signal from the other. Either path works; neither path alone is sufficient anymore.",
+    "author": "69d675cd0b0470dbde503885",
+    "authorName": "Skyler White",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Skyler White",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp7848342.png",
+      "https://wallpapercave.com/dwp2x/wp7848357.jpg",
+      "https://wallpapercave.com/dwp2x/wp15768537.png",
+      "https://wallpapercave.com/dwp2x/wp11543670.png"
+    ],
+    "hashtags": [
+      "observability"
+    ],
+    "readTime": 1,
+    "likes": 279,
+    "views": 2742,
+    "createdAt": "2026-02-14T15:35:41.209000",
+    "updatedAt": "2026-02-14T15:35:41.209000",
+    "publishedAt": "2025-11-10T06:33:10.382000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038ab",
+    "uuid": "19c25a94-c55f-46b0-a610-072a876a7638",
+    "slug": "browser-devtools-mastery",
+    "title": "Browser DevTools Mastery",
+    "description": "The Performance panel's flame chart is the most underused tool in frontend debugging. Record a slow interaction, find the longest task blocking the main thread, and work backwards to the function call. The Coverage tab reveals unused JavaScript loaded on the page — often 60–70% of a bundle on first load — making it invaluable for identifying what to lazy-load.",
+    "author": "69d675cd0b0470dbde503885",
+    "authorName": "Skyler White",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Skyler White",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp2669242.png",
+      "https://wallpapercave.com/dwp2x/wp10822434.jpg"
+    ],
+    "hashtags": [
+      "terraform"
+    ],
+    "readTime": 1,
+    "likes": 207,
+    "views": 3408,
+    "createdAt": "2026-03-28T13:35:41.209000",
+    "updatedAt": "2026-03-28T13:35:41.209000",
+    "publishedAt": "2025-11-25T01:05:14.740000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b1",
+    "uuid": "5613de0e-a0a6-4778-a3cd-cd76ee07c69d",
+    "slug": "testing-strategies",
+    "title": "Testing Strategies",
+    "description": "The testing pyramid is a heuristic, not a rule. Many unit tests give fast feedback but test implementation details and break on refactors. A smaller suite of integration tests that exercise a real database and real HTTP handlers gives you higher confidence with less maintenance overhead. Write tests that would catch the bugs that actually hurt you, not tests that hit a coverage number.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12896968.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822443.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347550.jpg"
+    ],
+    "hashtags": [
+      "terraform"
+    ],
+    "readTime": 1,
+    "likes": 280,
+    "views": 4434,
+    "createdAt": "2026-03-25T15:35:41.209000",
+    "updatedAt": "2026-03-25T15:35:41.209000",
+    "publishedAt": "2026-01-17T10:00:51.305000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50388b",
+    "uuid": "54367e17-bcf4-4eb3-8bdf-c2986c5143ff",
+    "slug": "clean-code-principles",
+    "title": "Clean Code Principles",
+    "description": "The most underrated clean code principle: a function should do one thing. If you need 'and' to describe what it does, split it. This single constraint eliminates most of the tangled, hard-to-test spaghetti that makes codebases painful to work in six months later.",
+    "author": "69d675cc0b0470dbde50387e",
+    "authorName": "Jordan Lee",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan Lee",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp4974472.jpg"
+    ],
+    "hashtags": [
+      "machinelearning"
+    ],
+    "readTime": 1,
+    "likes": 37,
+    "views": 1375,
+    "createdAt": "2026-04-04T07:35:41.206000",
+    "updatedAt": "2026-04-04T07:35:41.206000",
+    "publishedAt": "2026-03-08T04:57:15.816000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50388f",
+    "uuid": "1a967dd7-b145-4461-bda8-a5b094d9f487",
+    "slug": "mobile-first-design",
+    "title": "Mobile First Design",
+    "description": "Mobile first is a CSS strategy, not just a philosophy. Write your base styles for small screens and use min-width media queries to layer on complexity. The alternative — writing desktop styles and overriding with max-width — produces bloated CSS that ships unnecessary rules to every mobile user.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp15768607.png"
+    ],
+    "hashtags": [
+      "cicd"
+    ],
+    "readTime": 1,
+    "likes": 141,
+    "views": 1040,
+    "createdAt": "2026-03-30T00:35:41.206000",
+    "updatedAt": "2026-03-30T00:35:41.206000",
+    "publishedAt": "2025-11-24T02:17:47.564000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503892",
+    "uuid": "046b5238-ad7b-48ee-907b-d78eca9ddec4",
+    "slug": "intro-to-kubernetes",
+    "title": "Intro to Kubernetes",
+    "description": "You probably don't need Kubernetes yet. If you're running fewer than a dozen services with a small team, the operational overhead — managing the control plane, writing YAML for every resource, debugging CrashLoopBackOff at 2am — will slow you down more than it helps. Reach for it when horizontal scaling and self-healing are actual bottlenecks, not theoretical ones.",
+    "author": "69d675cc0b0470dbde50387e",
+    "authorName": "Jordan Lee",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan Lee",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10728144.jpg",
+      "https://wallpapercave.com/dwp2x/wp11875789.jpg",
+      "https://wallpapercave.com/dwp2x/wp7036862.jpg"
+    ],
+    "hashtags": [
+      "cicd",
+      "docker"
+    ],
+    "readTime": 1,
+    "likes": 270,
+    "views": 4351,
+    "createdAt": "2026-02-10T03:35:41.206000",
+    "updatedAt": "2026-02-10T03:35:41.206000",
+    "publishedAt": "2026-01-22T02:22:04.049000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503893",
+    "uuid": "cd2485cb-f7af-418b-94a9-1e78a9d5eb40",
+    "slug": "graphql-vs-rest",
+    "title": "GraphQL vs REST",
+    "description": "GraphQL solves over-fetching elegantly but introduces complexity that REST never had: N+1 query problems, schema stitching, authorization at the field level, and client-side caching that requires Apollo or a similar heavy client. For internal APIs consumed by one team, REST with good documentation is almost always the faster choice.",
+    "author": "69d675cd0b0470dbde503884",
+    "authorName": "Jamie Oliver",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jamie Oliver",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822452.jpg",
+      "https://wallpapercave.com/dwp2x/wp11875805.jpg",
+      "https://wallpapercave.com/dwp2x/wp12896983.jpg",
+      "https://wallpapercave.com/dwp2x/wp12897003.jpg"
+    ],
+    "hashtags": [
+      "airflow"
+    ],
+    "readTime": 1,
+    "likes": 55,
+    "views": 3027,
+    "createdAt": "2026-03-02T22:35:41.207000",
+    "updatedAt": "2026-03-02T22:35:41.207000",
+    "publishedAt": "2026-02-24T17:12:46.301000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503894",
+    "uuid": "7a9832e1-5238-43a6-9c0f-3d012c8b3e66",
+    "slug": "serverless-architecture",
+    "title": "Serverless Architecture",
+    "description": "Cold starts are real but often misunderstood. A Lambda cold start in a VPC with 128MB of memory hitting a TypeScript bundle with no tree-shaking can take 2–4 seconds. Fix it by keeping functions warm with provisioned concurrency, right-sizing memory (more memory = faster CPU), and aggressively trimming your dependency tree.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp7848356.png",
+      "https://wallpapercave.com/dwp2x/wp10822443.jpg",
+      "https://wallpapercave.com/dwp2x/wp15768508.webp"
+    ],
+    "hashtags": [
+      "nodejs",
+      "oss"
+    ],
+    "readTime": 1,
+    "likes": 314,
+    "views": 1553,
+    "createdAt": "2026-02-15T09:35:41.207000",
+    "updatedAt": "2026-02-15T09:35:41.207000",
+    "publishedAt": "2025-12-24T13:33:16.112000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a5",
+    "uuid": "0d512ff8-26da-426d-9419-dd454313c951",
+    "slug": "feature-flags-in-practice",
+    "title": "Feature Flags in Practice",
+    "description": "Feature flags decouple deployment from release, which is their real power. You can merge a half-finished feature to main, ship it to production disabled, and enable it for 1% of users without a separate branch living for weeks. Use a platform like LaunchDarkly or your own Redis-backed flag store — environment variables don't scale beyond a handful of flags.",
+    "author": "69d675cd0b0470dbde503883",
+    "authorName": "Quinn Fabray",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Quinn Fabray",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822445.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822421.png",
+      "https://wallpapercave.com/dwp2x/wp10822400.jpg",
+      "https://wallpapercave.com/dwp2x/wp7848351.png"
+    ],
+    "hashtags": [
+      "devops"
+    ],
+    "readTime": 1,
+    "likes": 6,
+    "views": 2397,
+    "createdAt": "2026-04-08T03:35:41.208000",
+    "updatedAt": "2026-04-08T03:35:41.208000",
+    "publishedAt": "2025-10-30T18:29:55.619000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503890",
+    "uuid": "f289c917-b298-4a1f-9a70-6e4f56850053",
+    "slug": "cybersecurity-basics",
+    "title": "Cybersecurity Basics",
+    "description": "Most breaches aren't zero-days — they're misconfigured S3 buckets, leaked .env files committed to public repos, or JWT secrets that never rotated. Audit your secrets management before anything else: use a vault, rotate credentials, and set up automated secret scanning in your CI pipeline.",
+    "author": "69d675cc0b0470dbde503880",
+    "authorName": "Morgan Free",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Morgan Free",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp15768607.png",
+      "https://wallpapercave.com/dwp2x/wp12896980.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347580.jpg",
+      "https://wallpapercave.com/dwp2x/wp12897008.png"
+    ],
+    "hashtags": [
+      "javascript",
+      "backend"
+    ],
+    "readTime": 1,
+    "likes": 330,
+    "views": 422,
+    "createdAt": "2026-02-13T03:35:41.206000",
+    "updatedAt": "2026-02-13T03:35:41.206000",
+    "publishedAt": "2026-03-06T01:45:33.882000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503898",
+    "uuid": "ddb3c303-0ef9-434e-b68d-2b0726df6ef6",
+    "slug": "continuous-learning",
+    "title": "Continuous Learning",
+    "description": "The half-life of a specific framework is short. The half-life of understanding distributed systems, data structures, and how the network stack actually works is much longer. Invest deeply in fundamentals — they compound. Framework knowledge gets you the job; systems thinking keeps you relevant.",
+    "author": "69d675cc0b0470dbde50387f",
+    "authorName": "Casey Jones",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Casey Jones",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12896984.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347562.jpg",
+      "https://wallpapercave.com/dwp2x/wp7848358.png",
+      "https://wallpapercave.com/dwp2x/wp12019418.jpg"
+    ],
+    "hashtags": [
+      "cicd",
+      "data"
+    ],
+    "readTime": 1,
+    "likes": 23,
+    "views": 4105,
+    "createdAt": "2026-04-07T14:35:41.207000",
+    "updatedAt": "2026-04-07T14:35:41.207000",
+    "publishedAt": "2025-11-29T09:47:37.097000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50389f",
+    "uuid": "dc084721-beed-4feb-8b0b-85226dfe4185",
+    "slug": "fine-tuning-vs-prompting",
+    "title": "Fine-tuning vs Prompting",
+    "description": "Fine-tune when you need the model to adopt a consistent tone, follow a strict output schema reliably, or learn domain-specific vocabulary that the base model doesn't know. Don't fine-tune to add knowledge — RAG is cheaper and keeps your data fresh. Fine-tuning is expensive to iterate and easy to overfit on small datasets.",
+    "author": "69d675cc0b0470dbde50387e",
+    "authorName": "Jordan Lee",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan Lee",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822425.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822349.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822466.jpg"
+    ],
+    "hashtags": [
+      "dbt"
+    ],
+    "readTime": 1,
+    "likes": 125,
+    "views": 4436,
+    "createdAt": "2026-03-14T19:35:41.208000",
+    "updatedAt": "2026-03-14T19:35:41.208000",
+    "publishedAt": "2026-02-20T00:53:43.018000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a1",
+    "uuid": "c5b71fb1-32ad-4d4f-8674-d460476329ac",
+    "slug": "spark-for-big-data",
+    "title": "Spark for Big Data",
+    "description": "Most Spark performance problems trace back to data skew — one partition holding 80% of the records while the rest finish in seconds and then wait. Diagnose with the Spark UI's stage timeline. Fix it with salting: add a random prefix to your join key to distribute the hot partition across multiple tasks.",
+    "author": "69d675cd0b0470dbde503883",
+    "authorName": "Quinn Fabray",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Quinn Fabray",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12896984.jpg"
+    ],
+    "hashtags": [
+      "ai"
+    ],
+    "readTime": 1,
+    "likes": 274,
+    "views": 1074,
+    "createdAt": "2026-03-30T14:35:41.208000",
+    "updatedAt": "2026-03-30T14:35:41.208000",
+    "publishedAt": "2026-01-07T23:32:21.916000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a2",
+    "uuid": "9ef0a85b-bfb3-40d0-a71a-7450b019816b",
+    "slug": "dbt-for-data-modeling",
+    "title": "dbt for Data Modeling",
+    "description": "dbt brings software engineering discipline to SQL: version control, testing, documentation, and a DAG of dependencies that makes lineage visible. The ref() function is the key primitive — it replaces hardcoded table names and lets dbt compile environment-aware SQL so the same model runs correctly in dev and prod.",
+    "author": "69d675cc0b0470dbde50387f",
+    "authorName": "Casey Jones",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Casey Jones",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822440.jpg"
+    ],
+    "hashtags": [
+      "observability",
+      "serverless"
+    ],
+    "readTime": 1,
+    "likes": 163,
+    "views": 528,
+    "createdAt": "2026-03-01T20:35:41.208000",
+    "updatedAt": "2026-03-01T20:35:41.208000",
+    "publishedAt": "2025-12-15T03:16:57.924000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038ad",
+    "uuid": "eaf8ef94-079c-4004-bed7-36ac6a446bcf",
+    "slug": "open-source-ai-models",
+    "title": "Open Source AI Models",
+    "description": "Running Llama 3 or Mistral locally with Ollama takes under ten minutes and costs nothing per token. The tradeoff is real: a 7B model on consumer hardware is noticeably behind GPT-4 on complex reasoning, but for summarization, classification, and structured data extraction tasks, the quality gap is much smaller than the cost gap.",
+    "author": "69d675cc0b0470dbde503880",
+    "authorName": "Morgan Free",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Morgan Free",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp7848338.jpg",
+      "https://wallpapercave.com/dwp2x/wp15768508.webp"
+    ],
+    "hashtags": [
+      "fullstack",
+      "observability"
+    ],
+    "readTime": 1,
+    "likes": 234,
+    "views": 3295,
+    "createdAt": "2026-04-08T12:35:41.209000",
+    "updatedAt": "2026-04-08T12:35:41.209000",
+    "publishedAt": "2025-12-29T21:05:12.958000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503895",
+    "uuid": "aa0a5950-2392-42ce-9e65-83c273589905",
+    "slug": "cicd-pipeline-setup",
+    "title": "CI/CD Pipeline Setup",
+    "description": "A good pipeline fails fast: lint and type-check first, then unit tests, then integration, then deploy. Gate each stage so failures stop the pipeline early and don't waste compute running a 10-minute test suite against code that won't type-check. Cache node_modules between runs — it's the single biggest speed win in most JS pipelines.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp4382786.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822462.jpg",
+      "https://wallpapercave.com/dwp2x/wp15768612.jpg"
+    ],
+    "hashtags": [
+      "cloud",
+      "dataops"
+    ],
+    "readTime": 1,
+    "likes": 313,
+    "views": 3344,
+    "createdAt": "2026-03-02T01:35:41.207000",
+    "updatedAt": "2026-03-02T01:35:41.207000",
+    "publishedAt": "2025-12-08T06:33:24.128000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503897",
+    "uuid": "c33c8110-0f0e-43f4-8aae-2de4a5b79462",
+    "slug": "mental-health-in-dev",
+    "title": "Mental Health in Dev",
+    "description": "Burnout in engineering has a specific fingerprint: context switching overload, unclear requirements, and the feeling that nothing ships. If you're rewriting the same feature for the third time and can't articulate why, that's a process problem dressed up as a performance problem. The fix is usually clarity, not more hours.",
+    "author": "69d675cc0b0470dbde503880",
+    "authorName": "Morgan Free",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Morgan Free",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12019521.png",
+      "https://wallpapercave.com/dwp2x/wp12897001.jpg"
+    ],
+    "hashtags": [
+      "testing"
+    ],
+    "readTime": 1,
+    "likes": 320,
+    "views": 918,
+    "createdAt": "2026-04-06T04:35:41.207000",
+    "updatedAt": "2026-04-06T04:35:41.207000",
+    "publishedAt": "2025-10-11T09:47:35.461000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a3",
+    "uuid": "0399c50f-5552-4aa5-9520-16e4871d3c70",
+    "slug": "the-ethics-of-ai",
+    "title": "The Ethics of AI",
+    "description": "Bias in ML models isn't a bug — it's a reflection of the training data, which is a reflection of historical human decisions. Fairness metrics are in tension with each other: optimizing for equal accuracy across groups often trades off against equal false positive rates. Engineers need to make explicit value choices, not hide behind the math.",
+    "author": "69d675cd0b0470dbde503883",
+    "authorName": "Quinn Fabray",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Quinn Fabray",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12019565.jpg",
+      "https://wallpapercave.com/dwp2x/wp7848374.jpg"
+    ],
+    "hashtags": [
+      "docker"
+    ],
+    "readTime": 1,
+    "likes": 292,
+    "views": 1852,
+    "createdAt": "2026-03-03T11:35:41.208000",
+    "updatedAt": "2026-03-03T11:35:41.208000",
+    "publishedAt": "2025-12-09T00:17:17.626000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a4",
+    "uuid": "697cd16f-c097-4dc4-b381-38654c51439c",
+    "slug": "building-a-side-project",
+    "title": "Building a Side Project",
+    "description": "Ship to five real users before writing a second feature. Their friction points will invalidate your roadmap in ways no amount of planning can predict. The fastest path from idea to learning is the smallest thing that lets someone accomplish the core task — everything else is premature optimization of an unvalidated assumption.",
+    "author": "69d675cc0b0470dbde50387e",
+    "authorName": "Jordan Lee",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan Lee",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822394.jpg",
+      "https://wallpapercave.com/dwp2x/wp12896980.jpg",
+      "https://wallpapercave.com/dwp2x/wp4974476.jpg"
+    ],
+    "hashtags": [
+      "ai",
+      "serverless"
+    ],
+    "readTime": 1,
+    "likes": 7,
+    "views": 4295,
+    "createdAt": "2026-04-07T03:35:41.208000",
+    "updatedAt": "2026-04-07T03:35:41.208000",
+    "publishedAt": "2026-02-16T05:45:48.314000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50389b",
+    "uuid": "f77182ec-3c8c-4be4-b54d-2ef26c979b68",
+    "slug": "prompt-engineering-101",
+    "title": "Prompt Engineering 101",
+    "description": "Chain-of-thought prompting consistently outperforms direct prompting on multi-step reasoning tasks. Append 'think step by step' or explicitly structure the output format you want in XML or JSON. The model isn't magic — it's a very sophisticated next-token predictor, and your prompt is the entire context it has to work with.",
+    "author": "69d675cc0b0470dbde50387d",
+    "authorName": "Sam Smith",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sam Smith",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822425.jpg"
+    ],
+    "hashtags": [
+      "data",
+      "redis"
+    ],
+    "readTime": 1,
+    "likes": 328,
+    "views": 324,
+    "createdAt": "2026-02-25T13:35:41.207000",
+    "updatedAt": "2026-02-25T13:35:41.207000",
+    "publishedAt": "2025-10-17T03:56:01.121000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038ae",
+    "uuid": "e45d24b8-d059-43f1-9389-7fc6d24d0dd4",
+    "slug": "dataops-best-practices",
+    "title": "DataOps Best Practices",
+    "description": "DataOps borrows three things from DevOps and applies them to data: automated testing (assert row counts, check for nulls in required columns, validate referential integrity), CI pipelines for data models, and environment parity between staging and production data. Most data teams have none of these and then wonder why their dashboards are unreliable.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12019525.jpg",
+      "https://wallpapercave.com/dwp2x/wp12019551.jpg",
+      "https://wallpapercave.com/dwp2x/wp11543670.png"
+    ],
+    "hashtags": [
+      "ai",
+      "webdev"
+    ],
+    "readTime": 1,
+    "likes": 9,
+    "views": 126,
+    "createdAt": "2026-04-03T15:35:41.209000",
+    "updatedAt": "2026-04-03T15:35:41.209000",
+    "publishedAt": "2026-03-15T07:12:00.571000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a7",
+    "uuid": "bc744634-dbc1-47eb-84f6-553f4b5f13df",
+    "slug": "webassembly-in-2024",
+    "title": "WebAssembly in 2024",
+    "description": "WASM is not a JavaScript replacement — it's a compilation target for performance-critical modules that run inside a sandbox at near-native speed. The real-world wins are specific: video codec processing, cryptographic operations, CAD rendering in the browser. For general-purpose web logic, the overhead of WASM boundary calls makes JS faster for most tasks.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp11875805.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347548.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822363.jpg",
+      "https://wallpapercave.com/dwp2x/wp12019515.jpg"
+    ],
+    "hashtags": [
+      "fullstack"
+    ],
+    "readTime": 1,
+    "likes": 303,
+    "views": 925,
+    "createdAt": "2026-02-11T13:35:41.209000",
+    "updatedAt": "2026-02-11T13:35:41.209000",
+    "publishedAt": "2026-03-01T11:27:49.520000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503889",
+    "uuid": "1aaad19f-96d0-49e3-a9e1-51b777671c4c",
+    "slug": "docker-for-beginners",
+    "title": "Docker for Beginners",
+    "description": "Multi-stage builds are the single biggest win for production Docker images. Build in a node:20 stage, copy only the compiled output into a node:20-alpine final stage, and watch your image drop from 1.2GB to under 150MB — dramatically reducing attack surface and pull times.",
+    "author": "69d675cc0b0470dbde503880",
+    "authorName": "Morgan Free",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Morgan Free",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp11875742.jpg",
+      "https://wallpapercave.com/dwp2x/wp6784617.jpg"
+    ],
+    "hashtags": [
+      "promptengineering",
+      "azure"
+    ],
+    "readTime": 1,
+    "likes": 106,
+    "views": 2850,
+    "createdAt": "2026-03-04T08:35:41.205000",
+    "updatedAt": "2026-03-04T08:35:41.205000",
+    "publishedAt": "2025-12-26T15:08:13.435000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503896",
+    "uuid": "f8f03b3e-9665-43db-a062-1fa2b3d1990f",
+    "slug": "microservices-patterns",
+    "title": "Microservices Patterns",
+    "description": "The saga pattern exists because distributed transactions are effectively impossible — you can't hold a lock across two services with their own databases. Instead, model long-running workflows as a sequence of events with compensating transactions for rollback. It's more code, but it's the only approach that scales.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12019436.jpg",
+      "https://wallpapercave.com/dwp2x/wp12896980.jpg",
+      "https://wallpapercave.com/dwp2x/wp12896967.jpg"
+    ],
+    "hashtags": [
+      "postgresql"
+    ],
+    "readTime": 1,
+    "likes": 7,
+    "views": 3130,
+    "createdAt": "2026-04-06T18:35:41.207000",
+    "updatedAt": "2026-04-06T18:35:41.207000",
+    "publishedAt": "2025-11-01T15:01:17.735000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a9",
+    "uuid": "030cd780-870e-4971-8e9d-31a036f63319",
+    "slug": "terraform-for-beginners",
+    "title": "Terraform for Beginners",
+    "description": "Terraform's state file is its superpower and its biggest footgun. It tracks every resource it manages, enabling plan to show a diff before apply. But if two engineers run apply simultaneously, the state gets corrupted. Use remote state in S3 with a DynamoDB lock table from day one — never keep state.tfstate in a git repository.",
+    "author": "69d675cc0b0470dbde50387d",
+    "authorName": "Sam Smith",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sam Smith",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12019436.jpg"
+    ],
+    "hashtags": [
+      "api"
+    ],
+    "readTime": 1,
+    "likes": 105,
+    "views": 2539,
+    "createdAt": "2026-04-08T03:35:41.209000",
+    "updatedAt": "2026-04-08T03:35:41.209000",
+    "publishedAt": "2026-03-15T04:21:31.798000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b7",
+    "uuid": "6353d23c-c255-43ba-9cb6-0560265f51f2",
+    "slug": "api-rate-limiting",
+    "title": "API Rate Limiting",
+    "description": "Implement rate limiting at the gateway layer, not inside each service. Use a sliding window algorithm over a fixed window — it prevents the burst problem where a client can double their allowed requests by straddling a window boundary. Store counters in Redis with TTL so they expire automatically and don't require a cleanup job.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp2347585.jpg",
+      "https://wallpapercave.com/dwp2x/wp12897003.jpg"
+    ],
+    "hashtags": [
+      "serverless"
+    ],
+    "readTime": 1,
+    "likes": 69,
+    "views": 3057,
+    "createdAt": "2026-03-27T07:35:41.210000",
+    "updatedAt": "2026-03-27T07:35:41.210000",
+    "publishedAt": "2025-12-14T01:16:16.101000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50388e",
+    "uuid": "7bd5ab32-cf13-4b82-b372-b8a3c803dbe9",
+    "slug": "the-state-of-web3",
+    "title": "The State of Web3",
+    "description": "Strip away the speculation and smart contracts are genuinely useful for one thing: trustless execution between parties who don't know each other, without a middleman. Everything else — NFT profile pictures, metaverse land — is narrative. Build on the use case, not the narrative.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12896972.jpg",
+      "https://wallpapercave.com/dwp2x/wp12896989.jpg"
+    ],
+    "hashtags": [
+      "promptengineering",
+      "serverless"
+    ],
+    "readTime": 1,
+    "likes": 325,
+    "views": 1759,
+    "createdAt": "2026-04-04T03:35:41.206000",
+    "updatedAt": "2026-04-04T03:35:41.206000",
+    "publishedAt": "2026-03-02T06:02:26.604000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503899",
+    "uuid": "c0f07cfc-7717-4c0f-96c0-d736302ee329",
+    "slug": "postgresql-deep-dive",
+    "title": "PostgreSQL Deep Dive",
+    "description": "EXPLAIN ANALYZE is the single most important Postgres skill. A sequential scan on a 10M-row table that takes 3 seconds with no index drops to 2ms with a B-tree index on the right column. Always check whether your ORM is generating the query you think it is — most N+1 bugs are invisible until you look at the query log.",
+    "author": "69d675cd0b0470dbde503882",
+    "authorName": "Riley Reed",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Riley Reed",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp15768523.jpg",
+      "https://wallpapercave.com/dwp2x/wp15768508.webp",
+      "https://wallpapercave.com/dwp2x/wp2347585.jpg"
+    ],
+    "hashtags": [
+      "machinelearning"
+    ],
+    "readTime": 1,
+    "likes": 23,
+    "views": 2633,
+    "createdAt": "2026-04-05T09:35:41.207000",
+    "updatedAt": "2026-04-05T09:35:41.207000",
+    "publishedAt": "2026-02-20T02:29:27.399000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50389a",
+    "uuid": "ad987052-fd76-4070-ada5-e20fb2d6a175",
+    "slug": "redis-caching-strategies",
+    "title": "Redis Caching Strategies",
+    "description": "Cache invalidation is the hard part, not caching itself. Write-through caching keeps the cache consistent but adds write latency. Cache-aside is simpler but risks stale reads under high write load. Pick your strategy based on your read/write ratio, and always set a TTL — a cache with no expiry is just a memory leak with extra steps.",
+    "author": "69d675cc0b0470dbde503880",
+    "authorName": "Morgan Free",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Morgan Free",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12897003.jpg"
+    ],
+    "hashtags": [
+      "ai",
+      "api"
+    ],
+    "readTime": 1,
+    "likes": 300,
+    "views": 2344,
+    "createdAt": "2026-03-24T10:35:41.207000",
+    "updatedAt": "2026-03-24T10:35:41.207000",
+    "publishedAt": "2025-12-05T07:52:53.434000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a0",
+    "uuid": "febaf786-e70b-471d-bfc1-4cf2fd1d652f",
+    "slug": "data-pipelines-with-airflow",
+    "title": "Data Pipelines with Airflow",
+    "description": "Airflow's biggest footgun is the XCom — passing large DataFrames between tasks via the metadata database will kill performance and hit size limits. Keep XComs small (IDs, paths, counts) and store intermediate data in S3 or GCS. Also: make every task idempotent, because at-least-once execution is a guarantee, not at-exactly-once.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp11875789.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822394.jpg"
+    ],
+    "hashtags": [
+      "dbt"
+    ],
+    "readTime": 1,
+    "likes": 2,
+    "views": 4419,
+    "createdAt": "2026-04-02T03:35:41.208000",
+    "updatedAt": "2026-04-02T03:35:41.208000",
+    "publishedAt": "2025-12-30T08:32:18.672000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b0",
+    "uuid": "92db9a85-a218-4dbe-afb4-7c1d7d1d0b13",
+    "slug": "websockets-vs-sse",
+    "title": "WebSockets vs SSE",
+    "description": "SSE is HTTP — it works through load balancers, proxies, and CDNs without special configuration, and the browser reconnects automatically on disconnect. WebSockets give you full-duplex communication but require sticky sessions or a pub/sub backend to work correctly behind a load balancer. For server-to-client push (notifications, live feeds), SSE is almost always the right default.",
+    "author": "69d675cc0b0470dbde503880",
+    "authorName": "Morgan Free",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Morgan Free",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp12019515.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822437.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822454.jpg"
+    ],
+    "hashtags": [
+      "aws",
+      "postgresql"
+    ],
+    "readTime": 1,
+    "likes": 144,
+    "views": 4136,
+    "createdAt": "2026-04-04T13:35:41.209000",
+    "updatedAt": "2026-04-04T13:35:41.209000",
+    "publishedAt": "2025-10-14T11:23:04.190000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b2",
+    "uuid": "1d0cc623-ed9a-4cd3-9a9d-abc5faea057c",
+    "slug": "sustainable-software",
+    "title": "Sustainable Software",
+    "description": "Cloud infrastructure has a measurable carbon footprint, and your architectural choices directly affect it. Regions matter: us-east-1 runs on a different energy mix than eu-north-1. Right-sizing instances eliminates idle compute. Shifting batch workloads to off-peak hours can reduce both cost and emissions — tools like Cloud Carbon Footprint make this measurable.",
+    "author": "69d675cd0b0470dbde503884",
+    "authorName": "Jamie Oliver",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jamie Oliver",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10317279.jpg"
+    ],
+    "hashtags": [
+      "css",
+      "dataops"
+    ],
+    "readTime": 1,
+    "likes": 264,
+    "views": 2895,
+    "createdAt": "2026-02-28T09:35:41.209000",
+    "updatedAt": "2026-02-28T09:35:41.209000",
+    "publishedAt": "2026-04-06T10:54:42.240000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde50388a",
+    "uuid": "152c9c88-1cea-44e9-a347-55e6932b3001",
+    "slug": "the-rise-of-ai-agents",
+    "title": "The Rise of AI Agents",
+    "description": "The shift from single-shot prompting to agentic loops changes everything about how you think about reliability. An agent that calls tools, checks results, and retries needs exponential backoff, hard iteration limits, and structured output validation at every step — or it will hallucinate its way to a wrong answer confidently.",
+    "author": "69d675cd0b0470dbde503885",
+    "authorName": "Skyler White",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Skyler White",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp7848342.png",
+      "https://wallpapercave.com/dwp2x/wp2347602.jpg",
+      "https://wallpapercave.com/dwp2x/wp2347549.jpg",
+      "https://wallpapercave.com/dwp2x/wp10822452.jpg"
+    ],
+    "hashtags": [
+      "backend"
+    ],
+    "readTime": 1,
+    "likes": 311,
+    "views": 4336,
+    "createdAt": "2026-02-19T02:35:41.205000",
+    "updatedAt": "2026-02-19T02:35:41.205000",
+    "publishedAt": "2026-01-09T04:36:13.426000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a6",
+    "uuid": "6d10835a-0669-472a-af47-fd5e73ee4bec",
+    "slug": "observability-vs-monitoring",
+    "title": "Observability vs Monitoring",
+    "description": "Monitoring tells you when something is broken. Observability tells you why. You can monitor with dashboards and alerts. Observability requires structured logs with trace IDs, distributed traces that cross service boundaries, and metrics tagged with enough cardinality to slice by customer, region, and version simultaneously.",
+    "author": "69d675cd0b0470dbde503883",
+    "authorName": "Quinn Fabray",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Quinn Fabray",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp7848331.png",
+      "https://wallpapercave.com/dwp2x/wp2347580.jpg"
+    ],
+    "hashtags": [
+      "aws"
+    ],
+    "readTime": 1,
+    "likes": 164,
+    "views": 594,
+    "createdAt": "2026-04-08T07:35:41.208000",
+    "updatedAt": "2026-04-08T07:35:41.208000",
+    "publishedAt": "2026-02-09T11:52:48.564000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde503886",
+    "uuid": "28296e1d-591c-4e1a-852a-010c7e717f04",
+    "slug": "the-future-of-react",
+    "title": "The Future of React",
+    "description": "React 19 flips the mental model: with the compiler handling memoization automatically, writing useMemo and useCallback everywhere is now an anti-pattern. Concurrent features like useTransition let you mark non-urgent updates, keeping your UI responsive even under heavy state churn.",
+    "author": "69d675cc0b0470dbde50387c",
+    "authorName": "Alex River",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex River",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822372.jpg"
+    ],
+    "hashtags": [
+      "rag"
+    ],
+    "readTime": 1,
+    "likes": 284,
+    "views": 835,
+    "createdAt": "2026-03-31T05:35:41.204000",
+    "updatedAt": "2026-03-31T05:35:41.204000",
+    "publishedAt": "2025-10-24T07:56:56.642000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038a8",
+    "uuid": "c912e2f4-a5a6-4db7-95cc-683b79b9117a",
+    "slug": "edge-computing-explained",
+    "title": "Edge Computing Explained",
+    "description": "Running compute at the edge means executing code in a data center geographically close to your user — reducing round-trip latency for dynamic responses that can't be served from cache. Cloudflare Workers and Vercel Edge Functions run in 200+ locations globally, but they come with constraints: no Node.js APIs, limited memory, and strict CPU time limits.",
+    "author": "69d675cc0b0470dbde50387e",
+    "authorName": "Jordan Lee",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan Lee",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp15768509.jpg",
+      "https://wallpapercave.com/dwp2x/wp9501746.jpg"
+    ],
+    "hashtags": [
+      "devops"
+    ],
+    "readTime": 1,
+    "likes": 33,
+    "views": 3593,
+    "createdAt": "2026-04-06T02:35:41.209000",
+    "updatedAt": "2026-04-06T02:35:41.209000",
+    "publishedAt": "2025-11-02T11:23:50.886000"
+  },
+  {
+    "_id": "69d675ce0b0470dbde5038b6",
+    "uuid": "fa3e842d-c082-436e-9f5c-42235351ada1",
+    "slug": "mechanical-keyboards",
+    "title": "Mechanical Keyboards",
+    "description": "The productivity argument for a good keyboard is real but overstated. The actual benefit is tactile feedback that reduces typos and a layout that keeps your wrists in a neutral position. A split ergonomic board with MX Browns at 60–70g actuation force is harder to justify on ROI and easy to justify on the grounds that you type eight hours a day.",
+    "author": "69d675cd0b0470dbde503881",
+    "authorName": "Taylor Swiftly",
+    "authorAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Taylor Swiftly",
+    "status": "published",
+    "isPublic": true,
+    "images": [
+      "https://wallpapercave.com/dwp2x/wp10822452.jpg",
+      "https://wallpapercave.com/dwp2x/wp7848369.jpg"
+    ],
+    "hashtags": [
+      "cicd"
+    ],
+    "readTime": 1,
+    "likes": 276,
+    "views": 74,
+    "createdAt": "2026-04-03T21:35:41.210000",
+    "updatedAt": "2026-04-03T21:35:41.210000",
+    "publishedAt": "2026-03-31T13:34:08.189000"
+  }
+]
