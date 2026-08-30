@@ -1,8 +1,10 @@
 # /end-sprint
 
-Push the current branch, open a PR against `main`, verify it's actually mergeable
-(status checks + SonarCloud, with real root-cause detail on failure, not just
-"failed"), merge if clean, then sync local back to `preview`.
+Push the current branch, open a PR against `preview` (never `main` — feature
+branches land on `preview` first, `main` only receives promoted releases via
+`/promote-release`), verify it's actually mergeable (status checks + SonarCloud,
+with real root-cause detail on failure, not just "failed"), merge if clean, then
+sync local `preview` to match.
 
 ## Invocation
 ```
@@ -31,13 +33,13 @@ switch to the feature branch first.
 it does not commit on your behalf. Commit or stash first.
 ```
 
-**If the branch has no commits ahead of `main`:**
+**If the branch has no commits ahead of `preview`:**
 ```bash
-git log main..HEAD --oneline
+git log preview..HEAD --oneline
 ```
 If empty: stop.
 ```
-⛔ No commits ahead of main on '<branch>' — nothing to end-sprint.
+⛔ No commits ahead of preview on '<branch>' — nothing to end-sprint.
 ```
 
 ---
@@ -67,8 +69,8 @@ PR already exists: <url>
 **Otherwise, create one:**
 1. Gather context for the body:
    ```bash
-   git log main..HEAD --oneline
-   git diff main..HEAD --stat
+   git log preview..HEAD --oneline
+   git diff preview..HEAD --stat
    ```
 2. Draft a title (short, under 70 chars, derived from the branch name / commit theme)
    and a body with `## Summary` (bullets from the commit log, grouped by theme) and
@@ -76,7 +78,7 @@ PR already exists: <url>
    test suites run, manual verification done).
 3. Create it:
    ```bash
-   gh pr create --base main --head <branch> --title "<title>" --body "$(cat <<'EOF'
+   gh pr create --base preview --head <branch> --title "<title>" --body "$(cat <<'EOF'
    ## Summary
    - <bullet>
 
@@ -143,20 +145,17 @@ gh pr view <number> --json state,mergedAt,mergeCommit
 
 ## Step 6 — Local sync
 
-Per this repo's branch strategy (`.claude/CLAUDE.md`), `preview` is always the
-starting point for new work — fast-forward it to match `main` now that the PR merged,
-so the next branch starts from current work, not a stale snapshot:
+The PR merged directly into `preview` (Step 5), so there's no cross-branch merge to
+do — just bring the local `preview` branch up to date with what GitHub now has, so
+the next feature branch is cut from current work:
 
 ```bash
 git checkout preview
-git fetch origin
-git merge main
-git push origin preview
+git pull origin preview
 ```
 
-If the merge doesn't fast-forward cleanly (unexpected — `preview` shouldn't normally
-diverge from `main` between end-sprint runs), stop and report rather than resolving
-conflicts blindly.
+`preview` → `main` promotion is a separate step, handled by `/promote-release` —
+not part of this command.
 
 ---
 
@@ -166,7 +165,7 @@ conflicts blindly.
 |---|---|
 | Current branch is `main` or `preview` | `⛔ On protected branch. Nothing to end-sprint from here.` |
 | Uncommitted changes present | `⛔ Uncommitted changes present. Commit or stash first.` |
-| No commits ahead of `main` | `⛔ No commits ahead of main — nothing to end-sprint.` |
+| No commits ahead of `preview` | `⛔ No commits ahead of preview — nothing to end-sprint.` |
 | `gh` not authenticated | `⛔ gh is not authenticated — run 'gh auth login' first.` |
 | Any status check failed or `mergeStateStatus` not `CLEAN` | Stop before Step 5. Report exact failing check(s) with root cause. Do not merge. |
 | `gh pr merge` fails (e.g. remote moved, branch protection) | Stop. Report the exact error. Do not retry with `--force` or bypass flags without being told to. |

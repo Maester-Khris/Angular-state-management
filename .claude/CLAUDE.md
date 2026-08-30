@@ -37,17 +37,14 @@ AiSearchResponse interface is in the same file
 
 - `preview` is the starting point for all new work — cut every feature/fix/chore
   branch from `preview`, never from `main`.
-- `main` is production-ready only — nothing lands there except a reviewed, merged PR.
-- Feature branches merge into `main` via PR (see `/end-sprint`).
-- After a PR merges into `main`, fast-forward `preview` to match before starting the
-  next branch:
-  ```bash
-  git checkout preview
-  git merge main
-  git push origin preview
-  ```
-  This keeps `preview` current so the next branch always starts from the latest
-  merged work, not a stale point-in-time snapshot.
+- `main` is production-ready only — nothing lands there except a promoted release
+  from `preview`. We never merge a feature branch directly into `main`.
+- Feature branches merge into `preview` via PR (see `/end-sprint`).
+- Once merged into `preview`, no local sync step is needed — the next feature
+  branch is cut from `preview` directly, since it's already current.
+- When `preview` is ready to ship, promote it to `main` via `/promote-release`,
+  which opens and manages the `preview` → `main` PR with the same mergeability
+  rigor as `/end-sprint`.
 - Both `main` and `preview` are protected (see Git hygiene below) — never commit
   directly to either.
 
